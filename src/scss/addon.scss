@@ -12,6 +12,19 @@
 }
 
 
-    a {
-      color: #b6b6c6 !important;
-    }
+a {
+  color: #b6b6c6 !important;
+}
+
+.pdf-viewer {
+  position: static !important;
+}
+
+
+.ng2-pdf-viewer-container {
+  overflow-x: visible !important;
+}
+
+.ml-3 {
+  margin-left: 1rem !important;
+}

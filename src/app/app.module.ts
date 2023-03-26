@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +9,9 @@ import { HeaderComponent } from './common/header/header.component';
 import { ShareModule } from './common/share/share.module';
 import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
 import { environment } from 'src/environments/environment';
+import { AppSettingsService } from './common/service/app-settings/app-settings.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -19,10 +22,12 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     BrowserAnimationsModule,
     ShareModule,
+    HttpClientModule,
     AnimateOnScrollModule.forRoot(),
     NgxGoogleAnalyticsModule.forRoot(environment.trackAnalyticID),
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,14 +4,20 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { ShareModule } from '../common/share/share.module';
-
+import { BannerComponent } from './banner/banner.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { AboutComponent } from './about/about.component';
+import { JobsComponent } from './jobs/jobs.component';
+import { MyProjectComponent } from './my-project/my-project.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, BannerComponent, AboutComponent, JobsComponent, MyProjectComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
-
+    CarouselModule,
+    NgbNavModule,
   ]
 })
 export class HomeModule { }

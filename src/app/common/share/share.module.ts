@@ -5,6 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { TemplateModule } from '../template/template.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
     NgbDropdownModule,
     FormsModule,
     ReactiveFormsModule,
+    TemplateModule
   ],
   exports: [HeaderComponent,FooterComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

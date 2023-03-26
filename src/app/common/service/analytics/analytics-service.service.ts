@@ -11,11 +11,9 @@ export class AnalyticsServiceService {
   ) { }
 
   sendAnalyticEvent(action: string, category: string, label: any){
+    debugger
     this.$gaService.event(action, category, label)
   }
 
-  sendAnalyticPageView(path: string, title: string){
-    this.$gaService.pageView(path, title)
-  }
 
 }

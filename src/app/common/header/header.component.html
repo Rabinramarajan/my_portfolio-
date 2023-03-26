@@ -21,7 +21,7 @@
               <ng-template ngbNavContent>Second content</ng-template>
           </li>
           <li ngbNavItem>
-              <a  class="main-btn cv-btn" ngbNavLink>
+              <a  class="main-btn cv-btn" ngbNavLink (click)="openUserManual()">
                 Resume
               </a>
           </li>
@@ -55,7 +55,7 @@
                       </a>
                     </li>
                     <li>
-                        <a  class="main-btn cv-btn">
+                        <a  class="main-btn cv-btn" (click)='openUserManual()'>
                           Resume
                         </a>
                     </li>
