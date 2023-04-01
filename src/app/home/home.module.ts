@@ -10,6 +10,8 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { AboutComponent } from './about/about.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { MyProjectComponent } from './my-project/my-project.component';
+import { TypingAnimatorModule } from 'angular-typing-animator'
+
 
 @NgModule({
   declarations: [HomeComponent, BannerComponent, AboutComponent, JobsComponent, MyProjectComponent],
@@ -18,6 +20,7 @@ import { MyProjectComponent } from './my-project/my-project.component';
     HomeRoutingModule,
     CarouselModule,
     NgbNavModule,
+    TypingAnimatorModule
   ]
 })
 export class HomeModule { }

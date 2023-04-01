@@ -7,7 +7,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import "scss/header.scss";
 @import "scss/variables.scss";
 @import "scss/scroll.scss";
-@import "scss/theme.scss";
 
 body{
     margin: 0;
@@ -67,16 +66,16 @@ body{
         bottom: 4px;
     }
 
-    &:after{
-        content: '';
-        display: block;
-        height: 1px;
-        width: 300px;
-        background-color: $LightestNavy;
-        position: relative;
-        top: -5px;
-        margin-left: 20px;
-    }
+    // &:after{
+    //     content: '';
+    //     display: block;
+    //     height: 1px;
+    //     width: 300px;
+    //     background-color: $LightestNavy;
+    //     position: relative;
+    //     top: -5px;
+    //     margin-left: 20px;
+    // }
 }
 
 

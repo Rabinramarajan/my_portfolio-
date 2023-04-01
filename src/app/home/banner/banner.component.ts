@@ -24,6 +24,8 @@ import { AnalyticsServiceService } from 'src/app/common/service/analytics/analyt
 })
 export class BannerComponent implements OnInit{
 
+  list = ['Front end Developer ...', 'Web Developer ...']
+
   constructor(
     public analyticsService: AnalyticsServiceService
   ) { }
