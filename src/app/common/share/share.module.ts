@@ -6,11 +6,12 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TemplateModule } from '../template/template.module';
+import { PreloaderDirective } from '../preloader/preloader.directive';
 
 
 @NgModule({
   declarations: [ HeaderComponent,
-    FooterComponent],
+    FooterComponent,PreloaderDirective],
   imports: [
     CommonModule,
     NgbModule,
@@ -18,7 +19,7 @@ import { TemplateModule } from '../template/template.module';
     NgbDropdownModule,
     FormsModule,
     ReactiveFormsModule,
-    TemplateModule
+    TemplateModule,
   ],
   exports: [HeaderComponent,FooterComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

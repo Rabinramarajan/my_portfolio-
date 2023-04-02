@@ -12,11 +12,10 @@ import { environment } from 'src/environments/environment';
 import { AppSettingsService } from './common/service/app-settings/app-settings.service';
 import { HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
   declarations: [
     AppComponent,
-  ],
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     AnimateOnScrollModule.forRoot(),
     NgxGoogleAnalyticsModule.forRoot(environment.trackAnalyticID),
+
   ],
   providers: [
   ],

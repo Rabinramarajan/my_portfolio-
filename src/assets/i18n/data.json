@@ -38,6 +38,30 @@
         "assets/projects/our_GYM/img-2.png"
       ],
       "Technologies": ["HTML", "CSS", "Bootstrap"]
+    },
+    {
+      "Title": "Trendz",
+      "Description": "TRENDZ in Ecommerce website Men's clothing and Women's clothing & all clothing Click product card  then show Product details then click buy button go to payment method screens. this is multi-page website",
+      "img": [
+        "assets/projects/trendz/trendz.jpeg",
+        "assets/projects/trendz/img-1.png",
+        "assets/projects/trendz/img-2.png",
+        "assets/projects/trendz/img-3.png"
+      ],
+      "Technologies": ["HTML", "CSS", "Bootstrap"]
+    },
+    {
+      "Title": "Tesla",
+      "Description": "TESLA Landing page using tools HTML, CSS & Javascript",
+      "img": [
+        "assets/projects/tesla/img-1.png",
+        "assets/projects/tesla/img-2.png"
+      ],
+      "Technologies": ["HTML", "CSS", "Javascript"]
     }
-  ]
+  ],
+  "Pretitle": "What’s Next",
+  "contactTitle": "Get in touch!",
+  "Content": "I will be happy to receive your contact if you want to talk about new opportunities. Write me, and I will reply as soon as I see your message. Simple one-page design that features a profile letter with basic information about a person.",
+  "Btn": "Say Hello"
 }
