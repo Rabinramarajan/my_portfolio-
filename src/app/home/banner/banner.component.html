@@ -7,15 +7,15 @@
         </div>
         <div class="banner-title">
           <h2>Rabin Ramarajan</h2>
-          <span typingAnimator class="font"
-      [sentences]="['Front end Developer ...', 'Web Developer ...']">
-</span>
+          <span typingAnimator class="font" [sentences]="['Front end Developer ...', 'Web Developer ...']">
+          </span>
+          <!-- <app-typing-animation [typingText]="list"></app-typing-animation> -->
           <!-- <h3>Frontend Developer</h3> -->
         </div>
         <div class="banner-description">
           <p class="mt-4">
             I have
-            <span class="underline">1 years of experience</span> developing
+            <span class="underline">1 year of experience</span> developing
             systems and technological solutions to make the
             web a better place. scalable code in
             <span class="underline">Angular</span> and sometimes in
@@ -25,18 +25,13 @@
         </div>
       </div>
       <div class="div-btn-banner">
-        <a
-          (click)="
+        <a (click)="
             analyticsService.sendAnalyticEvent(
               'click_send_mail',
               'banner',
               'email'
             )
-          "
-          href="mailto:suriyarabin@gmail.com"
-          target="_black"
-          class="main-btn"
-        >
+          " href="mailto:suriyarabin@gmail.com" target="_black" class="main-btn">
           Get in touch
         </a>
       </div>

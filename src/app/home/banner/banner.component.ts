@@ -1,4 +1,4 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { animate, query, stagger, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { AnalyticsServiceService } from 'src/app/common/service/analytics/analytics-service.service';
 
@@ -32,6 +32,6 @@ export class BannerComponent implements OnInit{
 
   ngOnInit(): void {
     console.log('banner page');
-
   }
+
 }
