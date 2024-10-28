@@ -29,6 +29,7 @@
     }
 
     .selection-footnote {
+        padding-top: 10px;
         font-size: 14px;
 
         p {
@@ -43,4 +44,24 @@
         line-height: 28px;
         color: #00103B;
     }
+
+    .selections {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+
+        .maintenance-img {
+            width: 400px;
+            height: 400px;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+
 }
