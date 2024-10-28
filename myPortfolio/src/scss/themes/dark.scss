@@ -1,0 +1,23 @@
+// dark.scss
+
+@import './theme.scss'; // Make sure this import is correct
+@import '../base/mixins.scss';
+
+.dark-theme {
+  @include apply-theme(dark);
+
+  a {
+    color: theme-color(primary-color);
+  }
+
+  button {
+    background-color: theme-color(primary-color);
+    color: theme-color(btn-text-color);
+  }
+
+  .logo {
+    ion-icon {
+      color: theme-color(logo-color) !important;
+    }
+  }
+}

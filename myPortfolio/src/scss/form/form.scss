@@ -1,0 +1,371 @@
+@import './password-strength.scss';
+
+// Hide password reveal icons for webkit and ms browsers
+input[type="password"]::-webkit-input-password,
+input[type="password"]::-ms-reveal {
+  display: none !important;
+}
+
+.zil-form {
+  user-select: none;
+  font-size: 16px;
+}
+
+// Text areas
+.textarea-container {
+  .home-input-group {
+    .home-input {
+      height: 100px !important;
+      background: var(--input-background-color) !important;
+      padding: 5px 12px;
+
+      .zil-input-control {
+        resize: none;
+        height: 90px !important;
+        background: var(--input-background-color) !important;
+      }
+
+      .zil-input-group-append {
+        display: flex;
+        align-items: start !important;
+
+        .close-btn {
+          height: 100px !important;
+          align-items: start !important;
+          padding-top: 10px;
+
+          ion-icon {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.zil-form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  padding-bottom: var(--input-group-margin-bottom);
+
+  .label-container {
+    display: flex;
+    width: 100%;
+    padding-bottom: var(--label-bottom-padding);
+
+    &.bottom {
+      position: absolute;
+      bottom: 0;
+      top: 58px;
+    }
+
+    label {
+      font-size: var(--label-font-size);
+      font-weight: var(--label-font-weight);
+      color: #212121;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-help-text {
+      margin-left: 4px;
+      width: 16px;
+      height: 16px;
+      font-size: 16px;
+      opacity: 0.7;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .label-container-right {
+      margin-left: auto;
+
+      .error-text {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        color: var(--error-text-color);
+        font-size: var(--error-text-font-size);
+        font-weight: var(--error-text-font-weight);
+
+        .error-text-icon {
+          height: 0.875rem;
+          width: 0.875rem;
+          display: flex;
+          align-items: center;
+
+          svg {
+            height: 0.875rem;
+            width: 0.875rem;
+          }
+        }
+      }
+    }
+  }
+
+  // Input groups
+  .zil-input-group {
+    display: flex;
+    align-items: center;
+    width: var(--input-width);
+    height: var(--input-height);
+    position: relative;
+    border: var(--input-border-color) 0.5px solid;
+    border-radius: var(--input-border-radius);
+    background: var(--input-background-color);
+    margin-bottom: 5px;
+
+    .zil-input-control {
+      padding: var(--input-padding);
+      border: none;
+      flex: 1;
+      height: var(--input-height);
+      width: var(--input-width);
+      font-size: var(--input-font-size);
+      font-weight: var(--input-font-weight);
+      color: var(--input-color);
+      font-family: var(--font-family);
+      background: transparent;
+
+      &::placeholder {
+        font-weight: 400;
+      }
+
+      &:focus {
+        outline: 0;
+
+        &+.zil-input-group-append {
+          border: none;
+
+          .close-btn {
+            display: flex !important;
+            justify-content: center !important;
+          }
+        }
+      }
+
+      &:active {
+        outline: 0;
+      }
+    }
+
+    &.bgRemove {
+      background: transparent !important;
+      border: transparent 0.5px solid !important;
+    }
+
+    &.input-error {
+      border: var(--input-border-color-error) 0.5px solid;
+      border-radius: var(--input-border-radius);
+      height: var(--input-height);
+      width: var(--input-width);
+      background: var(--input-background-color);
+    }
+
+    .zil-input-group-append {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .icon-btn {
+        border: none;
+        background: transparent;
+        align-items: center;
+        width: calc(var(--input-height) - 10px);
+        height: calc(var(--input-height) - 10px);
+        justify-content: center;
+        cursor: pointer;
+        gap: 10px !important;
+        user-select: none;
+        display: flex;
+        overflow: hidden;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333333;
+
+        &:focus {
+          outline: 0;
+          border: none;
+          display: flex !important;
+        }
+
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      .icon-btn.close-btn {
+        border: none;
+        background: transparent;
+        align-items: center;
+        width: calc(var(--input-height) - 2px);
+        height: calc(var(--input-height) - 3px);
+        gap: 10px !important;
+        justify-content: center;
+        cursor: pointer;
+        user-select: none;
+        display: flex;
+        overflow: hidden;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333333;
+
+        &:focus {
+          outline: 0;
+          border: none;
+          display: flex !important;
+        }
+
+        svg {
+          stroke: #333333;
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+
+  &:hover {
+    .zil-input-group {
+      .zil-input-group-append {
+        .close-btn {
+          display: flex !important;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
+// Specific classes for styles
+.old-value {
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid var(--bs-primary);
+  color: var(--bs-primary);
+  padding: 2px 8px;
+  border-radius: 15px;
+  margin-right: 10px;
+}
+
+.white-bg {
+  background: var(--input-background-color) !important;
+}
+
+// Placeholder styling
+::placeholder {
+  font-size: var(--input-font-size) !important;
+  opacity: 75% !important;
+}
+
+// Textarea styling
+.textarea {
+  .zil-form {
+    .label-container {
+      &.bottom {
+        position: absolute;
+        bottom: 0;
+        top: 80px;
+        right: 10px;
+      }
+
+      label {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        text-align: left;
+        color: #212121;
+      }
+    }
+
+    .zil-input-group {
+      width: 100% !important;
+      height: 75px !important;
+      background: #EEF1F6 !important;
+      border-radius: 4px;
+      padding: 8px 16px 8px 16px;
+
+      .zil-input-control {
+        width: 100% !important;
+        height: 75px !important;
+        resize: none !important;
+        padding: 8px 10px;
+      }
+    }
+  }
+}
+
+// Additional classes for styling and adjustments
+.border-texterea {
+  .zil-form {
+    .label-container {
+      &.bottom {
+        position: absolute;
+        bottom: 0;
+        top: 110px;
+        right: 10px;
+      }
+
+      label {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        text-align: left;
+        color: #212121;
+      }
+    }
+
+    .zil-input-group {
+      width: 100% !important;
+      height: 92px !important;
+      background: #FFFFFF !important;
+      border: 0.5px solid #21212180;
+      border-radius: 6px;
+      padding: 8px 16px 8px 16px;
+
+      .zil-input-control {
+        width: 100% !important;
+        height: 92px !important;
+        resize: none !important;
+        padding: 8px 10px;
+      }
+    }
+  }
+}
+
+.space-remove {
+  .zil-form-group {
+    padding-bottom: 0px !important;
+
+    .label-container {
+      padding-bottom: 0px !important;
+    }
+
+    .zil-input-group {
+      margin-bottom: 0px !important;
+    }
+  }
+}
+
+// Spinner styles for loading states
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .spinner-border {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .loading-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+    margin-left: 10px;
+  }
+}

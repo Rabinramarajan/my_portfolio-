@@ -1,1 +1,11 @@
-<router-outlet />
+@if(appSetting.environment.showMaintenance){
+<app-maintenance></app-maintenance>
+} @else {
+@if(isLoading) {
+<app-loader></app-loader>
+} @else {
+<div>
+    <app-header [modeChangedFlags]="isDarkTheme" (screenModeTrigger)="toggleTheme($event)"></app-header>
+</div>
+}
+}

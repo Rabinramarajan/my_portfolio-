@@ -1,0 +1,41 @@
+.header-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    padding: 0px 80px;
+
+    .logo {
+        ion-icon {
+            color: var(--logo-color);
+            font-size: 96px;
+        }
+    }
+
+    .menu-container {
+
+        ul {
+            list-style: none !important;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+
+            li {
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 24px;
+                text-align: left;
+                color: var(--text-color);
+                display: flex;
+                align-items: center;
+
+                ion-icon {
+                    color: var(--text-color);
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
