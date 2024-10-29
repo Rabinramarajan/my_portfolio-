@@ -4,12 +4,12 @@ import { HeaderTemplate } from './common/templates/header-template';
 import { AppSettingsService } from './common/services/app-settings/app-settings.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Loader } from './common/templates/loader';
-import { MaintenanceComponent } from './maintenance/maintenance.component';
+import { Maintenance } from './common/templates/maintenance';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderTemplate, Loader, MaintenanceComponent],
+  imports: [RouterOutlet, HeaderTemplate, Loader, Maintenance],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
