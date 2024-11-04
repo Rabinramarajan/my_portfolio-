@@ -1,26 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../../../environment/environment';
-
-interface PageSpeedResponse {
-  // Define the structure of the PageSpeed API response based on your needs
-  [key: string]: any;
-}
+import { Observable, timeout } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SpeedInsightsService {
   private readonly apiUrl = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
+  private readonly apiKey = 'AIzaSyDPO7BIPTdNxl-qAie5d7THCafcs74lGgc'; // Replace with your actual API key
 
   constructor(private http: HttpClient) {}
 
-  fetchPageSpeedInsights(url: string): Observable<PageSpeedResponse> {
+  fetchPageSpeedInsights(url: string): Observable<any> {
     const params = new HttpParams()
-      .set('url', url) // The URL of the page you want to analyze
-      .set('key', environment.pageSpeedApiKey); // Your API key from the environment
-
-    return this.http.get<PageSpeedResponse>(this.apiUrl, { params });
+      .set('url', url)
+      .set('key', this.apiKey);
+    return this.http.get<any>(this.apiUrl, { params }).pipe(
+      timeout(20000) // Increase timeout to 20 seconds
+    );
   }
 }

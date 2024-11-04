@@ -16,25 +16,27 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   title = 'myPortfolio';
-  testUrl: string = 'https://rabinr.com';
-  pageSpeedData: any;
+  insightsData: any;
+  errorMessage: string | null = null;
+
+  private testUrl = 'https://rabinr.com/'; 
 
   constructor(public appSetting: AppSettingsService,
     private speedInsightsService: SpeedInsightsService) {
   }
 
   ngOnInit(): void {
-  
+    this.getInsights();
   }
 
-  getPageSpeedData() {
-    this.speedInsightsService.fetchPageSpeedInsights(this.testUrl).subscribe(
-      (data) => {
-        this.pageSpeedData = data;
+  getInsights() {
+    this.speedInsightsService.fetchPageSpeedInsights(this.testUrl).subscribe({
+      next: (data) => {
+        this.insightsData = data;
       },
-      (error) => {
-        console.error('Error fetching PageSpeed data:', error);
-      }
-    );
+      error: (err) => {
+        this.errorMessage = 'Error fetching PageSpeed data: ' + err.message;
+      },
+    });
   }
 }

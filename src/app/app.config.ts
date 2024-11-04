@@ -8,10 +8,6 @@ import { AppSettingsService } from './common/services/app-settings/app-settings.
 import { HttpClientModule } from '@angular/common/http';
 import { RouteReuseService } from './common/services/route-reuse/route-reuse.service';
 
-import { injectSpeedInsights } from '@vercel/speed-insights';
-
-injectSpeedInsights();
-
 export const appInitializerFactory = (configService: AppSettingsService) => {
   return async () => {
     try {
