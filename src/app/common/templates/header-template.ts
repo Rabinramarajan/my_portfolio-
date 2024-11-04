@@ -1,56 +1,41 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { AppButton } from "../directives/core.directive";
-import { trigger, state, style, transition, animate } from "@angular/animations";
+import { AppSettingsService } from "../services/app-settings/app-settings.service";
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ThemeToggleComponent } from "./theme-toggle";
+import { AppButton } from "../core-component/core.directive";
 
 @Component({
     selector: 'app-header',
     standalone: true,
-    imports: [AppButton],
+    imports: [AppButton, MatTooltipModule, ThemeToggleComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     template: `
     <div class="header-container">
         <div class="logo">
-            <ion-icon [src]="'image/svg/logo.svg'" />
+            <ion-icon [src]="appSetting.userData.logo" />
         </div>
         <div class="menu-container">
             <ul>
-                <li>
-                    About
-                </li>
-                <li>
-                    Work
-                </li>
-                <li>
-                    About
-                </li>
-               
-                <li (click)="modeChanged(__modeChangedFlags)">
-                    <ion-icon 
-                        [@iconState]="__modeChangedFlags ? 'dark' : 'light'" 
-                        [name]="__modeChangedFlags ? 'sunny' : 'cloudy-night'" 
-                        class="theme-icon">
-                    </ion-icon>
-                </li>
-                <li>
-                    <button class="btn-primary" appButton="Download CV"></button>
-                </li>
+                @for (menu of appSetting.userData.menu; track $index) {
+                    @if(!menu.isBtn){
+                        <li>
+                            {{ menu.menuName }}
+                        </li>
+                    } @else if (menu.isBtn && menu.menuName === '') {
+                        <li>
+                            <app-theme-toggle [modeChanged]="menu.themeLst"></app-theme-toggle>
+                        </li>
+                    } @else {
+                        <li>
+                            <button class="btn-primary" [appButton]="menu.menuName"></button>
+                        </li>
+                    }
+                }
             </ul>
         </div>
     </div>
     `,
-     animations: [
-        trigger('iconState', [
-            state('light', style({
-                transform: 'rotate(0deg)', // Normal state
-            })),
-            state('dark', style({
-                transform: 'rotate(180deg)', // Rotated state for dark theme
-            })),
-            transition('light <=> dark', [
-                animate('0.5s ease-in-out') // Transition effect
-            ])
-        ])
-    ]
+
 })
 
 export class HeaderTemplate implements OnInit {
@@ -65,7 +50,7 @@ export class HeaderTemplate implements OnInit {
         return this.__modeChangedFlags;
     }
 
-    constructor() {
+    constructor(public appSetting: AppSettingsService) {
 
     }
 

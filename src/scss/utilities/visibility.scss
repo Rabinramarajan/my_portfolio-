@@ -1,10 +1,11 @@
 @import '../base/mixins.scss';
 
+@import '../base/responsive-mixin.scss';
+
 
 // Loop through the visibility states
 @each $visibility-state in $visibility {
 
-    // Small devices
     @include breakpoint(sm) {
         @if $visibility-state ==visible {
             .visible-sm {
@@ -19,7 +20,6 @@
         }
     }
 
-    // Medium devices
     @include breakpoint(md) {
         @if $visibility-state ==visible {
             .visible-md {
@@ -34,7 +34,6 @@
         }
     }
 
-    // Large devices
     @include breakpoint(lg) {
         @if $visibility-state ==visible {
             .visible-lg {

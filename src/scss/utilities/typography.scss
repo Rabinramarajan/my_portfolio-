@@ -1,5 +1,5 @@
-@import '../base/mixins.scss';
 @import '../base/variables.scss';
+@import '../base/responsive-mixin.scss';
 
 // Generate Font Size Classes
 @each $name, $size in $font-sizes {

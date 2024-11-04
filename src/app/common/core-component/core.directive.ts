@@ -25,3 +25,4 @@ export class AppButton implements AfterViewInit {
     this.renderer.setProperty(this.el.nativeElement, 'innerHTML', html);
   }
 }
+

@@ -8,20 +8,27 @@ import { AppSettingsService } from './common/services/app-settings/app-settings.
 import { HttpClientModule } from '@angular/common/http';
 import { RouteReuseService } from './common/services/route-reuse/route-reuse.service';
 
-export const appSettingFactory = (configService: AppSettingsService, appRef: ApplicationRef) => {
-  return () => {
-    return firstValueFrom(configService.loadConfig()).then(
-      (config: any) => {
-        configService.environment = config;
-      },
-      (error: any) => {
-        console.error('Error loading config:', error);
-        // appRef.tick(); // Manually trigger change detection to stop the app
-        throw error; // Re-throw the error to prevent app startup
-      }
-    );
+export const appInitializerFactory = (configService: AppSettingsService) => {
+  return async () => {
+    try {
+      const [environmentConfig, userConfig] = await Promise.all([
+        firstValueFrom(configService.loadConfig()),
+        firstValueFrom(configService.loadUserData())
+      ]);
+
+      console.log(
+        environmentConfig, userConfig
+      );
+
+      configService.environment = environmentConfig;
+      configService.userData = userConfig;
+    } catch (error) {
+      console.error('Error loading application configuration:', error);
+      throw error;  // Re-throw to prevent app startup on failure
+    }
   };
 };
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -34,9 +41,9 @@ export const appConfig: ApplicationConfig = {
     { provide: RouteReuseStrategy, useClass: RouteReuseService },
     {
       provide: APP_INITIALIZER,
-      useFactory: appSettingFactory,
+      useFactory: appInitializerFactory,
       deps: [AppSettingsService],
       multi: true,
-    },
+    }
   ]
 };

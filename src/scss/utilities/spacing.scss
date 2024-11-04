@@ -1,7 +1,4 @@
-@import '../base/mixins.scss';
-
-
-// Size Variables
+@import '../base/responsive-mixin.scss';
 
 // Padding Variables
 $padding-sizes: (
@@ -190,4 +187,3 @@ $gap-sizes: (
 .h100 {
     height: 100%;
 }
-
