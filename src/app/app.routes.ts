@@ -7,6 +7,11 @@ export const routes: Routes = [
         loadComponent: () => import('./main/main').then((m) => m.MainComponent),
     },
     {
+        path: 'privacy-policy',
+        redirectTo: 'privacy-policy.html',
+        pathMatch: 'full'
+    },
+    {
         path: '**',
         pathMatch: 'full',
         redirectTo: '',
