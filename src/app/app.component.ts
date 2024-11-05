@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
     this.getInsights();
   }
 
+
   getInsights() {
     this.speedInsightsService.fetchPageSpeedInsights(this.testUrl).subscribe({
       next: (data) => {

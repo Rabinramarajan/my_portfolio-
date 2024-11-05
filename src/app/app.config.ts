@@ -7,6 +7,13 @@ import { firstValueFrom } from 'rxjs';
 import { AppSettingsService } from './common/services/app-settings/app-settings.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouteReuseService } from './common/services/route-reuse/route-reuse.service';
+import { inject } from '@vercel/analytics';
+import { environment } from '../environment/environment.prod';
+
+
+if (environment.production && environment.enableAnalytics) {
+  inject();
+}
 
 export const appInitializerFactory = (configService: AppSettingsService) => {
   return async () => {
