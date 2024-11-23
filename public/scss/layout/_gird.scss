@@ -1,5 +1,6 @@
-@import '../base/mixins.scss';
+@import '../config/mixins';
 
+// Row Layouts
 .row {
     &.row-w100 {
         display: block;
@@ -21,6 +22,7 @@
     }
 }
 
+// Row Containers
 .row-container {
     width: 100%;
     padding: 0 $grid-spacer;
@@ -44,6 +46,7 @@
     }
 }
 
+// Column Layouts
 .col {
     position: relative;
     padding: 0 $grid-spacer;
@@ -52,4 +55,5 @@
     max-width: 100%;
 }
 
+// Generate Grid Columns based on mixin
 @include make-grid-columns();

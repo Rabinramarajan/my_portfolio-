@@ -1,0 +1,40 @@
+$breakpoints: (
+   sm: (min: 0px, max: 575.98px),
+  md: (min: 576px, max: 767.98px),
+  lg: (min: 768px, max: 991.98px),
+  xl: (min: 992px, max: 1199.98px),
+  xxl: (min: 1200px, max: 1399.98px)
+);
+
+@mixin breakpoint($breakpoint, $direction: min) {
+  // Check if the supplied breakpoint exists in the map
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-values: map-get($breakpoints, $breakpoint);
+    $breakpoint-min: map-get($breakpoint-values, min);
+    $breakpoint-max: map-get($breakpoint-values, max);
+
+    // Apply media query based on direction
+    @if $direction == min {
+      @media (min-width: $breakpoint-min) {
+        @content;
+      }
+    } @else if $direction == max {
+      @media (max-width: $breakpoint-max) {
+        @content;
+      }
+    }
+  } @else {
+    // Handle custom values
+    @if $direction == min {
+      @media (min-width: $breakpoint) {
+        @content;
+      }
+    } @else if $direction == max {
+      @media (max-width: $breakpoint) {
+        @content;
+      }
+    }
+  }
+}
+
+

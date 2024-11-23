@@ -1,0 +1,21 @@
+@import '../config/mixins';
+
+// Sizes for Width and Height
+$sizes: (
+    100: 100%,
+    75: 75%,
+    50: 50%,
+    25: 25%,
+);
+
+$viewport-heights: (
+    100: 100vh,
+    75: 75vh,
+    50: 50vh,
+    25: 25vh,
+);
+
+@include generate-dimension-utilities($sizes, "h", "height"); // Height utilities
+@include generate-dimension-utilities($viewport-heights, "vh", "height"); // Viewport height utilities
+@include generate-dimension-utilities($sizes, "mh", "max-height"); // Max height utilities
+@include generate-dimension-utilities($sizes, "mih", "min-height"); // Min height utilities

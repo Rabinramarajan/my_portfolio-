@@ -1,0 +1,146 @@
+// Mixin for generating spacing utilities
+@mixin generate-spacing-utilities($sizes, $property, $name) {
+    @each $key, $size in $sizes {
+
+        // Apply for padding, margin and Gap
+        .#{$property}#{$key} {
+            #{$name}: $size !important;
+        }
+
+        // Apply for padding and margin
+        @if $property =="p" or $property =="m" {
+
+            // Top spacing
+            .#{$property}t#{$key} {
+                #{$name}-top: $size !important;
+            }
+
+            // Bottom spacing
+            .#{$property}b#{$key} {
+                #{$name}-bottom: $size !important;
+            }
+
+            // Left spacing
+            .#{$property}l#{$key} {
+                #{$name}-left: $size !important;
+            }
+
+            // Right spacing
+            .#{$property}r#{$key} {
+                #{$name}-right: $size !important;
+            }
+
+            // Horizontal (left and right) spacing
+            .#{$property}x#{$key} {
+                #{$name}-left: $size !important;
+                #{$name}-right: $size !important;
+            }
+
+            // Vertical (top and bottom) spacing
+            .#{$property}y#{$key} {
+                #{$name}-top: $size !important;
+                #{$name}-bottom: $size !important;
+            }
+        }
+    }
+}
+
+// Mixin for generating dimension utilities
+@mixin generate-dimension-utilities($sizes, $prefix, $css-property) {
+    @each $key, $value in $sizes {
+        .#{$prefix}#{$key} {
+            #{$css-property}: $value !important;
+        }
+    }
+}
+
+// Mixin for generating flexbox utilities
+@mixin generate-flexbox-utilities($options, $prefix, $property) {
+    @each $key, $value in $options {
+        .#{$prefix}-#{$key} {
+            #{$property}: $value !important;
+        }
+    }
+}
+
+// Mixin for generating text alignment utilities
+@mixin generate-text-alignment-utilities($options, $property) {
+    @each $key, $value in $options {
+        .#{$property}-#{$key} {
+            #{$property}: $value !important;
+        }
+    }
+}
+
+// Mixin for generating font size utilities
+@mixin generate-font-size-utilities($sizes) {
+    @each $key, $value in $sizes {
+        .#{$key} {
+            font-size: $value !important;
+        }
+    }
+}
+
+// Mixin for generating font weight utilities
+@mixin generate-font-weight-utilities($weights) {
+    @each $key, $value in $weights {
+        .#{$key} {
+            font-weight: $value !important;
+        }
+    }
+}
+
+
+$grid-column: 12;
+$grid-spacer: 7px;
+
+$breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
+);
+
+@mixin make-grid-columns() {
+    @each $breakpoint in map-keys($breakpoints) {
+        $min: map-get($breakpoints, $breakpoint);
+
+        @for $i from 1 through $grid-column {
+            .col-#{$breakpoint}-#{$i} {
+                position: relative;
+                padding: 0 $grid-spacer;
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media (min-width: $min) {
+            @for $i from 1 through $grid-column {
+                $width-percentage: calc(#{$i} / #{$grid-column} * 100%);
+
+                .col-#{$breakpoint}-#{$i} {
+                    flex: 0 0 $width-percentage;
+                    max-width: $width-percentage;
+                }
+            }
+        }
+    }
+}
+
+@mixin generate-flexbox-utilities($options, $prefix, $property) {
+    @each $key, $value in $options {
+        .#{$prefix}-#{$key} {
+            #{$property}: $value !important;
+        }
+    }
+}
+
+
+
+// Mixin to apply theme styles
+@mixin apply-theme($theme) {
+    $theme-map: map-get($themes, $theme);
+    background-color: map-get($theme-map, background-color);
+    color: map-get($theme-map, text-color);
+}

@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { PrivacyPolicyComponent } from './common/templates/privacy-policy';
 
 export const routes: Routes = [
     {

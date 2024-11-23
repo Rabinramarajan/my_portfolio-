@@ -12,7 +12,7 @@ import { StorageService } from '../services/storage/storage.service';
 @Component({
     selector: 'app-theme-toggle',
     standalone: true,
-    imports: [MatMenuModule, ThemeColorsPipe],
+    imports: [MatMenuModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     template: `
         <div class="slot-center" [matMenuTriggerFor]="afterMenu" [matMenuTriggerFor]="afterMenu" aria-haspopup="true"
@@ -66,7 +66,8 @@ import { StorageService } from '../services/storage/storage.service';
                 ])
             ])
         ])
-    ]
+    ],
+    providers: [ThemeColorsPipe]
 
 })
 export class ThemeToggleComponent implements OnInit {
@@ -85,7 +86,10 @@ export class ThemeToggleComponent implements OnInit {
         return this.__modeChanged;
     }
 
-    constructor(private appSetting: AppSettingsService, public storage: StorageService) { }
+    constructor(
+        private appSetting: AppSettingsService,
+        public storage: StorageService,
+        private themeColorsPipe: ThemeColorsPipe) { }
 
 
     async ngOnInit(): Promise<void> {
@@ -122,7 +126,7 @@ export class ThemeToggleComponent implements OnInit {
     }
 
     private setCSSVariables(isDarkTheme: boolean): void {
-        const themeColors: ThemeColors = new ThemeColorsPipe().transform(isDarkTheme);
+        const themeColors: ThemeColors = this.themeColorsPipe.transform(isDarkTheme);
         Object.entries(themeColors).forEach(([key, value]) => {
             document.body.style.setProperty(`--${key}`, value);
         });

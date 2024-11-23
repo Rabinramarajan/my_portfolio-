@@ -1,0 +1,99 @@
+// Adjust Color Brightness
+// background-color: adjust-color($primary-color, 20%); small example
+@function adjust-color($color, $percentage) {
+    @if type-of($color) !='color' {
+        @error "Invalid input: '#{$color}' is not a color.";
+    }
+
+    @if $percentage >0 {
+        @return lighten($color, $percentage);
+    }
+
+    @else {
+        @return darken($color, abs($percentage));
+    }
+}
+
+// Convert Pixels to REM
+// font-size: px-to-rem(32px, 16px); // Converts 32px to 2rem
+@function px-to-rem($px, $base-font-size: 16px) {
+    @if type-of($px) !='number' or unit($px) !='px' {
+        @error "Invalid input: '#{$px}' must be a pixel value.";
+    }
+
+    @return $px / strip-unit($base-font-size) * 1rem;
+}
+
+// Remove Unit from Value
+// width: strip-unit(100px) * 2px; // Removes 'px' and doubles the value
+@function strip-unit($value) {
+    @if type-of($value)=='number' and unit($value) {
+        @return $value / ($value * 0 + 1);
+    }
+
+    @return $value;
+}
+
+// font-size: fluid-font(16px, 24px); // Scales font size between 16px and 24px
+@function fluid-font($min-size, $max-size, $min-vw: 320px, $max-vw: 1440px) {
+
+    // Validate that viewport width range is correct
+    @if $min-vw >=$max-vw {
+        @error "Invalid viewport range: $min-vw must be less than $max-vw.";
+    }
+
+    // Warn if minimum size is greater than or equal to maximum size
+    @if $min-size >=$max-size {
+        @warn "Minimum size ($min-size) is greater than or equal to maximum size ($max-size). Check input.";
+    }
+
+    // Return the fluid font size calculation
+    @return calc(#{px-to-rem($min-size)} + (#{px-to-rem($max-size)} - #{px-to-rem($min-size)}) * ((100vw - #{$min-vw}) / (#{$max-vw} - #{$min-vw})));
+}
+
+
+// Access Map Value with Error Handling
+@function map-get-safe($map, $key, $map-name: 'map') {
+    @if map-has-key($map, $key) {
+        @return map-get($map, $key);
+    }
+
+    @else {
+        @error "Invalid key: '#{$key}' not found in '#{$map-name}'.";
+    }
+}
+
+// Access Color from Map
+@function color($key) {
+    @return map-get-safe($colors, $key, 'colors');
+}
+
+// Access Spacing from Map
+@function spacing($scale) {
+    @return map-get-safe($spacing-scale, $scale, 'spacing-scale');
+}
+
+// Retrieve Breakpoint Min Width
+@function breakpoint-min($size) {
+    @return map-get-safe(map-get-safe($breakpoints, $size, 'breakpoints'), min, 'breakpoint-min');
+}
+
+// Retrieve Breakpoint Max Width
+@function breakpoint-max($size) {
+    @return map-get-safe(map-get-safe($breakpoints, $size, 'breakpoints'), max, 'breakpoint-max');
+}
+
+// Access Border Radius from Map
+@function radius($key) {
+    @return map-get-safe($border-radius, $key, 'border-radius');
+}
+
+// Access Z-Index from Map
+@function z($key) {
+    @return map-get-safe($z-index, $key, 'z-index');
+}
+
+// Access Shadow from Map
+@function shadow($key) {
+    @return map-get-safe($shadows, $key, 'shadows');
+}

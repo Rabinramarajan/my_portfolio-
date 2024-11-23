@@ -1,4 +1,6 @@
-@import '../base/responsive-mixin.scss';
+@import '../config/mixins';
+@import '../config/variables';
+@import '../config/responsive-mixin.scss';
 
 .about-container {
     width: 100%;

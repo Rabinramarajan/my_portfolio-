@@ -1,0 +1,15 @@
+@import '../config/mixins';
+
+// Sizes for Width 
+$sizes: (
+    100: 100%,
+    75: 75%,
+    50: 50%,
+    25: 25%,
+);
+
+
+// Apply Width Utilities
+@include generate-dimension-utilities($sizes, "w", "width"); // Width utilities
+@include generate-dimension-utilities($sizes, "mw", "max-width"); // Max width utilities
+@include generate-dimension-utilities($sizes, "miw", "min-width"); // Min width utilities

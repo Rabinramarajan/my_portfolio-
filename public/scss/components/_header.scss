@@ -1,0 +1,158 @@
+@import '../config/responsive-mixin.scss';
+
+.header-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    padding: 0 80px;
+    backdrop-filter: saturate(200%) blur(20px);
+    position: fixed;
+    top: 0;
+    // z-index: 9999;
+
+    .logo {
+        ion-icon {
+            color: var(--logo-color);
+            font-size: 70px;
+        }
+    }
+
+    .menu-container {
+        width: 100%;
+        display: flex !important;
+        align-items: center;
+        justify-content: end;
+
+        @include breakpoint(sm) {
+            display: none !important;
+        }
+        @include breakpoint(md) {
+            display: none !important;
+        }
+        @include breakpoint(lg) {
+            display: flex !important;
+        }
+
+        &.active {
+            display: flex !important;
+            opacity: 1;
+            transform: translateX(0); // Slide into view
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            position: absolute;
+            top: 70px;
+            right: 0;
+            height: calc(100vh - 70px);
+            background: var(--background-color);
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            flex-direction: column;
+            justify-content: start !important;
+            padding: 20px;
+        }
+
+        ul {
+            list-style: none !important;
+            display: flex;
+            align-items: center;
+
+
+            @include breakpoint(sm) {
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+
+            @include breakpoint(md) {
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+
+            @include breakpoint(lg) {
+                flex-direction: row !important;
+                gap: 40px !important;
+            }
+
+            li {
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 24px;
+                text-align: left;
+                color: var(--text-color);
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+
+                ion-icon {
+                    color: var(--text-color);
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+      
+    }
+
+    .menu-toggle {
+        display: none;
+        cursor: pointer;
+
+        ion-icon {
+            font-size: 30px;
+            color: var(--primary-color);
+        }
+
+        @include breakpoint(sm) {
+            display: flex;
+        }
+
+        @include breakpoint(md) {
+            display: flex;
+        }
+
+        @include breakpoint(lg) {
+            display: none;
+        }
+    }
+}
+
+.cus-menu {
+    min-width: 100px !important;
+    max-width: 200px !important;
+    margin-top: 15px;
+    border: 0.1px solid var(--logo-color);
+    border-radius: 10px !important;
+    margin-right: 30px !important;
+
+    .mat-mdc-menu-content {
+        .mat-mdc-menu-item {
+            display: flex;
+            align-items: center;
+            min-height: 35px;
+
+            .mat-mdc-menu-item-text {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: var(--text-color);
+            }
+        }
+    }
+}
+
+
+// Overlay for active menu
+.menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); // Semi-transparent black
+    z-index: 9998;
+
+    &.active {
+        display: block;
+    }
+}
