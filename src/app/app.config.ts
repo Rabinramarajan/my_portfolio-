@@ -7,6 +7,12 @@ import { provideHttpClient } from '@angular/common/http';
 import { appInitializerFactory } from './app.config.initializer';
 import { RouteReuseService } from './common/services/route-reuse/route-reuse.service';
 import { AppSettingsService } from './common/services/app-settings/app-settings.service';
+import { inject } from '@vercel/analytics';
+import { environment } from '../environment/environment.prod';
+
+if (environment.production && environment.enableAnalytics) {
+  inject();
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
