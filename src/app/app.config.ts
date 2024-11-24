@@ -8,11 +8,21 @@ import { appInitializerFactory } from './app.config.initializer';
 import { RouteReuseService } from './common/services/route-reuse/route-reuse.service';
 import { AppSettingsService } from './common/services/app-settings/app-settings.service';
 import { inject } from '@vercel/analytics';
-import { environment } from '../environment/environment.prod';
+import { environmentProd } from '../environment/environment.prod';
+import { environment } from '../environment/environment';
 
-if (environment.production && environment.enableAnalytics) {
+if (environmentProd.production && environmentProd.enableAnalytics) {
   inject();
 }
+
+// if (!environment.production) {  
+//   import('@vercel/toolbar').then(() => {
+//     // Toolbar might initialize automatically now
+//     console.log('Vercel toolbar should now be initialized automatically.');
+//   }).catch((err) => {
+//     console.error('Error loading Vercel Toolbar:', err);
+//   });
+// }
 
 export const appConfig: ApplicationConfig = {
   providers: [
