@@ -26,11 +26,10 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    Analytics.inject({
-      framework: 'angular',  
-      disableAutoTrack: false 
-    });
-
+    // Analytics.inject({
+    //   framework: 'angular',  
+    //   disableAutoTrack: false 
+    // });
     this.trackPageView();
     this.addJsonLd();
   }
