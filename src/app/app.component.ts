@@ -4,6 +4,7 @@ import { AppSettingsService } from './common/services/app-settings/app-settings.
 import { SpeedInsightsService } from './common/services/speed-insights/speed-insights.service';
 import { FormsModule } from '@angular/forms';
 import { Maintenance } from './common/templates/maintenance';
+import Analytics from '@vercel/analytics';
 
 @Component({
   selector: 'app-root',
@@ -25,8 +26,19 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    // this.getInsights();
-    // this.addJsonLd();
+    Analytics.inject({
+      framework: 'angular',  
+      disableAutoTrack: false 
+    });
+
+    this.trackPageView();
+    this.addJsonLd();
+  }
+
+  // Track a page view
+  trackPageView() {
+    Analytics.track('page_view', { path: window.location.pathname });
+    console.log('Page view tracked');
   }
 
   addJsonLd() {
@@ -53,17 +65,5 @@ export class AppComponent {
     script.type = 'application/ld+json';
     script.text = JSON.stringify(jsonLd);
     this.renderer.appendChild(document.head, script);
-  }
-
-
-  getInsights() {
-    this.speedInsightsService.fetchPageSpeedInsights(this.testUrl).subscribe({
-      next: (data) => {
-        this.insightsData = data;
-      },
-      error: (err) => {
-        this.errorMessage = 'Error fetching PageSpeed data: ' + err.message;
-      },
-    });
   }
 }
