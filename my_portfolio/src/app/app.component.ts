@@ -2,13 +2,12 @@ import { Component, Renderer2 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AppSettingsService } from './common/services/app-settings/app-settings.service';
 import { SpeedInsightsService } from './common/services/speed-insights/speed-insights.service';
-import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ExperienceDurationPipe } from './common/pipes/app-experienceDuration/experience-duration.pipe';
 import { Maintenance } from './common/templates/maintenance';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, Maintenance, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

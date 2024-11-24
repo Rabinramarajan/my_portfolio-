@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "myPortfolio": {
+    "my_portfolio": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/my-portfolio",
+            "outputPath": "dist/my_portfolio",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -32,7 +32,7 @@
               }
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/magenta-violet.css",
+              "@angular/material/prebuilt-themes/cyan-orange.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -47,8 +47,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
                 }
               ],
               "outputHashing": "all"
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "myPortfolio:build:production"
+              "buildTarget": "my_portfolio:build:production"
             },
             "development": {
-              "buildTarget": "myPortfolio:build:development"
+              "buildTarget": "my_portfolio:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -92,7 +92,7 @@
               }
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/magenta-violet.css",
+              "@angular/material/prebuilt-themes/cyan-orange.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -102,6 +102,6 @@
     }
   },
   "cli": {
-    "analytics": "0a8eadc2-5ca0-4d2b-bf9a-f7f1d067bbbb"
+    "analytics": "b0806219-d6bb-499f-b29b-9f34deb43fd0"
   }
 }
