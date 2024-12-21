@@ -15,14 +15,14 @@ if (environmentProd.production && environmentProd.enableAnalytics) {
   inject();
 }
 
-// if (!environment.production) {  
-//   import('@vercel/toolbar').then(() => {
-//     // Toolbar might initialize automatically now
-//     console.log('Vercel toolbar should now be initialized automatically.');
-//   }).catch((err) => {
-//     console.error('Error loading Vercel Toolbar:', err);
-//   });
-// }
+if (!environment.production) {
+  import('@vercel/toolbar').then(() => {
+    // Toolbar might initialize automatically now
+    console.log('Vercel toolbar should now be initialized automatically.');
+  }).catch((err) => {
+    console.error('Error loading Vercel Toolbar:', err);
+  });
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
