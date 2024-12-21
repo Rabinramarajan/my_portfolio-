@@ -1,43 +1,37 @@
-// Mixin for generating spacing utilities
+// mixin for spacing
 @mixin generate-spacing-utilities($sizes, $property, $name) {
-    @each $key, $size in $sizes {
+    @for $i from 1 through $sizes {
+        $size: $i * 1px;
 
-        // Apply for padding, margin and Gap
-        .#{$property}#{$key} {
+        // General spacing
+        .#{$property}#{$i} {
             #{$name}: $size !important;
         }
 
-        // Apply for padding and margin
+        // Specific cases for padding and margin
         @if $property =="p" or $property =="m" {
-
-            // Top spacing
-            .#{$property}t#{$key} {
+            .#{$property}t#{$i} {
                 #{$name}-top: $size !important;
             }
 
-            // Bottom spacing
-            .#{$property}b#{$key} {
+            .#{$property}b#{$i} {
                 #{$name}-bottom: $size !important;
             }
 
-            // Left spacing
-            .#{$property}l#{$key} {
+            .#{$property}l#{$i} {
                 #{$name}-left: $size !important;
             }
 
-            // Right spacing
-            .#{$property}r#{$key} {
+            .#{$property}r#{$i} {
                 #{$name}-right: $size !important;
             }
 
-            // Horizontal (left and right) spacing
-            .#{$property}x#{$key} {
+            .#{$property}x#{$i} {
                 #{$name}-left: $size !important;
                 #{$name}-right: $size !important;
             }
 
-            // Vertical (top and bottom) spacing
-            .#{$property}y#{$key} {
+            .#{$property}y#{$i} {
                 #{$name}-top: $size !important;
                 #{$name}-bottom: $size !important;
             }
@@ -45,11 +39,27 @@
     }
 }
 
-// Mixin for generating dimension utilities
-@mixin generate-dimension-utilities($sizes, $prefix, $css-property) {
-    @each $key, $value in $sizes {
-        .#{$prefix}#{$key} {
-            #{$css-property}: $value !important;
+// mixin for width and height
+@mixin generate-dimension-utilities-with-units($sizes, $prefix, $css-property, $unit) {
+    @each $size in $sizes {
+        .#{$prefix}#{$size} {
+            #{$css-property}: #{$size}#{$unit} !important;
+        }
+    }
+}
+
+// mixin for typography
+@mixin generate-font-utilities($sizes, $weights) {
+    @for $i from 1 through $sizes {
+        .fs#{$i} {
+            font-size: #{$i}px !important;
+        }
+    }
+
+    // Generate font-weight utilities
+    @each $key, $value in $weights {
+        .fw#{$key} {
+            font-weight: #{$value} !important;
         }
     }
 }
@@ -68,15 +78,6 @@
     @each $key, $value in $options {
         .#{$property}-#{$key} {
             #{$property}: $value !important;
-        }
-    }
-}
-
-// Mixin for generating font size utilities
-@mixin generate-font-size-utilities($sizes) {
-    @each $key, $value in $sizes {
-        .#{$key} {
-            font-size: $value !important;
         }
     }
 }
@@ -127,15 +128,6 @@ $breakpoints: (
         }
     }
 }
-
-@mixin generate-flexbox-utilities($options, $prefix, $property) {
-    @each $key, $value in $options {
-        .#{$prefix}-#{$key} {
-            #{$property}: $value !important;
-        }
-    }
-}
-
 
 
 // Mixin to apply theme styles

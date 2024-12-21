@@ -1,7 +1,8 @@
 @import './config/mixins';
 @import './config/variables';
 @import './config/function';
-@import './config/responsive-mixin.scss';
+@import './config/responsive-mixin';
+
 
 :root {
     --font-family: "Inter", sans-serif;
@@ -63,72 +64,6 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
-@include generate-spacing-utilities($spacing-sizes, "p", "padding"); // For padding utilities
-@include generate-spacing-utilities($spacing-sizes, "m", "margin"); // For margin utilities
-@include generate-spacing-utilities($spacing-sizes, "g", "gap"); // For gap utilities
-
-
-.auto-margin-left {
-    margin-left: auto;
-}
-
-.auto-margin-right {
-    margin-right: auto;
-}
-
-.slot-left {
-    @extend .auto-margin-right;
-}
-
-.slot-right {
-    @extend .auto-margin-left;
-}
-
-.relative {
-    position: relative;
-}
-
-.ab {
-    @include breakpoint(md) {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        overflow: hidden;
-    }
-}
-
-.rel {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-}
-
-.text {
-    @include breakpoint(sm) {
-        font-size: map-get($typography, font-size-sm);
-    }
-
-    @include breakpoint(md) {
-        font-size: map-get($typography, font-size-md);
-    }
-
-    @include breakpoint(lg) {
-        font-size: map-get($typography, font-size-lg);
-    }
-
-    @include breakpoint(xl) {
-        font-size: map-get($typography, font-size-xl);
-    }
-
-    @include breakpoint(xxl) {
-        font-size: map-get($typography, font-size-xxl);
-    }
-}
-
 
 .dark-theme {
     @include apply-theme(dark);

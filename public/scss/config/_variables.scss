@@ -1,12 +1,68 @@
-// Primary Color Palette
-$colors: (
-    primary: #3498db,
-    secondary: #2ecc71,
-    danger: #e74c3c,
-    warning: #f1c40f,
-    info: #8e44ad,
-    light: #ecf0f1,
-    dark: #2c3e50
+// Sizing Variable
+
+$sizes: 100;
+$sizesBasedOnPx: 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700;
+$percent-sizes: 10, 20, 25, 33, 50, 66, 75, 80, 90, 100;
+
+$font-weights: (
+    normal: 400,
+    bold: 700,
+    bolder: 900
+);
+
+$justify-options: (
+    start: flex-start,
+    center: center,
+    end: flex-end,
+    between: space-between,
+    around: space-around,
+    evenly: space-evenly
+);
+
+$align-items-options: (
+    start: flex-start,
+    center: center,
+    end: flex-end,
+    stretch: stretch,
+    baseline: baseline
+);
+
+$align-self-options: (
+    auto: auto,
+    start: flex-start,
+    center: center,
+    end: flex-end,
+    stretch: stretch,
+    baseline: baseline
+);
+
+$flex-direction-options: (
+    row: row,
+    column: column,
+    row-reverse: row-reverse,
+    column-reverse: column-reverse
+);
+
+$flex-wrap-options: (
+    nowrap: nowrap,
+    wrap: wrap,
+    wrap-reverse: wrap-reverse
+);
+
+$flex-grow-options: (
+    0: 0,
+    1: 1
+);
+
+$flex-shrink-options: (
+    0: 0,
+    1: 1
+);
+
+$flex-basis-options: (
+    auto: auto,
+    initial: initial,
+    full: 100%
 );
 
 // Base Typography
@@ -25,17 +81,7 @@ $typography: (
     line-height: 1.5
 );
 
-// Spacing Sizes
-$spacing-sizes: (
-    0: 0,
-    1: 2px,
-    2: 8px,
-    3: 10px,
-    4: 16px,
-    5: 24px,
-    6: 26px,
-    7: 32px,
-);
+
 
 // Border Radius
 $border-radius: (

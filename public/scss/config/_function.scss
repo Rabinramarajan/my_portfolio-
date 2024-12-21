@@ -1,10 +1,4 @@
-// Adjust Color Brightness
-// background-color: adjust-color($primary-color, 20%); small example
 @function adjust-color($color, $percentage) {
-    @if type-of($color) !='color' {
-        @error "Invalid input: '#{$color}' is not a color.";
-    }
-
     @if $percentage >0 {
         @return lighten($color, $percentage);
     }
@@ -14,86 +8,157 @@
     }
 }
 
-// Convert Pixels to REM
-// font-size: px-to-rem(32px, 16px); // Converts 32px to 2rem
+
 @function px-to-rem($px, $base-font-size: 16px) {
-    @if type-of($px) !='number' or unit($px) !='px' {
-        @error "Invalid input: '#{$px}' must be a pixel value.";
-    }
-
-    @return $px / strip-unit($base-font-size) * 1rem;
+    @return $px / $base-font-size * 1rem;
 }
 
-// Remove Unit from Value
-// width: strip-unit(100px) * 2px; // Removes 'px' and doubles the value
 @function strip-unit($value) {
-    @if type-of($value)=='number' and unit($value) {
-        @return $value / ($value * 0 + 1);
-    }
-
-    @return $value;
+    @return $value / ($value * 0 + 1);
 }
 
-// font-size: fluid-font(16px, 24px); // Scales font size between 16px and 24px
+
 @function fluid-font($min-size, $max-size, $min-vw: 320px, $max-vw: 1440px) {
-
-    // Validate that viewport width range is correct
-    @if $min-vw >=$max-vw {
-        @error "Invalid viewport range: $min-vw must be less than $max-vw.";
-    }
-
-    // Warn if minimum size is greater than or equal to maximum size
-    @if $min-size >=$max-size {
-        @warn "Minimum size ($min-size) is greater than or equal to maximum size ($max-size). Check input.";
-    }
-
-    // Return the fluid font size calculation
-    @return calc(#{px-to-rem($min-size)} + (#{px-to-rem($max-size)} - #{px-to-rem($min-size)}) * ((100vw - #{$min-vw}) / (#{$max-vw} - #{$min-vw})));
+    @return calc(#{px-to-rem($min-size)} + (#{px-to-rem($max-size)} - #{px-to-rem($min-size)}) * ((100vw - $min-vw) / ($max-vw - $min-vw)));
 }
 
-
-// Access Map Value with Error Handling
-@function map-get-safe($map, $key, $map-name: 'map') {
-    @if map-has-key($map, $key) {
-        @return map-get($map, $key);
-    }
-
-    @else {
-        @error "Invalid key: '#{$key}' not found in '#{$map-name}'.";
-    }
+@function map-get-safe($map, $key) {
+    @return map-get($map, $key);
 }
 
-// Access Color from Map
 @function color($key) {
-    @return map-get-safe($colors, $key, 'colors');
+    @return map-get-safe($colors, $key);
 }
 
-// Access Spacing from Map
-@function spacing($scale) {
-    @return map-get-safe($spacing-scale, $scale, 'spacing-scale');
+@function spacing($key) {
+    @return map-get-safe($spacing-scale, $key);
 }
 
-// Retrieve Breakpoint Min Width
 @function breakpoint-min($size) {
-    @return map-get-safe(map-get-safe($breakpoints, $size, 'breakpoints'), min, 'breakpoint-min');
+    @return map-get(map-get($breakpoints, $size), 'min');
 }
 
-// Retrieve Breakpoint Max Width
 @function breakpoint-max($size) {
-    @return map-get-safe(map-get-safe($breakpoints, $size, 'breakpoints'), max, 'breakpoint-max');
+    @return map-get(map-get($breakpoints, $size), 'max');
 }
 
-// Access Border Radius from Map
 @function radius($key) {
-    @return map-get-safe($border-radius, $key, 'border-radius');
+    @return map-get-safe($border-radius, $key);
 }
 
-// Access Z-Index from Map
 @function z($key) {
-    @return map-get-safe($z-index, $key, 'z-index');
+    @return map-get-safe($z-index, $key);
 }
 
-// Access Shadow from Map
 @function shadow($key) {
-    @return map-get-safe($shadows, $key, 'shadows');
+    @return map-get-safe($shadows, $key);
 }
+
+
+
+// How do I use these functions, for example?
+
+// 1. Adjust Color Brightness
+
+// $primary-color: #3498db;
+
+// button {
+//   background-color: adjust-color($primary-color, 20%); // Lightens the color by 20%
+//   color: adjust-color($primary-color, -20%); // Darkens the color by 20%
+// }
+
+
+// 2. Convert Pixels to REM
+
+// h1 {
+//     font-size: px-to-rem(32px); // Converts 32px to rem based on the default base font size (16px)
+//   }
+
+//   p {
+//     font-size: px-to-rem(18px, 18px); // Converts 18px to rem based on a custom base font size (18px)
+//   }
+
+// 3. Remove Unit from Value
+
+// .container {
+//     width: strip-unit(100px) * 2px; // Result: 200px
+// }
+
+// 4. Fluid Font Size
+
+// h1 {
+//     font-size: fluid-font(16px, 24px); // Scales between 16px and 24px based on viewport width
+//   }
+
+// 5. Safe Map Access
+
+// $colors: (
+//   primary: #3498db,
+//   secondary: #2ecc71
+// );
+
+// button {
+//   background-color: color('primary'); // Retrieves the primary color from the map
+//   border: 1px solid color('secondary'); // Retrieves the secondary color from the map
+// }
+
+// 6. Spacing from Map
+
+// $spacing-scale: (
+//   small: 8px,
+//   medium: 16px,
+//   large: 32px
+// );
+
+// .container {
+//   padding: spacing('medium'); // Applies 16px padding
+// }
+
+
+// 7. Breakpoint Min/Max Width
+
+// $breakpoints: (
+//   small: (min: 320px, max: 768px),
+//   medium: (min: 769px, max: 1024px),
+//   large: (min: 1025px, max: 1440px)
+// );
+
+// @media (min-width: breakpoint-min('medium')) and (max-width: breakpoint-max('medium')) {
+//   .container {
+//     padding: 20px;
+//   }
+// }
+
+// 8. Border Radius from Map
+
+// $border-radius: (
+//   small: 4px,
+//   medium: 8px,
+//   large: 16px
+// );
+
+// .box {
+//   border-radius: radius('medium'); // Applies a border-radius of 8px
+// }
+
+// 9. Z-Index from Map
+
+// $z-index: (
+//   modal: 1000,
+//   dropdown: 500
+// );
+
+// .modal {
+//   z-index: z('modal'); // Applies z-index of 1000
+// }
+
+// 10. Shadow from Map
+
+// $shadows: (
+//   light: 0 2px 4px rgba(0, 0, 0, 0.1),
+//   dark: 0 4px 8px rgba(0, 0, 0, 0.3)
+// );
+
+// .card {
+//   box-shadow: shadow('light'); // Applies a light shadow
+// }
