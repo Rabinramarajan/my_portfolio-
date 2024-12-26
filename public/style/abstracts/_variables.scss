@@ -1,15 +1,16 @@
-// Sizing Variable
-
+// Sizing Variables
 $sizes: 100;
 $sizesBasedOnPx: 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700;
 $percent-sizes: 10, 20, 25, 33, 50, 66, 75, 80, 90, 100;
 
+// Font Weights
 $font-weights: (
     normal: 400,
     bold: 700,
     bolder: 900
 );
 
+// Flexbox Justify Options
 $justify-options: (
     start: flex-start,
     center: center,
@@ -19,6 +20,7 @@ $justify-options: (
     evenly: space-evenly
 );
 
+// Flexbox Align Items Options
 $align-items-options: (
     start: flex-start,
     center: center,
@@ -27,6 +29,7 @@ $align-items-options: (
     baseline: baseline
 );
 
+// Flexbox Align Self Options
 $align-self-options: (
     auto: auto,
     start: flex-start,
@@ -36,6 +39,7 @@ $align-self-options: (
     baseline: baseline
 );
 
+// Flexbox Direction Options
 $flex-direction-options: (
     row: row,
     column: column,
@@ -43,22 +47,26 @@ $flex-direction-options: (
     column-reverse: column-reverse
 );
 
+// Flexbox Wrap Options
 $flex-wrap-options: (
     nowrap: nowrap,
     wrap: wrap,
     wrap-reverse: wrap-reverse
 );
 
+// Flexbox Grow Options
 $flex-grow-options: (
     0: 0,
     1: 1
 );
 
+// Flexbox Shrink Options
 $flex-shrink-options: (
     0: 0,
     1: 1
 );
 
+// Flexbox Basis Options
 $flex-basis-options: (
     auto: auto,
     initial: initial,
@@ -80,8 +88,6 @@ $typography: (
     font-weight-xxl: 700,
     line-height: 1.5
 );
-
-
 
 // Border Radius
 $border-radius: (
@@ -127,8 +133,7 @@ $scrollbar-thumb-active-color: lighten($scrollbar-thumb-color, 10%);
 $scrollbar-border-width: 2px;
 $scrollbar-border-radius: 1rem;
 
-// theme variables
-
+// Theme Variables
 $themes: (
     dark: (primary-color: #F9FAFB,
         secondary-color: #374151,
@@ -143,3 +148,9 @@ $themes: (
         btn-text-color: rgba(249, 250, 251, 1),
         logo-color: rgba(17, 24, 39, 1))
 );
+
+// Global Animation Variables
+$animation-duration: 1s;
+$animation-easing: cubic-bezier(0.68, -0.55, 0.27, 1.55); // Advanced spring-like easing
+$animation-delay: 0.2s;
+$stagger-step: 0.1s; // Staggered animation step

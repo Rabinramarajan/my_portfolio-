@@ -1,10 +1,10 @@
 import { Component, Renderer2 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AppSettingsService } from './common/services/app-settings/app-settings.service';
-import { SpeedInsightsService } from './common/services/speed-insights/speed-insights.service';
 import { FormsModule } from '@angular/forms';
 import { Maintenance } from './common/templates/maintenance';
 import Analytics from '@vercel/analytics';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -15,21 +15,13 @@ import Analytics from '@vercel/analytics';
 })
 export class AppComponent {
   title = 'myPortfolio';
-  insightsData: any;
-  errorMessage: string | null = null;
-
-  private testUrl = 'https://rabinr.com/';
-
+  
   constructor(public appSetting: AppSettingsService,
-    private speedInsightsService: SpeedInsightsService,
+    private http: HttpClient,
     private renderer: Renderer2) {
   }
 
   ngOnInit(): void {
-    // Analytics.inject({
-    //   framework: 'angular',  
-    //   disableAutoTrack: false 
-    // });
     this.trackPageView();
     this.addJsonLd();
   }
@@ -54,15 +46,14 @@ export class AppComponent {
       ],
       "jobTitle": "Front-End Developer",
       "alumniOf": "National College, Tiruchirapalli",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "ITGalax Solution Pvt Ltd"
-      }
+      "worksFor": { "@type": "Organization", "name": "ITGalax Solution Pvt Ltd" }
     };
 
-    const script = this.renderer.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify(jsonLd);
-    this.renderer.appendChild(document.head, script);
+    document.head.appendChild(
+      Object.assign(document.createElement('script'), { type: 'application/ld+json', textContent: JSON.stringify(jsonLd) })
+    );
   }
+
+
+
 }

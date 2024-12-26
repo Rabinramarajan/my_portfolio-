@@ -1,4 +1,4 @@
-// mixin for spacing
+// Mixin for spacing utilities
 @mixin generate-spacing-utilities($sizes, $property, $name) {
     @for $i from 1 through $sizes {
         $size: $i * 1px;
@@ -39,7 +39,7 @@
     }
 }
 
-// mixin for width and height
+// Mixin for width and height utilities with units
 @mixin generate-dimension-utilities-with-units($sizes, $prefix, $css-property, $unit) {
     @each $size in $sizes {
         .#{$prefix}#{$size} {
@@ -48,7 +48,7 @@
     }
 }
 
-// mixin for typography
+// Mixin for typography utilities
 @mixin generate-font-utilities($sizes, $weights) {
     @for $i from 1 through $sizes {
         .fs#{$i} {
@@ -82,19 +82,11 @@
     }
 }
 
-// Mixin for generating font weight utilities
-@mixin generate-font-weight-utilities($weights) {
-    @each $key, $value in $weights {
-        .#{$key} {
-            font-weight: $value !important;
-        }
-    }
-}
-
-
+// Grid column and spacer variables
 $grid-column: 12;
 $grid-spacer: 7px;
 
+// Breakpoints for responsive design
 $breakpoints: (
     sm: 576px,
     md: 768px,
@@ -103,6 +95,7 @@ $breakpoints: (
     xxl: 1400px
 );
 
+// Mixin to create grid columns
 @mixin make-grid-columns() {
     @each $breakpoint in map-keys($breakpoints) {
         $min: map-get($breakpoints, $breakpoint);
@@ -129,10 +122,67 @@ $breakpoints: (
     }
 }
 
-
 // Mixin to apply theme styles
 @mixin apply-theme($theme) {
     $theme-map: map-get($themes, $theme);
     background-color: map-get($theme-map, background-color);
     color: map-get($theme-map, text-color);
+}
+
+@mixin animate($name, $duration: $animation-duration, $easing: $animation-easing, $delay: 0s, $iteration: 1) {
+    animation-name: $name;
+    animation-duration: $duration;
+    animation-timing-function: $easing;
+    animation-delay: $delay;
+    animation-iteration-count: $iteration;
+    animation-fill-mode: both; // Ensures the element stays in the end state
+}
+
+// Mixin for Staggered Animations
+@mixin stagger($name, $count, $duration: $animation-duration, $easing: $animation-easing, $step: $stagger-step) {
+    @for $i from 1 through $count {
+        &:nth-child(#{$i}) {
+            @include animate($name, $duration, $easing, $step * ($i - 1));
+        }
+    }
+}
+
+@mixin slot-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin v-flex($displayType: 'column') {
+    @if $displayType =='column' {
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    @else if $displayType =='row' {
+        display: flex;
+        flex-direction: row !important;
+    }
+
+    @else if $displayType =='flex' {
+        display: flex;
+    }
+
+    @else if $displayType =='contents' {
+        display: contents;
+    }
+
+    @else if $displayType =='inline-flex' {
+        display: inline-flex;
+    }
+
+    @else {
+        display: block !important; // Fallback for other cases
+    }
+}
+
+@mixin reset-selector {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }

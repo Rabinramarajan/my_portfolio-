@@ -1,9 +1,3 @@
-@import './config/mixins';
-@import './config/variables';
-@import './config/function';
-@import './config/responsive-mixin';
-
-
 :root {
     --font-family: "Inter", sans-serif;
     --font-default-size: 14px;
@@ -49,10 +43,22 @@
     --btn-success: #357d1a;
 }
 
+.dark-theme {
+    @include apply-theme(dark);
+}
+
+
+.light-theme {
+    @include apply-theme(light);
+}
+
+
+.slot-center {
+    @include slot-center;
+}
+
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+    @include reset-selector;
 }
 
 html,
@@ -65,15 +71,6 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.dark-theme {
-    @include apply-theme(dark);
-}
-
-
-.light-theme {
-    @include apply-theme(light);
-}
-
-.z-iM{
+.z-iM {
     z-index: -1;
 }

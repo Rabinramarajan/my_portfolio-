@@ -20,6 +20,7 @@
 
 @function fluid-font($min-size, $max-size, $min-vw: 320px, $max-vw: 1440px) {
     @return calc(#{px-to-rem($min-size)} + (#{px-to-rem($max-size)} - #{px-to-rem($min-size)}) * ((100vw - $min-vw) / ($max-vw - $min-vw)));
+
 }
 
 @function map-get-safe($map, $key) {

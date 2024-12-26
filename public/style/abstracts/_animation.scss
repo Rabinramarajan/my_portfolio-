@@ -1,0 +1,172 @@
+// Keyframes for Common Animations
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-30px);
+    }
+
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes flip {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes slide-fade {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes zoom-rotate {
+    from {
+        transform: scale(0.5) rotate(0deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scale-up {
+    from {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// Advanced 3D Transformations
+@keyframes rotate-3d {
+    0% {
+        transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+    }
+
+    50% {
+        transform: perspective(800px) rotateX(180deg) rotateY(180deg);
+    }
+
+    100% {
+        transform: perspective(800px) rotateX(360deg) rotateY(360deg);
+    }
+}
+
+.rotate-3d {
+    @include animate(rotate-3d, 2s, linear, 0s, infinite);
+    transform-origin: center;
+    perspective: 1000px;
+}
+
+// Hover and Triggered Animations
+.hover-zoom {
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+}
+
+.trigger-animation {
+    opacity: 0;
+    transform: translateY(20px);
+
+    &.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        @include animate(fade-in, $animation-duration, $animation-easing);
+    }
+}
+
+// Utility Classes for Common Animations
+.fade-in {
+    @include animate(fade-in);
+}
+
+.slide-in {
+    @include animate(slide-in);
+}
+
+.scale-up {
+    @include animate(scale-up);
+}
+
+.rotate {
+    @include animate(rotate, 1s, linear, infinite); // Example with infinite rotation
+}
+
+.bounce {
+    @include animate(bounce, 2s, ease-in-out, 0s, infinite);
+}
+
+.flip {
+    @include animate(flip, 1s, linear);
+}
+
+.slide-fade {
+    @include animate(slide-fade, $animation-duration, $animation-easing);
+}
+
+.zoom-rotate {
+    @include animate(zoom-rotate, 1.5s, ease-in-out);
+}

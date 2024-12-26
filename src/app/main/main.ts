@@ -22,12 +22,12 @@ import { AboutComponent } from "./about/about.component";
     <div class="a">
         <app-header />
     </div>
-    <!-- <div class="z-iM">
+    <div class="z-iM">
        <app-banner />
     </div>
     <div class="z-iM">
       <app-about />
-    </div> -->
+    </div>
     }
 </div>
 

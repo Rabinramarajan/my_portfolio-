@@ -8,26 +8,28 @@
 @include generate-flexbox-utilities($flex-shrink-options, "flex-shrink", "flex-shrink");
 @include generate-flexbox-utilities($flex-basis-options, "flex-basis", "flex-basis");
 
-
-.slot-center {
-    display: flex;
-    align-items: center !important;
-    justify-content: center !important;
+.v-flex {
+    @include v-flex('column');
 }
 
 .d-flex {
-    display: flex !important;
+    @include v-flex('flex');
 }
 
-.d-inline-flex {
-    display: inline-flex !important;
+.h-flex {
+    @include v-flex('row');
 }
 
-.v-flex {
-    display: flex;
-    flex-direction: column !important;
+.b-flex {
+    @include v-flex('block');
 }
 
+.inline-flex {
+    @include v-flex('inline-flex');
+}
+.flex-contents {
+    @include v-flex('contents');
+}
 
 .flex-contents {
     display: contents;
