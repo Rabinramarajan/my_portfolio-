@@ -56,8 +56,8 @@ export class PortfolioHome implements OnInit, OnDestroy {
 
   // Static data
   socialLinks: SocialLink[] = [
-    { platform: 'twitter', url: 'https://twitter.com/username', icon: 'twitter' },
-    { platform: 'linkedin', url: 'https://linkedin.com/in/username', icon: 'linkedin' }
+    { platform: 'twitter', url: 'https://twitter.com/username', icon: 'logo-instagram' },
+    { platform: 'linkedin', url: 'https://linkedin.com/in/username', icon: 'logo-linkedin' }
   ];
 
   profile = {

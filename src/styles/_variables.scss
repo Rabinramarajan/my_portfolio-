@@ -1,22 +1,20 @@
-// $accent-gradient: linear-gradient(135deg, $accent-primary, $accent-secondary);
-
 // Typography
-$font-size-xs: 0.75rem;
-$font-size-sm: 0.875rem;
+$font-size-xs  : 0.75rem;
+$font-size-sm  : 0.875rem;
 $font-size-base: 1rem;
-$font-size-lg: 1.125rem;
-$font-size-xl: 1.25rem;
-$font-size-2xl: 1.5rem;
-$font-size-3xl: 1.875rem;
-$font-size-4xl: 2.25rem;
-$font-size-5xl: 3rem;
+$font-size-lg  : 1.125rem;
+$font-size-xl  : 1.25rem;
+$font-size-2xl : 1.5rem;
+$font-size-3xl : 1.875rem;
+$font-size-4xl : 2.25rem;
+$font-size-5xl : 3rem;
 
 // Spacing
-$spacing-xs: 0.5rem;
-$spacing-sm: 1rem;
-$spacing-md: 1.5rem;
-$spacing-lg: 2rem;
-$spacing-xl: 3rem;
+$spacing-xs : 0.5rem;
+$spacing-sm : 1rem;
+$spacing-md : 1.5rem;
+$spacing-lg : 2rem;
+$spacing-xl : 3rem;
 $spacing-2xl: 4rem;
 
 // Breakpoints
@@ -26,8 +24,8 @@ $breakpoint-lg: 1024px;
 $breakpoint-xl: 1280px;
 
 // Z-index
-$z-header: 1000;
-$z-modal: 2000;
+$z-header : 1000;
+$z-modal  : 2000;
 $z-tooltip: 3000;
 
 // Transitions
@@ -35,18 +33,15 @@ $transition-fast: 0.15s ease;
 $transition-base: 0.3s ease;
 $transition-slow: 0.5s ease;
 
-$spacing: (
-    xs: 4px,
+$spacing: (xs: 4px,
     sm: 8px,
     md: 10px,
     lg: 16px,
     xl: 24px,
     xxl: 35px,
-    xxxl: 70px
-);
+    xxxl: 70px);
 
-$colors: (
-    primary-bg: #020618,
+$colors: (primary-bg: #020618,
     secondary-bg: #0f172b,
     tertiary-bg: #1d293d,
     dark-bg: #0a0a0a,
@@ -58,38 +53,23 @@ $colors: (
     accent-cyan: #00d5be,
     accent-pink: #ffa1ad,
     accent-green: #46ecd5,
-    transparent: transparent
-);
+    transparent: transparent);
 
-$border-radius: (
-    sm: 4px,
+$border-radius: (sm: 4px,
     md: 6.5px,
     lg: 8px,
     xl: 10.35px,
-    xxl: 7.35px
-);
+    xxl: 7.35px);
 
-$gradients: (
-    snake-game: linear-gradient(154deg, rgba(23, 85, 83, 0.7) 0%, rgba(67, 217, 173, 0.09) 100%)
-);
+$gradients: (snake-game: linear-gradient(154deg, rgba(23, 85, 83, 0.7) 0%, rgba(67, 217, 173, 0.09) 100%));
 
-$shadows: (
-    inset-white: inset 0px 2px 0px #ffffff4c,
+$shadows: (inset-white: inset 0px 2px 0px #ffffff4c,
     inset-dark: inset 1px 5px 11px #01111ab5,
-    bolt-teal: (
-        inset 0px 1px 2px #198176,
-        2px 2px 4px #0d4241
-    ),
-    bolt-blue: (
-        inset 0px 1px 2px #2b578d,
-        2px 2px 4px #122c4d
-    ),
-    bolt-dark-teal: (
-        inset 0px 1px 2px #16635b,
-        2px 2px 4px #092d31
-    ),
-    bolt-light-teal: (
-        inset 0px 1px 2px #1f8076,
-        2px 2px 4px #0d4241
-    )
-);
+    bolt-teal: (inset 0px 1px 2px #198176,
+        2px 2px 4px #0d4241),
+    bolt-blue: (inset 0px 1px 2px #2b578d,
+        2px 2px 4px #122c4d),
+    bolt-dark-teal: (inset 0px 1px 2px #16635b,
+        2px 2px 4px #092d31),
+    bolt-light-teal: (inset 0px 1px 2px #1f8076,
+        2px 2px 4px #0d4241));

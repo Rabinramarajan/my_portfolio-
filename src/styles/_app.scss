@@ -75,12 +75,10 @@
         flex: 0 0 auto;
 
         .text-wrapper-2 {
-            @include m.text-style(
-                var(--body-md-font-family),
+            @include m.text-style(var(--body-md-font-family),
                 var(--body-md-font-weight),
                 var(--body-md-font-size),
-                map.get(v.$colors, text-primary)
-            );
+                map.get(v.$colors, text-primary));
             @include m.size(fit-content, auto);
             margin-top: -3px;
             white-space: nowrap;
@@ -106,12 +104,10 @@
         @include m.container();
         @include m.size(100%, auto);
         flex: 1;
-        @include m.background-image-custom(
-            "https://c.animaapp.com/mcuvvhde03bkCM/img/background-blurs.png",
+        @include m.background-image-custom("https://c.animaapp.com/mcuvvhde03bkCM/img/background-blurs.png",
             no-repeat,
             right,
-            contain
-        );
+            contain);
 
         .about-container {
             @include m.flex(column, center, center, 75px);
@@ -152,12 +148,10 @@
         }
 
         .job-title {
-            @include m.text-style(
-                var(--heading-h4-font-family),
+            @include m.text-style(var(--heading-h4-font-family),
                 var(--heading-h4-font-weight),
                 var(--heading-h4-font-size),
-                map.get(v.$colors, accent-blue)
-            );
+                map.get(v.$colors, accent-blue));
             align-self: stretch;
         }
 
@@ -176,30 +170,24 @@
             align-self: stretch;
 
             .span {
-                @include m.text-style(
-                    var(--body-md-font-family),
+                @include m.text-style(var(--body-md-font-family),
                     var(--body-md-font-weight),
                     var(--body-md-font-size),
-                    map.get(v.$colors, accent-blue)
-                );
+                    map.get(v.$colors, accent-blue));
             }
 
             .text-wrapper-3 {
-                @include m.text-style(
-                    var(--body-md-font-family),
+                @include m.text-style(var(--body-md-font-family),
                     var(--body-md-font-weight),
                     var(--body-md-font-size),
-                    map.get(v.$colors, text-primary)
-                );
+                    map.get(v.$colors, text-primary));
             }
 
             .text-wrapper-4 {
-                @include m.text-style(
-                    var(--body-md-font-family),
+                @include m.text-style(var(--body-md-font-family),
                     var(--body-md-font-weight),
                     var(--body-md-font-size),
-                    map.get(v.$colors, accent-cyan)
-                );
+                    map.get(v.$colors, accent-cyan));
             }
 
             .text-wrapper-5 {
@@ -287,12 +275,10 @@
             background-color: map.get(v.$colors, accent-orange);
 
             .button-text {
-                @include m.text-style(
-                    var(--body-sm-font-family),
+                @include m.text-style(var(--body-sm-font-family),
                     var(--body-sm-font-weight),
                     var(--body-sm-font-size),
-                    map.get(v.$colors, primary-bg)
-                );
+                    map.get(v.$colors, primary-bg));
                 @include m.size(fit-content, auto);
                 margin-top: -1px;
                 text-align: center;
@@ -306,12 +292,10 @@
             flex: 0 0 auto;
 
             .button-text-2 {
-                @include m.text-style(
-                    var(--body-sm-font-family),
+                @include m.text-style(var(--body-sm-font-family),
                     var(--body-sm-font-weight),
                     var(--body-sm-font-size),
-                    map.get(v.$colors, text-primary)
-                );
+                    map.get(v.$colors, text-primary));
                 @include m.size(fit-content, auto);
                 margin-top: -1px;
                 white-space: nowrap;
@@ -343,12 +327,10 @@
         }
 
         .text-wrapper-6 {
-            @include m.text-style(
-                var(--body-sm-font-family),
+            @include m.text-style(var(--body-sm-font-family),
                 var(--body-sm-font-weight),
                 var(--body-sm-font-size),
-                map.get(v.$colors, text-primary)
-            );
+                map.get(v.$colors, text-primary));
             margin-top: -1px;
             align-self: stretch;
         }
@@ -471,6 +453,64 @@
         .vector {
             @include m.position(absolute, 4px, 3px);
             @include m.size(6px, 5px);
+        }
+    }
+
+    // Footer
+    .footer-desktop {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-height: 56px;
+        border-top: 1px solid var(--theme-theme-stroke, #314158);
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            .find-me-in {
+                border-right: 1px solid var(--theme-theme-stroke, #314158);
+                padding: 24px 16px;
+                flex: 0 0 auto;
+            }
+
+            .social-media-icons-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 16px;
+                border-right: 1px solid var(--theme-theme-stroke, #314158);
+
+                ion-icon {
+                    font-size: 24px;
+                    color: #62748E !important;
+                }
+            }
+        }
+
+        .git-username {
+            border-left: 1px solid var(--theme-theme-stroke, #314158);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+
+            .frame-4 {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .text-wrapper {
+                    margin-right: 8px;
+                }
+
+                .icon-git {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
         }
     }
 }

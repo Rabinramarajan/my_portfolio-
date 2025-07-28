@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 
 interface SocialLink {
   platform: string;
@@ -9,6 +9,7 @@ interface SocialLink {
 @Component({
   selector: 'app-social-links',
   imports: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './social-links.html',
   styleUrl: './social-links.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

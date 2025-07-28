@@ -67,7 +67,8 @@
     flex-direction: $direction;
     align-items: $align;
     justify-content: $justify;
-    @if $gap != 0 {
+
+    @if $gap !=0 {
         gap: $gap;
     }
 }
@@ -80,33 +81,37 @@
 @mixin border($width: 1px, $style: solid, $color: map.get($colors, border), $side: null) {
     @if $side {
         border-#{$side}: $width $style $color;
-    } @else {
+    }
+
+    @else {
         border: $width $style $color;
     }
 }
 
 @mixin position($type: relative, $top: null, $left: null, $right: null, $bottom: null) {
     position: $type;
+
     @if $top {
         top: $top;
     }
+
     @if $left {
         left: $left;
     }
+
     @if $right {
         right: $right;
     }
+
     @if $bottom {
         bottom: $bottom;
     }
 }
 
-@mixin text-style(
-    $family: var(--body-md-font-family),
+@mixin text-style($family: var(--body-md-font-family),
     $weight: var(--body-md-font-weight),
     $size: var(--body-md-font-size),
-    $color: map.get(v.$colors, text-secondary)
-) {
+    $color: map.get(v.$colors, text-secondary)) {
     font-family: $family;
     font-weight: $weight;
     font-size: $size;
@@ -147,8 +152,17 @@
 /// @param {String} $blend-mode - normal | multiply | overlay | screen | darken
 
 @mixin background-image-custom($url, $repeat, $position, $size) {
-    background-image: url(#{$url});
+    background-image : url(#{$url});
     background-repeat: $repeat;
     background-position: $position;
     background-size: $size;
+}
+
+
+@mixin slot-center() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
