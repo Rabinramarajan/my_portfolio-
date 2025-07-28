@@ -1,0 +1,476 @@
+@use "./mixins" as m;
+@use "./variables" as v;
+@use "sass:color";
+@use "sass:map";
+
+.portfolio-home {
+    @include m.flex(column, center, center, map.get(v.$spacing, md));
+    @include m.size(100%, auto);
+    min-height: 100vh;
+    padding: map.get(v.$spacing, xl);
+    background-color: #020618;
+
+    .home-foreground {
+        @include m.flex(column, flex-start, flex-start);
+        @include m.size(100%, auto);
+        @include m.border(1px, solid, map.get(v.$colors, border));
+        background-color: map.get(v.$colors, secondary-bg);
+        border-radius: map.get(v.$border-radius, lg);
+        overflow: hidden;
+        flex: 1;
+        align-self: stretch;
+        flex-grow: 1;
+    }
+
+    .header-desktop {
+        @include m.flex(row, center, space-between);
+        @include m.size(100%, 56px);
+        @include m.border(1px, solid, map.get(v.$colors, border), bottom);
+        flex: 0 0 auto;
+        align-self: stretch;
+    }
+
+    .logo-container {
+        @include m.flex(row, center, flex-start, 128px);
+        flex: 0 0 auto;
+    }
+
+    .name-logo {
+        @include m.flex(row, center, center, map.get(v.$spacing, md));
+        padding: map.get(v.$spacing, lg) map.get(v.$spacing, xl);
+        flex: 0 0 auto;
+    }
+
+    .text-wrapper {
+        @include m.text-style();
+        @include m.size(fit-content, auto);
+        margin-top: -1px;
+        white-space: nowrap;
+    }
+
+    .nav-menu {
+        @include m.flex(row, center, flex-start);
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-item {
+        @include m.flex(column, flex-start, flex-start);
+        @include m.border(1px, solid, map.get(v.$colors, border), left);
+        @include m.border(1px, solid, map.get(v.$colors, border), right);
+        flex: 0 0 auto;
+    }
+
+    .menu-item-2 {
+        border-right: none;
+        @include m.border(1px, solid, map.get(v.$colors, border), left);
+    }
+
+    .tab {
+        @include m.flex(row, center, center, map.get(v.$spacing, md));
+        @include m.border(3px, solid, map.get(v.$colors, accent-orange), bottom);
+        padding: map.get(v.$spacing, lg) map.get(v.$spacing, xxl);
+        text-decoration: none;
+        flex: 0 0 auto;
+
+        .text-wrapper-2 {
+            @include m.text-style(
+                var(--body-md-font-family),
+                var(--body-md-font-weight),
+                var(--body-md-font-size),
+                map.get(v.$colors, text-primary)
+            );
+            @include m.size(fit-content, auto);
+            margin-top: -3px;
+            white-space: nowrap;
+        }
+    }
+
+    .tab-wrapper {
+        @include m.flex(column, flex-start, flex-start);
+        @include m.border(1px, solid, map.get(v.$colors, border), right);
+        flex: 0 0 auto;
+    }
+
+    .div-wrapper {
+        @include m.flex(row, center, center, map.get(v.$spacing, md));
+        padding: map.get(v.$spacing, lg) map.get(v.$spacing, xxl);
+        text-decoration: none;
+        flex: 0 0 auto;
+    }
+
+    // Main content
+    .home-content {
+        @include m.flex(row, center, flex-start, 146px);
+        @include m.container();
+        @include m.size(100%, auto);
+        flex: 1;
+        @include m.background-image-custom(
+            "https://c.animaapp.com/mcuvvhde03bkCM/img/background-blurs.png",
+            no-repeat,
+            right,
+            contain
+        );
+
+        .about-container {
+            @include m.flex(column, center, center, 75px);
+
+            .introduction {
+                @include m.flex(column, flex-start, space-around, 10px);
+                @include m.size(100%, auto);
+
+                .introduction-2 {
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 27px;
+                    color: #90a1b9;
+                }
+
+                .div-2 {
+                    @include m.flex(column, flex-start, space-around, 15px);
+
+                    .name {
+                        font-weight: 400;
+                        font-size: 60px;
+                        line-height: 66px;
+                        color: #f8fafc;
+                        margin-block-start: 0px !important;
+                        margin-block-end: 0px !important;
+                        margin-inline-start: 0px;
+                        margin-inline-end: 0px;
+                    }
+
+                    .job-title {
+                        font-size: 30px;
+                        font-weight: 400;
+                        line-height: 42px;
+                        color: #615fff;
+                    }
+                }
+            }
+        }
+
+        .job-title {
+            @include m.text-style(
+                var(--heading-h4-font-family),
+                var(--heading-h4-font-weight),
+                var(--heading-h4-font-size),
+                map.get(v.$colors, accent-blue)
+            );
+            align-self: stretch;
+        }
+
+        .complete-game,
+        .more-about {
+            @include m.text-style();
+            align-self: stretch;
+            margin-top: -1px;
+        }
+
+        // Git link with syntax highlighting
+        .git-link {
+            @include m.text-style("Fira Code", 400, 16px, map.get(v.$colors, transparent));
+            line-height: 16px;
+            letter-spacing: 0;
+            align-self: stretch;
+
+            .span {
+                @include m.text-style(
+                    var(--body-md-font-family),
+                    var(--body-md-font-weight),
+                    var(--body-md-font-size),
+                    map.get(v.$colors, accent-blue)
+                );
+            }
+
+            .text-wrapper-3 {
+                @include m.text-style(
+                    var(--body-md-font-family),
+                    var(--body-md-font-weight),
+                    var(--body-md-font-size),
+                    map.get(v.$colors, text-primary)
+                );
+            }
+
+            .text-wrapper-4 {
+                @include m.text-style(
+                    var(--body-md-font-family),
+                    var(--body-md-font-weight),
+                    var(--body-md-font-size),
+                    map.get(v.$colors, accent-cyan)
+                );
+            }
+
+            .text-wrapper-5 {
+                color: map.get(v.$colors, accent-pink);
+                line-height: 24px;
+                text-decoration: underline;
+            }
+        }
+
+        // Snake game section
+        .snake-game {
+            @include m.flex(row, flex-start, flex-start, map.get(v.$spacing, xl));
+            @include m.border(1px, solid, map.get(v.$colors, border));
+            padding: map.get(v.$spacing, xxl);
+            border-radius: map.get(v.$border-radius, lg);
+            box-shadow: map.get(v.$shadows, inset-white);
+            backdrop-filter: blur(32px) brightness(100%);
+            -webkit-backdrop-filter: blur(32px) brightness(100%);
+            background: map.get(v.$gradients, snake-game);
+            flex: 0 0 auto;
+        }
+
+        .group {
+            @include m.position(relative);
+            @include m.size(238.69px, 405.32px);
+            background-color: map.get(v.$colors, tertiary-bg);
+            border-radius: map.get(v.$border-radius, lg);
+            box-shadow: map.get(v.$shadows, inset-dark);
+        }
+
+        // Snake elements
+        .snake {
+            @include m.position(absolute, 53px, 88px);
+            @include m.size(62px, 192px);
+        }
+
+        .snake-body {
+            @include m.position(absolute, 34px, 6px);
+            @include m.size(60px, 162px);
+        }
+
+        .snake-food {
+            @include m.position(absolute, 0, 0);
+            @include m.size(21px, 21px);
+        }
+
+        .overlap-group {
+            @include m.position(relative);
+            height: 21px;
+            border-radius: map.get(v.$border-radius, xl);
+        }
+
+        %ellipse-base {
+            @include m.position(absolute);
+            background-color: map.get(v.$colors, accent-green);
+            border-radius: map.get(v.$border-radius, xl);
+        }
+
+        .ellipse {
+            @extend %ellipse-base;
+            @include m.size(21px, 21px);
+            @include m.position(absolute, 0, 0);
+            opacity: 0.1;
+        }
+
+        .ellipse-2 {
+            @extend %ellipse-base;
+            @include m.size(15px, 15px);
+            @include m.position(absolute, 3px, 3px);
+            border-radius: map.get(v.$border-radius, xxl);
+            opacity: 0.2;
+        }
+
+        .ellipse-3 {
+            @extend %ellipse-base;
+            @include m.size(8px, 8px);
+            @include m.position(absolute, 6px, 6px);
+            border-radius: map.get(v.$border-radius, sm);
+        }
+
+        // Buttons
+        .button {
+            @include m.button-base();
+            @include m.position(absolute, 312px, 65px);
+            background-color: map.get(v.$colors, accent-orange);
+
+            .button-text {
+                @include m.text-style(
+                    var(--body-sm-font-family),
+                    var(--body-sm-font-weight),
+                    var(--body-sm-font-size),
+                    map.get(v.$colors, primary-bg)
+                );
+                @include m.size(fit-content, auto);
+                margin-top: -1px;
+                text-align: center;
+                white-space: nowrap;
+            }
+        }
+
+        .component {
+            @include m.button-base();
+            @include m.border(1px, solid, map.get(v.$colors, text-primary));
+            flex: 0 0 auto;
+
+            .button-text-2 {
+                @include m.text-style(
+                    var(--body-sm-font-family),
+                    var(--body-sm-font-weight),
+                    var(--body-sm-font-size),
+                    map.get(v.$colors, text-primary)
+                );
+                @include m.size(fit-content, auto);
+                margin-top: -1px;
+                white-space: nowrap;
+            }
+        }
+
+        // Game controls
+        .frame {
+            @include m.flex(column, flex-end, space-between);
+            @include m.size(180px, auto);
+            align-self: stretch;
+        }
+
+        .frame-2 {
+            @include m.flex(column, flex-start, flex-start, map.get(v.$spacing, xl));
+            @include m.size(100%, auto);
+            flex: 0 0 auto;
+            align-self: stretch;
+        }
+
+        .game-nav {
+            @include m.flex(column, center, center, 12px);
+            @include m.size(100%, auto);
+            padding: map.get(v.$spacing, md);
+            background-color: map.get(v.$colors, tertiary-bg);
+            border-radius: map.get(v.$border-radius, lg);
+            flex: 0 0 auto;
+            align-self: stretch;
+        }
+
+        .text-wrapper-6 {
+            @include m.text-style(
+                var(--body-sm-font-family),
+                var(--body-sm-font-weight),
+                var(--body-sm-font-size),
+                map.get(v.$colors, text-primary)
+            );
+            margin-top: -1px;
+            align-self: stretch;
+        }
+
+        .buttons {
+            @include m.flex(column, center, center, map.get(v.$spacing, sm));
+            height: 68px;
+        }
+
+        %control-button {
+            @include m.flex(row, center, center, map.get(v.$spacing, md));
+            @include m.size(48px, auto);
+            @include m.border(1px, solid, map.get(v.$colors, border));
+            padding: 6px;
+            background-color: map.get(v.$colors, dark-bg);
+            border-radius: map.get(v.$border-radius, lg);
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+
+            &:hover {
+                opacity: 0.8;
+            }
+
+            &:focus {
+                outline: 2px solid map.get(v.$colors, accent-blue);
+                outline-offset: 2px;
+            }
+        }
+
+        .button-top {
+            @extend %control-button;
+            flex: 1;
+            flex-grow: 1;
+        }
+
+        .buttons-bottom {
+            @include m.flex(row, flex-end, center, map.get(v.$spacing, sm));
+            flex: 0 0 auto;
+        }
+
+        .icon-arrow-solid-wrapper {
+            @extend %control-button;
+        }
+
+        .icon-arrow-solid {
+            @include m.position(relative);
+            @include m.size(18px, 18px);
+        }
+
+        // Food section
+        .food-left {
+            @include m.flex(column, center, center, map.get(v.$spacing, sm));
+            @include m.size(100%, auto);
+            padding: 0 map.get(v.$spacing, md);
+            flex: 0 0 auto;
+            align-self: stretch;
+        }
+
+        .food {
+            @include m.flex(column, center, center, map.get(v.$spacing, sm));
+            @include m.size(136px, auto);
+            flex: 0 0 auto;
+        }
+
+        .frame-3 {
+            @include m.flex(row, center, flex-start, map.get(v.$spacing, sm));
+            @include m.size(100%, auto);
+            flex: 0 0 auto;
+            align-self: stretch;
+        }
+
+        .snake-s-food {
+            @include m.position(relative);
+            @include m.size(20.69px, 20.69px);
+        }
+
+        .overlap-group-2 {
+            @include m.position(relative);
+            @include m.size(21px, 21px);
+            border-radius: map.get(v.$border-radius, xl);
+        }
+
+        .overlap-wrapper {
+            @include m.position(relative);
+            @include m.size(20.69px, 20.69px);
+            opacity: 0.3;
+        }
+
+        // Decorative bolts
+        %bolt-base {
+            @include m.position(absolute);
+            @include m.size(13px, 13px);
+            border-radius: map.get(v.$border-radius, md);
+        }
+
+        .bolt-up-left {
+            @extend %bolt-base;
+            @include m.position(absolute, 12px, 12px);
+            box-shadow: map.get(v.$shadows, bolt-teal);
+        }
+
+        .bolt-down-left {
+            @extend %bolt-base;
+            @include m.position(absolute, 445px, 12px);
+            box-shadow: map.get(v.$shadows, bolt-dark-teal);
+        }
+
+        .bolt-down-right {
+            @extend %bolt-base;
+            @include m.position(absolute, 445px, 482px);
+            box-shadow: map.get(v.$shadows, bolt-blue);
+        }
+
+        .bolt-up-right {
+            @extend %bolt-base;
+            @include m.position(absolute, 12px, 482px);
+            box-shadow: map.get(v.$shadows, bolt-light-teal);
+        }
+
+        .vector {
+            @include m.position(absolute, 4px, 3px);
+            @include m.size(6px, 5px);
+        }
+    }
+}

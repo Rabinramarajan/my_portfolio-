@@ -1,0 +1,22 @@
+<div class="between w100">
+    <div class="social-links">
+        <p class="find-me-in">
+            <span class="text-wrapper">find me in:</span>
+        </p>
+        @for (link of socialLinks; track link.platform) {
+        <a [href]="link.url" class="social-media-icons-wrapper" [attr.aria-label]="link.platform" target="_blank"
+            rel="noopener noreferrer">
+            <div [class]="'social-media-icons social-media-icons-' + link.platform"></div>
+        </a>
+        }
+    </div>
+    <div class="menu-item-2">
+        <a [href]="githubUrl" class="div-wrapper" target="_blank" rel="noopener noreferrer"
+            [attr.aria-label]="'GitHub profile of ' + githubUsername">
+            <div class="frame-4">
+                <span class="text-wrapper">{{ githubUsername }}</span>
+                <img class="icon-git" src="https://c.animaapp.com/mcuvvhde03bkCM/img/icon-git.svg" alt="GitHub icon" />
+            </div>
+        </a>
+    </div>
+</div>

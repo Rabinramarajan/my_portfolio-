@@ -1,0 +1,95 @@
+@use "./mixins" as *;
+
+* {
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    box-sizing: border-box;
+}
+html,
+body {
+    margin: 0px;
+    height: 100%;
+}
+/* a blue color as a generic focus style */
+button:focus-visible {
+    outline: 2px solid #4a90e2 !important;
+    outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+    text-decoration: none;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.h100 {
+    height: 100%;
+}
+
+.v-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-align-start {
+    text-align: start !important;
+}
+
+.d-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex {
+    display: flex !important;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.flex-contents {
+    display: contents;
+}
+
+.relative {
+    position: relative;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.justify-content-end {
+    justify-content: end;
+    display: flex;
+}
+
+.flex-direction {
+    flex-direction: column;
+}
+
+.align-items-center {
+    display: flex;
+    align-items: center;
+}
+
+.justify-content-start {
+    justify-content: start !important;
+}
+
+.align-items-end {
+    align-items: end;
+}
+
+.between {
+    @include flex-between();
+}
+
+.pointer {
+    cursor: pointer;
+}

@@ -1,0 +1,462 @@
+// @use "sass:color";
+// @use "sass:map";
+
+// // Variables
+// $colors: (
+//     primary-bg: #020618,
+//     secondary-bg: #0f172b,
+//     tertiary-bg: #1d293d,
+//     dark-bg: #0a0a0a,
+//     border: #314158,
+//     text-primary: #f8fafc,
+//     text-secondary: #90a1b9,
+//     accent-orange: #ffb86a,
+//     accent-blue: #615eff,
+//     accent-cyan: #00d5be,
+//     accent-pink: #ffa1ad,
+//     accent-green: #46ecd5,
+//     transparent: transparent
+// );
+
+// $gradients: (
+//     snake-game: linear-gradient(154deg, rgba(23, 85, 83, 0.7) 0%, rgba(67, 217, 173, 0.09) 100%)
+// );
+
+// $shadows: (
+//     inset-white: inset 0px 2px 0px #ffffff4c,
+//     inset-dark: inset 1px 5px 11px #01111ab5,
+//     bolt-teal: (
+//         inset 0px 1px 2px #198176,
+//         2px 2px 4px #0d4241
+//     ),
+//     bolt-blue: (
+//         inset 0px 1px 2px #2b578d,
+//         2px 2px 4px #122c4d
+//     ),
+//     bolt-dark-teal: (
+//         inset 0px 1px 2px #16635b,
+//         2px 2px 4px #092d31
+//     ),
+//     bolt-light-teal: (
+//         inset 0px 1px 2px #1f8076,
+//         2px 2px 4px #0d4241
+//     )
+// );
+
+// $spacing: (
+//     xs: 4px,
+//     sm: 8px,
+//     md: 10px,
+//     lg: 16px,
+//     xl: 24px,
+//     xxl: 32px,
+//     xxxl: 70px
+// );
+
+// $border-radius: (
+//     sm: 4px,
+//     md: 6.5px,
+//     lg: 8px,
+//     xl: 10.35px,
+//     xxl: 7.35px
+// );
+
+// // Mixins
+// @mixin flex($direction: row, $align: center, $justify: center, $gap: 0) {
+//     display: flex;
+//     flex-direction: $direction;
+//     align-items: $align;
+//     justify-content: $justify;
+//     @if $gap != 0 {
+//         gap: $gap;
+//     }
+// }
+
+// @mixin border($width: 1px, $style: solid, $color: map.get($colors, border), $side: null) {
+//     @if $side {
+//         border-#{$side}: $width $style $color;
+//     } @else {
+//         border: $width $style $color;
+//     }
+// }
+
+// @mixin position($type: relative, $top: null, $left: null, $right: null, $bottom: null) {
+//     position: $type;
+//     @if $top {
+//         top: $top;
+//     }
+//     @if $left {
+//         left: $left;
+//     }
+//     @if $right {
+//         right: $right;
+//     }
+//     @if $bottom {
+//         bottom: $bottom;
+//     }
+// }
+
+// @mixin size($width: auto, $height: auto) {
+//     width: $width;
+//     height: $height;
+// }
+
+// @mixin text-style(
+//     $family: var(--body-md-font-family),
+//     $weight: var(--body-md-font-weight),
+//     $size: var(--body-md-font-size),
+//     $color: map.get($colors, text-secondary)
+// ) {
+//     font-family: $family;
+//     font-weight: $weight;
+//     font-size: $size;
+//     color: $color;
+//     letter-spacing: var(--body-md-letter-spacing);
+//     line-height: var(--body-md-line-height);
+//     font-style: var(--body-md-font-style);
+// }
+
+// @mixin button-base {
+//     all: unset;
+//     box-sizing: border-box;
+//     @include flex();
+//     gap: map.get($spacing, md);
+//     padding: map.get($spacing, md) 12px;
+//     border-radius: map.get($border-radius, lg);
+//     cursor: pointer;
+//     transition: opacity 0.2s ease;
+
+//     &:hover {
+//         opacity: 0.8;
+//     }
+
+//     &:focus {
+//         outline: 2px solid map.get($colors, accent-blue);
+//         outline-offset: 2px;
+//     }
+// }
+
+// // Base styles
+// .portfolio-home {
+//     // @include flex(column, center, center, map.get($spacing, md));
+//     // min-height: 100vh;
+//     // padding: map.get($spacing, xxl);
+//     // background-color: map.get($colors, primary-bg);
+
+//     // Home foreground container
+//     .home-foreground {
+//         // @include flex(column, flex-start, flex-start);
+//         // @include size(100%, auto);
+//         // @include border(1px, solid, map.get($colors, border));
+//         // background-color: map.get($colors, secondary-bg);
+//         // border-radius: map.get($border-radius, lg);
+//         // overflow: hidden;
+//         // flex: 1;
+//         // align-self: stretch;
+//         // flex-grow: 1;
+//     }
+
+//     // Header
+//     .header-desktop {
+//         // @include flex(row, center, space-between);
+//         // @include size(100%, auto);
+//         // @include border(1px, solid, map.get($colors, border), bottom);
+//         // flex: 0 0 auto;
+//         // align-self: stretch;
+//     }
+
+//     // Logo and navigation
+//     .logo-container {
+//         // @include flex(row, center, flex-start, 128px);
+//         // flex: 0 0 auto;
+//     }
+
+//     // .name-logo {
+//     //     @include flex(row, center, center, map.get($spacing, md));
+//     //     padding: map.get($spacing, lg) map.get($spacing, xl);
+//     //     flex: 0 0 auto;
+//     // }
+
+//     // .text-wrapper {
+//     //     @include text-style();
+//     //     @include size(fit-content, auto);
+//     //     margin-top: -1px;
+//     //     white-space: nowrap;
+//     // }
+
+//     // Navigation menu
+//     .nav-menu {
+//         @include flex(row, center, flex-start);
+//         list-style-type: none;
+//         padding: 0;
+//         margin: 0;
+//     }
+
+//     .menu-item {
+//         @include flex(column, flex-start, flex-start);
+//         @include border(1px, solid, map.get($colors, border), left);
+//         @include border(1px, solid, map.get($colors, border), right);
+//         flex: 0 0 auto;
+
+//         &:last-child {
+//             border-right: none;
+//         }
+
+//         &.menu-item-2 {
+//             border-right: none;
+//         }
+//     }
+
+//     .tab {
+//         @include flex(row, center, center, map.get($spacing, md));
+//         @include border(3px, solid, map.get($colors, accent-orange), bottom);
+//         padding: map.get($spacing, lg) map.get($spacing, xxl);
+//         text-decoration: none;
+//         flex: 0 0 auto;
+
+//         .text-wrapper-2 {
+//             @include text-style(
+//                 var(--body-md-font-family),
+//                 var(--body-md-font-weight),
+//                 var(--body-md-font-size),
+//                 map.get($colors, text-primary)
+//             );
+//             @include size(fit-content, auto);
+//             margin-top: -3px;
+//             white-space: nowrap;
+//         }
+//     }
+
+//     .tab-wrapper {
+//         @include flex(column, flex-start, flex-start);
+//         @include border(1px, solid, map.get($colors, border), right);
+//         flex: 0 0 auto;
+//     }
+
+//     .div-wrapper {
+//         @include flex(row, center, center, map.get($spacing, md));
+//         padding: map.get($spacing, lg) map.get($spacing, xxl);
+//         text-decoration: none;
+//         flex: 0 0 auto;
+//     }
+
+//     // Main content
+//     .home-content {
+//         @include flex(row, center, center, 146px);
+//         @include size(100%, auto);
+//         flex: 1;
+//         align-self: stretch;
+//         flex-grow: 1;
+//     }
+
+//     .background-blurs {
+//         @include position(absolute);
+//         // @include size(1128px, 940px);
+//         @include size(100%, 100%);
+//     }
+
+//     // About section
+//     .about-container {
+//         @include flex(column, flex-start, flex-start, 75px);
+//         @include size(504px, 310px);
+//     }
+
+//     .introduction {
+//         @include flex(column, flex-start, flex-start, map.get($spacing, xs));
+//         @include size(100%, auto);
+//         flex: 0 0 auto;
+//         align-self: stretch;
+
+//         &.introduction-2 {
+//             @include text-style(var(--body-lg-font-family), var(--body-lg-font-weight), var(--body-lg-font-size));
+//             margin-top: -1px;
+//             align-self: stretch;
+//         }
+//     }
+
+//     .div-2 {
+//         @include flex(column, flex-start, flex-start, map.get($spacing, sm));
+//         @include size(100%, auto);
+//         flex: 0 0 auto;
+//         align-self: stretch;
+//     }
+
+//     .name {
+//         @include text-style(
+//             var(--heading-h1-font-family),
+//             var(--heading-h1-font-weight),
+//             var(--heading-h1-font-size),
+//             map.get($colors, text-primary)
+//         );
+//         margin-top: -1px;
+//         align-self: stretch;
+//     }
+
+//     .job-title {
+//         @include text-style(
+//             var(--heading-h4-font-family),
+//             var(--heading-h4-font-weight),
+//             var(--heading-h4-font-size),
+//             map.get($colors, accent-blue)
+//         );
+//         align-self: stretch;
+//     }
+
+//     .complete-game,
+//     .more-about {
+//         @include text-style();
+//         align-self: stretch;
+//         margin-top: -1px;
+//     }
+
+//     // Git link with syntax highlighting
+//     .git-link {
+//         @include text-style("Fira Code", 400, 16px, map.get($colors, transparent));
+//         line-height: 16px;
+//         letter-spacing: 0;
+//         align-self: stretch;
+
+//         .span {
+//             @include text-style(
+//                 var(--body-md-font-family),
+//                 var(--body-md-font-weight),
+//                 var(--body-md-font-size),
+//                 map.get($colors, accent-blue)
+//             );
+//         }
+
+//         .text-wrapper-3 {
+//             @include text-style(
+//                 var(--body-md-font-family),
+//                 var(--body-md-font-weight),
+//                 var(--body-md-font-size),
+//                 map.get($colors, text-primary)
+//             );
+//         }
+
+//         .text-wrapper-4 {
+//             @include text-style(
+//                 var(--body-md-font-family),
+//                 var(--body-md-font-weight),
+//                 var(--body-md-font-size),
+//                 map.get($colors, accent-cyan)
+//             );
+//         }
+
+//         .text-wrapper-5 {
+//             color: map.get($colors, accent-pink);
+//             line-height: 24px;
+//             text-decoration: underline;
+//         }
+//     }
+
+//     // Footer
+//     .footer-desktop {
+//         @include flex(row, center, space-between);
+//         @include size(100%, auto);
+//         @include border(1px, solid, map.get($colors, border), top);
+//         flex: 0 0 auto;
+//         align-self: stretch;
+//     }
+
+//     .social-links {
+//         @include flex(row, center, flex-start);
+//     }
+
+//     .find-me-in {
+//         @include flex(row, center, center, map.get($spacing, md));
+//         @include border(1px, solid, map.get($colors, border), right);
+//         padding: map.get($spacing, lg) map.get($spacing, xl);
+//         flex: 0 0 auto;
+//     }
+
+//     .social-media-icons-wrapper {
+//         @include flex(row, center, center, map.get($spacing, md));
+//         @include border(1px, solid, map.get($colors, border), right);
+//         padding: map.get($spacing, lg);
+//         text-decoration: none;
+//         flex: 0 0 auto;
+//         transition: opacity 0.2s ease;
+
+//         &:hover {
+//             opacity: 0.8;
+//         }
+
+//         &:focus {
+//             outline: 2px solid map.get($colors, accent-blue);
+//             outline-offset: 2px;
+//         }
+//     }
+
+//     %social-icon {
+//         @include position(relative);
+//         @include size(24px, 24px);
+//         background-size: 100% 100%;
+//     }
+
+//     .social-media-icons {
+//         @extend %social-icon;
+//         background-image: url(https://c.animaapp.com/mcuvvhde03bkCM/img/icon-x.svg);
+//     }
+
+//     .social-media-icons-2 {
+//         @extend %social-icon;
+//         background-image: url(https://c.animaapp.com/mcuvvhde03bkCM/img/icon-linkedin.svg);
+//     }
+
+//     .frame-4 {
+//         @include flex(row, center, flex-start, map.get($spacing, sm));
+//         flex: 0 0 auto;
+//     }
+
+//     .icon-git {
+//         @include position(relative);
+//         @include size(24px, 24px);
+//     }
+// }
+
+// // Responsive design
+// @media (max-width: 768px) {
+//     .portfolio-home {
+//         padding: 20px;
+
+//         .home-content {
+//             @include flex(column, center, center, 50px);
+//         }
+
+//         .about-container,
+//         .snake-game {
+//             width: 100%;
+//         }
+
+//         .logo-container {
+//             gap: 64px;
+//         }
+
+//         .nav-menu {
+//             @include flex(column, center, flex-start);
+//         }
+
+//         .menu-item {
+//             @include border(1px, solid, map.get($colors, border), bottom);
+//             border-left: none;
+//             border-right: none;
+//             width: 100%;
+//         }
+//     }
+// }
+
+// @media (max-width: 480px) {
+//     .portfolio-home {
+//         padding: 10px;
+
+//         .snake-game {
+//             @include flex(column, center, center, map.get($spacing, lg));
+//             padding: map.get($spacing, lg);
+//         }
+
+//         .about-container {
+//             gap: 40px;
+//         }
+//     }
+// }

@@ -1,6 +1,0 @@
-// Apply Width Utilities
-@include generate-dimension-utilities-with-units($percent-sizes, "w", "width", "%"); // Width percentage utilities
-@include generate-dimension-utilities-with-units($sizesBasedOnPx, "wp", "width", "px"); // Width PX utilities
-@include generate-dimension-utilities-with-units($percent-sizes, "mw", "width", "%"); // max-Width percentage utilities
-@include generate-dimension-utilities-with-units($percent-sizes, "miw", "width", "%"); // min-Width percentage utilities
-

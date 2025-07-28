@@ -1,6 +1,0 @@
-// Apply Width Utilities
-@include generate-dimension-utilities-with-units($percent-sizes, "h", "height", "%"); // Height percentage utilities
-@include generate-dimension-utilities-with-units($sizesBasedOnPx, "hp", "height", "px"); // Height PX utilities
-@include generate-dimension-utilities-with-units($percent-sizes, "vh", "height", "vh"); // Viewport height utilities
-@include generate-dimension-utilities-with-units($percent-sizes, "mh", "max-height", "%"); // Max height percentage utilities
-@include generate-dimension-utilities-with-units($percent-sizes, "mih", "min-height", "%"); // Min height percentage utilities

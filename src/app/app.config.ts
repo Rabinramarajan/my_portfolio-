@@ -1,41 +1,31 @@
-import { APP_INITIALIZER, ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, RouteReuseStrategy } from '@angular/router';
-
+import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient } from '@angular/common/http';
-import { appInitializerFactory } from './app.config.initializer';
-import { RouteReuseService } from './common/services/route-reuse/route-reuse.service';
-import { AppSettingsService } from './common/services/app-settings/app-settings.service';
-import { inject } from '@vercel/analytics';
-import { environmentProd } from '../environment/environment.prod';
-import { environment } from '../environment/environment';
+import { AppSettingsService } from './services/app-settings/app-settings.service';
+import { firstValueFrom } from 'rxjs';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { AppInterceptor } from './interceptors/app.interceptor';
 
-if (environmentProd.production && environmentProd.enableAnalytics) {
-  inject();
-}
+export const appSettingFactory = (configService: AppSettingsService): Promise<void> => {
+  return firstValueFrom(configService.loadConfig()).then(
+    (config: any) => {
+      configService.environment = config;
+      console.log(config);
+    },
+    (error: any) => {
+      console.error('Error loading config:', error);
+      throw error;
+    }
+  );
+};
 
-if (!environment.production) {
-  import('@vercel/toolbar').then(() => {
-    // Toolbar might initialize automatically now
-    console.log('Vercel toolbar should now be initialized automatically.');
-  }).catch((err) => {
-    console.error('Error loading Vercel Toolbar:', err);
-  });
-}
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideAnimationsAsync(),
-    provideHttpClient(),
-    { provide: RouteReuseStrategy, useClass: RouteReuseService },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: appInitializerFactory,
-      deps: [AppSettingsService],
-      multi: true,
-    },
+    provideHttpClient(withInterceptors([AppInterceptor])),
+    provideAppInitializer(() => appSettingFactory(inject(AppSettingsService))),
   ]
 };
