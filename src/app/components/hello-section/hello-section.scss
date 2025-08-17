@@ -1,0 +1,19 @@
+.actions {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn.copy {
+  background: transparent;
+  color: var(--text, #eaeaea);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+}
+
+.btn.copy[aria-pressed="true"] {
+  border-color: #16a34a;
+  color: #16a34a;
+}

@@ -235,9 +235,10 @@
         }
 
         .overlap-group {
-            @include m.position(relative);
+            // Put declarations first to avoid mixed-decls warning
             height: 21px;
             border-radius: map.get(v.$border-radius, xl);
+            @include m.position(relative);
         }
 
         %ellipse-base {
@@ -362,6 +363,7 @@
 
         .button-top {
             @extend %control-button;
+            // Declarations first
             flex: 1;
             flex-grow: 1;
         }
@@ -472,7 +474,7 @@
 
             .find-me-in {
                 border-right: 1px solid var(--theme-theme-stroke, #314158);
-                padding: 24px 16px;
+                padding: 16px;
                 flex: 0 0 auto;
             }
 

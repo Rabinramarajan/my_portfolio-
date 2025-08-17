@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { PortfolioHome } from './components/portfolio-home/portfolio-home';
+import { Home } from './home/home';
 
 @Component({
   selector: 'app-root',
   imports: [
-    PortfolioHome,
+    Home,
   ],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  template: '<app-home />',
 })
 export class App {
   protected title = 'my-portfolio';

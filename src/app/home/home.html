@@ -1,0 +1,17 @@
+<div class="portfolio-home">
+    <div class="home-foreground">
+        <app-header class="w100" [navItems]="navItems()" [logoText]="'Rabin-Ramarajan'"
+            (tabClick)="setActiveTab($event)"></app-header>
+
+        <div class="home-content">
+            <app-hello-section [profile]="profile" [jobTitleStrings]="appSetting.environment.JobTitle"
+                [gameState]="gameState" (openRequested)="openLink($event)" />
+
+            <!-- <div class="right-content">
+                <app-snake-game />
+            </div> -->
+        </div>
+        <app-footer class="w100" [socialLinks]="socialLinks" [githubUsername]="profile.githubUsername"
+            [githubUrl]="getGithubProfileUrl()"></app-footer>
+    </div>
+</div>

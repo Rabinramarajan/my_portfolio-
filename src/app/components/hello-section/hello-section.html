@@ -1,0 +1,57 @@
+<div class="about-container" id="hello">
+  <div class="introduction">
+    <div class="introduction-2">Hi all. I am</div>
+    <div class="div-2">
+      <div class="name">{{ profile.name }}</div>
+      <div class="job-title">
+        @defer (on viewport) {
+          <span
+            appTypewriter
+            [strings]="jobTitleStrings"
+            [typeSpeed]="70"
+            [backSpeed]="40"
+            [backDelay]="1500"
+            [loop]="true"
+            [showCursor]="true"
+            [cursorChar]="'|'"
+            [smartPunctuationPause]="true"
+          ></span>
+        } @placeholder {
+          <span aria-hidden="true">{{ jobTitleStrings[0] || '' }}</span>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="div-2">
+    @if (!gameState().gameCompleted) {
+      <p class="complete-game">// complete the game to continue</p>
+    } @else {
+      <p class="complete-game">// game completed! well done!</p>
+    }
+
+    <p class="more-about">// find my profile on Github:</p>
+
+    <code class="git-link">
+      <span class="span">const</span>
+      <span class="text-wrapper-3">&nbsp;</span>
+      <span class="text-wrapper-4">githubLink</span>
+      <span class="text-wrapper-3"> = </span>
+      <span
+        class="text-wrapper-5 pointer"
+        role="link"
+        tabindex="0"
+        (click)="onOpenGithub()"
+        (keydown.enter)="onOpenGithub()"
+        (keydown.space)="$event.preventDefault(); onOpenGithub()"
+        >"{{ profile.githubLink }}"</span
+      >
+    </code>
+
+    <div class="actions" aria-label="GitHub actions">
+      <button type="button" class="btn copy" (click)="copyGithubLink()" [attr.aria-pressed]="copied">
+        {{ copied ? 'Copied!' : 'Copy link' }}
+      </button>
+    </div>
+  </div>
+</div>

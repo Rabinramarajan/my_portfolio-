@@ -1,0 +1,24 @@
+<header class="app-header w100">
+  <nav class="header-desktop w100">
+    <div class="logo-container">
+      <h1 class="name-logo">
+        <span class="text-wrapper">{{ logoText }}</span>
+      </h1>
+      <ul class="nav-menu">
+        @for (item of navItems; track item.id) {
+          <li class="menu-item" [class.active]="item.active">
+            <a [href]="'#' + item.id" class="tab" (click)="onTabClick(item.id, $event)"
+               [attr.aria-current]="item.active ? 'page' : null">
+              <span class="text-wrapper-2">{{ item.label }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+    <div class="menu-item-2">
+      <a href="#contact-me" class="div-wrapper" (click)="onTabClick('contact-me', $event)">
+        <span class="text-wrapper">_contact-me</span>
+      </a>
+    </div>
+  </nav>
+</header>

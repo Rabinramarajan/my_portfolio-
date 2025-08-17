@@ -14,22 +14,7 @@
     justify-content: space-between;
 }
 
-@mixin button-base {
-    padding: v.$spacing-sm v.$spacing-lg;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all v.$transition-base;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: v.$spacing-xs;
-
-    &:hover {
-        transform: translateY(-2px);
-    }
-}
+// removed duplicate legacy button-base mixin; the version below is the canonical one
 
 @mixin card {
     background: v.$bg-card;
@@ -74,11 +59,14 @@
 }
 
 @mixin size($width: auto, $height: auto) {
-    width: $width;
-    height: $height;
+    // Wrap in &{} to opt into new CSS nested behavior and avoid mixed-decls warnings
+    & {
+        width: $width;
+        height: $height;
+    }
 }
 
-@mixin border($width: 1px, $style: solid, $color: map.get($colors, border), $side: null) {
+@mixin border($width: 1px, $style: solid, $color: map.get(v.$colors, border), $side: null) {
     @if $side {
         border-#{$side}: $width $style $color;
     }
@@ -122,23 +110,19 @@
 }
 
 @mixin button-base {
-    all: unset;
-    box-sizing: border-box;
-    @include flex();
-    gap: map.get(v.$spacing, md);
-    padding: map.get(v.$spacing, md) 12px;
-    border-radius: map.get(v.$border-radius, lg);
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-
-    &:hover {
-        opacity: 0.8;
+    & {
+        all: unset;
+        box-sizing: border-box;
+        @include flex();
+        gap: map.get(v.$spacing, md);
+        padding: map.get(v.$spacing, md) 12px;
+        border-radius: map.get(v.$border-radius, lg);
+        cursor: pointer;
+        transition: opacity 0.2s ease;
     }
 
-    &:focus {
-        outline: 2px solid map.get(v.$colors, accent-blue);
-        outline-offset: 2px;
-    }
+    &:hover { opacity: 0.8; }
+    &:focus { outline: 2px solid map.get(v.$colors, accent-blue); outline-offset: 2px; }
 }
 
 /// @param {String} $url - Image URL (e.g. 'image.jpg')
@@ -152,10 +136,13 @@
 /// @param {String} $blend-mode - normal | multiply | overlay | screen | darken
 
 @mixin background-image-custom($url, $repeat, $position, $size) {
-    background-image : url(#{$url});
-    background-repeat: $repeat;
-    background-position: $position;
-    background-size: $size;
+    // Wrap declarations to avoid mixed-decls warnings when used near nested rules
+    & {
+        background-image : url(#{$url});
+        background-repeat: $repeat;
+        background-position: $position;
+        background-size: $size;
+    }
 }
 
 

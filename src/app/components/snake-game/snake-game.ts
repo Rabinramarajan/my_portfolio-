@@ -44,7 +44,7 @@ interface GameConfig {
   selector: 'app-snake-game',
   imports: [],
   templateUrl: './snake-game.html',
-  styleUrl: './snake-game.scss',
+  styleUrls: ['./snake-game.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SnakeGame implements AfterViewInit, OnDestroy, OnChanges {

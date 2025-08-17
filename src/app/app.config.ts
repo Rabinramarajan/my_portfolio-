@@ -1,10 +1,10 @@
 import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { AppSettingsService } from './services/app-settings/app-settings.service';
 import { firstValueFrom } from 'rxjs';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { AppInterceptor } from './interceptors/app.interceptor';
+import { AppInterceptor } from './core/interceptors/app.interceptor';
+import { AppSettingsService } from './core/services/app-settings/app-settings.service';
 
 export const appSettingFactory = (configService: AppSettingsService): Promise<void> => {
   return firstValueFrom(configService.loadConfig()).then(

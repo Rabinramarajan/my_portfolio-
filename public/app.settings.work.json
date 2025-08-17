@@ -1,0 +1,18 @@
+{
+  "dbName": "__MY_PORTFOLIO_WORK__",
+  "applicationPath": "",
+  "serverDateFormat": "dd/MM/yyyy",
+  "serverDateFormatWithTime": "dd/MM/yyyy HH:mm",
+  "dateViewFormat": "dd MMM yyyy",
+  "dateViewFormatWithTime": "dd MMM yyyy HH:mm",
+  "encrypt": false,
+  "showMaintenance": false,
+  "maintenanceText": "",
+  "JobTitle": [
+    "Frontend Developer",
+    "Web Developer",
+    "Angular Framework",
+    "Ionic Framework",
+    "Twig Template Engine"
+  ]
+}
