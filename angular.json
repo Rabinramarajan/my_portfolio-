@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-portfolio": {
+    "my_portfolio": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,9 +18,6 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -47,48 +44,12 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ]
+              "outputHashing": "all"
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.ts"
-                }
-              ]
-            },
-            "qa": {
-              "optimization": true,
-              "extractLicenses": true,
-              "sourceMap": false,
-              "outputHashing": "all",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.qa.ts"
-                }
-              ]
-            },
-            "work": {
-              "optimization": true,
-              "extractLicenses": true,
-              "sourceMap": false,
-              "outputHashing": "all",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.work.ts"
-                }
-              ]
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -97,16 +58,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "my-portfolio:build:production"
+              "buildTarget": "my_portfolio:build:production"
             },
             "development": {
-              "buildTarget": "my-portfolio:build:development"
-            },
-            "qa": {
-              "buildTarget": "my-portfolio:build:qa"
-            },
-            "work": {
-              "buildTarget": "my-portfolio:build:work"
+              "buildTarget": "my_portfolio:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -117,10 +72,6 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -138,6 +89,6 @@
     }
   },
   "cli": {
-    "analytics": "e5d09820-3177-4b89-a838-6c4645e20445"
+    "analytics": "6194ef6b-b3b4-433c-8cf5-611cfad96717"
   }
 }
