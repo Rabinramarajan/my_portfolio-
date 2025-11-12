@@ -1,0 +1,47 @@
+<section class="section banner">
+    <!-- Video de fondo -->
+    <video
+        muted
+        defaultmuted
+        loop
+        playsinline
+        preload="none"
+        disablepictureinpicture
+        class="banner-video">
+        <source src="images/banner-video2.mp4" type="video/mp4">
+        <!-- Fallback para navegadores que no soportan el video -->
+        Tu navegador no soporta videos HTML5.
+    </video>
+
+    <div class="banner-overlay"></div>
+
+    <div class="container">
+        <div class="section-box-banner">
+            <div class="content">
+                <!-- <div class="banner-pretitle">
+                    <h1>{{"Banner.Pretitle" | translate}}</h1>
+                </div> -->
+                <div class='banner-title'>
+                    <h2 class="banner-name">Rabin Ramarajan.</h2>
+                    <h3 class="banner-subtitle">Software Developer</h3>
+                </div>
+                <div class='banner-description'>
+                    <p [innerHTML]="'Banner.Description' | translate: { experienceDate: experienceDate }" class="mt-4"></p>
+                </div>
+            </div>
+            <div class="div-btn-banner">
+                <app-dynamic-button
+                    [text]='"Banner.ActionBtn" | translate'
+                    href="mailto:andresjosehr@gmail.com"
+                    target="_blank"
+                    analyticsEvent="click_send_mail"
+                    analyticsCategory="banner"
+                    analyticsLabel="email"
+                    variant="primary">
+                </app-dynamic-button>
+            </div>
+        </div>
+    </div>
+
+
+</section>

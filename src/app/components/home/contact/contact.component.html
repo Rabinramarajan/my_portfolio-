@@ -1,0 +1,35 @@
+<section class="section" id="contact">
+  <div class="container contact">
+    <div class="section-box">
+      <div class="mb-4" data-animate="fadeInDown" data-animate-duration="1000">
+        <h3 class="contact-pre-title big-subtitle">
+          05. {{ "Contact.Pretitle" | translate }}
+        </h3>
+        <h4 class="e-font contact-title big-title"
+            data-animate="typewriter"
+            data-animate-delay="500">
+          {{ "Contact.Title" | translate }}
+        </h4>
+      </div>
+      <p data-animate="morphIn"
+         data-animate-duration="1200"
+         data-animate-delay="2500">
+        {{ "Contact.Content" | translate }}
+      </p>
+      <div class="mt-5"
+           data-animate="scaleIn"
+           data-animate-duration="800"
+           data-animate-delay="3500">
+        <app-dynamic-button
+          [text]='"Contact.Btn" | translate'
+          href="mailto:andresjosehr@gmail.com"
+          target="_blank"
+          analyticsEvent="click_send_mail"
+          analyticsCategory="contact"
+          analyticsLabel="email"
+          variant="primary">
+        </app-dynamic-button>
+      </div>
+    </div>
+  </div>
+</section>

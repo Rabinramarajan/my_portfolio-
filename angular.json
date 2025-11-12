@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my_portfolio": {
+    "my_resume": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -44,7 +44,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "serviceWorker": "ngsw-config.json"
             },
             "development": {
               "optimization": false,
@@ -58,10 +59,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "my_portfolio:build:production"
+              "buildTarget": "my_resume:build:production"
             },
             "development": {
-              "buildTarget": "my_portfolio:build:development"
+              "buildTarget": "my_resume:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -89,6 +90,6 @@
     }
   },
   "cli": {
-    "analytics": "6194ef6b-b3b4-433c-8cf5-611cfad96717"
+    "analytics": "edce3e71-43d1-42af-8a0d-ff5199e39467"
   }
 }

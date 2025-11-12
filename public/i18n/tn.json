@@ -1,0 +1,334 @@
+{
+  "Header.Item1": "என்னை பற்றி",
+  "Header.Item2": "அனுபவம்",
+  "Header.Item3": "திட்டங்கள்",
+  "Header.Item4": "தொடர்புக்கு",
+  "Header.cvBtn": "ரெஸ்யூமே",
+  "Header.cvName": "CV_Jose_Hernandez_Tamil.pdf",
+  "Loading": "ஏற்றுகிறது...",
+  "Banner.Pretitle": "வணக்கம்! என் பெயர்",
+  "Banner.Description": "இணையத்தை ஒரு சிறந்த இடமாக மாற்றுவதற்காக, சிஸ்டம்கள், இன்டர்ஃபேஸ்கள், பாட்கள் மற்றும் தொழில்நுட்ப தீர்வுகளை உருவாக்குவதில் எனக்கு <span class='underline'>+10 வருட அனுபவம்</span> உள்ளது. நான் <span class='underline'>Angular</span> மற்றும் <span class='underline'>Laravel</span>-இல் சுத்தமான, மீண்டும் பயன்படுத்தக்கூடிய மற்றும் அளவிடக்கூடிய குறியீட்டை எழுதுவதிலும், மறுசீரமைப்பதிலும் அர்ப்பணிப்புடன் இருக்கிறேன், நல்ல நடைமுறைகள் மற்றும் மேம்பாட்டு தரங்களைப் பயன்படுத்துகிறேன்.",
+  "Banner.ActionBtn": "பேசலாம்",
+  "AboutMe.Title": "என்னை பற்றி",
+  "AboutMe.Paragraphs": [
+    "<span class='underline'>+10 வருட அனுபவத்தில்</span> நான் பல பதவிகளில் பணியாற்றியுள்ளேன்: <span class='underline'>சிஸ்டம்ஸ் அனலிஸ்ட்</span>, <span class='underline'>பேக்கெண்ட் டெவலப்பர்</span>, <span class='underline'>ஃபிரண்டெண்ட் டெவலப்பர்</span>, மற்றும் <span class='underline'>டெக்னிக்கல் லீட்</span>. பிரச்சனைகளைத் தீர்க்க உதவும் புதிய விஷயங்களை உருவாக்க என் அறிவைப் பங்களிப்பதை நான் விரும்புகிறேன்.",
+    "சிஸ்டம் மேம்பாடுகளைச் செயல்படுத்துதல், தளங்களை மேம்படுத்துதல், பேட்டர்ன்களை தரப்படுத்துதல் மற்றும் நான் பணிபுரியும் திட்டத்திற்கு மதிப்பு சேர்க்கும் யோசனைகளைப் பரிந்துரைத்து செயல்படுத்துதல் ஆகியவை எனது திறன்களில் அடங்கும்.",
+    "எனது தனிப்பட்ட பயன்பாட்டிற்காகவும், பொழுதுபோக்கிற்காகவோ அல்லது பயன்பாட்டிற்காகவோ நான் புரோகிராம் செய்கிறேன்.",
+    "நான் பயிற்சி பெற்று பணியாற்றிய சில தொழில்நுட்பங்கள் (ஆனால் இவை மட்டுமல்ல):"
+  ],
+  "Experience.Title": "அனுபவம்",
+  "Experience.Jobs": [
+    {
+      "Tab": "குளோபல்",
+      "Title": "ஃபுல்ஸ்டாக் டெவலப்பர்",
+      "Date": "மே 2023",
+      "Description": [
+        "தொழில்நுட்ப முடிவெடுப்பதில் தலைவர்",
+        "நிறுவனத்திற்கு தொழில்நுட்ப திறமையாளர்களை பணியமர்த்தல்",
+        "தொழில்நுட்பத் துறையின் குழுத் தலைவர்",
+        "கோர்ஸ் விற்பனைக்கான உள் செயல்முறை மேலாண்மை தளத்தை உருவாக்குதல் மற்றும் பராமரித்தல்",
+        "வேர்ட்பிரஸ் தளத்தைத் தனிப்பயனாக்க, தனிப்பயன் செயல்பாடுகள் மற்றும் பிளகின்களை புரோகிராமிங் செய்தல்",
+        "தொடர்ச்சியான ஒருங்கிணைப்பு மற்றும் தினசரி காப்புப்பிரதிகளைச் செயல்படுத்துதல்.",
+        "திட்டமிடல் மற்றும் அறிக்கை கூட்டங்கள்."
+      ]
+    },
+    {
+      "Tab": "ப்ரோயெக்ஸ்",
+      "Title": "ஃபுல்ஸ்டாக் டெவலப்பர்",
+      "Date": "டிசம்பர் 2019 - மே 2023",
+      "Description": [
+        "வேர்ட்பிரஸில் வரைபடங்களுடன் கண்காணிப்பு தளத்தை உருவாக்குதல் மற்றும் பராமரித்தல்.",
+        "தேவையான கண்காணிப்பு அம்சங்களைச் சேர்க்க, டெம்ப்ளேட்கள் மற்றும் பிளகின்களில் ஃபங்ஷனல் புரோகிராமிங் செய்தல்.",
+        "தொடர்ச்சியான ஒருங்கிணைப்பு மற்றும் தினசரி காப்புப்பிரதிகளைச் செயல்படுத்துதல்.",
+        "Angular, Angular Material, Laravel, MySQL, RxJS, Sass ஆகியவற்றைக் கொண்டு உருவாக்கப்பட்ட இரண்டாவது கண்காணிப்பு தளத்தை உருவாக்குதல் மற்றும் பராமரித்தல். இதில் கட்டமைக்கக்கூடிய வரைபடங்கள், அலாரம் அமைப்புகள் மற்றும் பயனர் மேலாண்மை மற்றும் பொது உள்ளமைவு அமைப்புகள் உள்ளன.",
+        "திட்டமிடல் மற்றும் அறிக்கை கூட்டங்கள்."
+      ]
+    },
+    {
+      "Tab": "ஃப்ரீலான்சர்",
+      "Title": "ஃப்ரீலான்சர்",
+      "Date": "மே 2016 - தற்போது",
+      "Description": [
+        "ஃபிரண்டெண்ட் மற்றும் பேக்கெண்டில் பணிபுரிந்து, தொடர்ச்சியான மேம்பாடுகளைச் செயல்படுத்துதல்.",
+        "ஃபங்ஷனல், ரியாக்டிவ் மற்றும் ஆப்ஜெக்ட்-ஓரியண்டட் புரோகிராமிங் முறைகளைப் பயன்படுத்தி Angular, Laravel, WordPress உடன் தளங்களை உருவாக்குதல்.",
+        "டேட்டா ஸ்ட்ரக்சர்களைப் பயன்படுத்தி செயல்முறைகளைத் தானியக்கமாக்குதல்.",
+        "SASS, Bootstrap, Materialize, Bulma போன்றவற்றைப் பயன்படுத்தி டெம்ப்ளேட் வடிவமைப்புகள்."
+      ]
+    },
+    {
+      "Tab": "மோபியஸ்",
+      "Title": "ஃபுல்ஸ்டாக் டெவலப்பர்",
+      "Date": "ஜூலை 2017 - அக்டோபர் 2018",
+      "Description": [
+        "Angular, Laravel, மற்றும் MySQL-இல் உருவாக்கப்பட்ட சுற்றுலா தரவு மேலாண்மை தளத்தின் மேம்பாட்டில் 4 பேர் கொண்ட குழுவை வழிநடத்துதல்.",
+        "Azure-இல் CI/CD செயல்படுத்துதல். பயன்பாட்டு சுமை நேரங்களை மறுசீரமைத்தல் மற்றும் மேம்படுத்துதல்.",
+        "RxJS உடன் API கோரிக்கைகளை குறியீடாக்கம் செய்தல்.",
+        "சிக்கலான ரியாக்டிவ் ஃபார்ம்களுடன் மாட்யூல்களை உருவாக்குதல்.",
+        "இலக்குகள் மற்றும் திட்டங்கள் பற்றிய வாராந்திர அறிக்கைகளை எழுதுதல்."
+      ]
+    },
+    {
+      "Tab": "டெக்லேடம்",
+      "Title": "ஃபிரண்டெண்ட் டெவலப்பர்",
+      "Date": "பிப்ரவரி 2016 - மே 2017",
+      "Description": [
+        "ACF உடன் வேர்ட்பிரஸ் டெம்ப்ளேட்களை உருவாக்குதல், JavaScript/jQuery-இல் ஃபங்ஷனல் புரோகிராமிங், SASS-இல் ஸ்டைல்கள்.",
+        "டெம்ப்ளேட்களுக்கான வடிவமைப்பு மற்றும் சுமை நேர மேம்பாடுகளை ஒருங்கிணைத்தல்.",
+        "வடிவமைப்பு குழுவுடன் திறம்பட தொடர்புகொண்டு, Avocode/Figma உடன் பணியாற்றுதல்."
+      ]
+    },
+    {
+      "Tab": "CANTV",
+      "Title": "சிஸ்டம்ஸ் அனலிஸ்ட்",
+      "Date": "நவம்பர் 2015 - டிசம்பர் 2016",
+      "Description": [
+        "Angular மற்றும் ExpressJS உடன் உருவாக்கப்பட்ட தற்போதைய பணியாளர் மேலாண்மை தளத்திற்கு புதிய செயல்பாடுகளை புரோகிராமிங் செய்தல்.",
+        "பழைய குறியீட்டை மறுசீரமைத்தல். வழக்கமான Angular புதுப்பிப்புகள் உட்பட ஒவ்வொரு புதுப்பித்தலுடனும் ஒவ்வொரு சார்புநிலையின் இணக்கத்தன்மையை உறுதி செய்தல்."
+      ]
+    },
+    {
+      "Tab": "IEP",
+      "Title": "ஆங்கில ஆசிரியர்",
+      "Date": "ஜனவரி 2015 - ஜூலை 2015",
+      "Description": [
+        "200-க்கும் மேற்பட்ட மாணவர்களுக்கு அடிப்படை ஆங்கிலம் கற்பித்தல்."
+      ]
+    }
+  ],
+  "FeatureProjects.Title": "எனது திட்டங்கள்",
+  "FeatureProjects.Label": "முக்கிய திட்டம்",
+  "FeatureProjects.Projects": [
+    {
+      "Title": "கிசெல்",
+      "Description": "விற்பனை, வசூல் மற்றும் கண்காணிப்புத் துறைகளை உள்ளடக்கிய உள் நிறுவன மேலாண்மைக்கான இணையப் பயன்பாடு. இது <span class='underline'>Angular</span> மற்றும் <span class='underline'>Laravel</span>-இல் உருவாக்கப்பட்ட மிகவும் விரிவான மற்றும் சிக்கலான பல்வேறு செயல்பாடுகளைக் கொண்டுள்ளது. இது <span class='underline'>வெப்சாக்கெட்டுகள்</span>, <span class='underline'>ஷெட்யூல்கள்</span>, <span class='underline'>லாரவெல் ஜாப்ஸ்</span>, WordPress, Zadarma, LiveConnect போன்றவற்றுடன் ஒருங்கிணைந்து செயல்படுகிறது.",
+      "imgs": [
+        "images/gisselle/Captura de pantalla 2024-05-19 1009582.png",
+        "images/gisselle/Captura de pantalla 2024-05-19 115514.png",
+        "images/gisselle/Captura de pantalla 2024-05-19 115702.png",
+        "images/gisselle/Captura de pantalla 2024-05-19 115829.png",
+        "images/gisselle/Captura de pantalla 2024-05-19 1009582.png"
+      ],
+      "Technologies": [
+        "Laravel",
+        "Angular",
+        "SASS",
+        "Angular Material",
+        "RxJS"
+      ]
+    },
+    {
+      "Title": "எமெல்டெசியோட்",
+      "Description": "தரவு வினவலுக்கான கண்காணிப்புப் பயன்பாடு, <span class='underline'>Angular</span> மற்றும் <span class='underline'>Laravel</span>-இல் உருவாக்கப்பட்டது. இதில் <span class='underline'>chart.js</span> லைப்ரரி பயன்படுத்தப்பட்டுள்ளது.",
+      "imgs": [
+        "images/proyex2/Captura de pantalla 2024-07-28 102852.png",
+        "images/proyex2/849c117f-bed9-4406-9c13-c8669f655acc.png",
+        "images/proyex2/62cdf90c-6196-4a6e-b639-8919cda4f749.png",
+        "images/proyex2/8c919208-d6a8-48f4-890d-4817323b6923.png",
+        "images/proyex2/8c919208-d6a8-48f4-890d-4817323b6923 (1).png"
+      ],
+      "Technologies": [
+        "Laravel",
+        "Angular",
+        "SASS",
+        "Angular Material",
+        "RxJS"
+      ]
+    },
+    {
+      "Title": "வாஸ் ஏவியேஷன்",
+      "Description": "விமானங்களுக்கான எரிபொருள் விநியோகக் கோரிக்கைகளைக் கண்காணிப்பதற்கான பயன்பாடு. இதில் <span class='underline'>மின்னஞ்சல் தொகுதி</span>, <span class='underline'>நிகழ்நேர அறிவிப்புகள்</span>, <span class='underline'>தரவு இறக்குமதிக்கான CSV கோப்பு கையாளுதல்</span>, <span class='underline'>விலை மேற்கோள்கள்</span> ஆகியவை உள்ளன. <span class='underline'>Angular</span> மற்றும் <span class='underline'>Laravel</span>-இல் உருவாக்கப்பட்டது.",
+      "imgs": [
+        "images/vasaviation/capture0.png",
+        "images/vasaviation/capture1.png",
+        "images/vasaviation/capture2.png",
+        "images/vasaviation/capture3.png",
+        "images/vasaviation/capture4.png",
+        "images/vasaviation/capture5.png"
+      ],
+      "Technologies": [
+        "Laravel",
+        "Angular",
+        "SASS",
+        "Angular Material",
+        "RxJS"
+      ]
+    },
+    {
+      "Title": "குளோபல்ஜாப்ஸ்",
+      "Description": "வேர்ட்பிரஸ் மூலம் உருவாக்கப்பட்ட மின்-கற்றல் தளம். முழுமையாக தனிப்பயனாக்கப்பட்ட வடிவமைப்பு, புதிதாக உருவாக்கப்பட்ட பிளகின்களுடன். இது தனிப்பயனாக்கப்பட்ட கட்டண தொகுதி, மெய்நிகர் வகுப்பறை, பாடநெறி கண்காணிப்பு டாஷ்போர்டு ஆகியவற்றைக் கொண்டுள்ளது.",
+      "imgs": [
+        "images/globaljobs/capture1.png",
+        "images/globaljobs/capture2.png",
+        "images/globaljobs/capture3.png",
+        "images/globaljobs/capture4.png",
+        "images/globaljobs/capture5.png",
+        "images/globaljobs/capture6.png"
+      ],
+      "Technologies": [
+        "WordPress",
+        "WordPress Codex",
+        "PHP",
+        "MySQL"
+      ]
+    },
+    {
+      "Title": "எம்பிஎலெக்ட்ரானிக்ஸ்",
+      "Description": "தொழில்நுட்ப தயாரிப்புகளுக்கான மின்-வணிக தளம். வேர்ட்பிரஸ் மூலம் உருவாக்கப்பட்டது மற்றும் தயாரிப்புகளுக்கான ஷிப்பிங் முறையை செயல்படுத்துகிறது. இது தனிப்பயனாக்கப்பட்ட புரோகிராமிங் மூலம் விற்பனை அறிக்கையிடலைக் கொண்டுள்ளது.",
+      "imgs": [
+        "images/mbelectronics/capture0.png",
+        "images/mbelectronics/capture1.png",
+        "images/mbelectronics/capture2.png"
+      ],
+      "Technologies": [
+        "WordPress",
+        "Elementor",
+        "Woocommerce",
+        "WordPress Codex",
+        "PHP",
+        "MySQL"
+      ]
+    },
+    {
+      "Title": "அக்ரோஉர்பானா",
+      "Description": "புதிதாக உருவாக்கப்பட்ட கண்காணிப்பு பயன்பாடு, இதில் அங்கீகார தொகுதி, <span class='underline'>கட்டமைக்கக்கூடிய வரைபடங்கள்</span>, <span class='underline'>கட்டமைக்கக்கூடிய அலாரங்கள்</span>, மற்றும் <span class='underline'>பயனர் மேலாண்மை</span> ஆகியவை உள்ளன. இது அளவுரு உள்ளமைவுக்கான ரியாக்டிவ் ஃபார்ம்களுக்கான லாஜிக்கையும் கொண்டுள்ளது.",
+      "imgs": [
+        "images/agrourbana/agrourbana1.png",
+        "images/agrourbana/agrourbana2.png",
+        "images/agrourbana/agrourbana3.png",
+        "images/agrourbana/agrourbana4.png",
+        "images/agrourbana/agrourbana5.png"
+      ],
+      "Technologies": [
+        "Laravel",
+        "Angular",
+        "SASS",
+        "Angular Material",
+        "RxJS"
+      ]
+    },
+    {
+      "Title": "டு சூப்பர் பிளான்",
+      "Description": "சுகாதார திட்டங்களுக்கான மேற்கோள் கருவி, இது ஒரு மேம்பட்ட தேடுபொறியைக் கொண்டுள்ளது. பயனரின் வயது, மாத வருமானம் மற்றும் இருப்பிடத்தின் அடிப்படையில் திட்டங்கள் காட்டப்படுகின்றன. இதில் <span class='underline'>நேரடி அரட்டை</span>, <span class='underline'>தொடர்பு படிவம்</span>, <span class='underline'>வாட்ஸ்அப் மற்றும் மின்னஞ்சல் வழியாக அறிவிப்பு அமைப்பு</span>, <span class='underline'>அங்கீகாரம்</span>, மற்றும் <span class='underline'>நிர்வாகி பங்கு மூலம் உள் தகவல் மேலாண்மை</span> ஆகியவை உள்ளன.",
+      "imgs": [
+        "images/tusuperplan/tusuperplan1.png",
+        "images/tusuperplan/tusuperplan2.png",
+        "images/tusuperplan/tusuperplan3.png",
+        "images/tusuperplan/tusuperplan4.png",
+        "images/tusuperplan/tusuperplan5.png"
+      ],
+      "Technologies": [
+        "Laravel",
+        "Angular",
+        "SASS",
+        "Angular Material",
+        "RxJS"
+      ]
+    },
+    {
+      "Title": "ப்ரோயெக்ஸியாட்",
+      "Description": "நீர் கிணறுகள், இழுவை படகுகள் மற்றும் பல்வேறு நிறுவல்களுக்கான தரவு கண்காணிப்பு தளம். இது அங்கீகார தொகுதி, <span class='underline'>கட்டமைக்கக்கூடிய வரைபடங்கள்</span>, <span class='underline'>கட்டமைக்கக்கூடிய அலாரங்கள்</span>, <span class='underline'>பயனர் மேலாண்மை</span>, மற்றும் <span class='underline'>ஓபன்லேயர்களுடன் புவிஇருப்பிடம்</span> ஆகியவற்றைக் கொண்டுள்ளது. இது அளவுரு உள்ளமைவுக்கான ரியாக்டிவ் ஃபார்ம்களுக்கான லாஜிக்கையும் கொண்டுள்ளது.",
+      "imgs": [
+        "images/proyex/proyex1.png",
+        "images/proyex/proyex2.png",
+        "images/proyex/proyex3.png",
+        "images/proyex/proyex4.png",
+        "images/proyex/proyex5.png",
+        "images/proyex/proyex6.png",
+        "images/proyex/proyex7.png",
+        "images/proyex/proyex8.png",
+        "images/proyex/proyex9.png",
+        "images/proyex/proyex10.png",
+        "images/proyex/proyex11.png",
+        "images/proyex/proyex12.png"
+      ],
+      "Technologies": [
+        "Laravel",
+        "Angular",
+        "SASS",
+        "Angular Material",
+        "RxJS"
+      ]
+    }
+  ],
+  "OtherProjects.Title": "மேலும் திட்டங்கள்",
+  "OtherProjects.Projects": [
+    {
+      "Title": "ஹேண்ட்ஸ் கேம்",
+      "Description": "விரிவாக்கப்பட்ட ராக்-பேப்பர்-சிஸ்சர்ஸ் விளையாட்டு. இது Angular-இல் உருவாக்கப்பட்ட ஒரு தனிப்பட்ட திட்டம், இதில் நீங்கள் கணினியுடன் விளையாடுவீர்கள். இது சர்வீஸ்கள், இன்டர்ஃபேஸ்கள் மற்றும் காம்போனென்ட்களின் பயன்பாட்டைக் கொண்டுள்ளது.",
+      "imgs": [
+        "images/hands-game.png"
+      ],
+      "ghLink": "https://github.com/andresjosehr/hands-game",
+      "demoLink": "https://projects.andresjosehr.com/hands-game",
+      "Technologies": [
+        "Angular",
+        "CSS GRID",
+        "SASS",
+        "Angular animations"
+      ]
+    },
+    {
+      "Title": "கண்ட்ரீஸ் வியூவர்",
+      "Description": "நாடுகளின் API-ஐப் பயன்படுத்தும் ஒரு இன்டர்ஃபேஸ், இதில் நீங்கள் நாடுகளின் பட்டியலைக் காணலாம், ஒவ்வொரு நாட்டின் விவரங்களையும் பார்க்கலாம், பெயர் மற்றும் பிராந்தியத்தின் அடிப்படையில் வடிகட்டலாம். இது டார்க் மற்றும் லைட் தீம்களுக்கு இடையில் மாற டார்க் மோட் அம்சத்தையும் கொண்டுள்ளது.",
+      "imgs": [
+        "images/countries-viewer.png"
+      ],
+      "ghLink": "https://github.com/andresjosehr/countries-viewer",
+      "demoLink": "https://projects.andresjosehr.com/countries-viewer",
+      "Technologies": [
+        "Angular",
+        "RxJS",
+        "SASS",
+        "API"
+      ]
+    },
+    {
+      "Title": "ஃபோர் கார்டு ஃபீச்சர் செக்ஷன்",
+      "Description": "4 கார்டுகளில் 4 அம்சங்களைப் பட்டியலிடும் ஒரு மினிமலிச வடிவமைப்பு கொண்ட ஒற்றைப் பக்கம். Angular அனிமேஷன்களுடன் நுழைவு அனிமேஷன்கள் பயன்படுத்தப்படுகின்றன.",
+      "ghLink": "https://github.com/andresjosehr/four-card-feature-section",
+      "demoLink": "https://projects.andresjosehr.com/four-card-feature-section",
+      "Technologies": [
+        "Angular",
+        "SASS",
+        "CSS GRID"
+      ]
+    },
+    {
+      "Title": "சோஷியல் ப்ரூஃப் செக்ஷன்",
+      "Description": "Figma-இல் செய்யப்பட்ட ஒரு வடிவமைப்பிலிருந்து உருவாக்கப்பட்ட ஒரு பக்கத்தின் தனிப்பட்ட திட்டம். Angular உடன் SASS மற்றும் CSS GRID ஆகியவை மேம்பாட்டிற்காகப் பயன்படுத்தப்பட்டன.",
+      "ghLink": "https://github.com/andresjosehr/social-proof-section",
+      "demoLink": "https://projects.andresjosehr.com/social-proof-section",
+      "Technologies": [
+        "Angular",
+        "CSS GRID",
+        "GIT"
+      ]
+    },
+    {
+      "Title": "FAQ அக்கார்டியன் கார்டு",
+      "Description": "Angular-இல் செய்யப்பட்ட லாஜிக் மற்றும் அனிமேஷன்களுடன் அடிக்கடி கேட்கப்படும் கேள்விகளுக்கான அக்கார்டியன்.",
+      "ghLink": "https://github.com/andresjosehr/faq-accordion",
+      "demoLink": "https://projects.andresjosehr.com/faq-accordion",
+      "Technologies": [
+        "Angular",
+        "CSS GRID",
+        "Angular animations"
+      ]
+    },
+    {
+      "Title": "சுயவிவர அட்டை",
+      "Description": "ஒரு நபரின் அடிப்படைத் தகவலுடன் ஒரு சுயவிவர அட்டையைக் காண்பிக்கும் ஒரு பக்கத்தின் எளிய வடிவமைப்பு.",
+      "ghLink": "https://github.com/andresjosehr/profile-card-component",
+      "demoLink": "https://projects.andresjosehr.com/profile-card-component",
+      "Technologies": [
+        "Angular",
+        "SASS",
+        "GIT"
+      ]
+    }
+  ],
+  "Contact.Pretitle": "மேலும்... இப்போது?",
+  "Contact.Title": "பேசலாம்!",
+  "Contact.Content": "புதிய வாய்ப்புகள் பற்றி விவாதிக்க நீங்கள் விரும்பினால், உங்களிடமிருந்து கேட்பதில் நான் மகிழ்ச்சியடைவேன். எனக்கு எழுதுங்கள், உங்கள் செய்தியைப் பார்த்தவுடன் நான் பதிலளிப்பேன்.",
+  "Contact.Btn": "என்னைத் தொடர்பு கொள்க"
+}

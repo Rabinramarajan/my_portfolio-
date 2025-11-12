@@ -1,0 +1,102 @@
+<section class="section proyects" id='proyects'>
+    <div class="container">
+        <div class="section-box">
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <h3 class="section-title">
+                    <span class='n-section-title'>03.</span> {{"FeatureProjects.Title" | translate}}
+                </h3>
+            </div>
+
+            @for (project of "FeatureProjects.Projects" | translate; track $index) {
+            <div class="d-flex proyect-container" data-aos="fade-up" data-aos-duration="1000">
+                @if ($index%2==0) {
+                <owl-carousel-o class='owl-carousel-o' [options]="customOptions">
+                    @for (img of project.imgs; track img; let imgIndex = $index) {
+                    <ng-template carouselSlide [id]="project.Title+'_slide_'+$index+'_'+imgIndex">
+                        <div #imgContainer class='img-container'>
+                            <img class='img-feature-proyect rounded' [src]="img" [alt]="project.Title">
+                        </div>
+                    </ng-template>
+                    }
+                </owl-carousel-o>
+                }
+
+                @if($index%2==0) {
+                <div class="img-feature-proyect-container" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="img-feature-proyect-box">
+                        <div class="img-container" style='width: auto;'>
+                            <img class='img-feature-proyect rounded' [src]="project.imgs[0]" [alt]="project.imgs[0]"
+                                width='600px'>
+                        </div>
+                    </div>
+                </div>
+                }
+
+
+                <div [class.proyect-info-right]='$index%2==0' [class.proyect-info-left]='$index%2!=0' class="h-100"
+                    style="background-image: url('{{project.img}}');">
+                    <div class="proyect-box">
+                        <h4 [class.text-right]='$index%2==0' [class.text-left]='$index%2!=0' class="feature-proyect">
+                            {{"FeatureProjects.Label"
+                            | translate}}</h4>
+                        <h5 [class.text-right]='$index%2==0' [class.text-left]='$index%2!=0' class="proyect-name">
+                            {{project.Title}}</h5>
+
+                        <div class="proyect-description-box" (click)='debug()'>
+                            <p class="mb-0" [innerHTML]="project.Description">
+                            </p>
+                        </div>
+                        <ul [class.justify-content-end]='$index%2==0' [class.justify-content-start]='$index%2!=0'
+                            class="proyect-skills">
+                            @for (technology of project.Technologies; track technology; let techIndex = $index) {
+                            <li class="ml-3">
+                                <span class="underline technology">{{technology}}</span>
+                            </li>
+                            }
+                        </ul>
+                        <div [class.text-right]='$index%2==0' [class.text-left]='$index%2!=0' class="proyect-links">
+                            @if(project['ghLink']) {
+                            <a style='color: inherit' [href]="project['ghLink']" target="_blank"><i
+                                    class="ml-3 fab fa-github"></i></a>
+                            }
+
+                            @if(project['demoLink']) {
+                            <a style='color: inherit' [href]="project['demoLink']" target="_blank"><i
+                                    class="ml-3 fas fa-external-link-alt"></i></a>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+                @if($index%2!=0) {
+                <owl-carousel-o class='owl-carousel-o' [options]="customOptions">
+                    @for (img of project.imgs; track img; let imgIndex = $index) {
+                    <ng-template carouselSlide [id]="project.Title+'_slide_'+$index+'_'+imgIndex">
+                        <div class='img-container'>
+                            <img class='img-feature-proyect rounded' [src]="img" [alt]="project.Title">
+                        </div>
+                    </ng-template>
+                    }
+                </owl-carousel-o>
+                }
+
+                @if($index%2!=0) {
+                <div class="img-feature-proyect-container" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="img-feature-proyect-box">
+                        <div class="img-container" style='width: auto;'>
+                            <img class='img-feature-proyect rounded' [src]="project.imgs[0]" [alt]="project.imgs[0]"
+                                width='600px'>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+            }
+
+
+            <div>
+            </div>
+        </div>
+    </div>
+</section>
