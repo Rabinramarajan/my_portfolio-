@@ -3,7 +3,7 @@ name: Deploy to Firebase Hosting (Production)
 on:
   push:
     branches:
-      - main   # production branch
+      - main
 
 jobs:
   build_and_deploy:
@@ -17,6 +17,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
@@ -24,7 +25,7 @@ jobs:
       - name: Build Angular app
         run: npm run build
 
-      - name: Deploy to Firebase
+      - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
