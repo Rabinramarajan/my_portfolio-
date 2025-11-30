@@ -1,0 +1,76 @@
+mutation CreateSeedData @transaction @auth(level: NO_ACCESS) {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      displayName: "demouser1",
+      email: "demouser1@example.com",
+      createdAt: "2024-01-01T00:00:00Z"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      displayName: "demouser2",
+      email: "demouser2@example.com",
+      createdAt: "2024-01-01T00:00:00Z"
+    }
+  ])
+  team_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440002",
+      name: "demoTeam1",
+      description: "Example Team 1",
+      createdAt: "2024-01-01T00:00:00Z"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440003",
+      name: "demoTeam2",
+      description: "Example Team 2",
+      createdAt: "2024-01-01T00:00:00Z"
+    }
+  ])
+  task_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440004",
+      title: "demoTask1",
+      description: "Example Task 1",
+      priority: "High",
+      status: "Open",
+      createdAt: "2024-01-01T00:00:00Z",
+      teamId: "550e8400-e29b-41d4-a716-446655440002",
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440005",
+      title: "demoTask2",
+      description: "Example Task 2",
+      priority: "Medium",
+      status: "InProgress",
+      createdAt: "2024-01-01T00:00:00Z",
+      teamId: "550e8400-e29b-41d4-a716-446655440003",
+    }
+  ])
+  membership_insertMany(data: [
+    {
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      teamId: "550e8400-e29b-41d4-a716-446655440002",
+      role: "admin"
+    },
+    {
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      teamId: "550e8400-e29b-41d4-a716-446655440003",
+      role: "member"
+    }
+  ])
+    comment_insertMany(data: [
+    {
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      taskId: "550e8400-e29b-41d4-a716-446655440004",
+      content: "Example comment from demouser1",
+      createdAt: "2024-01-01T00:00:00Z"
+    },
+    {
+      userId: "550e8400-e29b-41d4-a716-446655440001",
+      taskId: "550e8400-e29b-41d4-a716-446655440005",
+      content: "Example comment from demouser2",
+      createdAt: "2024-01-01T00:00:00Z"
+    }
+  ])
+}

@@ -1,64 +1,93 @@
 <section class="contact-page">
+  <div class="contact-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="animated-grid"></div>
+  </div>
+
   <div class="container">
     <header class="page-header" @fadeInUp>
-      <span class="page-tag">Contact</span>
-      <h1 class="page-title">Get In<br><span class="highlight">Touch</span></h1>
-      <p class="page-subtitle">Let's discuss your next project</p>
+      <span class="page-tag">Get In Touch</span>
+      <h1 class="page-title">Let's Start<br><span class="highlight">Something Great</span></h1>
+      <p class="page-subtitle">I'm always open to new projects and collaboration opportunities</p>
     </header>
 
-    <div class="contact-content" @fadeInUp>
-      <div class="contact-info">
-        <h2>Let's Connect</h2>
-        <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out through any of the following:</p>
+    <div class="contact-content">
+      <div class="contact-info" @staggerCards>
+        <div class="info-section">
+          <h2>Let's Connect</h2>
+          <p>Ready to bring your ideas to life? Whether you have a groundbreaking project, a challenging problem to solve, or simply want to explore what's possible, I'd love to hear from you.</p>
 
-        <div class="info-cards">
-          @for (info of contactInfo; track info.label) {
-            <a [href]="info.link" class="info-card" data-cursor-hover target="_blank" rel="noopener">
-              <div class="info-icon">
-                @switch (info.icon) {
-                  @case ('mail') {
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                      <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
+          <div class="info-cards">
+            @for (info of contactInfo; track info.id) {
+              <a 
+                [href]="info.link" 
+                class="info-card"
+                [class.hovered]="isCardHovered(info.id)"
+                (mouseenter)="setHoveredCard(info.id)"
+                (mouseleave)="setHoveredCard(null)"
+                data-cursor-hover 
+                target="_blank" 
+                rel="noopener">
+                <div class="card-border"></div>
+                <div class="info-icon">
+                  @switch (info.icon) {
+                    @case ('mail') {
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                      </svg>
+                    }
+                    @case ('phone') {
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                      </svg>
+                    }
+                    @case ('globe') {
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                      </svg>
+                    }
                   }
-                  @case ('phone') {
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                    </svg>
-                  }
-                  @case ('globe') {
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="2" y1="12" x2="22" y2="12"></line>
-                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                    </svg>
-                  }
-                }
-              </div>
-              <div class="info-details">
-                <span class="info-label">{{ info.label }}</span>
-                <span class="info-value">{{ info.value }}</span>
-              </div>
-            </a>
-          }
+                </div>
+                <div class="info-details">
+                  <span class="info-label">{{ info.label }}</span>
+                  <span class="info-value">{{ info.value }}</span>
+                </div>
+              </a>
+            }
+          </div>
         </div>
       </div>
 
-      <div class="contact-form-container">
+      <div class="contact-form-container" @formPulse>
         @if (isSubmitted()) {
           <div class="success-message">
             <div class="success-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
               </svg>
             </div>
-            <h3>Message Sent!</h3>
-            <p>Thank you for reaching out. I'll get back to you as soon as possible.</p>
+            <h3>Message Sent Successfully!</h3>
+            <p>Thank you for reaching out. I'll review your message and get back to you within 24 hours.</p>
+            <div class="success-details">✨ Message received and forwarded to my email</div>
           </div>
         } @else {
           <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+            @if (errorMessage()) {
+              <div class="error-banner">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                {{ errorMessage() }}
+              </div>
+            }
+
             <div class="form-group">
               <label for="name">Your Name</label>
               <input 
@@ -121,7 +150,7 @@
               <textarea 
                 id="message" 
                 formControlName="message"
-                rows="5"
+                rows="6"
                 placeholder="Tell me about your project..."
                 [class.error]="formControls['message'].touched && formControls['message'].invalid">
               </textarea>
@@ -143,7 +172,7 @@
               data-cursor-hover>
               @if (isSubmitting()) {
                 <span class="spinner"></span>
-                <span>Sending...</span>
+                <span>Sending Message...</span>
               } @else {
                 <span>Send Message</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

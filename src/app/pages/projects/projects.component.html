@@ -1,35 +1,79 @@
 <section class="projects-page">
+  <div class="projects-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="animated-grid"></div>
+  </div>
+
   <div class="container">
     <header class="page-header" @fadeInUp>
-      <span class="page-tag">Projects</span>
-      <h1 class="page-title">Featured<br><span class="highlight">Work</span></h1>
-      <p class="page-subtitle">A showcase of my key enterprise projects</p>
+      <span class="page-tag">Featured Projects</span>
+      <h1 class="page-title">My Best<br><span class="highlight">Work</span></h1>
+      <p class="page-subtitle">Enterprise solutions showcasing Angular expertise</p>
     </header>
 
     <div class="projects-grid" @staggerProjects>
       @for (project of projects; track project.id) {
-        <article class="project-card" (click)="openProject(project)" data-cursor-hover>
+        <article 
+          class="project-card" 
+          (click)="openProject(project)" 
+          (mouseenter)="setHoveredCard(project.id)"
+          (mouseleave)="setHoveredCard(null)"
+          [class.hovered]="isCardHovered(project.id)"
+          data-cursor-hover>
+          
+          <div class="card-border"></div>
+          
           <div class="project-image">
             <div class="image-placeholder">
               <span class="project-initial">{{ project.title.charAt(0) }}</span>
+              <div class="floating-icons">
+                <div class="float-icon">🚀</div>
+                <div class="float-icon">✨</div>
+                <div class="float-icon">⚡</div>
+              </div>
             </div>
             <div class="project-overlay">
-              <span class="view-project">View Details</span>
+              <div class="overlay-content">
+                <span class="view-project">View Details</span>
+                <div class="arrow-icon">→</div>
+              </div>
             </div>
+            <div class="image-glow"></div>
           </div>
           
           <div class="project-content">
             <span class="project-subtitle">{{ project.subtitle }}</span>
             <h3 class="project-title">{{ project.title }}</h3>
-            <p class="project-description">{{ project.description | slice:0:120 }}...</p>
+            <p class="project-description">{{ project.description | slice:0:100 }}...</p>
             
             <div class="project-tech">
-              @for (tech of project.technologies.slice(0, 4); track tech) {
+              @for (tech of project.technologies.slice(0, 3); track tech) {
                 <span class="tech-tag">{{ tech }}</span>
               }
-              @if (project.technologies.length > 4) {
-                <span class="tech-more">+{{ project.technologies.length - 4 }}</span>
+              @if (project.technologies.length > 3) {
+                <span class="tech-more">+{{ project.technologies.length - 3 }}</span>
               }
+            </div>
+
+            <div class="card-footer">
+              <div class="project-duration">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>{{ project.duration }}</span>
+              </div>
+              <div class="project-stats">
+                <div class="stat">
+                  <span class="stat-value">{{ project.technologies.length }}</span>
+                  <span class="stat-label">Tech</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">{{ project.highlights.length }}</span>
+                  <span class="stat-label">Highlights</span>
+                </div>
+              </div>
             </div>
           </div>
         </article>
@@ -39,8 +83,8 @@
 </section>
 
 @if (activeProject()) {
-  <div class="modal-overlay" (click)="onModalBackdropClick($event)" @fadeInUp>
-    <div class="modal-content">
+  <div class="modal-overlay" (click)="onModalBackdropClick($event)">
+    <div class="modal-content" @modalSlideIn>
       <button class="modal-close" (click)="closeModal()" data-cursor-hover>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -51,6 +95,7 @@
       <div class="modal-header">
         <div class="modal-image">
           <span class="project-initial large">{{ activeProject()!.title.charAt(0) }}</span>
+          <div class="modal-image-glow"></div>
         </div>
         <div class="modal-title">
           <span class="subtitle">{{ activeProject()!.subtitle }}</span>
@@ -58,7 +103,7 @@
         </div>
       </div>
 
-      <div class="modal-body">
+      <div class="modal-body" @modalStaggerContent>
         <div class="modal-section">
           <h3>Overview</h3>
           <p>{{ activeProject()!.description }}</p>
@@ -77,10 +122,12 @@
           <h3>Key Highlights</h3>
           <ul class="highlights-list">
             @for (highlight of activeProject()!.highlights; track highlight) {
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
+              <li class="highlight-item">
+                <div class="highlight-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
                 <span>{{ highlight }}</span>
               </li>
             }

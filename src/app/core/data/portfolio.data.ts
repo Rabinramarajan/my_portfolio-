@@ -2,6 +2,7 @@ export interface Skill {
   name: string;
   level: number;
   category: 'frontend' | 'backend' | 'tools' | 'other';
+  image?: string;
 }
 
 export interface Project {
@@ -9,6 +10,7 @@ export interface Project {
   title: string;
   subtitle: string;
   description: string;
+  duration: string;
   technologies: string[];
   highlights: string[];
   image?: string;
@@ -39,26 +41,26 @@ export const PROFILE = {
 };
 
 export const SKILLS: Skill[] = [
-  { name: 'Angular 13-20', level: 95, category: 'frontend' },
-  { name: 'Angular Zoneless', level: 90, category: 'frontend' },
-  { name: 'Ionic 7-8', level: 88, category: 'frontend' },
-  { name: 'TypeScript', level: 92, category: 'frontend' },
-  { name: 'JavaScript', level: 90, category: 'frontend' },
-  { name: 'SCSS/CSS', level: 88, category: 'frontend' },
-  { name: 'Signals', level: 85, category: 'frontend' },
-  { name: 'RxJS', level: 87, category: 'frontend' },
-  { name: 'PrimeNG', level: 82, category: 'frontend' },
-  { name: 'Angular Material', level: 85, category: 'frontend' },
-  { name: 'Node.js', level: 75, category: 'backend' },
-  { name: 'Express', level: 72, category: 'backend' },
-  { name: 'MongoDB', level: 70, category: 'backend' },
-  { name: 'REST APIs', level: 88, category: 'backend' },
-  { name: 'JWT/RBAC', level: 80, category: 'backend' },
-  { name: 'Micro Frontends', level: 78, category: 'tools' },
-  { name: 'Monorepos', level: 75, category: 'tools' },
-  { name: 'PWA', level: 80, category: 'tools' },
-  { name: 'CI/CD', level: 72, category: 'tools' },
-  { name: 'Git', level: 85, category: 'tools' }
+  { name: 'Angular 13-20', level: 95, category: 'frontend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg' },
+  { name: 'Angular Zoneless', level: 90, category: 'frontend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg' },
+  { name: 'Ionic 7-8', level: 88, category: 'frontend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ionic/ionic-original.svg' },
+  { name: 'TypeScript', level: 92, category: 'frontend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg' },
+  { name: 'JavaScript', level: 90, category: 'frontend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg' },
+  { name: 'SCSS/CSS', level: 88, category: 'frontend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg' },
+  { name: 'Signals', level: 85, category: 'frontend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg' },
+  { name: 'RxJS', level: 87, category: 'frontend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rxjs/rxjs-original.svg' },
+  { name: 'PrimeNG', level: 82, category: 'frontend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg' },
+  { name: 'Angular Material', level: 85, category: 'frontend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg' },
+  { name: 'Node.js', level: 75, category: 'backend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg' },
+  { name: 'Express', level: 72, category: 'backend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg' },
+  { name: 'MongoDB', level: 70, category: 'backend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg' },
+  { name: 'REST APIs', level: 88, category: 'backend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg' },
+  { name: 'JWT/RBAC', level: 80, category: 'backend', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg' },
+  { name: 'Micro Frontends', level: 78, category: 'tools', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/webpack/webpack-original.svg' },
+  { name: 'Monorepos', level: 75, category: 'tools', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/npm/npm-original-wordmark.svg' },
+  { name: 'PWA', level: 80, category: 'tools', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/chrome/chrome-original.svg' },
+  { name: 'CI/CD', level: 72, category: 'tools', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg' },
+  { name: 'Git', level: 85, category: 'tools', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg' }
 ];
 
 export const PROJECTS: Project[] = [
@@ -69,6 +71,7 @@ export const PROJECTS: Project[] = [
     description: `A comprehensive member portal system designed to manage member information, 
     subscriptions, and services. Built with Angular and featuring real-time updates, 
     role-based access control, and seamless API integrations.`,
+    duration: '14 months',
     technologies: ['Angular', 'TypeScript', 'RxJS', 'REST APIs', 'JWT', 'SCSS'],
     highlights: [
       'Developed modular architecture for scalability',
@@ -84,6 +87,7 @@ export const PROJECTS: Project[] = [
     description: `An enterprise-grade visa and immigration management system that streamlines 
     the application process for users and administrators. Features document management, 
     application tracking, and automated workflows.`,
+    duration: '18 months',
     technologies: ['Angular', 'Ionic', 'TypeScript', 'Signals', 'MongoDB', 'Node.js'],
     highlights: [
       'Built cross-platform solution with Ionic',
@@ -99,6 +103,7 @@ export const PROJECTS: Project[] = [
     description: `A robust financial platform enabling members to manage loans and withdrawals 
     efficiently. Includes loan calculators, application workflows, and real-time status tracking 
     with secure transaction handling.`,
+    duration: '12 months',
     technologies: ['Angular', 'TypeScript', 'RxJS', 'REST APIs', 'RBAC', 'Express'],
     highlights: [
       'Developed secure loan application workflow',

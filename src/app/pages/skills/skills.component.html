@@ -21,6 +21,12 @@
     <div class="skills-grid" @staggerSkills>
       @for (skill of filteredSkills; track skill.name) {
         <div class="skill-item">
+          @if (skill.image) {
+            <div class="skill-image-container">
+              <img [src]="skill.image" [alt]="skill.name" class="skill-image" />
+              <div class="image-glow"></div>
+            </div>
+          }
           <div class="skill-header">
             <span class="skill-name">{{ skill.name }}</span>
             <span class="skill-level">{{ getAnimatedLevel(skill.name) }}%</span>

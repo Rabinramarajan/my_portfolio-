@@ -1,0 +1,41 @@
+mutation CreateTeam($name: String!, $description: String!) @auth(level: USER) {
+  team_insert(data: {
+    name: $name,
+    description: $description,
+    createdAt_expr: "request.time"
+  })
+}
+
+query ListTeams @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  teams {
+    id
+    name
+    description
+    createdAt
+  }
+}
+
+mutation CreateTask($teamId: UUID!, $title: String!, $description: String!, $priority: String!, $status: String!, $dueDate: Timestamp) @auth(level: USER) {
+  task_insert(data: {
+    teamId: $teamId,
+    title: $title,
+    description: $description,
+    priority: $priority,
+    status: $status,
+    dueDate: $dueDate,
+    createdAt_expr: "request.time",
+    creatorId_expr: "auth.uid"
+  })
+}
+
+query ListTasksForTeam($teamId: UUID!) @auth(level: USER) {
+  tasks(where: {teamId: {eq: $teamId}}) {
+    id
+    title
+    description
+    priority
+    status
+    dueDate
+    createdAt
+  }
+}
