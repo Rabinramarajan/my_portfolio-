@@ -1,0 +1,24 @@
+<div class="cursor-container" [class.visible]="isVisible()">
+  <div 
+    class="cursor-dot"
+    [class.hovering]="isHovering()"
+    [class.clicking]="isClicking()"
+    [style.left.px]="cursorX()"
+    [style.top.px]="cursorY()">
+  </div>
+  
+  <div 
+    class="cursor-trail"
+    [class.hovering]="isHovering()"
+    [class.clicking]="isClicking()"
+    [style.left.px]="trailX()"
+    [style.top.px]="trailY()">
+  </div>
+  
+  <div 
+    class="cursor-glow"
+    [class.hovering]="isHovering()"
+    [style.left.px]="cursorX()"
+    [style.top.px]="cursorY()">
+  </div>
+</div>

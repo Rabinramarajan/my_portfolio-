@@ -1,0 +1,75 @@
+<section class="experience-page">
+  <div class="container">
+    <header class="page-header" @fadeInUp>
+      <span class="page-tag">Experience</span>
+      <h1 class="page-title">My Professional<br><span class="highlight">Journey</span></h1>
+      <p class="page-subtitle">{{ profile.experience }}+ years of crafting digital solutions</p>
+    </header>
+
+    <div class="timeline-container" @staggerTimeline>
+      <div class="timeline-line"></div>
+      
+      @for (exp of experiences; track exp.id; let i = $index) {
+        <div 
+          class="timeline-item" 
+          [class.active]="activeIndex() === i"
+          (mouseenter)="setActive(i)">
+          <div class="timeline-dot">
+            <div class="dot-inner"></div>
+          </div>
+          
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="period">{{ exp.period }}</span>
+              <h3 class="role">{{ exp.role }}</h3>
+              <span class="company">{{ exp.company }}</span>
+            </div>
+            
+            <p class="description">{{ exp.description }}</p>
+            
+            <ul class="achievements">
+              @for (achievement of exp.achievements; track achievement) {
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>{{ achievement }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="experience-summary" @fadeInUp>
+      <div class="summary-card">
+        <div class="summary-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+        </div>
+        <div class="summary-content">
+          <h3>Professional Experience</h3>
+          <p>Specialized in building enterprise-grade Angular applications with focus on performance, scalability, and user experience.</p>
+        </div>
+      </div>
+
+      <div class="summary-stats">
+        <div class="stat-item">
+          <span class="stat-value">{{ profile.experience }}+</span>
+          <span class="stat-label">Years</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">3</span>
+          <span class="stat-label">Major Projects</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">20+</span>
+          <span class="stat-label">Technologies</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,112 @@
+<section class="about-page">
+  <div class="container">
+    <header class="page-header" @fadeInUp>
+      <span class="page-tag">About Me</span>
+      <h1 class="page-title">Passionate About Creating<br><span class="highlight">Digital Experiences</span></h1>
+    </header>
+
+    <div class="about-content" @staggerFadeIn>
+      <div class="about-intro stagger-item">
+        <div class="intro-image">
+          <div class="image-placeholder">
+            <span class="initials">RR</span>
+          </div>
+          <div class="image-decoration"></div>
+        </div>
+        
+        <div class="intro-text">
+          <h2>Who I Am</h2>
+          <p>{{ profile.summary }}</p>
+          
+          <div class="quick-info">
+            <div class="info-item">
+              <span class="info-label">Name</span>
+              <span class="info-value">{{ profile.name }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Role</span>
+              <span class="info-value">{{ profile.role }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Experience</span>
+              <span class="info-value">{{ profile.experience }}+ Years</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Education</span>
+              <span class="info-value">{{ profile.education }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlights-section stagger-item">
+        <h2>What I Bring</h2>
+        <div class="highlights-grid">
+          @for (highlight of highlights; track highlight.title) {
+            <div class="highlight-card">
+              <div class="highlight-icon">
+                @switch (highlight.icon) {
+                  @case ('code') {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="16 18 22 12 16 6"></polyline>
+                      <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                  }
+                  @case ('layers') {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                      <polyline points="2 17 12 22 22 17"></polyline>
+                      <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                  }
+                  @case ('zap') {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                  }
+                  @case ('users') {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                  }
+                }
+              </div>
+              <h3>{{ highlight.title }}</h3>
+              <p>{{ highlight.description }}</p>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="skills-preview stagger-item">
+        <div class="skills-header">
+          <h2>Core Technologies</h2>
+          <a routerLink="/skills" class="view-all" data-cursor-hover>
+            View All Skills
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+        <div class="skills-tags">
+          @for (skill of topSkills; track skill.name) {
+            <span class="skill-tag">{{ skill.name }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="cta-section stagger-item">
+        <h2>Let's Work Together</h2>
+        <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
+        <div class="cta-actions">
+          <a routerLink="/contact" class="btn btn-primary" data-cursor-hover>Get In Touch</a>
+          <a routerLink="/projects" class="btn btn-secondary" data-cursor-hover>View Projects</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

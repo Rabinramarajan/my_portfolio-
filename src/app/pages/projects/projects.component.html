@@ -1,0 +1,92 @@
+<section class="projects-page">
+  <div class="container">
+    <header class="page-header" @fadeInUp>
+      <span class="page-tag">Projects</span>
+      <h1 class="page-title">Featured<br><span class="highlight">Work</span></h1>
+      <p class="page-subtitle">A showcase of my key enterprise projects</p>
+    </header>
+
+    <div class="projects-grid" @staggerProjects>
+      @for (project of projects; track project.id) {
+        <article class="project-card" (click)="openProject(project)" data-cursor-hover>
+          <div class="project-image">
+            <div class="image-placeholder">
+              <span class="project-initial">{{ project.title.charAt(0) }}</span>
+            </div>
+            <div class="project-overlay">
+              <span class="view-project">View Details</span>
+            </div>
+          </div>
+          
+          <div class="project-content">
+            <span class="project-subtitle">{{ project.subtitle }}</span>
+            <h3 class="project-title">{{ project.title }}</h3>
+            <p class="project-description">{{ project.description | slice:0:120 }}...</p>
+            
+            <div class="project-tech">
+              @for (tech of project.technologies.slice(0, 4); track tech) {
+                <span class="tech-tag">{{ tech }}</span>
+              }
+              @if (project.technologies.length > 4) {
+                <span class="tech-more">+{{ project.technologies.length - 4 }}</span>
+              }
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+@if (activeProject()) {
+  <div class="modal-overlay" (click)="onModalBackdropClick($event)" @fadeInUp>
+    <div class="modal-content">
+      <button class="modal-close" (click)="closeModal()" data-cursor-hover>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-image">
+          <span class="project-initial large">{{ activeProject()!.title.charAt(0) }}</span>
+        </div>
+        <div class="modal-title">
+          <span class="subtitle">{{ activeProject()!.subtitle }}</span>
+          <h2>{{ activeProject()!.title }}</h2>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>Overview</h3>
+          <p>{{ activeProject()!.description }}</p>
+        </div>
+
+        <div class="modal-section">
+          <h3>Technologies Used</h3>
+          <div class="tech-tags">
+            @for (tech of activeProject()!.technologies; track tech) {
+              <span class="tech-tag">{{ tech }}</span>
+            }
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3>Key Highlights</h3>
+          <ul class="highlights-list">
+            @for (highlight of activeProject()!.highlights; track highlight) {
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>{{ highlight }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+}
