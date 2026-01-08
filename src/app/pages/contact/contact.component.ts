@@ -1,8 +1,11 @@
-import { Component, signal, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 import { PROFILE } from '../../core/data/portfolio.data';
+import { FIREBASE_FIRESTORE, FIREBASE_ANALYTICS } from '../../core/firebase/firebase.di';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { logEvent } from 'firebase/analytics';
 import emailjs from 'emailjs-com';
 
 @Component({
@@ -38,6 +41,10 @@ import emailjs from 'emailjs-com';
   ]
 })
 export class ContactComponent {
+  // Inject Firebase services
+  private firestore = inject(FIREBASE_FIRESTORE);
+  private analytics = inject(FIREBASE_ANALYTICS);
+
   profile = PROFILE;
   contactForm: FormGroup;
   isSubmitting = signal(false);
@@ -100,6 +107,21 @@ export class ContactComponent {
 
       try {
         const formData = this.contactForm.value;
+
+        // Save to Firestore
+        await addDoc(collection(this.firestore, 'contact_messages'), {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          createdAt: serverTimestamp(),
+          status: 'unread'
+        });
+
+        // Track event in Analytics
+        logEvent(this.analytics, 'contact_form_submit', {
+          subject: formData.subject
+        });
 
         // Send email via EmailJS
         await emailjs.send(

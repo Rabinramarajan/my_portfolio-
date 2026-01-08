@@ -1,0 +1,21 @@
+# robots.txt for https://rabinr.in
+# Rabin Ramarajan - Frontend Developer Portfolio
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://rabinr.in/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Disallow admin or private areas (if any)
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /assets/icons/
+
+# Allow important resources
+Allow: /assets/og-image.png
+Allow: /assets/profile-photo.jpg
