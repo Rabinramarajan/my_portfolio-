@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 import { PROFILE, SKILLS } from '../../core/data/portfolio.data';
+import { ExperienceYearsPipe } from '../../shared/pipes/experience-calculate/experience-duration.pipe';
 
 @Component({
   selector: 'app-about',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ExperienceYearsPipe],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

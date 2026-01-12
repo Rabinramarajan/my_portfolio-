@@ -26,18 +26,15 @@ export interface Experience {
 }
 
 export const PROFILE = {
-  name: 'Rabin Ramarajan',
+  name: 'Rabin R',
   role: 'Frontend Developer',
   tagline: 'Angular & Ionic Specialist',
+  startDate: '2022-06-28',
   experience: '3.6+',
-  email: 'suriyarabin@gmail.com',
+  email: 'rabinr2607@gmail.com',
   phone: '+91 9789376992',
-  website: 'www.rabinr.in',
+  linkedin: 'www.linkedin.com/in/rabinr/',
   education: 'B.Sc. Information Technology',
-  summary: `Frontend Developer with 3.6+ years of experience specializing in Angular 13-20 (including Angular 20 Zoneless), 
-  Ionic 7-8, TypeScript, Signals, RxJS, REST API integrations, JWT authentication, modular architecture, 
-  micro frontends, and enterprise application development. Passionate about creating performant, 
-  scalable, and user-friendly web applications.`
 };
 
 export const SKILLS: Skill[] = [

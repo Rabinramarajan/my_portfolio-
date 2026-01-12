@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+@import './scss/addOn.scss';
+
 :root {
   --bg-primary: #0a0a0f;
   --bg-secondary: #12121a;
@@ -27,7 +29,7 @@
   --text-primary: #09090b;
   --text-secondary: #52525b;
   --text-tertiary: #71717a;
-  --border-color: #d4d4d8;
+  --border-color: #8b5cf6;
   --nav-bg: rgba(255, 255, 255, 0.8);
   --cursor-color: #09090b;
 }

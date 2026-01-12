@@ -67,13 +67,13 @@ export class ContactComponent {
       value: this.profile.phone,
       link: `tel:${this.profile.phone}`
     },
-    {
-      id: 'website',
-      icon: 'globe',
-      label: 'Website',
-      value: this.profile.website,
-      link: `https://${this.profile.website}`
-    }
+    // {
+    //   id: 'website',
+    //   icon: 'globe',
+    //   label: 'Website',
+    //   value: this.profile.website,
+    //   link: `https://${this.profile.website}`
+    // }
   ];
 
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
