@@ -1,32 +1,68 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * import {onCall} from "firebase-functions/v2/https";
- * import {onDocumentWritten} from "firebase-functions/v2/firestore";
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+import { onDocumentCreated } from "firebase-functions/v2/firestore";
+import * as nodemailer from "nodemailer";
+import { defineString } from "firebase-functions/params";
 
-import {setGlobalOptions} from "firebase-functions";
-import {onRequest} from "firebase-functions/https";
-import * as logger from "firebase-functions/logger";
+const gmailUser = defineString("GMAIL_USER");
+const gmailPass = defineString("GMAIL_PASS"); // Use App Passwords for Gmail
 
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
+export const sendContactEmail = onDocumentCreated(
+  {
+    document: "contact_messages/{docId}",
+  },
+  async (event) => {
+    const data = event.data?.data();
+    if (!data) return;
 
-// For cost control, you can set the maximum number of containers that can be
-// running at the same time. This helps mitigate the impact of unexpected
-// traffic spikes by instead downgrading performance. This limit is a
-// per-function limit. You can override the limit for each function using the
-// `maxInstances` option in the function's options, e.g.
-// `onRequest({ maxInstances: 5 }, (req, res) => { ... })`.
-// NOTE: setGlobalOptions does not apply to functions using the v1 API. V1
-// functions should each use functions.runWith({ maxInstances: 10 }) instead.
-// In the v1 API, each function can only serve one request per container, so
-// this will be the maximum concurrent request count.
-setGlobalOptions({ maxInstances: 10 });
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: gmailUser.value(),
+        pass: gmailPass.value(),
+      },
+    });
 
-// export const helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+    // Email to you (notification)
+    const mailOptions = {
+      from: `"Portfolio Contact" <${gmailUser.value()}>`,
+      to: gmailUser.value(), // YOU receive mail
+      replyTo: data.email,   // Reply goes to user
+      subject: `New Contact: ${data.subject}`,
+      html: `
+        <h3>New Contact Message</h3>
+        <p><b>Name:</b> ${data.name}</p>
+        <p><b>Email:</b> ${data.email}</p>
+        <p><b>Subject:</b> ${data.subject}</p>
+        <p><b>Message:</b><br/>${data.message}</p>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    // Auto-reply to the user
+    await transporter.sendMail({
+      from: `"Rabin R" <${gmailUser.value()}>`,
+      to: data.email,
+      subject: "Thanks for contacting Rabin R",
+      html: `
+        <p>Hi ${data.name},</p>
+
+        <p>Thank you for reaching out through my portfolio. I've received your message and will review it shortly.</p>
+
+        <p>If your inquiry is related to job opportunities, freelance projects, or collaborations, I'll get back to you as soon as possible.</p>
+
+        <p>In the meantime, feel free to check my work at:<br/>
+        <a href="https://rabinr.in">https://rabinr.in</a></p>
+
+        <p>Best regards,<br/>
+        <b>Rabin R</b><br/>
+        Angular & Frontend Developer</p>
+      `,
+    });
+
+    // Update document status to 'replied'
+    await event.data?.ref.update({
+      status: "replied",
+      repliedAt: new Date(),
+    });
+  }
+);

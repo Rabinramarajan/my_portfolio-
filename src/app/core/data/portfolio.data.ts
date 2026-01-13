@@ -34,6 +34,7 @@ export const PROFILE = {
   email: 'rabinr2607@gmail.com',
   phone: '+91 9789376992',
   linkedin: 'www.linkedin.com/in/rabinr/',
+  instagramLink: 'www.instagram.com/heyitsrabin/',
   education: 'B.Sc. Information Technology',
 };
 

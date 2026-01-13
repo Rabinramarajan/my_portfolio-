@@ -11,6 +11,9 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes, withViewTransitions()),
     provideAnimations(),
-    provideFirebase(environment)
+    provideFirebase({
+      firebase: environment.firebase,
+      recaptchaSiteKey: environment.recaptchaSiteKey,
+    }),
   ]
 };
