@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "rabin-portfolio-d34ac",
     "public": "dist/rabin-portfolio/browser",
     "ignore": [
       "firebase.json",

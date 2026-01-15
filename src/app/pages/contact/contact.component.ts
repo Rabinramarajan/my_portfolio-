@@ -119,9 +119,11 @@ export class ContactComponent {
         });
 
         // Track event in Analytics
-        logEvent(this.analytics, 'contact_form_submit', {
-          subject: formData.subject
-        });
+        if (this.analytics) {
+          logEvent(this.analytics, 'contact_form_submit', {
+            subject: formData.subject
+          });
+        }
 
         // Email will be sent by Cloud Function triggered on new document
 

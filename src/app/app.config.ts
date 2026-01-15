@@ -4,6 +4,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideFirebase } from './core/firebase/firebase.di';
 import { environment } from '../environments/environment';
 
+
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {

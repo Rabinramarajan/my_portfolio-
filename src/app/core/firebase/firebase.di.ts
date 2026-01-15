@@ -8,7 +8,7 @@ import { AppCheck, initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-
 export const FIREBASE_APP = new InjectionToken<FirebaseApp>('FIREBASE_APP');
 export const FIREBASE_AUTH = new InjectionToken<Auth>('FIREBASE_AUTH');
 export const FIREBASE_FIRESTORE = new InjectionToken<Firestore>('FIREBASE_FIRESTORE');
-export const FIREBASE_ANALYTICS = new InjectionToken<Analytics>('FIREBASE_ANALYTICS');
+export const FIREBASE_ANALYTICS = new InjectionToken<Analytics | null>('FIREBASE_ANALYTICS');
 export const FIREBASE_APP_CHECK = new InjectionToken<AppCheck>('FIREBASE_APP_CHECK');
 
 export interface FirebaseConfig {
@@ -28,12 +28,12 @@ export function provideFirebase(config: FirebaseConfig): EnvironmentProviders {
             provide: FIREBASE_APP_CHECK,
             useFactory: () => {
                 const app = inject(FIREBASE_APP);
-                
+
                 // Enable debug token for local development
                 if (isDevMode() && typeof window !== 'undefined') {
                     (self as any).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
                 }
-                
+
                 return initializeAppCheck(app, {
                     provider: new ReCaptchaV3Provider(config.recaptchaSiteKey),
                     isTokenAutoRefreshEnabled: true
@@ -57,8 +57,11 @@ export function provideFirebase(config: FirebaseConfig): EnvironmentProviders {
         {
             provide: FIREBASE_ANALYTICS,
             useFactory: () => {
-                const app = inject(FIREBASE_APP);
-                return getAnalytics(app);
+                if (typeof window !== 'undefined') {
+                    const app = inject(FIREBASE_APP);
+                    return getAnalytics(app);
+                }
+                return null;
             },
         },
     ]);
