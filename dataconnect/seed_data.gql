@@ -1,76 +1,61 @@
-mutation CreateSeedData @transaction @auth(level: NO_ACCESS) {
+mutation SeedDatabase @transaction @auth(level: PUBLIC, insecureReason: "This operation is only used to seed the database with initial data and is safe to expose to the public") {
   user_insertMany(data: [
     {
       id: "550e8400-e29b-41d4-a716-446655440000",
-      displayName: "demouser1",
-      email: "demouser1@example.com",
+      firstName: "Demo",
+      lastName: "User",
+      email: "demo@example.com",
       createdAt: "2024-01-01T00:00:00Z"
     },
     {
-      id: "550e8400-e29b-41d4-a716-446655440001",
-      displayName: "demouser2",
-      email: "demouser2@example.com",
-      createdAt: "2024-01-01T00:00:00Z"
+      id: "661f9511-f3ac-52e5-b827-557766551111",
+      firstName: "Jane",
+      lastName: "Doe",
+      email: "jane.doe@example.com",
+      createdAt: "2024-01-05T12:00:00Z"
     }
   ])
-  team_insertMany(data: [
+  skill_insertMany(data: [
     {
-      id: "550e8400-e29b-41d4-a716-446655440002",
-      name: "demoTeam1",
-      description: "Example Team 1",
-      createdAt: "2024-01-01T00:00:00Z"
-    },
-    {
-      id: "550e8400-e29b-41d4-a716-446655440003",
-      name: "demoTeam2",
-      description: "Example Team 2",
-      createdAt: "2024-01-01T00:00:00Z"
-    }
-  ])
-  task_insertMany(data: [
-    {
-      id: "550e8400-e29b-41d4-a716-446655440004",
-      title: "demoTask1",
-      description: "Example Task 1",
-      priority: "High",
-      status: "Open",
-      createdAt: "2024-01-01T00:00:00Z",
-      teamId: "550e8400-e29b-41d4-a716-446655440002",
-    },
-    {
-      id: "550e8400-e29b-41d4-a716-446655440005",
-      title: "demoTask2",
-      description: "Example Task 2",
-      priority: "Medium",
-      status: "InProgress",
-      createdAt: "2024-01-01T00:00:00Z",
-      teamId: "550e8400-e29b-41d4-a716-446655440003",
-    }
-  ])
-  membership_insertMany(data: [
-    {
+      id: "772ga622-04bd-63f6-c938-668877662222",
       userId: "550e8400-e29b-41d4-a716-446655440000",
-      teamId: "550e8400-e29b-41d4-a716-446655440002",
-      role: "admin"
+      name: "React",
+      skillCategory: "Frontend",
+      createdAt: "2024-01-02T00:00:00Z"
     },
     {
-      userId: "550e8400-e29b-41d4-a716-446655440001",
-      teamId: "550e8400-e29b-41d4-a716-446655440003",
-      role: "member"
+      id: "883hb733-15ce-7407-da49-779988773333",
+      userId: "550e8400-e29b-41d4-a716-446655440000",
+      name: "Node.js",
+      skillCategory: "Backend",
+      createdAt: "2024-01-03T00:00:00Z"
+    },
+    {
+      id: "994ic844-26df-8518-eb5a-880099884444",
+      userId: "661f9511-f3ac-52e5-b827-557766551111",
+      name: "Python",
+      skillCategory: "Backend",
+      createdAt: "2024-01-06T00:00:00Z"
     }
   ])
-    comment_insertMany(data: [
+  project_insertMany(data: [
     {
+      id: "aa5jd955-37ea-9629-fc6b-9911aa995555",
       userId: "550e8400-e29b-41d4-a716-446655440000",
-      taskId: "550e8400-e29b-41d4-a716-446655440004",
-      content: "Example comment from demouser1",
-      createdAt: "2024-01-01T00:00:00Z"
+      title: "Portfolio Website",
+      description: "A personal portfolio website built with React.",
+      projectType: "Web Application",
+      featured: true,
+      createdAt: "2024-01-04T00:00:00Z"
     },
     {
-      userId: "550e8400-e29b-41d4-a716-446655440001",
-      taskId: "550e8400-e29b-41d4-a716-446655440005",
-      content: "Example comment from demouser2",
-      createdAt: "2024-01-01T00:00:00Z"
+      id: "bb6ke066-48fb-073a-0d7c-0022bb006666",
+      userId: "661f9511-f3ac-52e5-b827-557766551111",
+      title: "Data Analysis Project",
+      description: "A data analysis project using Python and Pandas.",
+      projectType: "Data Science",
+      featured: false,
+      createdAt: "2024-01-07T00:00:00Z"
     }
   ])
 }

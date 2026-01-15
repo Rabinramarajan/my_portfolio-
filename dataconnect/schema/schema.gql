@@ -1,37 +1,60 @@
 type User @table {
-  displayName: String!
+  firstName: String!
+  lastName: String!
   email: String!
   createdAt: Timestamp!
-  photoUrl: String
+  bio: String
+  phone: String
+  linkedInUrl: String
+  gitHubUrl: String
+  websiteUrl: String
+  profilePictureUrl: String
 }
 
-type Team @table {
-  name: String!
-  createdAt: Timestamp!
-  description: String
-}
-
-type Task @table {
+type Project @table {
+  user: User
   title: String!
-  status: String!
-  priority: String!
+  description: String!
+  projectType: String!
   createdAt: Timestamp!
-  assignee: User
-  creator: User
-  team: Team
+  demoUrl: String
+  repositoryUrl: String
+  featured: Boolean
+  technologiesUsed: [String]
+}
+
+type ProjectImage @table {
+  project: Project
+  imageUrl: String!
+  createdAt: Timestamp!
+  caption: String
+  order: Int
+}
+
+type Skill @table {
+  user: User
+  name: String!
+  skillCategory: String!
+  createdAt: Timestamp!
+  proficiencyLevel: String
+}
+
+type Education @table {
+  user: User
+  institution: String!
+  degree: String!
+  startDate: Date!
+  createdAt: Timestamp!
+  endDate: Date
   description: String
-  dueDate: Timestamp
 }
 
-type Comment @table {
-  content: String!
-  createdAt: Timestamp!
-  user: User!
-  task: Task!
-}
-
-type Membership @table(key: ["user", "team"]) {
+type Experience @table {
+  user: User
+  company: String!
   role: String!
-  user: User!
-  team: Team!
+  startDate: Date!
+  createdAt: Timestamp!
+  endDate: Date
+  responsibilities: String
 }

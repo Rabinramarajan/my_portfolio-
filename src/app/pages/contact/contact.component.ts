@@ -6,7 +6,7 @@ import { PROFILE } from '../../core/data/portfolio.data';
 import { FIREBASE_FIRESTORE, FIREBASE_ANALYTICS } from '../../core/firebase/firebase.di';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { logEvent } from 'firebase/analytics';
-import emailjs from 'emailjs-com';
+import { ContactService } from './contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -44,6 +44,7 @@ export class ContactComponent {
   // Inject Firebase services
   private firestore = inject(FIREBASE_FIRESTORE);
   private analytics = inject(FIREBASE_ANALYTICS);
+  private contact = inject(ContactService);
 
   profile = PROFILE;
   contactForm: FormGroup;
@@ -67,25 +68,24 @@ export class ContactComponent {
       value: this.profile.phone,
       link: `tel:${this.profile.phone}`
     },
-    {
-      id: 'website',
-      icon: 'globe',
-      label: 'Website',
-      value: this.profile.website,
-      link: `https://${this.profile.website}`
-    }
+    // {
+    //   id: 'website',
+    //   icon: 'globe',
+    //   label: 'Website',
+    //   value: this.profile.website,
+    //   link: `https://${this.profile.website}`
+    // }
   ];
 
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef) {
-    this.contactForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
+    this.contactForm = this.fb.nonNullable.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       subject: ['', [Validators.required, Validators.minLength(5)]],
-      message: ['', [Validators.required, Validators.minLength(20)]]
+      message: ['', [Validators.required, Validators.minLength(10)]],
     });
 
-    // Initialize EmailJS
-    emailjs.init('YOUR_EMAILJS_PUBLIC_KEY');
+    // Email sending is handled by Firebase Cloud Functions on Firestore writes
   }
 
   get formControls() {
@@ -119,23 +119,13 @@ export class ContactComponent {
         });
 
         // Track event in Analytics
-        logEvent(this.analytics, 'contact_form_submit', {
-          subject: formData.subject
-        });
+        if (this.analytics) {
+          logEvent(this.analytics, 'contact_form_submit', {
+            subject: formData.subject
+          });
+        }
 
-        // Send email via EmailJS
-        await emailjs.send(
-          'YOUR_SERVICE_ID',
-          'YOUR_TEMPLATE_ID',
-          {
-            to_email: this.profile.email,
-            from_name: formData.name,
-            from_email: formData.email,
-            subject: formData.subject,
-            message: formData.message,
-            reply_to: formData.email
-          }
-        );
+        // Email will be sent by Cloud Function triggered on new document
 
         // Mark for check since we're using async operations in zoneless mode
         this.cdr.markForCheck();

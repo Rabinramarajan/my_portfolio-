@@ -1,16 +1,18 @@
-import { Component, signal, OnInit, OnDestroy, ChangeDetectionStrategy, inject, PLATFORM_ID, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, signal, computed, effect, afterNextRender, viewChild, inject, PLATFORM_ID, CUSTOM_ELEMENTS_SCHEMA, DestroyRef, ElementRef } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 import { PROFILE } from '../../core/data/portfolio.data';
+import { ExperienceService } from '../../shared/service/experience/experience.service';
+import { ExperienceYearsPipe } from '../../shared/pipes/experience-calculate/experience-duration.pipe';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ExperienceYearsPipe],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('fadeInUp', [
       transition(':enter', [
@@ -36,65 +38,108 @@ import { PROFILE } from '../../core/data/portfolio.data';
     ])
   ]
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent {
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly cdr = inject(ChangeDetectorRef);
-  private readonly ngZone = inject(NgZone);
-  
+  private readonly experience = inject(ExperienceService);
+  private readonly destroyRef = inject(DestroyRef);
+
+  // Signal-based view query
+  bannerVideo = viewChild<ElementRef<HTMLVideoElement>>('bannerVideo');
+
+  // State signals
   profile = PROFILE;
   isLoaded = signal(false);
   typedText = signal('');
-  
-  private roles = ['Frontend Developer', 'Angular Specialist', 'Ionic Expert', 'UI/UX Enthusiast'];
-  private currentRoleIndex = 0;
-  private charIndex = 0;
-  private isDeleting = false;
-  private timeoutId: ReturnType<typeof setTimeout> | null = null;
-  private isDestroyed = false;
 
-  ngOnInit(): void {
+  // Typing animation state
+  private readonly roles = [
+    'Angular Frontend Developer',
+    'Ionic App Developer',
+    'Enterprise Web Application Developer',
+    'Mobile App Developer with Ionic',
+    'Cross-Platform App Developer',
+    'Frontend Engineer'
+  ];
+  private currentRoleIndex = signal(0);
+  private charIndex = signal(0);
+  private isDeleting = signal(false);
+  private timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+  // Computed values
+  currentRole = computed(() => this.roles[this.currentRoleIndex()]);
+  experienceDate = signal<any>("");
+
+  constructor() {
+    const startDate = new Date('2022-06-28');
+    this.experienceDate.set(this.experience.getExperienceYears(startDate));
+    // Initialize component after render
     if (isPlatformBrowser(this.platformId)) {
-      this.timeoutId = setTimeout(() => {
-        this.ngZone.run(() => {
-          this.isLoaded.set(true);
-          this.cdr.markForCheck();
-        });
-        this.typeEffect();
-      }, 100);
+      // Start typing effect after initial load
+      afterNextRender(() => {
+        this.isLoaded.set(true);
+        this.startTypingAnimation();
+      });
+
+      // Handle video autoplay after view is ready
+      afterNextRender(() => {
+        const videoElement = this.bannerVideo();
+        if (videoElement) {
+          this.initializeVideo(videoElement.nativeElement);
+        }
+      });
+    }
+
+    // Cleanup on destroy
+    this.destroyRef.onDestroy(() => {
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId);
+        this.timeoutId = null;
+      }
+    });
+  }
+
+  private initializeVideo(video: HTMLVideoElement): void {
+    video.muted = true; // Ensure muted for autoplay policies
+    const playPromise = video.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.log('Auto-play was prevented:', error);
+        // Try to play on user interaction
+        document.addEventListener('click', () => {
+          video.play().catch(e => console.log('Play error:', e));
+        }, { once: true });
+      });
     }
   }
 
-  ngOnDestroy(): void {
-    this.isDestroyed = true;
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
+  private startTypingAnimation(): void {
+    this.typeEffect();
   }
 
   private typeEffect(): void {
-    if (this.isDestroyed) return;
-    
-    const currentRole = this.roles[this.currentRoleIndex];
-    
-    if (this.isDeleting) {
-      this.charIndex--;
+    const role = this.currentRole();
+    const currentChar = this.charIndex();
+    const deleting = this.isDeleting();
+
+    // Update character index
+    if (deleting) {
+      this.charIndex.update(i => i - 1);
     } else {
-      this.charIndex++;
+      this.charIndex.update(i => i + 1);
     }
-    
-    this.ngZone.run(() => {
-      this.typedText.set(currentRole.substring(0, this.charIndex));
-      this.cdr.markForCheck();
-    });
 
-    let typeSpeed = this.isDeleting ? 50 : 100;
+    // Update displayed text
+    this.typedText.set(role.substring(0, this.charIndex()));
 
-    if (!this.isDeleting && this.charIndex === currentRole.length) {
+    let typeSpeed = deleting ? 50 : 100;
+
+    if (!deleting && currentChar === role.length) {
       typeSpeed = 2000;
-      this.isDeleting = true;
-    } else if (this.isDeleting && this.charIndex === 0) {
-      this.isDeleting = false;
-      this.currentRoleIndex = (this.currentRoleIndex + 1) % this.roles.length;
+      this.isDeleting.set(true);
+    } else if (deleting && currentChar === 0) {
+      this.isDeleting.set(false);
+      this.currentRoleIndex.update(i => (i + 1) % this.roles.length);
       typeSpeed = 500;
     }
 
