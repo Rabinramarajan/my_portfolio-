@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe"/>
+      <stop offset="100%" stop-color="#4facfe"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="#050d1a"/>
+  <!-- The letter R with a sleek, modern design -->
+  <path d="M180,140 h110 c50,0, 80,30, 80,75 c0,35, -20,60, -50,70 l60,95 h-65 l-50,-85 h-35 v85 h-50 v-240 z M230,185 v55 h55 c25,0, 35,-15, 35,-28 c0,-15, -10,-27, -35,-27 h-55 z" fill="url(#g)" />
+</svg>
