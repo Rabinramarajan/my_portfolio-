@@ -1,0 +1,68 @@
+<!-- ===== NAVBAR ===== -->
+<header class="nav-wrapper" [class.scrolled]="isScrolled()">
+  <nav class="navbar" [class.scrolled]="isScrolled()">
+
+    <!-- Logo -->
+    <a href="#home" class="nav-logo">
+      <span class="logo-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="16 18 22 12 16 6"/>
+          <polyline points="8 6 2 12 8 18"/>
+        </svg>
+      </span>
+      <span class="logo-text">{{ pds.nav()?.logo }}</span>
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <ul class="nav-menu">
+      @for (link of pds.nav()?.links; track link.label) {
+        <li>
+          <a [href]="link.href" class="nav-link"
+             [target]="link.external ? '_blank' : '_self'">{{ link.label }}</a>
+        </li>
+      }
+    </ul>
+
+    <!-- Resume CTA -->
+    <a [href]="pds.meta()?.resumePdf" download class="btn-resume">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Resume
+    </a>
+
+    <!-- Mobile Hamburger -->
+    <button class="nav-toggle" aria-label="Toggle menu"
+            [class.active]="isMenuOpen()" (click)="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+
+  </nav>
+</header>
+
+<!-- Mobile Dropdown -->
+<div class="mobile-menu" [class.open]="isMenuOpen()">
+  <ul>
+    @for (link of pds.nav()?.links; track link.label) {
+      <li>
+        <a [href]="link.href" [target]="link.external ? '_blank' : '_self'"
+           (click)="closeMenu()">{{ link.label }}</a>
+      </li>
+    }
+    <li class="mobile-cta">
+      <a [href]="pds.meta()?.resumePdf" download class="btn-resume-mobile">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download Resume
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- Backdrop -->
+<div class="nav-backdrop" [class.show]="isMenuOpen()" (click)="closeMenu()"></div>

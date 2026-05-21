@@ -1,0 +1,8 @@
+﻿
+> portfolio@0.0.0 build
+> ng build
+
+[33mÔØ»[39m Building...
+[32mÔ£ö[39m Building...
+Application bundle generation failed. [2.051 seconds] - 2026-05-19T20:54:34.220Z
+

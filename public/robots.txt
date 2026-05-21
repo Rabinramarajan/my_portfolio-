@@ -1,3 +1,6 @@
+# robots.txt — Rabin R Portfolio
 User-agent: *
 Allow: /
-Sitemap: https://rabinramarajan.dev/sitemap.xml
+
+# Sitemaps
+Sitemap: https://rabinr.dev/sitemap.xml

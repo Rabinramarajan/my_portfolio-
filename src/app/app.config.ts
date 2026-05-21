@@ -1,18 +1,25 @@
-import { ApplicationConfig, provideZonelessChangeDetection, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection,
+} from '@angular/core';
+import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
+import { provideHttpClient, withXsrfConfiguration } from '@angular/common/http';
 
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZonelessChangeDetection(),
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
-    provideAnimationsAsync(), 
-    provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch())
-  ]
+    provideZonelessChangeDetection(),
+    // HTTP client with XSRF protection (minimal overhead)
+    provideHttpClient(
+      withXsrfConfiguration({
+        cookieName: 'X-CSRF-TOKEN',
+        headerName: 'X-CSRF-TOKEN',
+      })
+    ),
+    // Router with aggressive preloading for SPA performance
+    provideRouter(routes, withPreloading(PreloadAllModules)),
+  ],
 };

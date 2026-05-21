@@ -1,9 +1,9 @@
-{
+﻿{
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "6591f885-8676-426b-b9ea-c51774ec1c8e"
+    "analytics": "48dd83ed-f3ae-43fc-82fe-20029e6dcb6e"
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -32,15 +32,7 @@
             ],
             "styles": [
               "src/styles.scss"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": []
-            },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -51,18 +43,17 @@
                   "maximumError": "1MB"
                 },
                 {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "15kB",
-                  "maximumError": "25kB"
+                  "type": "anyComponentStyle", "maximumWarning": "32kB", "maximumError": "64kB"
                 }
               ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": true,
+              
+              "sourceMap": false,
+              "namedChunks": false,
+              
+              "extractLicenses": true,
+              
             },
             "development": {
               "optimization": false,
@@ -91,3 +82,4 @@
     }
   }
 }
+
