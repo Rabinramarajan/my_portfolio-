@@ -1,0 +1,22 @@
+{
+  "buildCommand": "cd backend && npm install",
+  "outputDirectory": "backend",
+  "functions": {
+    "backend/api/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/backend/api/$1.js"
+    }
+  ],
+  "env": {
+    "MONGODB_URI": "@mongodb_uri",
+    "EMAIL_USER": "@email_user",
+    "EMAIL_PASSWORD": "@email_password",
+    "RECIPIENT_EMAIL": "@recipient_email",
+    "NODE_ENV": "production"
+  }
+}

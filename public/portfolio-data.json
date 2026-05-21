@@ -5,11 +5,11 @@
     "name": "Rabin R",
     "role": "Angular & Full Stack Developer",
     "email": "rabinr2607@gmail.com",
-    "github": "https://github.com/rabinr",
-    "linkedin": "https://linkedin.com/in/rabin-r",
+    "github": "https://github.com/Rabinramarajan",
+    "linkedin": "https://www.linkedin.com/in/rabinr/",
     "location": "Chennai, India",
     "timezone": "IST (UTC+5:30)",
-    "resumePdf": "/assets/resume.pdf",
+    "resumePdf": "/rabin_resume.pdf",
     "profileImage": "/profile.png",
     "elfsightWidgetId": "YOUR_ELFSIGHT_WIDGET_ID"
   },
@@ -21,7 +21,7 @@
       { "label": "Skills",     "href": "#skills" },
       { "label": "Projects",   "href": "#projects" },
       { "label": "Resume",     "href": "#resume" },
-      { "label": "LinkedIn",   "href": "https://linkedin.com/in/rabin-r", "external": true },
+      { "label": "LinkedIn",   "href": "https://www.linkedin.com/in/rabinr/", "external": true },
       { "label": "Contact",    "href": "#contact" }
     ]
   },
@@ -143,24 +143,39 @@
     "subtitle": "Curated stack I rely on every day to ship reliable, performant, and secure web & mobile experiences.",
     "categories": [
       {
-        "name": "Frontend",
-        "items": ["Angular 13–21", "TypeScript", "JavaScript ES6+", "HTML5", "SCSS", "Tailwind CSS", "Angular Material", "PrimeNG"]
+        "name": "Frontend Technologies",
+        "icon": "frontend",
+        "items": ["Angular 13–20", "TypeScript", "JavaScript ES6+", "React.js"]
       },
       {
-        "name": "State & Performance",
-        "items": ["RxJS", "Angular Signals", "OnPush Change Detection", "Lazy Loading", "Code Splitting", "SPA Architecture"]
+        "name": "Frameworks & Libraries",
+        "icon": "framework",
+        "items": ["Angular Signals", "RxJS", "NgRx", "Ionic Angular", "Capacitor"]
       },
       {
-        "name": "Backend & APIs",
-        "items": ["Node.js", "Express.js", "REST APIs", "JWT Authentication", "RBAC Authorization"]
+        "name": "UI & Styling",
+        "icon": "ui",
+        "items": ["HTML5", "CSS3", "SCSS", "Tailwind CSS", "Bootstrap", "Angular Material"]
       },
       {
-        "name": "Mobile Development",
-        "items": ["Ionic Angular", "Capacitor"]
+        "name": "Architecture & Performance",
+        "icon": "arch",
+        "items": ["Single Page Applications", "Lazy Loading", "Code Splitting", "OnPush Change Detection", "Performance Optimization"]
       },
       {
-        "name": "Tools",
-        "items": ["Git", "GitHub", "GitLab", "Postman", "VS Code", "Chrome DevTools"]
+        "name": "API & Security",
+        "icon": "api",
+        "items": ["REST API Integration", "JWT Authentication", "Role-Based Access Control"]
+      },
+      {
+        "name": "Tools, DevOps & AI",
+        "icon": "tools",
+        "items": ["Git", "GitHub", "CI/CD", "Jenkins", "Postman", "Chrome DevTools", "Jira", "Cursor", "Claude", "GitHub Copilot"]
+      },
+      {
+        "name": "Backend (Basic)",
+        "icon": "backend",
+        "items": ["Node.js", "Express.js", "API Development"]
       }
     ]
   },
@@ -245,8 +260,8 @@
     "directSub": "Prefer a different channel? Use any of the below.",
     "channels": [
       { "type": "email",    "label": "EMAIL",    "value": "rabinr2607@gmail.com",       "href": "mailto:rabinr2607@gmail.com" },
-      { "type": "linkedin", "label": "LINKEDIN",  "value": "linkedin.com/in/rabin-r",    "href": "https://linkedin.com/in/rabin-r", "external": true },
-      { "type": "github",   "label": "GITHUB",    "value": "github.com/rabinr",           "href": "https://github.com/rabinr",      "external": true },
+      { "type": "linkedin", "label": "LINKEDIN",  "value": "linkedin.com/in/rabinr",    "href": "https://www.linkedin.com/in/rabinr/", "external": true },
+      { "type": "github",   "label": "GITHUB",    "value": "github.com/Rabinramarajan",           "href": "https://github.com/Rabinramarajan",      "external": true },
       { "type": "location", "label": "LOCATION",  "value": "Chennai, India · IST (UTC+5:30)" }
     ],
     "availText": "Currently available for new projects",
@@ -264,11 +279,11 @@
       { "label": "Contact",    "href": "#contact" }
     ],
     "socials": [
-      { "label": "GitHub",   "href": "https://github.com/rabinr",           "type": "github" },
-      { "label": "LinkedIn", "href": "https://linkedin.com/in/rabin-r",     "type": "linkedin" },
+      { "label": "GitHub",   "href": "https://github.com/Rabinramarajan",           "type": "github" },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/rabinr/",     "type": "linkedin" },
       { "label": "Email",    "href": "mailto:rabinr2607@gmail.com",         "type": "email" }
     ],
-    "copyright": "© 2025 Rabin R. All rights reserved.",
+    "copyright": "© 2025 Zellavora Technologies. All rights reserved.",
     "madeWith": "Built with Angular 21 · Zoneless · TypeScript"
   }
 }

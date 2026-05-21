@@ -11,6 +11,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+  overflow: hidden;
 }
 
 // ── Top 3-col grid ────────────────────────────────────
@@ -167,10 +168,24 @@
   gap: 8px;
 }
 
-.footer-copy,
+.footer-copy {
+  font-size: 12px;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  
+  .footer-company {
+    color: #6366f1;
+    font-weight: 600;
+  }
+}
+
 .footer-tagline-bottom {
   font-size: 12px;
   color: #334155;
+  white-space: nowrap;
 }
 
 .footer-company {
