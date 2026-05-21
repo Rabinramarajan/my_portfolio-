@@ -1,0 +1,534 @@
+﻿[33mÔØ»[39m Building...
+ng : X [ERROR] TS1127: Invalid character. [plugin angular-compiler]
+At line:1 char:1
++ ng build --verbose 2>&1 | Out-File -FilePath build_err.txt -Encoding  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (X [ERROR] TS112...gular-compiler] 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+    src/app/shared/components/dashboard-card.component.ts:10:20:
+      10 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                     ^
+
+X [ERROR] TS18004: No value exists in scope for the shorthand property 'r'. 
+Either declare one or provide an initializer. [plugin angular-compiler]
+
+    src/app/shared/components/dashboard-card.component.ts:10:21:
+      10 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                      ^
+
+X [ERROR] TS2353: Object literal may only specify known properties, and 'r' 
+does not exist in type 'Component'. [plugin angular-compiler]
+
+    src/app/shared/components/dashboard-card.component.ts:10:21:
+      10 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                      ^
+
+X [ERROR] TS1127: Invalid character. [plugin angular-compiler]
+
+    src/app/shared/components/dashboard-card.component.ts:10:22:
+      10 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                       ^
+
+X [ERROR] TS18004: No value exists in scope for the shorthand property 'n'. 
+Either declare one or provide an initializer. [plugin angular-compiler]
+
+    src/app/shared/components/dashboard-card.component.ts:10:23:
+      10 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                        ^
+
+X [ERROR] TS1005: ',' expected. [plugin angular-compiler]
+
+    src/app/shared/components/dashboard-card.component.ts:10:26:
+      10 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                           ~~~~~~~
+
+X [ERROR] TS1127: Invalid character. [plugin angular-compiler]
+
+    src/app/shared/components/dashboard-card.component.ts:200:20:
+      200 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                     ^
+
+X [ERROR] TS18004: No value exists in scope for the shorthand property 'r'. 
+Either declare one or provide an initializer. [plugin angular-compiler]
+
+    src/app/shared/components/dashboard-card.component.ts:200:21:
+      200 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                      ^
+
+X [ERROR] TS2353: Object literal may only specify known properties, and 'r' 
+does not exist in type 'Component'. [plugin angular-compiler]
+
+    src/app/shared/components/dashboard-card.component.ts:200:21:
+      200 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                      ^
+
+X [ERROR] TS1127: Invalid character. [plugin angular-compiler]
+
+    src/app/shared/components/dashboard-card.component.ts:200:22:
+      200 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                       ^
+
+X [ERROR] TS18004: No value exists in scope for the shorthand property 'n'. 
+Either declare one or provide an initializer. [plugin angular-compiler]
+
+    src/app/shared/components/dashboard-card.component.ts:200:23:
+      200 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                        ^
+
+X [ERROR] TS1005: ',' expected. [plugin angular-compiler]
+
+    src/app/shared/components/dashboard-card.component.ts:200:26:
+      200 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                           ~~~~~~~
+
+X [ERROR] TS1127: Invalid character. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:11:20:
+      11 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                     ^
+
+X [ERROR] TS18004: No value exists in scope for the shorthand property 'r'. 
+Either declare one or provide an initializer. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:11:21:
+      11 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                      ^
+
+X [ERROR] TS2353: Object literal may only specify known properties, and 'r' 
+does not exist in type 'Component'. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:11:21:
+      11 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                      ^
+
+X [ERROR] TS1127: Invalid character. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:11:22:
+      11 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                       ^
+
+X [ERROR] TS18004: No value exists in scope for the shorthand property 'n'. 
+Either declare one or provide an initializer. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:11:23:
+      11 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                        ^
+
+X [ERROR] TS1005: ',' expected. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:11:26:
+      11 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                           ~~~~~~~
+
+X [ERROR] NG1010: 'imports' must be an array of components, directives, pipes, 
+or NgModules.
+  Value could not be determined statically. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:11:36:
+      11 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                                     ~~~~~~~~~~~~
+
+  Unknown reference.
+
+    src/app/shared/components/terminal-cursor.component.ts:11:36:
+      11 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                                     ~~~~~~~~~~~~
+
+X [ERROR] TS2304: Cannot find name 'CommonModule'. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:11:36:
+      11 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                                     ~~~~~~~~~~~~
+
+X [ERROR] TS1127: Invalid character. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:138:20:
+      138 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                     ^
+
+X [ERROR] TS18004: No value exists in scope for the shorthand property 'r'. 
+Either declare one or provide an initializer. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:138:21:
+      138 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                      ^
+
+X [ERROR] TS2353: Object literal may only specify known properties, and 'r' 
+does not exist in type 'Component'. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:138:21:
+      138 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                      ^
+
+X [ERROR] TS1127: Invalid character. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:138:22:
+      138 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                       ^
+
+X [ERROR] TS18004: No value exists in scope for the shorthand property 'n'. 
+Either declare one or provide an initializer. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:138:23:
+      138 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                        ^
+
+X [ERROR] TS1005: ',' expected. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:138:26:
+      138 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                           ~~~~~~~
+
+X [ERROR] NG1010: 'imports' must be an array of components, directives, pipes, 
+or NgModules.
+  Value could not be determined statically. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:138:36:
+      138 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                                     ~~~~~~~~~~~~
+
+  Unknown reference.
+
+    src/app/shared/components/terminal-cursor.component.ts:138:36:
+      138 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                                     ~~~~~~~~~~~~
+
+X [ERROR] TS2304: Cannot find name 'CommonModule'. [plugin angular-compiler]
+
+    src/app/shared/components/terminal-cursor.component.ts:138:36:
+      138 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+          ÔòÁ                                     ~~~~~~~~~~~~
+
+X [ERROR] TS7006: Parameter 'e' implicitly has an 'any' type. [plugin 
+angular-compiler]
+
+    src/app/shared/directives/animation.directives.ts:223:43:
+      223 Ôöé ...nt.addEventListener('mousemove', (e) => 
+this.handleMouseMove(e));
+          ÔòÁ                                      ^
+
+X [ERROR] TS7006: Parameter 'word' implicitly has an 'any' type. [plugin 
+angular-compiler]
+
+    src/app/shared/directives/animation.directives.ts:371:9:
+      371 Ôöé         (word, i) => `
+          ÔòÁ          ~~~~
+
+X [ERROR] TS7006: Parameter 'i' implicitly has an 'any' type. [plugin 
+angular-compiler]
+
+    src/app/shared/directives/animation.directives.ts:371:15:
+      371 Ôöé         (word, i) => `
+          ÔòÁ                ^
+
+X [ERROR] Syntax error "r"
+
+    src/app/shared/components/terminal-cursor.component.ts:11:21:
+      11 Ôöé   standalone: true, \r\n  imports: [CommonModule],
+         ÔòÁ                      ^
+
+32 errors
+[32mÔ£ö[39m Building...
+Application bundle generation failed. [2.097 seconds] - 2026-05-19T20:54:46.369Z
+
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1127: Invalid 
+character.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/dashboard-card.component.ts:10:20:
+[37m      10 Ôöé   standalone: true, [32m[37m\r\n  imports: [CommonModule],
+         ÔòÁ                     [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in 
+scope for the shorthand property 'r'. Either declare one or provide an 
+initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/dashboard-card.component.ts:10:21:
+[37m      10 Ôöé   standalone: true, \[32mr[37m\n  imports: [CommonModule],
+         ÔòÁ                      [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2353: Object literal may only 
+specify known properties, and 'r' does not exist in type 'Component'.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/dashboard-card.component.ts:10:21:
+[37m      10 Ôöé   standalone: true, \[32mr[37m\n  imports: [CommonModule],
+         ÔòÁ                      [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1127: Invalid character.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/dashboard-card.component.ts:10:22:
+[37m      10 Ôöé   standalone: true, \r[32m[37m\n  imports: [CommonModule],
+         ÔòÁ                       [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in 
+scope for the shorthand property 'n'. Either declare one or provide an 
+initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/dashboard-card.component.ts:10:23:
+[37m      10 Ôöé   standalone: true, \r\[32mn[37m  imports: [CommonModule],
+         ÔòÁ                        [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/dashboard-card.component.ts:10:26:
+[37m      10 Ôöé   standalone: true, \r\n  [32mimports[37m: [CommonModule],
+         ÔòÁ                           [32m~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1127: Invalid character.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/dashboard-card.component.ts:200:20:
+[37m      200 Ôöé   standalone: true, [32m[37m\r\n  imports: [CommonModule],
+          ÔòÁ                     [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in 
+scope for the shorthand property 'r'. Either declare one or provide an 
+initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/dashboard-card.component.ts:200:21:
+[37m      200 Ôöé   standalone: true, \[32mr[37m\n  imports: [CommonModule],
+          ÔòÁ                      [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2353: Object literal may only 
+specify known properties, and 'r' does not exist in type 'Component'.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/dashboard-card.component.ts:200:21:
+[37m      200 Ôöé   standalone: true, \[32mr[37m\n  imports: [CommonModule],
+          ÔòÁ                      [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1127: Invalid character.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/dashboard-card.component.ts:200:22:
+[37m      200 Ôöé   standalone: true, \r[32m[37m\n  imports: [CommonModule],
+          ÔòÁ                       [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in 
+scope for the shorthand property 'n'. Either declare one or provide an 
+initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/dashboard-card.component.ts:200:23:
+[37m      200 Ôöé   standalone: true, \r\[32mn[37m  imports: [CommonModule],
+          ÔòÁ                        [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/dashboard-card.component.ts:200:26:
+[37m      200 Ôöé   standalone: true, \r\n  [32mimports[37m: [CommonModule],
+          ÔòÁ                           [32m~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1127: Invalid character.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:11:20:
+[37m      11 Ôöé   standalone: true, [32m[37m\r\n  imports: [CommonModule],
+         ÔòÁ                     [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in 
+scope for the shorthand property 'r'. Either declare one or provide an 
+initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:11:21:
+[37m      11 Ôöé   standalone: true, \[32mr[37m\n  imports: [CommonModule],
+         ÔòÁ                      [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2353: Object literal may only 
+specify known properties, and 'r' does not exist in type 'Component'.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:11:21:
+[37m      11 Ôöé   standalone: true, \[32mr[37m\n  imports: [CommonModule],
+         ÔòÁ                      [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1127: Invalid character.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:11:22:
+[37m      11 Ôöé   standalone: true, \r[32m[37m\n  imports: [CommonModule],
+         ÔòÁ                       [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in 
+scope for the shorthand property 'n'. Either declare one or provide an 
+initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:11:23:
+[37m      11 Ôöé   standalone: true, \r\[32mn[37m  imports: [CommonModule],
+         ÔòÁ                        [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:11:26:
+[37m      11 Ôöé   standalone: true, \r\n  [32mimports[37m: [CommonModule],
+         ÔòÁ                           [32m~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: 'imports' must be an 
+array of components, directives, pipes, or NgModules.
+  Value could not be determined statically.[0m [1m[35m[plugin 
+angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:11:36:
+[37m      11 Ôöé   standalone: true, \r\n  imports: [[32mCommonModule[37m],
+         ÔòÁ                                     [32m~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/shared/components/terminal-cursor.component.ts:11:36:
+[37m      11 Ôöé   standalone: true, \r\n  imports: [[32mCommonModule[37m],
+         ÔòÁ                                     [32m~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 
+'CommonModule'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:11:36:
+[37m      11 Ôöé   standalone: true, \r\n  imports: [[32mCommonModule[37m],
+         ÔòÁ                                     [32m~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1127: Invalid character.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:138:20:
+[37m      138 Ôöé   standalone: true, [32m[37m\r\n  imports: [CommonModule],
+          ÔòÁ                     [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in 
+scope for the shorthand property 'r'. Either declare one or provide an 
+initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:138:21:
+[37m      138 Ôöé   standalone: true, \[32mr[37m\n  imports: [CommonModule],
+          ÔòÁ                      [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2353: Object literal may only 
+specify known properties, and 'r' does not exist in type 'Component'.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:138:21:
+[37m      138 Ôöé   standalone: true, \[32mr[37m\n  imports: [CommonModule],
+          ÔòÁ                      [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1127: Invalid character.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:138:22:
+[37m      138 Ôöé   standalone: true, \r[32m[37m\n  imports: [CommonModule],
+          ÔòÁ                       [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in 
+scope for the shorthand property 'n'. Either declare one or provide an 
+initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:138:23:
+[37m      138 Ôöé   standalone: true, \r\[32mn[37m  imports: [CommonModule],
+          ÔòÁ                        [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m 
+[1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:138:26:
+[37m      138 Ôöé   standalone: true, \r\n  [32mimports[37m: [CommonModule],
+          ÔòÁ                           [32m~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: 'imports' must be an 
+array of components, directives, pipes, or NgModules.
+  Value could not be determined statically.[0m [1m[35m[plugin 
+angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:138:36:
+[37m      138 Ôöé   standalone: true, \r\n  imports: [[32mCommonModule[37m],
+          ÔòÁ                                     [32m~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/shared/components/terminal-cursor.component.ts:138:36:
+[37m      138 Ôöé   standalone: true, \r\n  imports: [[32mCommonModule[37m],
+          ÔòÁ                                     [32m~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 
+'CommonModule'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/components/terminal-cursor.component.ts:138:36:
+[37m      138 Ôöé   standalone: true, \r\n  imports: [[32mCommonModule[37m],
+          ÔòÁ                                     [32m~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'e' 
+implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/directives/animation.directives.ts:223:43:
+[37m      223 Ôöé ...nt.addEventListener('mousemove', ([32me[37m) => 
+this.handleMouseMove(e));
+          ÔòÁ                                      [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'word' 
+implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/directives/animation.directives.ts:371:9:
+[37m      371 Ôöé         ([32mword[37m, i) => `
+          ÔòÁ          [32m~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'i' 
+implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/shared/directives/animation.directives.ts:371:15:
+[37m      371 Ôöé         (word, [32mi[37m) => `
+          ÔòÁ                [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mSyntax error "r"[0m
+
+    src/app/shared/components/terminal-cursor.component.ts:11:21:
+[37m      11 Ôöé   standalone: true, \[32m[37mr\n  imports: [CommonModule],
+         ÔòÁ                      [32m^[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mexpected ":".
+    ÔòÀ
+490 Ôöé   .stagger-\#{$i} {
+    Ôöé                 ^
+    ÔòÁ
+  src\scss\animations.scss 490:17  @use
+  src\styles.scss 4:1              root stylesheet[0m [1m[35m[plugin 
+angular-sass][0m
+
+    angular:styles/global:styles:1:8:
+[37m      1 Ôöé @import [32m'src/styles.scss'[37m;
+        ÔòÁ         [32m~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m

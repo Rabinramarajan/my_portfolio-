@@ -1,0 +1,47 @@
+@use '@angular/material' as mat;
+@use './scss/nav.scss' as *;
+@use './scss/scroll.scss' as *;
+@use './scss/animations.scss' as *;
+@use './scss/animation-sections.scss' as *;
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$violet-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Inter,
+      density: 0,
+    )
+  );
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  color-scheme: dark;
+  background-color: #080d18;
+  color: #f8fafc;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  margin: 0;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== UTILITY ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+a { color: inherit; }
+
+img, svg { display: block; }

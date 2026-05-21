@@ -1,0 +1,274 @@
+{
+  "meta": {
+    "title": "Rabin R — Angular & Full Stack Developer Portfolio",
+    "description": "Frontend Angular Developer with 3.7+ years building enterprise portals, government systems, dashboards, and high-performance web applications.",
+    "name": "Rabin R",
+    "role": "Angular & Full Stack Developer",
+    "email": "rabinr2607@gmail.com",
+    "github": "https://github.com/rabinr",
+    "linkedin": "https://linkedin.com/in/rabin-r",
+    "location": "Chennai, India",
+    "timezone": "IST (UTC+5:30)",
+    "resumePdf": "/assets/resume.pdf",
+    "profileImage": "/profile.png",
+    "elfsightWidgetId": "YOUR_ELFSIGHT_WIDGET_ID"
+  },
+  "nav": {
+    "logo": "Rabin.R",
+    "links": [
+      { "label": "About",      "href": "#about" },
+      { "label": "Experience", "href": "#experience" },
+      { "label": "Skills",     "href": "#skills" },
+      { "label": "Projects",   "href": "#projects" },
+      { "label": "Resume",     "href": "#resume" },
+      { "label": "LinkedIn",   "href": "https://linkedin.com/in/rabin-r", "external": true },
+      { "label": "Contact",    "href": "#contact" }
+    ]
+  },
+  "hero": {
+    "badge": "Available for freelance & remote opportunities",
+    "headline": "Building Scalable Enterprise Applications",
+    "headlineAccent": "with Angular & Modern Web Technologies",
+    "description": "Frontend Angular Developer with 3.7+ years of experience delivering enterprise portals, government systems, dashboards, and high-performance web applications using Angular, TypeScript, RxJS, Node.js, and Ionic.",
+    "cta": {
+      "primary": { "label": "View Projects", "href": "#projects" },
+      "secondary": { "label": "Download Resume", "href": "/assets/resume.pdf" }
+    },
+    "stack": [
+      { "name": "Angular",    "color": "#DD0031" },
+      { "name": "TypeScript", "color": "#3178C6" },
+      { "name": "RxJS",      "color": "#B7178C" },
+      { "name": "Node.js",   "color": "#339933" },
+      { "name": "Ionic",     "color": "#3880FF" }
+    ],
+    "stats": [
+      { "number": "4+",    "label": "Years Experience" },
+      { "number": "10+",   "label": "Enterprise & Government Projects" },
+      { "number": "100%",  "label": "Angular 17–21 Expertise" },
+      { "number": "PRO",   "label": "Performance Optimization Specialist" }
+    ],
+    "codeSnippet": {
+      "filename": "app.component.ts",
+      "lines": [
+        { "type": "decorator", "text": "@Component" },
+        { "type": "punct",     "text": "({" },
+        { "type": "key",       "text": "  selector" },
+        { "type": "punct",     "text": ": " },
+        { "type": "string",    "text": "'app-root'" },
+        { "type": "punct",     "text": "," },
+        { "type": "key",       "text": "  standalone" },
+        { "type": "punct",     "text": ": " },
+        { "type": "bool",      "text": "true" },
+        { "type": "punct",     "text": "," },
+        { "type": "key",       "text": "  changeDetection" },
+        { "type": "punct",     "text": ": " },
+        { "type": "class",     "text": "ChangeDetectionStrategy.OnPush" },
+        { "type": "punct",     "text": "," },
+        { "type": "punct",     "text": "})" },
+        { "type": "kw",        "text": "export class " },
+        { "type": "class",     "text": "RabinR" },
+        { "type": "punct",     "text": " {" },
+        { "type": "key",       "text": "  role" },
+        { "type": "punct",     "text": " = " },
+        { "type": "string",    "text": "'Angular & Full Stack Dev'" },
+        { "type": "punct",     "text": ";" },
+        { "type": "key",       "text": "  years" },
+        { "type": "punct",     "text": " = " },
+        { "type": "num",       "text": "3" },
+        { "type": "punct",     "text": ";" },
+        { "type": "punct",     "text": "}" }
+      ]
+    }
+  },
+  "about": {
+    "sectionLabel": "ABOUT ME",
+    "title": "About Me",
+    "intro": "I'm Rabin R, a Frontend Angular Developer specializing in scalable enterprise applications, government portals, dashboard systems, and modern web solutions.",
+    "bio": [
+      "With 4+ years of professional experience, I build responsive, high-performance applications using Angular 17–21, TypeScript, RxJS, Angular Signals, Node.js, Ionic, and REST APIs. I have worked on enterprise-grade systems including immigration management portals, pension management systems, and mobile-first applications used by thousands of users.",
+      "Currently freelancing — delivering scalable frontend solutions, UI systems, and enterprise Angular applications for clients globally. My focus is on clean architecture, reusable component systems, frontend performance optimization, secure API integration, and exceptional user experience."
+    ],
+    "infoCards": [
+      { "label": "BASED IN",   "value": "Chennai, India" },
+      { "label": "EXPERIENCE", "value": "4+ Years" },
+      { "label": "STACK",      "value": "Angular · Node · Ionic" },
+      { "label": "FOCUS",      "value": "Freelance & Enterprise" }
+    ],
+    "openToWork": true,
+    "openBadge": "Open to work"
+  },
+  "experience": {
+    "sectionLabel": "EXPERIENCE",
+    "title": "A track record of shipping enterprise software",
+    "subtitle": "From government immigration platforms to large multi-step pension applications, here is where my craft has been forged.",
+    "jobs": [
+      {
+        "company": "Freelance",
+        "location": "Remote",
+        "role": "Freelance Angular & Full Stack Developer",
+        "duration": "February 2026 – Present",
+        "achievements": [
+          "Delivering end-to-end Angular web applications for international clients",
+          "Architecting scalable frontend systems with Angular 19–21 and standalone components",
+          "Building performant dashboards, admin panels, and enterprise UI systems",
+          "Integrating REST APIs, JWT authentication, and role-based access control (RBAC)",
+          "Developing cross-platform mobile apps using Ionic Angular & Capacitor",
+          "Providing performance audits and Angular migration from legacy versions",
+          "Collaborating with global teams using Agile workflows and Git-based CI/CD"
+        ],
+        "tags": ["Angular 19–21", "TypeScript", "RxJS", "Ionic", "Node.js", "REST APIs", "Freelance"]
+      },
+      {
+        "company": "ITGalaxy Solutions",
+        "location": "Chennai, India",
+        "role": "Frontend Angular Developer",
+        "duration": "June 2022 – January 2026",
+        "achievements": [
+          "Developed enterprise Angular applications for government and business platforms",
+          "Built scalable Single Page Applications (SPA)",
+          "Integrated secure REST APIs and JWT authentication",
+          "Improved application performance using Angular Signals and RxJS",
+          "Developed reusable frontend architecture and UI systems",
+          "Delivered responsive cross-platform interfaces",
+          "Worked in Agile/Scrum enterprise environments",
+          "Optimized API requests and frontend rendering performance"
+        ],
+        "tags": ["Angular 17–21", "TypeScript", "RxJS", "Node.js", "Express", "Ionic", "MongoDB"]
+      }
+    ]
+  },
+  "skills": {
+    "sectionLabel": "SKILLS & TECHNOLOGIES",
+    "title": "A modern toolkit, mastered in production",
+    "subtitle": "Curated stack I rely on every day to ship reliable, performant, and secure web & mobile experiences.",
+    "categories": [
+      {
+        "name": "Frontend",
+        "items": ["Angular 13–21", "TypeScript", "JavaScript ES6+", "HTML5", "SCSS", "Tailwind CSS", "Angular Material", "PrimeNG"]
+      },
+      {
+        "name": "State & Performance",
+        "items": ["RxJS", "Angular Signals", "OnPush Change Detection", "Lazy Loading", "Code Splitting", "SPA Architecture"]
+      },
+      {
+        "name": "Backend & APIs",
+        "items": ["Node.js", "Express.js", "REST APIs", "JWT Authentication", "RBAC Authorization"]
+      },
+      {
+        "name": "Mobile Development",
+        "items": ["Ionic Angular", "Capacitor"]
+      },
+      {
+        "name": "Tools",
+        "items": ["Git", "GitHub", "GitLab", "Postman", "VS Code", "Chrome DevTools"]
+      }
+    ]
+  },
+  "projects": {
+    "sectionLabel": "FEATURED PROJECTS",
+    "title": "Selected work — enterprise, government & mobile",
+    "subtitle": "A peek at recent products I've helped design, engineer, and ship. Each one balances scalable architecture with refined UI.",
+    "featured": {
+      "image": "/proj-fiji.png",
+      "alt": "Fiji Immigration Department Portal",
+      "name": "Fiji Immigration Department Portal",
+      "description": "Enterprise immigration management platform developed for government workflows including external user portals, internal staff portals, police verification systems, and secure payment gateway integration.",
+      "highlights": "Multi-step enterprise workflow systems, Secure authentication & RBAC, Responsive government portal UI, High-performance Angular architecture, REST API integration.",
+      "tags": ["Angular", "TypeScript", "RxJS", "Angular Signals", "Tailwind CSS", "REST APIs"],
+      "link": "#",
+      "linkLabel": "Fiji Immigration Department Portal"
+    },
+    "grid": [
+      {
+        "image": "/proj-pension.png",
+        "alt": "PRIMS — Pension & Retirement Information Management System",
+        "name": "PRIMS — Pension & Retirement Information Management System",
+        "description": "High-performance pension and retirement dashboard system designed for enterprise administration and scalable data workflows.",
+        "highlights": "Zoneless Angular architecture, Optimized rendering strategies, Dashboard analytics UI, API optimization & caching, Reusable enterprise components.",
+        "tags": ["Angular", "Dashboard", "Performance", "APIs"],
+        "link": "#",
+        "linkLabel": "PRIMS Solution"
+      },
+      {
+        "image": "/proj-vanuatu.png",
+        "alt": "VNPF — Vanuatu National Provident Fund",
+        "name": "VNPF — Vanuatu National Provident Fund",
+        "description": "Cross-platform mobile application developed using Ionic Angular with biometric authentication and optimized mobile workflows.",
+        "highlights": "Android & iOS support, Face ID & Touch ID integration, Responsive mobile-first design, Low-bandwidth API optimization, Hybrid mobile application architecture.",
+        "tags": ["Ionic Angular", "Capacitor", "Mobile UI", "Biometrics"],
+        "link": "#",
+        "linkLabel": "VNPF Mobile App"
+      }
+    ]
+  },
+  "resume": {
+    "sectionLabel": "RESUME",
+    "title": "Take a deeper look at my work",
+    "subtitle": "A snapshot of my experience, technical depth, and the products I've shipped — ready in PDF.",
+    "availBadge": "AVAILABLE · FREELANCE & REMOTE",
+    "cardTitle": "Rabin R — Freelance Angular & Full Stack Developer",
+    "cardBio": "4+ years building secure, scalable enterprise portals and dashboards. Currently freelancing — open to remote projects and long-term engagements.",
+    "downloadLabel": "Download Resume",
+    "viewLabel": "View Online",
+    "updatedLabel": "Updated"
+  },
+  "linkedin": {
+    "sectionLabel": "LINKEDIN PRESENCE",
+    "title": "Professional Presence",
+    "subtitle": "I actively share Angular development insights, frontend performance strategies, enterprise UI architecture, and modern web development best practices on LinkedIn. My content focuses on Angular Signals, scalable frontend architecture, performance optimization, enterprise dashboard systems, and modern UI engineering.",
+    "profile": {
+      "initial": "R",
+      "name": "Rabin R",
+      "role": "Freelance Angular & Full Stack Developer",
+      "location": "Chennai, India · 500+ connections"
+    },
+    "stats": [
+      { "value": "2.1k", "label": "FOLLOWERS" },
+      { "value": "48",   "label": "POSTS" },
+      { "value": "86%",  "label": "ENGAGEMENT" }
+    ],
+    "connectLabel": "Connect on LinkedIn"
+  },
+  "contact": {
+    "sectionLabel": "CONTACT",
+    "title": "Let's Build Something Great Together",
+    "subtitle": "Available for freelance projects, enterprise development, remote opportunities, and scalable frontend application development.",
+    "form": {
+      "namePlaceholder": "Your full name",
+      "emailPlaceholder": "you@example.com",
+      "subjectPlaceholder": "What's this about?",
+      "messagePlaceholder": "Tell me about your project or opportunity...",
+      "note": "By submitting, you agree to be contacted via email.",
+      "submitLabel": "Send Message"
+    },
+    "directTitle": "Reach me directly",
+    "directSub": "Prefer a different channel? Use any of the below.",
+    "channels": [
+      { "type": "email",    "label": "EMAIL",    "value": "rabinr2607@gmail.com",       "href": "mailto:rabinr2607@gmail.com" },
+      { "type": "linkedin", "label": "LINKEDIN",  "value": "linkedin.com/in/rabin-r",    "href": "https://linkedin.com/in/rabin-r", "external": true },
+      { "type": "github",   "label": "GITHUB",    "value": "github.com/rabinr",           "href": "https://github.com/rabinr",      "external": true },
+      { "type": "location", "label": "LOCATION",  "value": "Chennai, India · IST (UTC+5:30)" }
+    ],
+    "availText": "Currently available for new projects",
+    "availNote": "Typical response time within 24h on business days"
+  },
+  "footer": {
+    "logo": "Rabin.R",
+    "tagline": "Building scalable enterprise Angular applications.",
+    "links": [
+      { "label": "About",      "href": "#about" },
+      { "label": "Experience", "href": "#experience" },
+      { "label": "Skills",     "href": "#skills" },
+      { "label": "Projects",   "href": "#projects" },
+      { "label": "Resume",     "href": "#resume" },
+      { "label": "Contact",    "href": "#contact" }
+    ],
+    "socials": [
+      { "label": "GitHub",   "href": "https://github.com/rabinr",           "type": "github" },
+      { "label": "LinkedIn", "href": "https://linkedin.com/in/rabin-r",     "type": "linkedin" },
+      { "label": "Email",    "href": "mailto:rabinr2607@gmail.com",         "type": "email" }
+    ],
+    "copyright": "© 2025 Rabin R. All rights reserved.",
+    "madeWith": "Built with Angular 21 · Zoneless · TypeScript"
+  }
+}
