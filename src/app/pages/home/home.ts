@@ -82,6 +82,9 @@ export class Home implements AfterViewInit {
 
   protected submitContact() {
     if (this.contactForm.invalid || this.isSubmitting) {
+      if (this.contactForm.invalid) {
+        this.contactForm.markAllAsTouched();
+      }
       return;
     }
 

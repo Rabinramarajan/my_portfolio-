@@ -92,6 +92,7 @@ export class MouseFollowGlowDirective implements OnInit, OnDestroy {
   private targetX = 0;
   private targetY = 0;
   private animationId: number | null = null;
+  private boundMouseMove: ((e: MouseEvent) => void) | null = null;
 
   ngOnInit() {
     this.setupGlow();
@@ -116,10 +117,12 @@ export class MouseFollowGlowDirective implements OnInit, OnDestroy {
   }
 
   private setupMouseTracking() {
-    document.addEventListener('mousemove', (e) => {
+    this.boundMouseMove = (e: MouseEvent) => {
       this.mouseX = e.clientX;
       this.mouseY = e.clientY;
-    });
+    };
+
+    document.addEventListener('mousemove', this.boundMouseMove as EventListener);
   }
 
   private animateGlow() {
@@ -149,7 +152,10 @@ export class MouseFollowGlowDirective implements OnInit, OnDestroy {
     if (this.animationId !== null) {
       cancelAnimationFrame(this.animationId);
     }
-    document.removeEventListener('mousemove', () => {});
+    if (this.boundMouseMove) {
+      document.removeEventListener('mousemove', this.boundMouseMove as EventListener);
+      this.boundMouseMove = null;
+    }
   }
 }
 
@@ -213,15 +219,21 @@ export class MagneticButtonDirective implements OnInit, OnDestroy {
   private originalX = 0;
   private originalY = 0;
   private animationId: number | null = null;
+  private boundEnter: (() => void) | null = null;
+  private boundMove: ((e: MouseEvent) => void) | null = null;
+  private boundLeave: (() => void) | null = null;
 
   ngOnInit() {
     const element = this.el.nativeElement;
     element.style.position = 'relative';
     element.style.overflow = 'visible';
+    this.boundEnter = () => this.setupGlow();
+    this.boundMove = (e: MouseEvent) => this.handleMouseMove(e);
+    this.boundLeave = () => this.handleMouseLeave();
 
-    element.addEventListener('mouseenter', () => this.setupGlow());
-    element.addEventListener('mousemove', (e: MouseEvent) => this.handleMouseMove(e));
-    element.addEventListener('mouseleave', () => this.handleMouseLeave());
+    element.addEventListener('mouseenter', this.boundEnter as EventListener);
+    element.addEventListener('mousemove', this.boundMove as EventListener);
+    element.addEventListener('mouseleave', this.boundLeave as EventListener);
   }
 
   private setupGlow() {
@@ -256,6 +268,19 @@ export class MagneticButtonDirective implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.animationId !== null) {
       cancelAnimationFrame(this.animationId);
+    }
+    const element = this.el.nativeElement;
+    if (this.boundEnter) {
+      element.removeEventListener('mouseenter', this.boundEnter as EventListener);
+      this.boundEnter = null;
+    }
+    if (this.boundMove) {
+      element.removeEventListener('mousemove', this.boundMove as EventListener);
+      this.boundMove = null;
+    }
+    if (this.boundLeave) {
+      element.removeEventListener('mouseleave', this.boundLeave as EventListener);
+      this.boundLeave = null;
     }
   }
 }

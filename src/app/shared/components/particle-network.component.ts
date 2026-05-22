@@ -37,6 +37,8 @@ export class ParticleNetworkComponent implements OnInit, OnDestroy {
   private animationId: number | null = null;
   private mouseX = 0;
   private mouseY = 0;
+  private boundMouseMove: ((e: MouseEvent) => void) | null = null;
+  private boundResize: (() => void) | null = null;
   private canvas: HTMLCanvasElement | null = null;
 
   ngOnInit() {
@@ -51,12 +53,14 @@ export class ParticleNetworkComponent implements OnInit, OnDestroy {
     if (this.canvas) {
       this.canvas.width = window.innerWidth;
       this.canvas.height = window.innerHeight;
-      window.addEventListener('resize', () => {
+      this.boundResize = () => {
         if (this.canvas) {
           this.canvas.width = window.innerWidth;
           this.canvas.height = window.innerHeight;
         }
-      });
+      };
+
+      window.addEventListener('resize', this.boundResize);
     }
   }
 
@@ -75,10 +79,12 @@ export class ParticleNetworkComponent implements OnInit, OnDestroy {
   }
 
   private setupMouseTracking() {
-    document.addEventListener('mousemove', (e) => {
+    this.boundMouseMove = (e: MouseEvent) => {
       this.mouseX = e.clientX;
       this.mouseY = e.clientY;
-    });
+    };
+
+    document.addEventListener('mousemove', this.boundMouseMove as EventListener);
   }
 
   private animate() {
@@ -146,6 +152,14 @@ export class ParticleNetworkComponent implements OnInit, OnDestroy {
     if (this.animationId !== null) {
       cancelAnimationFrame(this.animationId);
     }
+    if (this.boundMouseMove) {
+      document.removeEventListener('mousemove', this.boundMouseMove as EventListener);
+      this.boundMouseMove = null;
+    }
+    if (this.boundResize) {
+      window.removeEventListener('resize', this.boundResize);
+      this.boundResize = null;
+    }
   }
 }
 
@@ -181,16 +195,26 @@ export class ParticleNetworkComponent implements OnInit, OnDestroy {
 })
 export class ScrollProgressComponent implements OnInit {
   private progressBar: HTMLElement | null = null;
+  private boundScroll: (() => void) | null = null;
 
   ngOnInit() {
     this.progressBar = document.querySelector('.scroll-progress-bar') as HTMLElement;
-    
-    window.addEventListener('scroll', () => {
+
+    this.boundScroll = () => {
       if (this.progressBar) {
         const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = windowHeight > 0 ? (window.scrollY / windowHeight) * 100 : 0;
         this.progressBar.style.width = scrolled + '%';
       }
-    });
+    };
+
+    window.addEventListener('scroll', this.boundScroll);
+  }
+
+  ngOnDestroy() {
+    if (this.boundScroll) {
+      window.removeEventListener('scroll', this.boundScroll);
+      this.boundScroll = null;
+    }
   }
 }
