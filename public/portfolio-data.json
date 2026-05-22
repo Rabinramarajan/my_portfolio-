@@ -184,7 +184,7 @@
     "title": "Selected work — enterprise, government & mobile",
     "subtitle": "A peek at recent products I've helped design, engineer, and ship. Each one balances scalable architecture with refined UI.",
     "featured": {
-      "image": "/proj-fiji.png",
+      "image": "/proj-fiji.webp",
       "alt": "Fiji Immigration Department Portal",
       "name": "Fiji Immigration Department Portal",
       "description": "Enterprise immigration management platform developed for government workflows including external user portals, internal staff portals, police verification systems, and secure payment gateway integration.",
@@ -195,7 +195,7 @@
     },
     "grid": [
       {
-        "image": "/proj-pension.png",
+        "image": "/proj-pension.webp",
         "alt": "PRIMS — Pension & Retirement Information Management System",
         "name": "PRIMS — Pension & Retirement Information Management System",
         "description": "High-performance pension and retirement dashboard system designed for enterprise administration and scalable data workflows.",
@@ -205,7 +205,7 @@
         "linkLabel": "PRIMS Solution"
       },
       {
-        "image": "/proj-vanuatu.png",
+        "image": "/proj-vanuatu.webp",
         "alt": "VNPF — Vanuatu National Provident Fund",
         "name": "VNPF — Vanuatu National Provident Fund",
         "description": "Cross-platform mobile application developed using Ionic Angular with biometric authentication and optimized mobile workflows.",
