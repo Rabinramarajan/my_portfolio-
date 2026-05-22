@@ -46,3 +46,25 @@ body {
 a { color: inherit; }
 
 img, svg { display: block; }
+
+/* ===== MOBILE OVERRIDES ===== */
+@media (max-width: 860px) {
+  .container {
+    padding: 0 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 14px !important;
+    max-width: 100% !important;
+  }
+
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
