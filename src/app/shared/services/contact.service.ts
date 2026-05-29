@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError, from } from 'rxjs';
 import { catchError, map, timeout } from 'rxjs/operators';
 import emailjs from '@emailjs/browser';
-import { environment } from '../../../environments/environment';
+import { environment } from '@environments/environment';
 
 export interface ContactFormData {
   name: string;
