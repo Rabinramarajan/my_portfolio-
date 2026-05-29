@@ -11,6 +11,9 @@ export interface PortfolioData {
   experience:   any;
   skills:       any;
   projects:     any;
+  achievements: any;
+  education:    any;
+  careerTimeline: any;
   resume:       any;
   linkedin:     any;
   contact:      any;
@@ -41,6 +44,9 @@ export class PortfolioDataService {
   readonly experience   = computed(() => this.data()?.experience);
   readonly skills       = computed(() => this.data()?.skills);
   readonly projects     = computed(() => this.data()?.projects);
+  readonly achievements = computed(() => this.data()?.achievements);
+  readonly education    = computed(() => this.data()?.education);
+  readonly careerTimeline = computed(() => this.data()?.careerTimeline);
   readonly resume       = computed(() => this.data()?.resume);
   readonly linkedin     = computed(() => this.data()?.linkedin);
   readonly contact      = computed(() => this.data()?.contact);

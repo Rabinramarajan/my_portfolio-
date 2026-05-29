@@ -111,7 +111,7 @@
 <span class="code-kw">export class</span> <span class="code-class">RabinR</span> {{ '{' }}
   <span class="code-key">role</span> = <span class="code-string">'Angular &amp; Full Stack Dev'</span>;
   <span class="code-key">stack</span> = [<span class="code-string">'Angular'</span>, <span class="code-string">'TS'</span>, <span class="code-string">'RxJS'</span>];
-  <span class="code-key">years</span> = <span class="code-num">3</span>;
+  <span class="code-key">years</span> = <span class="code-num">4</span>;
 {{ '}' }}
 </code></pre>
         </div>
@@ -221,6 +221,10 @@
             <div class="exp-duration">{{ job.duration }}</div>
           </div>
 
+          @if (job.summary) {
+          <p class="exp-summary">{{ job.summary }}</p>
+          }
+
           <ul class="exp-achievements">
             @for (item of job.achievements; track $index) {
             <li>
@@ -312,7 +316,7 @@
         <div class="proj-featured-content">
           <div class="proj-featured-header">
             <div class="proj-featured-meta">
-              <span class="proj-featured-type">Enterprise Project</span>
+              <span class="proj-featured-type">{{ feat.client || 'Enterprise Project' }}</span>
               <h3 class="proj-featured-title">{{ feat.name }}</h3>
             </div>
             <div class="proj-featured-icon">
@@ -393,6 +397,10 @@
             </div>
           </div>
 
+          @if (proj.client) {
+          <span class="proj-card-enhanced-client">{{ proj.client }}</span>
+          }
+
           <p class="proj-card-enhanced-desc">{{ proj.description }}</p>
 
           <!-- Tech tags with better styling -->
@@ -419,6 +427,92 @@
       }
     </div>
     }
+  </div>
+</section>
+
+<!-- ===== ACHIEVEMENTS & NUMBERS SECTION ===== -->
+<section class="achievements" id="achievements" appScrollTrigger>
+  <div class="ach-container">
+    <div class="section-label animate-fade-in-up">{{ pds.achievements()?.sectionLabel }}</div>
+    <h2 class="ach-title animate-fade-in-up" [style.animation-delay]="'0.1s'">{{ pds.achievements()?.title }}</h2>
+    <p class="ach-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.achievements()?.subtitle }}</p>
+
+    <div class="ach-grid">
+      @for (m of pds.achievements()?.metrics; track m.label) {
+      <div class="ach-card hover-lift animate-fade-in-scale" [style.animation-delay]="($index * 0.07) + 's'">
+        <span class="ach-value gradient-text">{{ m.value }}</span>
+        <span class="ach-label">{{ m.label }}</span>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===== EDUCATION & CERTIFICATIONS SECTION ===== -->
+<section class="education" id="education" appScrollTrigger>
+  <div class="edu-container">
+    <div class="section-label animate-fade-in-up">{{ pds.education()?.sectionLabel }}</div>
+    <h2 class="edu-title animate-fade-in-up" [style.animation-delay]="'0.1s'">{{ pds.education()?.title }}</h2>
+    <p class="edu-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.education()?.subtitle }}</p>
+
+    <div class="edu-grid">
+      <!-- Education -->
+      <div class="edu-col" appScrollTrigger>
+        <h3 class="edu-col-title">Education</h3>
+        @for (deg of pds.education()?.degrees; track deg.degree) {
+        <div class="edu-card hover-lift animate-fade-in-up" [style.animation-delay]="($index * 0.1) + 's'">
+          <span class="edu-icon">{{ deg.icon }}</span>
+          <div class="edu-info">
+            <h4 class="edu-degree">{{ deg.degree }}</h4>
+            <span class="edu-institution">{{ deg.institution }}</span>
+            <span class="edu-duration">{{ deg.duration }}</span>
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- Certifications -->
+      <div class="edu-col" appScrollTrigger>
+        <h3 class="edu-col-title">Certifications</h3>
+        @for (cert of pds.education()?.certifications; track cert.title) {
+        <div class="edu-card hover-lift animate-fade-in-up" [style.animation-delay]="($index * 0.1) + 's'">
+          <span class="edu-icon">{{ cert.icon }}</span>
+          <div class="edu-info">
+            <h4 class="edu-degree">{{ cert.title }}</h4>
+            <span class="edu-institution">{{ cert.institution }}</span>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAREER TIMELINE SECTION ===== -->
+<section class="career-timeline" id="career-timeline" appScrollTrigger>
+  <div class="ct-container">
+    <div class="section-label animate-fade-in-up">{{ pds.careerTimeline()?.sectionLabel }}</div>
+    <h2 class="ct-title animate-fade-in-up" [style.animation-delay]="'0.1s'">{{ pds.careerTimeline()?.title }}</h2>
+    <p class="ct-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.careerTimeline()?.subtitle }}</p>
+
+    <div class="ct-table">
+      <div class="ct-row ct-row--head">
+        <span class="ct-cell ct-cell--period">Period</span>
+        <span class="ct-cell ct-cell--role">Role</span>
+        <span class="ct-cell ct-cell--org">Organization</span>
+        <span class="ct-cell ct-cell--type">Type</span>
+      </div>
+      @for (item of pds.careerTimeline()?.items; track item.period) {
+      <div class="ct-row hover-lift animate-fade-in-up" [style.animation-delay]="($index * 0.08) + 's'">
+        <span class="ct-cell ct-cell--period">{{ item.period }}</span>
+        <span class="ct-cell ct-cell--role">{{ item.role }}</span>
+        <span class="ct-cell ct-cell--org">{{ item.org }}</span>
+        <span class="ct-cell ct-cell--type">
+          <span class="ct-badge" [class]="'ct-badge--' + item.type.toLowerCase().replace('-', '')">{{ item.type }}</span>
+        </span>
+      </div>
+      }
+    </div>
   </div>
 </section>
 

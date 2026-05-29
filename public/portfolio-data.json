@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Rabin R — Frontend Angular Developer Portfolio",
-    "description": "Frontend Angular Developer with 3.7+ years of experience building scalable enterprise web and mobile applications. Angular v13–v20, TypeScript, RxJS, Ionic, React.js specialist.",
+    "description": "Frontend Angular Developer with 4+ years of experience building scalable enterprise web and mobile applications. Angular v13–v20, TypeScript, RxJS, Ionic, Tailwind CSS specialist.",
     "name": "Rabin R",
     "role": "Frontend Angular Developer",
     "email": "rabinr2607@gmail.com",
@@ -33,24 +33,29 @@
     ]
   },
   "hero": {
-    "badge": "Frontend Angular Developer · Angular v13–v20 · TypeScript · Ionic · React.js",
+    "badge": "Frontend Angular Developer · Angular v13–v20 · TypeScript · Ionic · Tailwind CSS",
     "headline": "I Engineer Scalable,",
     "headlineAccent": "High-Performance Enterprise Applications",
-    "description": "I engineer scalable, high-performance enterprise web and mobile applications — with a sharp focus on clean architecture, reusable UI systems, and user-first experiences. 3.7+ years building enterprise portals, government systems, dashboards, and hybrid mobile apps used by thousands of users.",
+    "description": "I engineer scalable, high-performance enterprise web and mobile applications — with a sharp focus on clean architecture, reusable UI systems, and user-first experiences. 4+ years building enterprise portals, government systems, dashboards, and hybrid mobile apps used by thousands of users.",
     "cta": {
       "primary": { "label": "View Projects", "href": "#projects" },
       "secondary": { "label": "Download Resume", "href": "/rabin_resume.pdf" },
       "booking": { "label": "Hire Me", "href": "#contact" }
     },
     "stack": [
-      { "name": "Angular",    "color": "#DD0031" },
-      { "name": "TypeScript", "color": "#3178C6" },
-      { "name": "RxJS",      "color": "#B7178C" },
-      { "name": "Ionic",     "color": "#3880FF" },
-      { "name": "React.js",  "color": "#61DAFB" }
+      { "name": "Angular",     "color": "#DD0031" },
+      { "name": "TypeScript",  "color": "#3178C6" },
+      { "name": "RxJS",        "color": "#B7178C" },
+      { "name": "Ionic",       "color": "#3880FF" },
+      { "name": "Tailwind CSS", "color": "#06B6D4" }
     ],
+    "availability": {
+      "status": "Currently Freelancing · Open to Full-Time Opportunities",
+      "locations": "Chennai, Tamil Nadu, India · Remote · Hyderabad · Bengaluru",
+      "joiner": "Immediate Joiner"
+    },
     "stats": [
-      { "number": "3.7+",   "label": "Years Experience" },
+      { "number": "4+",   "label": "Years Experience" },
       { "number": "10,000+", "label": "Active Users Served" },
       { "number": "50%",    "label": "Performance Improvement" },
       { "number": "40%",    "label": "API Optimization" }
@@ -90,21 +95,21 @@
   },
   "about": {
     "sectionLabel": "ABOUT ME",
-    "title": "Frontend Angular Developer with 3.7+ Years Experience",
+    "title": "Frontend Angular Developer with 4+ Years Experience",
     "clientCentricTagline": "Specializing in scalable enterprise web and mobile applications with clean architecture, reusable UI systems, and user-first design.",
     "whoIHelp": [
       { "icon": "🏛️", "title": "Government & Enterprise", "desc": "Building large-scale portals, immigration systems, and pension management platforms" },
       { "icon": "📱", "title": "Hybrid Mobile Apps", "desc": "Cross-platform Ionic apps for iOS & Android with biometric auth and offline capabilities" },
       { "icon": "⚡", "title": "Performance & Optimization", "desc": "Reducing API consumption by 40% and improving performance by 50% through smart optimization" }
     ],
-    "intro": "I'm Rabin R — a Frontend Angular Developer from Chennai with 3.7+ years of professional experience building scalable enterprise web and mobile applications. I specialize in Angular (v13–v20), TypeScript, RxJS, Angular Signals, Ionic, and Tailwind CSS.",
+    "intro": "I'm Rabin R — a Frontend Angular Developer from Chennai with 4+ years of professional experience building scalable enterprise web and mobile applications. I currently freelance at Zellavora Technologies, delivering Angular and Ionic-based solutions across client projects. I specialize in Angular (v13–v20), TypeScript, RxJS, Angular Signals, Ionic Angular, and Tailwind CSS.",
     "bio": [
-      "I've engineered enterprise systems used by 10,000+ active users, optimized application performance by 50%, and reduced API consumption by 40% through smart caching and RxJS stream optimization. My expertise spans government portals (Fiji Immigration Department), enterprise pension management systems (PRIMS), and cross-platform mobile apps (Vanuatu National Provident Fund).",
+      "Previously at ITGalax Solutions Pvt Ltd, I engineered enterprise systems used by 10,000+ active users, optimized application performance by 50%, and reduced API consumption by 40% through smart caching and RxJS stream optimization. My expertise spans government portals (Fiji Immigration Department), enterprise pension management systems (PRIMS), and cross-platform mobile apps (Vanuatu National Provident Fund).",
       "I thrive in Agile/Scrum teams and specialize in clean, reusable component architecture, performance optimization, secure API integration with JWT authentication and RBAC, and delivering production-grade SPAs. I'm an immediate joiner open to remote, hybrid, or full-time roles."
     ],
     "infoCards": [
       { "label": "BASED IN",   "value": "Chennai, Tamil Nadu, India" },
-      { "label": "EXPERIENCE", "value": "3.7+ Years" },
+      { "label": "EXPERIENCE", "value": "4+ Years" },
       { "label": "STACK",      "value": "Angular · TypeScript · RxJS · Ionic" },
       { "label": "FOCUS",      "value": "Enterprise & Government" }
     ],
@@ -117,23 +122,40 @@
     "subtitle": "From government immigration platforms to large-scale pension management systems, here is where my craft has been forged.",
     "jobs": [
       {
-        "company": "ITGalax Solutions Pvt Ltd",
-        "location": "Chennai, India",
-        "role": "Frontend Angular Developer",
-        "duration": "June 2022 – January 2026 (3.7 Years)",
+        "company": "Zellavora Technologies",
+        "location": "Remote / Chennai, India",
+        "role": "Frontend Angular Developer (Freelance)",
+        "duration": "February 2026 – Present",
+        "summary": "Working as a Freelance Frontend Angular Developer at Zellavora Technologies, contributing to scalable web and mobile application development for client projects across India and international markets.",
         "achievements": [
-          "Developed enterprise Angular applications (v13–v20) for government and business platforms",
-          "Built scalable Single Page Applications (SPA) used by 10,000+ daily active users",
-          "Engineered 4 distinct government portals with role-based access control (RBAC) and JWT authentication",
-          "Improved application performance by 50% using Angular Signals and OnPush change detection",
-          "Reduced API consumption by 40% through smart caching and RxJS stream optimization",
-          "Constructed complex multi-step forms, enterprise validation modules, and workflow systems",
-          "Built and published reusable Angular component libraries adopted across all portals",
-          "Worked in Agile/Scrum enterprise environments with global stakeholders",
-          "Integrated REST APIs, Web Services, and backend systems across 5+ enterprise platforms",
-          "Optimized UI performance and frontend scalability for large-scale government usage"
+          "Developing responsive SPAs using Angular (v17–v20) and TypeScript for client projects across India and international markets",
+          "Building cross-platform hybrid mobile apps with Ionic Angular and Capacitor",
+          "Implementing reusable UI component libraries and scalable frontend architecture",
+          "Integrating REST APIs with JWT authentication and RBAC authorization",
+          "Optimizing performance using Angular Signals, lazy loading, and OnPush change detection",
+          "Collaborating with backend and design teams in Agile/Scrum sprint cycles",
+          "Writing technical documentation, project scope documents, and client cost estimation reports",
+          "Managing source control and feature branching via Git & GitHub"
         ],
-        "tags": ["Angular 13–v20", "TypeScript", "RxJS", "Angular Signals", "Tailwind CSS", "REST APIs", "RBAC", "JWT Auth"]
+        "tags": ["Angular", "TypeScript", "Ionic", "Capacitor", "RxJS", "Angular Signals", "Tailwind CSS", "REST APIs", "Git"]
+      },
+      {
+        "company": "ITGalax Solutions Pvt Ltd",
+        "location": "Karapakkam, Chennai",
+        "role": "Frontend Angular Developer",
+        "duration": "June 2022 – January 2026",
+        "summary": "Engineered enterprise-grade web and mobile applications for government and large-scale business clients. Delivered production systems across the Pacific region serving 10,000+ active users.",
+        "achievements": [
+          "Developed scalable enterprise SPAs using Angular, TypeScript, SCSS, Angular Material, Tailwind CSS",
+          "Built reusable component libraries and scalable frontend architecture across multiple projects",
+          "Integrated REST APIs, Web APIs, and Web Services with JWT Auth and RBAC",
+          "Implemented Angular Signals and RxJS stream optimization — reduced API requests by 40%",
+          "Improved overall application performance by 50% through frontend optimization",
+          "Developed Android & iOS hybrid apps using Ionic Angular and Capacitor",
+          "Participated in code reviews, sprint planning, and release management in Agile/Scrum teams",
+          "Managed source control workflows using Git, GitHub, and GitLab"
+        ],
+        "tags": ["Angular (v13–v20)", "TypeScript", "Ionic", "Capacitor", "RxJS", "Angular Signals", "Angular Material", "PrimeNG", "Tailwind CSS", "REST APIs", "JWT", "RBAC", "Node.js", "Git"]
       }
     ]
   },
@@ -165,7 +187,7 @@
       {
         "name": "Architecture & Performance",
         "icon": "arch",
-        "items": ["SPA Architecture", "Lazy Loading", "Code Splitting", "OnPush Change Detection", "API Optimization", "Caching Strategies"]
+        "items": ["SPA Architecture", "Lazy Loading", "Code Splitting", "OnPush Change Detection", "Zoneless Angular", "API Optimization", "Caching Strategies", "Shared Frontend Libraries"]
       },
       {
         "name": "UI & Design",
@@ -191,11 +213,12 @@
     "featured": {
       "image": "/proj-fiji.webp",
       "alt": "Fiji Immigration Department Portal",
-      "name": "Fiji Immigration Department Portal",
-      "description": "Enterprise immigration management platform developed for government workflows including external user portals, internal staff portals, police verification systems, and secure payment gateway integration.",
-      "highlights": "Multi-step enterprise workflow systems, Secure authentication & RBAC, Responsive government portal UI, High-performance Angular architecture, REST API integration.",
+      "name": "Fiji Immigration Department — Enterprise Immigration Management System",
+      "client": "Government of Fiji · via ITGalax Solutions Pvt Ltd",
+      "description": "A large-scale government immigration platform serving the Fiji Immigration Department. Engineered multiple role-based portals including External User Portal, Internal Staff Portal, Police Verification Portal, and a Payment Gateway.",
+      "highlights": "Engineered 4 role-based portals with JWT Auth and RBAC. Built complex multi-step forms, enterprise validation modules, and workflow systems. Developed and published shared Angular component libraries used across all portals. Integrated REST APIs and backend Web API services across the entire platform. Delivered responsive, mobile-friendly interfaces for large-scale government workflows.",
       "tags": ["Angular", "TypeScript", "RxJS", "Angular Signals", "Tailwind CSS", "REST APIs"],
-      "link": "#",
+      "link": "https://immihub.immigration.gov.fj/FIDPortal",
       "linkLabel": "Fiji Immigration Department Portal",
       "caseStudy": {
         "problem": "The Fiji Immigration Department relied on outdated paper-based workflows and fragmented legacy systems, causing processing delays of 3–5 business days per application. Staff had no unified digital view of applicant status, resulting in manual follow-ups and high error rates.",
@@ -218,10 +241,11 @@
         "image": "/proj-pension.webp",
         "alt": "PRIMS — Pension & Retirement Information Management System",
         "name": "PRIMS — Pension & Retirement Information Management System",
-        "description": "High-performance pension and retirement dashboard system designed for enterprise administration and scalable data workflows.",
-        "highlights": "Zoneless Angular architecture, Optimized rendering strategies, Dashboard analytics UI, API optimization & caching, Reusable enterprise components.",
-        "tags": ["Angular", "Dashboard", "Performance", "APIs"],
-        "link": "#",
+        "client": "Enterprise Administration · via ITGalax Solutions Pvt Ltd",
+        "description": "An enterprise pension management platform for HR teams and administrators, handling retirement information and administrative workflows. Built using Zoneless Angular for next-generation performance.",
+        "highlights": "Built responsive dashboards and reusable UI modules for enterprise administration. Enhanced rendering using Angular Signals and optimized change detection. Reduced API consumption via RxJS caching and stream optimization. Architected a scalable, maintainable, fully reusable component system.",
+        "tags": ["Angular (Zoneless)", "Angular Signals", "Angular Material", "RxJS", "REST APIs"],
+        "link": "https://mss.primssolution.com",
         "linkLabel": "PRIMS Solution",
         "caseStudy": {
           "problem": "Legacy pension system had critical performance bottlenecks — dashboard rendered 1,200+ records without virtualisation, causing 8-second load times on mid-range hardware used by administrators.",
@@ -242,11 +266,12 @@
       {
         "image": "/proj-vanuatu.webp",
         "alt": "VNPF — Vanuatu National Provident Fund",
-        "name": "VNPF — Vanuatu National Provident Fund",
-        "description": "Cross-platform mobile application developed using Ionic Angular with biometric authentication and optimised mobile workflows.",
-        "highlights": "Android & iOS support, Face ID & Touch ID integration, Responsive mobile-first design, Low-bandwidth API optimisation, Hybrid mobile application architecture.",
-        "tags": ["Ionic Angular", "Capacitor", "Mobile UI", "Biometrics"],
-        "link": "#",
+        "name": "VNPF — Vanuatu National Provident Fund App",
+        "client": "Government of Vanuatu · via ITGalax Solutions Pvt Ltd",
+        "description": "A cross-platform hybrid mobile application for the Vanuatu National Provident Fund, delivering insurance and provident fund services to citizens on Android and iOS in the Pacific region.",
+        "highlights": "Built full Android & iOS app using Ionic Angular and Capacitor. Implemented biometric authentication — Face ID and Touch ID. Optimized API communication for low-bandwidth Pacific region environments. Developed responsive mobile UI components and an admin portal module. Delivered a seamless cross-platform experience with high accessibility standards.",
+        "tags": ["Ionic Angular", "Capacitor", "TypeScript", "REST APIs", "Biometric Auth", "Mobile-First UI"],
+        "link": "https://play.google.com/store",
         "linkLabel": "VNPF Mobile App",
         "caseStudy": {
           "problem": "Fund members in Vanuatu had no mobile access to their provident fund accounts. Manual branch visits were the only way to check balances, causing long queues and poor member experience, especially on outer islands with limited connectivity.",
@@ -475,8 +500,52 @@
       { "type": "website",  "label": "WEBSITE",   "value": "rabinr.in",                 "href": "https://rabinr.in", "external": true },
       { "type": "location", "label": "LOCATION",  "value": "Chennai, Tamil Nadu, India · IST (UTC+5:30)" }
     ],
-    "availText": "Currently available for new opportunities",
-    "availNote": "Immediate joiner - Open to remote, hybrid, or full-time roles"
+    "availText": "Open to Full-Time, Remote, Hybrid Roles · Immediate Joiner",
+    "availNote": "Relocate to: Chennai · Hyderabad · Bengaluru · Remote"
+  },
+  "achievements": {
+    "sectionLabel": "ACHIEVEMENTS & NUMBERS",
+    "title": "Impact measured in numbers",
+    "subtitle": "A snapshot of what 4+ years of enterprise frontend engineering has delivered.",
+    "metrics": [
+      { "value": "4+",       "label": "Years of Experience" },
+      { "value": "3+",       "label": "Live Production Systems" },
+      { "value": "10,000+",  "label": "Active Users Served" },
+      { "value": "50%",      "label": "Faster App Load" },
+      { "value": "40%",      "label": "Reduction in API Requests" },
+      { "value": "2",        "label": "Government Clients (Fiji, Vanuatu)" },
+      { "value": "Web + Android + iOS", "label": "Platforms Delivered" }
+    ]
+  },
+  "education": {
+    "sectionLabel": "EDUCATION & CERTIFICATIONS",
+    "title": "Academic background & professional training",
+    "subtitle": "Formal education and certifications that underpin my engineering practice.",
+    "degrees": [
+      {
+        "degree": "Bachelor of Science — Information Technology",
+        "institution": "National College, Tiruchirappalli — 620 001",
+        "duration": "June 2018 – April 2021",
+        "icon": "🎓"
+      }
+    ],
+    "certifications": [
+      {
+        "title": "Web Design & Development",
+        "institution": "Web D School, Chennai",
+        "icon": "📜"
+      }
+    ]
+  },
+  "careerTimeline": {
+    "sectionLabel": "CAREER TIMELINE",
+    "title": "The journey so far",
+    "subtitle": "Roles, education, and milestones along the way.",
+    "items": [
+      { "period": "Feb 2026 – Present",  "role": "Frontend Angular Developer", "org": "Zellavora Technologies",      "type": "Freelance" },
+      { "period": "Jun 2022 – Jan 2026", "role": "Frontend Angular Developer", "org": "ITGalax Solutions Pvt Ltd",  "type": "Full-Time" },
+      { "period": "Jun 2018 – Apr 2021", "role": "B.Sc. Information Technology", "org": "National College, Trichy",   "type": "Education" }
+    ]
   },
   "footer": {
     "logo": "Rabin.R",
@@ -494,7 +563,7 @@
       { "label": "LinkedIn", "href": "https://www.linkedin.com/in/rabinr/",     "type": "linkedin" },
       { "label": "Email",    "href": "mailto:rabinr2607@gmail.com",         "type": "email" }
     ],
-    "copyright": "© 2026 Rabin R. All rights reserved.",
-    "madeWith": "Built with Angular 21 · Zoneless · TypeScript"
+    "copyright": "© 2026 Rabin R · Frontend Angular Developer",
+    "madeWith": "Built with Angular · Hosted on rabinr.in · Chennai, India"
   }
 }
