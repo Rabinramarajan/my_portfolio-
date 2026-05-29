@@ -17,11 +17,15 @@
     <ul class="nav-menu">
       @for (link of pds.nav()?.links; track link.label) {
         <li>
-          <a [href]="link.href" class="nav-link"
-             [target]="link.external ? '_blank' : '_self'">{{ link.label }}</a>
+          @if (link.highlight) {
+            <a [href]="link.href" class="nav-link nav-link--hire-me" [target]="link.external ? '_blank' : '_self'">{{ link.label }}</a>
+          } @else {
+            <a [href]="link.href" class="nav-link" [target]="link.external ? '_blank' : '_self'">{{ link.label }}</a>
+          }
         </li>
       }
     </ul>
+
 
     <!-- Resume CTA -->
     <a [href]="pds.meta()?.resumePdf" download class="btn-resume">

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnInit, OnDestroy, inject } from '@angular/core';
+import { Directive, ElementRef, OnInit, OnDestroy, inject, Input } from '@angular/core';
 import { AnimationService } from '../services/animation.service';
 
 /**
@@ -171,6 +171,7 @@ export class ScrollTriggerDirective implements OnInit, OnDestroy {
   private readonly el = inject(ElementRef);
   private readonly animation = inject(AnimationService);
   private unobserve: (() => void) | null = null;
+  @Input('appScrollTrigger') direction: 'up' | 'down' | 'left' | 'right' | '' | string = '';
 
   ngOnInit() {
     this.setupInitialState();
@@ -180,7 +181,18 @@ export class ScrollTriggerDirective implements OnInit, OnDestroy {
   private setupInitialState() {
     const element = this.el.nativeElement;
     element.style.opacity = '0';
-    element.style.transform = 'translateY(30px) blur(10px)';
+    
+    let transformStr = 'translateY(30px)';
+    if (this.direction === 'left') {
+      transformStr = 'translateX(-50px)';
+    } else if (this.direction === 'right') {
+      transformStr = 'translateX(50px)';
+    } else if (this.direction === 'down') {
+      transformStr = 'translateY(-30px)';
+    }
+    
+    element.style.transform = transformStr;
+    element.style.filter = 'blur(10px)';
     element.style.transition = `all 0.8s ${this.animation.easing.easeOutCubic}`;
   }
 
@@ -191,7 +203,8 @@ export class ScrollTriggerDirective implements OnInit, OnDestroy {
       (isVisible) => {
         if (isVisible) {
           element.style.opacity = '1';
-          element.style.transform = 'translateY(0) blur(0px)';
+          element.style.transform = 'translate(0, 0)';
+          element.style.filter = 'blur(0px)';
         }
       },
       { threshold: 0.2 }

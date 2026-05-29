@@ -1,10 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-custom-cursor',
-  standalone: true,
-  imports: [CommonModule],
   template: '',
   styles: [':host { display: block; }']
 })
@@ -12,8 +9,6 @@ export class CustomCursorComponent {}
 
 @Component({
   selector: 'app-terminal-intro',
-  standalone: true,
-  imports: [CommonModule],
   template: `
     <div class="terminal-container">
       <div class="terminal">
@@ -30,7 +25,9 @@ export class CustomCursorComponent {}
             <div class="terminal-line" [class.typing]="line === currentLine">
               <span class="prompt">$ </span>
               <span class="command">{{ line }}</span>
-              <span class="cursor" *ngIf="line === currentLine"></span>
+              @if (line === currentLine) {
+                <span class="cursor"></span>
+              }
             </div>
           }
         </div>
@@ -45,7 +42,6 @@ export class CustomCursorComponent {}
       padding: 40px 20px;
       min-height: 300px;
     }
-
     .terminal {
       width: 100%;
       max-width: 600px;
@@ -56,7 +52,6 @@ export class CustomCursorComponent {}
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
       font-family: 'Monaco', 'Courier New', monospace;
     }
-
     .terminal-header {
       background: #1a1a1a;
       padding: 12px;
@@ -65,91 +60,36 @@ export class CustomCursorComponent {}
       align-items: center;
       gap: 10px;
     }
-
-    .terminal-buttons {
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .btn.red {
-      background: #ff5f57;
-    }
-
-    .btn.yellow {
-      background: #ffbd2e;
-    }
-
-    .btn.green {
-      background: #28c940;
-    }
-
-    .terminal-title {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.6);
-      margin-left: 8px;
-    }
-
+    .terminal-buttons { display: flex; gap: 8px; }
+    .btn { width: 12px; height: 12px; border-radius: 50%; cursor: pointer; }
+    .btn.red { background: #ff5f57; }
+    .btn.yellow { background: #ffbd2e; }
+    .btn.green { background: #28c940; }
+    .terminal-title { font-size: 12px; color: rgba(255,255,255,0.6); margin-left: 8px; }
     .terminal-content {
       padding: 20px;
       color: #00ff00;
       font-size: 14px;
       line-height: 1.8;
-      text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+      text-shadow: 0 0 10px rgba(0,255,0,0.3);
     }
-
-    .terminal-line {
-      animation: slideIn 0.5s ease-out;
-    }
-
+    .terminal-line { animation: slideIn 0.5s ease-out; }
     @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateX(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
     }
-
-    .prompt {
-      color: #6366f1;
-    }
-
-    .command {
-      color: #00ff00;
-    }
-
+    .prompt { color: #6366f1; }
+    .command { color: #00ff00; }
     .cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1em;
-      background: #00ff00;
-      margin-left: 2px;
+      display: inline-block; width: 2px; height: 1em;
+      background: #00ff00; margin-left: 2px;
       animation: blink 1s infinite;
     }
-
     @keyframes blink {
-      0%, 49% {
-        background: #00ff00;
-      }
-      50%, 100% {
-        background: transparent;
-      }
+      0%, 49% { background: #00ff00; }
+      50%, 100% { background: transparent; }
     }
-
-    @media (max-width: 768px) {
-      .terminal-content {
-        font-size: 12px;
-      }
-    }
+    @media (max-width: 768px) { .terminal-content { font-size: 12px; } }
   `]
 })
 export class TerminalIntroComponent implements OnInit {
@@ -182,8 +122,6 @@ export class TerminalIntroComponent implements OnInit {
 
 @Component({
   selector: 'app-terminal-cursor',
-  standalone: true,
-  imports: [CommonModule],
   template: '<span>_</span>',
   styles: [':host { display: inline; }']
 })

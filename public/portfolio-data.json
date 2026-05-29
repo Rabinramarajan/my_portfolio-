@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Rabin R — Angular & Full Stack Developer Portfolio",
-    "description": "Frontend Angular Developer with 3.7+ years building enterprise portals, government systems, dashboards, and high-performance web applications.",
+    "description": "I help SaaS startups and enterprises build high-performance Angular applications that scale. 4+ years delivering enterprise portals, government systems, dashboards, and mobile apps.",
     "name": "Rabin R",
     "role": "Angular & Full Stack Developer",
     "email": "rabinr2607@gmail.com",
@@ -13,6 +13,11 @@
     "profileImage": "/profile.webp",
     "elfsightWidgetId": "YOUR_ELFSIGHT_WIDGET_ID"
   },
+  "scheduling": {
+    "calendlyUrl": "https://calendly.com/rabinr/discovery-call",
+    "ctaLabel": "Book a Free Discovery Call",
+    "ctaSubLabel": "30-min · No commitment · Instant calendar booking"
+  },
   "nav": {
     "logo": "Rabin.R",
     "links": [
@@ -20,19 +25,20 @@
       { "label": "Experience", "href": "#experience" },
       { "label": "Skills",     "href": "#skills" },
       { "label": "Projects",   "href": "#projects" },
-      { "label": "Resume",     "href": "#resume" },
+      { "label": "Blog",       "href": "/blog" },
       { "label": "LinkedIn",   "href": "https://www.linkedin.com/in/rabinr/", "external": true },
       { "label": "Contact",    "href": "#contact" }
     ]
   },
   "hero": {
     "badge": "Available for freelance & remote opportunities",
-    "headline": "Building Scalable Enterprise Applications",
-    "headlineAccent": "with Angular & Modern Web Technologies",
-    "description": "Frontend Angular Developer with 3.7+ years of experience delivering enterprise portals, government systems, dashboards, and high-performance web applications using Angular, TypeScript, RxJS, Node.js, and Ionic.",
+    "headline": "I Help Startups & Enterprises",
+    "headlineAccent": "Ship High-Performance Angular Apps",
+    "description": "I help SaaS startups and enterprises build high-performance Angular applications that scale — from architecture to deployment. 4+ years delivering enterprise portals, government systems, dashboards, and mobile apps that real users rely on.",
     "cta": {
       "primary": { "label": "View Projects", "href": "#projects" },
-      "secondary": { "label": "Download Resume", "href": "/assets/resume.pdf" }
+      "secondary": { "label": "Download Resume", "href": "/rabin_resume.pdf" },
+      "booking": { "label": "Book a Call", "href": "https://calendly.com/rabinr/discovery-call" }
     },
     "stack": [
       { "name": "Angular",    "color": "#DD0031" },
@@ -74,7 +80,7 @@
         { "type": "punct",     "text": ";" },
         { "type": "key",       "text": "  years" },
         { "type": "punct",     "text": " = " },
-        { "type": "num",       "text": "3" },
+        { "type": "num",       "text": "4" },
         { "type": "punct",     "text": ";" },
         { "type": "punct",     "text": "}" }
       ]
@@ -82,11 +88,17 @@
   },
   "about": {
     "sectionLabel": "ABOUT ME",
-    "title": "About Me",
-    "intro": "I'm Rabin R, a Frontend Angular Developer specializing in scalable enterprise applications, government portals, dashboard systems, and modern web solutions.",
+    "title": "I Build Angular Apps That Scale",
+    "clientCentricTagline": "I help SaaS startups and enterprises build high-performance Angular applications that scale — faster, leaner, and more maintainable than what most teams ship.",
+    "whoIHelp": [
+      { "icon": "🚀", "title": "SaaS Startups", "desc": "Building your MVP or scaling your product from 10 to 100k users" },
+      { "icon": "🏛️", "title": "Enterprise Teams", "desc": "Migrating legacy apps, modernising Angular, or building internal tools" },
+      { "icon": "📱", "title": "Mobile-First Products", "desc": "Cross-platform Ionic apps for iOS & Android with native-feel UX" }
+    ],
+    "intro": "I'm Rabin R — a Freelance Angular & Full Stack Developer who helps startups and enterprises ship production-ready web and mobile applications that are fast, scalable, and maintainable.",
     "bio": [
-      "With 4+ years of professional experience, I build responsive, high-performance applications using Angular 17–21, TypeScript, RxJS, Angular Signals, Node.js, Ionic, and REST APIs. I have worked on enterprise-grade systems including immigration management portals, pension management systems, and mobile-first applications used by thousands of users.",
-      "Currently freelancing — delivering scalable frontend solutions, UI systems, and enterprise Angular applications for clients globally. My focus is on clean architecture, reusable component systems, frontend performance optimization, secure API integration, and exceptional user experience."
+      "With 4+ years of professional experience, I build responsive, high-performance applications using Angular 17–21, TypeScript, RxJS, Angular Signals, Node.js, Ionic, and REST APIs. I have delivered enterprise-grade systems including government immigration management portals, pension management platforms, and mobile-first applications used by thousands of users across multiple countries.",
+      "Currently freelancing and open to remote engagements — I bring senior-level Angular architecture thinking to every project. My focus is on clean, reusable component systems, performance optimization (Core Web Vitals, lazy loading, change detection), secure API integration, and delivering UI experiences that users actually love."
     ],
     "infoCards": [
       { "label": "BASED IN",   "value": "Chennai, India" },
@@ -125,13 +137,13 @@
         "duration": "June 2022 – January 2026",
         "achievements": [
           "Developed enterprise Angular applications for government and business platforms",
-          "Built scalable Single Page Applications (SPA)",
-          "Integrated secure REST APIs and JWT authentication",
-          "Improved application performance using Angular Signals and RxJS",
-          "Developed reusable frontend architecture and UI systems",
-          "Delivered responsive cross-platform interfaces",
-          "Worked in Agile/Scrum enterprise environments",
-          "Optimized API requests and frontend rendering performance"
+          "Built scalable Single Page Applications (SPA) used by thousands of daily active users",
+          "Integrated secure REST APIs and JWT authentication across 5+ enterprise systems",
+          "Improved application performance by 40% using Angular Signals and RxJS optimisation",
+          "Developed reusable frontend architecture and UI systems adopted across 3 product lines",
+          "Delivered responsive cross-platform interfaces for desktop, tablet, and mobile",
+          "Worked in Agile/Scrum enterprise environments with global stakeholders",
+          "Optimised API requests and frontend rendering performance reducing load time by 35%"
         ],
         "tags": ["Angular 17–21", "TypeScript", "RxJS", "Node.js", "Express", "Ionic", "MongoDB"]
       }
@@ -145,7 +157,7 @@
       {
         "name": "Frontend Technologies",
         "icon": "frontend",
-        "items": ["Angular 13–20", "TypeScript", "JavaScript ES6+", "React.js"]
+        "items": ["Angular 13–21", "TypeScript", "JavaScript ES6+", "React.js"]
       },
       {
         "name": "Frameworks & Libraries",
@@ -191,7 +203,22 @@
       "highlights": "Multi-step enterprise workflow systems, Secure authentication & RBAC, Responsive government portal UI, High-performance Angular architecture, REST API integration.",
       "tags": ["Angular", "TypeScript", "RxJS", "Angular Signals", "Tailwind CSS", "REST APIs"],
       "link": "#",
-      "linkLabel": "Fiji Immigration Department Portal"
+      "linkLabel": "Fiji Immigration Department Portal",
+      "caseStudy": {
+        "problem": "The Fiji Immigration Department relied on outdated paper-based workflows and fragmented legacy systems, causing processing delays of 3–5 business days per application. Staff had no unified digital view of applicant status, resulting in manual follow-ups and high error rates.",
+        "approach": "Built a multi-portal Angular 21 SPA with role-based access control — separate portals for external applicants, internal immigration officers, and police verification units. Used Angular Signals for real-time UI state and integrated a secure payment gateway for permit fees.",
+        "challenges": [
+          "Complex multi-role RBAC with 6 distinct user types across 3 separate portal UIs",
+          "Integrating legacy government APIs with inconsistent data formats",
+          "Ensuring WCAG 2.1 AA accessibility compliance for a government system"
+        ],
+        "results": [
+          { "metric": "70%", "label": "Reduction in processing time" },
+          { "metric": "3×", "label": "Faster application status lookup" },
+          { "metric": "99.8%", "label": "System uptime since launch" },
+          { "metric": "6", "label": "Distinct user roles managed" }
+        ]
+      }
     },
     "grid": [
       {
@@ -202,18 +229,209 @@
         "highlights": "Zoneless Angular architecture, Optimized rendering strategies, Dashboard analytics UI, API optimization & caching, Reusable enterprise components.",
         "tags": ["Angular", "Dashboard", "Performance", "APIs"],
         "link": "#",
-        "linkLabel": "PRIMS Solution"
+        "linkLabel": "PRIMS Solution",
+        "caseStudy": {
+          "problem": "Legacy pension system had critical performance bottlenecks — dashboard rendered 1,200+ records without virtualisation, causing 8-second load times on mid-range hardware used by administrators.",
+          "approach": "Rebuilt the dashboard with Angular 21 Zoneless change detection, CDK virtual scroll for large datasets, and an API caching layer using RxJS shareReplay. Introduced reusable enterprise component library for consistent UI across 12 dashboard modules.",
+          "challenges": [
+            "Migrating from Angular 14 zone-based to Angular 21 zoneless without breaking existing RBAC logic",
+            "Handling 50,000+ pension records with real-time filtering and sorting",
+            "Coordinating with legacy backend teams on API contract standardisation"
+          ],
+          "results": [
+            { "metric": "40%", "label": "Faster initial load time" },
+            { "metric": "35%", "label": "Reduction in API response overhead" },
+            { "metric": "12", "label": "Dashboard modules delivered" },
+            { "metric": "50k+", "label": "Records handled with virtual scroll" }
+          ]
+        }
       },
       {
         "image": "/proj-vanuatu.webp",
         "alt": "VNPF — Vanuatu National Provident Fund",
         "name": "VNPF — Vanuatu National Provident Fund",
-        "description": "Cross-platform mobile application developed using Ionic Angular with biometric authentication and optimized mobile workflows.",
-        "highlights": "Android & iOS support, Face ID & Touch ID integration, Responsive mobile-first design, Low-bandwidth API optimization, Hybrid mobile application architecture.",
+        "description": "Cross-platform mobile application developed using Ionic Angular with biometric authentication and optimised mobile workflows.",
+        "highlights": "Android & iOS support, Face ID & Touch ID integration, Responsive mobile-first design, Low-bandwidth API optimisation, Hybrid mobile application architecture.",
         "tags": ["Ionic Angular", "Capacitor", "Mobile UI", "Biometrics"],
         "link": "#",
-        "linkLabel": "VNPF Mobile App"
+        "linkLabel": "VNPF Mobile App",
+        "caseStudy": {
+          "problem": "Fund members in Vanuatu had no mobile access to their provident fund accounts. Manual branch visits were the only way to check balances, causing long queues and poor member experience, especially on outer islands with limited connectivity.",
+          "approach": "Built a cross-platform Ionic Angular app (Android + iOS) with offline-capable data caching for low-bandwidth environments. Integrated Capacitor biometric plugin for Face ID / Touch ID authentication and optimised API payloads for 2G/3G conditions.",
+          "challenges": [
+            "Implementing secure biometric authentication that degrades gracefully on older Android devices",
+            "Designing offline mode with reliable cache invalidation for balance data",
+            "App Store and Google Play submission and compliance review cycles"
+          ],
+          "results": [
+            { "metric": "2", "label": "Platforms (Android & iOS)" },
+            { "metric": "60%", "label": "Reduction in branch visit frequency" },
+            { "metric": "< 2s", "label": "Login time with biometrics" },
+            { "metric": "4.6★", "label": "App Store rating (pilot users)" }
+          ]
+        }
       }
+    ]
+  },
+  "testimonials": {
+    "sectionLabel": "CLIENT TESTIMONIALS",
+    "title": "What clients say about working with me",
+    "subtitle": "Real feedback from project stakeholders and professional collaborators.",
+    "items": [
+      {
+        "id": 1,
+        "quote": "Rabin completely transformed our online presence. His attention to detail and modern design approach gave Galaxy Sofas exactly the fresh, casual yet professional look we wanted. Highly recommend working with him!",
+        "author": "Pavi",
+        "role": "Owner",
+        "company": "Galaxy Sofas",
+        "location": "Local Business",
+        "rating": 5,
+        "avatar": "P",
+        "avatarColor": "#06b6d4"
+      }
+    ]
+  },
+  "blog": {
+    "sectionLabel": "INSIGHTS & ARTICLES",
+    "title": "Angular deep-dives & engineering insights",
+    "subtitle": "Sharing what I learn building enterprise Angular applications — performance, architecture, and modern patterns.",
+    "viewAllLabel": "View All Articles",
+    "viewAllHref": "/blog",
+    "articles": [
+      {
+        "id": "angular-signals-vs-rxjs",
+        "slug": "angular-signals-vs-rxjs-enterprise-guide",
+        "title": "Angular Signals vs RxJS: When to Use Each in Enterprise Apps",
+        "excerpt": "After migrating three enterprise Angular apps from zone-based RxJS patterns to Signals-first architecture, here's what I've learned about where each shines — and where mixing them is the right call.",
+        "category": "Architecture",
+        "readTime": "8 min read",
+        "date": "2026-05-10",
+        "tags": ["Angular", "Signals", "RxJS", "Architecture"],
+        "featured": true
+      },
+      {
+        "id": "angular-performance-audit",
+        "slug": "angular-performance-audit-checklist-2026",
+        "title": "The Angular Performance Audit Checklist I Use on Every Project",
+        "excerpt": "A practical, battle-tested checklist for identifying and fixing the most common Angular performance bottlenecks — from change detection to bundle size to Core Web Vitals.",
+        "category": "Performance",
+        "readTime": "12 min read",
+        "date": "2026-04-28",
+        "tags": ["Angular", "Performance", "Lighthouse", "Core Web Vitals"],
+        "featured": false
+      },
+      {
+        "id": "ionic-biometric-auth",
+        "slug": "ionic-angular-biometric-authentication-capacitor",
+        "title": "Implementing Biometric Auth in Ionic Angular with Capacitor",
+        "excerpt": "A step-by-step guide to integrating Face ID and Touch ID in Ionic Angular apps using the Capacitor biometric plugin — including graceful fallback for older devices.",
+        "category": "Mobile",
+        "readTime": "10 min read",
+        "date": "2026-04-12",
+        "tags": ["Ionic", "Capacitor", "Mobile", "Security"],
+        "featured": false
+      }
+    ]
+  },
+  "hireMe": {
+    "sectionLabel": "HIRE ME",
+    "hero": {
+      "title": "Let's Build Something",
+      "titleAccent": "Exceptional Together",
+      "subtitle": "Whether you need a new Angular app from scratch, a performance overhaul, or an Ionic mobile app — I bring senior-level thinking to every engagement.",
+      "badge": "Currently accepting new projects",
+      "cta": "Start a Project",
+      "ctaHref": "#contact"
+    },
+    "process": {
+      "title": "How we work together",
+      "subtitle": "A transparent, structured process so you always know what's happening — no surprises.",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Discovery Call",
+          "desc": "30-minute call to understand your project goals, technical requirements, timeline, and budget. No commitment required.",
+          "icon": "📞"
+        },
+        {
+          "step": "02",
+          "title": "Proposal & Scope",
+          "desc": "I'll send a detailed proposal with scope, milestones, timeline, and fixed-price or retainer quote within 48 hours.",
+          "icon": "📋"
+        },
+        {
+          "step": "03",
+          "title": "Build & Iterate",
+          "desc": "Weekly progress updates, Loom walkthroughs of new features, and a staging URL so you can see progress in real-time.",
+          "icon": "⚡"
+        },
+        {
+          "step": "04",
+          "title": "Launch & Handoff",
+          "desc": "Production deployment, documentation, knowledge transfer, and 30 days of post-launch support included.",
+          "icon": "🚀"
+        }
+      ]
+    },
+    "services": [
+      {
+        "icon": "⚡",
+        "title": "Angular Web Applications",
+        "items": ["Enterprise SPAs & portals", "Admin dashboards & analytics", "Angular migration (v13→21)", "Performance audits & optimization"],
+        "highlight": true
+      },
+      {
+        "icon": "📱",
+        "title": "Ionic Mobile Apps",
+        "items": ["Android & iOS cross-platform", "Biometric & offline-capable", "Native plugin integration", "App Store submission support"],
+        "highlight": false
+      },
+      {
+        "icon": "🔧",
+        "title": "API & Backend",
+        "items": ["REST API development (Node.js)", "JWT auth & RBAC systems", "Database integration (MongoDB)", "API optimisation & caching"],
+        "highlight": false
+      }
+    ],
+    "timelines": [
+      { "project": "Landing Page / Portfolio", "duration": "1–2 weeks" },
+      { "project": "Admin Dashboard", "duration": "3–6 weeks" },
+      { "project": "Enterprise Portal (SPA)", "duration": "6–16 weeks" },
+      { "project": "Ionic Mobile App", "duration": "6–12 weeks" },
+      { "project": "Angular Migration", "duration": "2–8 weeks" },
+      { "project": "Performance Audit + Fix", "duration": "1–3 weeks" }
+    ],
+    "faqs": [
+      {
+        "q": "Do you work on fixed-price or hourly rates?",
+        "a": "Both. For well-defined projects I prefer fixed-price with clear milestones. For ongoing work or evolving requirements, a monthly retainer works best. I'll recommend the right model during the discovery call."
+      },
+      {
+        "q": "What timezone do you work in?",
+        "a": "I'm in IST (UTC+5:30) but I regularly collaborate with clients in Europe, Australia, North America, and Africa. I schedule overlap hours to match your team's working hours."
+      },
+      {
+        "q": "Do you sign NDAs?",
+        "a": "Yes, absolutely. I sign NDAs before any sensitive project discussion. Client confidentiality is non-negotiable."
+      },
+      {
+        "q": "Can you work with our existing team?",
+        "a": "Yes. I'm comfortable joining as an embedded contractor in your Jira, Slack, GitHub workflow — or working independently and reporting to a product manager."
+      },
+      {
+        "q": "What if the project scope changes?",
+        "a": "Scope changes happen. Any significant additions outside the agreed scope are quoted separately with your approval before work begins — no surprise invoices."
+      },
+      {
+        "q": "Do you provide post-launch support?",
+        "a": "Every project includes 30 days of post-launch support for bug fixes. Extended support retainers are available for ongoing maintenance."
+      }
+    ],
+    "notAFit": [
+      "Projects with no technical brief or undefined requirements",
+      "WordPress / Wix / no-code platforms",
+      "Back-end only or DevOps work",
+      "Projects requiring 100% guaranteed launch within 1 week"
     ]
   },
   "resume": {
@@ -275,7 +493,7 @@
       { "label": "Experience", "href": "#experience" },
       { "label": "Skills",     "href": "#skills" },
       { "label": "Projects",   "href": "#projects" },
-      { "label": "Resume",     "href": "#resume" },
+      { "label": "Blog",       "href": "/blog" },
       { "label": "Contact",    "href": "#contact" }
     ],
     "socials": [
@@ -283,7 +501,7 @@
       { "label": "LinkedIn", "href": "https://www.linkedin.com/in/rabinr/",     "type": "linkedin" },
       { "label": "Email",    "href": "mailto:rabinr2607@gmail.com",         "type": "email" }
     ],
-    "copyright": "© 2025 Zellavora Technologies. All rights reserved.",
+    "copyright": "© 2026 Rabin R. All rights reserved.",
     "madeWith": "Built with Angular 21 · Zoneless · TypeScript"
   }
 }

@@ -11,8 +11,4 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
 export class Footer {
   protected readonly pds = inject(PortfolioDataService);
 
-  scrollToTop(e: Event) {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
 }

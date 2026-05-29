@@ -55,14 +55,14 @@
   &.scrolled {
     max-width: 1200px;
     padding: 10px 24px;
-    background: rgba(8, 13, 24, 0.88);
+    background: var(--bg-card);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
-    border-color: rgba(255, 255, 255, 0.09);
+    border-color: var(--border);
     border-radius: 15px;
     box-shadow:
-      0 2px 0 rgba(255,255,255,0.04) inset,
-      0 16px 48px rgba(0, 0, 0, 0.55),
+      0 2px 0 var(--border) inset,
+      var(--shadow-xl),
       0 0 0 1px rgba(99, 102, 241, 0.05);
   }
 }
@@ -93,7 +93,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     font-weight: 600;
-    color: #f8fafc;
+    color: var(--text-primary);
     transition: color 0.2s ease;
   }
 
@@ -102,7 +102,7 @@
       transform: scale(1.07);
       box-shadow: 0 0 24px rgba(99, 102, 241, 0.6);
     }
-    .logo-text { color: #a5b4fc; }
+    .logo-text { color: var(--accent-primary); }
   }
 }
 
@@ -123,15 +123,34 @@
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  color: #94a3b8;
+  color: var(--text-secondary);
   text-decoration: none;
   border-radius: 8px;
   transition: color 0.2s ease, background 0.2s ease;
   white-space: nowrap;
 
   &:hover {
-    color: #f8fafc;
-    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+    background: var(--bg-elevated);
+  }
+}
+
+// Highlighted "Hire Me" nav button
+.nav-link--hire-me {
+  padding: 6px 14px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(79, 70, 229, 0.1));
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  color: #c4b5fd !important;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.28), rgba(79, 70, 229, 0.2));
+    border-color: rgba(124, 58, 237, 0.6);
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
   }
 }
 
@@ -160,14 +179,16 @@
   }
 }
 
+
+
 // ── Hamburger ─────────────────────────────────────────
 .nav-toggle {
   display: none;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-bright);
   border-radius: 8px;
   cursor: pointer;
   padding: 7px 9px;
@@ -185,7 +206,7 @@
   }
 
   &:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-elevated);
     border-color: rgba(255, 255, 255, 0.18);
     span { background: #f8fafc; }
   }
@@ -206,10 +227,10 @@
   left: 16px;
   right: 16px;
   z-index: 999;
-  background: rgba(8, 13, 24, 0.97);
+  background: var(--bg-card);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
   border-radius: 16px;
   padding: 8px;
   transform: translateY(-10px) scale(0.98);
@@ -237,14 +258,14 @@
     padding: 13px 16px;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
-    color: #94a3b8;
+    color: var(--text-secondary);
     text-decoration: none;
     border-radius: 10px;
     transition: color 0.2s, background 0.2s;
 
     &:hover {
-      color: #f8fafc;
-      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-primary);
+      background: var(--bg-elevated);
     }
   }
 
@@ -274,7 +295,7 @@
   position: fixed;
   inset: 0;
   z-index: 998;
-  background: rgba(0, 0, 0, 0.45);
+  background: var(--bg-overlay);
   opacity: 0;
   transition: opacity 0.25s ease;
 

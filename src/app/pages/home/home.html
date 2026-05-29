@@ -137,39 +137,48 @@
       <!-- LEFT — Photo card -->
       <div class="photo-card hover-lift" appScrollTrigger>
         <div class="photo-wrapper">
-          <img [src]="pds.meta()?.profileImage" [alt]="pds.meta()?.name + ' — Angular & Full Stack Developer'"
+          <img [src]="pds.meta()?.profileImage" [alt]="pds.meta()?.name"
             class="profile-img" />
           <div class="photo-overlay"></div>
-        </div>
-        <div class="photo-footer">
-          <div class="photo-info">
-            <span class="photo-name">{{ pds.meta()?.name }}</span>
-            <span class="photo-role">{{ pds.meta()?.role }}</span>
+          
+          <div class="photo-glass-footer">
+            <div class="photo-info">
+              <span class="photo-name">{{ pds.meta()?.name }}</span>
+              <span class="photo-role">{{ pds.meta()?.role }}</span>
+            </div>
+            <span class="open-badge animate-glow-pulse">
+              <span class="open-dot"></span>
+              {{ pds.about()?.openBadge }}
+            </span>
           </div>
-          <span class="open-badge animate-glow-pulse">
-            <span class="open-dot"></span>
-            {{ pds.about()?.openBadge }}
-          </span>
         </div>
       </div>
 
       <!-- RIGHT — Bio + cards -->
       <div class="about-right" appScrollTrigger>
         <div class="bio-card">
-          @for (para of pds.about()?.bio; track $index) {
-          <p class="bio-text animate-fade-in-up" [style.animation-delay]="($index * 0.1) + 's'">{{ para }}</p>
-          }
+          <div class="bio-content">
+            @for (para of pds.about()?.bio; track $index) {
+            <p class="bio-text animate-fade-in-up" [style.animation-delay]="($index * 0.1) + 's'">{{ para }}</p>
+            }
+          </div>
         </div>
 
         <div class="info-grid">
           @for (card of pds.about()?.infoCards; track card.label) {
           <div class="info-card hover-glow animate-fade-in-up" [style.animation-delay]="($index * 0.1) + 's'">
-            <span class="info-label">{{ card.label }}</span>
-            <div class="info-value">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2">
+            <div class="info-header">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 8v4l3 3" />
+              </svg>
+              <span class="info-label">{{ card.label }}</span>
+            </div>
+            <div class="info-value-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-indigo)" stroke-width="2">
                 <circle cx="12" cy="12" r="10" />
               </svg>
-              <strong>{{ card.value }}</strong>
+              <strong class="info-value">{{ card.value }}</strong>
             </div>
           </div>
           }

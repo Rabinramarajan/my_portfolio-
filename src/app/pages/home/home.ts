@@ -1,9 +1,11 @@
-import { Component, inject, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy, OnDestroy, afterNextRender, ElementRef, viewChild, signal } from '@angular/core';
 import { DOCUMENT, SlicePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { PortfolioDataService } from '../../shared/services/portfolio-data.service';
 import { ContactService } from '../../shared/services/contact.service';
+import { ToastService } from '../../shared/services/toast.service';
+import { GsapService } from '../../shared/services/gsap.service';
+import { ScrollService } from '../../shared/services/scroll.service';
 import {
   AuroraBackgroundDirective,
   MouseFollowGlowDirective,
@@ -34,22 +36,25 @@ import {
     CustomCursorComponent,
     SlicePipe,
     ReactiveFormsModule,
-    HttpClientModule,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Home implements AfterViewInit {
+export class Home implements OnDestroy {
   protected readonly pds = inject(PortfolioDataService);
   private readonly doc = inject(DOCUMENT);
   private readonly fb = inject(FormBuilder);
   protected readonly contactService = inject(ContactService);
+  private readonly toastService = inject(ToastService);
+  private readonly gsapService = inject(GsapService);
+  protected readonly scrollService = inject(ScrollService);
 
   protected contactForm: FormGroup;
   protected isSubmitting = false;
   protected submitMessage = '';
   protected submitStatus: 'idle' | 'success' | 'error' = 'idle';
+  protected elfsightLoaded = signal(false);
 
   constructor() {
     this.contactForm = this.fb.group({
@@ -58,10 +63,82 @@ export class Home implements AfterViewInit {
       subject: ['', [Validators.required, Validators.minLength(5)]],
       message: ['', [Validators.required, Validators.minLength(10)]]
     });
+
+    afterNextRender(() => {
+      this.initGsapAnimations();
+      this.loadElfsight();
+    });
   }
 
-  ngAfterViewInit() {
-    // Defer external script loading until after view is rendered
+  private async initGsapAnimations(): Promise<void> {
+    try {
+      await this.gsapService.init();
+      if (!this.gsapService.isLoaded) return;
+
+      // Hero section timeline
+      const heroTl = this.gsapService.createTimeline({
+        trigger: '.hero',
+        start: 'top top',
+        toggleActions: 'play none none none'
+      });
+
+      if (heroTl) {
+        heroTl
+          .from('.hero-badge', { y: 20, opacity: 0, duration: 0.6 })
+          .from('.hero-title', { y: 30, opacity: 0, duration: 0.8 }, '-=0.3')
+          .from('.hero-desc', { y: 20, opacity: 0, duration: 0.6 }, '-=0.4')
+          .from('.hero-actions', { y: 20, opacity: 0, duration: 0.6 }, '-=0.3')
+          .from('.hero-stack', { y: 20, opacity: 0, duration: 0.6 }, '-=0.3')
+          .from('.hero-stats .stat-card', { y: 20, opacity: 0, duration: 0.5, stagger: 0.1 }, '-=0.3')
+          .from('.hero-visual', { x: 40, opacity: 0, duration: 0.8 }, '-=0.8');
+      }
+
+      // Experience timeline draw
+      this.gsapService.gsap?.from('.timeline-line', {
+        scaleY: 0,
+        transformOrigin: 'top center',
+        duration: 1.5,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.timeline',
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      });
+
+      // Skill cards stagger
+      this.gsapService.staggerIn('.skill-card', 0.06);
+
+      // Project cards stagger
+      this.gsapService.staggerIn('.proj-card-enhanced', 0.12);
+
+      // Testimonial cards stagger
+      this.gsapService.staggerIn('.testi-card', 0.1);
+
+    } catch (e) {
+      // GSAP init failed — animations degrade gracefully via CSS
+      console.warn('GSAP initialization failed, falling back to CSS animations', e);
+    }
+  }
+
+  private loadElfsight(): void {
+    const checkElfsightRendered = () => {
+      const container = this.doc.querySelector('.elfsight-app-def48d51-c1c6-4d45-b385-c6fcc8a31a71');
+      if (container) {
+        if (container.children.length > 0) {
+          this.elfsightLoaded.set(true);
+        } else {
+          const observer = new MutationObserver((mutations, obs) => {
+            if (container.children.length > 0) {
+              this.elfsightLoaded.set(true);
+              obs.disconnect();
+            }
+          });
+          observer.observe(container, { childList: true, subtree: true });
+        }
+      }
+    };
+
     if (!this.doc.getElementById('elfsight-script')) {
       const s = this.doc.createElement('script');
       s.id = 'elfsight-script';
@@ -71,12 +148,16 @@ export class Home implements AfterViewInit {
       if ('requestIdleCallback' in window) {
         (window as any).requestIdleCallback(() => {
           this.doc.body.appendChild(s);
+          checkElfsightRendered();
         });
       } else {
         setTimeout(() => {
           this.doc.body.appendChild(s);
+          checkElfsightRendered();
         }, 2000);
       }
+    } else {
+      checkElfsightRendered();
     }
   }
 
@@ -97,8 +178,8 @@ export class Home implements AfterViewInit {
         this.submitStatus = 'success';
         this.submitMessage = response.message;
         this.contactForm.reset();
-        
-        // Clear message after 5 seconds
+        this.toastService.success(response.message);
+
         setTimeout(() => {
           this.submitStatus = 'idle';
           this.submitMessage = '';
@@ -107,9 +188,9 @@ export class Home implements AfterViewInit {
       error: (error) => {
         this.isSubmitting = false;
         this.submitStatus = 'error';
-        this.submitMessage = error.error?.message || 'Error sending message. Please try again.';
-        
-        // Clear message after 5 seconds
+        this.submitMessage = error?.message || 'Error sending message. Please try again.';
+        this.toastService.error(this.submitMessage);
+
         setTimeout(() => {
           this.submitStatus = 'idle';
           this.submitMessage = '';
@@ -132,9 +213,8 @@ export class Home implements AfterViewInit {
     }
     return '';
   }
+
+  ngOnDestroy(): void {
+    this.gsapService.killAll();
+  }
 }
-
-
-
-
-
