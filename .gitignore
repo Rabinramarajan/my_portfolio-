@@ -4,6 +4,12 @@
 .env
 .env.local
 .env*.local
+# Ignore environment files with real credentials
+src/environments/environment.ts
+src/environments/environment.prod.ts
+# But keep example files for reference
+!src/environments/environment.ts.example
+!src/environments/environment.prod.ts.example
 
 # Compiled output
 /dist
