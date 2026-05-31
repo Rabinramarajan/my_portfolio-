@@ -622,6 +622,8 @@
   .hm-section          { padding: 60px 0; }
   .hm-cta-card         { padding: 50px 24px; }
   .hm-notfit-card      { padding: 24px; }
+  .value-card          { padding: 1.5rem; }
+  .step-card           { padding: 1.5rem; }
 }
 
 @media (max-width: 480px) {
@@ -630,4 +632,5 @@
   .hm-hero-actions     { flex-direction: column; align-items: center; }
   .hm-process-steps    { grid-template-columns: 1fr; }
   .hm-cta-actions      { flex-direction: column; align-items: center; }
+  .hm-cta-card         { padding: 36px 16px; }
 }

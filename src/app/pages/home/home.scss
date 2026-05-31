@@ -132,6 +132,7 @@
 // ============================================================
 .hero {
   min-height: 100vh;
+  min-height: 100dvh;
   background: var(--bg-primary);
   display: flex;
   align-items: center;
@@ -526,6 +527,9 @@
   font-size: 13px;
   line-height: 1.85;
   overflow: visible;
+  @media (max-width: 600px) {
+    overflow-x: auto;
+  }
 
   code { display: block; }
 }
@@ -826,7 +830,7 @@
 
 .about-grid {
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: min(380px, 100%) 1fr;
   gap: 32px;
   align-items: stretch;
 }
@@ -882,9 +886,10 @@
   left: 20px;
   right: 20px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 18px;
   background: rgba(20, 20, 20, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
@@ -924,13 +929,14 @@
   font-size: 11px;
   font-weight: 500;
   color: #f5f5f7;
-  white-space: nowrap;
+  flex-shrink: 0;
 
   .open-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
     background: #34c759;
+    flex-shrink: 0;
   }
 }
 
@@ -1069,6 +1075,15 @@
 
   .about-intro {
     font-size: 14px;
+    margin-bottom: 32px;
+  }
+
+  .bio-text {
+    font-size: 14px;
+  }
+
+  .info-value {
+    font-size: 15px;
   }
 
   .info-grid { grid-template-columns: 1fr; }
@@ -1079,12 +1094,6 @@
 
   .photo-card {
     max-width: 100%;
-  }
-
-  .photo-info {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
   }
 
   .about-title {
@@ -1099,6 +1108,27 @@
 
   .info-grid {
     gap: 14px;
+  }
+
+  .bio-card {
+    padding: 20px;
+  }
+
+  .photo-wrapper {
+    min-height: 350px;
+  }
+
+  .photo-card {
+    height: 400px;
+  }
+
+  .photo-glass-footer {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    padding: 10px 14px;
+    gap: 8px;
+    border-radius: 12px;
   }
 }
 
@@ -1397,6 +1427,12 @@
   .exp-card-header { flex-direction: column; gap: 12px; }
   .exp-duration { align-self: flex-start; }
   .timeline { padding-left: 32px; }
+  .timeline-dot { left: -32px; }
+
+  .exp-subtitle {
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1433,6 +1469,8 @@
       left: 0;
     }
   }
+
+  .timeline-dot { left: -24px; }
 
   .timeline-marker {
     width: 16px;
@@ -1679,6 +1717,7 @@
 
   .skills-subtitle {
     font-size: 14px;
+    margin-bottom: 32px;
   }
 
   .skills-grid { grid-template-columns: 1fr; }
@@ -2269,6 +2308,15 @@
   .proj-featured-cta { order: 1; }
   .proj-featured-btn { flex: 1; justify-content: center; padding: 10px 16px; font-size: 12px; }
 
+  .proj-subtitle {
+    font-size: 13px;
+    margin-bottom: 28px;
+  }
+
+  .proj-featured-image {
+    min-height: 220px;
+  }
+
   .proj-grid-enhanced {
     gap: 16px;
   }
@@ -2302,18 +2350,6 @@
   background: var(--bg-primary);
   padding: 110px 0 90px;
   position: relative;
-}
-
-.resume-container {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 28px;
-}
-
-@media (max-width: 480px) {
-  .resume-container {
-    padding: 0 14px;
-  }
 }
 
 .resume-container {
@@ -2872,6 +2908,7 @@
 
   .li-subtitle {
     font-size: 14px;
+    margin-bottom: 32px;
   }
 
   .li-avatar {
@@ -3327,6 +3364,11 @@
 
   .contact-subtitle {
     font-size: 14px;
+    margin-bottom: 28px;
+  }
+
+  .contact-direct-title {
+    font-size: 14px;
   }
 
   .contact-grid { grid-template-columns: 1fr; }
@@ -3535,7 +3577,7 @@
   .about-container,
   .exp-container,
   .skills-container,
-  .projects-container,
+  .proj-container,
   .resume-container,
   .li-container,
   .contact-container {
@@ -3549,7 +3591,7 @@
   .about-container,
   .exp-container,
   .skills-container,
-  .projects-container,
+  .proj-container,
   .resume-container,
   .li-container,
   .contact-container,
@@ -3557,7 +3599,7 @@
     padding: 0 12px !important;
   }
 
-  .hero { padding: 50px 0 30px !important; }
+  .hero { padding: 72px 0 32px !important; }
   .about { padding: 40px 0 30px !important; }
   .experience { padding: 40px 0 30px !important; }
   .skills { padding: 40px 0 30px !important; }
