@@ -201,83 +201,63 @@
   },
   "projects": {
     "sectionLabel": "FEATURED PROJECTS",
-    "title": "Selected work — enterprise, government & mobile",
+    "title": "Selected work — freelance, enterprise & mobile",
     "subtitle": "A peek at recent products I've helped design, engineer, and ship. Each one balances scalable architecture with refined UI.",
     "featured": {
-      "image": "/proj-fiji.webp",
-      "alt": "Fiji Immigration Department — Enterprise Immigration Management System",
-      "name": "Fiji Immigration Department — Enterprise Immigration Management System",
-      "description": "A large-scale government immigration platform serving the Fiji Immigration Department. Engineered multiple role-based portals including External User Portal, Internal Staff Portal, Police Verification Portal, and a Payment Gateway.",
-      "highlights": "Engineered 4 role-based portals with JWT Auth and RBAC, Built complex multi-step forms, enterprise validation modules, and workflow systems, Developed and published shared Angular component libraries used across all portals, Integrated REST APIs and backend Web API services across the entire platform, Delivered responsive, mobile-friendly interfaces for large-scale government workflows.",
-      "tags": ["Angular", "TypeScript", "RxJS", "Angular Signals", "Tailwind CSS", "JWT", "RBAC", "REST APIs"],
-      "link": "https://immihub.immigration.gov.fj/FIDPortal",
-      "linkLabel": "Fiji Immigration Department Portal",
+      "image": "/proj-galaxy-sofas.webp",
+      "alt": "Galaxy Sofas — Modern Furniture Business Website",
+      "name": "Galaxy Sofas — Modern Furniture Business Website",
+      "description": "A modern, responsive business website for Galaxy Sofas, a local furniture retailer. Delivered a fresh, professional online presence with a product showcase, enquiry form, and brand identity that reflects the business's casual yet premium feel.",
+      "highlights": "Designed and built a fully responsive Angular website with modern UI/UX, Implemented product showcase with category filtering and smooth animations, Built a contact/enquiry form with email integration, Optimised for fast load times and SEO with structured metadata, Delivered a brand-consistent design — fresh, casual, and professional.",
+      "tags": ["Angular", "TypeScript", "SCSS", "EmailJS", "Responsive Design", "SEO", "UI/UX"],
+      "link": "#",
+      "linkLabel": "Galaxy Sofas Website",
       "caseStudy": {
-        "problem": "The Fiji Immigration Department relied on outdated paper-based workflows and fragmented legacy systems, causing processing delays of 3–5 business days per application. Staff had no unified digital view of applicant status, resulting in manual follow-ups and high error rates.",
-        "approach": "Built a multi-portal Angular 21 SPA with role-based access control — separate portals for external applicants, internal immigration officers, and police verification units. Used Angular Signals for real-time UI state and integrated a secure payment gateway for permit fees.",
+        "problem": "Galaxy Sofas had no online presence — customers could not discover the business online, browse products, or send enquiries without calling directly. The business was losing potential leads with no digital touchpoint.",
+        "approach": "Built a modern Angular website with a clean product showcase, enquiry form, and Google Maps integration. Focused on mobile-first design to capture walk-in traffic searching on phones, and optimised Core Web Vitals for fast organic discovery.",
         "challenges": [
-          "Complex multi-role RBAC with 6 distinct user types across 3 separate portal UIs",
-          "Integrating legacy government APIs with inconsistent data formats",
-          "Ensuring WCAG 2.1 AA accessibility compliance for a government system"
+          "Translating a furniture brand's physical store vibe into a clean digital aesthetic",
+          "Ensuring fast load times for image-heavy product galleries on mobile connections",
+          "Making the site self-manageable for a non-technical business owner"
         ],
         "results": [
-          { "metric": "70%", "label": "Reduction in processing time" },
-          { "metric": "3×", "label": "Faster application status lookup" },
-          { "metric": "99.8%", "label": "System uptime since launch" },
-          { "metric": "6", "label": "Distinct user roles managed" }
+          { "metric": "100%", "label": "Mobile-responsive across all devices" },
+          { "metric": "< 2s", "label": "Page load time on mobile" },
+          { "metric": "5★", "label": "Client satisfaction rating" },
+          { "metric": "∞", "label": "From zero to online presence" }
         ]
       }
     },
     "grid": [
       {
+        "image": "/proj-fiji.webp",
+        "alt": "Fiji Immigration Department — Enterprise Immigration Management System",
+        "name": "Fiji Immigration Department — Enterprise IMS",
+        "description": "A large-scale government immigration platform serving the Fiji Immigration Department with multiple role-based portals: External User, Internal Staff, Police Verification, and Payment Gateway.",
+        "highlights": "Engineered 4 role-based portals with JWT Auth and RBAC, Built complex multi-step forms, enterprise validation modules, and workflow systems, Developed and published shared Angular component libraries used across all portals, Integrated REST APIs and backend Web API services across the entire platform.",
+        "tags": ["Angular", "TypeScript", "RxJS", "Angular Signals", "Tailwind CSS", "JWT", "RBAC", "REST APIs"],
+        "link": "https://immihub.immigration.gov.fj/FIDPortal",
+        "linkLabel": "Fiji Immigration Department Portal"
+      },
+      {
         "image": "/proj-pension.webp",
         "alt": "PRIMS — Pension & Retirement Information Management System",
         "name": "PRIMS — Pension & Retirement Information Management System",
         "description": "An enterprise pension management platform for HR teams and administrators, handling retirement information and administrative workflows. Built using Zoneless Angular for next-generation performance.",
-        "highlights": "Built responsive dashboards and reusable UI modules for enterprise administration, Enhanced rendering using Angular Signals and optimized change detection strategies, Reduced API consumption via RxJS caching and stream optimization, Architected scalable, maintainable frontend structure for high-traffic enterprise usage, Improved frontend maintainability through a fully reusable component system.",
+        "highlights": "Built responsive dashboards and reusable UI modules for enterprise administration, Enhanced rendering using Angular Signals and optimized change detection strategies, Reduced API consumption via RxJS caching and stream optimization.",
         "tags": ["Angular (Zoneless)", "Angular Signals", "Angular Material", "RxJS", "REST APIs", "Performance Optimization"],
         "link": "https://mss.primssolution.com",
-        "linkLabel": "PRIMS Solution",
-        "caseStudy": {
-          "problem": "Legacy pension system had critical performance bottlenecks — dashboard rendered 1,200+ records without virtualisation, causing 8-second load times on mid-range hardware used by administrators.",
-          "approach": "Rebuilt the dashboard with Angular 21 Zoneless change detection, CDK virtual scroll for large datasets, and an API caching layer using RxJS shareReplay. Introduced reusable enterprise component library for consistent UI across 12 dashboard modules.",
-          "challenges": [
-            "Migrating from Angular 14 zone-based to Angular 21 zoneless without breaking existing RBAC logic",
-            "Handling 50,000+ pension records with real-time filtering and sorting",
-            "Coordinating with legacy backend teams on API contract standardisation"
-          ],
-          "results": [
-            { "metric": "40%", "label": "Faster initial load time" },
-            { "metric": "35%", "label": "Reduction in API response overhead" },
-            { "metric": "12", "label": "Dashboard modules delivered" },
-            { "metric": "50k+", "label": "Records handled with virtual scroll" }
-          ]
-        }
+        "linkLabel": "PRIMS Solution"
       },
       {
         "image": "/proj-vanuatu.webp",
         "alt": "VNPF — Vanuatu National Provident Fund App",
         "name": "VNPF — Vanuatu National Provident Fund App",
         "description": "A cross-platform hybrid mobile application for the Vanuatu National Provident Fund, delivering insurance and provident fund services to citizens on Android and iOS in the Pacific region.",
-        "highlights": "Built full Android & iOS app using Ionic Angular and Capacitor, Implemented biometric authentication — Face ID and Touch ID, Optimized API communication for low-bandwidth Pacific region environments, Developed responsive mobile UI components and an admin portal module, Delivered seamless cross-platform experience with high accessibility standards.",
+        "highlights": "Built full Android & iOS app using Ionic Angular and Capacitor, Implemented biometric authentication — Face ID and Touch ID, Optimized API communication for low-bandwidth Pacific region environments.",
         "tags": ["Ionic Angular", "Capacitor", "TypeScript", "REST APIs", "Biometric Auth", "Mobile-First UI"],
         "link": "https://play.google.com/store",
-        "linkLabel": "VNPF Mobile App",
-        "caseStudy": {
-          "problem": "Fund members in Vanuatu had no mobile access to their provident fund accounts. Manual branch visits were the only way to check balances, causing long queues and poor member experience, especially on outer islands with limited connectivity.",
-          "approach": "Built a cross-platform Ionic Angular app (Android + iOS) with offline-capable data caching for low-bandwidth environments. Integrated Capacitor biometric plugin for Face ID / Touch ID authentication and optimised API payloads for 2G/3G conditions.",
-          "challenges": [
-            "Implementing secure biometric authentication that degrades gracefully on older Android devices",
-            "Designing offline mode with reliable cache invalidation for balance data",
-            "App Store and Google Play submission and compliance review cycles"
-          ],
-          "results": [
-            { "metric": "2", "label": "Platforms (Android & iOS)" },
-            { "metric": "60%", "label": "Reduction in branch visit frequency" },
-            { "metric": "< 2s", "label": "Login time with biometrics" },
-            { "metric": "4.6★", "label": "App Store rating (pilot users)" }
-          ]
-        }
+        "linkLabel": "VNPF Mobile App"
       }
     ]
   },
