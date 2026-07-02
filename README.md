@@ -1,14 +1,6 @@
 # Portfolio
 
-Angular 21 portfolio for Rabin R. See [CONTACT_SETUP.md](./CONTACT_SETUP.md) for contact form configuration.
-
-## Local development
-
-```bash
-npm install
-npm run backend:dev   # Terminal 1 — contact API on :3000
-npm start             # Terminal 2 — app on :4200 (proxies /api)
-```
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.5.
 
 ## Development server
 

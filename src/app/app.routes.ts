@@ -13,10 +13,5 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/blog/blog').then(m => m.Blog),
     title: 'Blog | Angular Insights by Rabin R'
   },
-  {
-    path: 'blog/:slug',
-    loadComponent: () => import('./pages/blog-article/blog-article').then(m => m.BlogArticle),
-    title: 'Article | Rabin R'
-  },
   { path: '**', redirectTo: '' }
 ];

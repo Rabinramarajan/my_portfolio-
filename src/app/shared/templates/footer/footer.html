@@ -46,24 +46,12 @@
         <div class="footer-links-grid">
           <div class="footer-links-sub">
             @for (link of pds.footer()?.links?.slice(0, 3); track link.label) {
-              @if (isExternalHref(link.href)) {
-                <a [href]="link.href" class="footer-link">{{ link.label }}</a>
-              } @else if (navRouterLink(link.href); as rl) {
-                <a [routerLink]="rl" [fragment]="navFragment(link.href)" class="footer-link">{{ link.label }}</a>
-              } @else {
-                <a [href]="link.href" class="footer-link">{{ link.label }}</a>
-              }
+              <a [href]="link.href" class="footer-link">{{ link.label }}</a>
             }
           </div>
           <div class="footer-links-sub">
             @for (link of pds.footer()?.links?.slice(3); track link.label) {
-              @if (isExternalHref(link.href)) {
-                <a [href]="link.href" class="footer-link">{{ link.label }}</a>
-              } @else if (navRouterLink(link.href); as rl) {
-                <a [routerLink]="rl" [fragment]="navFragment(link.href)" class="footer-link">{{ link.label }}</a>
-              } @else {
-                <a [href]="link.href" class="footer-link">{{ link.label }}</a>
-              }
+              <a [href]="link.href" class="footer-link">{{ link.label }}</a>
             }
           </div>
         </div>

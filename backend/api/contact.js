@@ -1,21 +1,23 @@
-const express = require('express');
-const cors = require('cors');
 const nodemailer = require('nodemailer');
 const mongoose = require('mongoose');
-require('dotenv').config();
 
-const app = express();
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio-contacts', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// MongoDB Connection
+const connectDB = async () => {
+  if (mongoose.connections[0].readyState) {
+    return;
+  }
+  
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      maxPoolSize: 10,
+    });
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    throw error;
+  }
+};
 
 // Contact Schema
 const contactSchema = new mongoose.Schema({
@@ -38,8 +40,11 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Contact Form Endpoint
-app.post('/api/contact', async (req, res) => {
+// Email validation regex
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// POST handler
+async function handlePost(req, res) {
   try {
     const { name, email, subject, message } = req.body;
 
@@ -51,8 +56,7 @@ app.post('/api/contact', async (req, res) => {
       });
     }
 
-    // Email validation regex
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Email validation
     if (!emailRegex.test(email)) {
       return res.status(400).json({
         success: false,
@@ -60,13 +64,16 @@ app.post('/api/contact', async (req, res) => {
       });
     }
 
-    // Check message length
+    // Message length validation
     if (message.length < 10) {
       return res.status(400).json({
         success: false,
         message: 'Message must be at least 10 characters'
       });
     }
+
+    // Connect to MongoDB
+    await connectDB();
 
     // Save to database
     const contact = new Contact({
@@ -92,6 +99,7 @@ app.post('/api/contact', async (req, res) => {
         <p>${message.replace(/\n/g, '<br>')}</p>
         <hr>
         <p>Database ID: ${contact._id}</p>
+        <p>Submission Time: ${new Date().toLocaleString()}</p>
       `
     };
 
@@ -114,7 +122,7 @@ app.post('/api/contact', async (req, res) => {
 
     await transporter.sendMail(confirmationMail);
 
-    res.json({
+    res.status(200).json({
       success: true,
       message: 'Message sent successfully! Check your email for confirmation.',
       contactId: contact._id
@@ -127,19 +135,27 @@ app.post('/api/contact', async (req, res) => {
       message: 'Error processing your message. Please try again.'
     });
   }
-});
+}
 
-// Get contacts (admin endpoint - add authentication in production)
-app.get('/api/contacts', async (req, res) => {
-  try {
-    const contacts = await Contact.find().sort({ createdAt: -1 });
-    res.json({ success: true, contacts });
-  } catch (error) {
-    res.status(500).json({ success: false, message: 'Error fetching contacts' });
+// Main handler
+export default async function handler(req, res) {
+  // CORS headers
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  );
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
   }
-});
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+  if (req.method === 'POST') {
+    return handlePost(req, res);
+  }
+
+  res.status(405).json({ success: false, message: 'Method not allowed' });
+}
