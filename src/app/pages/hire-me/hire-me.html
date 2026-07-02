@@ -24,7 +24,7 @@
           </svg>
           Book a Free Discovery Call
         </button>
-        <a href="#contact" class="hm-btn hm-btn--outline" id="hm-contact-btn">
+        <a routerLink="/" fragment="contact" class="hm-btn hm-btn--outline" id="hm-contact-btn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
             <polyline points="22,6 12,13 2,6"/>
@@ -149,14 +149,21 @@
       <div class="hm-faq-list">
         @for (faq of pds.hireMe()?.faqs; track faq.q; let i = $index) {
           <div class="hm-faq-item" [class.hm-faq-item--open]="openFaqIndex() === i">
-            <button class="hm-faq-question" (click)="toggleFaq(i)" [id]="'faq-btn-' + i" [attr.aria-expanded]="openFaqIndex() === i">
+            <button
+              type="button"
+              class="hm-faq-question"
+              (click)="toggleFaq(i)"
+              [id]="'faq-btn-' + i"
+              [attr.aria-expanded]="openFaqIndex() === i"
+              [attr.aria-controls]="faqPanelId(i)"
+            >
               {{ faq.q }}
-              <svg class="hm-faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg class="hm-faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <polyline points="6 9 12 15 18 9"/>
               </svg>
             </button>
             @if (openFaqIndex() === i) {
-              <div class="hm-faq-answer">{{ faq.a }}</div>
+              <div class="hm-faq-answer" [id]="faqPanelId(i)" role="region" [attr.aria-labelledby]="'faq-btn-' + i">{{ faq.a }}</div>
             }
           </div>
         }
@@ -181,8 +188,8 @@
             </svg>
             Book a Free Call
           </button>
-          <a href="mailto:rabinr2607@gmail.com" class="hm-btn hm-btn--ghost" id="hm-email-btn">
-            rabinr2607&#64;gmail.com
+          <a [href]="'mailto:' + (pds.meta()?.email ?? 'rabinr2607@gmail.com')" class="hm-btn hm-btn--ghost" id="hm-email-btn">
+            {{ pds.meta()?.email ?? 'rabinr2607@gmail.com' }}
           </a>
         </div>
       </div>

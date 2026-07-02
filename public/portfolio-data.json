@@ -43,11 +43,11 @@
       "booking": { "label": "Hire Me", "href": "#contact" }
     },
     "stack": [
-      { "name": "Angular",     "color": "#DD0031" },
-      { "name": "TypeScript",  "color": "#3178C6" },
-      { "name": "RxJS",        "color": "#B7178C" },
-      { "name": "Ionic",       "color": "#3880FF" },
-      { "name": "Tailwind CSS", "color": "#06B6D4" }
+      { "name": "Angular",    "color": "#DD0031" },
+      { "name": "TypeScript", "color": "#3178C6" },
+      { "name": "RxJS",      "color": "#B7178C" },
+      { "name": "Ionic",     "color": "#3880FF" },
+      { "name": "Tailwind",  "color": "#06B6D4" }
     ],
     "availability": {
       "status": "Currently Freelancing · Open to Full-Time Opportunities",
@@ -56,9 +56,9 @@
     },
     "stats": [
       { "number": "4+",   "label": "Years Experience" },
+      { "number": "3+", "label": "Live Production Systems" },
       { "number": "10,000+", "label": "Active Users Served" },
-      { "number": "50%",    "label": "Performance Improvement" },
-      { "number": "40%",    "label": "API Optimization" }
+      { "number": "50%",    "label": "Performance Improvement" }
     ],
     "codeSnippet": {
       "filename": "app.component.ts",
@@ -102,10 +102,10 @@
       { "icon": "📱", "title": "Hybrid Mobile Apps", "desc": "Cross-platform Ionic apps for iOS & Android with biometric auth and offline capabilities" },
       { "icon": "⚡", "title": "Performance & Optimization", "desc": "Reducing API consumption by 40% and improving performance by 50% through smart optimization" }
     ],
-    "intro": "I'm Rabin R — a Frontend Angular Developer from Chennai with 4+ years of professional experience building scalable enterprise web and mobile applications. I currently freelance at Zellavora Technologies, delivering Angular and Ionic-based solutions across client projects. I specialize in Angular (v13–v20), TypeScript, RxJS, Angular Signals, Ionic Angular, and Tailwind CSS.",
+    "intro": "Frontend Angular Developer with 4+ years of experience building scalable enterprise web and mobile applications. Currently freelancing at Zellavora Technologies, delivering Angular and Ionic-based solutions across client projects.",
     "bio": [
-      "Previously at ITGalax Solutions Pvt Ltd, I engineered enterprise systems used by 10,000+ active users, optimized application performance by 50%, and reduced API consumption by 40% through smart caching and RxJS stream optimization. My expertise spans government portals (Fiji Immigration Department), enterprise pension management systems (PRIMS), and cross-platform mobile apps (Vanuatu National Provident Fund).",
-      "I thrive in Agile/Scrum teams and specialize in clean, reusable component architecture, performance optimization, secure API integration with JWT authentication and RBAC, and delivering production-grade SPAs. I'm an immediate joiner open to remote, hybrid, or full-time roles."
+      "Previously at ITGalax Solutions Pvt Ltd, I engineered government-grade portals and hybrid mobile apps serving 10,000+ active users — improving application performance by 50% and reducing API consumption by 40%. My expertise spans government portals (Fiji Immigration Department), enterprise pension management systems (PRIMS), and cross-platform mobile apps (Vanuatu National Provident Fund).",
+      "I specialize in Angular (v13–v20), TypeScript, RxJS, Angular Signals, Ionic Angular, and Tailwind CSS. I thrive in Agile/Scrum teams, deliver reusable component-driven architecture, and maintain clean, scalable codebases for enterprise environments. Open to remote, hybrid, and full-time opportunities across India."
     ],
     "infoCards": [
       { "label": "BASED IN",   "value": "Chennai, Tamil Nadu, India" },
@@ -114,7 +114,7 @@
       { "label": "FOCUS",      "value": "Enterprise & Government" }
     ],
     "openToWork": true,
-    "openBadge": "Immediate Joiner - Open to Remote/Hybrid"
+    "openBadge": "Immediate Joiner - Open to Full-Time / Remote"
   },
   "experience": {
     "sectionLabel": "EXPERIENCE",
@@ -126,18 +126,17 @@
         "location": "Remote / Chennai, India",
         "role": "Frontend Angular Developer (Freelance)",
         "duration": "February 2026 – Present",
-        "summary": "Working as a Freelance Frontend Angular Developer at Zellavora Technologies, contributing to scalable web and mobile application development for client projects across India and international markets.",
         "achievements": [
-          "Developing responsive SPAs using Angular (v17–v20) and TypeScript for client projects across India and international markets",
+          "Developing responsive SPAs using Angular (v17–v20) and TypeScript",
           "Building cross-platform hybrid mobile apps with Ionic Angular and Capacitor",
           "Implementing reusable UI component libraries and scalable frontend architecture",
           "Integrating REST APIs with JWT authentication and RBAC authorization",
-          "Optimizing performance using Angular Signals, lazy loading, and OnPush change detection",
+          "Optimizing performance using Angular Signals, lazy loading, and OnPush Change Detection",
           "Collaborating with backend and design teams in Agile/Scrum sprint cycles",
           "Writing technical documentation, project scope documents, and client cost estimation reports",
           "Managing source control and feature branching via Git & GitHub"
         ],
-        "tags": ["Angular", "TypeScript", "Ionic", "Capacitor", "RxJS", "Angular Signals", "Tailwind CSS", "REST APIs", "Git"]
+        "tags": ["Angular v17–v20", "TypeScript", "Ionic", "Capacitor", "RxJS", "Angular Signals", "Tailwind CSS", "REST APIs", "Git"]
       },
       {
         "company": "ITGalax Solutions Pvt Ltd",
@@ -155,7 +154,7 @@
           "Participated in code reviews, sprint planning, and release management in Agile/Scrum teams",
           "Managed source control workflows using Git, GitHub, and GitLab"
         ],
-        "tags": ["Angular (v13–v20)", "TypeScript", "Ionic", "Capacitor", "RxJS", "Angular Signals", "Angular Material", "PrimeNG", "Tailwind CSS", "REST APIs", "JWT", "RBAC", "Node.js", "Git"]
+        "tags": ["Angular v13–v20", "TypeScript", "Ionic", "Capacitor", "RxJS", "Angular Signals", "Angular Material", "PrimeNG", "Tailwind CSS", "REST APIs", "JWT", "RBAC", "Node.js", "Git"]
       }
     ]
   },
@@ -208,86 +207,63 @@
   },
   "projects": {
     "sectionLabel": "FEATURED PROJECTS",
-    "title": "Selected work — enterprise, government & mobile",
+    "title": "Selected work — freelance, enterprise & mobile",
     "subtitle": "A peek at recent products I've helped design, engineer, and ship. Each one balances scalable architecture with refined UI.",
     "featured": {
-      "image": "/proj-fiji.webp",
-      "alt": "Fiji Immigration Department Portal",
-      "name": "Fiji Immigration Department — Enterprise Immigration Management System",
-      "client": "Government of Fiji · via ITGalax Solutions Pvt Ltd",
-      "description": "A large-scale government immigration platform serving the Fiji Immigration Department. Engineered multiple role-based portals including External User Portal, Internal Staff Portal, Police Verification Portal, and a Payment Gateway.",
-      "highlights": "Engineered 4 role-based portals with JWT Auth and RBAC. Built complex multi-step forms, enterprise validation modules, and workflow systems. Developed and published shared Angular component libraries used across all portals. Integrated REST APIs and backend Web API services across the entire platform. Delivered responsive, mobile-friendly interfaces for large-scale government workflows.",
-      "tags": ["Angular", "TypeScript", "RxJS", "Angular Signals", "Tailwind CSS", "REST APIs"],
-      "link": "https://immihub.immigration.gov.fj/FIDPortal",
-      "linkLabel": "Fiji Immigration Department Portal",
+      "image": "/proj-galaxy-sofas.webp",
+      "alt": "Galaxy Sofas — Modern Furniture Business Website",
+      "name": "Galaxy Sofas — Modern Furniture Business Website",
+      "description": "A modern, responsive business website for Galaxy Sofas, a local furniture retailer. Delivered a fresh, professional online presence with a product showcase, enquiry form, and brand identity that reflects the business's casual yet premium feel.",
+      "highlights": "Designed and built a fully responsive Angular website with modern UI/UX, Implemented product showcase with category filtering and smooth animations, Built a contact/enquiry form with email integration, Optimised for fast load times and SEO with structured metadata, Delivered a brand-consistent design — fresh, casual, and professional.",
+      "tags": ["Angular", "TypeScript", "SCSS", "EmailJS", "Responsive Design", "SEO", "UI/UX"],
+      "link": "#",
+      "linkLabel": "Galaxy Sofas Website",
       "caseStudy": {
-        "problem": "The Fiji Immigration Department relied on outdated paper-based workflows and fragmented legacy systems, causing processing delays of 3–5 business days per application. Staff had no unified digital view of applicant status, resulting in manual follow-ups and high error rates.",
-        "approach": "Built a multi-portal Angular 21 SPA with role-based access control — separate portals for external applicants, internal immigration officers, and police verification units. Used Angular Signals for real-time UI state and integrated a secure payment gateway for permit fees.",
+        "problem": "Galaxy Sofas had no online presence — customers could not discover the business online, browse products, or send enquiries without calling directly. The business was losing potential leads with no digital touchpoint.",
+        "approach": "Built a modern Angular website with a clean product showcase, enquiry form, and Google Maps integration. Focused on mobile-first design to capture walk-in traffic searching on phones, and optimised Core Web Vitals for fast organic discovery.",
         "challenges": [
-          "Complex multi-role RBAC with 6 distinct user types across 3 separate portal UIs",
-          "Integrating legacy government APIs with inconsistent data formats",
-          "Ensuring WCAG 2.1 AA accessibility compliance for a government system"
+          "Translating a furniture brand's physical store vibe into a clean digital aesthetic",
+          "Ensuring fast load times for image-heavy product galleries on mobile connections",
+          "Making the site self-manageable for a non-technical business owner"
         ],
         "results": [
-          { "metric": "70%", "label": "Reduction in processing time" },
-          { "metric": "3×", "label": "Faster application status lookup" },
-          { "metric": "99.8%", "label": "System uptime since launch" },
-          { "metric": "6", "label": "Distinct user roles managed" }
+          { "metric": "100%", "label": "Mobile-responsive across all devices" },
+          { "metric": "< 2s", "label": "Page load time on mobile" },
+          { "metric": "5★", "label": "Client satisfaction rating" },
+          { "metric": "∞", "label": "From zero to online presence" }
         ]
       }
     },
     "grid": [
       {
+        "image": "/proj-fiji.webp",
+        "alt": "Fiji Immigration Department — Enterprise Immigration Management System",
+        "name": "Fiji Immigration Department — Enterprise IMS",
+        "description": "A large-scale government immigration platform serving the Fiji Immigration Department with multiple role-based portals: External User, Internal Staff, Police Verification, and Payment Gateway.",
+        "highlights": "Engineered 4 role-based portals with JWT Auth and RBAC, Built complex multi-step forms, enterprise validation modules, and workflow systems, Developed and published shared Angular component libraries used across all portals, Integrated REST APIs and backend Web API services across the entire platform.",
+        "tags": ["Angular", "TypeScript", "RxJS", "Angular Signals", "Tailwind CSS", "JWT", "RBAC", "REST APIs"],
+        "link": "https://immihub.immigration.gov.fj/FIDPortal",
+        "linkLabel": "Fiji Immigration Department Portal"
+      },
+      {
         "image": "/proj-pension.webp",
         "alt": "PRIMS — Pension & Retirement Information Management System",
         "name": "PRIMS — Pension & Retirement Information Management System",
-        "client": "Enterprise Administration · via ITGalax Solutions Pvt Ltd",
         "description": "An enterprise pension management platform for HR teams and administrators, handling retirement information and administrative workflows. Built using Zoneless Angular for next-generation performance.",
-        "highlights": "Built responsive dashboards and reusable UI modules for enterprise administration. Enhanced rendering using Angular Signals and optimized change detection. Reduced API consumption via RxJS caching and stream optimization. Architected a scalable, maintainable, fully reusable component system.",
-        "tags": ["Angular (Zoneless)", "Angular Signals", "Angular Material", "RxJS", "REST APIs"],
+        "highlights": "Built responsive dashboards and reusable UI modules for enterprise administration, Enhanced rendering using Angular Signals and optimized change detection strategies, Reduced API consumption via RxJS caching and stream optimization.",
+        "tags": ["Angular (Zoneless)", "Angular Signals", "Angular Material", "RxJS", "REST APIs", "Performance Optimization"],
         "link": "https://mss.primssolution.com",
-        "linkLabel": "PRIMS Solution",
-        "caseStudy": {
-          "problem": "Legacy pension system had critical performance bottlenecks — dashboard rendered 1,200+ records without virtualisation, causing 8-second load times on mid-range hardware used by administrators.",
-          "approach": "Rebuilt the dashboard with Angular 21 Zoneless change detection, CDK virtual scroll for large datasets, and an API caching layer using RxJS shareReplay. Introduced reusable enterprise component library for consistent UI across 12 dashboard modules.",
-          "challenges": [
-            "Migrating from Angular 14 zone-based to Angular 21 zoneless without breaking existing RBAC logic",
-            "Handling 50,000+ pension records with real-time filtering and sorting",
-            "Coordinating with legacy backend teams on API contract standardisation"
-          ],
-          "results": [
-            { "metric": "40%", "label": "Faster initial load time" },
-            { "metric": "35%", "label": "Reduction in API response overhead" },
-            { "metric": "12", "label": "Dashboard modules delivered" },
-            { "metric": "50k+", "label": "Records handled with virtual scroll" }
-          ]
-        }
+        "linkLabel": "PRIMS Solution"
       },
       {
         "image": "/proj-vanuatu.webp",
-        "alt": "VNPF — Vanuatu National Provident Fund",
+        "alt": "VNPF — Vanuatu National Provident Fund App",
         "name": "VNPF — Vanuatu National Provident Fund App",
-        "client": "Government of Vanuatu · via ITGalax Solutions Pvt Ltd",
         "description": "A cross-platform hybrid mobile application for the Vanuatu National Provident Fund, delivering insurance and provident fund services to citizens on Android and iOS in the Pacific region.",
-        "highlights": "Built full Android & iOS app using Ionic Angular and Capacitor. Implemented biometric authentication — Face ID and Touch ID. Optimized API communication for low-bandwidth Pacific region environments. Developed responsive mobile UI components and an admin portal module. Delivered a seamless cross-platform experience with high accessibility standards.",
+        "highlights": "Built full Android & iOS app using Ionic Angular and Capacitor, Implemented biometric authentication — Face ID and Touch ID, Optimized API communication for low-bandwidth Pacific region environments.",
         "tags": ["Ionic Angular", "Capacitor", "TypeScript", "REST APIs", "Biometric Auth", "Mobile-First UI"],
         "link": "https://play.google.com/store",
-        "linkLabel": "VNPF Mobile App",
-        "caseStudy": {
-          "problem": "Fund members in Vanuatu had no mobile access to their provident fund accounts. Manual branch visits were the only way to check balances, causing long queues and poor member experience, especially on outer islands with limited connectivity.",
-          "approach": "Built a cross-platform Ionic Angular app (Android + iOS) with offline-capable data caching for low-bandwidth environments. Integrated Capacitor biometric plugin for Face ID / Touch ID authentication and optimised API payloads for 2G/3G conditions.",
-          "challenges": [
-            "Implementing secure biometric authentication that degrades gracefully on older Android devices",
-            "Designing offline mode with reliable cache invalidation for balance data",
-            "App Store and Google Play submission and compliance review cycles"
-          ],
-          "results": [
-            { "metric": "2", "label": "Platforms (Android & iOS)" },
-            { "metric": "60%", "label": "Reduction in branch visit frequency" },
-            { "metric": "< 2s", "label": "Login time with biometrics" },
-            { "metric": "4.6★", "label": "App Store rating (pilot users)" }
-          ]
-        }
+        "linkLabel": "VNPF Mobile App"
       }
     ]
   },
@@ -325,7 +301,14 @@
         "readTime": "8 min read",
         "date": "2026-05-10",
         "tags": ["Angular", "Signals", "RxJS", "Architecture"],
-        "featured": true
+        "featured": true,
+        "content": [
+          "Enterprise Angular teams often ask whether Signals replace RxJS. The honest answer: they complement each other.",
+          "Signals excel at synchronous, component-local state — form toggles, derived UI flags, and template-ready values without async pipe overhead.",
+          "RxJS remains essential for event streams, HTTP orchestration, debounced search, and multi-source coordination.",
+          "In migrations I've led, we moved view-state to signals first, then wrapped existing observables with toSignal() at component boundaries.",
+          "The biggest win was clarity: templates read top-down, while services still compose async workflows with operators."
+        ]
       },
       {
         "id": "angular-performance-audit",
@@ -336,7 +319,14 @@
         "readTime": "12 min read",
         "date": "2026-04-28",
         "tags": ["Angular", "Performance", "Lighthouse", "Core Web Vitals"],
-        "featured": false
+        "featured": false,
+        "content": [
+          "Performance work starts with measurement, not assumptions. I run Lighthouse and Chrome DevTools on every production release candidate.",
+          "Check change detection strategy first: OnPush, signals, and trackBy on large lists eliminate unnecessary template work.",
+          "Next, audit bundle size with source-map-explorer and defer non-critical routes and animation libraries.",
+          "Images and fonts dominate LCP on marketing pages — optimize hero assets and avoid render-blocking third-party scripts.",
+          "Finally, validate INP by profiling long tasks during scroll and interaction; canvas animations and heavy observers are common culprits."
+        ]
       },
       {
         "id": "ionic-biometric-auth",
@@ -347,7 +337,14 @@
         "readTime": "10 min read",
         "date": "2026-04-12",
         "tags": ["Ionic", "Capacitor", "Mobile", "Security"],
-        "featured": false
+        "featured": false,
+        "content": [
+          "Biometric authentication improves UX for returning users, but only when implemented with secure fallbacks.",
+          "Capacitor's biometric plugin abstracts platform APIs while keeping secrets in the OS keystore.",
+          "Always offer PIN or password fallback for devices without biometrics or when enrollment fails.",
+          "Combine biometrics with refresh-token rotation and short-lived access tokens on the API layer.",
+          "Test on real devices early — emulator behavior differs significantly for Face ID and fingerprint flows."
+        ]
       }
     ]
   },
@@ -356,8 +353,8 @@
     "hero": {
       "title": "Let's Build Something",
       "titleAccent": "Exceptional Together",
-      "subtitle": "Available for immediate joining in remote, hybrid, or full-time roles. Open to relocating to Hyderabad, Bengaluru, Chennai, or staying remote.",
-      "badge": "IMMEDIATE JOINER - Currently Available",
+      "subtitle": "Currently freelancing at Zellavora Technologies. Open to full-time, remote, or hybrid roles. Immediate joiner available for opportunities across India.",
+      "badge": "IMMEDIATE JOINER · FREELANCING AT ZELLAVORA TECHNOLOGIES",
       "cta": "Get in Touch",
       "ctaHref": "#contact"
     },
@@ -412,20 +409,24 @@
       }
     ],
     "timelines": [
-      { "project": "Immediate Availability", "duration": "Ready to start ASAP" },
-      { "project": "Notice Period", "duration": "Flexible based on current engagement" },
-      { "project": "Full-time Role", "duration": "Available immediately" },
-      { "project": "Remote/Hybrid", "duration": "Fully flexible" },
-      { "project": "Relocation Timeline", "duration": "Within 30 days if needed" }
+      { "project": "Current Status", "duration": "Freelancing at Zellavora Technologies" },
+      { "project": "Availability", "duration": "Open to Full-Time Opportunities" },
+      { "project": "Work Mode", "duration": "Remote / Hybrid / Full-Time" },
+      { "project": "Location Preference", "duration": "Chennai · Hyderabad · Bengaluru · Remote" },
+      { "project": "Start Timeline", "duration": "Immediate Joiner" }
     ],
     "faqs": [
       {
-        "q": "What's your notice period?",
-        "a": "I'm currently freelancing, so I can start immediately or with the notice period agreed upon."
+        "q": "What's your current work status?",
+        "a": "I'm currently freelancing at Zellavora Technologies, delivering Angular and Ionic-based solutions for client projects. Open to transitioning to a full-time role."
       },
       {
         "q": "What's your work location preference?",
         "a": "Open to remote, hybrid, or full-time on-site in Chennai, Hyderabad, Bengaluru, or any location. Remote is preferred but flexible."
+      },
+      {
+        "q": "What's your notice period?",
+        "a": "As a freelancer, I can transition to a full-time role with flexible notice, typically within 2-4 weeks depending on current project commitments."
       },
       {
         "q": "What's your salary expectation?",
@@ -438,10 +439,6 @@
       {
         "q": "What types of roles interest you?",
         "a": "Senior Frontend Engineer, Angular Developer, Full Stack Engineer, or Technical Lead roles in enterprise, government, or product-based companies."
-      },
-      {
-        "q": "Do you contribute to open-source?",
-        "a": "Yes, I'm active on GitHub and contribute to Angular and related projects. Happy to discuss ongoing contributions."
       }
     ],
     "notAFit": [
@@ -455,9 +452,9 @@
     "sectionLabel": "RESUME",
     "title": "Take a deeper look at my work",
     "subtitle": "Full professional history, technical depth, and products delivered — available as PDF.",
-    "availBadge": "IMMEDIATE JOINER · REMOTE / HYBRID / FULL-TIME",
+    "availBadge": "IMMEDIATE JOINER · FREELANCING AT ZELLAVORA TECHNOLOGIES",
     "cardTitle": "Rabin R — Frontend Angular Developer",
-    "cardBio": "3.7+ years building enterprise portals, government systems, and scalable dashboards. Immediate joiner open to remote, hybrid, or full-time opportunities.",
+    "cardBio": "4+ years building enterprise portals, government systems, and scalable dashboards. Currently freelancing at Zellavora Technologies. Open to full-time opportunities.",
     "downloadLabel": "Download Resume",
     "viewLabel": "View Online",
     "updatedLabel": "Updated"
@@ -482,7 +479,7 @@
   "contact": {
     "sectionLabel": "CONTACT",
     "title": "Let's Build Something Great Together",
-    "subtitle": "Available for immediate joining in remote, hybrid, or full-time roles. Relocation open to Hyderabad, Bengaluru, Chennai, or Remote.",
+    "subtitle": "Currently freelancing at Zellavora Technologies. Open to full-time, remote, or hybrid opportunities. Immediate joiner available.",
     "form": {
       "namePlaceholder": "Your full name",
       "emailPlaceholder": "you@example.com",
@@ -500,56 +497,12 @@
       { "type": "website",  "label": "WEBSITE",   "value": "rabinr.in",                 "href": "https://rabinr.in", "external": true },
       { "type": "location", "label": "LOCATION",  "value": "Chennai, Tamil Nadu, India · IST (UTC+5:30)" }
     ],
-    "availText": "Open to Full-Time, Remote, Hybrid Roles · Immediate Joiner",
-    "availNote": "Relocate to: Chennai · Hyderabad · Bengaluru · Remote"
-  },
-  "achievements": {
-    "sectionLabel": "ACHIEVEMENTS & NUMBERS",
-    "title": "Impact measured in numbers",
-    "subtitle": "A snapshot of what 4+ years of enterprise frontend engineering has delivered.",
-    "metrics": [
-      { "value": "4+",       "label": "Years of Experience" },
-      { "value": "3+",       "label": "Live Production Systems" },
-      { "value": "10,000+",  "label": "Active Users Served" },
-      { "value": "50%",      "label": "Faster App Load" },
-      { "value": "40%",      "label": "Reduction in API Requests" },
-      { "value": "2",        "label": "Government Clients (Fiji, Vanuatu)" },
-      { "value": "Web + Android + iOS", "label": "Platforms Delivered" }
-    ]
-  },
-  "education": {
-    "sectionLabel": "EDUCATION & CERTIFICATIONS",
-    "title": "Academic background & professional training",
-    "subtitle": "Formal education and certifications that underpin my engineering practice.",
-    "degrees": [
-      {
-        "degree": "Bachelor of Science — Information Technology",
-        "institution": "National College, Tiruchirappalli — 620 001",
-        "duration": "June 2018 – April 2021",
-        "icon": "🎓"
-      }
-    ],
-    "certifications": [
-      {
-        "title": "Web Design & Development",
-        "institution": "Web D School, Chennai",
-        "icon": "📜"
-      }
-    ]
-  },
-  "careerTimeline": {
-    "sectionLabel": "CAREER TIMELINE",
-    "title": "The journey so far",
-    "subtitle": "Roles, education, and milestones along the way.",
-    "items": [
-      { "period": "Feb 2026 – Present",  "role": "Frontend Angular Developer", "org": "Zellavora Technologies",      "type": "Freelance" },
-      { "period": "Jun 2022 – Jan 2026", "role": "Frontend Angular Developer", "org": "ITGalax Solutions Pvt Ltd",  "type": "Full-Time" },
-      { "period": "Jun 2018 – Apr 2021", "role": "B.Sc. Information Technology", "org": "National College, Trichy",   "type": "Education" }
-    ]
+    "availText": "Currently available for new opportunities",
+    "availNote": "Freelancing at Zellavora Technologies · Open to Full-Time Roles"
   },
   "footer": {
     "logo": "Rabin.R",
-    "tagline": "Building scalable enterprise Angular applications.",
+    "tagline": "Frontend Angular Developer · Building scalable enterprise applications.",
     "links": [
       { "label": "About",      "href": "#about" },
       { "label": "Experience", "href": "#experience" },
@@ -564,6 +517,6 @@
       { "label": "Email",    "href": "mailto:rabinr2607@gmail.com",         "type": "email" }
     ],
     "copyright": "© 2026 Rabin R · Frontend Angular Developer",
-    "madeWith": "Built with Angular · Hosted on rabinr.in · Chennai, India"
+    "madeWith": "Built with Angular · Hosted on rabinr.in"
   }
 }

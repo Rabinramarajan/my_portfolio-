@@ -3,8 +3,13 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
-import { provideHttpClient, withXsrfConfiguration } from '@angular/common/http';
+import {
+  provideRouter,
+  withPreloading,
+  PreloadAllModules,
+  withInMemoryScrolling,
+} from '@angular/router';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 import { routes } from './app.routes';
 
@@ -12,14 +17,14 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    // HTTP client with XSRF protection (minimal overhead)
-    provideHttpClient(
-      withXsrfConfiguration({
-        cookieName: 'X-CSRF-TOKEN',
-        headerName: 'X-CSRF-TOKEN',
+    provideHttpClient(withFetch()),
+    provideRouter(
+      routes,
+      withPreloading(PreloadAllModules),
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'enabled',
       })
     ),
-    // Router with aggressive preloading for SPA performance
-    provideRouter(routes, withPreloading(PreloadAllModules)),
   ],
 };

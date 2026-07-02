@@ -1,0 +1,54 @@
+<main class="blog-article-page">
+  @if (pds.loading()) {
+    <div class="blog-container blog-state">Loading article…</div>
+  } @else if (pds.error()) {
+    <div class="blog-container blog-state blog-state--error">{{ pds.error() }}</div>
+  } @else if (article(); as art) {
+    <section class="blog-article-hero">
+      <div class="blog-container">
+        <a routerLink="/blog" class="blog-back-link">← Back to Blog</a>
+        <span
+          class="blog-category-badge"
+          [style.background]="getCategoryColor(art.category) + '1a'"
+          [style.color]="getCategoryColor(art.category)"
+          [style.border-color]="getCategoryColor(art.category) + '44'"
+        >
+          {{ art.category }}
+        </span>
+        <h1 class="blog-article-title">{{ art.title }}</h1>
+        <div class="blog-meta-row">
+          <span class="blog-date">{{ art.date | slice:0:10 }}</span>
+          <span class="blog-read-time">{{ art.readTime }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="blog-article-body">
+      <div class="blog-container">
+        <p class="blog-article-excerpt">{{ art.excerpt }}</p>
+        @if (art.content?.length) {
+          @for (para of art.content; track $index) {
+            <p class="blog-article-para">{{ para }}</p>
+          }
+        } @else {
+          <p class="blog-article-para blog-article-para--muted">
+            Full article content is coming soon. Follow on
+            <a href="https://www.linkedin.com/in/rabinr/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            for updates.
+          </p>
+        }
+        <div class="blog-article-tags">
+          @for (tag of art.tags; track tag) {
+            <span class="blog-tag">{{ tag }}</span>
+          }
+        </div>
+      </div>
+    </section>
+  } @else {
+    <div class="blog-container blog-state">
+      <h1>Article not found</h1>
+      <p>The article you are looking for does not exist.</p>
+      <a routerLink="/blog" class="blog-read-btn">Back to Blog</a>
+    </div>
+  }
+</main>
