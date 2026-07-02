@@ -49,6 +49,11 @@
       { "name": "Ionic",     "color": "#3880FF" },
       { "name": "Tailwind",  "color": "#06B6D4" }
     ],
+    "availability": {
+      "status": "Currently Freelancing · Open to Full-Time Opportunities",
+      "locations": "Chennai, Tamil Nadu, India · Remote · Hyderabad · Bengaluru",
+      "joiner": "Immediate Joiner"
+    },
     "stats": [
       { "number": "4+",   "label": "Years Experience" },
       { "number": "3+", "label": "Live Production Systems" },
@@ -135,9 +140,10 @@
       },
       {
         "company": "ITGalax Solutions Pvt Ltd",
-        "location": "Chennai, India",
+        "location": "Karapakkam, Chennai",
         "role": "Frontend Angular Developer",
-        "duration": "June 2022 – January 2026 (3.7 Years)",
+        "duration": "June 2022 – January 2026",
+        "summary": "Engineered enterprise-grade web and mobile applications for government and large-scale business clients. Delivered production systems across the Pacific region serving 10,000+ active users.",
         "achievements": [
           "Developed scalable enterprise SPAs using Angular, TypeScript, SCSS, Angular Material, Tailwind CSS",
           "Built reusable component libraries and scalable frontend architecture across multiple projects",
@@ -180,7 +186,7 @@
       {
         "name": "Architecture & Performance",
         "icon": "arch",
-        "items": ["SPA Architecture", "Lazy Loading", "Code Splitting", "OnPush Change Detection", "API Optimization", "Caching Strategies"]
+        "items": ["SPA Architecture", "Lazy Loading", "Code Splitting", "OnPush Change Detection", "Zoneless Angular", "API Optimization", "Caching Strategies", "Shared Frontend Libraries"]
       },
       {
         "name": "UI & Design",

@@ -3607,4 +3607,349 @@
   .resume-section { padding: 40px 0 30px !important; }
   .linkedin-section { padding: 40px 0 30px !important; }
   .contact-section { padding: 40px 0 30px !important; }
+  .achievements { padding: 40px 0 30px !important; }
+  .education { padding: 40px 0 30px !important; }
+  .career-timeline { padding: 40px 0 30px !important; }
+}
+
+// ============================================================
+// ===== ACHIEVEMENTS & NUMBERS ===============================
+// ============================================================
+.achievements {
+  background: var(--bg-secondary);
+  padding: 110px 0 90px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.35), transparent);
+  }
+}
+
+.ach-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.ach-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.12;
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+
+.ach-subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 580px;
+  margin: 0 0 52px;
+}
+
+.ach-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.ach-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: var(--border-accent);
+    background: var(--bg-glass-hover);
+  }
+}
+
+.ach-value {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  line-height: 1.1;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ach-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+// ============================================================
+// ===== EDUCATION & CERTIFICATIONS ===========================
+// ============================================================
+.education {
+  background: var(--bg-primary);
+  padding: 110px 0 90px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.35), transparent);
+  }
+}
+
+.edu-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.edu-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.12;
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+
+.edu-subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 580px;
+  margin: 0 0 52px;
+}
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.edu-col-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 18px;
+}
+
+.edu-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+
+  & + .edu-card { margin-top: 16px; }
+
+  &:hover {
+    border-color: var(--border-accent);
+    background: var(--bg-glass-hover);
+  }
+}
+
+.edu-icon {
+  font-size: 26px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.edu-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.edu-degree {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.edu-institution {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
+
+.edu-duration {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+// ============================================================
+// ===== CAREER TIMELINE ======================================
+// ============================================================
+.career-timeline {
+  background: var(--bg-secondary);
+  padding: 110px 0 90px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.35), transparent);
+  }
+}
+
+.ct-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.ct-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.12;
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+
+.ct-subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 580px;
+  margin: 0 0 44px;
+}
+
+.ct-table {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+}
+
+.ct-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.6fr 1.6fr 0.9fr;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.25s ease;
+
+  &:last-child { border-bottom: none; }
+
+  &:not(.ct-row--head):hover {
+    background: var(--bg-glass-hover);
+  }
+}
+
+.ct-row--head {
+  background: rgba(255, 255, 255, 0.03);
+
+  .ct-cell {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+}
+
+.ct-cell {
+  font-size: 14px;
+  color: var(--text-secondary);
+
+  &.ct-cell--period { font-weight: 600; color: var(--text-primary); }
+  &.ct-cell--role   { color: var(--text-primary); }
+}
+
+.ct-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  border: 1px solid var(--border-bright);
+  color: var(--text-secondary);
+
+  &.ct-badge--freelance {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #34d399;
+  }
+  &.ct-badge--fulltime {
+    background: rgba(124, 58, 237, 0.12);
+    border-color: rgba(124, 58, 237, 0.35);
+    color: #c4b5fd;
+  }
+  &.ct-badge--education {
+    background: rgba(6, 182, 212, 0.12);
+    border-color: rgba(6, 182, 212, 0.3);
+    color: #67e8f9;
+  }
+}
+
+// ── Experience summary line ───────────────────────────────
+.exp-summary {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0 0 18px;
+}
+
+// ── Project grid card client label ────────────────────────
+.proj-card-enhanced-client {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #c4b5fd;
+  margin: 2px 0 10px;
+}
+
+@media (max-width: 900px) {
+  .ach-grid { grid-template-columns: repeat(2, 1fr); }
+  .edu-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .ct-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .ct-row--head { display: none; }
+  .ct-cell--type { margin-top: 6px; }
+}
+
+@media (max-width: 480px) {
+  .ach-grid { grid-template-columns: 1fr; }
 }
