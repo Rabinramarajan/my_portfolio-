@@ -295,7 +295,14 @@
         "readTime": "8 min read",
         "date": "2026-05-10",
         "tags": ["Angular", "Signals", "RxJS", "Architecture"],
-        "featured": true
+        "featured": true,
+        "content": [
+          "Enterprise Angular teams often ask whether Signals replace RxJS. The honest answer: they complement each other.",
+          "Signals excel at synchronous, component-local state — form toggles, derived UI flags, and template-ready values without async pipe overhead.",
+          "RxJS remains essential for event streams, HTTP orchestration, debounced search, and multi-source coordination.",
+          "In migrations I've led, we moved view-state to signals first, then wrapped existing observables with toSignal() at component boundaries.",
+          "The biggest win was clarity: templates read top-down, while services still compose async workflows with operators."
+        ]
       },
       {
         "id": "angular-performance-audit",
@@ -306,7 +313,14 @@
         "readTime": "12 min read",
         "date": "2026-04-28",
         "tags": ["Angular", "Performance", "Lighthouse", "Core Web Vitals"],
-        "featured": false
+        "featured": false,
+        "content": [
+          "Performance work starts with measurement, not assumptions. I run Lighthouse and Chrome DevTools on every production release candidate.",
+          "Check change detection strategy first: OnPush, signals, and trackBy on large lists eliminate unnecessary template work.",
+          "Next, audit bundle size with source-map-explorer and defer non-critical routes and animation libraries.",
+          "Images and fonts dominate LCP on marketing pages — optimize hero assets and avoid render-blocking third-party scripts.",
+          "Finally, validate INP by profiling long tasks during scroll and interaction; canvas animations and heavy observers are common culprits."
+        ]
       },
       {
         "id": "ionic-biometric-auth",
@@ -317,7 +331,14 @@
         "readTime": "10 min read",
         "date": "2026-04-12",
         "tags": ["Ionic", "Capacitor", "Mobile", "Security"],
-        "featured": false
+        "featured": false,
+        "content": [
+          "Biometric authentication improves UX for returning users, but only when implemented with secure fallbacks.",
+          "Capacitor's biometric plugin abstracts platform APIs while keeping secrets in the OS keystore.",
+          "Always offer PIN or password fallback for devices without biometrics or when enrollment fails.",
+          "Combine biometrics with refresh-token rotation and short-lived access tokens on the API layer.",
+          "Test on real devices early — emulator behavior differs significantly for Face ID and fingerprint flows."
+        ]
       }
     ]
   },

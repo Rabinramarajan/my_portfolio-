@@ -1,90 +1,114 @@
 import { Directive, ElementRef, OnInit, OnDestroy, inject, Input } from '@angular/core';
 import { AnimationService } from '../services/animation.service';
 
-/**
- * Aurora Background Animation Directive
- * Smooth animated gradient waves with blue and purple flowing lights
- */
-@Directive({
-  selector: '[appAuroraBackground]',
-  standalone: true,
-})
+function createGatedCanvasController(
+  host: HTMLElement,
+  animation: AnimationService,
+  setup: (canvas: HTMLCanvasElement) => void,
+  tick: (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => void,
+  onResize: (canvas: HTMLCanvasElement) => void
+) {
+  if (animation.prefersReducedMotion()) {
+    return { destroy: () => {} };
+  }
+
+  const canvas = document.createElement('canvas');
+  setup(canvas);
+  host.style.position = 'relative';
+  host.appendChild(canvas);
+
+  let animationId: number | null = null;
+  let isVisible = false;
+
+  const start = () => {
+    if (animationId !== null) return;
+    const loop = () => {
+      if (!isVisible) {
+        animationId = null;
+        return;
+      }
+      const ctx = canvas.getContext('2d');
+      if (ctx) tick(ctx, canvas);
+      animationId = requestAnimationFrame(loop);
+    };
+    animationId = requestAnimationFrame(loop);
+  };
+
+  const stop = () => {
+    if (animationId !== null) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+  };
+
+  const unobserve = animation.observeIntersection(
+    host,
+    (visible) => {
+      isVisible = visible;
+      visible ? start() : stop();
+    },
+    { threshold: 0.05 }
+  );
+
+  const onWindowResize = () => onResize(canvas);
+  window.addEventListener('resize', onWindowResize, { passive: true });
+
+  return {
+    destroy: () => {
+      stop();
+      unobserve();
+      window.removeEventListener('resize', onWindowResize);
+      canvas.remove();
+    },
+  };
+}
+
+@Directive({ selector: '[appAuroraBackground]', standalone: true })
 export class AuroraBackgroundDirective implements OnInit, OnDestroy {
-  private readonly el = inject(ElementRef);
+  private readonly el = inject(ElementRef<HTMLElement>);
   private readonly animation = inject(AnimationService);
-  private animationId: number | null = null;
+  private controller: { destroy: () => void } | null = null;
   private time = 0;
 
-  ngOnInit() {
-    this.setupAuroraStyle();
-    this.animate();
+  ngOnInit(): void {
+    this.controller = createGatedCanvasController(
+      this.el.nativeElement,
+      this.animation,
+      (canvas) => {
+        canvas.style.cssText = 'position:absolute;top:0;left:0;pointer-events:none;opacity:0.15';
+        this.el.nativeElement.style.overflow = 'hidden';
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      },
+      (ctx, canvas) => {
+        this.time += 0.0015;
+        ctx.fillStyle = 'rgba(8, 13, 24, 0.3)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < 5; i++) {
+          const wave = Math.sin(this.time + i * 0.5) * 100 + 200;
+          const hue = (i * 60 + this.time * 20) % 360;
+          const gradient = ctx.createLinearGradient(0, wave - 100, 0, wave + 100);
+          gradient.addColorStop(0, `hsla(${hue}, 100%, 50%, 0)`);
+          gradient.addColorStop(0.5, `hsla(${hue}, 100%, 50%, 0.3)`);
+          gradient.addColorStop(1, `hsla(${hue}, 100%, 50%, 0)`);
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, wave - 100, canvas.width, 200);
+        }
+      },
+      (canvas) => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+    );
   }
 
-  private setupAuroraStyle() {
-    const canvas = document.createElement('canvas');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    canvas.style.position = 'absolute';
-    canvas.style.top = '0';
-    canvas.style.left = '0';
-    canvas.style.pointerEvents = 'none';
-    canvas.style.opacity = '0.15';
-    
-    this.el.nativeElement.style.position = 'relative';
-    this.el.nativeElement.style.overflow = 'hidden';
-    this.el.nativeElement.appendChild(canvas);
-
-    // Store for animation
-    (this.el.nativeElement as any).__auroraCanvas = canvas;
-  }
-
-  private animate() {
-    const canvas = (this.el.nativeElement as any).__auroraCanvas;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    this.time += 0.0015;
-
-    // Clear canvas
-    ctx.fillStyle = 'rgba(8, 13, 24, 0.3)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Draw animated aurora waves
-    for (let i = 0; i < 5; i++) {
-      const wave = Math.sin(this.time + i * 0.5) * 100 + 200;
-      const hue = (i * 60 + this.time * 20) % 360;
-
-      const gradient = ctx.createLinearGradient(0, wave - 100, 0, wave + 100);
-      gradient.addColorStop(0, `hsla(${hue}, 100%, 50%, 0)`);
-      gradient.addColorStop(0.5, `hsla(${hue}, 100%, 50%, 0.3)`);
-      gradient.addColorStop(1, `hsla(${hue}, 100%, 50%, 0)`);
-
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, wave - 100, canvas.width, 200);
-    }
-
-    this.animationId = requestAnimationFrame(() => this.animate());
-  }
-
-  ngOnDestroy() {
-    if (this.animationId !== null) {
-      cancelAnimationFrame(this.animationId);
-    }
+  ngOnDestroy(): void {
+    this.controller?.destroy();
   }
 }
 
-/**
- * Mouse Follow Glow Directive
- * Creates soft radial glow that follows cursor
- */
-@Directive({
-  selector: '[appMouseFollowGlow]',
-  standalone: true,
-})
+@Directive({ selector: '[appMouseFollowGlow]', standalone: true })
 export class MouseFollowGlowDirective implements OnInit, OnDestroy {
-  private readonly el = inject(ElementRef);
   private readonly animation = inject(AnimationService);
   private glowElement: HTMLElement | null = null;
   private mouseX = 0;
@@ -92,112 +116,78 @@ export class MouseFollowGlowDirective implements OnInit, OnDestroy {
   private targetX = 0;
   private targetY = 0;
   private animationId: number | null = null;
+  private active = false;
   private boundMouseMove: ((e: MouseEvent) => void) | null = null;
+  private boundVisibility: (() => void) | null = null;
 
-  ngOnInit() {
-    this.setupGlow();
-    this.setupMouseTracking();
-    this.animateGlow();
-  }
-
-  private setupGlow() {
+  ngOnInit(): void {
+    if (this.animation.prefersReducedMotion()) return;
     this.glowElement = document.createElement('div');
-    this.glowElement.style.cssText = `
-      position: fixed;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, rgba(59, 130, 246, 0.1) 70%, transparent 100%);
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(60px);
-      z-index: 1;
-      mix-blend-mode: screen;
-    `;
+    this.glowElement.style.cssText =
+      'position:fixed;width:300px;height:300px;background:radial-gradient(circle,rgba(168,85,247,0.3) 0%,rgba(59,130,246,0.1) 70%,transparent 100%);border-radius:50%;pointer-events:none;filter:blur(60px);z-index:1;mix-blend-mode:screen';
     document.body.appendChild(this.glowElement);
-  }
-
-  private setupMouseTracking() {
-    this.boundMouseMove = (e: MouseEvent) => {
+    this.boundMouseMove = (e) => {
       this.mouseX = e.clientX;
       this.mouseY = e.clientY;
     };
-
-    document.addEventListener('mousemove', this.boundMouseMove as EventListener);
+    document.addEventListener('mousemove', this.boundMouseMove);
+    this.boundVisibility = () => (document.hidden ? this.stop() : this.start());
+    document.addEventListener('visibilitychange', this.boundVisibility);
+    this.start();
   }
 
-  private animateGlow() {
-    if (!this.glowElement) return;
-
-    const smooth = this.animation.smoothMouseFollower(
-      this.mouseX,
-      this.mouseY,
-      this.targetX,
-      this.targetY,
-      0.1
-    );
-
-    this.targetX = smooth.x;
-    this.targetY = smooth.y;
-
-    this.glowElement.style.left = `${this.targetX - 150}px`;
-    this.glowElement.style.top = `${this.targetY - 150}px`;
-
-    this.animationId = requestAnimationFrame(() => this.animateGlow());
+  private start(): void {
+    if (this.active) return;
+    this.active = true;
+    const loop = () => {
+      if (!this.active || !this.glowElement) return;
+      const smooth = this.animation.smoothMouseFollower(this.mouseX, this.mouseY, this.targetX, this.targetY, 0.1);
+      this.targetX = smooth.x;
+      this.targetY = smooth.y;
+      this.glowElement.style.left = `${this.targetX - 150}px`;
+      this.glowElement.style.top = `${this.targetY - 150}px`;
+      this.animationId = requestAnimationFrame(loop);
+    };
+    this.animationId = requestAnimationFrame(loop);
   }
 
-  ngOnDestroy() {
-    if (this.glowElement) {
-      this.glowElement.remove();
-    }
+  private stop(): void {
+    this.active = false;
     if (this.animationId !== null) {
       cancelAnimationFrame(this.animationId);
+      this.animationId = null;
     }
-    if (this.boundMouseMove) {
-      document.removeEventListener('mousemove', this.boundMouseMove as EventListener);
-      this.boundMouseMove = null;
-    }
+  }
+
+  ngOnDestroy(): void {
+    this.stop();
+    this.glowElement?.remove();
+    if (this.boundMouseMove) document.removeEventListener('mousemove', this.boundMouseMove);
+    if (this.boundVisibility) document.removeEventListener('visibilitychange', this.boundVisibility);
   }
 }
 
-/**
- * Scroll Animation Trigger Directive
- * Cinematic section reveals with fade-up and blur-to-clear transitions
- */
-@Directive({
-  selector: '[appScrollTrigger]',
-  standalone: true,
-})
+@Directive({ selector: '[appScrollTrigger]', standalone: true })
 export class ScrollTriggerDirective implements OnInit, OnDestroy {
-  private readonly el = inject(ElementRef);
+  private readonly el = inject(ElementRef<HTMLElement>);
   private readonly animation = inject(AnimationService);
   private unobserve: (() => void) | null = null;
   @Input('appScrollTrigger') direction: 'up' | 'down' | 'left' | 'right' | '' | string = '';
 
-  ngOnInit() {
-    this.setupInitialState();
-    this.observeScroll();
-  }
-
-  private setupInitialState() {
+  ngOnInit(): void {
     const element = this.el.nativeElement;
-    element.style.opacity = '0';
-    
-    let transformStr = 'translateY(30px)';
-    if (this.direction === 'left') {
-      transformStr = 'translateX(-50px)';
-    } else if (this.direction === 'right') {
-      transformStr = 'translateX(50px)';
-    } else if (this.direction === 'down') {
-      transformStr = 'translateY(-30px)';
+    if (this.animation.prefersReducedMotion()) {
+      element.style.opacity = '1';
+      return;
     }
-    
+    element.style.opacity = '0';
+    let transformStr = 'translateY(30px)';
+    if (this.direction === 'left') transformStr = 'translateX(-50px)';
+    else if (this.direction === 'right') transformStr = 'translateX(50px)';
+    else if (this.direction === 'down') transformStr = 'translateY(-30px)';
     element.style.transform = transformStr;
     element.style.filter = 'blur(10px)';
     element.style.transition = `all 0.8s ${this.animation.easing.easeOutCubic}`;
-  }
-
-  private observeScroll() {
-    const element = this.el.nativeElement;
     this.unobserve = this.animation.observeIntersection(
       element,
       (isVisible) => {
@@ -211,210 +201,112 @@ export class ScrollTriggerDirective implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {
-    if (this.unobserve) {
-      this.unobserve();
-    }
+  ngOnDestroy(): void {
+    this.unobserve?.();
   }
 }
 
-/**
- * Magnetic Button Directive
- * Buttons move toward cursor with glow and ripple effects
- */
-@Directive({
-  selector: '[appMagneticButton]',
-  standalone: true,
-})
+@Directive({ selector: '[appMagneticButton]', standalone: true })
 export class MagneticButtonDirective implements OnInit, OnDestroy {
-  private readonly el = inject(ElementRef);
+  private readonly el = inject(ElementRef<HTMLElement>);
   private readonly animation = inject(AnimationService);
-  private originalX = 0;
-  private originalY = 0;
-  private animationId: number | null = null;
   private boundEnter: (() => void) | null = null;
   private boundMove: ((e: MouseEvent) => void) | null = null;
   private boundLeave: (() => void) | null = null;
 
-  ngOnInit() {
+  ngOnInit(): void {
+    if (this.animation.prefersReducedMotion()) return;
     const element = this.el.nativeElement;
     element.style.position = 'relative';
-    element.style.overflow = 'visible';
-    this.boundEnter = () => this.setupGlow();
-    this.boundMove = (e: MouseEvent) => this.handleMouseMove(e);
-    this.boundLeave = () => this.handleMouseLeave();
-
-    element.addEventListener('mouseenter', this.boundEnter as EventListener);
-    element.addEventListener('mousemove', this.boundMove as EventListener);
-    element.addEventListener('mouseleave', this.boundLeave as EventListener);
+    this.boundEnter = () => {
+      element.style.boxShadow = '0 0 30px 0 rgba(168, 85, 247, 0.5), 0 0 60px 0 rgba(59, 130, 246, 0.3)';
+    };
+    this.boundMove = (e) => {
+      const rect = element.getBoundingClientRect();
+      const angle = Math.atan2(e.clientY - rect.top - rect.height / 2, e.clientX - rect.left - rect.width / 2);
+      const dist = Math.min(
+        15,
+        this.animation.distance(e.clientX - rect.left, e.clientY - rect.top, rect.width / 2, rect.height / 2) / 30
+      );
+      this.animation.setTransform(element, Math.cos(angle) * dist, Math.sin(angle) * dist, 1.02);
+    };
+    this.boundLeave = () => {
+      element.style.transform = 'translate3d(0, 0, 0) scale(1)';
+      element.style.boxShadow = 'none';
+    };
+    element.addEventListener('mouseenter', this.boundEnter);
+    element.addEventListener('mousemove', this.boundMove);
+    element.addEventListener('mouseleave', this.boundLeave);
   }
 
-  private setupGlow() {
+  ngOnDestroy(): void {
     const element = this.el.nativeElement;
-    element.style.boxShadow = `0 0 30px 0 rgba(168, 85, 247, 0.5), 
-                               0 0 60px 0 rgba(59, 130, 246, 0.3)`;
-  }
-
-  private handleMouseMove(event: MouseEvent) {
-    const element = this.el.nativeElement;
-    const rect = element.getBoundingClientRect();
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-
-    const angle = Math.atan2(mouseY - centerY, mouseX - centerX);
-    const distance = Math.min(15, this.animation.distance(mouseX, mouseY, centerX, centerY) / 30);
-
-    const moveX = Math.cos(angle) * distance;
-    const moveY = Math.sin(angle) * distance;
-
-    this.animation.setTransform(element, moveX, moveY, 1.02);
-  }
-
-  private handleMouseLeave() {
-    const element = this.el.nativeElement;
-    element.style.transform = 'translate3d(0, 0, 0) scale(1)';
-    element.style.boxShadow = 'none';
-  }
-
-  ngOnDestroy() {
-    if (this.animationId !== null) {
-      cancelAnimationFrame(this.animationId);
-    }
-    const element = this.el.nativeElement;
-    if (this.boundEnter) {
-      element.removeEventListener('mouseenter', this.boundEnter as EventListener);
-      this.boundEnter = null;
-    }
-    if (this.boundMove) {
-      element.removeEventListener('mousemove', this.boundMove as EventListener);
-      this.boundMove = null;
-    }
-    if (this.boundLeave) {
-      element.removeEventListener('mouseleave', this.boundLeave as EventListener);
-      this.boundLeave = null;
-    }
+    if (this.boundEnter) element.removeEventListener('mouseenter', this.boundEnter);
+    if (this.boundMove) element.removeEventListener('mousemove', this.boundMove);
+    if (this.boundLeave) element.removeEventListener('mouseleave', this.boundLeave);
   }
 }
 
-/**
- * Grid Background Directive
- * Animated glowing grid with pulse effects and hover reactivity
- */
-@Directive({
-  selector: '[appGridBackground]',
-  standalone: true,
-})
+@Directive({ selector: '[appGridBackground]', standalone: true })
 export class GridBackgroundDirective implements OnInit, OnDestroy {
-  private readonly el = inject(ElementRef);
-  private animationId: number | null = null;
+  private readonly el = inject(ElementRef<HTMLElement>);
+  private readonly animation = inject(AnimationService);
+  private controller: { destroy: () => void } | null = null;
   private time = 0;
 
-  ngOnInit() {
-    this.setupGrid();
-    this.animate();
-  }
-
-  private setupGrid() {
-    const canvas = document.createElement('canvas');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    canvas.style.cssText = `
-      position: absolute;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      opacity: 0.15;
-    `;
-
-    this.el.nativeElement.style.position = 'relative';
-    this.el.nativeElement.appendChild(canvas);
-    (this.el.nativeElement as any).__gridCanvas = canvas;
-  }
-
-  private animate() {
-    const canvas = (this.el.nativeElement as any).__gridCanvas;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    this.time += 0.01;
-    ctx.fillStyle = 'rgba(8, 13, 24, 1)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Draw grid
-    ctx.strokeStyle = `rgba(168, 85, 247, ${0.3 + Math.sin(this.time) * 0.1})`;
-    ctx.lineWidth = 1;
-
-    const gridSize = 50;
-    for (let i = 0; i < canvas.width; i += gridSize) {
-      ctx.beginPath();
-      ctx.moveTo(i, 0);
-      ctx.lineTo(i, canvas.height);
-      ctx.stroke();
-    }
-
-    for (let i = 0; i < canvas.height; i += gridSize) {
-      ctx.beginPath();
-      ctx.moveTo(0, i);
-      ctx.lineTo(canvas.width, i);
-      ctx.stroke();
-    }
-
-    // Draw glowing intersection points
-    ctx.fillStyle = `rgba(59, 130, 246, ${0.5 + Math.sin(this.time * 2) * 0.2})`;
-    for (let i = gridSize; i < canvas.width; i += gridSize) {
-      for (let j = gridSize; j < canvas.height; j += gridSize) {
-        ctx.beginPath();
-        ctx.arc(i, j, 2 + Math.sin(this.time + i + j) * 1, 0, Math.PI * 2);
-        ctx.fill();
+  ngOnInit(): void {
+    this.controller = createGatedCanvasController(
+      this.el.nativeElement,
+      this.animation,
+      (canvas) => {
+        canvas.style.cssText = 'position:absolute;top:0;left:0;pointer-events:none;opacity:0.15';
+        canvas.width = window.innerWidth;
+        canvas.height = Math.max(this.el.nativeElement.offsetHeight, window.innerHeight);
+      },
+      (ctx, canvas) => {
+        this.time += 0.01;
+        ctx.fillStyle = 'rgba(8, 13, 24, 1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = `rgba(168, 85, 247, ${0.3 + Math.sin(this.time) * 0.1})`;
+        const gridSize = 50;
+        for (let i = 0; i < canvas.width; i += gridSize) {
+          ctx.beginPath();
+          ctx.moveTo(i, 0);
+          ctx.lineTo(i, canvas.height);
+          ctx.stroke();
+        }
+        for (let i = 0; i < canvas.height; i += gridSize) {
+          ctx.beginPath();
+          ctx.moveTo(0, i);
+          ctx.lineTo(canvas.width, i);
+          ctx.stroke();
+        }
+      },
+      (canvas) => {
+        canvas.width = window.innerWidth;
+        canvas.height = Math.max(this.el.nativeElement.offsetHeight, window.innerHeight);
       }
-    }
-
-    this.animationId = requestAnimationFrame(() => this.animate());
+    );
   }
 
-  ngOnDestroy() {
-    if (this.animationId !== null) {
-      cancelAnimationFrame(this.animationId);
-    }
+  ngOnDestroy(): void {
+    this.controller?.destroy();
   }
 }
 
-/**
- * Floating Text Animation Directive
- * Word-by-word reveal with gradient and blur transitions
- */
-@Directive({
-  selector: '[appFloatingText]',
-  standalone: true,
-})
+@Directive({ selector: '[appFloatingText]', standalone: true })
 export class FloatingTextDirective implements OnInit {
-  private readonly el = inject(ElementRef);
+  private readonly el = inject(ElementRef<HTMLElement>);
   private readonly animation = inject(AnimationService);
 
-  ngOnInit() {
-    this.setupTextAnimation();
-  }
-
-  private setupTextAnimation() {
+  ngOnInit(): void {
+    if (this.animation.prefersReducedMotion()) return;
     const element = this.el.nativeElement;
-    const text = element.textContent || '';
-
-    const words = text.split(' ');
-    element.innerHTML = words
+    element.innerHTML = (element.textContent || '')
+      .split(' ')
       .map(
-        (word: string, i: number) => `
-        <span style="
-          display: inline-block;
-          opacity: 0;
-          animation: fadeUpWords 0.8s ${this.animation.easing.easeOutCubic} forwards;
-          animation-delay: ${i * 0.1}s;
-          margin-right: 0.3em;
-        ">${word}</span>
-      `
+        (word: string, i: number) =>
+          `<span style="display:inline-block;opacity:0;animation:fadeUpWords 0.8s ${this.animation.easing.easeOutCubic} forwards;animation-delay:${i * 0.1}s;margin-right:0.3em">${word}</span>`
       )
       .join('');
   }
