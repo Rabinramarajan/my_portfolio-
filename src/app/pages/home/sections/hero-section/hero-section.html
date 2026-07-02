@@ -1,0 +1,119 @@
+<!-- ===== HERO SECTION ===== -->
+<section class="hero" id="home" appAuroraBackground appMouseFollowGlow>
+  <div class="hero-container">
+    <!-- LEFT COLUMN -->
+    <div class="hero-content animate-fade-in-up" appScrollTrigger>
+      <!-- Availability Badge -->
+      <div class="hero-badge animate-fade-in-scale">
+        <span class="badge-icon">✨</span>
+        <span>{{ pds.hero()?.badge }}</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="hero-title" appFloatingText>
+        {{ pds.hero()?.headline }}<br />
+        <span class="gradient-text text-gradient-animate">{{ pds.hero()?.headlineAccent }}</span>
+      </h1>
+
+      <!-- Sub-description -->
+      <p class="hero-desc animate-fade-in-up">{{ pds.hero()?.description }}</p>
+
+      <!-- CTA Buttons -->
+      <div class="hero-actions">
+        <a [href]="pds.hero()?.cta?.primary?.href" class="btn btn-primary animate-fade-in-scale" appMagneticButton
+          [style.animation-delay]="'0.1s'">
+          {{ pds.hero()?.cta?.primary?.label }} <span class="btn-arrow">→</span>
+        </a>
+        <a [href]="pds.hero()?.cta?.secondary?.href" class="btn btn-outline animate-fade-in-scale" appMagneticButton
+          [style.animation-delay]="'0.2s'">
+          <span class="btn-icon">⬇</span> {{ pds.hero()?.cta?.secondary?.label }}
+        </a>
+        <div class="hero-icon-btns">
+          <a href="#experience" class="icon-btn hover-lift" title="View Experience" aria-label="Go to Experience section">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+          </a>
+          <a [href]="pds.meta()?.github" target="_blank" rel="noopener noreferrer" class="icon-btn hover-lift" title="GitHub Profile" aria-label="Visit Rabin R's GitHub profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+          </a>
+          <a [href]="'mailto:' + pds.meta()?.email" class="icon-btn hover-lift" title="Send Email" aria-label="Send an email to Rabin R">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <polyline points="2,4 12,13 22,4" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Stack Badges -->
+      <div class="hero-stack animate-fade-in-up" [style.animation-delay]="'0.3s'">
+        <span class="stack-label">STACK</span>
+        <div class="stack-badges">
+          @for (tech of pds.hero()?.stack; track tech.name) {
+          <span class="stack-badge hover-scale">
+            <svg width="14" height="14" viewBox="0 0 24 24" [attr.fill]="tech.color">
+              <circle cx="12" cy="12" r="10" />
+            </svg>
+            {{ tech.name }}
+          </span>
+          }
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="hero-stats animate-fade-in-up" [style.animation-delay]="'0.4s'">
+        @for (stat of pds.hero()?.stats; track stat.label) {
+        <div class="stat-card hover-lift">
+          <span class="stat-number">{{ stat.number }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN – Code Editor Mockup -->
+    <div class="hero-visual animate-fade-in-scale" [style.animation-delay]="'0.2s'">
+      <div class="code-editor hover-glow">
+        <div class="editor-header">
+          <div class="editor-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="editor-filename">{{ pds.hero()?.codeSnippet?.filename }}</span>
+          <div class="editor-angular-logo">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#DD0031">
+              <path d="M12 2.5L2 6.2l1.5 13L12 23l8.5-3.8L22 6.2z" />
+              <path d="M12 2.5v20.5l8.5-3.8L22 6.2z" fill="#C3002F" />
+              <path d="M12 6.5L7.5 17h1.7l.9-2.3h3.8l.9 2.3h1.7zm0 3.2l1.4 3.5H10.6z" fill="white" />
+            </svg>
+          </div>
+        </div>
+        <div class="editor-body">
+          <pre class="code-block"><code>{{ '@' }}Component({{ '{' }}
+  <span class="code-key">selector</span>: <span class="code-string">'app-root'</span>,
+  <span class="code-key">standalone</span>: <span class="code-bool">true</span>,
+  <span class="code-key">changeDetection</span>: <span class="code-class">ChangeDetectionStrategy.OnPush</span>,
+{{ '}' }})
+
+<span class="code-kw">export class</span> <span class="code-class">RabinR</span> {{ '{' }}
+  <span class="code-key">role</span> = <span class="code-string">'Angular &amp; Full Stack Dev'</span>;
+  <span class="code-key">stack</span> = [<span class="code-string">'Angular'</span>, <span class="code-string">'TS'</span>, <span class="code-string">'RxJS'</span>];
+  <span class="code-key">years</span> = <span class="code-num">3</span>;
+{{ '}' }}
+</code></pre>
+        </div>
+        <div class="editor-footer">
+          <span class="build-dot"></span>
+          <span class="build-text">Build successful</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

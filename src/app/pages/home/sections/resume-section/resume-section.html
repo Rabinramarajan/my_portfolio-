@@ -1,0 +1,73 @@
+<!-- ===== RESUME SECTION ===== -->
+<section class="resume-section" id="resume">
+  <div class="resume-container">
+    <div class="resume-header">
+      <div class="section-label">{{ pds.resume()?.sectionLabel }}</div>
+      <h2 class="resume-title">{{ pds.resume()?.title }}</h2>
+      <p class="resume-subtitle">{{ pds.resume()?.subtitle }}</p>
+    </div>
+
+    <div class="resume-card">
+      <div class="resume-card-left">
+        <div class="avail-badge">
+          <span class="avail-dot"></span>
+          {{ pds.resume()?.availBadge }}
+        </div>
+        <h3 class="resume-name">{{ pds.resume()?.cardTitle }}</h3>
+        <p class="resume-bio">{{ pds.resume()?.cardBio }}</p>
+        <div class="resume-actions">
+          <a [href]="pds.meta()?.resumePdf" download class="resume-btn resume-btn--primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            {{ pds.resume()?.downloadLabel }}
+          </a>
+          <a [href]="pds.meta()?.resumePdf" target="_blank" class="resume-btn resume-btn--outline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
+            {{ pds.resume()?.viewLabel }}
+          </a>
+        </div>
+      </div>
+
+      <!-- Right — PDF mockup -->
+      <div class="resume-card-right">
+        <div class="pdf-mockup">
+          <div class="pdf-topbar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.5">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            <span class="pdf-label">.PDF</span>
+          </div>
+          <div class="pdf-content">
+            <div class="pdf-line pdf-line--title"></div>
+            <div class="pdf-line pdf-line--subtitle"></div>
+            <div class="pdf-spacer"></div>
+            <div class="pdf-line pdf-line--full"></div>
+            <div class="pdf-line pdf-line--full"></div>
+            <div class="pdf-line pdf-line--med"></div>
+            <div class="pdf-spacer"></div>
+            <div class="pdf-line pdf-line--accent pdf-line--long"></div>
+            <div class="pdf-line pdf-line--accent pdf-line--med"></div>
+            <div class="pdf-line pdf-line--accent pdf-line--short"></div>
+            <div class="pdf-spacer"></div>
+            <div class="pdf-line pdf-line--full"></div>
+            <div class="pdf-line pdf-line--med"></div>
+          </div>
+        </div>
+        <div class="pdf-updated">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15" />
+          </svg>
+          {{ pds.resume()?.updatedLabel }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
