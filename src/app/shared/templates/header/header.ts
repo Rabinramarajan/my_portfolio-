@@ -1,4 +1,5 @@
-import { Component, HostListener, signal, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, HostListener, signal, inject, afterNextRender, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { PortfolioDataService } from '../../services/portfolio-data.service';
 
 @Component({
@@ -8,14 +9,57 @@ import { PortfolioDataService } from '../../services/portfolio-data.service';
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Header {
-  protected readonly pds       = inject(PortfolioDataService);
+export class Header implements OnDestroy {
+  protected readonly pds        = inject(PortfolioDataService);
+  private readonly doc          = inject(DOCUMENT);
   protected readonly isScrolled = signal(false);
   protected readonly isMenuOpen = signal(false);
+
+  // Scroll-spy: which in-page section is currently active.
+  protected readonly activeSection = signal<string>('home');
+  private observer?: IntersectionObserver;
+
+  constructor() {
+    afterNextRender(() => this.setupScrollSpy());
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() { this.isScrolled.set(window.scrollY > 30); }
 
   toggleMenu() { this.isMenuOpen.update(v => !v); }
   closeMenu()  { this.isMenuOpen.set(false); }
+
+  /** True when the given nav href points at the currently-visible section. */
+  protected isActive(href?: string): boolean {
+    return !!href && href.startsWith('#') && href.slice(1) === this.activeSection();
+  }
+
+  private setupScrollSpy(): void {
+    const ids = ((this.pds.nav()?.links ?? []) as Array<{ href?: string }>)
+      .map(l => l.href)
+      .filter((h): h is string => !!h && h.startsWith('#'))
+      .map(h => h.slice(1));
+    if (!ids.includes('home')) ids.unshift('home');
+
+    const sections = ids
+      .map(id => this.doc.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+    if (!sections.length) return; // e.g. on /blog or /hire-me routes
+
+    // Narrow detection band around the viewport middle so the active section
+    // switches as each one crosses the centre while scrolling.
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) this.activeSection.set(e.target.id);
+        }
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+    );
+    sections.forEach(s => this.observer!.observe(s));
+  }
+
+  ngOnDestroy(): void {
+    this.observer?.disconnect();
+  }
 }

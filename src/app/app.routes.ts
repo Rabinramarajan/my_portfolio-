@@ -23,5 +23,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/project-detail/project-detail').then(m => m.ProjectDetail),
     title: 'Case Study | Rabin R'
   },
+  {
+    path: 'styleguide',
+    loadComponent: () => import('./pages/styleguide/styleguide').then(m => m.Styleguide),
+    title: 'Design System | Rabin R'
+  },
   { path: '**', redirectTo: '' }
 ];

@@ -20,7 +20,9 @@
           @if (link.highlight) {
             <a [href]="link.href" class="nav-link nav-link--hire-me" [target]="link.external ? '_blank' : '_self'">{{ link.label }}</a>
           } @else {
-            <a [href]="link.href" class="nav-link" [target]="link.external ? '_blank' : '_self'">{{ link.label }}</a>
+            <a [href]="link.href" class="nav-link" [class.nav-link--active]="isActive(link.href)"
+               [attr.aria-current]="isActive(link.href) ? 'true' : null"
+               [target]="link.external ? '_blank' : '_self'">{{ link.label }}</a>
           }
         </li>
       }

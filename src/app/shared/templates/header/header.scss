@@ -133,6 +133,22 @@
     color: var(--text-primary);
     background: var(--bg-elevated);
   }
+
+  // Active section (scroll-spy)
+  &--active {
+    color: var(--text-primary);
+    font-weight: 600;
+    background: rgba(99, 102, 241, 0.1);
+
+    &::after {
+      content: '';
+      display: block;
+      height: 2px;
+      margin: 4px 8px 0;
+      border-radius: 2px;
+      background: var(--gradient-primary);
+    }
+  }
 }
 
 // Highlighted "Hire Me" nav button

@@ -1,0 +1,159 @@
+<main class="sg">
+  <header class="sg-hero">
+    <a routerLink="/" class="sg-back">← Back to portfolio</a>
+    <h1 class="sg-title">Design System</h1>
+    <p class="sg-lead">The tokens and components that keep this portfolio visually consistent — colours, type, spacing, elevation, and the core UI primitives, all driven by CSS custom properties in one source of truth.</p>
+  </header>
+
+  <!-- COLORS -->
+  <section class="sg-section">
+    <h2 class="sg-h2">Colour tokens</h2>
+
+    <h3 class="sg-h3">Accents</h3>
+    <div class="sg-swatches">
+      @for (s of accents; track s.var) {
+        <div class="sg-swatch">
+          <div class="sg-swatch-chip" [style.background]="'var(' + s.var + ')'"></div>
+          <span class="sg-swatch-name">{{ s.name }}</span>
+          <code class="sg-swatch-var">{{ s.var }}</code>
+        </div>
+      }
+    </div>
+
+    <h3 class="sg-h3">Surfaces</h3>
+    <div class="sg-swatches">
+      @for (s of surfaces; track s.var) {
+        <div class="sg-swatch">
+          <div class="sg-swatch-chip sg-swatch-chip--bordered" [style.background]="'var(' + s.var + ')'"></div>
+          <span class="sg-swatch-name">{{ s.name }}</span>
+          <code class="sg-swatch-var">{{ s.var }}</code>
+        </div>
+      }
+    </div>
+
+    <h3 class="sg-h3">Text</h3>
+    <div class="sg-swatches">
+      @for (s of texts; track s.var) {
+        <div class="sg-swatch">
+          <div class="sg-swatch-chip sg-swatch-chip--bordered" [style.background]="'var(' + s.var + ')'"></div>
+          <span class="sg-swatch-name">{{ s.name }}</span>
+          <code class="sg-swatch-var">{{ s.var }}</code>
+        </div>
+      }
+    </div>
+
+    <h3 class="sg-h3">Gradients</h3>
+    <div class="sg-gradients">
+      <div class="sg-gradient" style="background: var(--gradient-primary)"><span>--gradient-primary</span></div>
+      <div class="sg-gradient" style="background: var(--gradient-accent)"><span>--gradient-accent</span></div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section class="sg-section">
+    <h2 class="sg-h2">Typography</h2>
+    <div class="sg-type">
+      <div class="sg-type-row"><span class="sg-type-meta">H1 · 40 / 700</span><span style="font-size:40px;font-weight:800;letter-spacing:-.02em">Engineering scalable apps</span></div>
+      <div class="sg-type-row"><span class="sg-type-meta">H2 · 32 / 700</span><span style="font-size:32px;font-weight:700;letter-spacing:-.01em">Section heading</span></div>
+      <div class="sg-type-row"><span class="sg-type-meta">H3 · 24 / 600</span><span style="font-size:24px;font-weight:600">Subsection heading</span></div>
+      <div class="sg-type-row"><span class="sg-type-meta">Body · 16 / 400</span><span style="font-size:16px;line-height:1.6;color:var(--text-secondary)">Body copy uses Inter at 16px with a 1.6 line-height for comfortable reading across long passages.</span></div>
+      <div class="sg-type-row"><span class="sg-type-meta">Caption · 14</span><span style="font-size:14px;color:var(--text-tertiary)">Caption / secondary text</span></div>
+      <div class="sg-type-row"><span class="sg-type-meta">Code</span><code class="sg-inline-code">const years = 4;</code></div>
+    </div>
+  </section>
+
+  <!-- SPACING -->
+  <section class="sg-section">
+    <h2 class="sg-h2">Spacing scale <span class="sg-note">(4px base)</span></h2>
+    <div class="sg-spacing">
+      @for (v of spacing; track v) {
+        <div class="sg-spacing-row">
+          <code class="sg-swatch-var">{{ v }}</code>
+          <div class="sg-spacing-bar" [style.width]="'var(' + v + ')'"></div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- RADIUS + SHADOW -->
+  <section class="sg-section sg-grid-2">
+    <div>
+      <h2 class="sg-h2">Radius</h2>
+      <div class="sg-boxes">
+        @for (r of radii; track r) {
+          <div class="sg-box" [style.border-radius]="'var(' + r + ')'"><code>{{ r }}</code></div>
+        }
+      </div>
+    </div>
+    <div>
+      <h2 class="sg-h2">Elevation</h2>
+      <div class="sg-boxes">
+        @for (s of shadows; track s) {
+          <div class="sg-box sg-box--shadow" [style.box-shadow]="'var(' + s + ')'"><code>{{ s }}</code></div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPONENTS -->
+  <section class="sg-section">
+    <h2 class="sg-h2">Components</h2>
+
+    <h3 class="sg-h3">Buttons</h3>
+    <div class="sg-row">
+      <button class="sg-btn sg-btn--primary">Primary</button>
+      <button class="sg-btn sg-btn--outline">Outline</button>
+      <button class="sg-btn sg-btn--ghost">Ghost</button>
+      <button class="sg-btn sg-btn--primary" disabled>Disabled</button>
+    </div>
+
+    <h3 class="sg-h3">Badges &amp; tags</h3>
+    <div class="sg-row">
+      <span class="sg-badge sg-badge--accent">Angular</span>
+      <span class="sg-badge sg-badge--accent">TypeScript</span>
+      <span class="sg-badge sg-badge--amber"><span class="sg-dot"></span> Work in Progress</span>
+      <span class="sg-badge sg-badge--emerald"><span class="sg-dot"></span> Available</span>
+    </div>
+
+    <h3 class="sg-h3">Form states</h3>
+    <div class="sg-form">
+      <label class="sg-field">
+        <span class="sg-label">Default</span>
+        <input class="sg-input" placeholder="you@example.com" />
+      </label>
+      <label class="sg-field">
+        <span class="sg-label">Error</span>
+        <input class="sg-input sg-input--error" value="not-an-email" />
+        <span class="sg-error">Enter a valid email address</span>
+      </label>
+    </div>
+
+    <h3 class="sg-h3">States</h3>
+    <div class="sg-row">
+      <span class="sg-state"><span class="sg-spinner"></span> Loading…</span>
+      <span class="sg-state sg-state--success">✓ Saved successfully</span>
+      <span class="sg-state sg-state--error">✕ Something went wrong</span>
+    </div>
+
+    <h3 class="sg-h3">Card</h3>
+    <div class="sg-card">
+      <span class="sg-badge sg-badge--accent">Case study</span>
+      <h4 class="sg-card-title">Sample project card</h4>
+      <p class="sg-card-desc">Cards use the card gradient, token radius, and elevation, with a lift-on-hover transition.</p>
+    </div>
+  </section>
+
+  <!-- TRANSITIONS -->
+  <section class="sg-section">
+    <h2 class="sg-h2">Transitions</h2>
+    <div class="sg-row">
+      @for (t of transitions; track t.var) {
+        <div class="sg-trans" [style.transition]="'transform var(' + t.var + ')'">
+          <span>{{ t.name }}</span>
+          <code>{{ t.var }}</code>
+        </div>
+      }
+    </div>
+    <p class="sg-note">Hover the tiles above to feel each easing curve.</p>
+  </section>
+</main>
