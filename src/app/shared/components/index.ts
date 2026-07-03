@@ -8,3 +8,5 @@ export { TerminalIntroComponent } from './terminal-cursor.component';
 export { ToastComponent } from './toast/toast.component';
 export { BackToTopComponent } from './back-to-top/back-to-top.component';
 export { WhatsAppWidgetComponent } from './whatsapp-widget/whatsapp-widget.component';
+export { ResumeButtonComponent } from './resume-button.component';
+export { SkillsVisualizationComponent } from './skills-visualization.component';

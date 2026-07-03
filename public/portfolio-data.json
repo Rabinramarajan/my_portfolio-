@@ -23,13 +23,13 @@
   "nav": {
     "logo": "Rabin.R",
     "links": [
-      { "label": "About",      "href": "#about" },
+      { "label": "About", "href": "#about" },
       { "label": "Experience", "href": "#experience" },
-      { "label": "Skills",     "href": "#skills" },
-      { "label": "Projects",   "href": "#projects" },
-      { "label": "Blog",       "href": "/blog" },
-      { "label": "LinkedIn",   "href": "https://www.linkedin.com/in/rabinr/", "external": true },
-      { "label": "Contact",    "href": "#contact" }
+      { "label": "Skills", "href": "#skills" },
+      { "label": "Projects", "href": "#projects" },
+      { "label": "Blog", "href": "/blog" },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/rabinr/", "external": true },
+      { "label": "Contact", "href": "#contact" }
     ]
   },
   "hero": {
@@ -43,48 +43,48 @@
       "booking": { "label": "Hire Me", "href": "#contact" }
     },
     "stack": [
-      { "name": "Angular",    "color": "#DD0031" },
+      { "name": "Angular", "color": "#DD0031" },
       { "name": "TypeScript", "color": "#3178C6" },
-      { "name": "RxJS",      "color": "#B7178C" },
-      { "name": "Ionic",     "color": "#3880FF" },
-      { "name": "Tailwind",  "color": "#06B6D4" }
+      { "name": "RxJS", "color": "#B7178C" },
+      { "name": "Ionic", "color": "#3880FF" },
+      { "name": "Tailwind", "color": "#06B6D4" }
     ],
     "stats": [
-      { "number": "4+",   "label": "Years Experience" },
+      { "number": "4+", "label": "Years Experience" },
       { "number": "3+", "label": "Live Production Systems" },
       { "number": "10,000+", "label": "Active Users Served" },
-      { "number": "50%",    "label": "Performance Improvement" }
+      { "number": "50%", "label": "Performance Improvement" }
     ],
     "codeSnippet": {
       "filename": "app.component.ts",
       "lines": [
         { "type": "decorator", "text": "@Component" },
-        { "type": "punct",     "text": "({" },
-        { "type": "key",       "text": "  selector" },
-        { "type": "punct",     "text": ": " },
-        { "type": "string",    "text": "'app-root'" },
-        { "type": "punct",     "text": "," },
-        { "type": "key",       "text": "  standalone" },
-        { "type": "punct",     "text": ": " },
-        { "type": "bool",      "text": "true" },
-        { "type": "punct",     "text": "," },
-        { "type": "key",       "text": "  changeDetection" },
-        { "type": "punct",     "text": ": " },
-        { "type": "class",     "text": "ChangeDetectionStrategy.OnPush" },
-        { "type": "punct",     "text": "," },
-        { "type": "punct",     "text": "})" },
-        { "type": "kw",        "text": "export class " },
-        { "type": "class",     "text": "RabinR" },
-        { "type": "punct",     "text": " {" },
-        { "type": "key",       "text": "  role" },
-        { "type": "punct",     "text": " = " },
-        { "type": "string",    "text": "'Angular & Full Stack Dev'" },
-        { "type": "punct",     "text": ";" },
-        { "type": "key",       "text": "  years" },
-        { "type": "punct",     "text": " = " },
-        { "type": "num",       "text": "4" },
-        { "type": "punct",     "text": ";" },
-        { "type": "punct",     "text": "}" }
+        { "type": "punct", "text": "({" },
+        { "type": "key", "text": "  selector" },
+        { "type": "punct", "text": ": " },
+        { "type": "string", "text": "'app-root'" },
+        { "type": "punct", "text": "," },
+        { "type": "key", "text": "  standalone" },
+        { "type": "punct", "text": ": " },
+        { "type": "bool", "text": "true" },
+        { "type": "punct", "text": "," },
+        { "type": "key", "text": "  changeDetection" },
+        { "type": "punct", "text": ": " },
+        { "type": "class", "text": "ChangeDetectionStrategy.OnPush" },
+        { "type": "punct", "text": "," },
+        { "type": "punct", "text": "})" },
+        { "type": "kw", "text": "export class " },
+        { "type": "class", "text": "RabinR" },
+        { "type": "punct", "text": " {" },
+        { "type": "key", "text": "  role" },
+        { "type": "punct", "text": " = " },
+        { "type": "string", "text": "'Angular & Full Stack Dev'" },
+        { "type": "punct", "text": ";" },
+        { "type": "key", "text": "  years" },
+        { "type": "punct", "text": " = " },
+        { "type": "num", "text": "4" },
+        { "type": "punct", "text": ";" },
+        { "type": "punct", "text": "}" }
       ]
     }
   },
@@ -93,9 +93,21 @@
     "title": "Frontend Angular Developer with 4+ Years Experience",
     "clientCentricTagline": "Specializing in scalable enterprise web and mobile applications with clean architecture, reusable UI systems, and user-first design.",
     "whoIHelp": [
-      { "icon": "🏛️", "title": "Government & Enterprise", "desc": "Building large-scale portals, immigration systems, and pension management platforms" },
-      { "icon": "📱", "title": "Hybrid Mobile Apps", "desc": "Cross-platform Ionic apps for iOS & Android with biometric auth and offline capabilities" },
-      { "icon": "⚡", "title": "Performance & Optimization", "desc": "Reducing API consumption by 40% and improving performance by 50% through smart optimization" }
+      {
+        "icon": "🏛️",
+        "title": "Government & Enterprise",
+        "desc": "Building large-scale portals, immigration systems, and pension management platforms"
+      },
+      {
+        "icon": "📱",
+        "title": "Hybrid Mobile Apps",
+        "desc": "Cross-platform Ionic apps for iOS & Android with biometric auth and offline capabilities"
+      },
+      {
+        "icon": "⚡",
+        "title": "Performance & Optimization",
+        "desc": "Reducing API consumption by 40% and improving performance by 50% through smart optimization"
+      }
     ],
     "intro": "Frontend Angular Developer with 4+ years of experience building scalable enterprise web and mobile applications. Currently freelancing at Zellavora Technologies, delivering Angular and Ionic-based solutions across client projects.",
     "bio": [
@@ -103,10 +115,10 @@
       "I specialize in Angular (v13–v20), TypeScript, RxJS, Angular Signals, Ionic Angular, and Tailwind CSS. I thrive in Agile/Scrum teams, deliver reusable component-driven architecture, and maintain clean, scalable codebases for enterprise environments. Open to remote, hybrid, and full-time opportunities across India."
     ],
     "infoCards": [
-      { "label": "BASED IN",   "value": "Chennai, Tamil Nadu, India" },
+      { "label": "BASED IN", "value": "Chennai, Tamil Nadu, India" },
       { "label": "EXPERIENCE", "value": "4+ Years" },
-      { "label": "STACK",      "value": "Angular · TypeScript · RxJS · Ionic" },
-      { "label": "FOCUS",      "value": "Enterprise & Government" }
+      { "label": "STACK", "value": "Angular · TypeScript · RxJS · Ionic" },
+      { "label": "FOCUS", "value": "Enterprise & Government" }
     ],
     "openToWork": true,
     "openBadge": "Immediate Joiner - Open to Full-Time / Remote"
@@ -131,7 +143,17 @@
           "Writing technical documentation, project scope documents, and client cost estimation reports",
           "Managing source control and feature branching via Git & GitHub"
         ],
-        "tags": ["Angular v17–v20", "TypeScript", "Ionic", "Capacitor", "RxJS", "Angular Signals", "Tailwind CSS", "REST APIs", "Git"]
+        "tags": [
+          "Angular v17–v20",
+          "TypeScript",
+          "Ionic",
+          "Capacitor",
+          "RxJS",
+          "Angular Signals",
+          "Tailwind CSS",
+          "REST APIs",
+          "Git"
+        ]
       },
       {
         "company": "ITGalax Solutions Pvt Ltd",
@@ -148,7 +170,22 @@
           "Participated in code reviews, sprint planning, and release management in Agile/Scrum teams",
           "Managed source control workflows using Git, GitHub, and GitLab"
         ],
-        "tags": ["Angular v13–v20", "TypeScript", "Ionic", "Capacitor", "RxJS", "Angular Signals", "Angular Material", "PrimeNG", "Tailwind CSS", "REST APIs", "JWT", "RBAC", "Node.js", "Git"]
+        "tags": [
+          "Angular v13–v20",
+          "TypeScript",
+          "Ionic",
+          "Capacitor",
+          "RxJS",
+          "Angular Signals",
+          "Angular Material",
+          "PrimeNG",
+          "Tailwind CSS",
+          "REST APIs",
+          "JWT",
+          "RBAC",
+          "Node.js",
+          "Git"
+        ]
       }
     ]
   },
@@ -170,27 +207,63 @@
       {
         "name": "Mobile Development",
         "icon": "mobile",
-        "items": ["Ionic Angular", "Capacitor", "Biometric Auth (Face ID, Touch ID)", "Android & iOS", "Low-bandwidth API Optimization"]
+        "items": [
+          "Ionic Angular",
+          "Capacitor",
+          "Biometric Auth (Face ID, Touch ID)",
+          "Android & iOS",
+          "Low-bandwidth API Optimization"
+        ]
       },
       {
         "name": "API & Backend Integration",
         "icon": "api",
-        "items": ["REST APIs", "Web APIs", "Web Services", "JWT Authentication", "RBAC Authorization", "Node.js"]
+        "items": [
+          "REST APIs",
+          "Web APIs",
+          "Web Services",
+          "JWT Authentication",
+          "RBAC Authorization",
+          "Node.js"
+        ]
       },
       {
         "name": "Architecture & Performance",
         "icon": "arch",
-        "items": ["SPA Architecture", "Lazy Loading", "Code Splitting", "OnPush Change Detection", "API Optimization", "Caching Strategies"]
+        "items": [
+          "SPA Architecture",
+          "Lazy Loading",
+          "Code Splitting",
+          "OnPush Change Detection",
+          "API Optimization",
+          "Caching Strategies"
+        ]
       },
       {
         "name": "UI & Design",
         "icon": "ui",
-        "items": ["Responsive & Mobile-First Design", "Cross-Browser Compatibility", "Web Accessibility (WCAG)", "UI/UX Best Practices", "Reusable Component Architecture"]
+        "items": [
+          "Responsive & Mobile-First Design",
+          "Cross-Browser Compatibility",
+          "Web Accessibility (WCAG)",
+          "UI/UX Best Practices",
+          "Reusable Component Architecture"
+        ]
       },
       {
         "name": "Tools & Workflow",
         "icon": "tools",
-        "items": ["Angular CLI", "Git", "GitHub", "GitLab", "Postman", "VS Code", "Chrome DevTools", "NPM", "PNPM"]
+        "items": [
+          "Angular CLI",
+          "Git",
+          "GitHub",
+          "GitLab",
+          "Postman",
+          "VS Code",
+          "Chrome DevTools",
+          "NPM",
+          "PNPM"
+        ]
       },
       {
         "name": "Agile & Methodology",
@@ -200,42 +273,60 @@
     ]
   },
   "projects": {
-    "sectionLabel": "FEATURED PROJECTS",
+    "sectionLabel": "PROJECTS",
     "title": "Selected work — enterprise, government & mobile",
     "subtitle": "A peek at recent products I've helped design, engineer, and ship. Each one balances scalable architecture with refined UI.",
-    "featured": {
-      "image": "/proj-fiji.webp",
-      "alt": "Fiji Immigration Department — Enterprise Immigration Management System",
-      "name": "Fiji Immigration Department — Enterprise Immigration Management System",
-      "description": "A large-scale government immigration platform serving the Fiji Immigration Department. Engineered multiple role-based portals including External User Portal, Internal Staff Portal, Police Verification Portal, and a Payment Gateway.",
-      "highlights": "Engineered 4 role-based portals with JWT Auth and RBAC, Built complex multi-step forms, enterprise validation modules, and workflow systems, Developed and published shared Angular component libraries used across all portals, Integrated REST APIs and backend Web API services across the entire platform, Delivered responsive, mobile-friendly interfaces for large-scale government workflows.",
-      "tags": ["Angular", "TypeScript", "RxJS", "Angular Signals", "Tailwind CSS", "JWT", "RBAC", "REST APIs"],
-      "link": "https://immihub.immigration.gov.fj/FIDPortal",
-      "linkLabel": "Fiji Immigration Department Portal",
-      "caseStudy": {
-        "problem": "The Fiji Immigration Department relied on outdated paper-based workflows and fragmented legacy systems, causing processing delays of 3–5 business days per application. Staff had no unified digital view of applicant status, resulting in manual follow-ups and high error rates.",
-        "approach": "Built a multi-portal Angular 21 SPA with role-based access control — separate portals for external applicants, internal immigration officers, and police verification units. Used Angular Signals for real-time UI state and integrated a secure payment gateway for permit fees.",
-        "challenges": [
-          "Complex multi-role RBAC with 6 distinct user types across 3 separate portal UIs",
-          "Integrating legacy government APIs with inconsistent data formats",
-          "Ensuring WCAG 2.1 AA accessibility compliance for a government system"
-        ],
-        "results": [
-          { "metric": "70%", "label": "Reduction in processing time" },
-          { "metric": "3×", "label": "Faster application status lookup" },
-          { "metric": "99.8%", "label": "System uptime since launch" },
-          { "metric": "6", "label": "Distinct user roles managed" }
-        ]
-      }
-    },
     "grid": [
       {
+        "slug": "fiji-immigration-management-system",
+        "image": "/proj-fiji.webp",
+        "alt": "Fiji Immigration Department — Enterprise Immigration Management System",
+        "name": "Fiji Immigration Department — Enterprise Immigration Management System",
+        "description": "A large-scale government immigration platform serving the Fiji Immigration Department. Engineered multiple role-based portals including External User Portal, Internal Staff Portal, Police Verification Portal, and a Payment Gateway.",
+        "highlights": "Engineered 4 role-based portals with JWT Auth and RBAC, Built complex multi-step forms, enterprise validation modules, and workflow systems, Developed and published shared Angular component libraries used across all portals, Integrated REST APIs and backend Web API services across the entire platform, Delivered responsive, mobile-friendly interfaces for large-scale government workflows.",
+        "tags": [
+          "Angular",
+          "TypeScript",
+          "RxJS",
+          "Angular Signals",
+          "Tailwind CSS",
+          "JWT",
+          "RBAC",
+          "REST APIs"
+        ],
+        "link": "https://immihub.immigration.gov.fj/FIDPortal",
+        "linkLabel": "Fiji Immigration Department Portal",
+        "caseStudy": {
+          "problem": "The Fiji Immigration Department relied on outdated paper-based workflows and fragmented legacy systems, causing processing delays of 3–5 business days per application. Staff had no unified digital view of applicant status, resulting in manual follow-ups and high error rates.",
+          "approach": "Built a multi-portal Angular 21 SPA with role-based access control — separate portals for external applicants, internal immigration officers, and police verification units. Used Angular Signals for real-time UI state and integrated a secure payment gateway for permit fees.",
+          "challenges": [
+            "Complex multi-role RBAC with 6 distinct user types across 3 separate portal UIs",
+            "Integrating legacy government APIs with inconsistent data formats",
+            "Ensuring WCAG 2.1 AA accessibility compliance for a government system"
+          ],
+          "results": [
+            { "metric": "70%", "label": "Reduction in processing time" },
+            { "metric": "3×", "label": "Faster application status lookup" },
+            { "metric": "99.8%", "label": "System uptime since launch" },
+            { "metric": "6", "label": "Distinct user roles managed" }
+          ]
+        }
+      },
+      {
+        "slug": "prims-pension-retirement-system",
         "image": "/proj-pension.webp",
         "alt": "PRIMS — Pension & Retirement Information Management System",
         "name": "PRIMS — Pension & Retirement Information Management System",
         "description": "An enterprise pension management platform for HR teams and administrators, handling retirement information and administrative workflows. Built using Zoneless Angular for next-generation performance.",
         "highlights": "Built responsive dashboards and reusable UI modules for enterprise administration, Enhanced rendering using Angular Signals and optimized change detection strategies, Reduced API consumption via RxJS caching and stream optimization, Architected scalable, maintainable frontend structure for high-traffic enterprise usage, Improved frontend maintainability through a fully reusable component system.",
-        "tags": ["Angular (Zoneless)", "Angular Signals", "Angular Material", "RxJS", "REST APIs", "Performance Optimization"],
+        "tags": [
+          "Angular (Zoneless)",
+          "Angular Signals",
+          "Angular Material",
+          "RxJS",
+          "REST APIs",
+          "Performance Optimization"
+        ],
         "link": "https://mss.primssolution.com",
         "linkLabel": "PRIMS Solution",
         "caseStudy": {
@@ -255,12 +346,20 @@
         }
       },
       {
+        "slug": "vnpf-provident-fund-app",
         "image": "/proj-vanuatu.webp",
         "alt": "VNPF — Vanuatu National Provident Fund App",
         "name": "VNPF — Vanuatu National Provident Fund App",
         "description": "A cross-platform hybrid mobile application for the Vanuatu National Provident Fund, delivering insurance and provident fund services to citizens on Android and iOS in the Pacific region.",
         "highlights": "Built full Android & iOS app using Ionic Angular and Capacitor, Implemented biometric authentication — Face ID and Touch ID, Optimized API communication for low-bandwidth Pacific region environments, Developed responsive mobile UI components and an admin portal module, Delivered seamless cross-platform experience with high accessibility standards.",
-        "tags": ["Ionic Angular", "Capacitor", "TypeScript", "REST APIs", "Biometric Auth", "Mobile-First UI"],
+        "tags": [
+          "Ionic Angular",
+          "Capacitor",
+          "TypeScript",
+          "REST APIs",
+          "Biometric Auth",
+          "Mobile-First UI"
+        ],
         "link": "https://play.google.com/store",
         "linkLabel": "VNPF Mobile App",
         "caseStudy": {
@@ -279,7 +378,65 @@
           ]
         }
       }
-    ]
+    ],
+    "inProgress": {
+      "sectionLabel": "CURRENTLY BUILDING",
+      "title": "Work in progress",
+      "subtitle": "Projects I'm actively building right now. Details and live links go up as each one ships.",
+      "items": [
+        {
+          "id": "galaxy-sofas",
+          "name": "Galaxy Sofas",
+          "type": "Company Website",
+          "status": "In Development",
+          "badge": "Work in Progress",
+          "description": "The official website for Galaxy Sofas, a furniture brand — a fast, responsive marketing site that presents the product catalogue and brand story with a clean, mobile-first experience.",
+          "features": [
+            "Product catalogue with category browsing",
+            "Responsive, mobile-first marketing pages",
+            "Enquiry and contact integration",
+            "SEO-optimised content structure"
+          ],
+          "tech": ["Tech stack — update me"],
+          "github": "",
+          "demo": ""
+        },
+        {
+          "id": "zellavora",
+          "name": "Zellavora",
+          "type": "Company Website",
+          "status": "In Development",
+          "badge": "Work in Progress",
+          "description": "The official corporate website for Zellavora Technologies — a polished brand presence showcasing the company's services, work, and identity with a modern, accessible design system.",
+          "features": [
+            "Services and portfolio showcase",
+            "Brand-consistent design system",
+            "Contact and lead capture",
+            "Performance and accessibility focus"
+          ],
+          "tech": ["Tech stack — update me"],
+          "github": "",
+          "demo": ""
+        },
+        {
+          "id": "zellavora-ai-resume-builder",
+          "name": "Zellavora AI Resume Builder",
+          "type": "AI Web Application",
+          "status": "In Development",
+          "badge": "Coming Soon",
+          "description": "An AI-powered resume builder that turns a few guided inputs into a tailored, ATS-friendly resume — pairing a live editor with AI-assisted content generation and one-click export.",
+          "features": [
+            "AI-assisted summary and bullet generation",
+            "ATS-friendly resume templates",
+            "Live preview editor",
+            "PDF export and shareable link"
+          ],
+          "tech": ["Tech stack — update me"],
+          "github": "",
+          "demo": ""
+        }
+      ]
+    }
   },
   "testimonials": {
     "sectionLabel": "CLIENT TESTIMONIALS",
@@ -315,7 +472,59 @@
         "readTime": "8 min read",
         "date": "2026-05-10",
         "tags": ["Angular", "Signals", "RxJS", "Architecture"],
-        "featured": true
+        "featured": true,
+        "content": [
+          {
+            "type": "p",
+            "text": "Signals landed as a stable API and immediately split teams into two camps: rip out RxJS entirely, or ignore Signals and keep shipping. After migrating three enterprise apps, I've found the truth is more nuanced — they solve overlapping but distinct problems."
+          },
+          { "type": "h2", "text": "The core distinction" },
+          {
+            "type": "p",
+            "text": "A Signal is a synchronous container for a value that notifies consumers when it changes. An Observable is a stream of values over time, with a rich operator vocabulary for combining, throttling, and cancelling asynchronous work. Signals model state; Observables model events."
+          },
+          { "type": "h2", "text": "Where Signals win" },
+          {
+            "type": "ul",
+            "items": [
+              "Component state that drives the template — no async pipe, no manual subscription, no OnPush friction.",
+              "Derived state via computed(), which memoizes automatically and only recalculates when a dependency actually changes.",
+              "Reading the current value synchronously — no more BehaviorSubject just to call getValue()."
+            ]
+          },
+          { "type": "h2", "text": "Where RxJS still wins" },
+          {
+            "type": "ul",
+            "items": [
+              "Anything time-based: debounceTime, throttleTime, retry with backoff.",
+              "Coordinating multiple async sources — switchMap on a typeahead is still unbeaten.",
+              "Event streams where you care about the sequence, not just the latest value."
+            ]
+          },
+          { "type": "h2", "text": "The pragmatic hybrid" },
+          {
+            "type": "p",
+            "text": "The bridge is toSignal() and toObservable(). Keep async orchestration in RxJS, then convert to a Signal at the edge where the template consumes it:"
+          },
+          {
+            "type": "code",
+            "lang": "ts",
+            "code": "private query = signal('');\n\nresults = toSignal(\n  toObservable(this.query).pipe(\n    debounceTime(300),\n    distinctUntilChanged(),\n    switchMap(q => this.api.search(q))\n  ),\n  { initialValue: [] }\n);"
+          },
+          { "type": "h2", "text": "Migration approach" },
+          {
+            "type": "ul",
+            "items": [
+              "Start with local component state — the lowest-risk, highest-reward conversion.",
+              "Leave HTTP and cross-cutting streams in RxJS until the Signals resource APIs mature.",
+              "Don't convert for the sake of it: a working switchMap does not need to become a Signal."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Bottom line: Signals are the default for state, RxJS is the specialist for asynchronous event streams. In enterprise apps you'll use both — the skill is knowing which layer each belongs in."
+          }
+        ]
       },
       {
         "id": "angular-performance-audit",
@@ -326,7 +535,63 @@
         "readTime": "12 min read",
         "date": "2026-04-28",
         "tags": ["Angular", "Performance", "Lighthouse", "Core Web Vitals"],
-        "featured": false
+        "featured": false,
+        "content": [
+          {
+            "type": "p",
+            "text": "Most Angular performance problems are not exotic. They cluster around a handful of recurring mistakes. This is the checklist I run on every project, top to bottom."
+          },
+          { "type": "h2", "text": "1. Change detection" },
+          {
+            "type": "ul",
+            "items": [
+              "Adopt OnPush on every component — it's the single highest-leverage change.",
+              "Move toward a zoneless setup where the app is Signals-driven.",
+              "Never call functions that do real work in templates; they run on every check."
+            ]
+          },
+          { "type": "h2", "text": "2. Bundle size" },
+          {
+            "type": "ul",
+            "items": [
+              "Lazy-load every route with loadComponent / loadChildren.",
+              "Audit with source-map-explorer — find the one dependency bloating your main chunk.",
+              "Prefer standalone components and tree-shakeable providers."
+            ]
+          },
+          { "type": "h2", "text": "3. Rendering & lists" },
+          {
+            "type": "ul",
+            "items": [
+              "Always use track in @for — untracked lists re-create the entire DOM subtree.",
+              "Virtualize long lists with the CDK virtual scroll.",
+              "Defer below-the-fold work with @defer blocks."
+            ]
+          },
+          { "type": "h2", "text": "4. Network & images" },
+          {
+            "type": "ul",
+            "items": [
+              "Use NgOptimizedImage for automatic lazy-loading, srcset, and priority hints.",
+              "Set priority on the LCP image so it isn't lazy-loaded by accident.",
+              "Cache idempotent GETs and deduplicate in-flight requests with shareReplay."
+            ]
+          },
+          { "type": "h2", "text": "5. Measure, don't guess" },
+          {
+            "type": "p",
+            "text": "Run Lighthouse in CI, not just locally, and budget the three Core Web Vitals that actually matter:"
+          },
+          {
+            "type": "code",
+            "lang": "bash",
+            "code": "# LCP  < 2.5s   (largest contentful paint)\n# INP  < 200ms  (interaction to next paint)\n# CLS  < 0.1    (cumulative layout shift)\nnpx unlighthouse --site https://your-site.com"
+          },
+          {
+            "type": "p",
+            "text": "Fix in this order — change detection and bundle size usually reclaim more than every micro-optimization combined."
+          }
+        ]
       },
       {
         "id": "ionic-biometric-auth",
@@ -337,7 +602,129 @@
         "readTime": "10 min read",
         "date": "2026-04-12",
         "tags": ["Ionic", "Capacitor", "Mobile", "Security"],
-        "featured": false
+        "featured": false,
+        "content": [
+          {
+            "type": "p",
+            "text": "Biometric authentication turns a clunky password prompt into a one-tap unlock. In Ionic Angular with Capacitor it's a small amount of code — the hard part is doing the fallback and error handling correctly."
+          },
+          { "type": "h2", "text": "1. Install the plugin" },
+          {
+            "type": "code",
+            "lang": "bash",
+            "code": "npm install @aparajita/capacitor-biometric-auth\nnpx cap sync"
+          },
+          { "type": "h2", "text": "2. Check availability first" },
+          {
+            "type": "p",
+            "text": "Never assume the device has Face ID or a fingerprint sensor. Probe capability before you offer the option:"
+          },
+          {
+            "type": "code",
+            "lang": "ts",
+            "code": "import { BiometricAuth } from '@aparajita/capacitor-biometric-auth';\n\nasync canUseBiometrics(): Promise<boolean> {\n  const info = await BiometricAuth.checkBiometry();\n  return info.isAvailable;\n}"
+          },
+          { "type": "h2", "text": "3. Authenticate" },
+          {
+            "type": "code",
+            "lang": "ts",
+            "code": "try {\n  await BiometricAuth.authenticate({\n    reason: 'Unlock your account',\n    cancelTitle: 'Use password',\n    allowDeviceCredential: true,\n  });\n  this.router.navigate(['/dashboard']);\n} catch (err) {\n  // Cancelled, lockout, or no enrollment\n  this.fallbackToPassword();\n}"
+          },
+          { "type": "h2", "text": "4. Graceful fallback" },
+          {
+            "type": "ul",
+            "items": [
+              "Always keep a password/PIN path — biometrics can fail or be unenrolled.",
+              "Set allowDeviceCredential so the OS offers the device passcode automatically.",
+              "After repeated failures the OS locks biometrics; detect the error and route to password."
+            ]
+          },
+          { "type": "h2", "text": "Security notes" },
+          {
+            "type": "ul",
+            "items": [
+              "Biometrics gate access to a secret you already store securely — they are not the secret itself.",
+              "Store tokens in the Keychain / Keystore, never in localStorage.",
+              "Treat a biometric success as one factor, not proof of identity for sensitive server actions."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Done right, this is the rare feature that improves both security and UX at once — provided the fallback path is as polished as the happy path."
+          }
+        ]
+      },
+      {
+        "id": "zellvora-ui-ecosystem",
+        "slug": "introducing-zellvora-ui-ecosystem",
+        "title": "Introducing Zellvora UI: Building an Enterprise Angular Library Ecosystem",
+        "excerpt": "The story and architecture behind Zellvora UI — a signals-first, SSR-safe, zoneless ecosystem of Angular 21 packages for icons, inputs, schema-driven forms, layout, and storage.",
+        "category": "Architecture",
+        "readTime": "18 min read",
+        "date": "2026-07-03",
+        "tags": ["Angular", "Signals", "Design System", "Enterprise", "Open Source"],
+        "featured": false,
+        "markdownFile": "/blog/introducing-zellvora-ui-ecosystem.md"
+      },
+      {
+        "id": "ng-input-form-controls",
+        "slug": "building-enterprise-angular-form-controls-ng-input",
+        "title": "Building Enterprise Angular Form Controls with @zellvora/ng-input",
+        "excerpt": "A deep dive into designing reusable, signals-first form controls for Angular 21+ — text, password, select, textarea, validation, and support for Reactive, Template-Driven, and Signal Forms.",
+        "category": "Tutorial",
+        "readTime": "11 min read",
+        "date": "2026-07-03",
+        "tags": ["Angular", "Signals", "Forms", "Enterprise", "TypeScript"],
+        "featured": false,
+        "markdownFile": "/blog/building-enterprise-angular-form-controls-ng-input.md"
+      },
+      {
+        "id": "ng-form-schema-driven",
+        "slug": "dynamic-schema-driven-forms-ng-form",
+        "title": "How We Built Dynamic Schema-Driven Forms with @zellvora/ng-form",
+        "excerpt": "An enterprise deep dive into schema-driven forms for Angular 21+ — dynamic field generation, a signals-based validation engine, conditional fields, custom components, and API-driven forms.",
+        "category": "Architecture",
+        "readTime": "14 min read",
+        "date": "2026-07-03",
+        "tags": ["Angular", "Signals", "Schema-Driven Forms", "Enterprise"],
+        "featured": false,
+        "markdownFile": "/blog/dynamic-schema-driven-forms-ng-form.md"
+      },
+      {
+        "id": "ng-layout-systems",
+        "slug": "enterprise-layout-systems-ng-layout",
+        "title": "Creating Enterprise Layout Systems with @zellvora/ng-layout",
+        "excerpt": "For Angular architects: designing a signals-based, SSR-safe, zoneless layout system — grid primitives, responsive layouts, dashboard shells, and how signal-driven layouts differ from traditional ones.",
+        "category": "Architecture",
+        "readTime": "12 min read",
+        "date": "2026-07-03",
+        "tags": ["Angular", "Signals", "Layout", "Architecture", "SSR"],
+        "featured": false,
+        "markdownFile": "/blog/enterprise-layout-systems-ng-layout.md"
+      },
+      {
+        "id": "ng-storage-management",
+        "slug": "modern-angular-storage-management-ng-storage",
+        "title": "Modern Angular Storage Management with @zellvora/ng-storage",
+        "excerpt": "Unifying localStorage, sessionStorage, IndexedDB, and cookies behind a signals-first, SSR-safe API — with encryption, compression, versioning, and cross-tab sync.",
+        "category": "Tutorial",
+        "readTime": "13 min read",
+        "date": "2026-07-03",
+        "tags": ["Angular", "Signals", "Storage", "IndexedDB", "Security"],
+        "featured": false,
+        "markdownFile": "/blog/modern-angular-storage-management-ng-storage.md"
+      },
+      {
+        "id": "zellvora-icons-system",
+        "slug": "production-ready-svg-icon-system-icons",
+        "title": "Building a Production-Ready SVG Icon System with @zellvora/icons",
+        "excerpt": "How to design an Angular icon system that optimizes SVGs, auto-syncs via a build pipeline, tree-shakes to only the icons you use, renders SSR-safely, and stays accessible.",
+        "category": "Performance",
+        "readTime": "10 min read",
+        "date": "2026-07-03",
+        "tags": ["Angular", "SVG", "Icons", "Build Tooling", "Accessibility"],
+        "featured": false,
+        "markdownFile": "/blog/production-ready-svg-icon-system-icons.md"
       }
     ]
   },
@@ -385,19 +772,34 @@
       {
         "icon": "⚡",
         "title": "Enterprise Angular Development",
-        "items": ["Large-scale SPA development", "Government & enterprise portals", "Performance-optimized applications", "Scalable architecture design"],
+        "items": [
+          "Large-scale SPA development",
+          "Government & enterprise portals",
+          "Performance-optimized applications",
+          "Scalable architecture design"
+        ],
         "highlight": true
       },
       {
         "icon": "📱",
         "title": "Hybrid Mobile Apps",
-        "items": ["Ionic Angular development", "Cross-platform (Android & iOS)", "Biometric & offline-capable", "Native integrations"],
+        "items": [
+          "Ionic Angular development",
+          "Cross-platform (Android & iOS)",
+          "Biometric & offline-capable",
+          "Native integrations"
+        ],
         "highlight": false
       },
       {
         "icon": "🔧",
         "title": "Frontend Optimization",
-        "items": ["Performance audits", "API optimization & caching", "Change detection optimization", "Bundle size reduction"],
+        "items": [
+          "Performance audits",
+          "API optimization & caching",
+          "Change detection optimization",
+          "Bundle size reduction"
+        ],
         "highlight": false
       }
     ],
@@ -484,11 +886,37 @@
     "directTitle": "Reach me directly",
     "directSub": "Prefer a different channel? Use any of the below.",
     "channels": [
-      { "type": "email",    "label": "EMAIL",    "value": "rabinr2607@gmail.com",       "href": "mailto:rabinr2607@gmail.com" },
-      { "type": "phone",    "label": "PHONE",    "value": "+91 97893 76992",           "href": "tel:+919789376992" },
-      { "type": "linkedin", "label": "LINKEDIN",  "value": "linkedin.com/in/rabinr",    "href": "https://www.linkedin.com/in/rabinr/", "external": true },
-      { "type": "website",  "label": "WEBSITE",   "value": "rabinr.in",                 "href": "https://rabinr.in", "external": true },
-      { "type": "location", "label": "LOCATION",  "value": "Chennai, Tamil Nadu, India · IST (UTC+5:30)" }
+      {
+        "type": "email",
+        "label": "EMAIL",
+        "value": "rabinr2607@gmail.com",
+        "href": "mailto:rabinr2607@gmail.com"
+      },
+      {
+        "type": "phone",
+        "label": "PHONE",
+        "value": "+91 97893 76992",
+        "href": "tel:+919789376992"
+      },
+      {
+        "type": "linkedin",
+        "label": "LINKEDIN",
+        "value": "linkedin.com/in/rabinr",
+        "href": "https://www.linkedin.com/in/rabinr/",
+        "external": true
+      },
+      {
+        "type": "website",
+        "label": "WEBSITE",
+        "value": "rabinr.in",
+        "href": "https://rabinr.in",
+        "external": true
+      },
+      {
+        "type": "location",
+        "label": "LOCATION",
+        "value": "Chennai, Tamil Nadu, India · IST (UTC+5:30)"
+      }
     ],
     "availText": "Currently available for new opportunities",
     "availNote": "Freelancing at Zellavora Technologies · Open to Full-Time Roles"
@@ -497,17 +925,17 @@
     "logo": "Rabin.R",
     "tagline": "Frontend Angular Developer · Building scalable enterprise applications.",
     "links": [
-      { "label": "About",      "href": "#about" },
+      { "label": "About", "href": "#about" },
       { "label": "Experience", "href": "#experience" },
-      { "label": "Skills",     "href": "#skills" },
-      { "label": "Projects",   "href": "#projects" },
-      { "label": "Blog",       "href": "/blog" },
-      { "label": "Contact",    "href": "#contact" }
+      { "label": "Skills", "href": "#skills" },
+      { "label": "Projects", "href": "#projects" },
+      { "label": "Blog", "href": "/blog" },
+      { "label": "Contact", "href": "#contact" }
     ],
     "socials": [
-      { "label": "GitHub",   "href": "https://github.com/Rabinramarajan",           "type": "github" },
-      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/rabinr/",     "type": "linkedin" },
-      { "label": "Email",    "href": "mailto:rabinr2607@gmail.com",         "type": "email" }
+      { "label": "GitHub", "href": "https://github.com/Rabinramarajan", "type": "github" },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/rabinr/", "type": "linkedin" },
+      { "label": "Email", "href": "mailto:rabinr2607@gmail.com", "type": "email" }
     ],
     "copyright": "© 2026 Rabin R · Frontend Angular Developer",
     "madeWith": "Built with Angular · Hosted on rabinr.in"

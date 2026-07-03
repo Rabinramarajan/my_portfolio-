@@ -1,5 +1,6 @@
 import { Component, inject, ChangeDetectionStrategy, OnDestroy, afterNextRender, ElementRef, viewChild, signal } from '@angular/core';
 import { DOCUMENT, SlicePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PortfolioDataService } from '../../shared/services/portfolio-data.service';
 import { ContactService } from '../../shared/services/contact.service';
@@ -18,6 +19,7 @@ import {
   ParticleNetworkComponent,
   ScrollProgressComponent,
   CustomCursorComponent,
+  ResumeButtonComponent,
 } from '../../shared/components';
 
 @Component({
@@ -34,6 +36,8 @@ import {
     ParticleNetworkComponent,
     ScrollProgressComponent,
     CustomCursorComponent,
+    ResumeButtonComponent,
+    RouterLink,
     SlicePipe,
     ReactiveFormsModule,
   ],

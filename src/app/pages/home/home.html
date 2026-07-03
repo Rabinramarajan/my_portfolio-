@@ -3,7 +3,7 @@
 <app-custom-cursor></app-custom-cursor>
 <app-particle-network></app-particle-network>
 
-<main id="main-content" role="main">
+<main id="main-content" role="main" tabindex="-1">
 <!-- ===== HERO SECTION ===== -->
 <section class="hero" id="home" appAuroraBackground appMouseFollowGlow>
   <div class="hero-container">
@@ -136,7 +136,7 @@
       <div class="photo-card hover-lift" appScrollTrigger>
         <div class="photo-wrapper">
           <img [src]="pds.meta()?.profileImage" [alt]="pds.meta()?.name"
-            class="profile-img" />
+            class="profile-img" width="1792" height="2392" loading="lazy" decoding="async" />
           <div class="photo-overlay"></div>
           
           <div class="photo-glass-footer">
@@ -180,6 +180,11 @@
             </div>
           </div>
           }
+        </div>
+
+        <!-- Resume CTA -->
+        <div class="about-resume-cta animate-fade-in-up" [style.animation-delay]="'0.3s'">
+          <app-resume-button></app-resume-button>
         </div>
       </div>
     </div>
@@ -300,7 +305,7 @@
       <div class="proj-card--featured">
         <!-- Image section with overlay effects -->
         <div class="proj-featured-image">
-          <img [src]="feat.image" [alt]="feat.alt" class="proj-featured-img" />
+          <img [src]="feat.image" [alt]="feat.alt" class="proj-featured-img" width="1024" height="1024" loading="lazy" decoding="async" />
           <div class="proj-featured-overlay"></div>
           <div class="proj-featured-gradient"></div>
           <div class="proj-featured-badge">FEATURED</div>
@@ -336,7 +341,16 @@
             </div>
 
             <div class="proj-featured-cta">
-              <a [href]="feat.link" class="proj-featured-btn proj-featured-btn--primary" appMagneticButton>
+              @if (feat.slug) {
+              <a [routerLink]="['/projects', feat.slug]" class="proj-featured-btn proj-featured-btn--primary" appMagneticButton>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                </svg>
+                Read Case Study
+              </a>
+              }
+              <a [href]="feat.link" target="_blank" rel="noopener noreferrer" class="proj-featured-btn proj-featured-btn--secondary" appMagneticButton>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M7 17L17 7M17 7H7M17 7V17" />
                 </svg>
@@ -367,7 +381,7 @@
         appScrollTrigger>
         <!-- Card image with overlay -->
         <div class="proj-card-enhanced-image">
-          <img [src]="proj.image" [alt]="proj.alt" class="proj-card-enhanced-img" />
+          <img [src]="proj.image" [alt]="proj.alt" class="proj-card-enhanced-img" width="1024" height="1024" loading="lazy" decoding="async" />
           <div class="proj-card-enhanced-overlay"></div>
           <div class="proj-card-enhanced-shine"></div>
 
@@ -405,8 +419,16 @@
 
           <!-- Footer with CTA -->
           <div class="proj-card-enhanced-footer">
-            <a [href]="proj.link" class="proj-card-enhanced-link" appMagneticButton>
-              <span>Discover</span>
+            @if (proj.slug) {
+            <a [routerLink]="['/projects', proj.slug]" class="proj-card-enhanced-link" appMagneticButton>
+              <span>Case study</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </a>
+            }
+            <a [href]="proj.link" target="_blank" rel="noopener noreferrer" class="proj-card-enhanced-link proj-card-enhanced-link--ghost" appMagneticButton>
+              <span>Visit</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M7 17L17 7M17 7H7M17 7V17" />
               </svg>
@@ -415,6 +437,69 @@
         </div>
       </div>
       }
+    </div>
+    }
+
+    <!-- ===== CURRENTLY BUILDING (in-progress projects) ===== -->
+    @if (pds.projects()?.inProgress; as wip) {
+    <div class="wip-block" appScrollTrigger>
+      <div class="wip-head">
+        <div class="section-label animate-fade-in-up">{{ wip.sectionLabel }}</div>
+        <h3 class="wip-title animate-fade-in-up" [style.animation-delay]="'0.1s'">{{ wip.title }}</h3>
+        <p class="wip-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ wip.subtitle }}</p>
+      </div>
+
+      <div class="wip-grid">
+        @for (item of wip.items; track item.id) {
+        <article class="wip-card animate-fade-in-up" [style.animation-delay]="($index * 0.1) + 's'">
+          <div class="wip-card-top">
+            <span class="wip-type">{{ item.type }}</span>
+            <span class="wip-badge">
+              <span class="wip-dot" aria-hidden="true"></span>
+              {{ item.badge }}
+            </span>
+          </div>
+
+          <h4 class="wip-name">{{ item.name }}</h4>
+          <p class="wip-desc">{{ item.description }}</p>
+
+          @if (item.features?.length) {
+          <ul class="wip-features">
+            @for (f of item.features; track f) {
+            <li>{{ f }}</li>
+            }
+          </ul>
+          }
+
+          @if (item.tech?.length) {
+          <div class="wip-tech">
+            @for (t of item.tech; track t) {
+            <span class="wip-tech-chip">{{ t }}</span>
+            }
+          </div>
+          }
+
+          <div class="wip-card-footer">
+            @if (item.demo) {
+            <a [href]="item.demo" target="_blank" rel="noopener noreferrer" class="wip-link wip-link--primary">
+              Live demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            } @else {
+            <span class="wip-link wip-link--disabled" aria-disabled="true">Live demo · soon</span>
+            }
+            @if (item.github) {
+            <a [href]="item.github" target="_blank" rel="noopener noreferrer" class="wip-link wip-link--ghost">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            } @else {
+            <span class="wip-link wip-link--ghost wip-link--disabled" aria-disabled="true">GitHub · soon</span>
+            }
+          </div>
+        </article>
+        }
+      </div>
     </div>
     }
   </div>
@@ -643,6 +728,11 @@
             <span class="avail-text">{{ pds.contact()?.availText }}</span>
           </div>
           <p class="avail-note">{{ pds.contact()?.availNote }}</p>
+        </div>
+
+        <!-- Resume CTA -->
+        <div class="contact-resume-cta">
+          <app-resume-button></app-resume-button>
         </div>
       </div>
     </div>

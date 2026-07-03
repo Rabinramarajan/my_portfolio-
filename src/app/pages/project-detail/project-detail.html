@@ -1,0 +1,110 @@
+<main class="proj-page">
+  @if (project(); as p) {
+    <article class="proj">
+      <!-- Header -->
+      <header class="proj-header animate-fade-in-up">
+        <a routerLink="/" fragment="projects" class="proj-back">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          All projects
+        </a>
+        <h1 class="proj-title">{{ p.name }}</h1>
+        <p class="proj-lead">{{ p.description }}</p>
+
+        <div class="proj-tags">
+          @for (tag of p.tags; track tag) {
+            <span class="proj-tag">{{ tag }}</span>
+          }
+        </div>
+
+        @if (p.link) {
+          <a [href]="p.link" target="_blank" rel="noopener noreferrer" class="proj-live-btn">
+            {{ p.linkLabel || 'Visit project' }}
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H7M17 7V17" />
+            </svg>
+          </a>
+        }
+      </header>
+
+      <!-- Hero image -->
+      <div class="proj-hero-img animate-fade-in-scale">
+        <img [src]="p.image" [alt]="p.alt" width="1024" height="1024" loading="eager" decoding="async" />
+      </div>
+
+      <!-- Highlights -->
+      @if (highlights().length) {
+        <section class="proj-section">
+          <h2 class="proj-h2">What I built</h2>
+          <ul class="proj-list">
+            @for (item of highlights(); track $index) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </section>
+      }
+
+      <!-- Case study -->
+      @if (p.caseStudy; as cs) {
+        @if (cs.problem) {
+          <section class="proj-section">
+            <h2 class="proj-h2">The challenge</h2>
+            <p class="proj-p">{{ cs.problem }}</p>
+          </section>
+        }
+        @if (cs.approach) {
+          <section class="proj-section">
+            <h2 class="proj-h2">The approach</h2>
+            <p class="proj-p">{{ cs.approach }}</p>
+          </section>
+        }
+        @if (cs.challenges?.length) {
+          <section class="proj-section">
+            <h2 class="proj-h2">Key challenges</h2>
+            <ul class="proj-list">
+              @for (c of cs.challenges; track $index) { <li>{{ c }}</li> }
+            </ul>
+          </section>
+        }
+        @if (cs.results?.length) {
+          <section class="proj-section">
+            <h2 class="proj-h2">Results &amp; impact</h2>
+            <div class="proj-metrics">
+              @for (r of cs.results; track $index) {
+                <div class="proj-metric">
+                  <span class="proj-metric-num">{{ r.metric }}</span>
+                  <span class="proj-metric-label">{{ r.label }}</span>
+                </div>
+              }
+            </div>
+          </section>
+        }
+      }
+
+      <!-- Related -->
+      @if (related().length) {
+        <footer class="proj-related">
+          <h2 class="proj-h2">More work</h2>
+          <div class="proj-related-grid">
+            @for (rel of related(); track rel.slug) {
+              <a [routerLink]="['/projects', rel.slug]" class="proj-related-card">
+                <span class="proj-related-name">{{ rel.name }}</span>
+                <span class="proj-related-cta">Case study
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+                </span>
+              </a>
+            }
+          </div>
+        </footer>
+      }
+    </article>
+  } @else {
+    <section class="proj-missing">
+      <div class="proj-missing-icon" aria-hidden="true">🔍</div>
+      <h1 class="proj-missing-title">Project not found</h1>
+      <p class="proj-missing-sub">This project doesn't exist or may have moved.</p>
+      <a routerLink="/" fragment="projects" class="proj-missing-btn">Back to projects</a>
+    </section>
+  }
+</main>

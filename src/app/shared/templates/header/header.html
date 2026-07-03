@@ -1,10 +1,10 @@
 <!-- ===== NAVBAR ===== -->
 <header class="nav-wrapper" [class.scrolled]="isScrolled()">
-  <nav class="navbar" [class.scrolled]="isScrolled()">
+  <nav class="navbar" [class.scrolled]="isScrolled()" aria-label="Primary">
 
     <!-- Logo -->
-    <a href="#home" class="nav-logo">
-      <span class="logo-icon">
+    <a href="#home" class="nav-logo" aria-label="Rabin R — back to top">
+      <span class="logo-icon" aria-hidden="true">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <polyline points="16 18 22 12 16 6"/>
           <polyline points="8 6 2 12 8 18"/>
@@ -38,17 +38,17 @@
     </a>
 
     <!-- Mobile Hamburger -->
-    <button class="nav-toggle" aria-label="Toggle menu"
+    <button class="nav-toggle" [attr.aria-label]="isMenuOpen() ? 'Close menu' : 'Open menu'"
             [attr.aria-expanded]="isMenuOpen()" aria-controls="mobile-menu"
             [class.active]="isMenuOpen()" (click)="toggleMenu()">
-      <span></span><span></span><span></span>
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>
 
   </nav>
 </header>
 
 <!-- Mobile Dropdown -->
-<div class="mobile-menu" id="mobile-menu" [class.open]="isMenuOpen()">
+<nav class="mobile-menu" id="mobile-menu" [class.open]="isMenuOpen()" aria-label="Mobile">
   <ul>
     @for (link of pds.nav()?.links; track link.label) {
       <li>
@@ -67,7 +67,7 @@
       </a>
     </li>
   </ul>
-</div>
+</nav>
 
 <!-- Backdrop -->
-<div class="nav-backdrop" [class.show]="isMenuOpen()" (click)="closeMenu()"></div>
+<div class="nav-backdrop" [class.show]="isMenuOpen()" (click)="closeMenu()" aria-hidden="true"></div>
