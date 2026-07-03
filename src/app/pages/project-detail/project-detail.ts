@@ -1,5 +1,6 @@
-import { Component, inject, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, computed, effect, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Title, Meta } from '@angular/platform-browser';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { PortfolioDataService } from '../../shared/services/portfolio-data.service';
 
@@ -12,7 +13,29 @@ import { PortfolioDataService } from '../../shared/services/portfolio-data.servi
 })
 export class ProjectDetail {
   private readonly route = inject(ActivatedRoute);
+  private readonly title = inject(Title);
+  private readonly meta = inject(Meta);
   protected readonly pds = inject(PortfolioDataService);
+
+  constructor() {
+    // Per-project SEO: dynamic title + meta description.
+    effect(() => {
+      const p = this.project();
+      if (!p) {
+        this.title.setTitle('Project not found | Rabin R');
+        return;
+      }
+      const pageTitle = `${p.name} — Case Study | Rabin R`;
+      const desc = p.description ?? '';
+      this.title.setTitle(pageTitle);
+      this.meta.updateTag({ name: 'description', content: desc });
+      this.meta.updateTag({ property: 'og:title', content: pageTitle });
+      this.meta.updateTag({ property: 'og:description', content: desc });
+      this.meta.updateTag({ property: 'og:type', content: 'article' });
+      this.meta.updateTag({ name: 'twitter:title', content: pageTitle });
+      this.meta.updateTag({ name: 'twitter:description', content: desc });
+    });
+  }
 
   private readonly params = toSignal(this.route.paramMap, {
     initialValue: this.route.snapshot.paramMap,

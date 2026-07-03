@@ -2,7 +2,7 @@ import { Component, inject, computed, signal, effect, ChangeDetectionStrategy } 
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { HttpClient } from '@angular/common/http';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml, Title, Meta } from '@angular/platform-browser';
 import { marked } from 'marked';
 import { PortfolioDataService } from '../../shared/services/portfolio-data.service';
 
@@ -25,6 +25,8 @@ export class BlogDetail {
   private readonly route = inject(ActivatedRoute);
   private readonly http = inject(HttpClient);
   private readonly sanitizer = inject(DomSanitizer);
+  private readonly title = inject(Title);
+  private readonly meta = inject(Meta);
   protected readonly pds = inject(PortfolioDataService);
 
   private readonly params = toSignal(this.route.paramMap, {
@@ -54,6 +56,24 @@ export class BlogDetail {
   });
 
   constructor() {
+    // Per-article SEO: dynamic title + meta description.
+    effect(() => {
+      const post = this.article();
+      if (!post) {
+        this.title.setTitle('Article not found | Rabin R');
+        return;
+      }
+      const pageTitle = `${post.title} | Rabin R`;
+      const desc = post.excerpt ?? '';
+      this.title.setTitle(pageTitle);
+      this.meta.updateTag({ name: 'description', content: desc });
+      this.meta.updateTag({ property: 'og:title', content: pageTitle });
+      this.meta.updateTag({ property: 'og:description', content: desc });
+      this.meta.updateTag({ property: 'og:type', content: 'article' });
+      this.meta.updateTag({ name: 'twitter:title', content: pageTitle });
+      this.meta.updateTag({ name: 'twitter:description', content: desc });
+    });
+
     // Load & render markdown whenever the resolved article changes.
     effect(() => {
       const file = this.article()?.markdownFile as string | undefined;

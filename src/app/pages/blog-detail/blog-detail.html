@@ -34,9 +34,9 @@
 
       <!-- Body: markdown-backed article -->
       @if (post.markdownFile) {
-        @if (post.markdownHtml(); as html) {
+        @if (markdownHtml(); as html) {
           <div class="post-body markdown-body animate-fade-in-up" [innerHTML]="html"></div>
-        } @else if (post.markdownHtml()) {
+        } @else if (markdownError()) {
           <p class="post-p">This article couldn't be loaded. Please try again later.</p>
         } @else {
           <div class="post-loading">Loading article…</div>
