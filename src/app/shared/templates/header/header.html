@@ -39,6 +39,7 @@
 
     <!-- Mobile Hamburger -->
     <button class="nav-toggle" aria-label="Toggle menu"
+            [attr.aria-expanded]="isMenuOpen()" aria-controls="mobile-menu"
             [class.active]="isMenuOpen()" (click)="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -47,7 +48,7 @@
 </header>
 
 <!-- Mobile Dropdown -->
-<div class="mobile-menu" [class.open]="isMenuOpen()">
+<div class="mobile-menu" id="mobile-menu" [class.open]="isMenuOpen()">
   <ul>
     @for (link of pds.nav()?.links; track link.label) {
       <li>

@@ -4,65 +4,65 @@
 
   <!-- Main Page -->
   <url>
-    <loc>https://rabinr.dev/</loc>
-    <lastmod>2026-05-21</lastmod>
+    <loc>https://rabinr.in/</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Section anchors for discoverability -->
   <url>
-    <loc>https://rabinr.dev/#about</loc>
-    <lastmod>2026-05-21</lastmod>
+    <loc>https://rabinr.in/#about</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://rabinr.dev/#experience</loc>
-    <lastmod>2026-05-21</lastmod>
+    <loc>https://rabinr.in/#experience</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://rabinr.dev/#skills</loc>
-    <lastmod>2026-05-21</lastmod>
+    <loc>https://rabinr.in/#skills</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://rabinr.dev/#projects</loc>
-    <lastmod>2026-05-21</lastmod>
+    <loc>https://rabinr.in/#projects</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://rabinr.dev/#resume</loc>
-    <lastmod>2026-05-21</lastmod>
+    <loc>https://rabinr.in/#resume</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://rabinr.dev/#contact</loc>
-    <lastmod>2026-05-21</lastmod>
+    <loc>https://rabinr.in/#contact</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://rabinr.dev/hire-me</loc>
-    <lastmod>2026-05-22</lastmod>
+    <loc>https://rabinr.in/hire-me</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://rabinr.dev/blog</loc>
-    <lastmod>2026-05-22</lastmod>
+    <loc>https://rabinr.in/blog</loc>
+    <lastmod>2026-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
