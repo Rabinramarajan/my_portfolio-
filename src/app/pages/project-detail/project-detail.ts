@@ -3,10 +3,11 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { PortfolioDataService } from '../../shared/services/portfolio-data.service';
+import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
 
 @Component({
   selector: 'app-project-detail',
-  imports: [RouterLink],
+  imports: [RouterLink, UiBadgeComponent, UiButtonDirective],
   templateUrl: './project-detail.html',
   styleUrl: './project-detail.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

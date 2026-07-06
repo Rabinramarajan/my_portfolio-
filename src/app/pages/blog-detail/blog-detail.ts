@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeHtml, Title, Meta } from '@angular/platform-browser';
 import { marked } from 'marked';
 import { PortfolioDataService } from '../../shared/services/portfolio-data.service';
+import { UiBadgeComponent } from '../../shared/ui';
 
 interface ContentBlock {
   type: 'p' | 'h2' | 'ul' | 'code';
@@ -16,7 +17,7 @@ interface ContentBlock {
 
 @Component({
   selector: 'app-blog-detail',
-  imports: [RouterLink],
+  imports: [RouterLink, UiBadgeComponent],
   templateUrl: './blog-detail.html',
   styleUrl: './blog-detail.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

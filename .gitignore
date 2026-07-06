@@ -4,6 +4,11 @@
 .env
 .env.local
 .env*.local
+.env.dev
+.env.qa
+.env.staging
+.env.uat
+.env.prod
 
 # Compiled output
 /dist
@@ -43,6 +48,12 @@ backend/node_modules/
 testem.log
 /typings
 __screenshots__/
+
+# Playwright
+/test-results
+/playwright-report
+/blob-report
+/playwright/.cache
 
 # System files
 .DS_Store

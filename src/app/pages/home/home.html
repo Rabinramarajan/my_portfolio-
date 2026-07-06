@@ -454,10 +454,7 @@
         <article class="wip-card animate-fade-in-up" [style.animation-delay]="($index * 0.1) + 's'">
           <div class="wip-card-top">
             <span class="wip-type">{{ item.type }}</span>
-            <span class="wip-badge">
-              <span class="wip-dot" aria-hidden="true"></span>
-              {{ item.badge }}
-            </span>
+            <ui-badge tone="amber" [dot]="true">{{ item.badge }}</ui-badge>
           </div>
 
           <h4 class="wip-name">{{ item.name }}</h4>
@@ -502,6 +499,16 @@
       </div>
     </div>
     }
+
+    <!-- Projects → Contact CTA -->
+    <div class="projects-cta" appScrollTrigger>
+      <h3 class="projects-cta-title">Have a project or role in mind?</h3>
+      <p class="projects-cta-sub">Open to full-time, remote, and freelance opportunities. Let's talk about what you're building.</p>
+      <div class="projects-cta-actions">
+        <a uiButton href="#contact">Get in Touch</a>
+        <a uiButton="outline" [href]="pds.meta()?.resumePdf || '/rabin_resume.pdf'" download>Download Resume</a>
+      </div>
+    </div>
   </div>
 </section>
 

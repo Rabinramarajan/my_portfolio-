@@ -1,11 +1,12 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { UiButtonDirective, UiInputDirective, UiBadgeComponent, UiCardComponent, UiSpinnerComponent } from '../../shared/ui';
 
 interface Swatch { name: string; var: string; }
 
 @Component({
   selector: 'app-styleguide',
-  imports: [RouterLink],
+  imports: [RouterLink, UiButtonDirective, UiInputDirective, UiBadgeComponent, UiCardComponent, UiSpinnerComponent],
   templateUrl: './styleguide.html',
   styleUrl: './styleguide.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

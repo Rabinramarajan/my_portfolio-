@@ -1,0 +1,77 @@
+// ============================================
+// Design-system primitives (global classes)
+// Applied by UiButtonDirective / UiInputDirective.
+// Components (badge, card, spinner) ship their own scoped styles.
+// ============================================
+
+// ── Button ─────────────────────────────────
+.ui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: var(--radius-md);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform var(--transition-base), box-shadow var(--transition-base),
+              background var(--transition-base), border-color var(--transition-base);
+
+  &:disabled,
+  &[aria-disabled='true'] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &--sm { padding: 8px 16px; font-size: 0.82rem; }
+  &--lg { padding: 14px 28px; font-size: 1rem; }
+
+  &--primary {
+    background: var(--gradient-primary);
+    color: #fff;
+    box-shadow: var(--shadow-glow);
+    &:hover:not(:disabled) { transform: translateY(-2px); box-shadow: var(--shadow-glow-lg); }
+  }
+
+  &--outline {
+    background: transparent;
+    border-color: var(--border-active);
+    color: var(--text-primary);
+    &:hover:not(:disabled) { background: rgba(255, 255, 255, 0.04); border-color: var(--accent-primary); }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    &:hover:not(:disabled) { color: var(--text-primary); background: rgba(255, 255, 255, 0.04); }
+  }
+}
+
+// ── Input ──────────────────────────────────
+.ui-input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  transition: border-color var(--transition-base), background var(--transition-base);
+
+  &::placeholder { color: var(--text-muted); }
+
+  &:focus {
+    outline: none;
+    border-color: var(--border-active);
+    background: rgba(99, 102, 241, 0.04);
+  }
+
+  &--error { border-color: var(--accent-rose); }
+}

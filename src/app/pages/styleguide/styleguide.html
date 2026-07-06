@@ -99,48 +99,51 @@
   <section class="sg-section">
     <h2 class="sg-h2">Components</h2>
 
-    <h3 class="sg-h3">Buttons</h3>
+    <h3 class="sg-h3">Buttons <code class="sg-swatch-var">[uiButton]</code></h3>
     <div class="sg-row">
-      <button class="sg-btn sg-btn--primary">Primary</button>
-      <button class="sg-btn sg-btn--outline">Outline</button>
-      <button class="sg-btn sg-btn--ghost">Ghost</button>
-      <button class="sg-btn sg-btn--primary" disabled>Disabled</button>
+      <button uiButton>Primary</button>
+      <button uiButton="outline">Outline</button>
+      <button uiButton="ghost">Ghost</button>
+      <button uiButton size="sm">Small</button>
+      <button uiButton size="lg">Large</button>
+      <button uiButton disabled>Disabled</button>
     </div>
 
-    <h3 class="sg-h3">Badges &amp; tags</h3>
+    <h3 class="sg-h3">Badges &amp; tags <code class="sg-swatch-var">&lt;ui-badge&gt;</code></h3>
     <div class="sg-row">
-      <span class="sg-badge sg-badge--accent">Angular</span>
-      <span class="sg-badge sg-badge--accent">TypeScript</span>
-      <span class="sg-badge sg-badge--amber"><span class="sg-dot"></span> Work in Progress</span>
-      <span class="sg-badge sg-badge--emerald"><span class="sg-dot"></span> Available</span>
+      <ui-badge>Angular</ui-badge>
+      <ui-badge>TypeScript</ui-badge>
+      <ui-badge tone="amber" [dot]="true">Work in Progress</ui-badge>
+      <ui-badge tone="emerald" [dot]="true">Available</ui-badge>
+      <ui-badge tone="rose">Error</ui-badge>
     </div>
 
-    <h3 class="sg-h3">Form states</h3>
+    <h3 class="sg-h3">Form states <code class="sg-swatch-var">[uiInput]</code></h3>
     <div class="sg-form">
       <label class="sg-field">
         <span class="sg-label">Default</span>
-        <input class="sg-input" placeholder="you@example.com" />
+        <input uiInput placeholder="you@example.com" />
       </label>
       <label class="sg-field">
         <span class="sg-label">Error</span>
-        <input class="sg-input sg-input--error" value="not-an-email" />
+        <input uiInput [invalid]="true" value="not-an-email" />
         <span class="sg-error">Enter a valid email address</span>
       </label>
     </div>
 
-    <h3 class="sg-h3">States</h3>
+    <h3 class="sg-h3">States <code class="sg-swatch-var">&lt;ui-spinner&gt;</code></h3>
     <div class="sg-row">
-      <span class="sg-state"><span class="sg-spinner"></span> Loading…</span>
+      <span class="sg-state"><ui-spinner /> Loading…</span>
       <span class="sg-state sg-state--success">✓ Saved successfully</span>
       <span class="sg-state sg-state--error">✕ Something went wrong</span>
     </div>
 
-    <h3 class="sg-h3">Card</h3>
-    <div class="sg-card">
-      <span class="sg-badge sg-badge--accent">Case study</span>
+    <h3 class="sg-h3">Card <code class="sg-swatch-var">&lt;ui-card&gt;</code></h3>
+    <ui-card [interactive]="true" style="max-width: 340px">
+      <ui-badge>Case study</ui-badge>
       <h4 class="sg-card-title">Sample project card</h4>
       <p class="sg-card-desc">Cards use the card gradient, token radius, and elevation, with a lift-on-hover transition.</p>
-    </div>
+    </ui-card>
   </section>
 
   <!-- TRANSITIONS -->

@@ -21,6 +21,7 @@ import {
   CustomCursorComponent,
   ResumeButtonComponent,
 } from '../../shared/components';
+import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
 
 @Component({
   selector: 'app-home',
@@ -37,6 +38,8 @@ import {
     ScrollProgressComponent,
     CustomCursorComponent,
     ResumeButtonComponent,
+    UiBadgeComponent,
+    UiButtonDirective,
     RouterLink,
     SlicePipe,
     ReactiveFormsModule,

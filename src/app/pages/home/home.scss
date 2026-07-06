@@ -2478,6 +2478,38 @@
   }
 }
 
+// ── Projects → Contact CTA ────────────────────────────────
+.projects-cta {
+  margin-top: 64px;
+  padding: 48px 32px;
+  text-align: center;
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 55%),
+    var(--gradient-card);
+  border: 1px solid var(--border-color);
+}
+.projects-cta-title {
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0 0 10px;
+}
+.projects-cta-sub {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 540px;
+  margin: 0 auto 24px;
+}
+.projects-cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 // ── Projects responsive ───────────────────────────────────
 @media (max-width: 1024px) {
   .proj-card--featured { grid-template-columns: 1fr; .proj-featured-image { min-height: 280px; } }

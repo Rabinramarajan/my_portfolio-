@@ -14,12 +14,12 @@
 
         <div class="proj-tags">
           @for (tag of p.tags; track tag) {
-            <span class="proj-tag">{{ tag }}</span>
+            <ui-badge>{{ tag }}</ui-badge>
           }
         </div>
 
         @if (p.link) {
-          <a [href]="p.link" target="_blank" rel="noopener noreferrer" class="proj-live-btn">
+          <a uiButton [href]="p.link" target="_blank" rel="noopener noreferrer">
             {{ p.linkLabel || 'Visit project' }}
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M7 17L17 7M17 7H7M17 7V17" />
