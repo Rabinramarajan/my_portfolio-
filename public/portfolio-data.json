@@ -12,8 +12,7 @@
     "location": "Chennai, Tamil Nadu, India",
     "timezone": "IST (UTC+5:30)",
     "resumePdf": "/rabin_resume.pdf",
-    "profileImage": "/profile.webp",
-    "elfsightWidgetId": "YOUR_ELFSIGHT_WIDGET_ID"
+    "profileImage": "/profile.webp"
   },
   "scheduling": {
     "calendlyUrl": "https://calendly.com/rabinr/discovery-call",
@@ -1686,27 +1685,36 @@
     "sectionLabel": "TESTIMONIALS",
     "title": "What People Say",
     "subtitle": "Real feedback from clients and team members I've worked with.",
-    "testimonies": [
+    "items": [
       {
+        "id": 1,
         "quote": "Rabin's ability to architect scalable Angular applications is exceptional. He took our pension management platform from concept to production with clean code and thoughtful design patterns. His understanding of government compliance and accessibility standards was critical to our success.",
         "author": "Rajeev Kumar",
-        "title": "CTO, ITGalax Solutions",
+        "role": "CTO, ITGalax Solutions",
         "company": "Government Systems Division",
-        "image": "https://api.dicebear.com/7.x/avataaars/svg?seed=rajeev"
+        "rating": 5,
+        "avatar": "RK",
+        "avatarColor": "#6366f1"
       },
       {
+        "id": 2,
         "quote": "Working with Rabin on the Zellavora UI library was eye-opening. He's not just a developer — he thinks like a systems architect. The accessibility-first approach and attention to design tokens shows maturity that's rare in component library work.",
         "author": "Priya Sharma",
-        "title": "Product Lead, SaaS Startup",
+        "role": "Product Lead, SaaS Startup",
         "company": "Enterprise Software Company",
-        "image": "https://api.dicebear.com/7.x/avataaars/svg?seed=priya"
+        "rating": 5,
+        "avatar": "PS",
+        "avatarColor": "#8b5cf6"
       },
       {
+        "id": 3,
         "quote": "The performance optimization work on our e-commerce platform was transformational. Reducing LCP from 4.2s to 1.2s directly increased our conversion rate by 3×. Rabin's systematic approach to performance — measurement, trade-offs, and validation — is what sets him apart.",
         "author": "Vikram Singh",
-        "title": "Founder, Galaxy Sofas",
+        "role": "Founder, Galaxy Sofas",
         "company": "E-commerce Platform",
-        "image": "https://api.dicebear.com/7.x/avataaars/svg?seed=vikram"
+        "rating": 5,
+        "avatar": "VS",
+        "avatarColor": "#f59e0b"
       }
     ]
   },
