@@ -1532,6 +1532,26 @@
         ],
         "featured": true,
         "markdownFile": "/blog/testing-strategy-enterprise-angular.md"
+      },
+      {
+        "id": "angular-architecture",
+        "slug": "angular-architecture-patterns-signals-zoneless",
+        "title": "Angular Architecture Patterns: Signals, Zoneless, and Standalone Components in 2026",
+        "excerpt": "After migrating three enterprise apps to Angular 21: when to use Signals over RxJS, why zoneless is a game-changer for performance, standalone components as the default, and OnPush change detection everywhere. Includes trade-offs, real examples, and a pragmatic migration path.",
+        "category": "Architecture",
+        "readTime": "16 min read",
+        "date": "2026-07-08",
+        "tags": [
+          "Angular",
+          "Signals",
+          "RxJS",
+          "Zoneless",
+          "Standalone Components",
+          "OnPush",
+          "Change Detection"
+        ],
+        "featured": true,
+        "markdownFile": "/blog/angular-architecture-patterns-signals-zoneless.md"
       }
     ]
   },
