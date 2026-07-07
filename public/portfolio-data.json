@@ -1552,6 +1552,26 @@
         ],
         "featured": true,
         "markdownFile": "/blog/angular-architecture-patterns-signals-zoneless.md"
+      },
+      {
+        "id": "hybrid-mobile-apps",
+        "slug": "hybrid-mobile-apps-scale-ionic",
+        "title": "Building Hybrid Mobile Apps at Scale with Ionic: Patterns for Enterprise",
+        "excerpt": "After shipping 5+ Ionic apps to government and enterprise users: offline-first architecture, biometric authentication, deep linking strategies, and performance optimization for 3G networks. Real-world patterns and anti-patterns from production serving 10,000+ users.",
+        "category": "Mobile",
+        "readTime": "17 min read",
+        "date": "2026-07-08",
+        "tags": [
+          "Ionic",
+          "Angular",
+          "Mobile",
+          "Offline-First",
+          "Enterprise",
+          "Cross-Platform",
+          "Performance"
+        ],
+        "featured": true,
+        "markdownFile": "/blog/hybrid-mobile-apps-scale-ionic.md"
       }
     ]
   },
