@@ -72,10 +72,9 @@ jobs:
             }
 
   lighthouse:
-    name: Lighthouse audit (optional)
+    name: Lighthouse audit (mandatory)
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    if: contains(github.event.pull_request.labels.*.name, 'lighthouse')
 
     steps:
       - uses: actions/checkout@v4
@@ -97,7 +96,52 @@ jobs:
         with:
           configPath: './.github/lighthouserc.json'
           temporaryPublicStorage: true
-        continue-on-error: true
+          runs: 3
+          uploadArtifacts: true
+
+      - name: Comment PR with Lighthouse results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            // Read Lighthouse CI results
+            const reportPath = '.lighthouseci/runs';
+            if (fs.existsSync(reportPath)) {
+              const files = fs.readdirSync(reportPath);
+              const latestRun = files.sort().pop();
+              const resultsPath = path.join(reportPath, latestRun, 'lhr.json');
+
+              if (fs.existsSync(resultsPath)) {
+                const results = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
+                const scores = results.categories;
+
+                const comment = `
+                ## ⚡ Lighthouse CI Results
+
+                | Category | Score |
+                |----------|-------|
+                | Performance | ${Math.round(scores.performance.score * 100)}/100 |
+                | Accessibility | ${Math.round(scores.accessibility.score * 100)}/100 |
+                | Best Practices | ${Math.round(scores['best-practices'].score * 100)}/100 |
+                | SEO | ${Math.round(scores.seo.score * 100)}/100 |
+
+                **Core Web Vitals:**
+                - LCP: ${results.metrics['largest-contentful-paint'].numericValue.toFixed(0)}ms
+                - CLS: ${results.metrics['cumulative-layout-shift'].numericValue.toFixed(3)}
+                - TBT: ${results.metrics['total-blocking-time'].numericValue.toFixed(0)}ms
+                `;
+
+                github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: comment
+                });
+              }
+            }
 
       - name: Upload Lighthouse report
         uses: actions/upload-artifact@v4
