@@ -1,12 +1,11 @@
-import { Component, inject, ChangeDetectionStrategy, OnDestroy, afterNextRender, ElementRef, viewChild, signal, computed } from '@angular/core';
-import { DOCUMENT, SlicePipe, DatePipe } from '@angular/common';
+import { Component, inject, ChangeDetectionStrategy, OnDestroy, afterNextRender, signal, computed } from '@angular/core';
+import { SlicePipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PortfolioDataService } from '../../shared/services/portfolio-data.service';
 import { ContactService } from '../../shared/services/contact.service';
 import { ToastService } from '../../shared/services/toast.service';
 import { GsapService } from '../../shared/services/gsap.service';
-import { ScrollService } from '../../shared/services/scroll.service';
 import {
   AuroraBackgroundDirective,
   MouseFollowGlowDirective,
@@ -21,7 +20,6 @@ import {
   ResumeButtonComponent,
   TestimonialsComponent,
   OpenSourceComponent,
-  ZelavoraComponent,
   ArrowIconComponent,
 } from '../../shared/components';
 import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
@@ -42,7 +40,6 @@ import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
     ResumeButtonComponent,
     TestimonialsComponent,
     OpenSourceComponent,
-    ZelavoraComponent,
     ArrowIconComponent,
     UiBadgeComponent,
     UiButtonDirective,
@@ -57,18 +54,15 @@ import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
 })
 export class Home implements OnDestroy {
   protected readonly pds = inject(PortfolioDataService);
-  private readonly doc = inject(DOCUMENT);
   private readonly fb = inject(FormBuilder);
   protected readonly contactService = inject(ContactService);
   private readonly toastService = inject(ToastService);
   private readonly gsapService = inject(GsapService);
-  protected readonly scrollService = inject(ScrollService);
 
   protected contactForm: FormGroup;
   protected isSubmitting = false;
   protected submitMessage = '';
   protected submitStatus: 'idle' | 'success' | 'error' = 'idle';
-  protected buildDone = signal(false);
   protected featuredBlogArticles = computed(() => this.pds.blog()?.articles?.slice(0, 3) ?? []);
 
   protected playgroundTabs = [

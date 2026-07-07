@@ -21,9 +21,7 @@ const getBlogPosts = (): Array<{ url: string; priority: number; changefreq: stri
 // Generate dynamic project URLs
 const getProjects = (): Array<{ url: string; priority: number; changefreq: string }> => {
   // Integrate with portfolio-data.service to fetch actual projects
-  return [
-    { url: '/projects/zellavora-ui', priority: 0.7, changefreq: 'monthly' },
-  ];
+  return [];
 };
 
 export function generateSitemap(): string {

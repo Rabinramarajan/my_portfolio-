@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IconComponent } from './icon.component';
 
 type BadgeVariant = 'default' | 'accent' | 'success' | 'warning' | 'error';
 type BadgeSize = 'sm' | 'md';
@@ -8,7 +7,7 @@ type BadgeSize = 'sm' | 'md';
 @Component({
   selector: 'app-badge',
   standalone: true,
-  imports: [CommonModule, IconComponent],
+  imports: [CommonModule],
   template: `
     <span
       [class]="'badge badge-' + variant + ' badge-' + size"

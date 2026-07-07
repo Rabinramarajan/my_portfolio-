@@ -17,7 +17,6 @@ export interface PortfolioData {
   footer:       any;
   testimonials: any;
   openSource:   any;
-  zellavora:    any;
   blog:         any;
   hireMe:       any;
   scheduling:   any;
@@ -49,7 +48,6 @@ export class PortfolioDataService {
   readonly footer       = computed(() => this.data()?.footer);
   readonly testimonials = computed(() => this.data()?.testimonials);
   readonly openSource   = computed(() => this.data()?.openSource);
-  readonly zellavora    = computed(() => this.data()?.zellavora);
   readonly blog         = computed(() => this.data()?.blog);
   readonly hireMe       = computed(() => this.data()?.hireMe);
   readonly scheduling   = computed(() => this.data()?.scheduling);

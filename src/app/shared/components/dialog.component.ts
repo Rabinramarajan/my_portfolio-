@@ -1,12 +1,11 @@
 import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from './icon.component';
-import { ButtonComponent } from './button.component';
 
 @Component({
   selector: 'app-dialog',
   standalone: true,
-  imports: [CommonModule, IconComponent, ButtonComponent],
+  imports: [CommonModule, IconComponent],
   template: `
     @if (isOpen()) {
       <div class="dialog-overlay" (click)="close()"></div>

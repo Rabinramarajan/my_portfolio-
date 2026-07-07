@@ -181,7 +181,7 @@ export class InputComponent implements ControlValueAccessor {
 @Component({
   selector: 'app-textarea',
   standalone: true,
-  imports: [CommonModule, IconComponent],
+  imports: [CommonModule],
   template: `
     <div class="input-wrapper" [class]="'input-' + state">
       @if (label) {

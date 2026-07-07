@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Rabin R — Senior Frontend Engineer · Founder, Zellavora",
-    "description": "Senior Frontend Engineer and founder of Zellavora, building Zellavora UI and an AI resume builder. 4+ years shipping enterprise portals with WCAG 2.1 AA compliance, government systems, and high-performance web apps. Playwright testing expert. Angular v13–v21.",
+    "title": "Rabin R — Senior Frontend Engineer",
+    "description": "Senior Frontend Engineer with 4+ years shipping enterprise portals with WCAG 2.1 AA compliance, government systems, and high-performance web apps. Playwright testing expert. Angular v13–v21.",
     "name": "Rabin R",
     "role": "Senior Frontend Engineer",
     "email": "rabinr2607@gmail.com",
@@ -233,8 +233,8 @@
   },
   "about": {
     "sectionLabel": "ABOUT ME",
-    "title": "Founder & Engineer Building Products, Not Just Features",
-    "clientCentricTagline": "Building Zellavora (UI systems + AI tools) while helping enterprises ship scalable, accessible, high-performance applications.",
+    "title": "Engineer Building Products, Not Just Features",
+    "clientCentricTagline": "Helping enterprises ship scalable, accessible, high-performance applications.",
     "whoIHelp": [
       {
         "icon": "building",
@@ -252,11 +252,11 @@
         "desc": "Reducing API consumption by 40% and improving performance by 50% through smart optimization"
       }
     ],
-    "intro": "Founder of Zellavora, building design systems and AI tools. 4+ years engineering government portals, enterprise systems, and high-performance web apps at scale. WCAG 2.1 AA accessibility advocate.",
+    "intro": "Building design systems and AI tools. 4+ years engineering government portals, enterprise systems, and high-performance web apps at scale. WCAG 2.1 AA accessibility advocate.",
     "bio": [
-      "**Current focus:** Zellavora — an ecosystem of open-source component libraries (@zellavora/ui) and AI tools (Zellavora AI Resume Builder). Building in public with a commitment to accessibility, performance, and clean architecture. 1.2k+ monthly npm downloads.",
+      "**Current focus:** Building open-source Angular component libraries and AI-powered developer tools in public, with a commitment to accessibility, performance, and clean architecture. 1.2k+ monthly npm downloads.",
       "**Prior work:** At ITGalax Solutions, engineered government-grade systems serving 10,000+ users. Delivered immigration portals for Fiji, pension management platforms (PRIMS), and cross-platform mobile apps — achieving 50% performance improvements and 40% API optimization. The craft: WCAG 2.1 AA compliance, comprehensive Playwright testing, systematic performance audits.",
-      "**What matters:** Building products that scale requires discipline — not just shipping features. Strong type systems, accessible-first design, automated testing, and measurable outcomes. Open to full-time technical leadership roles in product-driven companies, or advancing Zellavora with the right partners. Based in Chennai, India · Remote-first."
+      "**What matters:** Building products that scale requires discipline — not just shipping features. Strong type systems, accessible-first design, automated testing, and measurable outcomes. Open to full-time technical leadership roles in product-driven companies. Based in Chennai, India · Remote-first."
     ],
     "infoCards": [
       {
@@ -960,93 +960,6 @@
         }
       ]
     }
-  },
-  "zellavora": {
-    "sectionLabel": "ZELLAVORA",
-    "title": "Building the future of Angular UX",
-    "subtitle": "Founder of Zellavora — creating production-grade tools and design systems that help teams ship faster.",
-    "narrative": "Zellavora started as a frustration: every Angular project reinvented the wheel. Layout systems, component libraries, form handling — all bespoke, all buggy. I built Zellavora to solve that. Now we're shipping the tools I wish existed five years ago: a living design system, reusable component libraries, and AI-powered productivity tools that actually work.",
-    "role": "Founder & Lead Engineer",
-    "vision": "Make enterprise-grade Angular development accessible to every team. Kill boilerplate. Amplify focus.",
-    "products": [
-      {
-        "id": "zellavora-ui",
-        "name": "Zellavora UI",
-        "type": "Component Library",
-        "status": "Live",
-        "statusColor": "success",
-        "tagline": "15+ production-ready Angular components built for accessibility and performance",
-        "description": "A comprehensive Angular component library with WCAG 2.1 AA compliance, full TypeScript support, and zero runtime overhead. Every component is battle-tested in production environments.",
-        "features": [
-          "Glass morphism & responsive design built-in",
-          "Three-tier token system for theming",
-          "WCAG 2.1 AA accessibility guaranteed",
-          "Full keyboard navigation support",
-          "1.2k+ downloads/month on npm"
-        ],
-        "link": "https://zellavora-ui.dev",
-        "github": "https://github.com/zellavora/zellavora-ui",
-        "npm": "https://www.npmjs.com/package/@zellavora/zellavora-ui"
-      },
-      {
-        "id": "ai-resume-builder",
-        "name": "AI Resume Builder",
-        "type": "Web App",
-        "status": "In Development",
-        "statusColor": "warning",
-        "tagline": "AI-powered resume generation that helps you land interviews faster",
-        "description": "Pair a guided resume builder with Claude API integration for smart content generation. Live preview, ATS-optimized templates, and one-click PDF export. 200+ beta users, 4.7★ rating.",
-        "features": [
-          "AI-assisted bullet point generation",
-          "ATS-friendly resume templates",
-          "Live preview editor with sync",
-          "PDF export + shareable links",
-          "87% conversion to PDF export"
-        ],
-        "link": "https://resume.zellavora.com",
-        "github": "https://github.com/zellavora/ai-resume-builder",
-        "demo": "https://resume.zellavora.com"
-      },
-      {
-        "id": "ng-layout",
-        "name": "@zellavora/ng-layout",
-        "type": "Utility Library",
-        "status": "Live",
-        "statusColor": "success",
-        "tagline": "Production-grade Angular layout system with responsive containers",
-        "description": "CSS-in-JS free layout utilities for Angular. Responsive container system, semantic spacing, and zero runtime overhead. Used by teams shipping enterprise applications.",
-        "features": [
-          "Responsive container utilities",
-          "CSS custom properties for theming",
-          "WCAG 2.1 AA built-in",
-          "Zero JavaScript overhead",
-          "1.2k+ monthly downloads"
-        ],
-        "link": "https://ng-layout.zellavora.com",
-        "github": "https://github.com/zellavora/ng-layout",
-        "npm": "https://www.npmjs.com/package/@zellavora/ng-layout"
-      }
-    ],
-    "roadmap": [
-      {
-        "title": "Form Builder Pro",
-        "status": "In Development",
-        "eta": "Q3 2026",
-        "description": "Reactive Forms on steroids. Smart validation, async submission handling, and form state visualization — all without boilerplate."
-      },
-      {
-        "title": "Data Table Enterprise",
-        "status": "Planning",
-        "eta": "Q4 2026",
-        "description": "The table component Angular deserves. Virtualization, sorting, filtering, and export — production-ready for 50k+ row datasets."
-      },
-      {
-        "title": "Zellavora Cloud",
-        "status": "Concept",
-        "eta": "2027",
-        "description": "Managed hosting + deployment for Zellavora projects. Git push → live. No DevOps required."
-      }
-    ]
   },
   "openSource": {
     "sectionLabel": "OPEN SOURCE",
@@ -1782,7 +1695,7 @@
   "contact": {
     "sectionLabel": "CONTACT",
     "title": "Let's Build Something Great Together",
-    "subtitle": "Founder at Zellavora, building Zellavora UI and an AI resume builder. Open to full-time, remote, or hybrid opportunities — immediate joiner.",
+    "subtitle": "Building design systems and AI tools. Open to full-time, remote, or hybrid opportunities — immediate joiner.",
     "form": {
       "namePlaceholder": "Your full name",
       "emailPlaceholder": "you@example.com",

@@ -29,11 +29,5 @@ export const routes: Routes = [
     title: 'Design System | Rabin R',
     data: { description: 'Living design system: standardized components, tokens, and patterns.' }
   },
-  {
-    path: 'zellavora',
-    loadComponent: () => import('./pages/zellavora/zellavora').then(m => m.Zellavora),
-    title: 'Zellavora | Founder',
-    data: { description: 'Zellavora: building Zellavora UI (Angular component library) and AI Resume Builder.' }
-  },
   { path: '**', redirectTo: '' }
 ];

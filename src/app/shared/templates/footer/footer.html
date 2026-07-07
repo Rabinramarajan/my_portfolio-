@@ -15,7 +15,6 @@
           <span class="footer-logo-name">rabin<span class="footer-logo-dot">.</span>r</span>
         </div>
         <p class="footer-tagline">{{ pds.footer()?.tagline }}</p>
-        <p class="footer-founder">Founder, <strong>Zellavora</strong></p>
         <div class="footer-socials">
           @for (s of pds.footer()?.socials; track s.type) {
             <a [href]="s.href" target="_blank" class="footer-social" [attr.aria-label]="s.label">
@@ -68,7 +67,7 @@
 
     <!-- Bottom bar -->
     <div class="footer-bottom">
-      <span class="footer-copy">© 2026 <span class="footer-company">Zellavora</span>. All rights reserved.</span>
+      <span class="footer-copy">© 2026 <span class="footer-company">Rabin R</span>. All rights reserved.</span>
       <span class="footer-tagline-bottom">{{ pds.footer()?.madeWith }}</span>
     </div>
 

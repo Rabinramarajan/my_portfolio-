@@ -33,4 +33,3 @@ export { TimelineItemComponent, StatTileComponent } from './timeline-stat.compon
 export { DrawerComponent } from './drawer.component';
 export { TestimonialsComponent } from './testimonials.component';
 export { OpenSourceComponent } from './open-source.component';
-export { ZelavoraComponent } from './zellavora.component';

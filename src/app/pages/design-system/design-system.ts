@@ -6,20 +6,9 @@ import {
   CardComponent,
   BadgeComponent,
   InputComponent,
-  DialogComponent,
-  TabsComponent,
-  TabPanelComponent,
-  TooltipComponent,
-  TableComponent,
-  TableRowComponent,
-  TableCellComponent,
-  ToastComponent,
   SkeletonComponent,
   TimelineItemComponent,
   StatTileComponent,
-  DrawerComponent,
-  IconComponent,
-  NavComponent,
 } from '../../shared/components';
 
 @Component({
@@ -32,26 +21,16 @@ import {
     CardComponent,
     BadgeComponent,
     InputComponent,
-    DialogComponent,
-    TabsComponent,
-    TabPanelComponent,
-    TooltipComponent,
-    TableComponent,
-    TableRowComponent,
-    TableCellComponent,
-    ToastComponent,
     SkeletonComponent,
     TimelineItemComponent,
     StatTileComponent,
-    DrawerComponent,
-    IconComponent,
   ],
   template: `
     <main class="design-main">
       <app-section-shell
         label="DESIGN SYSTEM"
         title="Living Component Library"
-        subtitle="Standardized, theme-aware, and production-ready components powering both the portfolio and Zellavora UI."
+        subtitle="Standardized, theme-aware, and production-ready components powering the portfolio."
       >
         <div class="components-grid">
           <!-- Buttons -->
