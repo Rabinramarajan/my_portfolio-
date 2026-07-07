@@ -1512,6 +1512,26 @@
         ],
         "featured": true,
         "markdownFile": "/blog/performance-optimization-core-web-vitals-case-study.md"
+      },
+      {
+        "id": "testing-strategy",
+        "slug": "testing-strategy-enterprise-angular",
+        "title": "Testing Strategy for Enterprise Angular Applications: From Unit Tests to E2E",
+        "excerpt": "A battle-tested pyramid approach to testing: unit tests for logic (60%), integration tests for features (30%), E2E tests for user journeys (10%), and accessibility tests integrated throughout. Includes real examples, ROI breakdown, and common mistakes.",
+        "category": "Testing & Quality",
+        "readTime": "15 min read",
+        "date": "2026-07-08",
+        "tags": [
+          "Testing",
+          "Angular",
+          "Playwright",
+          "Unit Tests",
+          "E2E",
+          "Accessibility",
+          "Quality Assurance"
+        ],
+        "featured": true,
+        "markdownFile": "/blog/testing-strategy-enterprise-angular.md"
       }
     ]
   },
