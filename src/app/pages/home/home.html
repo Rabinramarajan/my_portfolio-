@@ -743,6 +743,223 @@
     </div>
   </section>
 
+  <!-- ===== COMPONENT PLAYGROUND SECTION ===== -->
+  <section class="playground-section" id="components" appScrollTrigger>
+    <div class="proj-container">
+      <div class="section-label animate-fade-in-up">COMPONENT LIBRARY</div>
+      <h2 class="proj-title animate-fade-in-up" [style.animation-delay]="'0.1s'">Zellavora UI Components</h2>
+      <p class="proj-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">Interactive showcase of production-grade Angular components with glassmorphism design, full accessibility, and dark mode support.</p>
+
+      <!-- Tabs for different component categories -->
+      <div class="playground-tabs animate-fade-in-up" [style.animation-delay]="'0.3s'">
+        @for (tab of playgroundTabs; track tab.id) {
+        <button
+          class="playground-tab"
+          [class.active]="activePlaygroundTab() === tab.id"
+          (click)="setActivePlaygroundTab(tab.id)"
+          type="button">
+          {{ tab.label }}
+        </button>
+        }
+      </div>
+
+      <!-- Tab Content: Buttons -->
+      @if (activePlaygroundTab() === 'buttons') {
+      <div class="playground-content animate-fade-in-up">
+        <div class="component-showcase">
+          <div class="showcase-group">
+            <h4 class="showcase-title">Button Variants</h4>
+            <div class="showcase-grid">
+              <button class="btn btn-primary" type="button">Primary Button</button>
+              <button class="btn btn-secondary" type="button">Secondary</button>
+              <button class="btn btn-outline" type="button">Outline</button>
+              <button class="btn btn-ghost" type="button">Ghost</button>
+            </div>
+          </div>
+
+          <div class="showcase-group">
+            <h4 class="showcase-title">Button States</h4>
+            <div class="showcase-grid">
+              <button class="btn btn-primary" type="button">Normal</button>
+              <button class="btn btn-primary" disabled type="button">Disabled</button>
+              <button class="btn btn-primary loading" type="button">
+                <span class="spinner"></span>
+                Loading...
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- Tab Content: Cards & Badges -->
+      @if (activePlaygroundTab() === 'cards') {
+      <div class="playground-content animate-fade-in-up">
+        <div class="component-showcase">
+          <div class="showcase-group">
+            <h4 class="showcase-title">Cards</h4>
+            <div class="showcase-cards-grid">
+              <div class="showcase-card">
+                <div class="card-header">
+                  <h5 class="card-title">Component Card</h5>
+                  <span class="badge badge-success">Live</span>
+                </div>
+                <p class="card-desc">Production-ready Angular component with full TypeScript support.</p>
+                <div class="card-footer">
+                  <a href="#" class="card-link">View Docs →</a>
+                </div>
+              </div>
+
+              <div class="showcase-card">
+                <div class="card-header">
+                  <h5 class="card-title">Accessible</h5>
+                  <span class="badge badge-info">WCAG 2.1 AA</span>
+                </div>
+                <p class="card-desc">Full keyboard navigation and screen reader support built-in.</p>
+                <div class="card-footer">
+                  <a href="#" class="card-link">Learn More →</a>
+                </div>
+              </div>
+
+              <div class="showcase-card">
+                <div class="card-header">
+                  <h5 class="card-title">Themeable</h5>
+                  <span class="badge badge-accent">Tokens</span>
+                </div>
+                <p class="card-desc">CSS custom properties for complete design system customization.</p>
+                <div class="card-footer">
+                  <a href="#" class="card-link">Customize →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="showcase-group">
+            <h4 class="showcase-title">Badge Variants</h4>
+            <div class="showcase-grid">
+              <span class="badge badge-success">Success</span>
+              <span class="badge badge-warning">Warning</span>
+              <span class="badge badge-danger">Danger</span>
+              <span class="badge badge-info">Info</span>
+              <span class="badge badge-accent">Accent</span>
+              <span class="badge badge-default">Default</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- Tab Content: Forms -->
+      @if (activePlaygroundTab() === 'forms') {
+      <div class="playground-content animate-fade-in-up">
+        <div class="component-showcase">
+          <div class="showcase-group">
+            <h4 class="showcase-title">Input Fields</h4>
+            <div class="showcase-forms">
+              <div class="form-group">
+                <label class="form-label-demo">Default Input</label>
+                <input type="text" placeholder="Type something..." class="form-input-demo" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label-demo">With Error</label>
+                <input type="email" placeholder="email@example.com" class="form-input-demo form-input-error" />
+                <span class="form-error">Invalid email format</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label-demo">Textarea</label>
+                <textarea placeholder="Enter your message..." class="form-textarea-demo"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- Tab Content: Colors & Tokens -->
+      @if (activePlaygroundTab() === 'tokens') {
+      <div class="playground-content animate-fade-in-up">
+        <div class="component-showcase">
+          <div class="showcase-group">
+            <h4 class="showcase-title">Color Tokens</h4>
+            <div class="tokens-grid">
+              <div class="token-swatch">
+                <div class="swatch" style="background: #7c3aed;"></div>
+                <div class="token-label">Primary</div>
+                <div class="token-value">#7c3aed</div>
+              </div>
+
+              <div class="token-swatch">
+                <div class="swatch" style="background: #06b6d4;"></div>
+                <div class="token-label">Accent</div>
+                <div class="token-value">#06b6d4</div>
+              </div>
+
+              <div class="token-swatch">
+                <div class="swatch" style="background: #10b981;"></div>
+                <div class="token-label">Success</div>
+                <div class="token-value">#10b981</div>
+              </div>
+
+              <div class="token-swatch">
+                <div class="swatch" style="background: #f59e0b;"></div>
+                <div class="token-label">Warning</div>
+                <div class="token-value">#f59e0b</div>
+              </div>
+
+              <div class="token-swatch">
+                <div class="swatch" style="background: #ef4444;"></div>
+                <div class="token-label">Danger</div>
+                <div class="token-value">#ef4444</div>
+              </div>
+
+              <div class="token-swatch">
+                <div class="swatch" style="background: #6b7280;"></div>
+                <div class="token-label">Neutral</div>
+                <div class="token-value">#6b7280</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="showcase-group">
+            <h4 class="showcase-title">Typography Scale</h4>
+            <div class="typography-demo">
+              <div class="typo-item">
+                <div class="typo-label">Display</div>
+                <div class="typo-example" style="font-size: 2.25rem; font-weight: 800;">Zellavora</div>
+              </div>
+              <div class="typo-item">
+                <div class="typo-label">Heading</div>
+                <div class="typo-example" style="font-size: 1.875rem; font-weight: 700;">Component Library</div>
+              </div>
+              <div class="typo-item">
+                <div class="typo-label">Body</div>
+                <div class="typo-example" style="font-size: 1rem; font-weight: 400;">Production-grade components</div>
+              </div>
+              <div class="typo-item">
+                <div class="typo-label">Caption</div>
+                <div class="typo-example" style="font-size: 0.875rem; font-weight: 500;">Built with Angular 21+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- CTA to Design System Page -->
+      <div class="playground-cta animate-fade-in-up" [style.animation-delay]="'0.4s'">
+        <p>Explore the full design system with interactive documentation</p>
+        <a [routerLink]="['/design-system']" class="playground-cta-link">
+          Visit Design System
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== CONTACT SECTION ===== -->
   <section class="contact-section" id="contact">
     <div class="contact-container">

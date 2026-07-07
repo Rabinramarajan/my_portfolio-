@@ -70,6 +70,18 @@ export class Home implements OnDestroy {
   protected buildDone = signal(false);
   protected featuredBlogArticles = computed(() => this.pds.blog()?.articles?.slice(0, 3) ?? []);
 
+  protected playgroundTabs = [
+    { id: 'buttons', label: 'Buttons' },
+    { id: 'cards', label: 'Cards & Badges' },
+    { id: 'forms', label: 'Forms' },
+    { id: 'tokens', label: 'Design Tokens' },
+  ];
+  protected activePlaygroundTab = signal<string>('buttons');
+
+  protected setActivePlaygroundTab(tabId: string): void {
+    this.activePlaygroundTab.set(tabId);
+  }
+
   constructor() {
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
