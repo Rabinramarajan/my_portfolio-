@@ -22,6 +22,7 @@ import {
   TestimonialsComponent,
   OpenSourceComponent,
   ZelavoraComponent,
+  ArrowIconComponent,
 } from '../../shared/components';
 import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
 
@@ -42,6 +43,7 @@ import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
     TestimonialsComponent,
     OpenSourceComponent,
     ZelavoraComponent,
+    ArrowIconComponent,
     UiBadgeComponent,
     UiButtonDirective,
     RouterLink,

@@ -3,7 +3,7 @@
 
 <main id="main-content" role="main" tabindex="-1">
   <!-- ===== HERO SECTION ===== -->
-  <section class="hero" id="home" appAuroraBackground appMouseFollowGlow>
+  <section class="hero" id="home" aria-labelledby="hero-title" appAuroraBackground appMouseFollowGlow>
     <div class="hero-container">
       <!-- LEFT COLUMN -->
       <div class="hero-content animate-fade-in-up" appScrollTrigger>
@@ -22,7 +22,7 @@
 
         <!-- Headline with Animated Underline -->
         <div class="hero-headline-wrapper">
-          <h1 class="hero-title">
+          <h1 class="hero-title" id="hero-title">
             <span class="hero-line">
               <span class="hero-line-inner">{{ pds.hero()?.headline }}</span>
             </span>
@@ -40,7 +40,7 @@
         <div class="hero-actions hero-actions-premium" appStagger [staggerMs]="60" [staggerStartMs]="1200">
           <a [href]="pds.hero()?.cta?.primary?.href" class="btn btn-primary btn-premium animate-fade-in-scale" appMagneticButton>
             {{ pds.hero()?.cta?.primary?.label }}
-            <span class="btn-arrow">→</span>
+            <app-arrow-icon />
           </a>
           <a [href]="pds.hero()?.cta?.booking?.href" class="btn btn-outline btn-premium animate-fade-in-scale" appMagneticButton>
             {{ pds.hero()?.cta?.booking?.label }}
@@ -818,7 +818,7 @@
                 </div>
                 <p class="card-desc">Production-ready Angular component with full TypeScript support.</p>
                 <div class="card-footer">
-                  <a href="#" class="card-link">View Docs →</a>
+                  <a href="#" class="card-link">View Docs <app-arrow-icon /></a>
                 </div>
               </div>
 
@@ -829,7 +829,7 @@
                 </div>
                 <p class="card-desc">Full keyboard navigation and screen reader support built-in.</p>
                 <div class="card-footer">
-                  <a href="#" class="card-link">Learn More →</a>
+                  <a href="#" class="card-link">Learn More <app-arrow-icon /></a>
                 </div>
               </div>
 
@@ -840,7 +840,7 @@
                 </div>
                 <p class="card-desc">CSS custom properties for complete design system customization.</p>
                 <div class="card-footer">
-                  <a href="#" class="card-link">Customize →</a>
+                  <a href="#" class="card-link">Customize <app-arrow-icon /></a>
                 </div>
               </div>
             </div>
