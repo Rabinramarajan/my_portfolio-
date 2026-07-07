@@ -182,6 +182,9 @@ export class ScrollTriggerDirective implements OnInit, OnDestroy {
   private unobserve: (() => void) | null = null;
   @Input('appScrollTrigger') direction: 'up' | 'down' | 'left' | 'right' | '' | string = '';
 
+  private prefersReducedMotion =
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   ngOnInit() {
     this.setupInitialState();
     this.observeScroll();
@@ -189,20 +192,28 @@ export class ScrollTriggerDirective implements OnInit, OnDestroy {
 
   private setupInitialState() {
     const element = this.el.nativeElement;
-    element.style.opacity = '0';
-    
-    let transformStr = 'translateY(30px)';
-    if (this.direction === 'left') {
-      transformStr = 'translateX(-50px)';
-    } else if (this.direction === 'right') {
-      transformStr = 'translateX(50px)';
-    } else if (this.direction === 'down') {
-      transformStr = 'translateY(-30px)';
+
+    if (this.prefersReducedMotion) {
+      element.style.opacity = '1';
+      element.style.transform = 'translate(0, 0)';
+      element.style.filter = 'blur(0px)';
+      return;
     }
-    
+
+    element.style.opacity = '0';
+
+    let transformStr = 'translateY(24px)';
+    if (this.direction === 'left') {
+      transformStr = 'translateX(-24px)';
+    } else if (this.direction === 'right') {
+      transformStr = 'translateX(24px)';
+    } else if (this.direction === 'down') {
+      transformStr = 'translateY(-24px)';
+    }
+
     element.style.transform = transformStr;
     element.style.filter = 'blur(10px)';
-    element.style.transition = `all 0.8s ${this.animation.easing.easeOutCubic}`;
+    element.style.transition = `all 0.6s ${this.animation.easing.easeOutCubic}`;
   }
 
   private observeScroll() {
@@ -238,17 +249,23 @@ export class ScrollTriggerDirective implements OnInit, OnDestroy {
 export class MagneticButtonDirective implements OnInit, OnDestroy {
   private readonly el = inject(ElementRef);
   private readonly animation = inject(AnimationService);
-  private originalX = 0;
-  private originalY = 0;
   private animationId: number | null = null;
   private boundEnter: (() => void) | null = null;
   private boundMove: ((e: MouseEvent) => void) | null = null;
   private boundLeave: (() => void) | null = null;
 
+  private prefersReducedMotion =
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   ngOnInit() {
     const element = this.el.nativeElement;
     element.style.position = 'relative';
     element.style.overflow = 'visible';
+
+    if (this.prefersReducedMotion) {
+      return;
+    }
+
     this.boundEnter = () => this.setupGlow();
     this.boundMove = (e: MouseEvent) => this.handleMouseMove(e);
     this.boundLeave = () => this.handleMouseLeave();
@@ -260,7 +277,7 @@ export class MagneticButtonDirective implements OnInit, OnDestroy {
 
   private setupGlow() {
     const element = this.el.nativeElement;
-    element.style.boxShadow = `0 0 30px 0 rgba(168, 85, 247, 0.5), 
+    element.style.boxShadow = `0 0 30px 0 rgba(168, 85, 247, 0.5),
                                0 0 60px 0 rgba(59, 130, 246, 0.3)`;
   }
 
