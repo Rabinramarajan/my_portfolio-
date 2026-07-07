@@ -20,9 +20,9 @@
           <div class="accent-orb accent-orb-2"></div>
         </div>
 
-        <!-- Headline with Animated Underline -->
+        <!-- Headline with Typing Animation & Underline -->
         <div class="hero-headline-wrapper">
-          <h1 class="hero-title" id="hero-title">
+          <h1 class="hero-title" id="hero-title" appTypewriter [typeSpeedMs]="32" [typeStartDelayMs]="400">
             <span class="hero-line">
               <span class="hero-line-inner">{{ pds.hero()?.headline }}</span>
             </span>

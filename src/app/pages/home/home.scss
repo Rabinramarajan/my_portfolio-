@@ -381,6 +381,22 @@
   to { transform: translateY(0); }
 }
 
+// Typing caret animation
+.type-caret {
+  display: inline-block;
+  width: 3px;
+  height: 1.2em;
+  background: var(--accent-primary);
+  margin: 0 2px;
+  vertical-align: baseline;
+  animation: blink 0.7s step-end infinite;
+  opacity: 0.8;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
 // Description
 .hero-desc {
   font-size: 16px;
