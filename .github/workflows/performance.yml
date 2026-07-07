@@ -1,0 +1,108 @@
+name: Performance Audit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  performance:
+    name: Run performance tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Check bundle size
+        run: |
+          # Extract gzipped size from build output
+          BUNDLE_SIZE=$(npm run build 2>&1 | grep "Initial total" | grep -oP '\K\d+\.\d+(?= kB)' | tail -1)
+          echo "📦 Bundle size: ${BUNDLE_SIZE} KB gzipped"
+
+          # Fail if exceeds 250 KB
+          if (( $(echo "$BUNDLE_SIZE > 250" | bc -l) )); then
+            echo "❌ Bundle size exceeded 250 KB budget!"
+            exit 1
+          fi
+          echo "✅ Bundle size within budget"
+
+      - name: Install Playwright
+        run: npm run e2e:install
+
+      - name: Run performance tests
+        run: npm run e2e:perf
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Comment PR with results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reportPath = 'playwright-report/index.html';
+
+            if (fs.existsSync(reportPath)) {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: '✅ Performance tests passed! View detailed report in artifacts.'
+              });
+            }
+
+  lighthouse:
+    name: Lighthouse audit (optional)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    if: contains(github.event.pull_request.labels.*.name, 'lighthouse')
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          configPath: './.github/lighthouserc.json'
+          temporaryPublicStorage: true
+        continue-on-error: true
+
+      - name: Upload Lighthouse report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-report
+          path: .lighthouseci
+          retention-days: 30
