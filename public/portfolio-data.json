@@ -55,10 +55,10 @@
     ]
   },
   "hero": {
-    "badge": "Senior Frontend Engineer · Building Zellavora UI · Angular v13–v21",
+    "badge": "Senior Frontend Engineer · WCAG 2.1 AA · Playwright Tests · Angular v13–v21",
     "headline": "I Engineer Scalable,",
     "headlineAccent": "High-Performance Enterprise Applications",
-    "description": "I engineer scalable, high-performance enterprise web and mobile applications — with a sharp focus on clean architecture, reusable UI systems, and user-first experiences. 4+ years building enterprise portals, government systems, dashboards, and hybrid mobile apps used by thousands of users.",
+    "description": "I engineer scalable, high-performance enterprise web and mobile applications with measurable outcomes. 4+ years delivering government portals and enterprise systems serving 10,000+ users. Recent wins: 50% performance improvements, 40% API optimization, WCAG 2.1 AA compliance, and comprehensive Playwright test coverage.",
     "cta": {
       "primary": {
         "label": "View Projects",
@@ -282,6 +282,37 @@
     ],
     "openToWork": true,
     "openBadge": "Immediate Joiner - Open to Full-Time / Remote"
+  },
+  "quality": {
+    "sectionLabel": "QUALITY & STANDARDS",
+    "title": "Engineering Practices That Scale",
+    "subtitle": "Production-grade code requires discipline. Here's what I bring to every project.",
+    "practices": [
+      {
+        "title": "WCAG 2.1 AA Compliance",
+        "description": "All applications meet Level AA accessibility standards. Full support for keyboard navigation, prefers-reduced-motion, and sufficient contrast ratios across light and dark modes.",
+        "details": ["Semantic landmarks with aria-labelledby", "Motion preferences respected", "4.5:1+ contrast ratio compliance", "Screen reader optimized"]
+      },
+      {
+        "title": "Automated Testing",
+        "description": "Playwright test suite with accessibility, visual regression, and performance monitoring. Catches regressions before production.",
+        "details": ["Dual-theme A11y tests", "E2E coverage for critical flows", "Visual regression detection", "Lighthouse CI integration"]
+      },
+      {
+        "title": "Performance Audits",
+        "description": "Systematic approach to Core Web Vitals, bundle optimization, and runtime performance. 40-50% performance improvements on average.",
+        "details": ["LCP/CLS/FID optimization", "Bundle size analysis", "Change detection tuning", "API consumption reduction"]
+      },
+      {
+        "title": "Clean Architecture",
+        "description": "Scalable, maintainable codebases built on SOLID principles, lazy loading, standalone components, and reusable UI systems.",
+        "details": ["Standalone components & zoneless detection", "Service-based architecture", "Typed RxJS patterns", "Component library design"]
+      }
+    ],
+    "cta": {
+      "label": "Read case studies →",
+      "href": "/blog"
+    }
   },
   "experience": {
     "sectionLabel": "EXPERIENCE",
