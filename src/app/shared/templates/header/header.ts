@@ -18,6 +18,9 @@ export class Header implements OnDestroy {
   // Scroll-spy: which in-page section is currently active.
   protected readonly activeSection = signal<string>('home');
   private observer?: IntersectionObserver;
+  private navMenuElement?: HTMLElement;
+  private menuTriggerButton?: HTMLElement;
+  private setupFocusTrapOnce = false;
 
   constructor() {
     afterNextRender(() => this.setupScrollSpy());
@@ -26,8 +29,63 @@ export class Header implements OnDestroy {
   @HostListener('window:scroll', [])
   onWindowScroll() { this.isScrolled.set(window.scrollY > 30); }
 
-  toggleMenu() { this.isMenuOpen.update(v => !v); }
-  closeMenu()  { this.isMenuOpen.set(false); }
+  @HostListener('document:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Escape' && this.isMenuOpen()) {
+      event.preventDefault();
+      this.closeMenu();
+      this.menuTriggerButton?.focus();
+    }
+  }
+
+  toggleMenu() {
+    this.isMenuOpen.update(v => !v);
+    if (this.isMenuOpen() && !this.setupFocusTrapOnce) {
+      this.setupFocusTrap();
+    }
+  }
+
+  closeMenu() {
+    this.isMenuOpen.set(false);
+  }
+
+  private setupFocusTrap(): void {
+    this.setupFocusTrapOnce = true;
+    this.menuTriggerButton = this.doc.querySelector('[data-nav-toggle]') || undefined;
+    this.navMenuElement = this.doc.querySelector('nav.nav-menu') || undefined;
+
+    if (!this.navMenuElement) return;
+
+    const focusableSelectors = [
+      'a[href]', 'button:not([disabled])', 'input:not([disabled])',
+      'select:not([disabled])', 'textarea:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])'
+    ].join(',');
+
+    const focusableElements = Array.from(
+      this.navMenuElement.querySelectorAll(focusableSelectors)
+    ) as HTMLElement[];
+
+    if (focusableElements.length === 0) return;
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    afterNextRender(() => {
+      firstElement.focus();
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key !== 'Tab') return;
+        if (e.shiftKey && this.doc.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        } else if (!e.shiftKey && this.doc.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      };
+      this.navMenuElement!.addEventListener('keydown', handleKeyDown);
+    });
+  }
 
   /** True when the given nav href points at the currently-visible section. */
   protected isActive(href?: string): boolean {
