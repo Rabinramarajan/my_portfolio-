@@ -7,6 +7,7 @@ export { TerminalIntroComponent } from './terminal-cursor.component';
 // Icons & Utilities
 export { ArrowIconComponent } from './arrow-icon.component';
 export { IconSvgComponent } from './icon-svg.component';
+export { PictureComponent } from './picture.component';
 
 // Widget components
 export { BackToTopComponent } from './back-to-top/back-to-top.component';
