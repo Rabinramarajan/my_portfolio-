@@ -693,6 +693,68 @@
             { "image": "/case-resume-3.webp", "alt": "Generated resume template showcase" }
           ]
         }
+      },
+      {
+        "slug": "zellavora-portfolio-accessibility",
+        "status": "Live",
+        "statusColor": "success",
+        "image": "/proj-zellavora-portfolio.webp",
+        "alt": "Zellavora Portfolio — WCAG 2.1 AA Compliance Case Study",
+        "name": "Zellavora Portfolio — Accessibility Audit & Implementation",
+        "outcome": "Audited and fixed 12 accessibility issues, achieving WCAG 2.1 AA compliance across light and dark modes with comprehensive automated testing",
+        "description": "This portfolio website, rebuilt with a systematic accessibility-first approach. Includes WCAG 2.1 AA compliance, dual-theme testing, keyboard navigation, and a full Playwright test suite demonstrating production-grade engineering practices.",
+        "tags": ["Angular 21", "WCAG 2.1 AA", "Playwright", "Accessibility", "SEO"],
+        "links": {
+          "caseStudy": "/blog/wcag-2-1-aa-compliance-audit-and-implementation",
+          "live": "https://rabinr.in",
+          "github": "https://github.com/zellavora/my_portfolio-"
+        },
+        "caseStudy": {
+          "role": "Full-stack: Accessibility Audit, Test Suite Design, Performance Lead",
+          "timeline": "4 weeks",
+          "context": "Enterprise companies increasingly require WCAG 2.1 AA compliance from vendors and contractors. A portfolio demonstrating genuine accessibility knowledge — not just claims — signals senior-level engineering maturity. Most portfolios ignore light mode contrast, animation preferences, and keyboard navigation.",
+          "problem": "Audit revealed 12 accessibility issues: animations ignored prefers-reduced-motion, light mode gradient text failed 4.5:1 contrast, no landmark navigation, mobile nav lacked focus management. Additionally: no robots.txt, no XML sitemap, inconsistent testing across themes.",
+          "solution": "Implemented Phase 1-3 accessibility overhaul: (1) Motion preferences respected globally via shouldReduceEffects() helper, (2) Light mode token system with 4.5:1+ contrast, (3) Semantic landmarks with aria-labelledby on all sections, (4) Mobile nav focus trap with Esc/Tab keyboard controls, (5) Theme-aware axe-core scanner utility, (6) Playwright dual-theme test suite, (7) robots.txt and XML sitemap for SEO.",
+          "challenges": [
+            {
+              "problem": "Animations scattered across 4 directives (aurora, grid, magnetic, scroll) each checking prefers-reduced-motion independently",
+              "options": "Create helper function vs. add to each directive vs. use Angular interceptor",
+              "chosen": "Centralized shouldReduceEffects() helper + consistent refactor across all animations",
+              "why": "Single source of truth, eliminates inconsistency, easy to test, easy to maintain"
+            },
+            {
+              "problem": "Light mode gradient text had 2.1:1 contrast (fails WCAG AA, needs 4.5:1). Dark mode was fine at 6.3:1.",
+              "options": "Switch to solid color, use different gradient, or implement @media prefers-color-scheme",
+              "chosen": "Theme-aware gradient via CSS @media query + updated all light mode color tokens",
+              "why": "Preserves design in dark mode, unlocks full feature set in light mode, demonstrates theme-aware thinking"
+            },
+            {
+              "problem": "Mobile nav: Tab focus would escape menu, no way to close with keyboard",
+              "options": "Restrict focus via shadow DOM, implement manual focus trap, or use ARIA modal",
+              "chosen": "Custom focus trap in header.ts + Esc key listener with proper focus restoration",
+              "why": "Works with Angular's change detection, reusable pattern, tested with Playwright"
+            },
+            {
+              "problem": "Accessibility testing only on dark mode; light mode contrast issues slip through",
+              "options": "Manual testing both themes, or automated testing with theme switching",
+              "chosen": "Playwright tests with emulateMedia({ colorScheme: 'light' / 'dark' }) + axe-core scanner",
+              "why": "Catches both themes automatically, prevents regressions, scales to all pages"
+            }
+          ],
+          "results": [
+            { "metric": "0", "label": "Accessibility violations (WCAG 2.1 AA)" },
+            { "metric": "12", "label": "Issues audited and fixed" },
+            { "metric": "4.5:1+", "label": "Contrast ratio (light + dark modes)" },
+            { "metric": "100%", "label": "Keyboard navigation coverage" },
+            { "metric": "6", "label": "Playwright test specs with dual-theme" },
+            { "metric": "2", "label": "SEO issues resolved (robots.txt, sitemap)" }
+          ],
+          "gallery": [
+            { "image": "/case-a11y-1.webp", "alt": "Accessibility audit results: 0 violations" },
+            { "image": "/case-a11y-2.webp", "alt": "Light mode contrast verification: 6-8.3:1" },
+            { "image": "/case-a11y-3.webp", "alt": "Playwright test suite dual-theme coverage" }
+          ]
+        }
       }
     ],
     "grid": [
