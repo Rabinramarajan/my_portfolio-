@@ -1,4 +1,3 @@
-@use '@angular/material' as mat;
 @use './scss/tokens.scss' as *;
 @use './scss/variables.scss' as *;
 @use './scss/nav.scss' as *;
@@ -59,16 +58,6 @@
 
 html {
   height: 100%;
-  @include mat.theme(
-    (
-      color: (
-        primary: mat.$violet-palette,
-        tertiary: mat.$blue-palette,
-      ),
-      typography: Inter,
-      density: 0,
-    )
-  );
 }
 
 *,
