@@ -66,7 +66,6 @@ export class Home implements OnDestroy {
   protected isSubmitting = false;
   protected submitMessage = '';
   protected submitStatus: 'idle' | 'success' | 'error' = 'idle';
-  protected elfsightLoaded = signal(false);
   protected buildDone = signal(false);
   protected featuredBlogArticles = computed(() => this.pds.blog()?.articles?.slice(0, 3) ?? []);
 
@@ -92,7 +91,6 @@ export class Home implements OnDestroy {
 
     afterNextRender(() => {
       this.initGsapAnimations();
-      this.loadElfsight();
     });
   }
 
@@ -144,46 +142,6 @@ export class Home implements OnDestroy {
     } catch (e) {
       // GSAP init failed — animations degrade gracefully via CSS
       console.warn('GSAP initialization failed, falling back to CSS animations', e);
-    }
-  }
-
-  private loadElfsight(): void {
-    const checkElfsightRendered = () => {
-      const container = this.doc.querySelector('.elfsight-app-def48d51-c1c6-4d45-b385-c6fcc8a31a71');
-      if (container) {
-        if (container.children.length > 0) {
-          this.elfsightLoaded.set(true);
-        } else {
-          const observer = new MutationObserver((mutations, obs) => {
-            if (container.children.length > 0) {
-              this.elfsightLoaded.set(true);
-              obs.disconnect();
-            }
-          });
-          observer.observe(container, { childList: true, subtree: true });
-        }
-      }
-    };
-
-    if (!this.doc.getElementById('elfsight-script')) {
-      const s = this.doc.createElement('script');
-      s.id = 'elfsight-script';
-      s.src = 'https://static.elfsight.com/platform/platform.js';
-      s.async = true;
-      s.defer = true;
-      if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(() => {
-          this.doc.body.appendChild(s);
-          checkElfsightRendered();
-        });
-      } else {
-        setTimeout(() => {
-          this.doc.body.appendChild(s);
-          checkElfsightRendered();
-        }, 2000);
-      }
-    } else {
-      checkElfsightRendered();
     }
   }
 

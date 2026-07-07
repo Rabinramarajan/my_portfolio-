@@ -139,8 +139,21 @@
         <!-- LEFT — Photo card -->
         <div class="photo-card hover-lift" appScrollTrigger>
           <div class="photo-wrapper">
-            <img [src]="pds.meta()?.profileImage" [alt]="pds.meta()?.name" class="profile-img" width="1792"
-              height="2392" loading="lazy" decoding="async" />
+            <img
+              srcset="
+                /profile-480w.webp 480w,
+                /profile-768w.webp 768w,
+                /profile-1200w.webp 1200w
+              "
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1200px"
+              [src]="pds.meta()?.profileImage"
+              [alt]="pds.meta()?.name"
+              class="profile-img"
+              width="1200"
+              height="1600"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high" />
             <div class="photo-overlay"></div>
 
             <div class="photo-glass-footer">

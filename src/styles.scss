@@ -7,7 +7,9 @@
 @use './scss/animation-sections.scss' as *;
 @use './scss/ui.scss' as *;
 
-/* ===== SELF-HOSTED DISPLAY FACE — General Sans (Fontshare, free license) ===== */
+/* ===== SELF-HOSTED FONTS (NO EXTERNAL CDN DEPENDENCY) ===== */
+
+/* Display Face — General Sans (Fontshare, free license) */
 @font-face {
   font-family: 'General Sans';
   src: url('/fonts/GeneralSans-Medium.woff2') format('woff2');
@@ -19,6 +21,38 @@
   font-family: 'General Sans';
   src: url('/fonts/GeneralSans-Semibold.woff2') format('woff2');
   font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Body Face — Inter (self-hosted, latin subset only) */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Mono Face — JetBrains Mono (self-hosted, below-fold only) */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrains-Mono-Regular.woff2') format('woff2');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
