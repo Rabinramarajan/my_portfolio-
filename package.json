@@ -24,7 +24,8 @@
     "e2e:allure": "cross-env ALLURE=1 playwright test",
     "e2e:lint": "eslint e2e playwright.config.ts",
     "serve:ssr": "node dist/portfolio/server/server.mjs",
-    "favicon:generate": "node scripts/generate-favicons.js"
+    "favicon:generate": "node scripts/generate-favicons.js",
+    "images:responsive": "node scripts/generate-responsive-images.js"
   },
   "private": true,
   "packageManager": "npm@11.9.0",
