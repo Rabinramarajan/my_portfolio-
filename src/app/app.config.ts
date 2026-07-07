@@ -3,7 +3,7 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
+import { provideRouter, withPreloading, PreloadAllModules, withViewTransitions } from '@angular/router';
 import { provideHttpClient, withXsrfConfiguration } from '@angular/common/http';
 
 import { routes } from './app.routes';
@@ -20,7 +20,12 @@ export const appConfig: ApplicationConfig = {
         headerName: 'X-CSRF-TOKEN',
       })
     ),
-    // Router with aggressive preloading for SPA performance
-    provideRouter(routes, withPreloading(PreloadAllModules)), provideClientHydration(withEventReplay()),
+    // Router with aggressive preloading + native View Transitions API (250ms crossfade + rise)
+    provideRouter(
+      routes,
+      withPreloading(PreloadAllModules),
+      withViewTransitions()
+    ),
+    provideClientHydration(withEventReplay()),
   ],
 };
