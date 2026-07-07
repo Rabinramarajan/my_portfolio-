@@ -1,5 +1,13 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, OnInit, OnDestroy, Output, inject, Input } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, OnInit, OnDestroy, Output, inject, Input, NgZone } from '@angular/core';
 import { AnimationService } from '../services/animation.service';
+
+function shouldReduceEffects(): boolean {
+  if (typeof navigator === 'undefined') return false;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const lowEndDevice = (navigator.hardwareConcurrency ?? 4) < 4;
+  const dataSaver = (navigator as any).connection?.saveData === true;
+  return prefersReduced || lowEndDevice || dataSaver;
+}
 
 /**
  * Aurora Background Animation Directive
@@ -95,6 +103,7 @@ export class AuroraBackgroundDirective implements OnInit, OnDestroy {
 export class MouseFollowGlowDirective implements OnInit, OnDestroy {
   private readonly el = inject(ElementRef);
   private readonly animation = inject(AnimationService);
+  private readonly ngZone = inject(NgZone);
   private glowElement: HTMLElement | null = null;
   private mouseX = 0;
   private mouseY = 0;
@@ -102,11 +111,40 @@ export class MouseFollowGlowDirective implements OnInit, OnDestroy {
   private targetY = 0;
   private animationId: number | null = null;
   private boundMouseMove: ((e: MouseEvent) => void) | null = null;
+  private isVisible = true;
+  private intersectionObserver: IntersectionObserver | null = null;
+  private shouldDisable = shouldReduceEffects();
 
   ngOnInit() {
+    if (this.shouldDisable) return;
+
     this.setupGlow();
     this.setupMouseTracking();
+    this.setupVisibilityObserver();
     this.animateGlow();
+  }
+
+  private setupVisibilityObserver() {
+    if (typeof IntersectionObserver === 'undefined') return;
+
+    this.intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          this.isVisible = entry.isIntersecting;
+          if (!this.isVisible && this.animationId !== null) {
+            this.ngZone.runOutsideAngular(() => {
+              cancelAnimationFrame(this.animationId!);
+              this.animationId = null;
+            });
+          } else if (this.isVisible && this.animationId === null) {
+            this.animateGlow();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    this.intersectionObserver.observe(this.el.nativeElement);
   }
 
   private setupGlow() {
@@ -148,10 +186,12 @@ export class MouseFollowGlowDirective implements OnInit, OnDestroy {
     this.targetX = smooth.x;
     this.targetY = smooth.y;
 
-    this.glowElement.style.left = `${this.targetX - 150}px`;
-    this.glowElement.style.top = `${this.targetY - 150}px`;
-
-    this.animationId = requestAnimationFrame(() => this.animateGlow());
+    // Run DOM update outside zone to avoid change detection
+    this.ngZone.runOutsideAngular(() => {
+      this.glowElement!.style.left = `${this.targetX - 150}px`;
+      this.glowElement!.style.top = `${this.targetY - 150}px`;
+      this.animationId = requestAnimationFrame(() => this.animateGlow());
+    });
   }
 
   ngOnDestroy() {
@@ -164,6 +204,9 @@ export class MouseFollowGlowDirective implements OnInit, OnDestroy {
     if (this.boundMouseMove) {
       document.removeEventListener('mousemove', this.boundMouseMove as EventListener);
       this.boundMouseMove = null;
+    }
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
     }
   }
 }
@@ -334,19 +377,44 @@ export class MagneticButtonDirective implements OnInit, OnDestroy {
 })
 export class GridBackgroundDirective implements OnInit, OnDestroy {
   private readonly el = inject(ElementRef);
+  private readonly ngZone = inject(NgZone);
   private animationId: number | null = null;
   private time = 0;
-
-  private prefersReducedMotion =
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  private isVisible = true;
+  private intersectionObserver: IntersectionObserver | null = null;
+  private shouldDisable = shouldReduceEffects();
 
   ngOnInit() {
     this.setupGrid();
-    if (!this.prefersReducedMotion) {
+    this.setupVisibilityObserver();
+    if (!this.shouldDisable) {
       this.animate();
     } else {
       this.drawStaticGrid();
     }
+  }
+
+  private setupVisibilityObserver() {
+    if (typeof IntersectionObserver === 'undefined') return;
+
+    this.intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          this.isVisible = entry.isIntersecting;
+          if (!this.isVisible && this.animationId !== null) {
+            this.ngZone.runOutsideAngular(() => {
+              cancelAnimationFrame(this.animationId!);
+              this.animationId = null;
+            });
+          } else if (this.isVisible && this.animationId === null && !this.shouldDisable) {
+            this.animate();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    this.intersectionObserver.observe(this.el.nativeElement);
   }
 
   private setupGrid() {
@@ -405,51 +473,56 @@ export class GridBackgroundDirective implements OnInit, OnDestroy {
   }
 
   private animate() {
-    const canvas = (this.el.nativeElement as any).__gridCanvas;
-    if (!canvas) return;
+    this.ngZone.runOutsideAngular(() => {
+      const canvas = (this.el.nativeElement as any).__gridCanvas;
+      if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
 
-    this.time += 0.01;
-    ctx.fillStyle = 'rgba(8, 13, 24, 1)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+      this.time += 0.01;
+      ctx.fillStyle = 'rgba(8, 13, 24, 1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Draw grid
-    ctx.strokeStyle = `rgba(168, 85, 247, ${0.3 + Math.sin(this.time) * 0.1})`;
-    ctx.lineWidth = 1;
+      // Draw grid
+      ctx.strokeStyle = `rgba(168, 85, 247, ${0.3 + Math.sin(this.time) * 0.1})`;
+      ctx.lineWidth = 1;
 
-    const gridSize = 50;
-    for (let i = 0; i < canvas.width; i += gridSize) {
-      ctx.beginPath();
-      ctx.moveTo(i, 0);
-      ctx.lineTo(i, canvas.height);
-      ctx.stroke();
-    }
-
-    for (let i = 0; i < canvas.height; i += gridSize) {
-      ctx.beginPath();
-      ctx.moveTo(0, i);
-      ctx.lineTo(canvas.width, i);
-      ctx.stroke();
-    }
-
-    // Draw glowing intersection points
-    ctx.fillStyle = `rgba(59, 130, 246, ${0.5 + Math.sin(this.time * 2) * 0.2})`;
-    for (let i = gridSize; i < canvas.width; i += gridSize) {
-      for (let j = gridSize; j < canvas.height; j += gridSize) {
+      const gridSize = 50;
+      for (let i = 0; i < canvas.width; i += gridSize) {
         ctx.beginPath();
-        ctx.arc(i, j, 2 + Math.sin(this.time + i + j) * 1, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.moveTo(i, 0);
+        ctx.lineTo(i, canvas.height);
+        ctx.stroke();
       }
-    }
 
-    this.animationId = requestAnimationFrame(() => this.animate());
+      for (let i = 0; i < canvas.height; i += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, i);
+        ctx.lineTo(canvas.width, i);
+        ctx.stroke();
+      }
+
+      // Draw glowing intersection points
+      ctx.fillStyle = `rgba(59, 130, 246, ${0.5 + Math.sin(this.time * 2) * 0.2})`;
+      for (let i = gridSize; i < canvas.width; i += gridSize) {
+        for (let j = gridSize; j < canvas.height; j += gridSize) {
+          ctx.beginPath();
+          ctx.arc(i, j, 2 + Math.sin(this.time + i + j) * 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      this.animationId = requestAnimationFrame(() => this.animate());
+    });
   }
 
   ngOnDestroy() {
     if (this.animationId !== null) {
       cancelAnimationFrame(this.animationId);
+    }
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
     }
   }
 }
