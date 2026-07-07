@@ -233,8 +233,8 @@
   },
   "about": {
     "sectionLabel": "ABOUT ME",
-    "title": "Senior Frontend Engineer with 4+ Years Experience",
-    "clientCentricTagline": "Specializing in scalable enterprise web and mobile applications with clean architecture, reusable UI systems, and user-first design.",
+    "title": "Founder & Engineer Building Products, Not Just Features",
+    "clientCentricTagline": "Building Zellavora (UI systems + AI tools) while helping enterprises ship scalable, accessible, high-performance applications.",
     "whoIHelp": [
       {
         "icon": "building",
@@ -252,10 +252,11 @@
         "desc": "Reducing API consumption by 40% and improving performance by 50% through smart optimization"
       }
     ],
-    "intro": "Senior Frontend Engineer with 4+ years building scalable enterprise web and mobile applications. Specializing in Angular, TypeScript, and clean architecture.",
+    "intro": "Founder of Zellavora, building design systems and AI tools. 4+ years engineering government portals, enterprise systems, and high-performance web apps at scale. WCAG 2.1 AA accessibility advocate.",
     "bio": [
-      "Previously at ITGalax Solutions Pvt Ltd, I engineered government-grade portals and hybrid mobile apps serving 10,000+ active users — improving application performance by 50% and reducing API consumption by 40%. My expertise spans government portals (Fiji Immigration Department), enterprise pension management systems (PRIMS), and cross-platform mobile apps (Vanuatu National Provident Fund).",
-      "I specialize in Angular (v13–v21), TypeScript, RxJS, Angular Signals, Ionic Angular, and Tailwind CSS. I thrive in Agile/Scrum teams, deliver reusable component-driven architecture, and maintain clean, scalable codebases for enterprise environments. Open to remote, hybrid, and full-time opportunities across India."
+      "**Current focus:** Zellavora — an ecosystem of open-source component libraries (@zellavora/ui) and AI tools (Zellavora AI Resume Builder). Building in public with a commitment to accessibility, performance, and clean architecture. 1.2k+ monthly npm downloads.",
+      "**Prior work:** At ITGalax Solutions, engineered government-grade systems serving 10,000+ users. Delivered immigration portals for Fiji, pension management platforms (PRIMS), and cross-platform mobile apps — achieving 50% performance improvements and 40% API optimization. The craft: WCAG 2.1 AA compliance, comprehensive Playwright testing, systematic performance audits.",
+      "**What matters:** Building products that scale requires discipline — not just shipping features. Strong type systems, accessible-first design, automated testing, and measurable outcomes. Open to full-time technical leadership roles in product-driven companies, or advancing Zellavora with the right partners. Based in Chennai, India · Remote-first."
     ],
     "infoCards": [
       {
