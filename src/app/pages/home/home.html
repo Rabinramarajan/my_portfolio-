@@ -3,7 +3,7 @@
 
 <main id="main-content" role="main" tabindex="-1">
   <!-- ===== HERO SECTION ===== -->
-  <section class="hero" id="home" appAuroraBackground appMouseFollowGlow>
+  <section class="hero" id="home" aria-labelledby="hero-title" appAuroraBackground appMouseFollowGlow>
     <div class="hero-container">
       <!-- LEFT COLUMN -->
       <div class="hero-content animate-fade-in-up" appScrollTrigger>
@@ -22,7 +22,7 @@
 
         <!-- Headline with Animated Underline -->
         <div class="hero-headline-wrapper">
-          <h1 class="hero-title">
+          <h1 class="hero-title" id="hero-title">
             <span class="hero-line">
               <span class="hero-line-inner">{{ pds.hero()?.headline }}</span>
             </span>
@@ -40,7 +40,7 @@
         <div class="hero-actions hero-actions-premium" appStagger [staggerMs]="60" [staggerStartMs]="1200">
           <a [href]="pds.hero()?.cta?.primary?.href" class="btn btn-primary btn-premium animate-fade-in-scale" appMagneticButton>
             {{ pds.hero()?.cta?.primary?.label }}
-            <span class="btn-arrow">→</span>
+            <app-arrow-icon />
           </a>
           <a [href]="pds.hero()?.cta?.booking?.href" class="btn btn-outline btn-premium animate-fade-in-scale" appMagneticButton>
             {{ pds.hero()?.cta?.booking?.label }}
@@ -129,10 +129,10 @@
   </section>
 
   <!-- ===== ABOUT SECTION ===== -->
-  <section class="about" id="about" appGridBackground>
+  <section class="about" id="about" aria-labelledby="about-title" appGridBackground>
     <div class="about-container" appScrollTrigger>
       <div class="section-label animate-fade-in-up">{{ pds.about()?.sectionLabel }}</div>
-      <h2 class="about-title animate-fade-in-up" [style.animation-delay]="'0.1s'">{{ pds.about()?.title }}</h2>
+      <h2 class="about-title animate-fade-in-up" id="about-title" [style.animation-delay]="'0.1s'">{{ pds.about()?.title }}</h2>
       <p class="about-intro animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.about()?.intro }}</p>
 
       <div class="about-grid">
@@ -229,10 +229,10 @@
   </section>
 
   <!-- ===== EXPERIENCE SECTION ===== -->
-  <section class="experience" id="experience" appScrollTrigger>
+  <section class="experience" id="experience" aria-labelledby="experience-title" appScrollTrigger>
     <div class="exp-container">
       <div class="section-label animate-fade-in-up">{{ pds.experience()?.sectionLabel }}</div>
-      <h2 class="exp-title animate-fade-in-up" [style.animation-delay]="'0.1s'">{{ pds.experience()?.title }}</h2>
+      <h2 class="exp-title animate-fade-in-up" id="experience-title" [style.animation-delay]="'0.1s'">{{ pds.experience()?.title }}</h2>
       <p class="exp-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.experience()?.subtitle }}</p>
 
       <div class="timeline">
@@ -286,10 +286,10 @@
   </section>
 
   <!-- ===== SKILLS & TECHNOLOGIES SECTION ===== -->
-  <section class="skills" id="skills" appScrollTrigger>
+  <section class="skills" id="skills" aria-labelledby="skills-title" appScrollTrigger>
     <div class="skills-container">
       <div class="section-label animate-fade-in-up">{{ pds.skills()?.sectionLabel }}</div>
-      <h2 class="skills-title animate-fade-in-up" [style.animation-delay]="'0.1s'">{{ pds.skills()?.title }}</h2>
+      <h2 class="skills-title animate-fade-in-up" id="skills-title" [style.animation-delay]="'0.1s'">{{ pds.skills()?.title }}</h2>
       <p class="skills-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.skills()?.subtitle }}</p>
 
       <div class="skills-grid">
@@ -351,7 +351,7 @@
   </section>
 
   <!-- ===== FEATURED PROJECTS SECTION ===== -->
-  <section class="projects" id="projects" appScrollTrigger>
+  <section class="projects" id="projects" aria-labelledby="projects-title" appScrollTrigger>
     <div class="proj-container">
       <div class="section-label animate-fade-in-up">{{ pds.projects()?.sectionLabel }}</div>
       <h2 class="proj-title animate-fade-in-up" [style.animation-delay]="'0.1s'">{{ pds.projects()?.title }}</h2>
@@ -582,11 +582,11 @@
   </section>
 
   <!-- ===== RESUME SECTION ===== -->
-  <section class="resume-section" id="resume">
+  <section class="resume-section" id="resume" aria-labelledby="resume-title">
     <div class="resume-container">
       <div class="resume-header">
         <div class="section-label">{{ pds.resume()?.sectionLabel }}</div>
-        <h2 class="resume-title">{{ pds.resume()?.title }}</h2>
+        <h2 class="resume-title" id="resume-title">{{ pds.resume()?.title }}</h2>
         <p class="resume-subtitle">{{ pds.resume()?.subtitle }}</p>
       </div>
 
@@ -671,7 +671,7 @@
   </section>
 
   <!-- ===== OPEN SOURCE SECTION ===== -->
-  <section class="open-source-section" id="open-source" appScrollTrigger>
+  <section class="open-source-section" id="open-source" aria-labelledby="opensource-title" appScrollTrigger>
     <div class="proj-container">
       <div class="section-label animate-fade-in-up">{{ pds.openSource()?.sectionLabel }}</div>
       <h2 class="proj-title animate-fade-in-up" [style.animation-delay]="'0.1s'">{{ pds.openSource()?.title }}</h2>
@@ -686,7 +686,7 @@
   </section>
 
   <!-- ===== ZELLAVORA SECTION ===== -->
-  <section class="zellavora-section" id="zellavora" appScrollTrigger>
+  <section class="zellavora-section" id="zellavora" aria-labelledby="zellavora-title" appScrollTrigger>
     <div class="proj-container">
       <div class="section-label animate-fade-in-up">{{ pds.zellavora()?.sectionLabel }}</div>
       <h2 class="proj-title animate-fade-in-up" [style.animation-delay]="'0.1s'">{{ pds.zellavora()?.title }}</h2>
@@ -701,7 +701,7 @@
   </section>
 
   <!-- ===== BLOG TEASER SECTION ===== -->
-  <section class="blog-section" id="blog" appScrollTrigger>
+  <section class="blog-section" id="blog" aria-labelledby="blog-title" appScrollTrigger>
     <div class="proj-container">
       <div class="section-label animate-fade-in-up">{{ pds.blog()?.sectionLabel }}</div>
       <h2 class="proj-title animate-fade-in-up" [style.animation-delay]="'0.1s'">{{ pds.blog()?.title }}</h2>
@@ -756,7 +756,7 @@
   </section>
 
   <!-- ===== COMPONENT PLAYGROUND SECTION ===== -->
-  <section class="playground-section" id="components" appScrollTrigger>
+  <section class="playground-section" id="components" aria-labelledby="components-title" appScrollTrigger>
     <div class="proj-container">
       <div class="section-label animate-fade-in-up">COMPONENT LIBRARY</div>
       <h2 class="proj-title animate-fade-in-up" [style.animation-delay]="'0.1s'">Zellavora UI Components</h2>
@@ -818,7 +818,7 @@
                 </div>
                 <p class="card-desc">Production-ready Angular component with full TypeScript support.</p>
                 <div class="card-footer">
-                  <a href="#" class="card-link">View Docs →</a>
+                  <a href="#" class="card-link">View Docs <app-arrow-icon /></a>
                 </div>
               </div>
 
@@ -829,7 +829,7 @@
                 </div>
                 <p class="card-desc">Full keyboard navigation and screen reader support built-in.</p>
                 <div class="card-footer">
-                  <a href="#" class="card-link">Learn More →</a>
+                  <a href="#" class="card-link">Learn More <app-arrow-icon /></a>
                 </div>
               </div>
 
@@ -840,7 +840,7 @@
                 </div>
                 <p class="card-desc">CSS custom properties for complete design system customization.</p>
                 <div class="card-footer">
-                  <a href="#" class="card-link">Customize →</a>
+                  <a href="#" class="card-link">Customize <app-arrow-icon /></a>
                 </div>
               </div>
             </div>
@@ -973,7 +973,7 @@
   </section>
 
   <!-- ===== CONTACT SECTION ===== -->
-  <section class="contact-section" id="contact">
+  <section class="contact-section" id="contact" aria-labelledby="contact-title">
     <div class="contact-container">
       <div class="section-label">{{ pds.contact()?.sectionLabel }}</div>
       <h2 class="contact-title">{{ pds.contact()?.title }}</h2>

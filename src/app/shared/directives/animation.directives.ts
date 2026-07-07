@@ -22,13 +22,13 @@ export class AuroraBackgroundDirective implements OnInit, OnDestroy {
   private readonly animation = inject(AnimationService);
   private animationId: number | null = null;
   private time = 0;
-
-  private reducedMotion =
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  private shouldDisable = shouldReduceEffects();
 
   ngOnInit() {
     this.setupAuroraStyle();
-    this.animate();
+    if (!this.shouldDisable) {
+      this.animate();
+    }
   }
 
   private setupAuroraStyle() {
@@ -53,6 +53,8 @@ export class AuroraBackgroundDirective implements OnInit, OnDestroy {
   }
 
   private animate() {
+    if (this.shouldDisable) return;
+
     const canvas = (this.el.nativeElement as any).__auroraCanvas;
     if (!canvas) return;
 
@@ -80,7 +82,7 @@ export class AuroraBackgroundDirective implements OnInit, OnDestroy {
     }
 
     // Static single frame under prefers-reduced-motion
-    if (!this.reducedMotion) {
+    if (!this.shouldDisable) {
       this.animationId = requestAnimationFrame(() => this.animate());
     }
   }
@@ -224,9 +226,7 @@ export class ScrollTriggerDirective implements OnInit, OnDestroy {
   private readonly animation = inject(AnimationService);
   private unobserve: (() => void) | null = null;
   @Input('appScrollTrigger') direction: 'up' | 'down' | 'left' | 'right' | '' | string = '';
-
-  private prefersReducedMotion =
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  private shouldDisable = shouldReduceEffects();
 
   ngOnInit() {
     this.setupInitialState();
@@ -236,7 +236,7 @@ export class ScrollTriggerDirective implements OnInit, OnDestroy {
   private setupInitialState() {
     const element = this.el.nativeElement;
 
-    if (this.prefersReducedMotion) {
+    if (this.shouldDisable) {
       element.style.opacity = '1';
       element.style.transform = 'translate(0, 0)';
       element.style.filter = 'blur(0px)';
@@ -296,16 +296,14 @@ export class MagneticButtonDirective implements OnInit, OnDestroy {
   private boundEnter: (() => void) | null = null;
   private boundMove: ((e: MouseEvent) => void) | null = null;
   private boundLeave: (() => void) | null = null;
-
-  private prefersReducedMotion =
-    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  private shouldDisable = shouldReduceEffects();
 
   ngOnInit() {
     const element = this.el.nativeElement;
     element.style.position = 'relative';
     element.style.overflow = 'visible';
 
-    if (this.prefersReducedMotion) {
+    if (this.shouldDisable) {
       return;
     }
 

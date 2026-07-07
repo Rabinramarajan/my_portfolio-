@@ -4,6 +4,9 @@ export { ScrollProgressComponent } from './scroll-progress.component';
 export { CustomCursorComponent } from './terminal-cursor.component';
 export { TerminalIntroComponent } from './terminal-cursor.component';
 
+// Icons & Utilities
+export { ArrowIconComponent } from './arrow-icon.component';
+
 // Widget components
 export { BackToTopComponent } from './back-to-top/back-to-top.component';
 export { WhatsAppWidgetComponent } from './whatsapp-widget/whatsapp-widget.component';
