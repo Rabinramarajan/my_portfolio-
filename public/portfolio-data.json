@@ -1492,6 +1492,26 @@
         ],
         "featured": true,
         "markdownFile": "/blog/wcag-2-1-aa-compliance-audit-and-implementation.md"
+      },
+      {
+        "id": "performance-case-study",
+        "slug": "performance-optimization-core-web-vitals-case-study",
+        "title": "Performance Optimization Case Study: From LCP 4.2s to 1.2s in an Angular App",
+        "excerpt": "How I reduced Largest Contentful Paint (LCP) from 4.2s to 1.2s, improved Cumulative Layout Shift (CLS), and optimized Core Web Vitals in a furniture e-commerce app. Includes concrete metrics, code decisions, and a battle-tested performance checklist.",
+        "category": "Performance",
+        "readTime": "13 min read",
+        "date": "2026-06-15",
+        "tags": [
+          "Performance",
+          "Core Web Vitals",
+          "Angular",
+          "Optimization",
+          "LCP",
+          "CLS",
+          "Lighthouse"
+        ],
+        "featured": true,
+        "markdownFile": "/blog/performance-optimization-core-web-vitals-case-study.md"
       }
     ]
   },
