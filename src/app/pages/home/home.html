@@ -467,6 +467,13 @@
               </div>
             </div>
 
+            <!-- Outcome badge — visible metric/result -->
+            @if (proj.outcome) {
+            <div class="proj-card-outcome">
+              {{ proj.outcome }}
+            </div>
+            }
+
             <p class="proj-card-enhanced-desc">{{ proj.description }}</p>
 
             <!-- Tech tags with better styling -->
