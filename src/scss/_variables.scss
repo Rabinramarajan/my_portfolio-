@@ -3,6 +3,19 @@
 // ============================================
 
 :root {
+  // --- Brand Core (Rabin R ↔ Zellavora shared identity) ---
+  --brand-ink-950: #0d1117; // Ink — deepest ground
+  --brand-surface-900: #161b27; // Surface
+  --brand-violet-500: #6e56cf; // Zella Violet — primary accent (light grounds)
+  --brand-violet-400: #9e8cfc; // Violet 400 — accent on dark grounds
+  --brand-teal-400: #3dd6c3; // Signal Teal — sparingly (live/success states)
+  --brand-paper: #f7f7fb; // Paper — light background
+
+  // --- Typefaces ---
+  --font-display: 'General Sans', 'Inter', sans-serif;
+  --font-body: 'Inter', 'Roboto', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
   // --- Color Palette (Dark Theme — Default) ---
   --bg-primary: #080d18;
   --bg-secondary: #0f172a;

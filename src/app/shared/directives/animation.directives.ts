@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnInit, OnDestroy, inject, Input } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, OnInit, OnDestroy, Output, inject, Input } from '@angular/core';
 import { AnimationService } from '../services/animation.service';
 
 /**
@@ -15,6 +15,9 @@ export class AuroraBackgroundDirective implements OnInit, OnDestroy {
   private animationId: number | null = null;
   private time = 0;
 
+  private reducedMotion =
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   ngOnInit() {
     this.setupAuroraStyle();
     this.animate();
@@ -28,8 +31,11 @@ export class AuroraBackgroundDirective implements OnInit, OnDestroy {
     canvas.style.top = '0';
     canvas.style.left = '0';
     canvas.style.pointerEvents = 'none';
-    canvas.style.opacity = '0.15';
-    
+    // Fade in over the first 300ms of the hero load sequence
+    canvas.style.opacity = '0';
+    canvas.style.transition = 'opacity 300ms ease';
+    requestAnimationFrame(() => (canvas.style.opacity = '0.15'));
+
     this.el.nativeElement.style.position = 'relative';
     this.el.nativeElement.style.overflow = 'hidden';
     this.el.nativeElement.appendChild(canvas);
@@ -65,7 +71,10 @@ export class AuroraBackgroundDirective implements OnInit, OnDestroy {
       ctx.fillRect(0, wave - 100, canvas.width, 200);
     }
 
-    this.animationId = requestAnimationFrame(() => this.animate());
+    // Static single frame under prefers-reduced-motion
+    if (!this.reducedMotion) {
+      this.animationId = requestAnimationFrame(() => this.animate());
+    }
   }
 
   ngOnDestroy() {
@@ -417,5 +426,101 @@ export class FloatingTextDirective implements OnInit {
       `
       )
       .join('');
+  }
+}
+
+/**
+ * Stagger Directive
+ * Applies an incremental animation-delay to the host's direct children,
+ * replacing per-element hardcoded [style.animation-delay] bindings.
+ */
+/**
+ * Typewriter Directive
+ * Types the host's text content character by character (~28 chars/s),
+ * preserving any syntax-highlighting spans, with a blinking caret.
+ * Emits (typingDone) when finished; renders instantly under
+ * prefers-reduced-motion.
+ */
+@Directive({
+  selector: '[appTypewriter]',
+  standalone: true,
+})
+export class TypewriterDirective implements AfterViewInit, OnDestroy {
+  private readonly el = inject(ElementRef);
+
+  @Input() typeSpeedMs = 36;
+  @Input() typeStartDelayMs = 600;
+  @Output() typingDone = new EventEmitter<void>();
+
+  private timerId: ReturnType<typeof setTimeout> | null = null;
+  private caret: HTMLElement | null = null;
+
+  ngAfterViewInit() {
+    const host = this.el.nativeElement as HTMLElement;
+    const reduce =
+      typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      this.typingDone.emit();
+      return;
+    }
+
+    const walker = document.createTreeWalker(host, NodeFilter.SHOW_TEXT);
+    const nodes: { node: Text; text: string }[] = [];
+    let current: Node | null;
+    while ((current = walker.nextNode())) {
+      const textNode = current as Text;
+      if (textNode.textContent) {
+        nodes.push({ node: textNode, text: textNode.textContent });
+      }
+    }
+    nodes.forEach((entry) => (entry.node.textContent = ''));
+
+    this.caret = document.createElement('span');
+    this.caret.className = 'type-caret';
+    this.caret.setAttribute('aria-hidden', 'true');
+
+    let nodeIndex = 0;
+    let charIndex = 0;
+    const step = () => {
+      if (nodeIndex >= nodes.length) {
+        this.caret?.remove();
+        this.caret = null;
+        this.typingDone.emit();
+        return;
+      }
+      const { node, text } = nodes[nodeIndex];
+      charIndex++;
+      node.textContent = text.slice(0, charIndex);
+      node.parentNode?.insertBefore(this.caret!, node.nextSibling);
+      if (charIndex >= text.length) {
+        nodeIndex++;
+        charIndex = 0;
+      }
+      this.timerId = setTimeout(step, this.typeSpeedMs);
+    };
+    this.timerId = setTimeout(step, this.typeStartDelayMs);
+  }
+
+  ngOnDestroy() {
+    if (this.timerId !== null) clearTimeout(this.timerId);
+    this.caret?.remove();
+  }
+}
+
+@Directive({
+  selector: '[appStagger]',
+  standalone: true,
+})
+export class StaggerDirective implements OnInit {
+  private readonly el = inject(ElementRef);
+
+  @Input() staggerMs = 80;
+  @Input() staggerStartMs = 0;
+
+  ngOnInit() {
+    const children = Array.from(this.el.nativeElement.children) as HTMLElement[];
+    children.forEach((child, i) => {
+      child.style.animationDelay = `${this.staggerStartMs + i * this.staggerMs}ms`;
+    });
   }
 }

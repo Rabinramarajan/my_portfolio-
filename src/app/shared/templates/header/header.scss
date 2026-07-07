@@ -90,11 +90,16 @@
   }
 
   .logo-text {
-    font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-family: var(--font-display);
+    font-size: 16px;
     font-weight: 600;
+    letter-spacing: -0.01em;
     color: var(--text-primary);
     transition: color 0.2s ease;
+
+    .logo-dot {
+      color: var(--brand-violet-400);
+    }
   }
 
   &:hover {
@@ -167,6 +172,25 @@
     color: white !important;
     transform: translateY(-1px);
     box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+  }
+}
+
+// ── GitHub Icon Link ──────────────────────────────────
+.nav-github {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+  color: var(--text-secondary, #a1a1aa);
+  border-radius: 9px;
+  flex-shrink: 0;
+  transition: color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    color: var(--text-primary, #fff);
+    background: rgba(124, 58, 237, 0.12);
   }
 }
 
@@ -377,6 +401,7 @@
 @media (max-width: 860px) {
   .nav-menu    { display: none !important; }
   .btn-resume  { display: none !important; }
+  .nav-github  { display: none !important; }
   .nav-toggle  { display: flex !important; }
   .mobile-menu { display: block !important; }
   .nav-backdrop { display: block !important; }

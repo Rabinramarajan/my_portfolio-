@@ -1,5 +1,5 @@
 ---
-title: "Creating Enterprise Layout Systems with @zellvora/ng-layout"
+title: "Creating Enterprise Layout Systems with @zellavora/ng-layout"
 description: "For Angular architects: designing a signals-based, SSR-safe, zoneless layout system — grid primitives, responsive layouts, dashboard shells, and how signal-driven layouts differ from traditional ones."
 tags: ["Angular", "Signals", "Layout", "Architecture", "SSR"]
 author: "Rabin R"
@@ -7,7 +7,7 @@ date: "2026-07-03"
 readingTime: "12 min read"
 ---
 
-> **Note:** `@zellvora/ng-layout` is a design study. APIs, diagrams, and benchmark figures are **illustrative** — realistic Angular 21 patterns used to explain the architecture, not a shipped release.
+> **Note:** `@zellavora/ng-layout` is a design study. APIs, diagrams, and benchmark figures are **illustrative** — realistic Angular 21 patterns used to explain the architecture, not a shipped release.
 
 ## Why layout consistency matters
 
@@ -27,7 +27,7 @@ Enterprise UIs have specific layout pressures that consumer apps often don't:
 
 A layout library that ignores any of these fails in production.
 
-## Design philosophy behind @zellvora/ng-layout
+## Design philosophy behind @zellavora/ng-layout
 
 Three principles:
 
@@ -38,7 +38,7 @@ Three principles:
 **3. SSR and zoneless as constraints, not features.** Every component is authored to render identically on server and client and to update without `zone.js`.
 
 ```bash
-npm install @zellvora/ng-layout
+npm install @zellavora/ng-layout
 ```
 
 ## Grid system
@@ -125,7 +125,7 @@ export class DashboardPage {
 }
 ```
 
-The collapse state is a `model()` signal, so it's two-way bindable and persistable (drop it into `@zellvora/ng-storage` to remember the user's preference across sessions).
+The collapse state is a `model()` signal, so it's two-way bindable and persistable (drop it into `@zellavora/ng-storage` to remember the user's preference across sessions).
 
 ### Architecture diagram
 
@@ -151,7 +151,7 @@ The sidebar width animates via CSS transitions on a `data-open` attribute the si
 
 ## SSR compatibility
 
-Layout is where SSR most often breaks, because layout code loves to measure the DOM. `@zellvora/ng-layout` avoids it:
+Layout is where SSR most often breaks, because layout code loves to measure the DOM. `@zellavora/ng-layout` avoids it:
 
 - **No `getBoundingClientRect()` at init.** Breakpoint detection uses `matchMedia` guarded by `isPlatformBrowser()`, with a sensible default breakpoint for the server render.
 - **CSS-driven responsiveness.** Because spans and stacks resolve through media queries, the server emits correct responsive HTML without knowing the viewport.
@@ -191,7 +191,7 @@ Dragging updates one signal; the `computed` style recalculates; only this compon
 
 ## Traditional layouts vs. signal-based layouts
 
-| Concern | Traditional (zone + component state) | `@zellvora/ng-layout` (signals) |
+| Concern | Traditional (zone + component state) | `@zellavora/ng-layout` (signals) |
 |---|---|---|
 | Sidebar toggle | Property + zone tick re-checks tree | Signal → one attribute binding updates |
 | Resize/drag | `mousemove` → app-wide change detection | Signal write → only this component |
@@ -231,13 +231,13 @@ The point of the table is the *shape* of the difference, not exact milliseconds:
 
 ## Conclusion
 
-A layout system is architecture, not decoration: it's where consistency, responsiveness, RTL, SSR-safety, and performance are decided once for the whole product. `@zellvora/ng-layout` argues for a disciplined split — CSS Grid and tokens for rendering, signals only for interactive and persisted layout state — which yields shells that are fast, zoneless, and server-safe by construction.
+A layout system is architecture, not decoration: it's where consistency, responsiveness, RTL, SSR-safety, and performance are decided once for the whole product. `@zellavora/ng-layout` argues for a disciplined split — CSS Grid and tokens for rendering, signals only for interactive and persisted layout state — which yields shells that are fast, zoneless, and server-safe by construction.
 
 ### Roadmap
 
 - **Draggable dashboard grids** with persisted widget positions
 - **Container queries** for component-level responsiveness beyond viewport breakpoints
-- **Layout schema** shared with `@zellvora/ng-form` for fully declarative pages
+- **Layout schema** shared with `@zellavora/ng-form` for fully declarative pages
 - **Density modes** (comfortable/compact) as a first-class token set
 - **Masonry and virtualized grid** primitives for large data surfaces
 

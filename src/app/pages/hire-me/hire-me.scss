@@ -60,7 +60,7 @@
 }
 
 .hm-section-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(26px, 3.5vw, 42px);
   font-weight: 800;
   color: var(--text-primary);
@@ -199,7 +199,7 @@
 }
 
 .hm-hero-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(36px, 5vw, 62px);
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -287,7 +287,7 @@
 }
 
 .hm-service-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-display);
   font-size: 18px;
   font-weight: 700;
   color: var(--text-primary);
@@ -368,7 +368,7 @@
 }
 
 .hm-step-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-display);
   font-size: 15px;
   font-weight: 700;
   color: var(--text-primary);
@@ -458,7 +458,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-display);
   font-size: 17px;
   font-weight: 700;
   color: #fbbf24;
@@ -584,7 +584,7 @@
 }
 
 .hm-cta-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(28px, 4vw, 46px);
   font-weight: 800;
   color: var(--text-primary);

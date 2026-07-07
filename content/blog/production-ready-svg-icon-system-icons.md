@@ -1,5 +1,5 @@
 ---
-title: "Building a Production-Ready SVG Icon System with @zellvora/icons"
+title: "Building a Production-Ready SVG Icon System with @zellavora/icons"
 description: "How to design an Angular icon system that optimizes SVGs, auto-syncs via a build pipeline, tree-shakes to only the icons you use, renders SSR-safely, and stays accessible."
 tags: ["Angular", "SVG", "Icons", "Build Tooling", "Accessibility", "Performance"]
 author: "Rabin R"
@@ -7,7 +7,7 @@ date: "2026-07-03"
 readingTime: "10 min read"
 ---
 
-> **Note:** `@zellvora/icons` is a design study. APIs, metrics, and pipeline details are **illustrative** — realistic patterns used to explain the architecture, not a shipped release.
+> **Note:** `@zellavora/icons` is a design study. APIs, metrics, and pipeline details are **illustrative** — realistic patterns used to explain the architecture, not a shipped release.
 
 ## Why icon systems matter
 
@@ -28,7 +28,7 @@ The default approach — drop SVG files in `assets/` and reference them — accu
 
 An icon *system* solves these by making icons **code**, generated from a single source, optimized and tree-shakeable.
 
-## Goals of @zellvora/icons
+## Goals of @zellavora/icons
 
 - **Single source of truth.** Icons live as source SVGs in one place; everything else is generated.
 - **Optimized at build time.** SVGO-style optimization runs in the pipeline, not the browser.
@@ -38,7 +38,7 @@ An icon *system* solves these by making icons **code**, generated from a single 
 - **Auto-synced.** A build step regenerates the icon modules from source, so design and code never drift.
 
 ```bash
-npm install @zellvora/icons
+npm install @zellavora/icons
 ```
 
 ## SVG optimization
@@ -106,7 +106,7 @@ This is the performance heart of the system. Because each icon is an individual,
 
 ```ts
 // Only these two icons end up in the bundle:
-import { arrowRight, search } from '@zellvora/icons';
+import { arrowRight, search } from '@zellavora/icons';
 
 @Component({
   imports: [ZvIcon],
@@ -123,7 +123,7 @@ export class ToolbarComponent {
 
 Contrast with a sprite or `assets/` approach, where all 200 icons ship regardless. Import two, ship two.
 
-> Anti-pattern: `import * as icons from '@zellvora/icons'` defeats tree-shaking by referencing everything. The lint rule ships to forbid it.
+> Anti-pattern: `import * as icons from '@zellavora/icons'` defeats tree-shaking by referencing everything. The lint rule ships to forbid it.
 
 ## SSR compatibility
 
@@ -199,12 +199,12 @@ The default (`aria-hidden="true"`) is the safe one: an unlabeled icon is assumed
 ## Installation and usage guide
 
 ```bash
-npm install @zellvora/icons
+npm install @zellavora/icons
 ```
 
 ```ts
-import { ZvIcon } from '@zellvora/icons';
-import { heart } from '@zellvora/icons';
+import { ZvIcon } from '@zellavora/icons';
+import { heart } from '@zellavora/icons';
 
 @Component({
   selector: 'app-like',
@@ -234,7 +234,7 @@ npx zv-icons build
 |---|---|---|---|
 | `assets/*.svg` via `<img>` | 200 files available, N fetched | N HTTP | Possible |
 | SVG sprite | All 200 in one file | 1 HTTP | Possible |
-| `@zellvora/icons` (inline, tree-shaken) | 12 | 0 (inlined) | None |
+| `@zellavora/icons` (inline, tree-shaken) | 12 | 0 (inlined) | None |
 
 The combination that matters: **only used icons ship** (tree-shaking) **and** they're **inline** (no requests, no flash).
 
@@ -281,4 +281,4 @@ This "generate-and-verify" gate is the trick: contributors add a source SVG, and
 
 ## Conclusion
 
-A good icon system is a build-time problem solved once so it disappears at runtime: optimize and generate from a single source, ship only what's imported, render inline for SSR, and force an accessibility decision at every use. `@zellvora/icons` shows how those pieces fit — SVGO-style optimization, per-icon tree-shakeable exports, an inline signals-based component, and a CI generate-and-verify gate — turning two hundred scattered files into invisible, fast, accessible infrastructure.
+A good icon system is a build-time problem solved once so it disappears at runtime: optimize and generate from a single source, ship only what's imported, render inline for SSR, and force an accessibility decision at every use. `@zellavora/icons` shows how those pieces fit — SVGO-style optimization, per-icon tree-shakeable exports, an inline signals-based component, and a CI generate-and-verify gate — turning two hundred scattered files into invisible, fast, accessible infrastructure.

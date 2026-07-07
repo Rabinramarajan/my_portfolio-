@@ -19,11 +19,11 @@ None of this happens because engineers are careless. It happens because the *pri
 
 The ecosystem is five packages:
 
-1. **`@zellvora/icons`** — a build-time-optimized, tree-shakeable SVG icon system.
-2. **`@zellvora/ng-input`** — signals-first form controls that work with every Angular forms API.
-3. **`@zellvora/ng-form`** — schema-driven, dynamic form generation.
-4. **`@zellvora/ng-layout`** — grid, responsive, and dashboard layout primitives.
-5. **`@zellvora/ng-storage`** — a unified, SSR-safe client-storage layer.
+1. **`@zellavora/icons`** — a build-time-optimized, tree-shakeable SVG icon system.
+2. **`@zellavora/ng-input`** — signals-first form controls that work with every Angular forms API.
+3. **`@zellavora/ng-form`** — schema-driven, dynamic form generation.
+4. **`@zellavora/ng-layout`** — grid, responsive, and dashboard layout primitives.
+5. **`@zellavora/ng-storage`** — a unified, SSR-safe client-storage layer.
 
 They can be adopted one at a time, but they're designed to compose into something larger than their sum.
 
@@ -43,11 +43,11 @@ Mapping each package to the concrete pain it removes:
 
 | Package | The pain it removes |
 |---|---|
-| `@zellvora/icons` | Bloated bundles from shipping all icons; unoptimized SVGs; inaccessible icon buttons; design/code drift |
-| `@zellvora/ng-input` | Forty duplicated inputs; accessibility drift; lock-in to one forms API |
-| `@zellvora/ng-form` | Hand-built dynamic forms; scattered conditional logic; forms that can't change without a release |
-| `@zellvora/ng-layout` | Inconsistent page shells; re-invented dashboards; SSR-breaking layout code |
-| `@zellvora/ng-storage` | Manual serialization; SSR crashes on `localStorage`; no versioning; no cross-tab sync |
+| `@zellavora/icons` | Bloated bundles from shipping all icons; unoptimized SVGs; inaccessible icon buttons; design/code drift |
+| `@zellavora/ng-input` | Forty duplicated inputs; accessibility drift; lock-in to one forms API |
+| `@zellavora/ng-form` | Hand-built dynamic forms; scattered conditional logic; forms that can't change without a release |
+| `@zellavora/ng-layout` | Inconsistent page shells; re-invented dashboards; SSR-breaking layout code |
+| `@zellavora/ng-storage` | Manual serialization; SSR crashes on `localStorage`; no versioning; no cross-tab sync |
 
 Individually, each is a real win. Together, they cover the substrate of an enterprise app.
 
@@ -127,11 +127,11 @@ Four packages, one pattern: **state is a signal, derivation is `computed`, persi
 
 Server rendering is where naive libraries fail, so it's designed in at every layer:
 
-- **`@zellvora/icons`** renders inline `<svg>` from static build-time data — present in the initial HTML, no fetch, no flash.
-- **`@zellvora/ng-input`** generates deterministic IDs and defers focus/measurement to `afterNextRender()` — no hydration mismatch.
-- **`@zellvora/ng-form`** renders deterministically from schema + model and fetches schemas via `resource()` with state transfer.
-- **`@zellvora/ng-layout`** drives responsiveness through CSS media queries, not DOM measurement, so the server emits correct responsive HTML.
-- **`@zellvora/ng-storage`** guards every backend behind `isPlatformBrowser()`, returns defaults on the server, and reads cookies from the request for server-known values.
+- **`@zellavora/icons`** renders inline `<svg>` from static build-time data — present in the initial HTML, no fetch, no flash.
+- **`@zellavora/ng-input`** generates deterministic IDs and defers focus/measurement to `afterNextRender()` — no hydration mismatch.
+- **`@zellavora/ng-form`** renders deterministically from schema + model and fetches schemas via `resource()` with state transfer.
+- **`@zellavora/ng-layout`** drives responsiveness through CSS media queries, not DOM measurement, so the server emits correct responsive HTML.
+- **`@zellavora/ng-storage`** guards every backend behind `isPlatformBrowser()`, returns defaults on the server, and reads cookies from the request for server-known values.
 
 The shared rule: **given the same inputs, server and client produce identical DOM.** That's what makes hydration seamless.
 
@@ -147,9 +147,9 @@ Every export is standalone and side-effect-free, so your bundle contains only wh
 
 ```ts
 // Ships: one icon, one control, the grid — nothing else from the ecosystem.
-import { search } from '@zellvora/icons';
-import { ZvTextInput } from '@zellvora/ng-input';
-import { ZvGrid } from '@zellvora/ng-layout';
+import { search } from '@zellavora/icons';
+import { ZvTextInput } from '@zellavora/ng-input';
+import { ZvGrid } from '@zellavora/ng-layout';
 ```
 
 *(Illustrative — directional, not a benchmark of a shipped build.)*
@@ -181,12 +181,12 @@ src/app/
 │   ├── config/          # provideZv*Config() calls (icons, inputs, storage)
 │   └── guards/
 ├── shared/              # your thin wrappers over Zellvora primitives
-│   ├── ui/              # e.g. AppButton composed from @zellvora/icons + tokens
+│   ├── ui/              # e.g. AppButton composed from @zellavora/icons + tokens
 │   └── forms/           # app-specific field types registered into ng-form
 ├── features/            # domain features (lazy-loaded)
-│   ├── dashboard/       # uses @zellvora/ng-layout dashboard shell
-│   ├── onboarding/      # uses @zellvora/ng-form schema forms
-│   └── settings/        # uses @zellvora/ng-input + ng-storage
+│   ├── dashboard/       # uses @zellavora/ng-layout dashboard shell
+│   ├── onboarding/      # uses @zellavora/ng-form schema forms
+│   └── settings/        # uses @zellavora/ng-input + ng-storage
 └── ui/                  # design tokens (CSS custom properties)
     └── tokens.css       # spacing, color, radius, breakpoints
 ```
@@ -211,10 +211,10 @@ The key architectural move: **`ui/tokens.css` is the single styling source of tr
 })
 export class SettingsComponent {
   private fb = inject(FormBuilder);
-  protected readonly save = saveIcon; // @zellvora/icons
+  protected readonly save = saveIcon; // @zellavora/icons
   themes = [{ label: 'Dark', value: 'dark' }, { label: 'Light', value: 'light' }];
 
-  // @zellvora/ng-storage: remembers the theme across sessions & tabs
+  // @zellavora/ng-storage: remembers the theme across sessions & tabs
   private themePref = storageSignal('theme', 'dark', { syncTabs: true });
 
   form = this.fb.group({
@@ -275,11 +275,11 @@ Adopt incrementally — install only what you need:
 
 ```bash
 # Start with one
-npm install @zellvora/ng-input
+npm install @zellavora/ng-input
 
 # Or the whole ecosystem
-npm install @zellvora/icons @zellvora/ng-input @zellvora/ng-form \
-            @zellvora/ng-layout @zellvora/ng-storage
+npm install @zellavora/icons @zellavora/ng-input @zellavora/ng-form \
+            @zellavora/ng-layout @zellavora/ng-storage
 ```
 
 Then wire shared configuration once, in `core/`:
@@ -309,10 +309,10 @@ Near-term, per package:
 
 The ecosystem is intended to grow along the same architectural spine:
 
-- **`@zellvora/ng-table`** — a signals-first, virtualized data grid.
-- **`@zellvora/ng-overlay`** — dialogs, popovers, and toasts with SSR-safe portals.
-- **`@zellvora/ng-charts`** — accessible, themeable data visualization on the shared token system.
-- **`@zellvora/ng-i18n`** — signal-driven localization utilities.
+- **`@zellavora/ng-table`** — a signals-first, virtualized data grid.
+- **`@zellavora/ng-overlay`** — dialogs, popovers, and toasts with SSR-safe portals.
+- **`@zellavora/ng-charts`** — accessible, themeable data visualization on the shared token system.
+- **`@zellavora/ng-i18n`** — signal-driven localization utilities.
 
 Each future package would inherit the same invariants: signals-first, standalone, tree-shakeable, SSR-safe, zoneless, token-themed.
 

@@ -1,5 +1,5 @@
-import { Component, inject, ChangeDetectionStrategy, OnDestroy, afterNextRender, ElementRef, viewChild, signal } from '@angular/core';
-import { DOCUMENT, SlicePipe } from '@angular/common';
+import { Component, inject, ChangeDetectionStrategy, OnDestroy, afterNextRender, ElementRef, viewChild, signal, computed } from '@angular/core';
+import { DOCUMENT, SlicePipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PortfolioDataService } from '../../shared/services/portfolio-data.service';
@@ -13,13 +13,15 @@ import {
   ScrollTriggerDirective,
   MagneticButtonDirective,
   GridBackgroundDirective,
-  FloatingTextDirective,
+  StaggerDirective,
+  TypewriterDirective,
 } from '../../shared/directives';
 import {
-  ParticleNetworkComponent,
   ScrollProgressComponent,
-  CustomCursorComponent,
   ResumeButtonComponent,
+  TestimonialsComponent,
+  OpenSourceComponent,
+  ZelavoraComponent,
 } from '../../shared/components';
 import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
 
@@ -32,16 +34,19 @@ import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
     ScrollTriggerDirective,
     MagneticButtonDirective,
     GridBackgroundDirective,
-    FloatingTextDirective,
+    StaggerDirective,
+    TypewriterDirective,
     // Components
-    ParticleNetworkComponent,
     ScrollProgressComponent,
-    CustomCursorComponent,
     ResumeButtonComponent,
+    TestimonialsComponent,
+    OpenSourceComponent,
+    ZelavoraComponent,
     UiBadgeComponent,
     UiButtonDirective,
     RouterLink,
     SlicePipe,
+    DatePipe,
     ReactiveFormsModule,
   ],
   templateUrl: './home.html',
@@ -62,6 +67,8 @@ export class Home implements OnDestroy {
   protected submitMessage = '';
   protected submitStatus: 'idle' | 'success' | 'error' = 'idle';
   protected elfsightLoaded = signal(false);
+  protected buildDone = signal(false);
+  protected featuredBlogArticles = computed(() => this.pds.blog()?.articles?.slice(0, 3) ?? []);
 
   constructor() {
     this.contactForm = this.fb.group({

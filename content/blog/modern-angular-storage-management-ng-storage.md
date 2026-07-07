@@ -1,5 +1,5 @@
 ---
-title: "Modern Angular Storage Management with @zellvora/ng-storage"
+title: "Modern Angular Storage Management with @zellavora/ng-storage"
 description: "A deep technical guide for enterprise developers: unifying localStorage, sessionStorage, IndexedDB, and cookies behind a signals-first, SSR-safe API — with encryption, compression, versioning, and cross-tab sync."
 tags: ["Angular", "Signals", "Storage", "IndexedDB", "Security", "SSR"]
 author: "Rabin R"
@@ -7,7 +7,7 @@ date: "2026-07-03"
 readingTime: "13 min read"
 ---
 
-> **Note:** `@zellvora/ng-storage` is a design study. APIs and performance figures are **illustrative** — idiomatic Angular 21 patterns used to explain the architecture, not a shipped release.
+> **Note:** `@zellavora/ng-storage` is a design study. APIs and performance figures are **illustrative** — idiomatic Angular 21 patterns used to explain the architecture, not a shipped release.
 
 ## Storage challenges in large applications
 
@@ -33,10 +33,10 @@ In a large app these aren't edge cases; they're daily friction distributed acros
 - **Evolving data** → needs versioning and migrations.
 - **Multi-tab UIs** → needs cross-tab synchronization.
 
-The insight behind `@zellvora/ng-storage` is that these are all the *same operation* (get/set a typed value) against *different backends* with *different capabilities*. So unify the API and make the backend a strategy.
+The insight behind `@zellavora/ng-storage` is that these are all the *same operation* (get/set a typed value) against *different backends* with *different capabilities*. So unify the API and make the backend a strategy.
 
 ```bash
-npm install @zellvora/ng-storage
+npm install @zellavora/ng-storage
 ```
 
 ## The unified, signals-first API
@@ -232,7 +232,7 @@ The honest guidance: use client storage for *convenience and UX state*, not for 
 
 ## Real enterprise examples
 
-**Remembered dashboard layout** (ties into `@zellvora/ng-layout`):
+**Remembered dashboard layout** (ties into `@zellavora/ng-layout`):
 
 ```ts
 export class DashboardShell {
@@ -241,7 +241,7 @@ export class DashboardShell {
 }
 ```
 
-**Offline-capable drafts** for a long form (ties into `@zellvora/ng-form`):
+**Offline-capable drafts** for a long form (ties into `@zellavora/ng-form`):
 
 ```ts
 export class TicketForm {
@@ -268,7 +268,7 @@ const settings = storageSignal('settings', defaults, {
 
 *(Illustrative and directional — not measurements of a shipped build.)*
 
-| Concern | Raw `localStorage` | `@zellvora/ng-storage` |
+| Concern | Raw `localStorage` | `@zellavora/ng-storage` |
 |---|---|---|
 | Reactivity | None (manual) | Signal — views update automatically |
 | Large data | Blocks main thread | IndexedDB, async, off critical path |
@@ -294,4 +294,4 @@ const settings = storageSignal('settings', defaults, {
 
 ## Conclusion
 
-Client storage in large Angular apps is not one problem but several — reactivity, SSR-safety, size, evolution, security, and multi-tab consistency — that teams usually solve ad hoc, badly, and repeatedly. `@zellvora/ng-storage` unifies them behind a single signals-first primitive: pick a backend, get automatic serialization, reactivity, SSR-safety, and opt-in encryption/compression/versioning. The result is that persistence stops being a source of bugs and becomes a one-line concern — which is exactly what infrastructure should be.
+Client storage in large Angular apps is not one problem but several — reactivity, SSR-safety, size, evolution, security, and multi-tab consistency — that teams usually solve ad hoc, badly, and repeatedly. `@zellavora/ng-storage` unifies them behind a single signals-first primitive: pick a backend, get automatic serialization, reactivity, SSR-safety, and opt-in encryption/compression/versioning. The result is that persistence stops being a source of bugs and becomes a one-line concern — which is exactly what infrastructure should be.

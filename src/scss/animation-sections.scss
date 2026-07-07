@@ -27,7 +27,7 @@
 }
 
 .section-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(28px, 4vw, 48px);
   font-weight: 800;
   background: linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #06b6d4 100%);

@@ -1,5 +1,5 @@
 ---
-title: "How We Built Dynamic Schema-Driven Forms with @zellvora/ng-form"
+title: "How We Built Dynamic Schema-Driven Forms with @zellavora/ng-form"
 description: "An enterprise deep dive into schema-driven forms for Angular 21+ — dynamic field generation, a signals-based validation engine, conditional fields, custom components, API-driven forms, and SSR-safe, zoneless rendering."
 tags: ["Angular", "Signals", "Schema-Driven Forms", "Enterprise", "Architecture"]
 author: "Rabin R"
@@ -7,7 +7,7 @@ date: "2026-07-03"
 readingTime: "14 min read"
 ---
 
-> **Note:** `@zellvora/ng-form` is presented as a design study. APIs, schema shapes, and performance figures are **illustrative** — idiomatic Angular 21 patterns used to explain the architecture, not a shipped release.
+> **Note:** `@zellavora/ng-form` is presented as a design study. APIs, schema shapes, and performance figures are **illustrative** — idiomatic Angular 21 patterns used to explain the architecture, not a shipped release.
 
 ## What are schema-driven forms?
 
@@ -47,7 +47,7 @@ Traditional Angular forms — Reactive or Template-Driven — are excellent for 
 
 Schema-driven forms collapse all three into one artifact.
 
-## Design goals of @zellvora/ng-form
+## Design goals of @zellavora/ng-form
 
 - **Schema is the single source of truth.** Fields, validation, layout, and conditions all live in one declarative object.
 - **Signals-first engine.** Form state, per-field validity, and derived visibility are signals — precise updates, zoneless-ready.
@@ -57,7 +57,7 @@ Schema-driven forms collapse all three into one artifact.
 - **Type-safe where it counts.** Schemas are authorable in TypeScript with inference, or loaded as JSON from an API.
 
 ```bash
-npm install @zellvora/ng-form
+npm install @zellavora/ng-form
 ```
 
 ## Dynamic field generation
@@ -329,10 +329,10 @@ Selecting "Company" reveals `registrationNo` and `teamSize`, both required — b
 ## Future improvements
 
 - **Visual schema builder** — a drag-and-drop UI that emits `ng-form` schemas.
-- **Layout schema** — declarative grid/section/step layout alongside fields (integrating with `@zellvora/ng-layout`).
+- **Layout schema** — declarative grid/section/step layout alongside fields (integrating with `@zellavora/ng-layout`).
 - **Wizard/stepper support** — multi-page schemas with per-step validation gates.
 - **JSON Schema interop** — import standard JSON Schema and map constraints to validators.
-- **Offline drafts** — autosave in-progress models via `@zellvora/ng-storage`.
+- **Offline drafts** — autosave in-progress models via `@zellavora/ng-storage`.
 
 ## GitHub contribution guide
 
@@ -349,4 +349,4 @@ Good first issues: new built-in validators, additional field types, and docs exa
 
 ## Conclusion
 
-Schema-driven forms trade a little upfront engine complexity for enormous downstream leverage: forms become data you can version, fetch, configure per tenant, and edit without a frontend release. `@zellvora/ng-form` shows how a signals-first engine makes that both performant (precise, zoneless updates) and safe (SSR-deterministic, hidden fields excluded from validation). For any organization where forms change faster than release cycles, that leverage is the whole game.
+Schema-driven forms trade a little upfront engine complexity for enormous downstream leverage: forms become data you can version, fetch, configure per tenant, and edit without a frontend release. `@zellavora/ng-form` shows how a signals-first engine makes that both performant (precise, zoneless updates) and safe (SSR-deterministic, hidden fields excluded from validation). For any organization where forms change faster than release cycles, that leverage is the whole game.

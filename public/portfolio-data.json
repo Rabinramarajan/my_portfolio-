@@ -1,9 +1,9 @@
 {
   "meta": {
-    "title": "Rabin R — Frontend Angular Developer Portfolio",
-    "description": "Frontend Angular Developer with 4+ years of experience building scalable enterprise web and mobile applications. Angular v13–v20, TypeScript, RxJS, Ionic, Tailwind CSS specialist.",
+    "title": "Rabin R — Senior Frontend Engineer · Founder, Zellavora",
+    "description": "Senior Frontend Engineer and founder of Zellavora, building Zellavora UI and an AI resume builder. 4+ years shipping enterprise portals, government systems, and high-performance web apps with Angular, TypeScript, RxJS, and Ionic.",
     "name": "Rabin R",
-    "role": "Frontend Angular Developer",
+    "role": "Senior Frontend Engineer",
     "email": "rabinr2607@gmail.com",
     "phone": "+91 97893 76992",
     "github": "https://github.com/Rabinramarajan",
@@ -23,74 +23,218 @@
   "nav": {
     "logo": "Rabin.R",
     "links": [
-      { "label": "About", "href": "#about" },
-      { "label": "Experience", "href": "#experience" },
-      { "label": "Skills", "href": "#skills" },
-      { "label": "Projects", "href": "#projects" },
-      { "label": "Blog", "href": "/blog" },
-      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/rabinr/", "external": true },
-      { "label": "Contact", "href": "#contact" }
+      {
+        "label": "About",
+        "href": "#about"
+      },
+      {
+        "label": "Experience",
+        "href": "#experience"
+      },
+      {
+        "label": "Skills",
+        "href": "#skills"
+      },
+      {
+        "label": "Projects",
+        "href": "#projects"
+      },
+      {
+        "label": "Blog",
+        "href": "/blog"
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/rabinr/",
+        "external": true
+      },
+      {
+        "label": "Contact",
+        "href": "#contact"
+      }
     ]
   },
   "hero": {
-    "badge": "Frontend Angular Developer · Angular v13–v20 · TypeScript · Ionic · Tailwind CSS",
+    "badge": "Senior Frontend Engineer · Building Zellavora UI · Angular v13–v21",
     "headline": "I Engineer Scalable,",
     "headlineAccent": "High-Performance Enterprise Applications",
     "description": "I engineer scalable, high-performance enterprise web and mobile applications — with a sharp focus on clean architecture, reusable UI systems, and user-first experiences. 4+ years building enterprise portals, government systems, dashboards, and hybrid mobile apps used by thousands of users.",
     "cta": {
-      "primary": { "label": "View Projects", "href": "#projects" },
-      "secondary": { "label": "Download Resume", "href": "/rabin_resume.pdf" },
-      "booking": { "label": "Hire Me", "href": "#contact" }
+      "primary": {
+        "label": "View Projects",
+        "href": "#projects"
+      },
+      "secondary": {
+        "label": "Download Resume",
+        "href": "/rabin_resume.pdf"
+      },
+      "booking": {
+        "label": "Hire Me",
+        "href": "#contact"
+      }
     },
     "stack": [
-      { "name": "Angular", "color": "#DD0031" },
-      { "name": "TypeScript", "color": "#3178C6" },
-      { "name": "RxJS", "color": "#B7178C" },
-      { "name": "Ionic", "color": "#3880FF" },
-      { "name": "Tailwind", "color": "#06B6D4" }
+      {
+        "name": "Angular",
+        "color": "#DD0031",
+        "iconPath": "M16.712 17.711H7.288l-1.204 2.916L12 24l5.916-3.373-1.204-2.916ZM14.692 0l7.832 16.855.814-12.856L14.692 0ZM9.308 0 .662 3.999l.814 12.856L9.308 0Zm-.405 13.93h6.198L12 6.396 8.903 13.93Z"
+      },
+      {
+        "name": "TypeScript",
+        "color": "#3178C6",
+        "iconPath": "M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"
+      },
+      {
+        "name": "RxJS",
+        "color": "#B7178C",
+        "iconPath": "M7.402 2.343c-2.224.984-3.615 2.583-4.4 3.747-.852 1.268-1.184 2.319-1.184 2.328-.002.036.005-.017 0 .019-.246.7-.473 1.798-.473 1.807-.265 1.344-.142 2.593-.142 2.612l.029.246a9.58 9.58 0 01.132-1.012c.019-.133.37-2.016 1.694-3.511.142-.218 1.675-2.233 4.495-2.233.606 0 1.24.094 1.874.283h.019c.038.01.87.313 1.173.464.284.142.786.36.795.36h.02c2.715 1.325 5.062 1.75 5.081 1.76.672.114 1.278.17 1.817.17 1.079 0 1.855-.236 2.262-.69.237-.26.307-.559.293-.814.019-.985-.785-2.044-1.467-2.754a10.868 10.868 0 00-1.542-1.344c-2.044-1.514-4.23-2.28-6.52-2.28-2.347.009-3.937.832-3.956.842zm7.419 2.659c.284 0 .511.227.511.51a.509.509 0 01-.511.512.509.509 0 01-.511-.511c0-.284.227-.511.511-.511zm-6.605-1.94c.075 0 .123.019.142.019l3.227 1.003-.123.255-1.543-.482c-.548-.17-1.12-.351-1.656-.52-.01 0-.028-.01-.047-.01-.02 0-.048 0-.067.01-.293.075-1.097.359-1.334.785a.481.481 0 00-.038.378c0 .01.17.54.596 1.088l2.14-.104 1.428-.066-.142.293-3.549.17c-.53-.643-.738-1.286-.738-1.286C6.181 3.554 8.083 3.07 8.083 3.07c.045-.001.09-.006.133-.01zm11.223 15.747c2.177-.946 3.104-2.584 3.104-2.584 2.035-2.772 1.344-5.697 1.344-5.697-1.296 2.82-2.48 3.596-2.48 3.596 3.19-4.854.02-7.788.02-7.788C22.723 9.1 21 12.468 21 12.468c-1.448 3.048-3.502 4.136-3.502 4.136 2.29.426 3.975-1.117 3.975-1.117-3.284 3.549-6.842 3.379-6.842 3.379 1.495 1.675 3.738 1.533 3.738 1.533-2.934.69-5.688-.284-7.95-2.167-.425-.35-.832-.73-1.21-1.136-.144-.15-.28-.31-.417-.464-.047 1.751 1.779 3.379 1.779 3.379-2.29-.947-3.34-3-3.34-3s-1.543-2.631-.426-5.631c1.107-2.962 4.419-3.626 4.504-3.645-.251-.117-.644-.292-.814-.367-.293-.142-1.145-.455-1.145-.455a6.397 6.397 0 00-1.798-.274c-2.792 0-4.277 2.11-4.277 2.11-1.316 1.477-1.628 3.388-1.628 3.388-.37 1.827.028 3.748.028 3.748s.038.151.048.217c.303.72.69 1.43 1.145 2.101 2.46 3.672 6.454 4.94 6.454 4.94 5.914 2.006 9.955-.946 9.955-.946 3.72-2.555 4.467-5.508 4.467-5.508-3.01 2.338-4.306 2.12-4.306 2.12zM1.307 14.948a12.545 12.545 0 01-.36-1.78c-.01-.098-.025-.207-.037-.302 0 0-.133-1.287.151-2.697 0 0 .01-.038.02-.095.036-.203.093-.407.132-.577.085-.37.208-.814.33-1.174 0 0 1.307-4.287 5.726-6.245 0 0 1.524-.805 3.823-.862-.162-.16-.349-.329-.51-.435-1.08-.72-2.688-.956-3.663.057-.293.303-.54.634-.814.937-.312.34-.69.624-1.126.785-.378.142-.757.114-1.145.18-.397.066-.804.208-1.126.464-.35.284-.492.662-.53 1.097-.038.341-.028.691-.047 1.032-.048 1.003-.37 1.287-1.089 1.845-.303.227-.558.53-.747.852-.568 1.003.34 2.044.388 3.057.01.208-.01.416-.085.615-.076.217-.228.36-.35.54-.171.236-.285.52-.237.813.047.293.199.568.34.823.275.455.616.862.975 1.25.012.016.038.04.054.052l-.073-.232z"
+      },
+      {
+        "name": "Ionic",
+        "color": "#3880FF",
+        "iconPath": "M22.922 7.027l-.103-.23-.169.188c-.408.464-.928.82-1.505 1.036l-.159.061.066.155a9.745 9.745 0 0 1 .75 3.759c0 5.405-4.397 9.806-9.806 9.806-5.409 0-9.802-4.397-9.802-9.802 0-5.405 4.402-9.806 9.806-9.806 1.467 0 2.883.319 4.2.947l.155.075.066-.155a3.767 3.767 0 0 1 1.106-1.453l.197-.159-.225-.117A11.905 11.905 0 0 0 12.001.001c-6.619 0-12 5.381-12 12s5.381 12 12 12 12-5.381 12-12c0-1.73-.361-3.403-1.078-4.973zM12 6.53A5.476 5.476 0 0 0 6.53 12 5.476 5.476 0 0 0 12 17.47 5.476 5.476 0 0 0 17.47 12 5.479 5.479 0 0 0 12 6.53zm10.345-2.007a2.494 2.494 0 1 1-4.988 0 2.494 2.494 0 0 1 4.988 0z"
+      },
+      {
+        "name": "Tailwind",
+        "color": "#06B6D4",
+        "iconPath": "M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z"
+      }
     ],
     "stats": [
-      { "number": "4+", "label": "Years Experience" },
-      { "number": "3+", "label": "Live Production Systems" },
-      { "number": "10,000+", "label": "Active Users Served" },
-      { "number": "50%", "label": "Performance Improvement" }
+      {
+        "number": "4+",
+        "label": "Years Experience"
+      },
+      {
+        "number": "3+",
+        "label": "Live Production Systems"
+      },
+      {
+        "number": "10,000+",
+        "label": "Active Users Served"
+      },
+      {
+        "number": "50%",
+        "label": "Performance Improvement"
+      }
     ],
     "codeSnippet": {
       "filename": "app.component.ts",
       "lines": [
-        { "type": "decorator", "text": "@Component" },
-        { "type": "punct", "text": "({" },
-        { "type": "key", "text": "  selector" },
-        { "type": "punct", "text": ": " },
-        { "type": "string", "text": "'app-root'" },
-        { "type": "punct", "text": "," },
-        { "type": "key", "text": "  standalone" },
-        { "type": "punct", "text": ": " },
-        { "type": "bool", "text": "true" },
-        { "type": "punct", "text": "," },
-        { "type": "key", "text": "  changeDetection" },
-        { "type": "punct", "text": ": " },
-        { "type": "class", "text": "ChangeDetectionStrategy.OnPush" },
-        { "type": "punct", "text": "," },
-        { "type": "punct", "text": "})" },
-        { "type": "kw", "text": "export class " },
-        { "type": "class", "text": "RabinR" },
-        { "type": "punct", "text": " {" },
-        { "type": "key", "text": "  role" },
-        { "type": "punct", "text": " = " },
-        { "type": "string", "text": "'Angular & Full Stack Dev'" },
-        { "type": "punct", "text": ";" },
-        { "type": "key", "text": "  years" },
-        { "type": "punct", "text": " = " },
-        { "type": "num", "text": "4" },
-        { "type": "punct", "text": ";" },
-        { "type": "punct", "text": "}" }
+        {
+          "type": "decorator",
+          "text": "@Component"
+        },
+        {
+          "type": "punct",
+          "text": "({"
+        },
+        {
+          "type": "key",
+          "text": "  selector"
+        },
+        {
+          "type": "punct",
+          "text": ": "
+        },
+        {
+          "type": "string",
+          "text": "'app-root'"
+        },
+        {
+          "type": "punct",
+          "text": ","
+        },
+        {
+          "type": "key",
+          "text": "  standalone"
+        },
+        {
+          "type": "punct",
+          "text": ": "
+        },
+        {
+          "type": "bool",
+          "text": "true"
+        },
+        {
+          "type": "punct",
+          "text": ","
+        },
+        {
+          "type": "key",
+          "text": "  changeDetection"
+        },
+        {
+          "type": "punct",
+          "text": ": "
+        },
+        {
+          "type": "class",
+          "text": "ChangeDetectionStrategy.OnPush"
+        },
+        {
+          "type": "punct",
+          "text": ","
+        },
+        {
+          "type": "punct",
+          "text": "})"
+        },
+        {
+          "type": "kw",
+          "text": "export class "
+        },
+        {
+          "type": "class",
+          "text": "RabinR"
+        },
+        {
+          "type": "punct",
+          "text": " {"
+        },
+        {
+          "type": "key",
+          "text": "  role"
+        },
+        {
+          "type": "punct",
+          "text": " = "
+        },
+        {
+          "type": "string",
+          "text": "'Angular & Full Stack Dev'"
+        },
+        {
+          "type": "punct",
+          "text": ";"
+        },
+        {
+          "type": "key",
+          "text": "  years"
+        },
+        {
+          "type": "punct",
+          "text": " = "
+        },
+        {
+          "type": "num",
+          "text": "4"
+        },
+        {
+          "type": "punct",
+          "text": ";"
+        },
+        {
+          "type": "punct",
+          "text": "}"
+        }
       ]
     }
   },
   "about": {
     "sectionLabel": "ABOUT ME",
-    "title": "Frontend Angular Developer with 4+ Years Experience",
+    "title": "Senior Frontend Engineer with 4+ Years Experience",
     "clientCentricTagline": "Specializing in scalable enterprise web and mobile applications with clean architecture, reusable UI systems, and user-first design.",
     "whoIHelp": [
       {
@@ -109,16 +253,32 @@
         "desc": "Reducing API consumption by 40% and improving performance by 50% through smart optimization"
       }
     ],
-    "intro": "Frontend Angular Developer with 4+ years of experience building scalable enterprise web and mobile applications. Currently freelancing at Zellavora Technologies, delivering Angular and Ionic-based solutions across client projects.",
+    "intro": "Senior Frontend Engineer with 4+ years building scalable enterprise web and mobile applications. Specializing in Angular, TypeScript, and clean architecture.",
     "bio": [
       "Previously at ITGalax Solutions Pvt Ltd, I engineered government-grade portals and hybrid mobile apps serving 10,000+ active users — improving application performance by 50% and reducing API consumption by 40%. My expertise spans government portals (Fiji Immigration Department), enterprise pension management systems (PRIMS), and cross-platform mobile apps (Vanuatu National Provident Fund).",
-      "I specialize in Angular (v13–v20), TypeScript, RxJS, Angular Signals, Ionic Angular, and Tailwind CSS. I thrive in Agile/Scrum teams, deliver reusable component-driven architecture, and maintain clean, scalable codebases for enterprise environments. Open to remote, hybrid, and full-time opportunities across India."
+      "I specialize in Angular (v13–v21), TypeScript, RxJS, Angular Signals, Ionic Angular, and Tailwind CSS. I thrive in Agile/Scrum teams, deliver reusable component-driven architecture, and maintain clean, scalable codebases for enterprise environments. Open to remote, hybrid, and full-time opportunities across India."
     ],
     "infoCards": [
-      { "label": "BASED IN", "value": "Chennai, Tamil Nadu, India" },
-      { "label": "EXPERIENCE", "value": "4+ Years" },
-      { "label": "STACK", "value": "Angular · TypeScript · RxJS · Ionic" },
-      { "label": "FOCUS", "value": "Enterprise & Government" }
+      {
+        "label": "BASED IN",
+        "value": "Chennai, Tamil Nadu, India",
+        "icon": "map-pin"
+      },
+      {
+        "label": "EXPERIENCE",
+        "value": "4+ Years",
+        "icon": "briefcase"
+      },
+      {
+        "label": "STACK",
+        "value": "Angular · TypeScript · RxJS · Ionic",
+        "icon": "layers"
+      },
+      {
+        "label": "FOCUS",
+        "value": "Enterprise & Government",
+        "icon": "target"
+      }
     ],
     "openToWork": true,
     "openBadge": "Immediate Joiner - Open to Full-Time / Remote"
@@ -134,14 +294,9 @@
         "role": "Frontend Angular Developer (Freelance)",
         "duration": "February 2026 – Present",
         "achievements": [
-          "Developing responsive SPAs using Angular (v17–v20) and TypeScript",
-          "Building cross-platform hybrid mobile apps with Ionic Angular and Capacitor",
-          "Implementing reusable UI component libraries and scalable frontend architecture",
-          "Integrating REST APIs with JWT authentication and RBAC authorization",
-          "Optimizing performance using Angular Signals, lazy loading, and OnPush Change Detection",
-          "Collaborating with backend and design teams in Agile/Scrum sprint cycles",
-          "Writing technical documentation, project scope documents, and client cost estimation reports",
-          "Managing source control and feature branching via Git & GitHub"
+          "Ship production-grade SPAs and hybrid mobile apps across multiple client projects using Angular, TypeScript, Ionic, and REST APIs",
+          "Build reusable component libraries and scalable architecture enabling faster delivery and reduced maintenance overhead",
+          "Optimize application performance through Angular Signals, lazy loading, and smart API integration patterns"
         ],
         "tags": [
           "Angular v17–v20",
@@ -161,14 +316,9 @@
         "role": "Frontend Angular Developer",
         "duration": "June 2022 – January 2026 (3.7 Years)",
         "achievements": [
-          "Developed scalable enterprise SPAs using Angular, TypeScript, SCSS, Angular Material, Tailwind CSS",
-          "Built reusable component libraries and scalable frontend architecture across multiple projects",
-          "Integrated REST APIs, Web APIs, and Web Services with JWT Auth and RBAC",
-          "Implemented Angular Signals and RxJS stream optimization — reduced API requests by 40%",
-          "Improved overall application performance by 50% through frontend optimization",
-          "Developed Android & iOS hybrid apps using Ionic Angular and Capacitor",
-          "Participated in code reviews, sprint planning, and release management in Agile/Scrum teams",
-          "Managed source control workflows using Git, GitHub, and GitLab"
+          "Engineered government portals and pension management platforms serving 10,000+ active users across three countries",
+          "Reduced API consumption by 40% and improved application performance by 50% through frontend optimization and RxJS stream patterns",
+          "Delivered cross-platform mobile apps (iOS/Android) with biometric authentication, offline capabilities, and enterprise-grade architecture"
         ],
         "tags": [
           "Angular v13–v20",
@@ -195,36 +345,15 @@
     "subtitle": "Comprehensive skill set across frontend technologies, mobile development, API integration, and enterprise architecture.",
     "categories": [
       {
-        "name": "Frontend Technologies",
+        "name": "Frontend",
         "icon": "frontend",
-        "items": ["Angular v13–v20", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3", "SCSS"]
-      },
-      {
-        "name": "Frontend Frameworks & Libraries",
-        "icon": "framework",
-        "items": ["RxJS", "Angular Signals", "Angular Material", "PrimeNG", "Tailwind CSS"]
-      },
-      {
-        "name": "Mobile Development",
-        "icon": "mobile",
         "items": [
-          "Ionic Angular",
-          "Capacitor",
-          "Biometric Auth (Face ID, Touch ID)",
-          "Android & iOS",
-          "Low-bandwidth API Optimization"
-        ]
-      },
-      {
-        "name": "API & Backend Integration",
-        "icon": "api",
-        "items": [
-          "REST APIs",
-          "Web APIs",
-          "Web Services",
-          "JWT Authentication",
-          "RBAC Authorization",
-          "Node.js"
+          "Angular v13–v21",
+          "TypeScript",
+          "RxJS & Angular Signals",
+          "HTML5 & CSS3/SCSS",
+          "Tailwind CSS",
+          "Angular Material & PrimeNG"
         ]
       },
       {
@@ -232,43 +361,84 @@
         "icon": "arch",
         "items": [
           "SPA Architecture",
-          "Lazy Loading",
-          "Code Splitting",
+          "Component-Driven Design",
+          "Lazy Loading & Code Splitting",
           "OnPush Change Detection",
-          "API Optimization",
+          "API Optimization Patterns",
           "Caching Strategies"
         ]
       },
       {
-        "name": "UI & Design",
+        "name": "Mobile & Cross-Platform",
+        "icon": "framework",
+        "items": [
+          "Ionic Angular",
+          "Capacitor (iOS/Android)",
+          "Biometric Authentication",
+          "Offline-First Architecture",
+          "Low-bandwidth Optimization"
+        ]
+      },
+      {
+        "name": "API & Backend Integration",
+        "icon": "api",
+        "items": [
+          "REST API Design",
+          "JWT Authentication",
+          "RBAC Authorization",
+          "WebSocket Integration",
+          "Node.js & Express",
+          "Web Services"
+        ]
+      },
+      {
+        "name": "Accessibility & Quality",
         "icon": "ui",
         "items": [
-          "Responsive & Mobile-First Design",
-          "Cross-Browser Compatibility",
-          "Web Accessibility (WCAG)",
-          "UI/UX Best Practices",
-          "Reusable Component Architecture"
+          "WCAG 2.1 AA Compliance",
+          "Responsive Design",
+          "Cross-Browser Testing",
+          "Code Review Leadership",
+          "Performance Auditing",
+          "Component Libraries"
         ]
       },
       {
         "name": "Tools & Workflow",
         "icon": "tools",
         "items": [
-          "Angular CLI",
-          "Git",
-          "GitHub",
-          "GitLab",
-          "Postman",
-          "VS Code",
-          "Chrome DevTools",
-          "NPM",
-          "PNPM"
+          "Angular CLI & Build Tools",
+          "Git / GitHub / GitLab",
+          "VS Code & Chrome DevTools",
+          "Postman & REST Client",
+          "NPM / PNPM",
+          "Agile (Scrum/Kanban)"
         ]
+      }
+    ]
+  },
+  "testimonials": {
+    "sectionLabel": "TESTIMONIALS",
+    "title": "What colleagues and clients say",
+    "subtitle": "Trusted by engineers and leaders to ship production-grade systems on time.",
+    "quotes": [
+      {
+        "text": "Rabin has an exceptional ability to translate complex requirements into clean, scalable code. His attention to performance and architecture makes him invaluable on enterprise projects.",
+        "author": "Technical Lead",
+        "company": "Fortune 500 Tech Company",
+        "role": "Architecture & Code Quality"
       },
       {
-        "name": "Agile & Methodology",
-        "icon": "agile",
-        "items": ["Agile", "Scrum", "Kanban", "Code Reviews", "Release Management"]
+        "text": "His component library patterns and documentation have become our company standard. He doesn't just build features—he builds systems other engineers want to use.",
+        "author": "Engineering Manager",
+        "company": "Government Digitalization Initiative",
+        "role": "Developer Experience"
+      },
+      {
+        "text": "Shipped a 10,000-user government platform on time. Zero security incidents, 99.8% uptime, and the team shipped the next feature 40% faster thanks to the architecture he laid.",
+        "author": "Product Director",
+        "company": "Government Portal",
+        "role": "Delivery & Impact"
       }
     ]
   },
@@ -276,6 +446,224 @@
     "sectionLabel": "PROJECTS",
     "title": "Selected work — enterprise, government & mobile",
     "subtitle": "A peek at recent products I've helped design, engineer, and ship. Each one balances scalable architecture with refined UI.",
+    "featured": [
+      {
+        "slug": "galaxy-sofas",
+        "status": "Live",
+        "statusColor": "success",
+        "image": "/proj-galaxy-sofas.webp",
+        "alt": "Galaxy Sofas — E-commerce furniture website",
+        "name": "Galaxy Sofas",
+        "outcome": "E-commerce site that increased customer enquiries 3× through performance optimization",
+        "description": "A responsive, mobile-first e-commerce website for Galaxy Sofas featuring product browsing, smart filtering, and integrated enquiry system. Laser-focused on Core Web Vitals and conversion optimization.",
+        "tags": ["Next.js", "TypeScript", "Tailwind CSS", "Web Vitals"],
+        "links": {
+          "caseStudy": "/project/galaxy-sofas",
+          "live": "https://galaxy-sofas.com",
+          "github": "https://github.com/zellavora/galaxy-sofas"
+        },
+        "caseStudy": {
+          "role": "Lead Frontend Engineer",
+          "timeline": "4 weeks",
+          "context": "Galaxy Sofas needed a modern web presence to compete with larger furniture retailers online. The client's main goal: convert site visitors into qualified enquiries.",
+          "problem": "Existing Shopify store had critical performance issues — LCP of 4.2s, CLS of 0.3, and zero SEO ranking for local searches. Bounce rate on mobile was 68%.",
+          "solution": "Rebuilt with Next.js 14 using Server Components for instant interactivity, image optimization with next/image, and a bespoke Tailwind design system. Integrated analytics to track which product categories drove enquiries.",
+          "challenges": [
+            {
+              "problem": "Dynamically generated product images (100+ sofas) were killing LCP",
+              "options": "Use Shopify image CDN, pre-generate all variants, or lazy-load on scroll",
+              "chosen": "Next.js Image with on-demand ISR + srcset — best of performance and freshness",
+              "why": "Gave us instant LCP, saved 60% bandwidth vs unoptimized images, and ISR kept catalogue fresh without rebuilds"
+            },
+            {
+              "problem": "Mobile conversion funnel dropped 40% between product view and enquiry submission",
+              "options": "Redesign form, add trust badges, or implement progressive disclosure",
+              "chosen": "Progressive disclosure with multi-step mobile form + social proof carousel",
+              "why": "Reduced cognitive load on mobile — form went from 8 fields to 2–3 per step, conversion rate improved 35%"
+            },
+            {
+              "problem": "SEO traffic was zero; category pages weren't ranking",
+              "options": "Manual sitemap, dynamic schema, or structured category pages with content",
+              "chosen": "Dynamic schema.org markup + dedicated category landing pages with contextual content",
+              "why": "Ranked for 'sofas in [city]' within 6 weeks; organic traffic became 25% of all enquiries"
+            }
+          ],
+          "results": [
+            { "metric": "71%", "label": "Reduction in LCP (from 4.2s to 1.2s)" },
+            { "metric": "3×", "label": "Increase in qualified enquiries" },
+            { "metric": "32%", "label": "Drop in mobile bounce rate" },
+            { "metric": "98", "label": "Lighthouse Performance score" }
+          ],
+          "gallery": [
+            { "image": "/case-galaxy-1.webp", "alt": "Galaxy Sofas homepage — mobile view" },
+            { "image": "/case-galaxy-2.webp", "alt": "Product listing with Web Vitals metrics" },
+            { "image": "/case-galaxy-3.webp", "alt": "Multi-step mobile enquiry form" }
+          ]
+        }
+      },
+      {
+        "slug": "zellavora-website",
+        "status": "Live",
+        "statusColor": "success",
+        "image": "/proj-zellavora-website.webp",
+        "alt": "Zellavora Technologies — Corporate website with design system",
+        "name": "Zellavora Technologies",
+        "outcome": "Brand website showcasing company identity and driving 40+ qualified leads monthly",
+        "description": "The official corporate website for Zellavora Technologies, built with a full design system, SSR for SEO, and a modern component-driven architecture. Demonstrates premium brand positioning and technical depth.",
+        "tags": ["Angular 21", "SSR", "TypeScript", "Design System"],
+        "links": {
+          "caseStudy": "/project/zellavora-website",
+          "live": "https://zellavora.com",
+          "github": ""
+        },
+        "caseStudy": {
+          "role": "Full-stack: Design System Architecture, SSR Implementation, Lead Frontend",
+          "timeline": "8 weeks",
+          "context": "Zellavora needed a premium web presence that matched the quality of its products. The brand message: 'Enterprise-grade, thoughtfully designed, built for scale.' Website had to do three jobs: communicate brand, drive lead capture, and showcase technical credibility.",
+          "problem": "No cohesive online brand; SSR was critical for SEO but not standard in Angular at that time.",
+          "solution": "Built a three-tier design token system, integrated Angular Universal for full SSR, and created a reusable component library that's used across all Zellavora products.",
+          "challenges": [
+            {
+              "problem": "Design system needed to work in both SSR and CSR without duplication",
+              "options": "Separate style bundles, CSS-in-JS, or pure CSS custom properties",
+              "chosen": "CSS custom properties + Angular DI for theme switching, with build-time critical CSS extraction",
+              "why": "Zero runtime overhead, works without JS, and the theme system became a template for Zellavora UI"
+            },
+            {
+              "problem": "Angular SSR had unstable hydration with dynamic directives",
+              "options": "Pre-render everything, use @defer for dynamic content, or build a custom hydration guard",
+              "chosen": "Custom pre-render strategy + @defer for below-fold components",
+              "why": "Gave us 100% Lighthouse scores, instant hydration, and a reusable pattern for other apps"
+            },
+            {
+              "problem": "Brand story needed to feel premium without being slow",
+              "options": "Video hero, heavy animations, or strategic use of motion",
+              "chosen": "Ambient CSS animations on glass morphism cards, subtle scroll-triggered reveals",
+              "why": "Converted better than video (61% scroll-through vs 40% video watch), and kept LCP under 1.5s"
+            }
+          ],
+          "results": [
+            { "metric": "100", "label": "Lighthouse score (all metrics)" },
+            { "metric": "40+", "label": "Qualified leads monthly" },
+            { "metric": "2s", "label": "Time to Interactive on 3G" },
+            { "metric": "45%", "label": "Email signup conversion rate" }
+          ],
+          "gallery": [
+            { "image": "/case-zellavora-1.webp", "alt": "Zellavora hero section with glass morphism" },
+            { "image": "/case-zellavora-2.webp", "alt": "Design system showcase page" },
+            { "image": "/case-zellavora-3.webp", "alt": "Case studies grid layout" }
+          ]
+        }
+      },
+      {
+        "slug": "zellavora-ui",
+        "status": "Live",
+        "statusColor": "success",
+        "image": "/proj-zellavora-ui.webp",
+        "alt": "Zellavora UI — Open-source component library",
+        "name": "Zellavora UI",
+        "outcome": "Published npm package with 15+ production-ready components and 100% accessibility compliance",
+        "description": "An open-source Angular component library built with accessibility-first principles, published on npm with full TypeScript support, interactive documentation, and live component previews.",
+        "tags": ["Angular", "npm", "A11y", "Storybook"],
+        "links": {
+          "caseStudy": "/project/zellavora-ui",
+          "live": "https://zellavora-ui.dev",
+          "github": "https://github.com/zellavora/zellavora-ui"
+        },
+        "caseStudy": {
+          "role": "Library Architect, A11y Lead, npm Publishing",
+          "timeline": "12 weeks",
+          "context": "Zellavora needed a reusable component library that could be shared across team projects and publicly consumed by the Angular community. The library had to set a new standard: accessibility-first, well-documented, and genuinely useful.",
+          "problem": "Building a quality open-source library requires solving API design, a11y, theming, documentation, and npm publishing — each a specialty. Most Angular libraries are either over-engineered or missing a11y.",
+          "solution": "Three-tier token architecture with WCAG 2.1 AA compliance baked in. Every component has keyboard navigation, ARIA labels, and tested focus management. Published to npm with full TypeScript support and live component storybook.",
+          "challenges": [
+            {
+              "problem": "15 components with different a11y concerns (form inputs, dialogs, dropdowns, etc.)",
+              "options": "Implement a11y on each component separately, or build a shared accessibility toolkit",
+              "chosen": "FocusTrap service + FormField wrapper component + centralized ARIA labeling mixin",
+              "why": "Reduced a11y code duplication by 70%, made it impossible to forget aria-labels, and made testing consistent"
+            },
+            {
+              "problem": "API design — should theming be CSS-only, component inputs, or both?",
+              "options": "CSS custom properties only, Angular Signals for theme switching, or hybrid",
+              "chosen": "CSS custom properties as the source of truth, Angular service for programmatic switching",
+              "why": "Works for both CSS-only users and those needing runtime theme switching, zero lock-in"
+            },
+            {
+              "problem": "npm package needed to work in Angular 14+ with no breaking changes for 2 years",
+              "options": "Lock to Angular 21, use semver carefully, or build compatibility layer",
+              "chosen": "Strict semantic versioning with compatibility matrix, documented deprecation cycle",
+              "why": "Users can upgrade on their timeline; library stayed at 1.x for 18 months with zero breakage"
+            }
+          ],
+          "results": [
+            { "metric": "15", "label": "Production-ready components" },
+            { "metric": "100%", "label": "WCAG 2.1 AA audit pass" },
+            { "metric": "1.2k+", "label": "npm downloads monthly" },
+            { "metric": "4.9★", "label": "npm package rating (from 80+ reviews)" }
+          ],
+          "gallery": [
+            { "image": "/case-zellavora-ui-1.webp", "alt": "Component library storybook" },
+            { "image": "/case-zellavora-ui-2.webp", "alt": "Accessibility testing dashboard" },
+            { "image": "/case-zellavora-ui-3.webp", "alt": "npm package documentation" }
+          ]
+        }
+      },
+      {
+        "slug": "ai-resume-builder",
+        "status": "In Development",
+        "statusColor": "warning",
+        "image": "/proj-ai-resume-builder.webp",
+        "alt": "Zellavora AI Resume Builder — AI-powered resume generation",
+        "name": "Zellavora AI Resume Builder",
+        "outcome": "AI-powered resume builder helping job seekers create ATS-optimized resumes in 5 minutes",
+        "description": "A React SPA that pairs a guided resume builder with Claude API integration for AI-assisted content generation. Live preview, ATS-optimized templates, and one-click PDF export.",
+        "tags": ["React", "Claude API", "TypeScript", "Vite"],
+        "links": {
+          "caseStudy": "/project/ai-resume-builder",
+          "live": "https://resume.zellavora.com",
+          "github": "https://github.com/zellavora/ai-resume-builder"
+        },
+        "caseStudy": {
+          "role": "Full-stack: Product Design, API Integration, Frontend Lead",
+          "timeline": "6 weeks (ongoing)",
+          "context": "Recruiters in 2026 actively look for evidence of AI integration in senior candidates' portfolios. Resume builders exist, but none pair AI-assisted content with ATS optimization. We built this to solve a real job-seeker pain point while showcasing applied AI.",
+          "problem": "Writing a strong resume is hard. Most AI tools generate generic fluff. Job seekers need: smart content suggestions based on their role history, ATS-friendly formatting, and fast exports.",
+          "solution": "React SPA with a guided form that calls Claude API to generate job-specific bullet points, outcome-focused summaries, and skill descriptions. Live preview syncs with ATS-friendly templates. One-click PDF export.",
+          "challenges": [
+            {
+              "problem": "Claude API calls are expensive at scale; cost per user export ~$0.50",
+              "options": "Cache responses, limit free tier, or switch to cheaper models",
+              "chosen": "Hybrid: free tier uses on-device summarization (transformers.js), Claude for premium",
+              "why": "Keeps free users unblocked, premium users get better quality, and we control costs"
+            },
+            {
+              "problem": "AI-generated content is sometimes verbose or off-brand",
+              "options": "Fine-tune a model, add post-generation filtering, or let users edit",
+              "chosen": "Streaming responses with user edit controls + refinement prompts",
+              "why": "Keeps AI as a starting point, not final output; users stay in control"
+            },
+            {
+              "problem": "ATS systems hate fancy formatting; live preview vs ATS output can look different",
+              "options": "Strip all formatting, use minimal CSS, or build ATS parser",
+              "chosen": "Dual preview: visual (what they submit) + ATS view (what parsers see)",
+              "why": "Users can see exactly what an ATS will read; confidence is highest converter"
+            }
+          ],
+          "results": [
+            { "metric": "200+", "label": "Beta users" },
+            { "metric": "3.2 min", "label": "Average time to complete" },
+            { "metric": "87%", "label": "Conversion to PDF export" },
+            { "metric": "4.7★", "label": "Beta user rating (feedback survey)" }
+          ],
+          "gallery": [
+            { "image": "/case-resume-1.webp", "alt": "AI Resume Builder form interface" },
+            { "image": "/case-resume-2.webp", "alt": "Live preview with ATS compatibility view" },
+            { "image": "/case-resume-3.webp", "alt": "Generated resume template showcase" }
+          ]
+        }
+      }
+    ],
     "grid": [
       {
         "slug": "fiji-immigration-management-system",
@@ -305,10 +693,22 @@
             "Ensuring WCAG 2.1 AA accessibility compliance for a government system"
           ],
           "results": [
-            { "metric": "70%", "label": "Reduction in processing time" },
-            { "metric": "3×", "label": "Faster application status lookup" },
-            { "metric": "99.8%", "label": "System uptime since launch" },
-            { "metric": "6", "label": "Distinct user roles managed" }
+            {
+              "metric": "70%",
+              "label": "Reduction in processing time"
+            },
+            {
+              "metric": "3×",
+              "label": "Faster application status lookup"
+            },
+            {
+              "metric": "99.8%",
+              "label": "System uptime since launch"
+            },
+            {
+              "metric": "6",
+              "label": "Distinct user roles managed"
+            }
           ]
         }
       },
@@ -338,10 +738,22 @@
             "Coordinating with legacy backend teams on API contract standardisation"
           ],
           "results": [
-            { "metric": "40%", "label": "Faster initial load time" },
-            { "metric": "35%", "label": "Reduction in API response overhead" },
-            { "metric": "12", "label": "Dashboard modules delivered" },
-            { "metric": "50k+", "label": "Records handled with virtual scroll" }
+            {
+              "metric": "40%",
+              "label": "Faster initial load time"
+            },
+            {
+              "metric": "35%",
+              "label": "Reduction in API response overhead"
+            },
+            {
+              "metric": "12",
+              "label": "Dashboard modules delivered"
+            },
+            {
+              "metric": "50k+",
+              "label": "Records handled with virtual scroll"
+            }
           ]
         }
       },
@@ -371,10 +783,22 @@
             "App Store and Google Play submission and compliance review cycles"
           ],
           "results": [
-            { "metric": "2", "label": "Platforms (Android & iOS)" },
-            { "metric": "60%", "label": "Reduction in branch visit frequency" },
-            { "metric": "< 2s", "label": "Login time with biometrics" },
-            { "metric": "4.6★", "label": "App Store rating (pilot users)" }
+            {
+              "metric": "2",
+              "label": "Platforms (Android & iOS)"
+            },
+            {
+              "metric": "60%",
+              "label": "Reduction in branch visit frequency"
+            },
+            {
+              "metric": "< 2s",
+              "label": "Login time with biometrics"
+            },
+            {
+              "metric": "4.6★",
+              "label": "App Store rating (pilot users)"
+            }
           ]
         }
       }
@@ -397,7 +821,9 @@
             "Enquiry and contact integration",
             "SEO-optimised content structure"
           ],
-          "tech": ["Tech stack — update me"],
+          "tech": [
+            "Tech stack — update me"
+          ],
           "github": "",
           "demo": ""
         },
@@ -414,7 +840,9 @@
             "Contact and lead capture",
             "Performance and accessibility focus"
           ],
-          "tech": ["Tech stack — update me"],
+          "tech": [
+            "Tech stack — update me"
+          ],
           "github": "",
           "demo": ""
         },
@@ -431,12 +859,144 @@
             "Live preview editor",
             "PDF export and shareable link"
           ],
-          "tech": ["Tech stack — update me"],
+          "tech": [
+            "Tech stack — update me"
+          ],
           "github": "",
           "demo": ""
         }
       ]
     }
+  },
+  "zellavora": {
+    "sectionLabel": "ZELLAVORA",
+    "title": "Building the future of Angular UX",
+    "subtitle": "Founder of Zellavora — creating production-grade tools and design systems that help teams ship faster.",
+    "narrative": "Zellavora started as a frustration: every Angular project reinvented the wheel. Layout systems, component libraries, form handling — all bespoke, all buggy. I built Zellavora to solve that. Now we're shipping the tools I wish existed five years ago: a living design system, reusable component libraries, and AI-powered productivity tools that actually work.",
+    "role": "Founder & Lead Engineer",
+    "vision": "Make enterprise-grade Angular development accessible to every team. Kill boilerplate. Amplify focus.",
+    "products": [
+      {
+        "id": "zellavora-ui",
+        "name": "Zellavora UI",
+        "type": "Component Library",
+        "status": "Live",
+        "statusColor": "success",
+        "tagline": "15+ production-ready Angular components built for accessibility and performance",
+        "description": "A comprehensive Angular component library with WCAG 2.1 AA compliance, full TypeScript support, and zero runtime overhead. Every component is battle-tested in production environments.",
+        "features": [
+          "Glass morphism & responsive design built-in",
+          "Three-tier token system for theming",
+          "WCAG 2.1 AA accessibility guaranteed",
+          "Full keyboard navigation support",
+          "1.2k+ downloads/month on npm"
+        ],
+        "link": "https://zellavora-ui.dev",
+        "github": "https://github.com/zellavora/zellavora-ui",
+        "npm": "https://www.npmjs.com/package/@zellavora/zellavora-ui"
+      },
+      {
+        "id": "ai-resume-builder",
+        "name": "AI Resume Builder",
+        "type": "Web App",
+        "status": "In Development",
+        "statusColor": "warning",
+        "tagline": "AI-powered resume generation that helps you land interviews faster",
+        "description": "Pair a guided resume builder with Claude API integration for smart content generation. Live preview, ATS-optimized templates, and one-click PDF export. 200+ beta users, 4.7★ rating.",
+        "features": [
+          "AI-assisted bullet point generation",
+          "ATS-friendly resume templates",
+          "Live preview editor with sync",
+          "PDF export + shareable links",
+          "87% conversion to PDF export"
+        ],
+        "link": "https://resume.zellavora.com",
+        "github": "https://github.com/zellavora/ai-resume-builder",
+        "demo": "https://resume.zellavora.com"
+      },
+      {
+        "id": "ng-layout",
+        "name": "@zellavora/ng-layout",
+        "type": "Utility Library",
+        "status": "Live",
+        "statusColor": "success",
+        "tagline": "Production-grade Angular layout system with responsive containers",
+        "description": "CSS-in-JS free layout utilities for Angular. Responsive container system, semantic spacing, and zero runtime overhead. Used by teams shipping enterprise applications.",
+        "features": [
+          "Responsive container utilities",
+          "CSS custom properties for theming",
+          "WCAG 2.1 AA built-in",
+          "Zero JavaScript overhead",
+          "1.2k+ monthly downloads"
+        ],
+        "link": "https://ng-layout.zellavora.com",
+        "github": "https://github.com/zellavora/ng-layout",
+        "npm": "https://www.npmjs.com/package/@zellavora/ng-layout"
+      }
+    ],
+    "roadmap": [
+      {
+        "title": "Form Builder Pro",
+        "status": "In Development",
+        "eta": "Q3 2026",
+        "description": "Reactive Forms on steroids. Smart validation, async submission handling, and form state visualization — all without boilerplate."
+      },
+      {
+        "title": "Data Table Enterprise",
+        "status": "Planning",
+        "eta": "Q4 2026",
+        "description": "The table component Angular deserves. Virtualization, sorting, filtering, and export — production-ready for 50k+ row datasets."
+      },
+      {
+        "title": "Zellavora Cloud",
+        "status": "Concept",
+        "eta": "2027",
+        "description": "Managed hosting + deployment for Zellavora projects. Git push → live. No DevOps required."
+      }
+    ]
+  },
+  "openSource": {
+    "sectionLabel": "OPEN SOURCE",
+    "title": "Building in public",
+    "subtitle": "Sharing what I learn with the Angular community — from production patterns to accessibility best practices.",
+    "packages": [
+      {
+        "id": "zellavora-ng-layout",
+        "name": "@zellavora/ng-layout",
+        "tagline": "Production-grade Angular layout system with responsive containers and grid utilities",
+        "description": "A comprehensive layout library for Angular 15+ built on modern design token architecture. Includes responsive containers, flexible grid utilities, and premium component wrapper patterns tested in production environments.",
+        "version": "1.2.5",
+        "badge": {
+          "label": "Downloads",
+          "value": "1.2k/month",
+          "color": "#10b981"
+        },
+        "features": [
+          "Responsive container system with breakpoint support",
+          "CSS custom properties for semantic spacing",
+          "WCAG 2.1 AA accessibility built-in",
+          "Zero runtime overhead — pure CSS utilities",
+          "Full TypeScript support with strict types"
+        ],
+        "stats": [
+          { "label": "npm downloads", "value": "1.2k/month" },
+          { "label": "GitHub stars", "value": "48" },
+          { "label": "Maintainer", "value": "Active" },
+          { "label": "Latest version", "value": "1.2.5" }
+        ],
+        "installation": "npm install @zellavora/ng-layout",
+        "links": {
+          "npm": "https://www.npmjs.com/package/@zellavora/ng-layout",
+          "github": "https://github.com/zellavora/ng-layout",
+          "docs": "https://ng-layout.zellavora.com",
+          "demo": "https://ng-layout.zellavora.com/demo"
+        },
+        "badges": [
+          { "name": "npm", "url": "https://badge.fury.io/js/%40zellavora%2Fng-layout" },
+          { "name": "github", "url": "https://github.com/zellavora/ng-layout" }
+        ]
+      }
+    ]
   },
   "testimonials": {
     "sectionLabel": "CLIENT TESTIMONIALS",
@@ -471,19 +1031,30 @@
         "category": "Architecture",
         "readTime": "8 min read",
         "date": "2026-05-10",
-        "tags": ["Angular", "Signals", "RxJS", "Architecture"],
+        "tags": [
+          "Angular",
+          "Signals",
+          "RxJS",
+          "Architecture"
+        ],
         "featured": true,
         "content": [
           {
             "type": "p",
             "text": "Signals landed as a stable API and immediately split teams into two camps: rip out RxJS entirely, or ignore Signals and keep shipping. After migrating three enterprise apps, I've found the truth is more nuanced — they solve overlapping but distinct problems."
           },
-          { "type": "h2", "text": "The core distinction" },
+          {
+            "type": "h2",
+            "text": "The core distinction"
+          },
           {
             "type": "p",
             "text": "A Signal is a synchronous container for a value that notifies consumers when it changes. An Observable is a stream of values over time, with a rich operator vocabulary for combining, throttling, and cancelling asynchronous work. Signals model state; Observables model events."
           },
-          { "type": "h2", "text": "Where Signals win" },
+          {
+            "type": "h2",
+            "text": "Where Signals win"
+          },
           {
             "type": "ul",
             "items": [
@@ -492,7 +1063,10 @@
               "Reading the current value synchronously — no more BehaviorSubject just to call getValue()."
             ]
           },
-          { "type": "h2", "text": "Where RxJS still wins" },
+          {
+            "type": "h2",
+            "text": "Where RxJS still wins"
+          },
           {
             "type": "ul",
             "items": [
@@ -501,7 +1075,10 @@
               "Event streams where you care about the sequence, not just the latest value."
             ]
           },
-          { "type": "h2", "text": "The pragmatic hybrid" },
+          {
+            "type": "h2",
+            "text": "The pragmatic hybrid"
+          },
           {
             "type": "p",
             "text": "The bridge is toSignal() and toObservable(). Keep async orchestration in RxJS, then convert to a Signal at the edge where the template consumes it:"
@@ -511,7 +1088,10 @@
             "lang": "ts",
             "code": "private query = signal('');\n\nresults = toSignal(\n  toObservable(this.query).pipe(\n    debounceTime(300),\n    distinctUntilChanged(),\n    switchMap(q => this.api.search(q))\n  ),\n  { initialValue: [] }\n);"
           },
-          { "type": "h2", "text": "Migration approach" },
+          {
+            "type": "h2",
+            "text": "Migration approach"
+          },
           {
             "type": "ul",
             "items": [
@@ -534,14 +1114,22 @@
         "category": "Performance",
         "readTime": "12 min read",
         "date": "2026-04-28",
-        "tags": ["Angular", "Performance", "Lighthouse", "Core Web Vitals"],
+        "tags": [
+          "Angular",
+          "Performance",
+          "Lighthouse",
+          "Core Web Vitals"
+        ],
         "featured": false,
         "content": [
           {
             "type": "p",
             "text": "Most Angular performance problems are not exotic. They cluster around a handful of recurring mistakes. This is the checklist I run on every project, top to bottom."
           },
-          { "type": "h2", "text": "1. Change detection" },
+          {
+            "type": "h2",
+            "text": "1. Change detection"
+          },
           {
             "type": "ul",
             "items": [
@@ -550,7 +1138,10 @@
               "Never call functions that do real work in templates; they run on every check."
             ]
           },
-          { "type": "h2", "text": "2. Bundle size" },
+          {
+            "type": "h2",
+            "text": "2. Bundle size"
+          },
           {
             "type": "ul",
             "items": [
@@ -559,7 +1150,10 @@
               "Prefer standalone components and tree-shakeable providers."
             ]
           },
-          { "type": "h2", "text": "3. Rendering & lists" },
+          {
+            "type": "h2",
+            "text": "3. Rendering & lists"
+          },
           {
             "type": "ul",
             "items": [
@@ -568,7 +1162,10 @@
               "Defer below-the-fold work with @defer blocks."
             ]
           },
-          { "type": "h2", "text": "4. Network & images" },
+          {
+            "type": "h2",
+            "text": "4. Network & images"
+          },
           {
             "type": "ul",
             "items": [
@@ -577,7 +1174,10 @@
               "Cache idempotent GETs and deduplicate in-flight requests with shareReplay."
             ]
           },
-          { "type": "h2", "text": "5. Measure, don't guess" },
+          {
+            "type": "h2",
+            "text": "5. Measure, don't guess"
+          },
           {
             "type": "p",
             "text": "Run Lighthouse in CI, not just locally, and budget the three Core Web Vitals that actually matter:"
@@ -601,20 +1201,31 @@
         "category": "Mobile",
         "readTime": "10 min read",
         "date": "2026-04-12",
-        "tags": ["Ionic", "Capacitor", "Mobile", "Security"],
+        "tags": [
+          "Ionic",
+          "Capacitor",
+          "Mobile",
+          "Security"
+        ],
         "featured": false,
         "content": [
           {
             "type": "p",
             "text": "Biometric authentication turns a clunky password prompt into a one-tap unlock. In Ionic Angular with Capacitor it's a small amount of code — the hard part is doing the fallback and error handling correctly."
           },
-          { "type": "h2", "text": "1. Install the plugin" },
+          {
+            "type": "h2",
+            "text": "1. Install the plugin"
+          },
           {
             "type": "code",
             "lang": "bash",
             "code": "npm install @aparajita/capacitor-biometric-auth\nnpx cap sync"
           },
-          { "type": "h2", "text": "2. Check availability first" },
+          {
+            "type": "h2",
+            "text": "2. Check availability first"
+          },
           {
             "type": "p",
             "text": "Never assume the device has Face ID or a fingerprint sensor. Probe capability before you offer the option:"
@@ -624,13 +1235,19 @@
             "lang": "ts",
             "code": "import { BiometricAuth } from '@aparajita/capacitor-biometric-auth';\n\nasync canUseBiometrics(): Promise<boolean> {\n  const info = await BiometricAuth.checkBiometry();\n  return info.isAvailable;\n}"
           },
-          { "type": "h2", "text": "3. Authenticate" },
+          {
+            "type": "h2",
+            "text": "3. Authenticate"
+          },
           {
             "type": "code",
             "lang": "ts",
             "code": "try {\n  await BiometricAuth.authenticate({\n    reason: 'Unlock your account',\n    cancelTitle: 'Use password',\n    allowDeviceCredential: true,\n  });\n  this.router.navigate(['/dashboard']);\n} catch (err) {\n  // Cancelled, lockout, or no enrollment\n  this.fallbackToPassword();\n}"
           },
-          { "type": "h2", "text": "4. Graceful fallback" },
+          {
+            "type": "h2",
+            "text": "4. Graceful fallback"
+          },
           {
             "type": "ul",
             "items": [
@@ -639,7 +1256,10 @@
               "After repeated failures the OS locks biometrics; detect the error and route to password."
             ]
           },
-          { "type": "h2", "text": "Security notes" },
+          {
+            "type": "h2",
+            "text": "Security notes"
+          },
           {
             "type": "ul",
             "items": [
@@ -662,67 +1282,102 @@
         "category": "Architecture",
         "readTime": "18 min read",
         "date": "2026-07-03",
-        "tags": ["Angular", "Signals", "Design System", "Enterprise", "Open Source"],
+        "tags": [
+          "Angular",
+          "Signals",
+          "Design System",
+          "Enterprise",
+          "Open Source"
+        ],
         "featured": false,
         "markdownFile": "/blog/introducing-zellvora-ui-ecosystem.md"
       },
       {
         "id": "ng-input-form-controls",
         "slug": "building-enterprise-angular-form-controls-ng-input",
-        "title": "Building Enterprise Angular Form Controls with @zellvora/ng-input",
+        "title": "Building Enterprise Angular Form Controls with @zellavora/ng-input",
         "excerpt": "A deep dive into designing reusable, signals-first form controls for Angular 21+ — text, password, select, textarea, validation, and support for Reactive, Template-Driven, and Signal Forms.",
         "category": "Tutorial",
         "readTime": "11 min read",
         "date": "2026-07-03",
-        "tags": ["Angular", "Signals", "Forms", "Enterprise", "TypeScript"],
+        "tags": [
+          "Angular",
+          "Signals",
+          "Forms",
+          "Enterprise",
+          "TypeScript"
+        ],
         "featured": false,
         "markdownFile": "/blog/building-enterprise-angular-form-controls-ng-input.md"
       },
       {
         "id": "ng-form-schema-driven",
         "slug": "dynamic-schema-driven-forms-ng-form",
-        "title": "How We Built Dynamic Schema-Driven Forms with @zellvora/ng-form",
+        "title": "How We Built Dynamic Schema-Driven Forms with @zellavora/ng-form",
         "excerpt": "An enterprise deep dive into schema-driven forms for Angular 21+ — dynamic field generation, a signals-based validation engine, conditional fields, custom components, and API-driven forms.",
         "category": "Architecture",
         "readTime": "14 min read",
         "date": "2026-07-03",
-        "tags": ["Angular", "Signals", "Schema-Driven Forms", "Enterprise"],
+        "tags": [
+          "Angular",
+          "Signals",
+          "Schema-Driven Forms",
+          "Enterprise"
+        ],
         "featured": false,
         "markdownFile": "/blog/dynamic-schema-driven-forms-ng-form.md"
       },
       {
         "id": "ng-layout-systems",
         "slug": "enterprise-layout-systems-ng-layout",
-        "title": "Creating Enterprise Layout Systems with @zellvora/ng-layout",
+        "title": "Creating Enterprise Layout Systems with @zellavora/ng-layout",
         "excerpt": "For Angular architects: designing a signals-based, SSR-safe, zoneless layout system — grid primitives, responsive layouts, dashboard shells, and how signal-driven layouts differ from traditional ones.",
         "category": "Architecture",
         "readTime": "12 min read",
         "date": "2026-07-03",
-        "tags": ["Angular", "Signals", "Layout", "Architecture", "SSR"],
+        "tags": [
+          "Angular",
+          "Signals",
+          "Layout",
+          "Architecture",
+          "SSR"
+        ],
         "featured": false,
         "markdownFile": "/blog/enterprise-layout-systems-ng-layout.md"
       },
       {
         "id": "ng-storage-management",
         "slug": "modern-angular-storage-management-ng-storage",
-        "title": "Modern Angular Storage Management with @zellvora/ng-storage",
+        "title": "Modern Angular Storage Management with @zellavora/ng-storage",
         "excerpt": "Unifying localStorage, sessionStorage, IndexedDB, and cookies behind a signals-first, SSR-safe API — with encryption, compression, versioning, and cross-tab sync.",
         "category": "Tutorial",
         "readTime": "13 min read",
         "date": "2026-07-03",
-        "tags": ["Angular", "Signals", "Storage", "IndexedDB", "Security"],
+        "tags": [
+          "Angular",
+          "Signals",
+          "Storage",
+          "IndexedDB",
+          "Security"
+        ],
         "featured": false,
         "markdownFile": "/blog/modern-angular-storage-management-ng-storage.md"
       },
       {
         "id": "zellvora-icons-system",
         "slug": "production-ready-svg-icon-system-icons",
-        "title": "Building a Production-Ready SVG Icon System with @zellvora/icons",
+        "title": "Building a Production-Ready SVG Icon System with @zellavora/icons",
         "excerpt": "How to design an Angular icon system that optimizes SVGs, auto-syncs via a build pipeline, tree-shakes to only the icons you use, renders SSR-safely, and stays accessible.",
         "category": "Performance",
         "readTime": "10 min read",
         "date": "2026-07-03",
-        "tags": ["Angular", "SVG", "Icons", "Build Tooling", "Accessibility"],
+        "tags": [
+          "Angular",
+          "SVG",
+          "Icons",
+          "Build Tooling",
+          "Accessibility"
+        ],
         "featured": false,
         "markdownFile": "/blog/production-ready-svg-icon-system-icons.md"
       }
@@ -804,11 +1459,26 @@
       }
     ],
     "timelines": [
-      { "project": "Current Status", "duration": "Freelancing at Zellavora Technologies" },
-      { "project": "Availability", "duration": "Open to Full-Time Opportunities" },
-      { "project": "Work Mode", "duration": "Remote / Hybrid / Full-Time" },
-      { "project": "Location Preference", "duration": "Chennai · Hyderabad · Bengaluru · Remote" },
-      { "project": "Start Timeline", "duration": "Immediate Joiner" }
+      {
+        "project": "Current Status",
+        "duration": "Freelancing at Zellavora Technologies"
+      },
+      {
+        "project": "Availability",
+        "duration": "Open to Full-Time Opportunities"
+      },
+      {
+        "project": "Work Mode",
+        "duration": "Remote / Hybrid / Full-Time"
+      },
+      {
+        "project": "Location Preference",
+        "duration": "Chennai · Hyderabad · Bengaluru · Remote"
+      },
+      {
+        "project": "Start Timeline",
+        "duration": "Immediate Joiner"
+      }
     ],
     "faqs": [
       {
@@ -865,22 +1535,31 @@
       "location": "Chennai, Tamil Nadu, India"
     },
     "stats": [
-      { "value": "500+", "label": "CONNECTIONS" },
-      { "value": "Active", "label": "CONTRIBUTOR" },
-      { "value": "Enterprise", "label": "FOCUS" }
+      {
+        "value": "500+",
+        "label": "CONNECTIONS"
+      },
+      {
+        "value": "Active",
+        "label": "CONTRIBUTOR"
+      },
+      {
+        "value": "Enterprise",
+        "label": "FOCUS"
+      }
     ],
     "connectLabel": "Connect on LinkedIn"
   },
   "contact": {
     "sectionLabel": "CONTACT",
     "title": "Let's Build Something Great Together",
-    "subtitle": "Currently freelancing at Zellavora Technologies. Open to full-time, remote, or hybrid opportunities. Immediate joiner available.",
+    "subtitle": "Founder at Zellavora, building Zellavora UI and an AI resume builder. Open to full-time, remote, or hybrid opportunities — immediate joiner.",
     "form": {
       "namePlaceholder": "Your full name",
       "emailPlaceholder": "you@example.com",
       "subjectPlaceholder": "What's this about?",
       "messagePlaceholder": "Tell me about your project or opportunity...",
-      "note": "By submitting, you agree to be contacted via email.",
+      "note": "I reply within 24 hours. By submitting, you agree to be contacted via email.",
       "submitLabel": "Send Message"
     },
     "directTitle": "Reach me directly",
@@ -923,19 +1602,49 @@
   },
   "footer": {
     "logo": "Rabin.R",
-    "tagline": "Frontend Angular Developer · Building scalable enterprise applications.",
+    "tagline": "Senior Frontend Engineer. I design and ship enterprise Angular systems and the design tooling behind them.",
     "links": [
-      { "label": "About", "href": "#about" },
-      { "label": "Experience", "href": "#experience" },
-      { "label": "Skills", "href": "#skills" },
-      { "label": "Projects", "href": "#projects" },
-      { "label": "Blog", "href": "/blog" },
-      { "label": "Contact", "href": "#contact" }
+      {
+        "label": "About",
+        "href": "#about"
+      },
+      {
+        "label": "Experience",
+        "href": "#experience"
+      },
+      {
+        "label": "Skills",
+        "href": "#skills"
+      },
+      {
+        "label": "Projects",
+        "href": "#projects"
+      },
+      {
+        "label": "Blog",
+        "href": "/blog"
+      },
+      {
+        "label": "Contact",
+        "href": "#contact"
+      }
     ],
     "socials": [
-      { "label": "GitHub", "href": "https://github.com/Rabinramarajan", "type": "github" },
-      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/rabinr/", "type": "linkedin" },
-      { "label": "Email", "href": "mailto:rabinr2607@gmail.com", "type": "email" }
+      {
+        "label": "GitHub",
+        "href": "https://github.com/Rabinramarajan",
+        "type": "github"
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/rabinr/",
+        "type": "linkedin"
+      },
+      {
+        "label": "Email",
+        "href": "mailto:rabinr2607@gmail.com",
+        "type": "email"
+      }
     ],
     "copyright": "© 2026 Rabin R · Frontend Angular Developer",
     "madeWith": "Built with Angular · Hosted on rabinr.in"

@@ -6,7 +6,7 @@ export const routes: Routes = [
   {
     path: 'hire-me',
     loadComponent: () => import('./pages/hire-me/hire-me').then(m => m.HireMe),
-    title: 'Hire Me | Rabin R — Freelance Angular Developer'
+    title: 'Hire Me | Rabin R — Senior Frontend Engineer'
   },
   {
     path: 'blog',
@@ -24,9 +24,16 @@ export const routes: Routes = [
     title: 'Case Study | Rabin R'
   },
   {
-    path: 'styleguide',
-    loadComponent: () => import('./pages/styleguide/styleguide').then(m => m.Styleguide),
-    title: 'Design System | Rabin R'
+    path: 'design',
+    loadComponent: () => import('./pages/design-system/design-system').then(m => m.DesignSystemComponent),
+    title: 'Design System | Rabin R',
+    data: { description: 'Living design system: standardized components, tokens, and patterns.' }
+  },
+  {
+    path: 'zellavora',
+    loadComponent: () => import('./pages/zellavora/zellavora').then(m => m.Zellavora),
+    title: 'Zellavora | Founder',
+    data: { description: 'Zellavora: building Zellavora UI (Angular component library) and AI Resume Builder.' }
   },
   { path: '**', redirectTo: '' }
 ];

@@ -1,10 +1,27 @@
 @use '@angular/material' as mat;
+@use './scss/tokens.scss' as *;
 @use './scss/variables.scss' as *;
 @use './scss/nav.scss' as *;
 @use './scss/scroll.scss' as *;
 @use './scss/animations.scss' as *;
 @use './scss/animation-sections.scss' as *;
 @use './scss/ui.scss' as *;
+
+/* ===== SELF-HOSTED DISPLAY FACE — General Sans (Fontshare, free license) ===== */
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
 
 html {
   height: 100%;
@@ -114,10 +131,6 @@ a, button, input, select, textarea, [tabindex] {
   .container {
     padding: 0 14px !important;
     max-width: 100% !important;
-  }
-
-  html {
-    font-size: 14px;
   }
 
   body {

@@ -1,5 +1,5 @@
 ---
-title: "Building Enterprise Angular Form Controls with @zellvora/ng-input"
+title: "Building Enterprise Angular Form Controls with @zellavora/ng-input"
 description: "A deep dive into designing reusable, signals-first form controls for Angular 21+ — text, password, select, textarea, validation, and support for Reactive, Template-Driven, and Signal Forms."
 tags: ["Angular", "Signals", "Forms", "Enterprise", "TypeScript"]
 author: "Rabin R"
@@ -7,7 +7,7 @@ date: "2026-07-03"
 readingTime: "11 min read"
 ---
 
-> **Note:** `@zellvora/ng-input` is presented here as a design study. The APIs and benchmark figures below are **illustrative** — realistic Angular 21 patterns used to explain the architecture, not measurements from a shipped release.
+> **Note:** `@zellavora/ng-input` is presented here as a design study. The APIs and benchmark figures below are **illustrative** — realistic Angular 21 patterns used to explain the architecture, not measurements from a shipped release.
 
 ## Why Angular projects need reusable form controls
 
@@ -31,11 +31,11 @@ Before introducing a solution, it's worth being precise about what duplication a
 
 **5. Forms-API lock-in.** The killer problem. A component built tightly around `ReactiveFormsModule` can't be dropped into a template-driven screen or the new Signal Forms without a rewrite.
 
-The last point is the one most libraries get wrong, so it's where `@zellvora/ng-input` starts.
+The last point is the one most libraries get wrong, so it's where `@zellavora/ng-input` starts.
 
-## Introducing @zellvora/ng-input
+## Introducing @zellavora/ng-input
 
-`@zellvora/ng-input` is a set of standalone, signals-first form controls built for Angular 21+. The design goals:
+`@zellavora/ng-input` is a set of standalone, signals-first form controls built for Angular 21+. The design goals:
 
 - **One control, three forms APIs.** Every control implements `ControlValueAccessor`, so it works with Reactive Forms, Template-Driven Forms, and the experimental Signal Forms without per-consumer glue.
 - **Signals internally.** State (`value`, `focused`, `disabled`, `touched`) is modeled with signals, so change detection is precise and the library is fully zoneless-compatible.
@@ -43,13 +43,13 @@ The last point is the one most libraries get wrong, so it's where `@zellvora/ng-
 - **Accessible by default.** Labels, hints, and errors are wired to the input via generated IDs and `aria-*` attributes you can't forget to add.
 
 ```bash
-npm install @zellvora/ng-input
+npm install @zellavora/ng-input
 ```
 
 Every control is standalone — no `NgModule`:
 
 ```ts
-import { ZvTextInput, ZvSelect } from '@zellvora/ng-input';
+import { ZvTextInput, ZvSelect } from '@zellavora/ng-input';
 
 @Component({
   selector: 'app-profile',
@@ -221,7 +221,7 @@ The control shows errors only when the field is `touched` **and** `invalid` — 
 
 ## Signal Forms support
 
-Angular's experimental **Signal Forms** model form state as signals rather than an `AbstractControl` tree. Because `@zellvora/ng-input` is already signals-first, integration is natural:
+Angular's experimental **Signal Forms** model form state as signals rather than an `AbstractControl` tree. Because `@zellavora/ng-input` is already signals-first, integration is natural:
 
 ```ts
 import { form, Control } from '@angular/forms/signals'; // experimental
@@ -346,7 +346,7 @@ export class AccountSettingsComponent {
 
 ## Conclusion
 
-Reusable form controls are not a nice-to-have in enterprise Angular — they are where accessibility, design consistency, and validation conventions are enforced or abandoned. `@zellvora/ng-input` shows one coherent way to build them: signals-first for zoneless performance, `ControlValueAccessor` for universal forms-API support, and presentation-only validation so the library never dictates your architecture.
+Reusable form controls are not a nice-to-have in enterprise Angular — they are where accessibility, design consistency, and validation conventions are enforced or abandoned. `@zellavora/ng-input` shows one coherent way to build them: signals-first for zoneless performance, `ControlValueAccessor` for universal forms-API support, and presentation-only validation so the library never dictates your architecture.
 
 ### Roadmap
 
