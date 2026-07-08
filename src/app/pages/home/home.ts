@@ -21,12 +21,23 @@ import {
   ArrowIconComponent,
 } from '../../shared/components';
 import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
+import { HeroComponent } from './components/hero/hero.component';
+import { AboutComponent } from './components/about/about.component';
+import { ExperienceComponent } from './components/experience/experience.component';
+import { SkillsComponent } from './components/skills/skills.component';
+import { ProjectsComponent } from './components/projects/projects.component';
 import { ResumeComponent } from './components/deferred/resume/resume.component';
 import { PlaygroundComponent } from './components/deferred/playground/playground.component';
 
 @Component({
   selector: 'app-home',
   imports: [
+    // Section Components
+    HeroComponent,
+    AboutComponent,
+    ExperienceComponent,
+    SkillsComponent,
+    ProjectsComponent,
     // Deferred Components
     ResumeComponent,
     PlaygroundComponent,
