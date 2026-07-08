@@ -6,14 +6,7 @@ import { DomSanitizer, SafeHtml, Title, Meta } from '@angular/platform-browser';
 import { marked } from 'marked';
 import { PortfolioDataService } from '../../shared/services/portfolio-data.service';
 import { UiBadgeComponent } from '../../shared/ui';
-
-interface ContentBlock {
-  type: 'p' | 'h2' | 'ul' | 'code';
-  text?: string;
-  items?: string[];
-  lang?: string;
-  code?: string;
-}
+import type { ContentBlock, BlogArticle } from '../../shared/types';
 
 @Component({
   selector: 'app-blog-detail',
@@ -36,7 +29,7 @@ export class BlogDetail {
 
   protected readonly article = computed(() => {
     const slug = this.params().get('slug');
-    return (this.pds.blog()?.articles ?? []).find((a: any) => a.slug === slug) ?? null;
+    return (this.pds.blog()?.articles ?? []).find((a: BlogArticle) => a.slug === slug) ?? null;
   });
 
   // Structured-block content (legacy articles authored inline in JSON)
@@ -52,7 +45,7 @@ export class BlogDetail {
   protected readonly related = computed(() => {
     const current = this.article();
     return (this.pds.blog()?.articles ?? [])
-      .filter((a: any) => a.slug !== current?.slug)
+      .filter((a: BlogArticle) => a.slug !== current?.slug)
       .slice(0, 2);
   });
 

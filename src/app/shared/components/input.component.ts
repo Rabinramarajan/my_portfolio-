@@ -4,6 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IconComponent } from './icon.component';
 
 let inputIdCounter = 0;
+let textareaIdCounter = 0;
 
 type InputType = 'text' | 'email' | 'password' | 'number' | 'url' | 'tel' | 'date';
 type InputState = 'default' | 'focus' | 'error' | 'success';
@@ -151,26 +152,29 @@ export class InputComponent implements ControlValueAccessor {
   @Output() valueChange = new EventEmitter<string | null>();
   @Output() blur = new EventEmitter<void>();
 
-  onChange(_: any) {
-    const input = (_ as any).target;
+  onChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
     this.value = input.value;
     this.valueChange.emit(this.value || null);
   }
 
-  onBlur() {
+  onBlur(): void {
     this.state = this.errorMessage ? 'error' : 'default';
     this.blur.emit();
   }
 
-  writeValue(value: any): void {
+  writeValue(value: string | null): void {
     this.value = value;
   }
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
+  registerOnChange(fn: (value: string | null) => void): void {
+    this.onChange = (event: Event) => {
+      const input = event.target as HTMLInputElement;
+      fn(input.value || null);
+    };
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: () => void): void {
     this.onBlur = fn;
   }
 
@@ -238,7 +242,7 @@ export class InputComponent implements ControlValueAccessor {
   `],
 })
 export class TextareaComponent implements ControlValueAccessor {
-  @Input() id: string = 'textarea-' + Math.random().toString(36).substr(2, 9);
+  @Input() id: string = `textarea-${++textareaIdCounter}`;
   @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() disabled: boolean = false;
@@ -250,26 +254,29 @@ export class TextareaComponent implements ControlValueAccessor {
   @Output() valueChange = new EventEmitter<string | null>();
   @Output() blur = new EventEmitter<void>();
 
-  onChange(_: any) {
-    const textarea = (_ as any).target;
+  onChange(event: Event): void {
+    const textarea = event.target as HTMLTextAreaElement;
     this.value = textarea.value;
     this.valueChange.emit(this.value || null);
   }
 
-  onBlur() {
+  onBlur(): void {
     this.state = this.errorMessage ? 'error' : 'default';
     this.blur.emit();
   }
 
-  writeValue(value: any): void {
+  writeValue(value: string | null): void {
     this.value = value;
   }
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
+  registerOnChange(fn: (value: string | null) => void): void {
+    this.onChange = (event: Event) => {
+      const textarea = event.target as HTMLTextAreaElement;
+      fn(textarea.value || null);
+    };
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: () => void): void {
     this.onBlur = fn;
   }
 

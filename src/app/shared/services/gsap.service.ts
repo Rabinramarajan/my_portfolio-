@@ -1,5 +1,15 @@
 import { Injectable } from '@angular/core';
 
+interface ScrollTriggerConfig {
+  [key: string]: unknown;
+}
+
+interface AnimationOptions {
+  delay?: number;
+  stagger?: number;
+  duration?: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class GsapService {
   private gsapModule: any = null;
@@ -12,12 +22,14 @@ export class GsapService {
 
     const [gsapMod, stMod] = await Promise.all([
       import('gsap'),
-      import('gsap/ScrollTrigger')
+      import('gsap/ScrollTrigger'),
     ]);
 
     this.gsapModule = gsapMod.gsap || gsapMod.default;
     this.scrollTriggerModule = stMod.ScrollTrigger || stMod.default;
-    this.gsapModule.registerPlugin(this.scrollTriggerModule);
+    if (this.gsapModule && this.scrollTriggerModule) {
+      this.gsapModule.registerPlugin(this.scrollTriggerModule);
+    }
     this.loaded = true;
   }
 
@@ -33,7 +45,10 @@ export class GsapService {
     return this.loaded;
   }
 
-  fadeInUp(elements: Element | Element[] | string, options: { delay?: number; stagger?: number; duration?: number } = {}): any {
+  fadeInUp(
+    elements: Element | Element[] | string,
+    options: AnimationOptions = {}
+  ): any {
     if (!this.gsapModule) return null;
     return this.gsapModule.from(elements, {
       y: 40,
@@ -45,8 +60,8 @@ export class GsapService {
       scrollTrigger: {
         trigger: elements,
         start: 'top 85%',
-        toggleActions: 'play none none none'
-      }
+        toggleActions: 'play none none none',
+      },
     });
   }
 
@@ -61,12 +76,12 @@ export class GsapService {
       scrollTrigger: {
         trigger: elements,
         start: 'top 85%',
-        toggleActions: 'play none none none'
-      }
+        toggleActions: 'play none none none',
+      },
     });
   }
 
-  createTimeline(scrollTriggerConfig?: any): any {
+  createTimeline(scrollTriggerConfig?: ScrollTriggerConfig): any {
     if (!this.gsapModule) return null;
     const config: any = { defaults: { ease: 'power3.out', duration: 0.8 } };
     if (scrollTriggerConfig) {

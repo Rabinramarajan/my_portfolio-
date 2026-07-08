@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { PortfolioDataService } from '../../shared/services/portfolio-data.service';
+import type { ProjectItem } from '../../shared/types';
 
 @Component({
   selector: 'app-project-detail',
@@ -44,7 +45,7 @@ export class ProjectDetail {
   // All projects (featured + grid) as one flat list.
   private readonly allProjects = computed(() => {
     const p = this.pds.projects();
-    return [p?.featured, ...(p?.grid ?? [])].filter(Boolean) as any[];
+    return [p?.featured, ...(p?.grid ?? [])].filter(Boolean) as ProjectItem[];
   });
 
   protected readonly project = computed(() => {
