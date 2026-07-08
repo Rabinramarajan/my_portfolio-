@@ -39,6 +39,7 @@ export interface MetaData {
   github?: string;
   resumePdf?: string;
   socialLinks?: Link[];
+  aboutImage?: string;
 }
 
 export interface NavItem {
@@ -83,11 +84,23 @@ export interface HeroData {
 // ABOUT SECTION
 // ============================================================================
 
+export interface InfoCard {
+  label: string;
+  value: string;
+  icon?: string;
+}
+
 export interface AboutData {
   sectionLabel: string;
   title: string;
   content: string;
   image?: string;
+  infoCards?: InfoCard[];
+  bio?: string[];
+  intro?: string;
+  openBadge?: string;
+  clientCentricTagline?: string;
+  whoIHelp?: Array<{ icon?: string; title: string; desc: string }>;
 }
 
 // ============================================================================
@@ -100,12 +113,17 @@ export interface ExperienceItem {
   duration: string;
   description: string;
   technologies: string[];
+  tags?: string[];
+  achievements?: string[];
+  location?: string;
 }
 
 export interface ExperienceData {
   sectionLabel: string;
   title: string;
-  items: ExperienceItem[];
+  subtitle?: string;
+  items?: ExperienceItem[];
+  jobs?: ExperienceItem[];
 }
 
 // ============================================================================
@@ -122,11 +140,13 @@ export interface SkillItem {
 export interface SkillCategory {
   name: string;
   icon?: string;
+  items: string[];
 }
 
 export interface SkillsData {
   sectionLabel: string;
   title: string;
+  subtitle?: string;
   items?: SkillItem[];
   categories?: SkillCategory[];
 }
@@ -183,6 +203,7 @@ export interface ProjectCaseStudy {
 }
 
 export interface ProjectItem {
+  id?: string;
   title: string;
   name?: string;
   slug: string;
@@ -196,18 +217,34 @@ export interface ProjectItem {
   technologies: string[];
   tags?: string[];
   highlights?: string;
+  tech?: string[];
+  demo?: string;
+  github?: string;
+  link?: string;
   links: ProjectLinks;
   caseStudy: ProjectCaseStudy;
   caseStudyUrl?: string;
   featured?: boolean;
+  badge?: string;
+  type?: string;
+  features?: string[];
+}
+
+export interface ProjectsSection {
+  sectionLabel: string;
+  title: string;
+  subtitle?: string;
+  items: ProjectItem[];
 }
 
 export interface ProjectsData {
   sectionLabel: string;
   title: string;
+  subtitle?: string;
   items?: ProjectItem[];
   featured?: ProjectItem;
   grid?: ProjectItem[];
+  inProgress?: ProjectsSection;
 }
 
 // ============================================================================
@@ -223,6 +260,7 @@ export interface ContentBlock {
 }
 
 export interface BlogArticle {
+  id?: string | number;
   title: string;
   slug: string;
   excerpt: string;
@@ -232,12 +270,16 @@ export interface BlogArticle {
   readTime: string;
   thumbnail?: string;
   tags?: string[];
+  category: string;
 }
 
 export interface BlogData {
   sectionLabel: string;
   title: string;
+  subtitle?: string;
   articles: BlogArticle[];
+  viewAllLabel?: string;
+  viewAllHref?: string;
 }
 
 // ============================================================================
@@ -245,18 +287,25 @@ export interface BlogData {
 // ============================================================================
 
 export interface TestimonialItem {
-  name: string;
+  id: number;
+  quote: string;
+  author: string;
   role: string;
-  company?: string;
-  content: string;
-  image?: string;
+  company: string;
+  location?: string;
   rating?: number;
+  avatar?: string;
+  avatarColor?: string;
+  name?: string;
+  content?: string;
+  text?: string;
+  image?: string;
 }
 
 export interface TestimonialsData {
   sectionLabel: string;
   title: string;
-  items: TestimonialItem[];
+  items?: TestimonialItem[];
 }
 
 // ============================================================================
@@ -272,10 +321,43 @@ export interface OpenSourceProject {
   icon?: string;
 }
 
+export interface NpmPackageBadge {
+  label: string;
+  value: string;
+  color?: string;
+}
+
+export interface NpmPackageStat {
+  label: string;
+  value: string;
+}
+
+export interface NpmPackageLinks {
+  npm: string;
+  github: string;
+  docs: string;
+  demo: string;
+}
+
+export interface NpmPackage {
+  id: string;
+  name: string;
+  tagline: string;
+  description: string;
+  version: string;
+  badge?: NpmPackageBadge;
+  features: string[];
+  stats: NpmPackageStat[];
+  installation: string;
+  links: NpmPackageLinks;
+}
+
 export interface OpenSourceData {
   sectionLabel: string;
   title: string;
-  projects: OpenSourceProject[];
+  subtitle?: string;
+  projects?: OpenSourceProject[];
+  packages?: NpmPackage[];
 }
 
 // ============================================================================
@@ -305,6 +387,7 @@ export interface ContactData {
   sectionLabel: string;
   title: string;
   description: string;
+  subtitle?: string;
   email: string;
   directTitle?: string;
   directSub?: string;
@@ -340,11 +423,50 @@ export interface FooterData {
 // HIRE ME PAGE
 // ============================================================================
 
+export interface HireMeFAQ {
+  q: string;
+  a: string;
+}
+
+export interface HireMeHero {
+  title: string;
+  titleAccent?: string;
+  subtitle: string;
+  badge?: string;
+  cta: string;
+  ctaHref?: string;
+}
+
+export interface HireMeProcess {
+  title: string;
+  subtitle: string;
+  steps?: Array<{ step: string; title: string; desc: string; icon?: string }>;
+}
+
+export interface HireMeTimeline {
+  project: string;
+  duration: string;
+}
+
+export interface HireMeService {
+  icon?: string;
+  title: string;
+  items?: string[];
+  highlight?: boolean;
+  desc?: string;
+}
+
 export interface HireMeData {
   sectionLabel: string;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   cta?: ButtonCTA;
+  hero?: HireMeHero;
+  process?: HireMeProcess;
+  services?: HireMeService[];
+  timelines?: HireMeTimeline[];
+  notAFit?: string[];
+  faqs?: HireMeFAQ[];
 }
 
 // ============================================================================
@@ -363,9 +485,43 @@ export interface SchedulingData {
 // ============================================================================
 
 export interface ResumeData {
-  url: string;
-  label: string;
+  sectionLabel: string;
+  title: string;
+  subtitle?: string;
+  availBadge?: string;
+  cardTitle?: string;
+  cardBio?: string;
+  downloadLabel?: string;
+  viewLabel?: string;
+  updatedLabel?: string;
+  url?: string;
+  label?: string;
   lastUpdated?: string;
+}
+
+// ============================================================================
+// LINKEDIN DATA
+// ============================================================================
+
+export interface LinkedInProfile {
+  initial: string;
+  name: string;
+  role: string;
+  location: string;
+}
+
+export interface LinkedInStat {
+  value: string;
+  label: string;
+}
+
+export interface LinkedInData {
+  sectionLabel: string;
+  title: string;
+  subtitle?: string;
+  profile?: LinkedInProfile;
+  stats?: LinkedInStat[];
+  connectLabel?: string;
 }
 
 // ============================================================================
@@ -373,10 +529,10 @@ export interface ResumeData {
 // ============================================================================
 
 export interface SocialLinks {
-  linkedin?: { url: string };
-  github?: { url: string };
-  twitter?: { url: string };
-  email?: { url: string };
+  linkedin?: { url: string; subtitle?: string };
+  github?: { url: string; subtitle?: string };
+  twitter?: { url: string; subtitle?: string };
+  email?: { url: string; subtitle?: string };
 }
 
 // ============================================================================
@@ -392,7 +548,7 @@ export interface PortfolioData {
   skills: SkillsData;
   projects: ProjectsData;
   resume: ResumeData;
-  linkedin: SocialLinks;
+  linkedin: LinkedInData;
   contact: ContactData;
   footer: FooterData;
   testimonials: TestimonialsData;

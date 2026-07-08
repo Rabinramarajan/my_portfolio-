@@ -643,7 +643,7 @@
 
       <!-- Live Posts Feed (Elfsight LinkedIn Feed Widget) -->
       <div class="testimonials-wrap animate-fade-in-up">
-        <app-testimonials [testimonials]="pds.testimonials()?.items" />
+        <app-testimonials [testimonials]="pds.testimonials()?.items || []" />
       </div>
     </div>
   </section>
@@ -669,7 +669,7 @@
 
       @if (pds.openSource()?.packages) {
         <div style="margin-top: 48px;">
-          <app-open-source [packages]="pds.openSource()?.packages" />
+          <app-open-source [packages]="pds.openSource()?.packages || []" />
         </div>
       }
     </div>

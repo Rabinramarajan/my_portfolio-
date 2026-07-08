@@ -14,7 +14,6 @@ import {
   MagneticButtonDirective,
   GridBackgroundDirective,
   StaggerDirective,
-  TypewriterDirective,
 } from '../../shared/directives';
 import {
   ScrollProgressComponent,
@@ -35,7 +34,6 @@ import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
     MagneticButtonDirective,
     GridBackgroundDirective,
     StaggerDirective,
-    TypewriterDirective,
     // Components
     ScrollProgressComponent,
     ResumeButtonComponent,
