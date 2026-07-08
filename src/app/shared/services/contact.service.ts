@@ -4,6 +4,8 @@ import { catchError, map, timeout } from 'rxjs/operators';
 import emailjs from '@emailjs/browser';
 import { environment } from '../../../environments/environment';
 
+const isDev = !environment.production;
+
 export interface ContactFormData {
   name: string;
   email: string;
@@ -38,15 +40,21 @@ export class ContactService {
     try {
       // Check if credentials are configured
       if (this.PUBLIC_KEY === 'your_public_key') {
-        console.warn('EmailJS not configured. Please set your credentials in src/environments/environment.ts');
+        if (isDev) {
+          console.warn('EmailJS not configured. Please set your credentials in src/environments/environment.ts');
+        }
         return;
       }
-      
+
       emailjs.init(this.PUBLIC_KEY);
       this.isInitialized = true;
-      console.log('EmailJS initialized successfully');
+      if (isDev) {
+        console.log('EmailJS initialized successfully');
+      }
     } catch (error) {
-      console.error('EmailJS initialization failed:', error);
+      if (isDev) {
+        console.error('EmailJS initialization failed:', error);
+      }
     }
   }
 
@@ -105,9 +113,11 @@ export class ContactService {
         };
       }),
       catchError((error) => {
-        console.error('EmailJS Error:', error);
+        if (isDev) {
+          console.error('EmailJS Error:', error);
+        }
         let message = 'Unable to send message. Please try again later.';
-        
+
         if (error.name === 'TimeoutError') {
           message = 'Request timeout. Please try again.';
         } else if (error.text === 'Forbidden') {
@@ -115,7 +125,7 @@ export class ContactService {
         } else if (error.status === 0) {
           message = 'Network error. Please check your connection.';
         }
-        
+
         return throwError(() => ({
           success: false,
           message
@@ -155,7 +165,9 @@ export class ContactService {
         message: 'Email sent successfully'
       })),
       catchError((error) => {
-        console.error('Custom email error:', error);
+        if (isDev) {
+          console.error('Custom email error:', error);
+        }
         return throwError(() => ({
           success: false,
           message: 'Failed to send email'

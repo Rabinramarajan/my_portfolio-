@@ -183,7 +183,7 @@
 .hero-content {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 22px;
 }
 
 // Badge
@@ -244,66 +244,6 @@
   50% { opacity: 0.6; transform: scale(1.2); }
 }
 
-// Animated accent shapes background
-.hero-accent-shapes {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.accent-orb {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
-  filter: blur(40px);
-
-  &-1 {
-    width: 300px;
-    height: 300px;
-    top: -100px;
-    left: -150px;
-    animation: float-orb-1 8s ease-in-out infinite;
-  }
-
-  &-2 {
-    width: 250px;
-    height: 250px;
-    bottom: 50px;
-    right: -100px;
-    animation: float-orb-2 10s ease-in-out infinite;
-  }
-}
-
-@keyframes float-orb-1 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(30px, 40px); }
-}
-
-@keyframes float-orb-2 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-20px, -30px); }
-}
-
-.accent-line {
-  position: absolute;
-  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.3), transparent);
-
-  &-1 {
-    width: 400px;
-    height: 1px;
-    top: 40%;
-    left: -50%;
-    animation: slide-line 6s ease-in-out infinite;
-  }
-}
-
-@keyframes slide-line {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
-}
-
 // Headline wrapper with animated underline
 .hero-headline-wrapper {
   position: relative;
@@ -311,68 +251,32 @@
   z-index: 1;
 }
 
-.headline-underline {
-  position: absolute;
-  bottom: -12px;
-  left: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #a78bfa 0%, #67e8f9 50%, #a78bfa 100%);
-  border-radius: 2px;
-  animation: underline-draw 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
-}
-
-@keyframes underline-draw {
-  0% {
-    width: 0;
-    opacity: 0;
-  }
-  100% {
-    width: 280px;
-    opacity: 1;
-  }
-}
-
-// Headline
+// Headline — sized to fit the split column without overflowing the fold
 .hero-title {
   font-family: var(--font-display);
-  font-size: var(--h1-size);
+  font-size: clamp(2.25rem, 3.2vw, 3.4rem);
   font-weight: var(--h1-weight);
-  line-height: var(--h1-line);
+  line-height: 1.08;
   color: var(--text-primary);
   margin: 0;
   letter-spacing: var(--h1-letter);
   text-wrap: balance;
 
-  // Masked line-by-line rise (300–900ms of the hero load sequence)
   .hero-line {
     display: block;
-    overflow: hidden;
-    padding-bottom: 0.08em; // keep descenders inside the mask
-    margin-bottom: -0.08em;
   }
-
-  .hero-line-inner {
-    display: inline-block;
-    transform: translateY(110%);
-    animation: heroLineRise 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .hero-line:nth-child(1) .hero-line-inner { animation-delay: 0.3s; }
-  .hero-line:nth-child(2) .hero-line-inner:not(.gradient-text) { animation-delay: 0.45s; }
 
   .gradient-text {
     background: linear-gradient(135deg, #c4b5fd 0%, #67e8f9 45%, #a78bfa 100%);
-    background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    // One pass on load, then hold — no perpetual shimmer
-    animation: heroLineRise 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards,
-      gradientShift 1.8s ease 0.9s 1 both;
 
     // Light mode: darker gradient for white background (min 4.5:1 contrast)
     @media (prefers-color-scheme: light) {
       background: linear-gradient(135deg, #7c3aed 0%, #0891b2 45%, #6d28d9 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
     }
   }
 }
@@ -680,201 +584,105 @@
   }
 }
 
-// ── Right Column – Interactive Component Showcase ────────
+// ── Right Column – Profile portrait ──────────────────────
 .hero-visual {
   display: flex;
   justify-content: center;
   align-items: center;
   animation: fadeSlideUp 0.65s ease 0.2s both;
   position: relative;
-  height: 400px;
-  min-height: 300px;
 }
 
-.component-showcase {
+.hero-photo {
   position: relative;
+  margin: 0 0 0 auto;
   width: 100%;
-  max-width: 500px;
-  height: 100%;
-  perspective: 1200px;
+  max-width: 400px;
+  max-height: 74vh;
+  aspect-ratio: 3 / 4;
 }
 
-// Animated gradient mesh background
-.mesh-bg {
+// Soft accent glow behind the frame (single, calm)
+.hero-photo-glow {
   position: absolute;
-  inset: -20%;
-  background: linear-gradient(
-    135deg,
-    rgba(124, 58, 237, 0.08) 0%,
-    rgba(6, 182, 212, 0.06) 50%,
-    rgba(124, 58, 237, 0.05) 100%
+  inset: -8%;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    rgba(124, 58, 237, 0.28) 0%,
+    rgba(6, 182, 212, 0.14) 45%,
+    transparent 72%
   );
-  border-radius: 50%;
-  animation: meshFloat 8s ease-in-out infinite;
-  filter: blur(40px);
+  filter: blur(48px);
   pointer-events: none;
 }
 
-@keyframes meshFloat {
-  0%, 100% { transform: scale(1) translateY(0); }
-  50% { transform: scale(1.1) translateY(20px); }
+// Framed portrait with gradient border
+.hero-photo-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-lg, 20px);
+  overflow: hidden;
+  padding: 1px;
+  background: linear-gradient(155deg, rgba(167, 139, 250, 0.55), rgba(6, 182, 212, 0.35) 45%, rgba(255, 255, 255, 0.06) 100%);
+  box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.65);
+  transition: transform var(--transition), box-shadow var(--transition);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    // subtle inner ink gradient to blend photo with the dark UI
+    background: linear-gradient(180deg, transparent 55%, rgba(13, 17, 23, 0.55) 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
 }
 
-// Floating showcase cards
-.showcase-card {
+.hero-photo-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--radius-lg, 20px) - 1px);
+}
+
+.hero-photo:hover .hero-photo-frame {
+  transform: translateY(-4px);
+  box-shadow: 0 40px 90px -24px rgba(124, 58, 237, 0.45);
+}
+
+// Floating status chip
+.hero-photo-chip {
   position: absolute;
-  padding: 20px 24px;
-  background: rgba(22, 27, 34, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 2;
-
-  &:hover {
-    border-color: rgba(124, 58, 237, 0.3);
-    background: rgba(22, 27, 34, 0.8);
-    transform: translateY(-8px);
-    box-shadow: 0 16px 48px rgba(124, 58, 237, 0.15);
-  }
-
-  .card-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #a78bfa;
-    margin-bottom: 12px;
-  }
-
-  .card-content {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-}
-
-// Card 1 – Components (top left) — entry animation only
-.card-1 {
-  top: 0;
-  left: -20px;
-  width: 200px;
-  animation: floatCard1 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes floatCard1 {
-  0% { opacity: 0; transform: translate(-40px, 40px) rotateZ(-5deg); }
-  100% { opacity: 1; transform: translate(0, 0) rotateZ(-5deg); }
-}
-
-// Card 2 – Tokens (center right) — entry animation only
-.card-2 {
-  top: 50%;
-  right: -30px;
-  width: 180px;
-  transform: translateY(-50%);
-  animation: floatCard2 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes floatCard2 {
-  0% { opacity: 0; transform: translateY(-50%) translate(50px, -30px) rotateZ(4deg); }
-  100% { opacity: 1; transform: translateY(-50%) translate(0, 0) rotateZ(4deg); }
-}
-
-// Card 3 – System (bottom center) — entry animation only
-.card-3 {
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 160px;
-  animation: floatCard3 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes floatCard3 {
-  0% { opacity: 0; transform: translateX(-50%) translate(0, 50px) rotateZ(2deg); }
-  100% { opacity: 1; transform: translateX(-50%) translate(0, 0) rotateZ(2deg); }
-}
-
-// Badge group styling
-.badge-group {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.mini-badge {
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 500;
-  background: rgba(99, 102, 241, 0.1);
-  color: #a1a1aa;
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: rgba(99, 102, 241, 0.15);
-    border-color: rgba(99, 102, 241, 0.3);
-  }
-
-  &.accent {
-    background: rgba(124, 58, 237, 0.15);
-    color: #a78bfa;
-    border-color: rgba(124, 58, 237, 0.3);
-  }
-
-  &.success {
-    background: rgba(16, 185, 129, 0.1);
-    color: #86efac;
-    border-color: rgba(16, 185, 129, 0.2);
-  }
-}
-
-// Token grid
-.token-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.token-item {
-  display: flex;
+  z-index: 3;
+  left: -14px;
+  bottom: 26px;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  color: #9b9baf;
-
-  .token-color {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-
-    &.accent { background: #7c3aed; }
-    &.success { background: #3dd6c3; }
-  }
+  gap: 9px;
+  padding: 10px 16px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: rgba(22, 27, 34, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  animation: fadeSlideUp 0.6s ease 1s both;
 }
 
-// System stat
-.system-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  text-align: center;
-
-  .stat-value {
-    font-size: 24px;
-    font-weight: 600;
-    color: #a78bfa;
-  }
-
-  .stat-desc {
-    font-size: 10px;
-    color: #6b6b7f;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
+.hero-photo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2dd4bf;
+  box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.18);
+  animation: pulse-dot 2s ease-in-out infinite;
 }
 
 // Scroll cue — thin line that draws downward, with a pause
@@ -921,7 +729,8 @@
 
   .hero-badge, .hero-actions, .hero-stack { justify-content: center; }
   .hero-desc { max-width: 100%; }
-  .hero-visual { justify-content: center; }
+  .hero-visual { justify-content: center; order: -1; }
+  .hero-photo { max-width: 340px; }
   .hero-stats { justify-content: center; }
 
   .hero-headline-wrapper {
@@ -957,6 +766,9 @@
 
 @media (max-width: 600px) {
   .hero { padding: 100px 0 70px; }
+
+  .hero-photo { max-width: 280px; }
+  .hero-photo-chip { left: 50%; transform: translateX(-50%); bottom: -14px; }
 
   .hero-stats {
     flex-wrap: wrap;

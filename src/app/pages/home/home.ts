@@ -6,6 +6,7 @@ import { PortfolioDataService } from '../../shared/services/portfolio-data.servi
 import { ContactService } from '../../shared/services/contact.service';
 import { ToastService } from '../../shared/services/toast.service';
 import { GsapService } from '../../shared/services/gsap.service';
+import { environment } from '../../../environments/environment';
 import {
   AuroraBackgroundDirective,
   MouseFollowGlowDirective,
@@ -95,23 +96,9 @@ export class Home implements OnDestroy {
       await this.gsapService.init();
       if (!this.gsapService.isLoaded) return;
 
-      // Hero section timeline
-      const heroTl = this.gsapService.createTimeline({
-        trigger: '.hero',
-        start: 'top top',
-        toggleActions: 'play none none none'
-      });
-
-      if (heroTl) {
-        heroTl
-          .from('.hero-badge', { y: 20, opacity: 0, duration: 0.6 })
-          .from('.hero-title', { y: 30, opacity: 0, duration: 0.8 }, '-=0.3')
-          .from('.hero-desc', { y: 20, opacity: 0, duration: 0.6 }, '-=0.4')
-          .from('.hero-actions', { y: 20, opacity: 0, duration: 0.6 }, '-=0.3')
-          .from('.hero-stack', { y: 20, opacity: 0, duration: 0.6 }, '-=0.3')
-          .from('.hero-stats .stat-card', { y: 20, opacity: 0, duration: 0.5, stagger: 0.1 }, '-=0.3')
-          .from('.hero-visual', { x: 40, opacity: 0, duration: 0.8 }, '-=0.8');
-      }
+      // Hero entrance is handled by self-contained CSS animations
+      // (animate-fade-in-*) so content is never left hidden if JS/GSAP is
+      // delayed. GSAP only drives scroll-triggered effects below.
 
       // Experience timeline draw
       this.gsapService.gsap?.from('.timeline-line', {
@@ -137,7 +124,9 @@ export class Home implements OnDestroy {
 
     } catch (e) {
       // GSAP init failed — animations degrade gracefully via CSS
-      console.warn('GSAP initialization failed, falling back to CSS animations', e);
+      if (!environment.production) {
+        console.warn('GSAP initialization failed, falling back to CSS animations', e);
+      }
     }
   }
 

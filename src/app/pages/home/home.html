@@ -13,24 +13,12 @@
           <span>{{ pds.hero()?.badge }}</span>
         </div>
 
-        <!-- Animated Accent Shapes Background -->
-        <div class="hero-accent-shapes">
-          <div class="accent-orb accent-orb-1"></div>
-          <div class="accent-line accent-line-1"></div>
-          <div class="accent-orb accent-orb-2"></div>
-        </div>
-
-        <!-- Headline with Typing Animation & Underline -->
+        <!-- Headline -->
         <div class="hero-headline-wrapper">
-          <h1 class="hero-title" id="hero-title" appTypewriter [typeSpeedMs]="32" [typeStartDelayMs]="400">
-            <span class="hero-line">
-              <span class="hero-line-inner">{{ pds.hero()?.headline }}</span>
-            </span>
-            <span class="hero-line">
-              <span class="hero-line-inner gradient-text">{{ pds.hero()?.headlineAccent }}</span>
-            </span>
+          <h1 class="hero-title animate-fade-in-up" id="hero-title">
+            <span class="hero-line">{{ pds.hero()?.headline }}</span>
+            <span class="hero-line gradient-text">{{ pds.hero()?.headlineAccent }}</span>
           </h1>
-          <div class="headline-underline"></div>
         </div>
 
         <!-- Premium Description -->
@@ -75,50 +63,27 @@
         </div>
       </div>
 
-      <!-- RIGHT COLUMN – Interactive Component Showcase -->
+      <!-- RIGHT COLUMN – Profile portrait -->
       <div class="hero-visual animate-fade-in-scale" [style.animation-delay]="'0.2s'">
-        <div class="component-showcase">
-          <!-- Floating component cards -->
-          <div class="showcase-card card-1">
-            <div class="card-label">Components</div>
-            <div class="card-content">
-              <div class="badge-group">
-                <span class="mini-badge accent">Button</span>
-                <span class="mini-badge success">Card</span>
-                <span class="mini-badge">Badge</span>
-              </div>
-            </div>
+        <figure class="hero-photo">
+          <div class="hero-photo-glow" aria-hidden="true"></div>
+          <div class="hero-photo-frame">
+            <img
+              [src]="pds.hero()?.portrait || pds.meta()?.profileImage || '/profile.webp'"
+              [alt]="pds.meta()?.name + ' — ' + pds.meta()?.role"
+              class="hero-photo-img"
+              width="1080"
+              height="1440"
+              fetchpriority="high"
+              decoding="async" />
           </div>
 
-          <div class="showcase-card card-2">
-            <div class="card-label">Tokens</div>
-            <div class="card-content">
-              <div class="token-grid">
-                <div class="token-item">
-                  <div class="token-color accent"></div>
-                  <span>Violet 400</span>
-                </div>
-                <div class="token-item">
-                  <div class="token-color success"></div>
-                  <span>Teal 400</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="showcase-card card-3">
-            <div class="card-label">System</div>
-            <div class="card-content">
-              <div class="system-stat">
-                <span class="stat-value">15</span>
-                <span class="stat-desc">Components</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Gradient mesh background element -->
-          <div class="mesh-bg"></div>
-        </div>
+          <!-- Floating status chip -->
+          <figcaption class="hero-photo-chip">
+            <span class="hero-photo-dot"></span>
+            <span>Available for work</span>
+          </figcaption>
+        </figure>
       </div>
     </div>
 
@@ -140,17 +105,11 @@
         <div class="photo-card hover-lift" appScrollTrigger>
           <div class="photo-wrapper">
             <img
-              srcset="
-                /profile-480w.webp 480w,
-                /profile-768w.webp 768w,
-                /profile-1200w.webp 1200w
-              "
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1200px"
-              [src]="pds.meta()?.profileImage"
+              [src]="pds.meta()?.aboutImage || pds.meta()?.profileImage"
               [alt]="pds.meta()?.name"
               class="profile-img"
-              width="1200"
-              height="1600"
+              width="1080"
+              height="1440"
               loading="lazy"
               decoding="async" />
             <div class="photo-overlay"></div>

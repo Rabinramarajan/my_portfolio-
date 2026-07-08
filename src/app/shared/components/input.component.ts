@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IconComponent } from './icon.component';
 
+let inputIdCounter = 0;
+
 type InputType = 'text' | 'email' | 'password' | 'number' | 'url' | 'tel' | 'date';
 type InputState = 'default' | 'focus' | 'error' | 'success';
 
@@ -136,7 +138,7 @@ type InputState = 'default' | 'focus' | 'error' | 'success';
   ],
 })
 export class InputComponent implements ControlValueAccessor {
-  @Input() id: string = 'input-' + Math.random().toString(36).substr(2, 9);
+  @Input() id: string = `input-${++inputIdCounter}`;
   @Input() type: InputType = 'text';
   @Input() label: string = '';
   @Input() placeholder: string = '';

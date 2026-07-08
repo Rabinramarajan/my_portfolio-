@@ -1,13 +1,12 @@
 // Animation components
-export { ParticleNetworkComponent } from './particle-network.component';
 export { ScrollProgressComponent } from './scroll-progress.component';
-export { CustomCursorComponent } from './terminal-cursor.component';
-export { TerminalIntroComponent } from './terminal-cursor.component';
+// Note: ParticleNetworkComponent, CustomCursorComponent, and TerminalIntroComponent
+// are kept in the codebase but not exported as they're not currently used in the application.
 
 // Icons & Utilities
 export { ArrowIconComponent } from './arrow-icon.component';
-export { IconSvgComponent } from './icon-svg.component';
-export { PictureComponent } from './picture.component';
+// Note: IconSvgComponent and PictureComponent are kept in the codebase but not exported
+// as they're not currently used in the application.
 
 // Widget components
 export { BackToTopComponent } from './back-to-top/back-to-top.component';
@@ -21,15 +20,14 @@ export { ButtonComponent } from './button.component';
 export { CardComponent } from './card.component';
 export { BadgeComponent } from './badge.component';
 export { InputComponent, TextareaComponent } from './input.component';
-export { NavComponent, type NavItem } from './nav.component';
-export { DialogComponent } from './dialog.component';
+// Note: NavComponent is kept in the codebase but not exported as it's not currently used.
+// export { NavComponent, type NavItem } from './nav.component';
+// Note: DialogComponent, TooltipComponent, TableComponent, and DrawerComponent
+// are kept in the codebase but not exported as they're not currently used.
 export { TabsComponent, TabPanelComponent, type TabItem } from './tabs.component';
-export { TooltipComponent } from './tooltip.component';
-export { TableComponent, TableRowComponent, TableCellComponent, type TableColumn } from './table.component';
-export { ToastComponent } from './toast.component';
+export { ToastComponent } from './toast/toast.component';
 export { SkeletonComponent } from './skeleton.component';
 export { SectionShellComponent } from './section-shell.component';
 export { TimelineItemComponent, StatTileComponent } from './timeline-stat.component';
-export { DrawerComponent } from './drawer.component';
 export { TestimonialsComponent } from './testimonials.component';
 export { OpenSourceComponent } from './open-source.component';

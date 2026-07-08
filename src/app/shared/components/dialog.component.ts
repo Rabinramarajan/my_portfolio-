@@ -2,6 +2,8 @@ import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from './icon.component';
 
+let dialogIdCounter = 0;
+
 @Component({
   selector: 'app-dialog',
   standalone: true,
@@ -124,7 +126,7 @@ export class DialogComponent {
   @Input() isOpen = signal(false);
   @Output() closed = new EventEmitter<void>();
 
-  titleId = 'dialog-' + Math.random().toString(36).substr(2, 9);
+  titleId = `dialog-${++dialogIdCounter}`;
 
   close() {
     this.isOpen.set(false);
