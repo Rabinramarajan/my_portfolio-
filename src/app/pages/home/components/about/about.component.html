@@ -1,0 +1,92 @@
+<section class="about" id="about" aria-labelledby="about-title" appGridBackground>
+  <div class="about-container" appScrollTrigger>
+    <div class="section-label animate-fade-in-up">{{ pds.about()?.sectionLabel }}</div>
+    <h2 class="about-title animate-fade-in-up" id="about-title" [style.animation-delay]="'0.1s'">{{ pds.about()?.title }}</h2>
+    <p class="about-intro animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.about()?.intro }}</p>
+
+    <div class="about-grid">
+      <!-- LEFT — Photo card -->
+      <div class="photo-card hover-lift" appScrollTrigger>
+        <div class="photo-wrapper">
+          <img
+            [src]="pds.meta()?.aboutImage || pds.meta()?.profileImage"
+            [alt]="pds.meta()?.name"
+            class="profile-img"
+            width="1080"
+            height="1440"
+            loading="lazy"
+            decoding="async" />
+          <div class="photo-overlay"></div>
+
+          <div class="photo-glass-footer">
+            <div class="photo-info">
+              <span class="photo-name">{{ pds.meta()?.name }}</span>
+              <span class="photo-role">{{ pds.meta()?.role }}</span>
+            </div>
+            <span class="open-badge animate-glow-pulse">
+              <span class="open-dot"></span>
+              {{ pds.about()?.openBadge }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT — Bio + cards -->
+      <div class="about-right" appScrollTrigger>
+        <div class="bio-card">
+          <div class="bio-content" appStagger>
+            @for (para of pds.about()?.bio; track $index) {
+            <p class="bio-text animate-fade-in-up">{{ para }}</p>
+            }
+          </div>
+        </div>
+
+        <div class="info-grid" appStagger>
+          @for (card of pds.about()?.infoCards; track card.label) {
+          <div class="info-card hover-glow animate-fade-in-up">
+            <div class="info-header">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-indigo)"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                @switch (card.icon) {
+                @case ('map-pin') {
+                <path
+                  d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                <circle cx="12" cy="10" r="3" />
+                }
+                @case ('briefcase') {
+                <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                <rect width="20" height="14" x="2" y="6" rx="2" />
+                }
+                @case ('layers') {
+                <path
+                  d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
+                <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
+                <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
+                }
+                @case ('target') {
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="6" />
+                <circle cx="12" cy="12" r="2" />
+                }
+                @default {
+                <circle cx="12" cy="12" r="10" />
+                }
+                }
+              </svg>
+              <span class="info-label">{{ card.label }}</span>
+            </div>
+            <div class="info-value-wrap">
+              <strong class="info-value">{{ card.value }}</strong>
+            </div>
+          </div>
+          }
+        </div>
+
+        <!-- Resume CTA -->
+        <div class="about-resume-cta animate-fade-in-up" [style.animation-delay]="'0.3s'">
+          <app-resume-button></app-resume-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

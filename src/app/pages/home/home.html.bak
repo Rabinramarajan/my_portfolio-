@@ -3,311 +3,16 @@
 
 <main id="main-content" role="main" tabindex="-1">
   <!-- ===== HERO SECTION ===== -->
-  <section class="hero" id="home" aria-labelledby="hero-title" appAuroraBackground appMouseFollowGlow>
-    <div class="hero-container">
-      <!-- LEFT COLUMN -->
-      <div class="hero-content animate-fade-in-up" appScrollTrigger>
-        <!-- Availability Badge (Minimal) -->
-        <div class="hero-badge hero-badge-minimal animate-fade-in-scale">
-          <span class="badge-dot"></span>
-          <span>{{ pds.hero()?.badge }}</span>
-        </div>
-
-        <!-- Headline -->
-        <div class="hero-headline-wrapper">
-          <h1 class="hero-title animate-fade-in-up" id="hero-title">
-            <span class="hero-line">{{ pds.hero()?.headline }}</span>
-            <span class="hero-line gradient-text">{{ pds.hero()?.headlineAccent }}</span>
-          </h1>
-        </div>
-
-        <!-- Premium Description -->
-        <p class="hero-desc animate-fade-in-up">{{ pds.hero()?.description }}</p>
-
-        <!-- CTA Buttons (Premium Styling) -->
-        <div class="hero-actions hero-actions-premium" appStagger [staggerMs]="60" [staggerStartMs]="1200">
-          <a [href]="pds.hero()?.cta?.primary?.href" class="btn btn-primary btn-premium animate-fade-in-scale" appMagneticButton>
-            {{ pds.hero()?.cta?.primary?.label }}
-            <app-arrow-icon />
-          </a>
-          <a [href]="pds.hero()?.cta?.booking?.href" class="btn btn-outline btn-premium animate-fade-in-scale" appMagneticButton>
-            {{ pds.hero()?.cta?.booking?.label }}
-          </a>
-        </div>
-
-        <!-- Stack & Stats (Compact Premium Layout) -->
-        <div class="hero-bottom-section">
-          <!-- Stack Badges (Horizontal) -->
-          <div class="hero-stack hero-stack-horizontal">
-            <div class="stack-badges">
-              @for (tech of pds.hero()?.stack; track tech.name) {
-              <span class="stack-badge stack-badge-pill hover-scale">
-                <svg width="12" height="12" viewBox="0 0 24 24" [attr.fill]="tech.color" aria-hidden="true">
-                  <path [attr.d]="tech.iconPath" />
-                </svg>
-                <span class="tech-name">{{ tech.name }}</span>
-              </span>
-              }
-            </div>
-          </div>
-
-          <!-- Stats (Horizontal Divider) -->
-          <div class="hero-stats hero-stats-compact">
-            @for (stat of pds.hero()?.stats; track stat.label) {
-            <div class="stat-item">
-              <span class="stat-number">{{ stat.number }}</span>
-              <span class="stat-label">{{ stat.label }}</span>
-            </div>
-            }
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT COLUMN – Profile portrait -->
-      <div class="hero-visual animate-fade-in-scale" [style.animation-delay]="'0.2s'">
-        <figure class="hero-photo">
-          <div class="hero-photo-glow" aria-hidden="true"></div>
-          <div class="hero-photo-frame">
-            <img
-              [src]="pds.hero()?.portrait || pds.meta()?.profileImage || '/profile.webp'"
-              [alt]="pds.meta()?.name + ' — ' + pds.meta()?.role"
-              class="hero-photo-img"
-              width="1080"
-              height="1440"
-              fetchpriority="high"
-              decoding="async" />
-          </div>
-
-          <!-- Floating status chip -->
-          <figcaption class="hero-photo-chip">
-            <span class="hero-photo-dot"></span>
-            <span>Available for work</span>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <!-- Scroll cue -->
-    <div class="hero-scroll-cue" aria-hidden="true">
-      <span class="cue-line"></span>
-    </div>
-  </section>
+  <app-hero></app-hero>
 
   <!-- ===== ABOUT SECTION ===== -->
-  <section class="about" id="about" aria-labelledby="about-title" appGridBackground>
-    <div class="about-container" appScrollTrigger>
-      <div class="section-label animate-fade-in-up">{{ pds.about()?.sectionLabel }}</div>
-      <h2 class="about-title animate-fade-in-up" id="about-title" [style.animation-delay]="'0.1s'">{{ pds.about()?.title }}</h2>
-      <p class="about-intro animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.about()?.intro }}</p>
-
-      <div class="about-grid">
-        <!-- LEFT — Photo card -->
-        <div class="photo-card hover-lift" appScrollTrigger>
-          <div class="photo-wrapper">
-            <img
-              [src]="pds.meta()?.aboutImage || pds.meta()?.profileImage"
-              [alt]="pds.meta()?.name"
-              class="profile-img"
-              width="1080"
-              height="1440"
-              loading="lazy"
-              decoding="async" />
-            <div class="photo-overlay"></div>
-
-            <div class="photo-glass-footer">
-              <div class="photo-info">
-                <span class="photo-name">{{ pds.meta()?.name }}</span>
-                <span class="photo-role">{{ pds.meta()?.role }}</span>
-              </div>
-              <span class="open-badge animate-glow-pulse">
-                <span class="open-dot"></span>
-                {{ pds.about()?.openBadge }}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- RIGHT — Bio + cards -->
-        <div class="about-right" appScrollTrigger>
-          <div class="bio-card">
-            <div class="bio-content" appStagger>
-              @for (para of pds.about()?.bio; track $index) {
-              <p class="bio-text animate-fade-in-up">{{ para }}</p>
-              }
-            </div>
-          </div>
-
-          <div class="info-grid" appStagger>
-            @for (card of pds.about()?.infoCards; track card.label) {
-            <div class="info-card hover-glow animate-fade-in-up">
-              <div class="info-header">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-indigo)"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  @switch (card.icon) {
-                  @case ('map-pin') {
-                  <path
-                    d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
-                  <circle cx="12" cy="10" r="3" />
-                  }
-                  @case ('briefcase') {
-                  <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                  <rect width="20" height="14" x="2" y="6" rx="2" />
-                  }
-                  @case ('layers') {
-                  <path
-                    d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
-                  <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
-                  <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
-                  }
-                  @case ('target') {
-                  <circle cx="12" cy="12" r="10" />
-                  <circle cx="12" cy="12" r="6" />
-                  <circle cx="12" cy="12" r="2" />
-                  }
-                  @default {
-                  <circle cx="12" cy="12" r="10" />
-                  }
-                  }
-                </svg>
-                <span class="info-label">{{ card.label }}</span>
-              </div>
-              <div class="info-value-wrap">
-                <strong class="info-value">{{ card.value }}</strong>
-              </div>
-            </div>
-            }
-          </div>
-
-          <!-- Resume CTA -->
-          <div class="about-resume-cta animate-fade-in-up" [style.animation-delay]="'0.3s'">
-            <app-resume-button></app-resume-button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <app-about></app-about>
 
   <!-- ===== EXPERIENCE SECTION ===== -->
-  <section class="experience" id="experience" aria-labelledby="experience-title" appScrollTrigger>
-    <div class="exp-container">
-      <div class="section-label animate-fade-in-up">{{ pds.experience()?.sectionLabel }}</div>
-      <h2 class="exp-title animate-fade-in-up" id="experience-title" [style.animation-delay]="'0.1s'">{{ pds.experience()?.title }}</h2>
-      <p class="exp-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.experience()?.subtitle }}</p>
-
-      <div class="timeline">
-        <div class="timeline-line"></div>
-
-        @for (job of pds.experience()?.jobs; track job.company) {
-        <div class="timeline-item animate-fade-in-up" [style.animation-delay]="($index * 0.1) + 's'" appScrollTrigger>
-          <div class="timeline-dot">
-            <span class="dot-inner"></span>
-          </div>
-
-          <div class="exp-card hover-lift">
-            <div class="exp-card-header">
-              <div class="exp-meta">
-                <div class="exp-company">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2">
-                    <rect x="2" y="7" width="20" height="14" rx="2" />
-                    <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-                  </svg>
-                  <span class="company-name">{{ job.company }}</span>
-                  <span class="company-sep">·</span>
-                  <span class="company-location">{{ job.location }}</span>
-                </div>
-                <h3 class="exp-role">{{ job.role }}</h3>
-              </div>
-              <div class="exp-duration">{{ job.duration }}</div>
-            </div>
-
-            <ul class="exp-achievements">
-              @for (item of job.achievements; track $index) {
-              <li>
-                <svg class="check-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2.5">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                {{ item }}
-              </li>
-              }
-            </ul>
-
-            <div class="exp-tags">
-              @for (tag of job.tags; track tag) {
-              <span class="exp-tag hover-scale">{{ tag }}</span>
-              }
-            </div>
-          </div>
-        </div>
-        }
-      </div>
-    </div>
-  </section>
+  <app-experience></app-experience>
 
   <!-- ===== SKILLS & TECHNOLOGIES SECTION ===== -->
-  <section class="skills" id="skills" aria-labelledby="skills-title" appScrollTrigger>
-    <div class="skills-container">
-      <div class="section-label animate-fade-in-up">{{ pds.skills()?.sectionLabel }}</div>
-      <h2 class="skills-title animate-fade-in-up" id="skills-title" [style.animation-delay]="'0.1s'">{{ pds.skills()?.title }}</h2>
-      <p class="skills-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.skills()?.subtitle }}</p>
-
-      <div class="skills-grid">
-        @for (cat of pds.skills()?.categories; track cat.name) {
-        <div class="skill-card hover-lift animate-fade-in-scale" [style.animation-delay]="($index * 0.08) + 's'">
-          <div class="skill-card-header">
-            <div class="skill-cat-icon" [class]="'skill-cat-icon--' + (cat.icon || 'frontend')">
-              @if (cat.icon === 'frontend') {
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="16 18 22 12 16 6" />
-                <polyline points="8 6 2 12 8 18" />
-              </svg>
-              } @else if (cat.icon === 'framework') {
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                <path d="M2 17l10 5 10-5" />
-                <path d="M2 12l10 5 10-5" />
-              </svg>
-              } @else if (cat.icon === 'ui') {
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="3" width="20" height="14" rx="2" />
-                <path d="M8 21h8M12 17v4" />
-              </svg>
-              } @else if (cat.icon === 'arch') {
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-              </svg>
-              } @else if (cat.icon === 'api') {
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 20V10M12 20V4M6 20v-6" />
-              </svg>
-              } @else if (cat.icon === 'tools') {
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path
-                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-              </svg>
-              } @else {
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="3" width="20" height="14" rx="2" />
-                <circle cx="12" cy="17" r="1" />
-              </svg>
-              }
-            </div>
-            <div class="skill-cat-info">
-              <span class="skill-cat-name">{{ cat.name }}</span>
-              <span class="skill-cat-count">{{ cat.items.length }} {{ cat.items.length === 1 ? 'skill' : 'skills'
-                }}</span>
-            </div>
-          </div>
-          <ul class="skill-list">
-            @for (item of cat.items; track item) {
-            <li class="skill-row hover-scale"><span class="skill-name">{{ item }}</span></li>
-            }
-          </ul>
-        </div>
-        }
-      </div>
-    </div>
-  </section>
+  <app-skills></app-skills>
 
   <!-- ===== FEATURED PROJECTS SECTION ===== -->
   <section class="projects" id="projects" aria-labelledby="projects-title" appScrollTrigger>
@@ -549,7 +254,78 @@
 
   <!-- ===== RESUME SECTION ===== -->
   @defer (on viewport; prefetch on idle) {
-    <app-resume></app-resume>
+  <section class="resume-section" id="resume" aria-labelledby="resume-title">
+    <div class="resume-container">
+      <div class="resume-header">
+        <div class="section-label">{{ pds.resume()?.sectionLabel }}</div>
+        <h2 class="resume-title" id="resume-title">{{ pds.resume()?.title }}</h2>
+        <p class="resume-subtitle">{{ pds.resume()?.subtitle }}</p>
+      </div>
+
+      <div class="resume-card">
+        <div class="resume-card-left">
+          <div class="avail-badge">
+            <span class="avail-dot"></span>
+            {{ pds.resume()?.availBadge }}
+          </div>
+          <h3 class="resume-name">{{ pds.resume()?.cardTitle }}</h3>
+          <p class="resume-bio">{{ pds.resume()?.cardBio }}</p>
+          <div class="resume-actions">
+            <a [href]="pds.meta()?.resumePdf" download class="resume-btn resume-btn--primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              {{ pds.resume()?.downloadLabel }}
+            </a>
+            <a [href]="pds.meta()?.resumePdf" target="_blank" class="resume-btn resume-btn--outline">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+              {{ pds.resume()?.viewLabel }}
+            </a>
+          </div>
+        </div>
+
+        <!-- Right — PDF mockup -->
+        <div class="resume-card-right">
+          <div class="pdf-mockup">
+            <div class="pdf-topbar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.5">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+              <span class="pdf-label">.PDF</span>
+            </div>
+            <div class="pdf-content">
+              <div class="pdf-line pdf-line--title"></div>
+              <div class="pdf-line pdf-line--subtitle"></div>
+              <div class="pdf-spacer"></div>
+              <div class="pdf-line pdf-line--full"></div>
+              <div class="pdf-line pdf-line--full"></div>
+              <div class="pdf-line pdf-line--med"></div>
+              <div class="pdf-spacer"></div>
+              <div class="pdf-line pdf-line--accent pdf-line--long"></div>
+              <div class="pdf-line pdf-line--accent pdf-line--med"></div>
+              <div class="pdf-line pdf-line--accent pdf-line--short"></div>
+              <div class="pdf-spacer"></div>
+              <div class="pdf-line pdf-line--full"></div>
+              <div class="pdf-line pdf-line--med"></div>
+            </div>
+          </div>
+          <div class="pdf-updated">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="18 15 12 9 6 15" />
+            </svg>
+            {{ pds.resume()?.updatedLabel }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   } @placeholder {
     <section class="resume-section resume-placeholder" aria-label="Resume section loading">
       <div class="resume-container">
@@ -686,7 +462,221 @@
 
   <!-- ===== COMPONENT PLAYGROUND SECTION ===== -->
   @defer (on viewport; prefetch on idle) {
-    <app-playground></app-playground>
+  <section class="playground-section" id="components" aria-labelledby="components-title" appScrollTrigger>
+    <div class="proj-container">
+      <div class="section-label animate-fade-in-up">COMPONENT LIBRARY</div>
+      <h2 class="proj-title animate-fade-in-up" [style.animation-delay]="'0.1s'">UI Components</h2>
+      <p class="proj-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">Interactive showcase of production-grade Angular components with glassmorphism design, full accessibility, and dark mode support.</p>
+
+      <!-- Tabs for different component categories -->
+      <div class="playground-tabs animate-fade-in-up" [style.animation-delay]="'0.3s'">
+        @for (tab of playgroundTabs; track tab.id) {
+        <button
+          class="playground-tab"
+          [class.active]="activePlaygroundTab() === tab.id"
+          (click)="setActivePlaygroundTab(tab.id)"
+          type="button">
+          {{ tab.label }}
+        </button>
+        }
+      </div>
+
+      <!-- Tab Content: Buttons -->
+      @if (activePlaygroundTab() === 'buttons') {
+      <div class="playground-content animate-fade-in-up">
+        <div class="component-showcase">
+          <div class="showcase-group">
+            <h4 class="showcase-title">Button Variants</h4>
+            <div class="showcase-grid">
+              <button class="btn btn-primary" type="button">Primary Button</button>
+              <button class="btn btn-secondary" type="button">Secondary</button>
+              <button class="btn btn-outline" type="button">Outline</button>
+              <button class="btn btn-ghost" type="button">Ghost</button>
+            </div>
+          </div>
+
+          <div class="showcase-group">
+            <h4 class="showcase-title">Button States</h4>
+            <div class="showcase-grid">
+              <button class="btn btn-primary" type="button">Normal</button>
+              <button class="btn btn-primary" disabled type="button">Disabled</button>
+              <button class="btn btn-primary loading" type="button">
+                <span class="spinner"></span>
+                Loading...
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- Tab Content: Cards & Badges -->
+      @if (activePlaygroundTab() === 'cards') {
+      <div class="playground-content animate-fade-in-up">
+        <div class="component-showcase">
+          <div class="showcase-group">
+            <h4 class="showcase-title">Cards</h4>
+            <div class="showcase-cards-grid">
+              <div class="showcase-card">
+                <div class="card-header">
+                  <h5 class="card-title">Component Card</h5>
+                  <span class="badge badge-success">Live</span>
+                </div>
+                <p class="card-desc">Production-ready Angular component with full TypeScript support.</p>
+                <div class="card-footer">
+                  <a href="#" class="card-link">View Docs <app-arrow-icon /></a>
+                </div>
+              </div>
+
+              <div class="showcase-card">
+                <div class="card-header">
+                  <h5 class="card-title">Accessible</h5>
+                  <span class="badge badge-info">WCAG 2.1 AA</span>
+                </div>
+                <p class="card-desc">Full keyboard navigation and screen reader support built-in.</p>
+                <div class="card-footer">
+                  <a href="#" class="card-link">Learn More <app-arrow-icon /></a>
+                </div>
+              </div>
+
+              <div class="showcase-card">
+                <div class="card-header">
+                  <h5 class="card-title">Themeable</h5>
+                  <span class="badge badge-accent">Tokens</span>
+                </div>
+                <p class="card-desc">CSS custom properties for complete design system customization.</p>
+                <div class="card-footer">
+                  <a href="#" class="card-link">Customize <app-arrow-icon /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="showcase-group">
+            <h4 class="showcase-title">Badge Variants</h4>
+            <div class="showcase-grid">
+              <span class="badge badge-success">Success</span>
+              <span class="badge badge-warning">Warning</span>
+              <span class="badge badge-danger">Danger</span>
+              <span class="badge badge-info">Info</span>
+              <span class="badge badge-accent">Accent</span>
+              <span class="badge badge-default">Default</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- Tab Content: Forms -->
+      @if (activePlaygroundTab() === 'forms') {
+      <div class="playground-content animate-fade-in-up">
+        <div class="component-showcase">
+          <div class="showcase-group">
+            <h4 class="showcase-title">Input Fields</h4>
+            <div class="showcase-forms">
+              <div class="form-group">
+                <label class="form-label-demo">Default Input</label>
+                <input type="text" placeholder="Type something..." class="form-input-demo" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label-demo">With Error</label>
+                <input type="email" placeholder="email@example.com" class="form-input-demo form-input-error" />
+                <span class="form-error">Invalid email format</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label-demo">Textarea</label>
+                <textarea placeholder="Enter your message..." class="form-textarea-demo"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- Tab Content: Colors & Tokens -->
+      @if (activePlaygroundTab() === 'tokens') {
+      <div class="playground-content animate-fade-in-up">
+        <div class="component-showcase">
+          <div class="showcase-group">
+            <h4 class="showcase-title">Color Tokens</h4>
+            <div class="tokens-grid">
+              <div class="token-swatch">
+                <div class="swatch" style="background: #7c3aed;"></div>
+                <div class="token-label">Primary</div>
+                <div class="token-value">#7c3aed</div>
+              </div>
+
+              <div class="token-swatch">
+                <div class="swatch" style="background: #06b6d4;"></div>
+                <div class="token-label">Accent</div>
+                <div class="token-value">#06b6d4</div>
+              </div>
+
+              <div class="token-swatch">
+                <div class="swatch" style="background: #10b981;"></div>
+                <div class="token-label">Success</div>
+                <div class="token-value">#10b981</div>
+              </div>
+
+              <div class="token-swatch">
+                <div class="swatch" style="background: #f59e0b;"></div>
+                <div class="token-label">Warning</div>
+                <div class="token-value">#f59e0b</div>
+              </div>
+
+              <div class="token-swatch">
+                <div class="swatch" style="background: #ef4444;"></div>
+                <div class="token-label">Danger</div>
+                <div class="token-value">#ef4444</div>
+              </div>
+
+              <div class="token-swatch">
+                <div class="swatch" style="background: #6b7280;"></div>
+                <div class="token-label">Neutral</div>
+                <div class="token-value">#6b7280</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="showcase-group">
+            <h4 class="showcase-title">Typography Scale</h4>
+            <div class="typography-demo">
+              <div class="typo-item">
+                <div class="typo-label">Display</div>
+                <div class="typo-example" style="font-size: 2.25rem; font-weight: 800;">Rabin R</div>
+              </div>
+              <div class="typo-item">
+                <div class="typo-label">Heading</div>
+                <div class="typo-example" style="font-size: 1.875rem; font-weight: 700;">Component Library</div>
+              </div>
+              <div class="typo-item">
+                <div class="typo-label">Body</div>
+                <div class="typo-example" style="font-size: 1rem; font-weight: 400;">Production-grade components</div>
+              </div>
+              <div class="typo-item">
+                <div class="typo-label">Caption</div>
+                <div class="typo-example" style="font-size: 0.875rem; font-weight: 500;">Built with Angular 21+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- CTA to Design System Page -->
+      <div class="playground-cta animate-fade-in-up" [style.animation-delay]="'0.4s'">
+        <p>Explore the full design system with interactive documentation</p>
+        <a [routerLink]="['/design-system']" class="playground-cta-link">
+          Visit Design System
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
   } @placeholder {
     <section class="playground-section playground-placeholder" aria-label="Component playground loading">
       <div class="proj-container">

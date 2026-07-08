@@ -1,0 +1,236 @@
+<section class="projects" id="projects" aria-labelledby="projects-title" appScrollTrigger>
+  <div class="proj-container">
+    <div class="section-label animate-fade-in-up">{{ pds.projects()?.sectionLabel }}</div>
+    <h2 class="proj-title animate-fade-in-up" [style.animation-delay]="'0.1s'">{{ pds.projects()?.title }}</h2>
+    <p class="proj-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.projects()?.subtitle }}</p>
+
+    <!-- Featured full-width card -->
+    @if (pds.projects()?.featured; as feat) {
+    <div class="proj-featured animate-fade-in-up" appScrollTrigger>
+      <div class="proj-card--featured">
+        <!-- Image section with overlay effects -->
+        <div class="proj-featured-image">
+          <img [src]="feat.image" [alt]="feat.alt" class="proj-featured-img" width="1024" height="1024" loading="lazy"
+            decoding="async" />
+          <div class="proj-featured-overlay"></div>
+          <div class="proj-featured-gradient"></div>
+          <div class="proj-featured-badge">FEATURED</div>
+        </div>
+
+        <!-- Content section -->
+        <div class="proj-featured-content">
+          <div class="proj-featured-header">
+            <div class="proj-featured-meta">
+              <span class="proj-featured-type">Enterprise Project</span>
+              <h3 class="proj-featured-title">{{ feat.name }}</h3>
+            </div>
+            <div class="proj-featured-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M9 11h6M9 15h6" />
+              </svg>
+            </div>
+          </div>
+
+          <p class="proj-featured-desc">{{ feat.description }}</p>
+
+          <div class="proj-featured-highlights">
+            <div class="highlights-title">Key Highlights</div>
+            <p class="highlights-content">{{ feat.highlights }}</p>
+          </div>
+
+          <div class="proj-featured-footer">
+            <div class="proj-featured-tags">
+              @for (tag of feat.tags; track tag) {
+              <span class="proj-featured-tag">{{ tag }}</span>
+              }
+            </div>
+
+            <div class="proj-featured-cta">
+              @if (feat.slug) {
+              <a [routerLink]="['/projects', feat.slug]" class="proj-featured-btn proj-featured-btn--primary"
+                appMagneticButton>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                </svg>
+                Read Case Study
+              </a>
+              }
+              <a [href]="feat.link" target="_blank" rel="noopener noreferrer"
+                class="proj-featured-btn proj-featured-btn--secondary" appMagneticButton>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" />
+                </svg>
+                Explore Project
+              </a>
+              @if (feat.github) {
+              <a [href]="feat.github" target="_blank" class="proj-featured-btn proj-featured-btn--secondary"
+                appMagneticButton>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                View Code
+              </a>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+
+    <!-- Grid of enhanced project cards -->
+    @if (pds.projects()?.grid) {
+    <div class="proj-grid-enhanced">
+      @for (proj of pds.projects()?.grid; track proj.name; let idx = $index) {
+      <div class="proj-card-enhanced animate-fade-in-scale" [style.animation-delay]="(idx * 0.15) + 's'"
+        appScrollTrigger>
+        <!-- Card image with overlay -->
+        <div class="proj-card-enhanced-image">
+          <img [src]="proj.image" [alt]="proj.alt" class="proj-card-enhanced-img" width="1024" height="1024"
+            loading="lazy" decoding="async" />
+          <div class="proj-card-enhanced-overlay"></div>
+          <div class="proj-card-enhanced-shine"></div>
+
+          <!-- Floating tech indicator -->
+          <div class="proj-card-tech-indicator">
+            @if (proj.tags && proj.tags.length > 0) {
+            <span class="tech-count">{{ proj.tags.length }} Tech</span>
+            }
+          </div>
+        </div>
+
+        <!-- Card body with gradient -->
+        <div class="proj-card-enhanced-body">
+          <div class="proj-card-enhanced-header">
+            <h3 class="proj-card-enhanced-title">{{ proj.name }}</h3>
+            <div class="proj-card-star-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1.5">
+                <polygon
+                  points="12 2 15.09 10.26 24 10.35 17.77 16.01 19.85 24.29 12 18.77 4.15 24.29 6.23 16.01 0 10.35 8.91 10.26" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Outcome badge — visible metric/result -->
+          @if (proj.outcome) {
+          <div class="proj-card-outcome">
+            {{ proj.outcome }}
+          </div>
+          }
+
+          <p class="proj-card-enhanced-desc">{{ proj.description }}</p>
+
+          <!-- Tech tags with better styling -->
+          <div class="proj-card-enhanced-tags">
+            @for (tag of proj.tags | slice:0:3; track tag) {
+            <span class="proj-card-enhanced-tag">{{ tag }}</span>
+            }
+            @if (proj.tags && proj.tags.length > 3) {
+            <span class="proj-card-enhanced-tag proj-card-tag-more">+{{ proj.tags.length - 3 }}</span>
+            }
+          </div>
+
+          <!-- Footer with CTA -->
+          <div class="proj-card-enhanced-footer">
+            @if (proj.slug) {
+            <a [routerLink]="['/projects', proj.slug]" class="proj-card-enhanced-link" appMagneticButton>
+              <span>Case study</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </a>
+            }
+            <a [href]="proj.link" target="_blank" rel="noopener noreferrer"
+              class="proj-card-enhanced-link proj-card-enhanced-link--ghost" appMagneticButton>
+              <span>Visit</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    }
+
+    <!-- ===== CURRENTLY BUILDING (in-progress projects) ===== -->
+    @if (pds.projects()?.inProgress; as wip) {
+    <div class="wip-block" appScrollTrigger>
+      <div class="wip-head">
+        <div class="section-label animate-fade-in-up">{{ wip.sectionLabel }}</div>
+        <h3 class="wip-title animate-fade-in-up" [style.animation-delay]="'0.1s'">{{ wip.title }}</h3>
+        <p class="wip-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ wip.subtitle }}</p>
+      </div>
+
+      <div class="wip-grid">
+        @for (item of wip.items; track item.id) {
+        <article class="wip-card animate-fade-in-up" [style.animation-delay]="($index * 0.1) + 's'">
+          <div class="wip-card-top">
+            <span class="wip-type">{{ item.type }}</span>
+            <ui-badge tone="amber" [dot]="true">{{ item.badge }}</ui-badge>
+          </div>
+
+          <h4 class="wip-name">{{ item.name }}</h4>
+          <p class="wip-desc">{{ item.description }}</p>
+
+          @if (item.features?.length) {
+          <ul class="wip-features">
+            @for (f of item.features; track f) {
+            <li>{{ f }}</li>
+            }
+          </ul>
+          }
+
+          @if (item.tech?.length) {
+          <div class="wip-tech">
+            @for (t of item.tech; track t) {
+            <span class="wip-tech-chip">{{ t }}</span>
+            }
+          </div>
+          }
+
+          <div class="wip-card-footer">
+            @if (item.demo) {
+            <a [href]="item.demo" target="_blank" rel="noopener noreferrer" class="wip-link wip-link--primary">
+              Live demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </a>
+            } @else {
+            <span class="wip-link wip-link--disabled" aria-disabled="true">Live demo · soon</span>
+            }
+            @if (item.github) {
+            <a [href]="item.github" target="_blank" rel="noopener noreferrer" class="wip-link wip-link--ghost">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+              GitHub
+            </a>
+            } @else {
+            <span class="wip-link wip-link--ghost wip-link--disabled" aria-disabled="true">GitHub · soon</span>
+            }
+          </div>
+        </article>
+        }
+      </div>
+    </div>
+    }
+
+    <!-- Projects → Contact CTA -->
+    <div class="projects-cta" appScrollTrigger>
+      <h3 class="projects-cta-title">Have a project or role in mind?</h3>
+      <p class="projects-cta-sub">Open to full-time, remote, and freelance opportunities. Let's talk about what you're
+        building.</p>
+      <div class="projects-cta-actions">
+        <a uiButton href="#contact">Get in Touch</a>
+        <a uiButton="outline" [href]="pds.meta()?.resumePdf || '/rabin_resume.pdf'" download>Download Resume</a>
+      </div>
+    </div>
+  </div>
+</section>

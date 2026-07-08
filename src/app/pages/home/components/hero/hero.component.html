@@ -1,0 +1,89 @@
+<section class="hero" id="home" aria-labelledby="hero-title" appAuroraBackground appMouseFollowGlow>
+  <div class="hero-container">
+    <!-- LEFT COLUMN -->
+    <div class="hero-content animate-fade-in-up" appScrollTrigger>
+      <!-- Availability Badge (Minimal) -->
+      <div class="hero-badge hero-badge-minimal animate-fade-in-scale">
+        <span class="badge-dot"></span>
+        <span>{{ pds.hero()?.badge }}</span>
+      </div>
+
+      <!-- Headline -->
+      <div class="hero-headline-wrapper">
+        <h1 class="hero-title animate-fade-in-up" id="hero-title">
+          <span class="hero-line">{{ pds.hero()?.headline }}</span>
+          <span class="hero-line gradient-text">{{ pds.hero()?.headlineAccent }}</span>
+        </h1>
+      </div>
+
+      <!-- Premium Description -->
+      <p class="hero-desc animate-fade-in-up">{{ pds.hero()?.description }}</p>
+
+      <!-- CTA Buttons (Premium Styling) -->
+      <div class="hero-actions hero-actions-premium" appStagger [staggerMs]="60" [staggerStartMs]="1200">
+        <a [href]="pds.hero()?.cta?.primary?.href" class="btn btn-primary btn-premium animate-fade-in-scale" appMagneticButton>
+          {{ pds.hero()?.cta?.primary?.label }}
+          <app-arrow-icon />
+        </a>
+        <a [href]="pds.hero()?.cta?.booking?.href" class="btn btn-outline btn-premium animate-fade-in-scale" appMagneticButton>
+          {{ pds.hero()?.cta?.booking?.label }}
+        </a>
+      </div>
+
+      <!-- Stack & Stats (Compact Premium Layout) -->
+      <div class="hero-bottom-section">
+        <!-- Stack Badges (Horizontal) -->
+        <div class="hero-stack hero-stack-horizontal">
+          <div class="stack-badges">
+            @for (tech of pds.hero()?.stack; track tech.name) {
+            <span class="stack-badge stack-badge-pill hover-scale">
+              <svg width="12" height="12" viewBox="0 0 24 24" [attr.fill]="tech.color" aria-hidden="true">
+                <path [attr.d]="tech.iconPath" />
+              </svg>
+              <span class="tech-name">{{ tech.name }}</span>
+            </span>
+            }
+          </div>
+        </div>
+
+        <!-- Stats (Horizontal Divider) -->
+        <div class="hero-stats hero-stats-compact">
+          @for (stat of pds.hero()?.stats; track stat.label) {
+          <div class="stat-item">
+            <span class="stat-number">{{ stat.number }}</span>
+            <span class="stat-label">{{ stat.label }}</span>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN – Profile portrait -->
+    <div class="hero-visual animate-fade-in-scale" [style.animation-delay]="'0.2s'">
+      <figure class="hero-photo">
+        <div class="hero-photo-glow" aria-hidden="true"></div>
+        <div class="hero-photo-frame">
+          <img
+            [src]="pds.hero()?.portrait || pds.meta()?.profileImage || '/profile.webp'"
+            [alt]="pds.meta()?.name + ' — ' + pds.meta()?.role"
+            class="hero-photo-img"
+            width="1080"
+            height="1440"
+            fetchpriority="high"
+            decoding="async" />
+        </div>
+
+        <!-- Floating status chip -->
+        <figcaption class="hero-photo-chip">
+          <span class="hero-photo-dot"></span>
+          <span>Available for work</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="hero-scroll-cue" aria-hidden="true">
+    <span class="cue-line"></span>
+  </div>
+</section>

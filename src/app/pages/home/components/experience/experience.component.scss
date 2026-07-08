@@ -1,0 +1,359 @@
+// ============================================================
+// ===== EXPERIENCE SECTION ===================================
+// ============================================================
+.experience {
+  background: var(--bg-primary);
+  padding: 110px 0 90px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.35), transparent);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5%;
+    left: -5%;
+    width: 40%;
+    height: 60%;
+    background: radial-gradient(ellipse, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+.exp-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.exp-title {
+  font-family: var(--font-display);
+  font-size: var(--h2-size);
+  font-weight: var(--h2-weight);
+  color: var(--text-primary);
+  line-height: var(--h2-line);
+  margin: 0 0 16px;
+  letter-spacing: var(--h2-letter);
+}
+
+.exp-subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 580px;
+  margin: 0 0 60px;
+}
+
+// ── Timeline ─────────────────────────────────────────────
+.timeline {
+  position: relative;
+  padding-left: 44px;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 9px;
+  top: 16px;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--accent-violet) 0%,
+    rgba(124, 58, 237, 0.1) 100%
+  );
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 48px;
+
+  &:last-child { padding-bottom: 0; }
+
+  // Highlight the CURRENT/FIRST job
+  &:first-child {
+    .exp-card {
+      border-color: rgba(6, 182, 212, 0.2);
+
+      &::before {
+        background: linear-gradient(180deg, var(--accent-cyan), var(--accent-violet));
+        opacity: 1;
+      }
+    }
+
+    .timeline-dot .dot-inner {
+      background: var(--accent-cyan);
+      box-shadow: 0 0 14px rgba(6, 182, 212, 0.8), 0 0 28px rgba(6, 182, 212, 0.4);
+    }
+  }
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -44px;
+  top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: var(--bg-primary);
+  border-radius: 50%;
+
+  .dot-inner {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-violet);
+    box-shadow:
+      0 0 10px rgba(124, 58, 237, 0.8),
+      0 0 24px rgba(124, 58, 237, 0.4);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+}
+
+// ── Experience card ──────────────────────────────────────
+.exp-card {
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 36px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+
+  // Left accent bar
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent-violet), var(--accent-indigo));
+    border-radius: 0 2px 2px 0;
+    opacity: 0.6;
+    transition: opacity var(--transition);
+  }
+
+  &:hover {
+    border-color: rgba(124, 58, 237, 0.25);
+    box-shadow:
+      0 20px 56px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(124, 58, 237, 0.1);
+    transform: translateY(-3px);
+    background: var(--bg-glass-hover);
+
+    &::before { opacity: 1; }
+  }
+}
+
+.exp-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.exp-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exp-company {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  .company-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .company-sep {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  .company-location {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+}
+
+.exp-role {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.5vw, 23px);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+// Duration badge
+.exp-duration {
+  padding: 7px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-bright);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  backdrop-filter: blur(8px);
+  letter-spacing: 0.01em;
+}
+
+// Highlight current job duration
+.timeline-item:first-child .exp-duration {
+  background: rgba(6, 182, 212, 0.08);
+  border-color: rgba(6, 182, 212, 0.25);
+  color: #67e8f9;
+}
+
+// Achievement list
+.exp-achievements {
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+}
+
+.check-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--accent-indigo);
+}
+
+// Tech tags
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.exp-tag {
+  padding: 5px 13px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all var(--transition);
+  backdrop-filter: blur(6px);
+
+  &:hover {
+    background: rgba(124, 58, 237, 0.1);
+    border-color: rgba(124, 58, 237, 0.3);
+    color: #c4b5fd;
+    transform: translateY(-1px);
+  }
+}
+
+// Freelance current tag
+.timeline-item:first-child .exp-tag:last-child {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: rgba(124, 58, 237, 0.3);
+  color: #c4b5fd;
+}
+
+// ── Experience responsive ────────────────────────────────
+@media (max-width: 640px) {
+  .experience { padding: 80px 0 70px; }
+  .exp-card { padding: 24px; }
+  .exp-card-header { flex-direction: column; gap: 12px; }
+  .exp-duration { align-self: flex-start; }
+  .timeline { padding-left: 32px; }
+  .timeline-dot { left: -32px; }
+
+  .exp-subtitle {
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .exp-container {
+    padding: 0 14px;
+  }
+
+  .exp-role {
+    font-size: clamp(16px, 2.5vw, 23px);
+  }
+
+  .exp-achievements {
+    font-size: 12px;
+  }
+
+  .exp-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience { padding: 50px 0 40px; }
+
+  .exp-card {
+    padding: 18px;
+  }
+
+  .timeline {
+    padding-left: 24px;
+    gap: 18px;
+
+    &::before {
+      left: 0;
+    }
+  }
+
+  .timeline-dot { left: -24px; }
+
+  .timeline-marker {
+    width: 16px;
+    height: 16px;
+    margin-left: -7px;
+  }
+
+  .exp-role {
+    font-size: 16px;
+  }
+
+  .exp-achievements li {
+    font-size: 11px;
+    gap: 8px;
+  }
+
+  .exp-tags {
+    gap: 6px;
+  }
+}

@@ -6,13 +6,11 @@ import { PortfolioDataService } from '../../shared/services/portfolio-data.servi
 import { ContactService } from '../../shared/services/contact.service';
 import { ToastService } from '../../shared/services/toast.service';
 import { GsapService } from '../../shared/services/gsap.service';
+import { HomeAnimationsService } from './services/home-animations.service';
 import { environment } from '../../../environments/environment';
 import {
-  AuroraBackgroundDirective,
-  MouseFollowGlowDirective,
   ScrollTriggerDirective,
   MagneticButtonDirective,
-  GridBackgroundDirective,
   StaggerDirective,
 } from '../../shared/directives';
 import {
@@ -23,16 +21,29 @@ import {
   ArrowIconComponent,
 } from '../../shared/components';
 import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
+import { HeroComponent } from './components/hero/hero.component';
+import { AboutComponent } from './components/about/about.component';
+import { ExperienceComponent } from './components/experience/experience.component';
+import { SkillsComponent } from './components/skills/skills.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { ResumeComponent } from './components/deferred/resume/resume.component';
+import { PlaygroundComponent } from './components/deferred/playground/playground.component';
 
 @Component({
   selector: 'app-home',
   imports: [
+    // Section Components
+    HeroComponent,
+    AboutComponent,
+    ExperienceComponent,
+    SkillsComponent,
+    ProjectsComponent,
+    // Deferred Components
+    ResumeComponent,
+    PlaygroundComponent,
     // Directives
-    AuroraBackgroundDirective,
-    MouseFollowGlowDirective,
     ScrollTriggerDirective,
     MagneticButtonDirective,
-    GridBackgroundDirective,
     StaggerDirective,
     // Components
     ScrollProgressComponent,
@@ -57,6 +68,7 @@ export class Home implements OnDestroy {
   protected readonly contactService = inject(ContactService);
   private readonly toastService = inject(ToastService);
   private readonly gsapService = inject(GsapService);
+  private readonly homeAnimations = inject(HomeAnimationsService);
 
   protected contactForm: FormGroup;
   protected isSubmitting = false;
@@ -85,47 +97,8 @@ export class Home implements OnDestroy {
     });
 
     afterNextRender(() => {
-      this.initGsapAnimations();
+      this.homeAnimations.initialize();
     });
-  }
-
-  private async initGsapAnimations(): Promise<void> {
-    try {
-      await this.gsapService.init();
-      if (!this.gsapService.isLoaded) return;
-
-      // Hero entrance is handled by self-contained CSS animations
-      // (animate-fade-in-*) so content is never left hidden if JS/GSAP is
-      // delayed. GSAP only drives scroll-triggered effects below.
-
-      // Experience timeline draw
-      this.gsapService.gsap?.from('.timeline-line', {
-        scaleY: 0,
-        transformOrigin: 'top center',
-        duration: 1.5,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.timeline',
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
-      });
-
-      // Skill cards stagger
-      this.gsapService.staggerIn('.skill-card', 0.06);
-
-      // Project cards stagger
-      this.gsapService.staggerIn('.proj-card-enhanced', 0.12);
-
-      // Testimonial cards stagger
-      this.gsapService.staggerIn('.testi-card', 0.1);
-
-    } catch (e) {
-      // GSAP init failed — animations degrade gracefully via CSS
-      if (!environment.production) {
-        console.warn('GSAP initialization failed, falling back to CSS animations', e);
-      }
-    }
   }
 
   protected submitContact() {
@@ -182,6 +155,6 @@ export class Home implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.gsapService.killAll();
+    this.homeAnimations.cleanup();
   }
 }

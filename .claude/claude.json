@@ -1,36 +1,8 @@
 {
-  "$schema": "https://claude.ai/schemas/claude-config.json",
-  "mcpServers": {
-    "angular-json": {
-      "command": "node",
-      "args": [".claude/mcp-servers/angular-json-server.js"],
-      "env": {
-        "DEBUG": "false",
-        "NODE_ENV": "production"
-      },
-      "autoStart": true,
-      "alwaysAllow": [
-        "read-json",
-        "write-json",
-        "validate-json"
-      ]
+  "servers": {
+    "angular-cli": {
+      "command": "npx",
+      "args": ["-y", "@angular/cli", "mcp"]
     }
-  },
-  "projectSettings": {
-    "name": "my-portfolio",
-    "version": "1.0.0",
-    "description": "Angular portfolio website with enterprise-grade features",
-    "rootFiles": [
-      "angular.json",
-      "tsconfig.json",
-      "package.json",
-      "public/portfolio-data.json"
-    ]
-  },
-  "assistantSettings": {
-    "codeStyle": "strict",
-    "typeChecking": "strict",
-    "linting": true,
-    "formatting": "prettier"
   }
 }
