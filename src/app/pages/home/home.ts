@@ -15,7 +15,7 @@ import {
   ArrowIconComponent,
 } from '../../shared/components';
 import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
-import { HeroComponent } from './components/hero/hero.component';
+import { HeroPremiumComponent } from './components/hero/hero-premium.component';
 import { AboutComponent } from './components/about/about.component';
 import { ExperienceComponent } from './components/experience/experience.component';
 import { SkillsComponent } from './components/skills/skills.component';
@@ -29,7 +29,7 @@ import { PlaygroundComponent } from './components/deferred/playground/playground
   selector: 'app-home',
   imports: [
     // Section Components
-    HeroComponent,
+    HeroPremiumComponent,
     AboutComponent,
     ExperienceComponent,
     SkillsComponent,
