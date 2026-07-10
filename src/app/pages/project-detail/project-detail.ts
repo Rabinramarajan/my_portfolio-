@@ -45,7 +45,7 @@ export class ProjectDetail {
   // All projects (featured + grid) as one flat list.
   private readonly allProjects = computed(() => {
     const p = this.pds.projects();
-    return [p?.featured, ...(p?.grid ?? [])].filter(Boolean) as ProjectItem[];
+    return [...(p?.featured ?? []), ...(p?.grid ?? [])].filter(Boolean) as ProjectItem[];
   });
 
   protected readonly project = computed(() => {

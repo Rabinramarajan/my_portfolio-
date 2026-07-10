@@ -1,63 +1,159 @@
-<section class="skills" id="skills" aria-labelledby="skills-title" appScrollTrigger>
-  <div class="skills-container">
-    <div class="section-label animate-fade-in-up">{{ pds.skills()?.sectionLabel }}</div>
-    <h2 class="skills-title animate-fade-in-up" id="skills-title" [style.animation-delay]="'0.1s'">{{ pds.skills()?.title }}</h2>
-    <p class="skills-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.skills()?.subtitle }}</p>
+<section class="skills" id="skills" aria-labelledby="skills-title">
+  <div class="skills-container" appScrollTrigger>
+    <!-- Breadcrumb -->
+    <nav class="sk-breadcrumb animate-fade-in-up" aria-label="Breadcrumb">
+      <a href="#home">Home</a>
+      <span class="crumb-sep">/</span>
+      <span class="crumb-current">Skills &amp; Technologies</span>
+    </nav>
 
-    <div class="skills-grid">
-      @for (cat of pds.skills()?.categories; track cat.name) {
-      <div class="skill-card hover-lift animate-fade-in-scale" [style.animation-delay]="($index * 0.08) + 's'">
-        <div class="skill-card-header">
-          <div class="skill-cat-icon" [class]="'skill-cat-icon--' + (cat.icon || 'frontend')">
-            @if (cat.icon === 'frontend') {
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="16 18 22 12 16 6" />
-              <polyline points="8 6 2 12 8 18" />
-            </svg>
-            } @else if (cat.icon === 'framework') {
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5" />
-              <path d="M2 12l10 5 10-5" />
-            </svg>
-            } @else if (cat.icon === 'ui') {
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="2" y="3" width="20" height="14" rx="2" />
-              <path d="M8 21h8M12 17v4" />
-            </svg>
-            } @else if (cat.icon === 'arch') {
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-            </svg>
-            } @else if (cat.icon === 'api') {
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 20V10M12 20V4M6 20v-6" />
-            </svg>
-            } @else if (cat.icon === 'tools') {
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path
-                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-            </svg>
-            } @else {
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="2" y="3" width="20" height="14" rx="2" />
-              <circle cx="12" cy="17" r="1" />
-            </svg>
+    <!-- ============ HEADER ============ -->
+    <div class="sk-header">
+      <div class="sk-headline">
+        <h2 class="sk-title animate-fade-in-up" id="skills-title">
+          Skills &amp; <span class="grad-word">Technologies</span>
+        </h2>
+        <p class="sk-subtitle animate-fade-in-up">
+          A combination of technical expertise, creativity, and problem-solving
+          that drives exceptional digital experiences.
+        </p>
+      </div>
+
+      <div class="sk-learning-card animate-fade-in-up">
+        <span class="sk-learn-orb" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5ZM12 2v20M3 7l9 5 9-5" /></svg>
+        </span>
+        <div class="sk-learn-text">
+          <strong>Always Learning. Always Building.</strong>
+          <p>I love exploring new technologies and enhancing my skills to build better products for the future.</p>
+        </div>
+        <div class="sk-learn-radial" [style.--score]="learningScore" aria-hidden="true">
+          <div class="sk-radial-ring"></div>
+          <div class="sk-radial-label">
+            <span class="sk-radial-pct">{{ learningScore }}%</span>
+          </div>
+          <span class="sk-radial-caption">Learning Score</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ CATEGORY TABS ============ -->
+    <div class="sk-tabs" role="tablist" aria-label="Skill categories">
+      @for (cat of categories; track trackByIndex($index)) {
+        <button
+          type="button"
+          class="sk-tab"
+          [class.active]="activeCategory() === cat.key"
+          role="tab"
+          [attr.aria-selected]="activeCategory() === cat.key"
+          (click)="setCategory(cat.key)"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path [attr.d]="cat.icon" />
+          </svg>
+          {{ cat.label }}
+        </button>
+      }
+    </div>
+
+    <!-- ============ MAIN GRID ============ -->
+    <div class="sk-main">
+      <!-- LEFT COLUMN -->
+      <div class="sk-left">
+        <!-- Skills card: list + radar -->
+        <div class="sk-card sk-skills-card">
+          <div class="sk-card-head"><span class="dot"></span> {{ activeLabel() }} Skills</div>
+
+          <div class="sk-skills-body">
+            <div class="skill-list">
+              @for (skill of activeSkills(); track trackByIndex($index)) {
+                <div class="skill-row">
+                  <span class="skill-logo" [style.--brand]="skill.color">
+                    @if (skill.path) {
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path [attr.d]="skill.path" /></svg>
+                    } @else {
+                      <span class="skill-mono">{{ skill.mono }}</span>
+                    }
+                  </span>
+                  <span class="skill-name">{{ skill.name }}</span>
+                  <span class="skill-pct">{{ skill.pct }}%</span>
+                </div>
+              }
+            </div>
+
+            <!-- Radar chart -->
+            <div class="radar-wrap">
+              <svg class="radar-svg" viewBox="0 0 200 200" aria-hidden="true">
+                @for (frac of [1, 0.66, 0.33]; track trackByIndex($index)) {
+                  <polygon class="radar-grid" [attr.points]="gridPoints(frac)" />
+                }
+                @for (pt of axisLines; track trackByIndex($index)) {
+                  <line class="radar-axis" x1="100" y1="100" [attr.x2]="pt.x" [attr.y2]="pt.y" />
+                }
+                <polygon class="radar-data" [attr.points]="dataPoints" />
+                @for (ax of radar; track trackByIndex($index); let i = $index) {
+                  <circle class="radar-dot" [attr.cx]="dataPoints.split(' ')[i].split(',')[0]" [attr.cy]="dataPoints.split(' ')[i].split(',')[1]" r="2.5" />
+                }
+              </svg>
+              <span class="radar-label rl-0">UI Development</span>
+              <span class="radar-label rl-1">Responsive Design</span>
+              <span class="radar-label rl-2">Performance</span>
+              <span class="radar-label rl-3">State Management</span>
+              <span class="radar-label rl-4">Testing</span>
+              <span class="radar-label rl-5">Problem Solving</span>
+            </div>
+          </div>
+
+          <!-- Mini stats -->
+          <div class="sk-mini-stats">
+            @for (m of miniStats; track trackByIndex($index)) {
+              <div class="mini-stat">
+                <span class="mini-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="m.icon" /></svg>
+                </span>
+                <span class="mini-text"><strong>{{ m.number }}</strong><span>{{ m.label }}</span></span>
+              </div>
             }
           </div>
-          <div class="skill-cat-info">
-            <span class="skill-cat-name">{{ cat.name }}</span>
-            <span class="skill-cat-count">{{ cat.items.length }} {{ cat.items.length === 1 ? 'skill' : 'skills'
-              }}</span>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <aside class="sk-right">
+        <!-- Popular Technologies -->
+        <div class="sk-card">
+          <div class="sk-card-head"><span class="dot"></span> Popular Technologies</div>
+          <div class="poptech-grid">
+            @for (tech of popularTech; track trackByIndex($index)) {
+              <div class="poptech" [style.--brand]="tech.color">
+                <span class="poptech-logo">
+                  @if (tech.path) {
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path [attr.d]="tech.path" /></svg>
+                  } @else {
+                    <span class="poptech-mono">{{ tech.mono }}</span>
+                  }
+                </span>
+                <span class="poptech-name">{{ tech.name }}</span>
+              </div>
+            }
           </div>
         </div>
-        <ul class="skill-list">
-          @for (item of cat.items; track item) {
-          <li class="skill-row hover-scale"><span class="skill-name">{{ item }}</span></li>
-          }
-        </ul>
-      </div>
-      }
+
+        <!-- Circular metrics -->
+        <div class="sk-card sk-metrics-card">
+          <div class="sk-card-head"><span class="dot"></span> Core Strengths</div>
+          <div class="metrics-grid">
+            @for (metric of metrics; track trackByIndex($index)) {
+              <div class="metric" [style.--pct]="metric.pct" [style.--color]="metric.color">
+                <span class="metric-label">{{ metric.label }}</span>
+                <div class="metric-ring">
+                  <span class="metric-pct">{{ metric.pct }}%</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </aside>
     </div>
   </div>
 </section>

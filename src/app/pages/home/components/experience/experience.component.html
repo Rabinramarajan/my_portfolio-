@@ -1,55 +1,172 @@
-<section class="experience" id="experience" aria-labelledby="experience-title" appScrollTrigger>
-  <div class="exp-container">
-    <div class="section-label animate-fade-in-up">{{ pds.experience()?.sectionLabel }}</div>
-    <h2 class="exp-title animate-fade-in-up" id="experience-title" [style.animation-delay]="'0.1s'">{{ pds.experience()?.title }}</h2>
-    <p class="exp-subtitle animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.experience()?.subtitle }}</p>
+<section class="experience" id="experience" aria-labelledby="experience-title">
+  <div class="exp-container" appScrollTrigger>
+    <!-- Breadcrumb -->
+    <nav class="exp-breadcrumb animate-fade-in-up" aria-label="Breadcrumb">
+      <a href="#home">Home</a>
+      <span class="crumb-sep">/</span>
+      <span class="crumb-current">Experience</span>
+    </nav>
 
-    <div class="timeline">
-      <div class="timeline-line"></div>
+    <!-- ============ HEADER ============ -->
+    <div class="exp-header">
+      <div class="exp-headline">
+        <h2 class="exp-title animate-fade-in-up" id="experience-title">
+          My Experience <span class="grad-word">Journey</span>
+        </h2>
+        <p class="exp-subtitle animate-fade-in-up">
+          A timeline of my professional growth, skills evolution, and the impact I've created.
+        </p>
+      </div>
 
-      @for (job of pds.experience()?.jobs; track job.company) {
-      <div class="timeline-item animate-fade-in-up" [style.animation-delay]="($index * 0.1) + 's'" appScrollTrigger>
-        <div class="timeline-dot">
-          <span class="dot-inner"></span>
+      <div class="exp-header-right">
+        <div class="exp-stats">
+          @for (stat of stats; track trackByIndex($index)) {
+            <div class="exp-stat-card animate-fade-in-up">
+              <span class="exp-stat-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                  <path [attr.d]="stat.icon" />
+                </svg>
+              </span>
+              <strong class="exp-stat-number">{{ stat.number }}</strong>
+              <span class="exp-stat-label">{{ stat.label }}</span>
+            </div>
+          }
         </div>
 
-        <div class="exp-card hover-lift">
-          <div class="exp-card-header">
-            <div class="exp-meta">
-              <div class="exp-company">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2">
-                  <rect x="2" y="7" width="20" height="14" rx="2" />
-                  <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-                </svg>
-                <span class="company-name">{{ job.company }}</span>
-                <span class="company-sep">·</span>
-                <span class="company-location">{{ job.location }}</span>
-              </div>
-              <h3 class="exp-role">{{ job.role }}</h3>
-            </div>
-            <div class="exp-duration">{{ job.duration }}</div>
-          </div>
-
-          <ul class="exp-achievements">
-            @for (item of job.achievements; track $index) {
-            <li>
-              <svg class="check-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              {{ item }}
-            </li>
-            }
-          </ul>
-
-          <div class="exp-tags">
-            @for (tag of job.tags; track tag) {
-            <span class="exp-tag hover-scale">{{ tag }}</span>
-            }
-          </div>
+        <!-- Astronaut orbit placeholder -->
+        <div class="astro-scene" aria-hidden="true">
+          <span class="astro-orbit"></span>
+          <span class="astro-planet astro-planet-1"></span>
+          <span class="astro-planet astro-planet-2"></span>
+          <span class="astro-figure">🧑‍🚀</span>
         </div>
       </div>
-      }
+    </div>
+
+    <!-- ============ MAIN ============ -->
+    <div class="exp-main">
+      <!-- LEFT: filters + timeline -->
+      <div class="exp-timeline-col">
+        <div class="exp-filters" role="tablist" aria-label="Filter experience by type">
+          @for (f of filters; track trackByIndex($index)) {
+            <button
+              type="button"
+              class="filter-tab"
+              [class.active]="activeFilter() === f"
+              role="tab"
+              [attr.aria-selected]="activeFilter() === f"
+              (click)="setFilter(f)"
+            >
+              {{ f === 'all' ? 'All Experience' : f }}
+            </button>
+          }
+        </div>
+
+        <ol class="timeline">
+          @for (job of filteredJobs(); track trackByIndex($index)) {
+            <li class="tl-item">
+              <div class="tl-year">
+                <span class="tl-year-start">{{ job.startYear }}</span>
+                <span class="tl-year-end">{{ job.endLabel }}</span>
+              </div>
+              <span class="tl-node" aria-hidden="true"></span>
+
+              <article class="tl-card">
+                <span class="tl-icon" [style.--brand]="job.iconColor" aria-hidden="true">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                    <path [attr.d]="job.iconPath" />
+                  </svg>
+                </span>
+
+                <div class="tl-main">
+                  <h3 class="tl-role">{{ job.role }}</h3>
+                  <div class="tl-company-row">
+                    <span class="tl-company">{{ job.company }}</span>
+                    <span class="tl-type" [class.type-freelance]="job.type === 'Freelance'" [class.type-contract]="job.type === 'Contract'">{{ job.type }}</span>
+                  </div>
+                  <p class="tl-desc">{{ job.description }}</p>
+                </div>
+
+                @if (job.bullets.length) {
+                  <ul class="tl-bullets">
+                    @for (b of job.bullets; track trackByIndex($index)) {
+                      <li>{{ b }}</li>
+                    }
+                  </ul>
+                }
+              </article>
+            </li>
+          } @empty {
+            <li class="tl-empty">No {{ activeFilter() }} experience to show.</li>
+          }
+        </ol>
+      </div>
+
+      <!-- RIGHT: rail -->
+      <aside class="exp-rail">
+        <!-- Experience Highlights -->
+        <div class="rail-card">
+          <div class="rail-head">
+            <span class="rail-glyph" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 15l3-4 3 3 5-7" /></svg>
+            </span>
+            <h3 class="rail-title">Experience Highlights</h3>
+          </div>
+
+          <div class="highlights-body">
+            <div class="highlights-list">
+              @for (h of highlights; track trackByIndex($index)) {
+                <div class="highlight-row">
+                  <div class="highlight-top">
+                    <span class="highlight-label">{{ h.label }}</span>
+                    <span class="highlight-value">{{ h.value }}%</span>
+                  </div>
+                  <div class="highlight-bar"><span [style.width.%]="h.value"></span></div>
+                </div>
+              }
+            </div>
+
+            <div class="radial" [style.--score]="overallScore" aria-hidden="true">
+              <div class="radial-ring"></div>
+              <div class="radial-core">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16M2 6h20v14H2z" /></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skills Evolution -->
+        <div class="rail-card">
+          <div class="rail-head">
+            <span class="rail-glyph" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8" /></svg>
+            </span>
+            <h3 class="rail-title">Skills Evolution</h3>
+          </div>
+
+          <div class="evolution">
+            <span class="evolution-line" aria-hidden="true"></span>
+            @for (step of evolution; track trackByIndex($index)) {
+              <div class="evolution-step">
+                <span class="evolution-node" [style.--brand]="step.color">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path [attr.d]="step.path" />
+                  </svg>
+                </span>
+                <span class="evolution-name">{{ step.name }}</span>
+                <span class="evolution-year">{{ step.year }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Quote -->
+        <div class="rail-card quote-card">
+          <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+          <p class="quote-text">The best way to predict the future is to <span class="quote-accent">create</span> it.</p>
+          <span class="quote-signature">{{ signatureName }}</span>
+        </div>
+      </aside>
     </div>
   </div>
 </section>

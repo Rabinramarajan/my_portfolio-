@@ -1,91 +1,149 @@
-<section class="about" id="about" aria-labelledby="about-title" appGridBackground>
+<section class="about" id="about" aria-labelledby="about-title">
   <div class="about-container" appScrollTrigger>
-    <div class="section-label animate-fade-in-up">{{ pds.about()?.sectionLabel }}</div>
-    <h2 class="about-title animate-fade-in-up" id="about-title" [style.animation-delay]="'0.1s'">{{ pds.about()?.title }}</h2>
-    <p class="about-intro animate-fade-in-up" [style.animation-delay]="'0.2s'">{{ pds.about()?.intro }}</p>
+    <!-- Top row: breadcrumb + availability -->
+    <div class="about-topbar animate-fade-in-up">
+      <nav class="about-breadcrumb" aria-label="Breadcrumb">
+        <a href="#home">Home</a>
+        <span class="crumb-sep">/</span>
+        <span class="crumb-current">About Me</span>
+      </nav>
+      <span class="avail-pill">
+        <span class="avail-dot" aria-hidden="true"></span>
+        Available for Freelance
+      </span>
+    </div>
 
-    <div class="about-grid">
-      <!-- LEFT — Photo card -->
-      <div class="photo-card hover-lift" appScrollTrigger>
-        <div class="photo-wrapper">
-          <img
-            [src]="pds.meta()?.aboutImage || pds.meta()?.profileImage"
-            [alt]="pds.meta()?.name"
-            class="profile-img"
-            width="1080"
-            height="1440"
-            loading="lazy"
-            decoding="async" />
-          <div class="photo-overlay"></div>
+    <!-- ============ HERO ROW ============ -->
+    <div class="about-hero">
+      <!-- INTRO -->
+      <div class="about-intro-col">
+        <span class="eyebrow-pill animate-fade-in-up">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="8" r="4" /><path d="M4 21v-1a6 6 0 0 1 12 0v1" />
+          </svg>
+          GET TO KNOW ME
+        </span>
 
-          <div class="photo-glass-footer">
-            <div class="photo-info">
-              <span class="photo-name">{{ pds.meta()?.name }}</span>
-              <span class="photo-role">{{ pds.meta()?.role }}</span>
+        <h2 class="about-title animate-fade-in-up" id="about-title">
+          More About <span class="grad-me">Me.</span>
+        </h2>
+        <p class="about-tagline animate-fade-in-up">Curious mind. Clean code. Creative soul.</p>
+
+        <div class="about-bio animate-fade-in-up">
+          <p>
+            I'm {{ pds.meta()?.name || 'Rabin R.' }}, a passionate Frontend Developer &amp; UI Engineer
+            with 4+ years of experience crafting modern, responsive and scalable
+            web &amp; mobile applications. I love turning complex problems into
+            simple, beautiful and intuitive digital experiences.
+          </p>
+        </div>
+
+        <p class="innovate-line animate-fade-in-up" aria-label="I code. I design. I innovate.">
+          <span>I code.</span> <span>I design.</span> <span class="innovate-word">I innovate.</span>
+        </p>
+      </div>
+
+      <!-- PORTRAIT -->
+      <div class="about-visual-col">
+        <div class="portrait-card">
+          <div class="portrait-media" role="img" aria-label="Portrait of {{ pds.meta()?.name }}">
+            @if ((pds.meta()?.aboutImage || pds.meta()?.profileImage) && !imgFailed) {
+              <img
+                [src]="pds.meta()?.aboutImage || pds.meta()?.profileImage"
+                [alt]="pds.meta()?.name"
+                class="portrait-img"
+                width="1080"
+                height="1440"
+                loading="lazy"
+                decoding="async"
+                (error)="imgFailed = true" />
+            } @else {
+              <div class="portrait-placeholder">
+                <span class="pp-ring" aria-hidden="true"></span>
+                <span class="pp-text">Portrait</span>
+              </div>
+            }
+            <div class="portrait-ring" aria-hidden="true"></div>
+
+            <!-- Signature card -->
+            <div class="signature-card">
+              <span class="signature-name">{{ signatureName }}</span>
+              <span class="signature-badge" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 9-3 3 3 3M15 9l3 3-3 3" />
+                </svg>
+              </span>
             </div>
-            <span class="open-badge animate-glow-pulse">
-              <span class="open-dot"></span>
-              {{ pds.about()?.openBadge }}
-            </span>
           </div>
         </div>
       </div>
 
-      <!-- RIGHT — Bio + cards -->
-      <div class="about-right" appScrollTrigger>
-        <div class="bio-card">
-          <div class="bio-content" appStagger>
-            @for (para of pds.about()?.bio; track $index) {
-            <p class="bio-text animate-fade-in-up">{{ para }}</p>
-            }
-          </div>
+      <!-- RIGHT RAIL: quote + what I do -->
+      <div class="about-rail">
+        <div class="quote-card animate-fade-in-up">
+          <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+          <p class="quote-text">{{ quote }}</p>
+          <span class="quote-underline" aria-hidden="true"></span>
         </div>
 
-        <div class="info-grid" appStagger>
-          @for (card of pds.about()?.infoCards; track card.label) {
-          <div class="info-card hover-glow animate-fade-in-up">
-            <div class="info-header">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-indigo)"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                @switch (card.icon) {
-                @case ('map-pin') {
-                <path
-                  d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
-                <circle cx="12" cy="10" r="3" />
-                }
-                @case ('briefcase') {
-                <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                <rect width="20" height="14" x="2" y="6" rx="2" />
-                }
-                @case ('layers') {
-                <path
-                  d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
-                <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
-                <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
-                }
-                @case ('target') {
-                <circle cx="12" cy="12" r="10" />
-                <circle cx="12" cy="12" r="6" />
-                <circle cx="12" cy="12" r="2" />
-                }
-                @default {
-                <circle cx="12" cy="12" r="10" />
-                }
-                }
-              </svg>
-              <span class="info-label">{{ card.label }}</span>
+        <div class="whatido-panel">
+          <div class="panel-eyebrow"><span class="dot dot-violet"></span> What I Do</div>
+          <ul class="whatido-list" appStagger>
+            @for (item of whatIDo; track trackByIndex($index)) {
+              <li class="whatido-item animate-fade-in-up">
+                <span class="whatido-icon" aria-hidden="true">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <path [attr.d]="item.icon" />
+                  </svg>
+                </span>
+                {{ item.title }}
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+
+      <!-- STATS (spans below intro + portrait) -->
+      <div class="about-stats">
+        <div class="stat-strip" appStagger>
+          @for (stat of stats; track trackByIndex($index)) {
+            <div class="stat-cell animate-fade-in-up">
+              <span class="stat-icon" [style.--tint]="stat.tint" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                  <path [attr.d]="stat.icon" />
+                </svg>
+              </span>
+              <strong class="stat-number">{{ stat.number }}</strong>
+              <span class="stat-label">{{ stat.label }}</span>
             </div>
-            <div class="info-value-wrap">
-              <strong class="info-value">{{ card.value }}</strong>
-            </div>
-          </div>
           }
         </div>
+      </div>
+    </div>
 
-        <!-- Resume CTA -->
-        <div class="about-resume-cta animate-fade-in-up" [style.animation-delay]="'0.3s'">
-          <app-resume-button></app-resume-button>
+    <!-- ============ PANELS ROW ============ -->
+    <div class="about-panels">
+      <!-- Panel 1: Tech Arsenal -->
+      <div class="panel panel-expertise" appScrollTrigger>
+        <div class="panel-eyebrow"><span class="dot dot-violet"></span> Tech Arsenal</div>
+        <div class="expertise-grid" appStagger>
+          @for (tech of expertise; track trackByIndex($index)) {
+            <div class="expertise-item animate-fade-in-up" [style.--brand]="tech.color">
+              <span class="expertise-logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path [attr.d]="tech.path" />
+                </svg>
+              </span>
+              <span class="expertise-name">{{ tech.name }}</span>
+            </div>
+          }
         </div>
+        <button type="button" class="panel-cta" (click)="scrollToSkills()">
+          and many more...
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 10h11M11 6l4 4-4 4" />
+          </svg>
+        </button>
       </div>
     </div>
   </div>

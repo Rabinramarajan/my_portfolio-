@@ -1,70 +1,225 @@
 <section class="resume-section" id="resume" aria-labelledby="resume-title">
-  <div class="resume-container">
-    <div class="resume-header">
-      <div class="section-label">{{ pds.resume()?.sectionLabel }}</div>
-      <h2 class="resume-title" id="resume-title">{{ pds.resume()?.title }}</h2>
-      <p class="resume-subtitle">{{ pds.resume()?.subtitle }}</p>
+  <div class="rz-container">
+    <!-- Breadcrumb -->
+    <nav class="rz-breadcrumb" aria-label="Breadcrumb">
+      <a href="#home">Home</a><span class="crumb-sep">›</span><span class="crumb-current">Resume</span>
+    </nav>
+
+    <!-- ============ HEADER ============ -->
+    <div class="rz-header">
+      <div class="rz-headline">
+        <h2 class="rz-title" id="resume-title">My <span class="grad">Resume</span></h2>
+        <p class="rz-subtitle">
+          A result-driven {{ pds.meta()?.role || 'Frontend Developer' }} with 4+ years of experience
+          building scalable, high-performance web &amp; mobile applications.
+        </p>
+      </div>
+
+      <div class="rz-header-actions">
+        <a [href]="pds.meta()?.resumePdf" download class="rz-btn rz-btn--primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+          Download CV
+        </a>
+        <button type="button" class="rz-btn rz-btn--ghost" (click)="print()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><rect x="6" y="14" width="12" height="8" /></svg>
+          Print Resume
+        </button>
+      </div>
+
+      <div class="rz-avail-card">
+        <span class="rz-planet" aria-hidden="true"></span>
+        <div class="rz-avail-text">
+          <strong><span class="rz-avail-dot"></span> Available for Opportunities</strong>
+          <p>Let's build something amazing together!</p>
+        </div>
+      </div>
     </div>
 
-    <div class="resume-card">
-      <div class="resume-card-left">
-        <div class="avail-badge">
-          <span class="avail-dot"></span>
-          {{ pds.resume()?.availBadge }}
+    <!-- ============ TOP ROW ============ -->
+    <div class="rz-grid-top">
+      <!-- Profile -->
+      <div class="rz-card rz-profile">
+        <div class="rz-profile-photo">
+          <img [src]="pds.meta()?.aboutImage || pds.meta()?.profileImage" [alt]="pds.meta()?.name" loading="lazy" decoding="async" />
         </div>
-        <h3 class="resume-name">{{ pds.resume()?.cardTitle }}</h3>
-        <p class="resume-bio">{{ pds.resume()?.cardBio }}</p>
-        <div class="resume-actions">
-          <a [href]="pds.meta()?.resumePdf" download class="resume-btn resume-btn--primary">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            {{ pds.resume()?.downloadLabel }}
-          </a>
-          <a [href]="pds.meta()?.resumePdf" target="_blank" class="resume-btn resume-btn--outline">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="2" y1="12" x2="22" y2="12" />
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-            </svg>
-            {{ pds.resume()?.viewLabel }}
-          </a>
+        <div class="rz-profile-info">
+          <h3 class="rz-profile-name">{{ pds.meta()?.name }}</h3>
+          <p class="rz-profile-role">{{ pds.meta()?.role }}</p>
+          <ul class="rz-contact">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>{{ pds.meta()?.location }}</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-10 5L2 7" /></svg>{{ pds.meta()?.email }}</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" /></svg>{{ phone }}</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z" /></svg>{{ website }}</li>
+          </ul>
+          <span class="rz-profile-avail"><span class="rz-avail-dot"></span> Available for new opportunities</span>
         </div>
       </div>
 
-      <!-- Right — PDF mockup -->
-      <div class="resume-card-right">
-        <div class="pdf-mockup">
-          <div class="pdf-topbar">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.5">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-            </svg>
-            <span class="pdf-label">.PDF</span>
-          </div>
-          <div class="pdf-content">
-            <div class="pdf-line pdf-line--title"></div>
-            <div class="pdf-line pdf-line--subtitle"></div>
-            <div class="pdf-spacer"></div>
-            <div class="pdf-line pdf-line--full"></div>
-            <div class="pdf-line pdf-line--full"></div>
-            <div class="pdf-line pdf-line--med"></div>
-            <div class="pdf-spacer"></div>
-            <div class="pdf-line pdf-line--accent pdf-line--long"></div>
-            <div class="pdf-line pdf-line--accent pdf-line--med"></div>
-            <div class="pdf-line pdf-line--accent pdf-line--short"></div>
-            <div class="pdf-spacer"></div>
-            <div class="pdf-line pdf-line--full"></div>
-            <div class="pdf-line pdf-line--med"></div>
-          </div>
+      <!-- About Me -->
+      <div class="rz-card rz-about">
+        <div class="rz-card-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4" /><path d="M4 21v-1a6 6 0 0 1 12 0v1" /></svg>
+          About Me
         </div>
-        <div class="pdf-updated">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="18 15 12 9 6 15" />
-          </svg>
-          {{ pds.resume()?.updatedLabel }}
+        <p class="rz-about-bio">
+          I'm a passionate {{ pds.meta()?.role || 'Frontend Developer' }} who loves crafting beautiful,
+          responsive and user-friendly web &amp; mobile applications. I specialize in Angular,
+          Ionic and the modern JavaScript ecosystem.
+        </p>
+        <div class="rz-about-stats">
+          @for (s of miniStats; track s.label) {
+            <div class="rz-mini"><strong>{{ s.number }}</strong><span>{{ s.label }}</span></div>
+          }
+        </div>
+        <a href="#about" class="rz-more">More About Me
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </a>
+      </div>
+
+      <!-- Professional Skills -->
+      <div class="rz-card rz-skills">
+        <div class="rz-card-head rz-card-head--split">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6" /></svg> Professional Skills</span>
+          <a href="#skills" class="rz-pill-link">View All Skills</a>
+        </div>
+        <div class="rz-skill-list">
+          @for (skill of skills; track skill.name) {
+            <div class="rz-skill-row">
+              <span class="rz-skill-logo" [style.--brand]="skill.color">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path [attr.d]="skill.path" /></svg>
+              </span>
+              <span class="rz-skill-name">{{ skill.name }}</span>
+              <span class="rz-skill-bar"><span [style.width.%]="skill.pct"></span></span>
+              <span class="rz-skill-pct">{{ skill.pct }}%</span>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ MID ROW ============ -->
+    <div class="rz-grid-mid">
+      <!-- Work Experience -->
+      <div class="rz-card rz-work">
+        <div class="rz-card-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /></svg>
+          Work Experience
+        </div>
+        <ol class="rz-timeline">
+          @for (job of pds.experience()?.jobs || []; track job.company; let i = $index) {
+            <li class="rz-tl-item">
+              <span class="rz-tl-rail" aria-hidden="true"><span class="rz-tl-node" [class.is-alt]="i % 2 === 1"></span></span>
+              <div class="rz-tl-body">
+                <span class="rz-tl-badge">{{ job.duration }}</span>
+                <div class="rz-tl-top">
+                  <div>
+                    <h4 class="rz-tl-role">{{ job.role }}</h4>
+                    <span class="rz-tl-company">{{ job.company }}</span>
+                  </div>
+                  @if (job.location) {
+                    <span class="rz-tl-loc">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
+                      {{ job.location }}
+                    </span>
+                  }
+                </div>
+                <p class="rz-tl-desc">{{ job.achievements?.[0] }}</p>
+              </div>
+            </li>
+          }
+        </ol>
+      </div>
+
+      <!-- Right rail: Education + Achievements -->
+      <div class="rz-mid-right">
+        <div class="rz-card rz-edu">
+          <div class="rz-card-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10 12 5 2 10l10 5 10-5ZM6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5" /></svg>
+            Education
+          </div>
+          <ol class="rz-edu-list">
+            @for (e of education; track e.year) {
+              <li class="rz-edu-item">
+                <span class="rz-edu-year">{{ e.year }}</span>
+                <span class="rz-edu-node" aria-hidden="true"></span>
+                <div class="rz-edu-body">
+                  <h4>{{ e.title }}</h4>
+                  <p>{{ e.place }}</p>
+                </div>
+                <span class="rz-edu-score">{{ e.score }}</span>
+              </li>
+            }
+          </ol>
+        </div>
+
+        <div class="rz-card rz-ach">
+          <div class="rz-card-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9H4a2 2 0 0 1-2-2V5a1 1 0 0 1 1-1h3M18 9h2a2 2 0 0 0 2-2V5a1 1 0 0 0-1-1h-3M6 4h12v6a6 6 0 0 1-12 0V4ZM12 16v3M8 21h8" /></svg>
+            Achievements
+          </div>
+          <ul class="rz-ach-list">
+            @for (a of achievements; track a.title) {
+              <li class="rz-ach-item" [style.--tint]="a.tint">
+                <span class="rz-ach-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="a.icon" /></svg></span>
+                <div class="rz-ach-body"><h4>{{ a.title }}</h4><p>{{ a.desc }}</p></div>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ BOTTOM ROW ============ -->
+    <div class="rz-grid-bottom">
+      <!-- Tech Stack -->
+      <div class="rz-card rz-tech">
+        <div class="rz-card-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5M3 12c0 1.66 4 3 9 3s9-1.34 9-3" /></svg>
+          Tech Stack
+        </div>
+        <div class="rz-tech-row">
+          @for (t of techStack; track t.name) {
+            <span class="rz-tech-logo" [style.--brand]="t.color" [attr.title]="t.name">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path [attr.d]="t.path" /></svg>
+            </span>
+          }
+          <a href="#skills" class="rz-tech-more">+ More</a>
+        </div>
+      </div>
+
+      <!-- Languages -->
+      <div class="rz-card rz-lang">
+        <div class="rz-card-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z" /></svg>
+          Languages
+        </div>
+        <div class="rz-lang-row">
+          @for (l of languages; track l.name) {
+            <div class="rz-gauge" [style.--color]="l.color">
+              <svg viewBox="0 0 60 60" aria-hidden="true">
+                <circle class="rz-gauge-track" cx="30" cy="30" r="26" />
+                <circle class="rz-gauge-fill" cx="30" cy="30" r="26"
+                  [attr.stroke-dasharray]="163.36" [attr.stroke-dashoffset]="dash(l.pct)" />
+              </svg>
+              <span class="rz-gauge-label"><strong>{{ l.name }}</strong><span>{{ l.level }}</span></span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Interests -->
+      <div class="rz-card rz-int">
+        <div class="rz-card-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" /></svg>
+          Interests
+        </div>
+        <div class="rz-int-row">
+          @for (it of interests; track it.name) {
+            <div class="rz-int-item">
+              <span class="rz-int-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="it.icon" /></svg></span>
+              <span>{{ it.name }}</span>
+            </div>
+          }
         </div>
       </div>
     </div>

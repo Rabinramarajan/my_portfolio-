@@ -1,0 +1,179 @@
+<section class="li" id="linkedin" aria-labelledby="li-title">
+  <div class="li-container" appScrollTrigger>
+    <!-- Breadcrumb -->
+    <nav class="li-breadcrumb" aria-label="Breadcrumb">
+      <a href="#home">Home</a><span class="crumb-sep">›</span><span class="crumb-current">LinkedIn Presence</span>
+    </nav>
+
+    <!-- ============ HEADER ============ -->
+    <div class="li-header">
+      <div class="li-headline">
+        <h2 class="li-title" id="li-title">My LinkedIn <span class="grad">Presence</span></h2>
+        <p class="li-subtitle">
+          A professional network where I share ideas, insights, projects,
+          and connect with amazing people.
+        </p>
+      </div>
+      <div class="li-orbit" aria-hidden="true">
+        <span class="li-orbit-ring"></span>
+        <span class="li-orbit-badge">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
+        </span>
+      </div>
+    </div>
+
+    <!-- ============ MAIN GRID ============ -->
+    <div class="li-main">
+      <!-- LEFT COLUMN -->
+      <div class="li-left">
+        <!-- Profile card -->
+        <div class="li-card li-profile">
+          <div class="li-profile-photo">
+            <img [src]="pds.meta()?.aboutImage || pds.meta()?.profileImage" [alt]="pds.meta()?.name" loading="lazy" decoding="async" />
+            <span class="li-online" aria-hidden="true"></span>
+          </div>
+          <div class="li-profile-info">
+            <h3 class="li-profile-name">
+              {{ pds.meta()?.name }}
+              <svg class="li-verified" width="18" height="18" viewBox="0 0 24 24" fill="#38bdf8" aria-label="Verified"><path d="M12 2 9.8 4.2 6.7 4l-.7 3-2.8 1.4L4.5 12l-1.3 3.6 2.8 1.4.7 3 3.1-.2L12 22l2.2-2.2 3.1.2.7-3 2.8-1.4L19.5 12l1.3-3.6-2.8-1.4-.7-3-3.1.2Z" /><path d="m9.5 12 1.8 1.8 3.7-3.7" stroke="#0a0a0f" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </h3>
+            <p class="li-profile-headline">{{ headline }}</p>
+            <p class="li-profile-bio">
+              Passionate Frontend Developer with 4+ years of experience building
+              scalable web &amp; mobile applications. I love turning ideas into
+              real world products.
+            </p>
+            <div class="li-profile-meta">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>{{ pds.meta()?.location || 'India' }}</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /></svg>{{ industry }}</span>
+            </div>
+            <div class="li-profile-actions">
+              <a [href]="linkedinUrl" target="_blank" rel="noopener" class="li-btn li-btn--primary">
+                View My LinkedIn Profile
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </a>
+              <a [href]="linkedinUrl" target="_blank" rel="noopener" class="li-btn li-btn--ghost">
+                Connect With Me
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
+              </a>
+            </div>
+          </div>
+          <div class="li-qr">
+            <div class="li-qr-code" aria-hidden="true">
+              @for (c of qrCells; track trackByIndex($index)) {
+                <span [class.on]="c"></span>
+              }
+            </div>
+            <span class="li-qr-caption">Scan to view<br />my LinkedIn Profile</span>
+          </div>
+        </div>
+
+        <!-- Stats bar -->
+        <div class="li-card li-stats">
+          @for (s of stats; track s.label; let last = $last) {
+            <div class="li-stat" [class.has-divider]="!last">
+              <span class="li-stat-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="s.icon" /></svg>
+              </span>
+              <strong class="li-stat-value">{{ s.value }}</strong>
+              <span class="li-stat-label">{{ s.label }}</span>
+            </div>
+          }
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="li-card li-activity">
+          <div class="li-card-head li-card-head--split">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8ZM14 2v6h6" /></svg> Recent Activity</span>
+            <a [href]="linkedinUrl" target="_blank" rel="noopener" class="li-head-link">View all activity ›</a>
+          </div>
+          <div class="li-activity-grid">
+            @for (a of activity; track trackByIndex($index)) {
+              <a [href]="linkedinUrl" target="_blank" rel="noopener" class="li-act-card">
+                <div class="li-act-thumb" [style.--hue]="a.hue">
+                  <span class="li-act-badge">{{ a.type }}</span>
+                  <span class="li-act-glyph"></span>
+                </div>
+                <div class="li-act-body">
+                  <h4>{{ a.title }}</h4>
+                  <p>{{ a.desc }}</p>
+                  <div class="li-act-meta">{{ a.date }} • {{ a.views }} • ❤ {{ a.reactions }}</div>
+                </div>
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <aside class="li-right">
+        <!-- Network Growth chart -->
+        <div class="li-card li-growth">
+          <div class="li-card-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18M7 14l4-4 3 3 5-6" /></svg> Network Growth</div>
+          <p class="li-growth-sub">My LinkedIn network has grown consistently through meaningful connections.</p>
+          <div class="li-chart">
+            <div class="li-chart-y">
+              @for (y of chart.yLabels; track trackByIndex($index)) { <span>{{ y }}</span> }
+            </div>
+            <svg class="li-chart-svg" viewBox="0 0 300 160" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="liArea" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="rgba(124,58,237,0.4)" />
+                  <stop offset="100%" stop-color="rgba(124,58,237,0)" />
+                </linearGradient>
+              </defs>
+              <polygon class="li-chart-fill" [attr.points]="chartArea" fill="url(#liArea)" />
+              <polyline class="li-chart-line" [attr.points]="chartPoints" />
+              @for (v of chart.values; track trackByIndex($index); let i = $index) {
+                <circle class="li-chart-dot" [attr.cx]="chartDot(i).x" [attr.cy]="chartDot(i).y" r="3" />
+              }
+            </svg>
+            <span class="li-chart-flag" [style.left.%]="88">500+</span>
+          </div>
+          <div class="li-chart-x">
+            @for (l of chart.labels; track trackByIndex($index)) { <span>{{ l }}</span> }
+          </div>
+        </div>
+
+        <!-- Top Skills & Endorsements -->
+        <div class="li-card li-skills">
+          <div class="li-card-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 5v6c0 5 3.4 8.6 8 11 4.6-2.4 8-6 8-11V5Z" /><path d="m9 12 2 2 4-4" /></svg> Top Skills &amp; Endorsements</div>
+          <div class="li-skill-list">
+            @for (s of skills; track s.name) {
+              <div class="li-skill-row">
+                <span class="li-skill-logo" [style.--brand]="s.color"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path [attr.d]="s.path" /></svg></span>
+                <span class="li-skill-name">{{ s.name }}</span>
+                <span class="li-skill-bar"><span [style.width.%]="s.pct"></span></span>
+                <span class="li-skill-count">{{ s.count }}</span>
+              </div>
+            }
+          </div>
+          <a [href]="linkedinUrl" target="_blank" rel="noopener" class="li-skill-link">View all skills on LinkedIn →</a>
+        </div>
+
+        <!-- What I Share -->
+        <div class="li-card li-share">
+          <div class="li-card-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4" /></svg> What I Share</div>
+          <div class="li-share-grid">
+            @for (sh of shares; track sh.name) {
+              <div class="li-share-item" [style.--tint]="sh.tint">
+                <span class="li-share-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="sh.icon" /></svg></span>
+                <span>{{ sh.name }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Let's Collaborate -->
+        <div class="li-card li-collab">
+          <div class="li-card-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" /></svg> Let's Collaborate</div>
+          <p class="li-collab-text">I'm always open to discussing new projects, opportunities and innovative ideas.</p>
+          <a [href]="linkedinUrl" target="_blank" rel="noopener" class="li-btn li-btn--primary li-collab-btn">
+            Message Me on LinkedIn
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

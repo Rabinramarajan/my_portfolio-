@@ -1,179 +1,162 @@
-<!-- ===== CONTACT SECTION ===== -->
-<section class="contact-section" id="contact" aria-labelledby="contact-title">
-  <div class="contact-container">
-    <div class="section-label">{{ pds.contact()?.sectionLabel }}</div>
-    <h2 class="contact-title">{{ pds.contact()?.title }}</h2>
-    <p class="contact-subtitle">{{ pds.contact()?.subtitle }}</p>
+<section class="ct" id="contact" aria-labelledby="ct-title">
+  <div class="ct-container">
+    <!-- Breadcrumb -->
+    <nav class="ct-breadcrumb" aria-label="Breadcrumb">
+      <a href="#home">Home</a><span class="crumb-sep">›</span><span class="crumb-current">Contact</span>
+    </nav>
 
-    <div class="contact-grid">
-      <!-- LEFT: Form -->
-      <div class="contact-form-wrap">
-        <form [formGroup]="contactForm" (ngSubmit)="submitContact()">
-          <div class="contact-form-row">
-            <div class="form-field">
-              <label for="contact-name" class="form-label">NAME</label>
-              <input id="contact-name" type="text" formControlName="name" autocomplete="name" class="form-input"
-                [class.form-input--error]="contactForm.get('name')?.invalid && contactForm.get('name')?.touched"
-                [placeholder]="pds.contact()?.form?.namePlaceholder" />
-              @if (contactForm.get('name')?.invalid && contactForm.get('name')?.touched) {
-              <span class="form-error">{{ getFieldError('name') }}</span>
-              }
+    <!-- ============ TOP ROW ============ -->
+    <div class="ct-top">
+      <!-- LEFT: intro + quote -->
+      <div class="ct-intro">
+        <h2 class="ct-title" id="ct-title">Get In<br /><span class="grad">Touch</span></h2>
+        <p class="ct-subtitle">
+          Have a project in mind or just want to say hello? I'd love to hear from you.
+          Fill out the form or reach me through any of the channels below.
+        </p>
+
+        <div class="ct-intro-row">
+          <div class="ct-plane" aria-hidden="true">
+            <span class="ct-plane-orbit"></span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
+          </div>
+          <blockquote class="ct-quote">
+            <span class="ct-quote-mark" aria-hidden="true">&ldquo;</span>
+            <p>{{ quote.text }}</p>
+            <cite>– {{ quote.author }}</cite>
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- RIGHT: form -->
+      <div class="ct-card ct-form-card">
+        <div class="ct-form-head">
+          <span class="ct-form-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
+          </span>
+          <div>
+            <h3>Send Me a Message</h3>
+            <p>I will get back to you as soon as possible.</p>
+          </div>
+        </div>
+
+        <form [formGroup]="contactForm" (ngSubmit)="submitContact()" novalidate>
+          <div class="ct-field-row">
+            <div class="ct-field">
+              <label for="ct-name">Your Name</label>
+              <div class="ct-input" [class.is-invalid]="isInvalid('name')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4" /><path d="M4 21v-1a6 6 0 0 1 12 0v1" /></svg>
+                <input id="ct-name" type="text" formControlName="name" placeholder="Enter your name" autocomplete="name" />
+              </div>
+              @if (isInvalid('name')) { <span class="ct-err">{{ getFieldError('name') }}</span> }
             </div>
-            <div class="form-field">
-              <label for="contact-email" class="form-label">EMAIL</label>
-              <input id="contact-email" type="email" formControlName="email" autocomplete="email" class="form-input"
-                [class.form-input--error]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
-                [placeholder]="pds.contact()?.form?.emailPlaceholder" />
-              @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
-              <span class="form-error">{{ getFieldError('email') }}</span>
-              }
+            <div class="ct-field">
+              <label for="ct-email">Your Email</label>
+              <div class="ct-input" [class.is-invalid]="isInvalid('email')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 6-10 6L2 6" /></svg>
+                <input id="ct-email" type="email" formControlName="email" placeholder="Enter your email" autocomplete="email" />
+              </div>
+              @if (isInvalid('email')) { <span class="ct-err">{{ getFieldError('email') }}</span> }
             </div>
           </div>
-          <div class="form-field">
-            <label for="contact-subject" class="form-label">SUBJECT</label>
-            <input id="contact-subject" type="text" formControlName="subject" class="form-input"
-              [class.form-input--error]="contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched"
-              [placeholder]="pds.contact()?.form?.subjectPlaceholder" />
-            @if (contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched) {
-            <span class="form-error">{{ getFieldError('subject') }}</span>
-            }
+
+          <div class="ct-field">
+            <label for="ct-subject">Subject</label>
+            <div class="ct-input" [class.is-invalid]="isInvalid('subject')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8ZM14 2v6h6M8 13h8M8 17h5" /></svg>
+              <input id="ct-subject" type="text" formControlName="subject" placeholder="What is this regarding?" />
+            </div>
+            @if (isInvalid('subject')) { <span class="ct-err">{{ getFieldError('subject') }}</span> }
           </div>
-          <div class="form-field">
-            <label for="contact-message" class="form-label">MESSAGE</label>
-            <textarea id="contact-message" formControlName="message" class="form-textarea"
-              [class.form-input--error]="contactForm.get('message')?.invalid && contactForm.get('message')?.touched"
-              rows="5" [placeholder]="pds.contact()?.form?.messagePlaceholder"></textarea>
-            @if (contactForm.get('message')?.invalid && contactForm.get('message')?.touched) {
-            <span class="form-error">{{ getFieldError('message') }}</span>
-            }
+
+          <div class="ct-field">
+            <label for="ct-message">Message</label>
+            <div class="ct-input ct-input--area" [class.is-invalid]="isInvalid('message')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" /></svg>
+              <textarea id="ct-message" rows="4" formControlName="message" placeholder="Write your message here..."></textarea>
+            </div>
+            @if (isInvalid('message')) { <span class="ct-err">{{ getFieldError('message') }}</span> }
           </div>
-          <div class="form-footer">
-            <span class="form-note">{{ pds.contact()?.form?.note }}</span>
-            <button class="contact-send-btn" type="submit" [disabled]="contactForm.invalid || isSubmitting">
-              @if (!isSubmitting) {
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="22" y1="2" x2="11" y2="13" />
-                <polygon points="22 2 15 22 11 13 2 9 22 2" />
-              </svg>
-              {{ pds.contact()?.form?.submitLabel }}
-              } @else {
-              <span class="spinner"></span>
-              Sending...
-              }
+
+          <div class="ct-form-foot">
+            <button type="submit" class="ct-send" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
             </button>
+            <span class="ct-safe">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+              Your information is safe with me.
+            </span>
           </div>
-
-          <!-- Status message -->
-          @if (submitMessage) {
-          <div class="form-status" [class]="'form-status--' + submitStatus">
-            @if (submitStatus === 'success') {
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-            } @else if (submitStatus === 'error') {
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="15" y1="9" x2="9" y2="15" />
-              <line x1="9" y1="9" x2="15" y2="15" />
-            </svg>
-            }
-            {{ submitMessage }}
-          </div>
-          }
         </form>
       </div>
+    </div>
 
-      <!-- RIGHT: Direct contact info -->
-      <div class="contact-direct">
-        <h3 class="contact-direct-title">{{ pds.contact()?.directTitle }}</h3>
-        <p class="contact-direct-sub">{{ pds.contact()?.directSub }}</p>
+    <!-- ============ BOTTOM ROW ============ -->
+    <div class="ct-bottom">
+      <!-- Contact Information -->
+      <div class="ct-card ct-info">
+        <div class="ct-card-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" /></svg>
+          <div class="ct-head-text"><strong>Contact Information</strong><span>Feel free to reach out through any of these channels.</span></div>
+        </div>
+        <ul class="ct-channels">
+          @for (c of channels; track c.key) {
+            <li class="ct-channel" [style.--tint]="c.tint">
+              <a [href]="c.href" [attr.target]="c.key === 'website' || c.key === 'location' ? '_blank' : null" rel="noopener">
+                <span class="ct-channel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path [attr.d]="c.icon" /></svg></span>
+                <span class="ct-channel-text"><strong>{{ c.label }}</strong><span>{{ c.value }}</span></span>
+                <span class="ct-channel-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
 
-        @if (pds.scheduling()?.calendlyUrl) {
-        <a [href]="pds.scheduling()?.calendlyUrl" target="_blank" rel="noopener noreferrer" class="contact-book-call">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M8 2v4" />
-            <path d="M16 2v4" />
-            <rect width="18" height="18" x="3" y="4" rx="2" />
-            <path d="M3 10h18" />
-          </svg>
-          {{ pds.scheduling()?.ctaLabel }}
+      <!-- Where I'm Located -->
+      <div class="ct-card ct-map-card">
+        <div class="ct-card-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
+          <div class="ct-head-text"><strong>Where I'm Located</strong></div>
+        </div>
+        <div class="ct-map" aria-hidden="true">
+          <span class="ct-map-pin">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" /></svg>
+          </span>
+          <span class="ct-map-name">{{ locationName.split(',')[0] }}</span>
+        </div>
+        <a [href]="mapUrl" target="_blank" rel="noopener" class="ct-map-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4ZM8 2v16M16 6v16" /></svg>
+          Open in Google Maps
         </a>
-        <span class="contact-book-sub">{{ pds.scheduling()?.ctaSubLabel }}</span>
-        }
+      </div>
 
-        <div class="contact-channels">
-          @for (ch of pds.contact()?.channels; track ch.type) {
-          @if (ch.href) {
-          <a [href]="ch.href" [target]="ch['external'] ? '_blank' : '_self'" class="contact-channel">
-            <div class="channel-icon" [class]="'channel-icon--' + ch.type">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                @if (ch.type === 'email') {
-                <rect x="2" y="4" width="20" height="16" rx="2" />
-                <path d="m22 7-10 5L2 7" />
-                }
-                @if (ch.type === 'phone') {
-                <path
-                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                }
-                @if (ch.type === 'website') {
-                <circle cx="12" cy="12" r="10" />
-                <line x1="2" y1="12" x2="22" y2="12" />
-                <path
-                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                }
-                @if (ch.type === 'linkedin') {
-                <path
-                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
-                <circle cx="4" cy="4" r="2" />
-                }
-                @if (ch.type === 'github') {
-                <path
-                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                    fill="currentColor" stroke="none" />
-                }
-                @if (ch.type === 'location') {
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-                }
-              </svg>
-            </div>
-            <div class="channel-info">
-              <span class="channel-label">{{ ch.label }}</span>
-              <span class="channel-val">{{ ch.value }}</span>
-            </div>
-          </a>
-          } @else {
-          <div class="contact-channel contact-channel--static">
-            <div class="channel-icon channel-icon--location">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-            </div>
-            <div class="channel-info">
-              <span class="channel-label">{{ ch.label }}</span>
-              <span class="channel-val">{{ ch.value }}</span>
-            </div>
-          </div>
-          }
-          }
+      <!-- I'm Available For -->
+      <div class="ct-card ct-avail">
+        <div class="ct-card-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /></svg>
+          <div class="ct-head-text"><strong>I'm Available For</strong></div>
         </div>
-
-        <!-- Availability card -->
-        <div class="avail-card">
-          <div class="avail-row">
-            <span class="avail-dot avail-dot--green"></span>
-            <span class="avail-text">{{ pds.contact()?.availText }}</span>
-          </div>
-          <p class="avail-note">{{ pds.contact()?.availNote }}</p>
-        </div>
-
-        <!-- Resume CTA -->
-        <div class="contact-resume-cta">
-          <app-resume-button></app-resume-button>
+        <ul class="ct-avail-list">
+          @for (a of availableFor; track trackByIndex($index)) {
+            <li>
+              <span class="ct-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 5 5L20 7" /></svg></span>
+              {{ a }}
+            </li>
+          }
+        </ul>
+        <div class="ct-quick">
+          <span class="ct-quick-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg></span>
+          <div><h4>Quick Response</h4><p>I usually respond within 24 hours. Let's connect and create something awesome together!</p></div>
         </div>
       </div>
+    </div>
+
+    <!-- ============ FOOTER STRIP ============ -->
+    <div class="ct-footer">
+      <span class="ct-footer-heart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.5-8.5C.5 9 2 5 5.5 5c2 0 3.5 1.5 4.5 3 1-1.5 2.5-3 4.5-3C18 5 19.5 9 17.5 12.5 15 16.5 12 21 12 21Z" /></svg></span>
+      Thank you for visiting! I look forward to connecting with you.
+      <span class="ct-signature">– {{ pds.meta()?.name || 'Rabin R.' }}</span>
     </div>
   </div>
 </section>

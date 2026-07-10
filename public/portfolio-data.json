@@ -12,7 +12,8 @@
     "location": "Chennai, Tamil Nadu, India",
     "timezone": "IST (UTC+5:30)",
     "resumePdf": "/rabin_resume.pdf",
-    "profileImage": "/profile.webp"
+    "profileImage": "/profile.webp",
+    "aboutImage": "/about-portrait.png"
   },
   "scheduling": {
     "calendlyUrl": "https://calendly.com/rabinr/discovery-call",
@@ -291,22 +292,42 @@
       {
         "title": "WCAG 2.1 AA Compliance",
         "description": "All applications meet Level AA accessibility standards. Full support for keyboard navigation, prefers-reduced-motion, and sufficient contrast ratios across light and dark modes.",
-        "details": ["Semantic landmarks with aria-labelledby", "Motion preferences respected", "4.5:1+ contrast ratio compliance", "Screen reader optimized"]
+        "details": [
+          "Semantic landmarks with aria-labelledby",
+          "Motion preferences respected",
+          "4.5:1+ contrast ratio compliance",
+          "Screen reader optimized"
+        ]
       },
       {
         "title": "Automated Testing",
         "description": "Playwright test suite with accessibility, visual regression, and performance monitoring. Catches regressions before production.",
-        "details": ["Dual-theme A11y tests", "E2E coverage for critical flows", "Visual regression detection", "Lighthouse CI integration"]
+        "details": [
+          "Dual-theme A11y tests",
+          "E2E coverage for critical flows",
+          "Visual regression detection",
+          "Lighthouse CI integration"
+        ]
       },
       {
         "title": "Performance Audits",
         "description": "Systematic approach to Core Web Vitals, bundle optimization, and runtime performance. 40-50% performance improvements on average.",
-        "details": ["LCP/CLS/FID optimization", "Bundle size analysis", "Change detection tuning", "API consumption reduction"]
+        "details": [
+          "LCP/CLS/FID optimization",
+          "Bundle size analysis",
+          "Change detection tuning",
+          "API consumption reduction"
+        ]
       },
       {
         "title": "Clean Architecture",
         "description": "Scalable, maintainable codebases built on SOLID principles, lazy loading, standalone components, and reusable UI systems.",
-        "details": ["Standalone components & zoneless detection", "Service-based architecture", "Typed RxJS patterns", "Component library design"]
+        "details": [
+          "Standalone components & zoneless detection",
+          "Service-based architecture",
+          "Typed RxJS patterns",
+          "Component library design"
+        ]
       }
     ],
     "cta": {
@@ -319,6 +340,26 @@
     "title": "A track record of delivering enterprise-grade applications",
     "subtitle": "From government immigration platforms to large-scale pension management systems, here is where my craft has been forged.",
     "jobs": [
+      {
+        "company": "RSTACK Solutions Private Limited",
+        "location": "Remote / Bengaluru, Karnataka, India",
+        "role": "Frontend Developer (Contract)",
+        "duration": "June 2026 – Present",
+        "achievements": [
+          "Designing and developing an interactive front-end interface and user experience for a web-based analytics application using modern frontend technologies",
+          "Integrating REST APIs with Artificial Intelligence and Machine Learning models to generate predictions and power intelligent decision-making",
+          "Delivering production-grade, original work on a structured full-time schedule with milestone-based timesheets and code reviews"
+        ],
+        "tags": [
+          "Angular",
+          "TypeScript",
+          "UI/UX",
+          "REST APIs",
+          "AI/ML Integration",
+          "Analytics Dashboard",
+          "Data Visualization"
+        ]
+      },
       {
         "company": "Zellavora Technologies",
         "location": "Remote / Chennai, India",
@@ -450,26 +491,38 @@
   },
   "testimonials": {
     "sectionLabel": "TESTIMONIALS",
-    "title": "What colleagues and clients say",
-    "subtitle": "Trusted by engineers and leaders to ship production-grade systems on time.",
-    "quotes": [
+    "title": "What People Say",
+    "subtitle": "Real feedback from clients and team members I've worked with.",
+    "items": [
       {
-        "text": "Rabin has an exceptional ability to translate complex requirements into clean, scalable code. His attention to performance and architecture makes him invaluable on enterprise projects.",
-        "author": "Technical Lead",
-        "company": "Fortune 500 Tech Company",
-        "role": "Architecture & Code Quality"
+        "id": 1,
+        "quote": "Rabin's ability to architect scalable Angular applications is exceptional. He took our pension management platform from concept to production with clean code and thoughtful design patterns. His understanding of government compliance and accessibility standards was critical to our success.",
+        "author": "Rajeev Kumar",
+        "role": "CTO, ITGalax Solutions",
+        "company": "Government Systems Division",
+        "rating": 5,
+        "avatar": "RK",
+        "avatarColor": "#6366f1"
       },
       {
-        "text": "His component library patterns and documentation have become our company standard. He doesn't just build features—he builds systems other engineers want to use.",
-        "author": "Engineering Manager",
-        "company": "Government Digitalization Initiative",
-        "role": "Developer Experience"
+        "id": 2,
+        "quote": "Working with Rabin on the Zellavora UI library was eye-opening. He's not just a developer — he thinks like a systems architect. The accessibility-first approach and attention to design tokens shows maturity that's rare in component library work.",
+        "author": "Priya Sharma",
+        "role": "Product Lead, SaaS Startup",
+        "company": "Enterprise Software Company",
+        "rating": 5,
+        "avatar": "PS",
+        "avatarColor": "#8b5cf6"
       },
       {
-        "text": "Shipped a 10,000-user government platform on time. Zero security incidents, 99.8% uptime, and the team shipped the next feature 40% faster thanks to the architecture he laid.",
-        "author": "Product Director",
-        "company": "Government Portal",
-        "role": "Delivery & Impact"
+        "id": 3,
+        "quote": "The performance optimization work on our e-commerce platform was transformational. Reducing LCP from 4.2s to 1.2s directly increased our conversion rate by 3×. Rabin's systematic approach to performance — measurement, trade-offs, and validation — is what sets him apart.",
+        "author": "Vikram Singh",
+        "role": "Founder, Galaxy Sofas",
+        "company": "E-commerce Platform",
+        "rating": 5,
+        "avatar": "VS",
+        "avatarColor": "#f59e0b"
       }
     ]
   },
@@ -487,7 +540,12 @@
         "name": "Galaxy Sofas",
         "outcome": "E-commerce site that increased customer enquiries 3× through performance optimization",
         "description": "A responsive, mobile-first e-commerce website for Galaxy Sofas featuring product browsing, smart filtering, and integrated enquiry system. Laser-focused on Core Web Vitals and conversion optimization.",
-        "tags": ["Next.js", "TypeScript", "Tailwind CSS", "Web Vitals"],
+        "tags": [
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "Web Vitals"
+        ],
         "links": {
           "caseStudy": "/project/galaxy-sofas",
           "live": "https://galaxy-sofas.com",
@@ -520,17 +578,39 @@
             }
           ],
           "results": [
-            { "metric": "71%", "label": "Reduction in LCP (from 4.2s to 1.2s)" },
-            { "metric": "3×", "label": "Increase in qualified enquiries" },
-            { "metric": "32%", "label": "Drop in mobile bounce rate" },
-            { "metric": "98", "label": "Lighthouse Performance score" }
+            {
+              "metric": "71%",
+              "label": "Reduction in LCP (from 4.2s to 1.2s)"
+            },
+            {
+              "metric": "3×",
+              "label": "Increase in qualified enquiries"
+            },
+            {
+              "metric": "32%",
+              "label": "Drop in mobile bounce rate"
+            },
+            {
+              "metric": "98",
+              "label": "Lighthouse Performance score"
+            }
           ],
           "gallery": [
-            { "image": "/case-galaxy-1.webp", "alt": "Galaxy Sofas homepage — mobile view" },
-            { "image": "/case-galaxy-2.webp", "alt": "Product listing with Web Vitals metrics" },
-            { "image": "/case-galaxy-3.webp", "alt": "Multi-step mobile enquiry form" }
+            {
+              "image": "/case-galaxy-1.webp",
+              "alt": "Galaxy Sofas homepage — mobile view"
+            },
+            {
+              "image": "/case-galaxy-2.webp",
+              "alt": "Product listing with Web Vitals metrics"
+            },
+            {
+              "image": "/case-galaxy-3.webp",
+              "alt": "Multi-step mobile enquiry form"
+            }
           ]
-        }
+        },
+        "category": "E-Commerce"
       },
       {
         "slug": "zellavora-website",
@@ -541,7 +621,12 @@
         "name": "Zellavora Technologies",
         "outcome": "Brand website showcasing company identity and driving 40+ qualified leads monthly",
         "description": "The official corporate website for Zellavora Technologies, built with a full design system, SSR for SEO, and a modern component-driven architecture. Demonstrates premium brand positioning and technical depth.",
-        "tags": ["Angular 21", "SSR", "TypeScript", "Design System"],
+        "tags": [
+          "Angular 21",
+          "SSR",
+          "TypeScript",
+          "Design System"
+        ],
         "links": {
           "caseStudy": "/project/zellavora-website",
           "live": "https://zellavora.com",
@@ -574,17 +659,39 @@
             }
           ],
           "results": [
-            { "metric": "100", "label": "Lighthouse score (all metrics)" },
-            { "metric": "40+", "label": "Qualified leads monthly" },
-            { "metric": "2s", "label": "Time to Interactive on 3G" },
-            { "metric": "45%", "label": "Email signup conversion rate" }
+            {
+              "metric": "100",
+              "label": "Lighthouse score (all metrics)"
+            },
+            {
+              "metric": "40+",
+              "label": "Qualified leads monthly"
+            },
+            {
+              "metric": "2s",
+              "label": "Time to Interactive on 3G"
+            },
+            {
+              "metric": "45%",
+              "label": "Email signup conversion rate"
+            }
           ],
           "gallery": [
-            { "image": "/case-zellavora-1.webp", "alt": "Zellavora hero section with glass morphism" },
-            { "image": "/case-zellavora-2.webp", "alt": "Design system showcase page" },
-            { "image": "/case-zellavora-3.webp", "alt": "Case studies grid layout" }
+            {
+              "image": "/case-zellavora-1.webp",
+              "alt": "Zellavora hero section with glass morphism"
+            },
+            {
+              "image": "/case-zellavora-2.webp",
+              "alt": "Design system showcase page"
+            },
+            {
+              "image": "/case-zellavora-3.webp",
+              "alt": "Case studies grid layout"
+            }
           ]
-        }
+        },
+        "category": "Web Applications"
       },
       {
         "slug": "zellavora-ui",
@@ -595,7 +702,12 @@
         "name": "Zellavora UI",
         "outcome": "Published npm package with 15+ production-ready components and 100% accessibility compliance",
         "description": "An open-source Angular component library built with accessibility-first principles, published on npm with full TypeScript support, interactive documentation, and live component previews.",
-        "tags": ["Angular", "npm", "A11y", "Storybook"],
+        "tags": [
+          "Angular",
+          "npm",
+          "A11y",
+          "Storybook"
+        ],
         "links": {
           "caseStudy": "/project/zellavora-ui",
           "live": "https://zellavora-ui.dev",
@@ -628,17 +740,39 @@
             }
           ],
           "results": [
-            { "metric": "15", "label": "Production-ready components" },
-            { "metric": "100%", "label": "WCAG 2.1 AA audit pass" },
-            { "metric": "1.2k+", "label": "npm downloads monthly" },
-            { "metric": "4.9★", "label": "npm package rating (from 80+ reviews)" }
+            {
+              "metric": "15",
+              "label": "Production-ready components"
+            },
+            {
+              "metric": "100%",
+              "label": "WCAG 2.1 AA audit pass"
+            },
+            {
+              "metric": "1.2k+",
+              "label": "npm downloads monthly"
+            },
+            {
+              "metric": "4.9★",
+              "label": "npm package rating (from 80+ reviews)"
+            }
           ],
           "gallery": [
-            { "image": "/case-zellavora-ui-1.webp", "alt": "Component library storybook" },
-            { "image": "/case-zellavora-ui-2.webp", "alt": "Accessibility testing dashboard" },
-            { "image": "/case-zellavora-ui-3.webp", "alt": "npm package documentation" }
+            {
+              "image": "/case-zellavora-ui-1.webp",
+              "alt": "Component library storybook"
+            },
+            {
+              "image": "/case-zellavora-ui-2.webp",
+              "alt": "Accessibility testing dashboard"
+            },
+            {
+              "image": "/case-zellavora-ui-3.webp",
+              "alt": "npm package documentation"
+            }
           ]
-        }
+        },
+        "category": "UI/UX"
       },
       {
         "slug": "ai-resume-builder",
@@ -649,7 +783,12 @@
         "name": "Zellavora AI Resume Builder",
         "outcome": "AI-powered resume builder helping job seekers create ATS-optimized resumes in 5 minutes",
         "description": "A React SPA that pairs a guided resume builder with Claude API integration for AI-assisted content generation. Live preview, ATS-optimized templates, and one-click PDF export.",
-        "tags": ["React", "Claude API", "TypeScript", "Vite"],
+        "tags": [
+          "React",
+          "Claude API",
+          "TypeScript",
+          "Vite"
+        ],
         "links": {
           "caseStudy": "/project/ai-resume-builder",
           "live": "https://resume.zellavora.com",
@@ -682,17 +821,39 @@
             }
           ],
           "results": [
-            { "metric": "200+", "label": "Beta users" },
-            { "metric": "3.2 min", "label": "Average time to complete" },
-            { "metric": "87%", "label": "Conversion to PDF export" },
-            { "metric": "4.7★", "label": "Beta user rating (feedback survey)" }
+            {
+              "metric": "200+",
+              "label": "Beta users"
+            },
+            {
+              "metric": "3.2 min",
+              "label": "Average time to complete"
+            },
+            {
+              "metric": "87%",
+              "label": "Conversion to PDF export"
+            },
+            {
+              "metric": "4.7★",
+              "label": "Beta user rating (feedback survey)"
+            }
           ],
           "gallery": [
-            { "image": "/case-resume-1.webp", "alt": "AI Resume Builder form interface" },
-            { "image": "/case-resume-2.webp", "alt": "Live preview with ATS compatibility view" },
-            { "image": "/case-resume-3.webp", "alt": "Generated resume template showcase" }
+            {
+              "image": "/case-resume-1.webp",
+              "alt": "AI Resume Builder form interface"
+            },
+            {
+              "image": "/case-resume-2.webp",
+              "alt": "Live preview with ATS compatibility view"
+            },
+            {
+              "image": "/case-resume-3.webp",
+              "alt": "Generated resume template showcase"
+            }
           ]
-        }
+        },
+        "category": "Web Applications"
       },
       {
         "slug": "zellavora-portfolio-accessibility",
@@ -703,7 +864,13 @@
         "name": "Zellavora Portfolio — Accessibility Audit & Implementation",
         "outcome": "Audited and fixed 12 accessibility issues, achieving WCAG 2.1 AA compliance across light and dark modes with comprehensive automated testing",
         "description": "This portfolio website, rebuilt with a systematic accessibility-first approach. Includes WCAG 2.1 AA compliance, dual-theme testing, keyboard navigation, and a full Playwright test suite demonstrating production-grade engineering practices.",
-        "tags": ["Angular 21", "WCAG 2.1 AA", "Playwright", "Accessibility", "SEO"],
+        "tags": [
+          "Angular 21",
+          "WCAG 2.1 AA",
+          "Playwright",
+          "Accessibility",
+          "SEO"
+        ],
         "links": {
           "caseStudy": "/blog/wcag-2-1-aa-compliance-audit-and-implementation",
           "live": "https://rabinr.in",
@@ -742,19 +909,47 @@
             }
           ],
           "results": [
-            { "metric": "0", "label": "Accessibility violations (WCAG 2.1 AA)" },
-            { "metric": "12", "label": "Issues audited and fixed" },
-            { "metric": "4.5:1+", "label": "Contrast ratio (light + dark modes)" },
-            { "metric": "100%", "label": "Keyboard navigation coverage" },
-            { "metric": "6", "label": "Playwright test specs with dual-theme" },
-            { "metric": "2", "label": "SEO issues resolved (robots.txt, sitemap)" }
+            {
+              "metric": "0",
+              "label": "Accessibility violations (WCAG 2.1 AA)"
+            },
+            {
+              "metric": "12",
+              "label": "Issues audited and fixed"
+            },
+            {
+              "metric": "4.5:1+",
+              "label": "Contrast ratio (light + dark modes)"
+            },
+            {
+              "metric": "100%",
+              "label": "Keyboard navigation coverage"
+            },
+            {
+              "metric": "6",
+              "label": "Playwright test specs with dual-theme"
+            },
+            {
+              "metric": "2",
+              "label": "SEO issues resolved (robots.txt, sitemap)"
+            }
           ],
           "gallery": [
-            { "image": "/case-a11y-1.webp", "alt": "Accessibility audit results: 0 violations" },
-            { "image": "/case-a11y-2.webp", "alt": "Light mode contrast verification: 6-8.3:1" },
-            { "image": "/case-a11y-3.webp", "alt": "Playwright test suite dual-theme coverage" }
+            {
+              "image": "/case-a11y-1.webp",
+              "alt": "Accessibility audit results: 0 violations"
+            },
+            {
+              "image": "/case-a11y-2.webp",
+              "alt": "Light mode contrast verification: 6-8.3:1"
+            },
+            {
+              "image": "/case-a11y-3.webp",
+              "alt": "Playwright test suite dual-theme coverage"
+            }
           ]
-        }
+        },
+        "category": "UI/UX"
       }
     ],
     "grid": [
@@ -803,7 +998,8 @@
               "label": "Distinct user roles managed"
             }
           ]
-        }
+        },
+        "category": "Dashboard"
       },
       {
         "slug": "prims-pension-retirement-system",
@@ -848,7 +1044,8 @@
               "label": "Records handled with virtual scroll"
             }
           ]
-        }
+        },
+        "category": "Dashboard"
       },
       {
         "slug": "vnpf-provident-fund-app",
@@ -893,7 +1090,8 @@
               "label": "App Store rating (pilot users)"
             }
           ]
-        }
+        },
+        "category": "Mobile Apps"
       }
     ],
     "inProgress": {
@@ -985,10 +1183,22 @@
           "Full TypeScript support with strict types"
         ],
         "stats": [
-          { "label": "npm downloads", "value": "1.2k/month" },
-          { "label": "GitHub stars", "value": "48" },
-          { "label": "Maintainer", "value": "Active" },
-          { "label": "Latest version", "value": "1.2.5" }
+          {
+            "label": "npm downloads",
+            "value": "1.2k/month"
+          },
+          {
+            "label": "GitHub stars",
+            "value": "48"
+          },
+          {
+            "label": "Maintainer",
+            "value": "Active"
+          },
+          {
+            "label": "Latest version",
+            "value": "1.2.5"
+          }
         ],
         "installation": "npm install @zellavora/ng-layout",
         "links": {
@@ -998,27 +1208,15 @@
           "demo": "https://ng-layout.zellavora.com/demo"
         },
         "badges": [
-          { "name": "npm", "url": "https://badge.fury.io/js/%40zellavora%2Fng-layout" },
-          { "name": "github", "url": "https://github.com/zellavora/ng-layout" }
+          {
+            "name": "npm",
+            "url": "https://badge.fury.io/js/%40zellavora%2Fng-layout"
+          },
+          {
+            "name": "github",
+            "url": "https://github.com/zellavora/ng-layout"
+          }
         ]
-      }
-    ]
-  },
-  "testimonials": {
-    "sectionLabel": "CLIENT TESTIMONIALS",
-    "title": "What clients say about working with me",
-    "subtitle": "Real feedback from project stakeholders and professional collaborators.",
-    "items": [
-      {
-        "id": 1,
-        "quote": "Rabin completely transformed our online presence. His attention to detail and modern design approach gave Galaxy Sofas exactly the fresh, casual yet professional look we wanted. Highly recommend working with him!",
-        "author": "Pavi",
-        "role": "Owner",
-        "company": "Galaxy Sofas",
-        "location": "Local Business",
-        "rating": 5,
-        "avatar": "P",
-        "avatarColor": "#06b6d4"
       }
     ]
   },
@@ -1654,43 +1852,6 @@
       }
     ],
     "connectLabel": "Connect on LinkedIn"
-  },
-  "testimonials": {
-    "sectionLabel": "TESTIMONIALS",
-    "title": "What People Say",
-    "subtitle": "Real feedback from clients and team members I've worked with.",
-    "items": [
-      {
-        "id": 1,
-        "quote": "Rabin's ability to architect scalable Angular applications is exceptional. He took our pension management platform from concept to production with clean code and thoughtful design patterns. His understanding of government compliance and accessibility standards was critical to our success.",
-        "author": "Rajeev Kumar",
-        "role": "CTO, ITGalax Solutions",
-        "company": "Government Systems Division",
-        "rating": 5,
-        "avatar": "RK",
-        "avatarColor": "#6366f1"
-      },
-      {
-        "id": 2,
-        "quote": "Working with Rabin on the Zellavora UI library was eye-opening. He's not just a developer — he thinks like a systems architect. The accessibility-first approach and attention to design tokens shows maturity that's rare in component library work.",
-        "author": "Priya Sharma",
-        "role": "Product Lead, SaaS Startup",
-        "company": "Enterprise Software Company",
-        "rating": 5,
-        "avatar": "PS",
-        "avatarColor": "#8b5cf6"
-      },
-      {
-        "id": 3,
-        "quote": "The performance optimization work on our e-commerce platform was transformational. Reducing LCP from 4.2s to 1.2s directly increased our conversion rate by 3×. Rabin's systematic approach to performance — measurement, trade-offs, and validation — is what sets him apart.",
-        "author": "Vikram Singh",
-        "role": "Founder, Galaxy Sofas",
-        "company": "E-commerce Platform",
-        "rating": 5,
-        "avatar": "VS",
-        "avatarColor": "#f59e0b"
-      }
-    ]
   },
   "contact": {
     "sectionLabel": "CONTACT",

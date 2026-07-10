@@ -227,6 +227,7 @@ export interface ProjectItem {
   featured?: boolean;
   badge?: string;
   type?: string;
+  category?: string;
   features?: string[];
 }
 
@@ -242,7 +243,7 @@ export interface ProjectsData {
   title: string;
   subtitle?: string;
   items?: ProjectItem[];
-  featured?: ProjectItem;
+  featured?: ProjectItem[];
   grid?: ProjectItem[];
   inProgress?: ProjectsSection;
 }

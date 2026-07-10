@@ -9,10 +9,7 @@ import {
 } from '../../shared/directives';
 import {
   ScrollProgressComponent,
-  ResumeButtonComponent,
-  TestimonialsComponent,
   OpenSourceComponent,
-  ArrowIconComponent,
 } from '../../shared/components';
 import { UiBadgeComponent, UiButtonDirective } from '../../shared/ui';
 import { HeroPremiumComponent } from './components/hero/hero-premium.component';
@@ -22,6 +19,7 @@ import { SkillsComponent } from './components/skills/skills.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { LinkedinComponent } from './components/linkedin/linkedin.component';
 import { ResumeComponent } from './components/deferred/resume/resume.component';
 import { PlaygroundComponent } from './components/deferred/playground/playground.component';
 
@@ -36,6 +34,7 @@ import { PlaygroundComponent } from './components/deferred/playground/playground
     ProjectsComponent,
     BlogComponent,
     ContactComponent,
+    LinkedinComponent,
     // Deferred Components
     ResumeComponent,
     PlaygroundComponent,
@@ -43,8 +42,6 @@ import { PlaygroundComponent } from './components/deferred/playground/playground
     ScrollTriggerDirective,
     // Components
     ScrollProgressComponent,
-    ResumeButtonComponent,
-    TestimonialsComponent,
     OpenSourceComponent,
   ],
   templateUrl: './home.html',
