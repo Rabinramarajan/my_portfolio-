@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" fill="none">
+  <defs>
+    <linearGradient id="medBg" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0a0f24"/>
+      <stop offset="1" stop-color="#1a1140"/>
+    </linearGradient>
+    <linearGradient id="medGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7c5cff"/>
+      <stop offset="1" stop-color="#3ba7ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#medBg)"/>
+  <g stroke="#3ba7ff" stroke-opacity="0.08">
+    <path d="M0 120H640M0 240H640M213 0V360M426 0V360"/>
+  </g>
+  <rect x="250" y="70" width="140" height="220" rx="24" fill="#12183a" stroke="url(#medGlow)" stroke-width="2" stroke-opacity="0.6"/>
+  <rect x="266" y="92" width="108" height="150" rx="12" fill="#0c1130"/>
+  <circle cx="320" cy="150" r="30" fill="#7c5cff" fill-opacity="0.25" stroke="url(#medGlow)" stroke-width="2"/>
+  <path d="M320 136v28M306 150h28" stroke="#5ee6a8" stroke-width="5" stroke-linecap="round"/>
+  <path d="M280 210 q40 -30 80 0" stroke="#3ba7ff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="320" cy="266" r="10" stroke="url(#medGlow)" stroke-width="2" fill="none"/>
+  <path d="M150 180 h40 l12 -26 l16 52 l14 -34 h30" stroke="#5ee6a8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M470 180 h-30 l-14 -34 l-16 52 l-12 -26 h-40" stroke="#5ee6a8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+</svg>

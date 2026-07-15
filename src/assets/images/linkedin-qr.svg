@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <rect width="120" height="120" rx="8" fill="#ffffff"/>
+  <g fill="#0d1330">
+    <!-- finder patterns -->
+    <path d="M14 14h28v28H14Z M20 20h16v16H20Z" fill-rule="evenodd"/>
+    <rect x="24" y="24" width="8" height="8"/>
+    <path d="M78 14h28v28H78Z M84 20h16v16H84Z" fill-rule="evenodd"/>
+    <rect x="88" y="24" width="8" height="8"/>
+    <path d="M14 78h28v28H14Z M20 84h16v16H20Z" fill-rule="evenodd"/>
+    <rect x="24" y="88" width="8" height="8"/>
+    <!-- data modules -->
+    <g>
+      <rect x="52" y="14" width="6" height="6"/><rect x="64" y="14" width="6" height="6"/><rect x="52" y="26" width="6" height="6"/><rect x="60" y="32" width="6" height="6"/>
+      <rect x="14" y="52" width="6" height="6"/><rect x="26" y="52" width="6" height="6"/><rect x="32" y="60" width="6" height="6"/><rect x="14" y="64" width="6" height="6"/>
+      <rect x="52" y="52" width="6" height="6"/><rect x="64" y="52" width="6" height="6"/><rect x="58" y="58" width="6" height="6"/><rect x="52" y="70" width="6" height="6"/><rect x="70" y="52" width="6" height="6"/>
+      <rect x="88" y="52" width="6" height="6"/><rect x="100" y="58" width="6" height="6"/><rect x="94" y="66" width="6" height="6"/>
+      <rect x="52" y="88" width="6" height="6"/><rect x="64" y="88" width="6" height="6"/><rect x="58" y="98" width="6" height="6"/><rect x="70" y="94" width="6" height="6"/>
+      <rect x="88" y="88" width="6" height="6"/><rect x="100" y="88" width="6" height="6"/><rect x="94" y="98" width="6" height="6"/><rect x="88" y="100" width="6" height="6"/>
+    </g>
+  </g>
+</svg>

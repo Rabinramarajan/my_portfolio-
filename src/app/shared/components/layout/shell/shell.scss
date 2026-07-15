@@ -1,0 +1,123 @@
+:host {
+  display: block;
+}
+
+.shell__topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: color-mix(in srgb, var(--color-bg-elevated) 80%, transparent);
+  padding: 0.75rem 1rem;
+  backdrop-filter: blur(24px);
+}
+
+.shell__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.shell__brand-mark {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 800;
+}
+
+.shell__brand-name {
+  font-weight: 700;
+  color: var(--color-fg);
+}
+
+.shell__menu-btn {
+  display: inline-flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-fg);
+  background: none;
+  cursor: pointer;
+}
+
+.shell__layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.shell__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgb(0 0 0 / 60%);
+  backdrop-filter: blur(4px);
+  border: 0;
+  cursor: pointer;
+}
+
+.shell__sidebar {
+  position: fixed;
+  inset-block: 0;
+  left: 0;
+  z-index: 50;
+  height: 100vh;
+  flex-shrink: 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+.shell__sidebar--open {
+  transform: translateX(0);
+}
+
+.shell__main {
+  margin: 0 auto;
+  min-width: 0;
+  flex: 1;
+  padding: 1.5rem 1rem;
+  /* Reserve space for the fixed footer bar */
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 640px) {
+  .shell__main {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .shell__main {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .shell__topbar {
+    display: none;
+  }
+  .shell__backdrop {
+    display: none;
+  }
+  .shell__sidebar {
+    position: sticky;
+    top: 0;
+    z-index: auto;
+    transform: translateX(0);
+  }
+  .shell__main {
+    padding: 2.5rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .shell__main {
+    max-width: 1600px;
+  }
+}

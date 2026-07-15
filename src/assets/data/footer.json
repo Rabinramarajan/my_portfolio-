@@ -1,0 +1,44 @@
+{
+  "description": "I build responsive, accessible, enterprise-grade Angular applications with a focus on performance, clean architecture and measurable outcomes.",
+  "groups": [
+    {
+      "id": "quick-links",
+      "title": "Quick Links",
+      "items": [
+        { "label": "Home", "route": "/" },
+        { "label": "About Me", "route": "/about" },
+        { "label": "Experience", "route": "/experience" },
+        { "label": "Skills & Technologies", "route": "/skills" },
+        { "label": "Projects", "route": "/projects" },
+        { "label": "Resume", "route": "/resume" },
+        { "label": "Contact", "route": "/contact" }
+      ]
+    },
+    {
+      "id": "resources",
+      "title": "Resources",
+      "items": [
+        { "label": "Insights & Articles", "route": "/blog" },
+        { "label": "GitHub", "url": "https://github.com/rabinr", "external": true },
+        { "label": "LinkedIn", "url": "https://linkedin.com/in/rabinr", "external": true },
+        { "label": "Portfolio", "url": "https://www.rabinr.in", "external": true },
+        { "label": "Resume (PDF)", "url": "assets/files/rabin-cv.pdf", "external": true }
+      ]
+    }
+  ],
+  "newsletter": {
+    "heading": "Stay Connected",
+    "caption": "Subscribe for the latest articles, projects and Angular insights.",
+    "placeholder": "Enter your email"
+  },
+  "quote": {
+    "text": "Code is not just what I do, it's how I solve problems and create impact.",
+    "author": "Rabin R"
+  },
+  "bottomLinks": [
+    { "label": "Privacy Policy", "url": "#" },
+    { "label": "Terms of Service", "url": "#" },
+    { "label": "Sitemap", "url": "#" }
+  ],
+  "copyright": "© 2024 Rabin R. All rights reserved."
+}

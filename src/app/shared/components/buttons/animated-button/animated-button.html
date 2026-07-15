@@ -1,0 +1,54 @@
+@let content =
+  ({
+    label: label(),
+    icon: icon(),
+    pos: iconPosition(),
+    loading: loading(),
+    size: iconSize(),
+  });
+
+<ng-template #inner>
+  @if (content.loading) {
+    <app-icon name="Rocket" [size]="content.size" class="btn__spin" aria-hidden="true" />
+  } @else if (content.icon && content.pos === 'left') {
+    <app-icon [name]="content.icon" [size]="content.size" aria-hidden="true" />
+  }
+  @if (content.label) {
+    <span>{{ content.label }}</span>
+  }
+  @if (!content.loading && content.icon && content.pos === 'right') {
+    <app-icon [name]="content.icon" [size]="content.size" aria-hidden="true" />
+  }
+</ng-template>
+
+@if (routerLink(); as link) {
+  <a
+    [routerLink]="link"
+    [class]="classes()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-disabled]="isDisabled() || null"
+  >
+    <ng-container [ngTemplateOutlet]="inner" />
+  </a>
+} @else if (href(); as url) {
+  <a
+    [href]="url"
+    target="_blank"
+    rel="noopener noreferrer"
+    [class]="classes()"
+    [attr.aria-label]="ariaLabel()"
+  >
+    <ng-container [ngTemplateOutlet]="inner" />
+  </a>
+} @else {
+  <button
+    [type]="type()"
+    [class]="classes()"
+    [disabled]="isDisabled()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-busy]="loading() || null"
+    (click)="emit()"
+  >
+    <ng-container [ngTemplateOutlet]="inner" />
+  </button>
+}

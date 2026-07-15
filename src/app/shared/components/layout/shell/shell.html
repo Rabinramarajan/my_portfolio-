@@ -1,0 +1,41 @@
+<app-background-glow />
+
+<!-- Mobile top bar -->
+<header class="shell__topbar">
+  <a routerLink="/" class="shell__brand" aria-label="Home">
+    <span class="shell__brand-mark text-gradient-brand" aria-hidden="true">R.</span>
+    <span class="shell__brand-name">{{ profile.value()?.name }}</span>
+  </a>
+  <button
+    type="button"
+    class="shell__menu-btn"
+    aria-label="Open navigation menu"
+    [attr.aria-expanded]="menuOpen()"
+    (click)="menuOpen.set(true)"
+  >
+    <app-icon name="Menu" [size]="22" aria-hidden="true" />
+  </button>
+</header>
+
+<div class="shell__layout">
+  <!-- Drawer backdrop (mobile only) -->
+  @if (menuOpen()) {
+    <button
+      type="button"
+      class="shell__backdrop"
+      aria-label="Close navigation menu"
+      (click)="menuOpen.set(false)"
+    ></button>
+  }
+
+  <!-- Sidebar: drawer on mobile, static on desktop -->
+  <app-sidebar
+    class="shell__sidebar"
+    [class.shell__sidebar--open]="menuOpen()"
+    (navigate)="menuOpen.set(false)"
+  />
+
+  <main id="main-content" tabindex="-1" class="shell__main">
+    <router-outlet />
+  </main>
+</div>

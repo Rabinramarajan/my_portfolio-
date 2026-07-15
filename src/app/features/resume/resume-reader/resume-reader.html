@@ -1,0 +1,129 @@
+@let r = resume();
+@let p = profile();
+
+<div class="reader" role="dialog" aria-modal="true" aria-label="Resume document">
+  <div class="reader__bar">
+    <p class="reader__title"><app-icon name="FileText" [size]="16" aria-hidden="true" /> {{ p?.shortName ?? 'Rabin R' }} — Resume</p>
+    <div class="reader__actions">
+      <button type="button" class="reader__btn" (click)="print()">
+        <app-icon name="Printer" [size]="15" aria-hidden="true" /> <span class="reader__btn-label">Print</span>
+      </button>
+      @if (p?.resumeUrl; as url) {
+        <a class="reader__btn" [href]="url" target="_blank" rel="noopener">
+          <app-icon name="Download" [size]="15" aria-hidden="true" /> <span class="reader__btn-label">PDF</span>
+        </a>
+      }
+      <button type="button" class="reader__btn reader__btn--close" (click)="closed.emit()" aria-label="Close reader">
+        <app-icon name="X" [size]="16" aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+
+  <div class="reader__scroll">
+    <article class="paper">
+      <!-- Identity -->
+      <header class="paper__head">
+        <div>
+          <h2 class="paper__name">{{ p?.name ?? 'Rabin R' }}</h2>
+          <p class="paper__role">{{ p?.role ?? 'Frontend Developer' }}</p>
+        </div>
+        <ul class="paper__contacts">
+          @if (p?.email; as email) { <li><app-icon name="Mail" [size]="14" aria-hidden="true" />{{ email }}</li> }
+          @if (p?.phone; as phone) { <li><app-icon name="Phone" [size]="14" aria-hidden="true" />{{ phone }}</li> }
+          @if (p?.location; as loc) { <li><app-icon name="MapPin" [size]="14" aria-hidden="true" />{{ loc }}</li> }
+          @if (p?.website; as web) { <li><app-icon name="Globe" [size]="14" aria-hidden="true" />{{ web }}</li> }
+        </ul>
+      </header>
+
+      <p class="paper__summary">{{ r.summary }}</p>
+
+      <div class="paper__grid">
+        <div class="paper__main">
+          <section class="paper__sec">
+            <h3 class="paper__h3">Experience</h3>
+            <ol class="paper__exp">
+              @for (job of r.work; track trackById($index, job)) {
+                <li class="paper__exp-item">
+                  <div class="paper__exp-row">
+                    <p class="paper__exp-role">{{ job.role }}</p>
+                    <span class="paper__exp-period">{{ job.period }}</span>
+                  </div>
+                  <p class="paper__exp-co">{{ job.company }} · {{ job.location }}</p>
+                  <p class="paper__exp-desc">{{ job.description }}</p>
+                </li>
+              }
+            </ol>
+          </section>
+
+          <section class="paper__sec">
+            <h3 class="paper__h3">Projects</h3>
+            <ul class="paper__list">
+              @for (proj of r.projectHighlights; track trackById($index, proj)) {
+                <li>
+                  <p class="paper__proj-title">{{ proj.title }} <span class="paper__tag">{{ proj.type }}</span></p>
+                  <p class="paper__proj-desc">{{ proj.description }}</p>
+                  <p class="paper__proj-tech">{{ proj.technologies.join(' · ') }}</p>
+                </li>
+              }
+            </ul>
+          </section>
+
+          <section class="paper__sec">
+            <h3 class="paper__h3">Achievements</h3>
+            <ul class="paper__ach">
+              @for (ach of r.achievements; track trackById($index, ach)) {
+                <li>
+                  <p class="paper__ach-title">{{ ach.title }}</p>
+                  <p class="paper__ach-desc">{{ ach.description }}</p>
+                </li>
+              }
+            </ul>
+          </section>
+        </div>
+
+        <aside class="paper__side">
+          <section class="paper__sec">
+            <h3 class="paper__h3">Skills</h3>
+            <div class="paper__skills">
+              @for (group of r.skillGroups; track trackById($index, group)) {
+                <div>
+                  <p class="paper__skill-cat">{{ group.category }}</p>
+                  <ul class="paper__chips">
+                    @for (item of group.items; track item) {
+                      <li>{{ item }}</li>
+                    }
+                  </ul>
+                </div>
+              }
+            </div>
+          </section>
+
+          <section class="paper__sec">
+            <h3 class="paper__h3">Education</h3>
+            <ul class="paper__list paper__list--sm">
+              @for (edu of education(); track trackById($index, edu)) {
+                <li>
+                  <p class="paper__edu-degree">{{ edu.degree }}</p>
+                  <p class="paper__edu-inst">{{ edu.institution }}</p>
+                  <p class="paper__edu-score">{{ edu.score }}</p>
+                </li>
+              }
+            </ul>
+          </section>
+
+          <section class="paper__sec">
+            <h3 class="paper__h3">Certifications</h3>
+            <ul class="paper__list paper__list--sm">
+              @for (cert of r.certifications; track trackById($index, cert)) {
+                <li>
+                  <p class="paper__cert-title">{{ cert.title }}</p>
+                  <p class="paper__cert-issuer">{{ cert.issuer }}</p>
+                </li>
+              }
+            </ul>
+          </section>
+        </aside>
+      </div>
+    </article>
+  </div>
+</div>

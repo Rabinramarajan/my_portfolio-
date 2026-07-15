@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" fill="none">
+  <defs>
+    <linearGradient id="finBg" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0b1024"/>
+      <stop offset="1" stop-color="#161036"/>
+    </linearGradient>
+    <linearGradient id="finBar" x1="0" y1="1" x2="0" y2="0">
+      <stop stop-color="#3ba7ff"/>
+      <stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#finBg)"/>
+  <g stroke="#7c5cff" stroke-opacity="0.08">
+    <path d="M0 90H640M0 180H640M0 270H640"/>
+  </g>
+  <g fill="url(#finBar)" opacity="0.9">
+    <rect x="120" y="220" width="46" height="80" rx="6"/>
+    <rect x="196" y="180" width="46" height="120" rx="6"/>
+    <rect x="272" y="140" width="46" height="160" rx="6"/>
+    <rect x="348" y="196" width="46" height="104" rx="6"/>
+    <rect x="424" y="110" width="46" height="190" rx="6"/>
+  </g>
+  <path d="M120 190 L200 150 L280 168 L360 120 L470 84" stroke="#5ee6a8" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#5ee6a8">
+    <circle cx="200" cy="150" r="5"/><circle cx="360" cy="120" r="5"/><circle cx="470" cy="84" r="6"/>
+  </g>
+  <circle cx="500" cy="255" r="34" fill="#7c5cff" fill-opacity="0.18" stroke="#7c5cff" stroke-opacity="0.5"/>
+  <text x="500" y="270" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="800" fill="#c9b8ff" text-anchor="middle">$</text>
+</svg>

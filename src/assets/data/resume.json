@@ -1,0 +1,109 @@
+{
+  "summary": "Senior Frontend Angular Developer with 4+ years architecting and delivering enterprise-grade web applications for government and financial sectors. Specialized in scalable, high-performance SPAs using Angular (v13–v22), TypeScript and RxJS — serving 10,000+ users across three countries with measurable outcomes like 50% performance gains and 40% API optimization.",
+  "openToWork": {
+    "title": "Available for Opportunities",
+    "caption": "Let's build something impactful together!"
+  },
+  "work": [
+    {
+      "id": "w1",
+      "period": "2026 - Present",
+      "role": "Frontend Developer Consultant",
+      "company": "Freelance · RSTACK Solutions",
+      "location": "Chennai, India",
+      "description": "Building an AI-driven web analytics application — a dynamic Angular frontend consuming REST APIs and integrating ML models for predictive insights and intelligent decision-making.",
+      "accent": "purple"
+    },
+    {
+      "id": "w2",
+      "period": "2022 - 2026",
+      "role": "Frontend Angular Developer",
+      "company": "ITGalax Solutions Pvt. Ltd.",
+      "location": "Chennai, India",
+      "description": "Engineered government portals & enterprise systems serving 10,000+ users across three countries — Fiji Immigration System, PRIMS pension platform and cross-platform mobile apps. Reduced API consumption 40% and boosted performance 50%.",
+      "accent": "blue"
+    }
+  ],
+  "professionalSkills": [
+    { "id": "angular", "name": "Angular", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg", "level": 95, "accent": "red" },
+    { "id": "typescript", "name": "TypeScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", "level": 92, "accent": "blue" },
+    { "id": "rxjs", "name": "RxJS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rxjs/rxjs-original.svg", "level": 90, "accent": "violet" },
+    { "id": "javascript", "name": "JavaScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "level": 90, "accent": "amber" },
+    { "id": "html5", "name": "HTML5", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", "level": 95, "accent": "orange" },
+    { "id": "css", "name": "CSS3 / SCSS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", "level": 90, "accent": "blue" },
+    { "id": "ionic", "name": "Ionic Angular", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg", "level": 88, "accent": "blue" },
+    { "id": "tailwind", "name": "Tailwind CSS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", "level": 88, "accent": "cyan" }
+  ],
+  "achievements": [
+    { "id": "a1", "icon": "Trophy", "title": "Fiji Immigration Portal", "description": "Owned the full frontend architecture for a national immigration platform, earning client commendation for UI and performance", "accent": "amber" },
+    { "id": "a2", "icon": "Zap", "title": "Angular Signals Adoption", "description": "Led the team's migration to Angular Signals and standalone components for faster, more maintainable UIs", "accent": "violet" },
+    { "id": "a3", "icon": "Star", "title": "Performance Optimization", "description": "Cut API consumption by 40% and improved load performance by 50% through RxJS and rendering optimizations", "accent": "purple" },
+    { "id": "a4", "icon": "Rocket", "title": "Cross-Platform Mobile", "description": "Shipped iOS & Android provident-fund apps with biometric auth and offline support via Ionic + Capacitor", "accent": "cyan" }
+  ],
+  "languages": [
+    { "id": "tamil", "name": "Tamil", "level": "Native", "value": 100, "accent": "cyan" },
+    { "id": "english", "name": "English", "level": "Professional", "value": 90, "accent": "blue" }
+  ],
+  "interests": [
+    { "id": "coding", "label": "Coding", "icon": "Code" },
+    { "id": "opensource", "label": "Open Source", "icon": "Github" },
+    { "id": "ai", "label": "AI / ML", "icon": "Zap" },
+    { "id": "reading", "label": "Reading", "icon": "BookOpen" },
+    { "id": "music", "label": "Music", "icon": "Heart" }
+  ],
+  "pageCount": 2,
+  "skillGroups": [
+    {
+      "id": "frontend",
+      "category": "Frontend",
+      "items": ["HTML5", "CSS3", "Sass", "JavaScript", "TypeScript", "Angular", "RxJS"]
+    },
+    { "id": "mobile", "category": "Mobile", "items": ["Ionic", "Flutter", "Capacitor"] },
+    {
+      "id": "design",
+      "category": "UI / UX & Design",
+      "items": ["Figma", "Adobe XD", "Photoshop", "Canva", "Tailwind CSS", "Bootstrap"]
+    },
+    {
+      "id": "tools",
+      "category": "Tools & Others",
+      "items": ["Git", "GitHub", "VS Code", "Postman", "Firebase", "ESLint", "Prettier"]
+    }
+  ],
+  "certifications": [
+    { "id": "c1", "title": "Applied AI & ML Essentials", "issuer": "IIT Patna (Vishlesan i-Hub) × Masai" },
+    { "id": "c2", "title": "Web Design & Development", "issuer": "Web D School, Chennai" }
+  ],
+  "projectHighlights": [
+    {
+      "id": "p1",
+      "title": "Fiji Immigration Portal",
+      "type": "Government Web Platform",
+      "description": "Secure citizen self-service portal for visas, permits and citizenship — with document uploads, payments and role-based workflows.",
+      "icon": "LayoutGrid",
+      "technologies": ["Angular", "TypeScript", "Angular Signals", "Tailwind CSS"]
+    },
+    {
+      "id": "p2",
+      "title": "VNPF Mobile App",
+      "type": "Mobile Application",
+      "description": "Cross-platform provident-fund app with biometric authentication, real-time balances and offline-capable member services.",
+      "icon": "Smartphone",
+      "technologies": ["Ionic", "Angular", "Capacitor"]
+    },
+    {
+      "id": "p3",
+      "title": "PRIMS Pension Portal",
+      "type": "Enterprise Web Application",
+      "description": "Self-service pension platform giving members real-time access to contributions, benefit statements and claim submissions.",
+      "icon": "BarChart3",
+      "technologies": ["Angular", "Angular Material", "RxJS", "REST APIs"]
+    }
+  ],
+  "suggestions": [
+    "Quantify your achievements using numbers and metrics.",
+    "Add relevant keywords to pass ATS systems.",
+    "Keep it concise – ideally one to two pages.",
+    "Highlight your most recent and impactful work."
+  ]
+}

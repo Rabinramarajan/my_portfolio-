@@ -1,0 +1,136 @@
+@if (profile.value(); as p) {
+  @if (home.value()?.hero; as hero) {
+    <!-- Hero -->
+    <section class="hero" appReveal>
+      <!-- Left: content -->
+      <div class="hero__content">
+        <span class="hero__avail">
+          <span class="hero__avail-dot animate-pulse"></span>
+          {{ hero.availabilityLabel }}
+        </span>
+
+        <h1 class="hero__title">
+          {{ hero.headlineLead }} <span class="text-gradient-brand">{{ hero.headlineHighlight }}</span>
+        </h1>
+
+        <p class="hero__subtitle">{{ hero.subtitle }}</p>
+
+        <div class="hero__ctas">
+          @for (cta of hero.ctas; track trackById($index, cta)) {
+            <app-animated-button
+              [variant]="cta.variant"
+              [label]="cta.label"
+              [icon]="cta.icon ?? null"
+              [iconPosition]="cta.iconPosition ?? 'right'"
+              [routerLink]="cta.route ?? null"
+              [href]="cta.href ?? null"
+            />
+          }
+        </div>
+
+        <!-- Stats -->
+        <div class="hero__stats">
+          @for (stat of homeStats(); track trackById($index, stat)) {
+            <div class="hero__stat">
+              @if (stat.icon; as icon) {
+                <app-icon
+                  [name]="icon"
+                  [size]="22"
+                  [style.color]="accentColor(stat.accent)"
+                  aria-hidden="true"
+                />
+              }
+              <span class="hero__stat-value">{{ stat.value }}</span>
+              <span class="hero__stat-label">{{ stat.label }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Right: portrait visual -->
+      <div class="hero__visual">
+        <!-- Ambient glow -->
+        <div
+          class="hero__glow"
+          style="background: radial-gradient(circle, var(--color-brand-purple), transparent 68%)"
+          aria-hidden="true"
+        ></div>
+
+        <!-- Rotating gradient ring -->
+        <div
+          class="hero__ring"
+          style="background: conic-gradient(from 0deg, var(--color-brand-purple), var(--color-brand-blue), transparent 55%, var(--color-brand-purple))"
+          aria-hidden="true"
+        ></div>
+
+        <!-- Portrait -->
+        <div class="hero__portrait">
+          <img
+            [src]="p.heroImage ?? p.avatar"
+            [alt]="p.name"
+            class="hero__portrait-img"
+            loading="eager"
+            decoding="async"
+          />
+          <!-- Legibility gradient + signature -->
+          <div class="hero__portrait-fade" aria-hidden="true"></div>
+          <span class="hero__signature" aria-hidden="true">{{ p.signature }}</span>
+        </div>
+
+        <!-- Floating code chip -->
+        <span class="hero__chip hero__chip--code">
+          <app-icon name="Code" [size]="22" aria-hidden="true" />
+        </span>
+
+        <!-- Floating availability chip -->
+        <span class="hero__chip hero__chip--avail">
+          <span class="hero__avail-dot animate-pulse"></span> Open to work
+        </span>
+      </div>
+    </section>
+
+    <!-- Highlights + technologies -->
+    <div class="home-grid">
+      <!-- What I do -->
+      <div class="highlights">
+        @for (item of hero.highlights; track trackById($index, item); let i = $index) {
+          <app-glass-card padding="md" [interactive]="true">
+            <app-icon
+              [name]="item.icon"
+              [size]="24"
+              [style.color]="accentColor(highlightAccents[i % highlightAccents.length])"
+              aria-hidden="true"
+            />
+            <h3 class="highlight__title">{{ item.title }}</h3>
+            <p class="highlight__desc">{{ item.description }}</p>
+          </app-glass-card>
+        }
+      </div>
+
+      <!-- Technologies -->
+      <app-glass-card padding="md">
+        <div class="tech">
+          <h2 class="tech__heading">{{ hero.techHeading }}</h2>
+          <div class="tech__grid">
+            @for (tech of topTech(); track trackById($index, tech)) {
+              <span class="tech__item" [title]="tech.name">
+                <img
+                  [src]="tech.logo"
+                  [alt]="tech.name"
+                  class="tech__logo"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+            }
+          </div>
+          <a routerLink="/skills" class="tech__more">
+            View all <app-icon name="ChevronRight" [size]="16" aria-hidden="true" />
+          </a>
+        </div>
+      </app-glass-card>
+    </div>
+  }
+}
+
+<app-footer class="home__footer" />

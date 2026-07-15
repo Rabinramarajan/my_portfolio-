@@ -1,0 +1,48 @@
+<app-page-layout
+  breadcrumb="Services"
+  titleLead="Services I"
+  titleHighlight="Offer"
+  subtitle="Freelance and contract frontend engineering — from full Angular builds to focused performance and UI work. Here's how I can help."
+>
+  @if (offerings.value(); as cfg) {
+    <div class="svc-grid" appStagger>
+      @for (svc of cfg.items; track trackById($index, svc)) {
+        <app-glass-card padding="lg">
+          <article class="svc" [class]="'svc--' + accent(svc.accent)">
+            <span class="svc__badge" aria-hidden="true">
+              <app-icon [name]="svc.icon" [size]="24" />
+            </span>
+
+            <h2 class="svc__title">{{ svc.title }}</h2>
+            <p class="svc__desc">{{ svc.description }}</p>
+
+            <ul class="svc__features">
+              @for (feature of svc.features; track $index) {
+                <li class="svc__feature">
+                  <app-icon name="Check" [size]="16" class="svc__check" aria-hidden="true" />
+                  <span>{{ feature }}</span>
+                </li>
+              }
+            </ul>
+          </article>
+        </app-glass-card>
+      }
+    </div>
+
+    <!-- CTA -->
+    <app-glass-card padding="lg">
+      <div class="svc-cta">
+        <div class="svc-cta__text">
+          <h2 class="svc-cta__title">Have a project in mind?</h2>
+          <p class="svc-cta__sub">
+            Tell me what you're building and I'll get back to you with how I can help.
+          </p>
+        </div>
+        <a routerLink="/contact" class="svc-cta__btn">
+          Start a conversation
+          <app-icon name="Send" [size]="16" aria-hidden="true" />
+        </a>
+      </div>
+    </app-glass-card>
+  }
+</app-page-layout>

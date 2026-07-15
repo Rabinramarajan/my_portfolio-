@@ -1,0 +1,21 @@
+@let p = post();
+<app-glass-card padding="none" [interactive]="true" class="bc__card">
+  <div class="bc__media">
+    <img [src]="p.cover" [alt]="p.title" class="bc__cover" loading="lazy" decoding="async" />
+    <app-badge accent="purple" class="bc__badge">{{ p.category }}</app-badge>
+  </div>
+  <div class="bc__body">
+    <h3 class="bc__title">{{ p.title }}</h3>
+    <p class="bc__excerpt">{{ p.excerpt }}</p>
+    <div class="bc__meta">
+      <span>{{ p.date | date: 'MMM d, y' }} • {{ p.readingMinutes }} min read</span>
+      <a
+        [routerLink]="['/blog', p.slug]"
+        [attr.aria-label]="'Read ' + p.title"
+        class="bc__arrow"
+      >
+        <app-icon name="ArrowRight" [size]="15" aria-hidden="true" />
+      </a>
+    </div>
+  </div>
+</app-glass-card>

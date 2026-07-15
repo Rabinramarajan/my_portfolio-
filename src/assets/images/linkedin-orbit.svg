@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 160" fill="none">
+  <defs>
+    <linearGradient id="liG" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3ba7ff"/><stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+    <radialGradient id="liHalo" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#3ba7ff" stop-opacity="0.35"/><stop offset="1" stop-color="#3ba7ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="110" cy="80" r="74" fill="url(#liHalo)"/>
+  <g stroke="#7c5cff" stroke-opacity="0.4" fill="none">
+    <ellipse cx="110" cy="80" rx="96" ry="40" transform="rotate(-18 110 80)"/>
+    <ellipse cx="110" cy="80" rx="70" ry="70"/>
+  </g>
+  <rect x="78" y="48" width="64" height="64" rx="14" fill="#0a66c2"/>
+  <text x="110" y="98" font-family="Segoe UI, Arial, sans-serif" font-size="40" font-weight="800" fill="#fff" text-anchor="middle">in</text>
+  <g fill="url(#liG)">
+    <circle cx="26" cy="58" r="5"/><circle cx="196" cy="104" r="6"/><circle cx="150" cy="18" r="4"/>
+  </g>
+  <circle cx="188" cy="52" r="8" fill="#3ba7ff" fill-opacity="0.5"/>
+</svg>

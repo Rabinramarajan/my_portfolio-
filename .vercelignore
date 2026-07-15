@@ -1,7 +1,8 @@
-node_modules
-.git
-.gitignore
-README.md
 .angular
-.env.local
-.env.*.local
+.vscode
+.husky
+node_modules
+dist
+UX
+BUG-REPORT.md
+*.log

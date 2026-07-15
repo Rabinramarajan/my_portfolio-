@@ -1,24 +1,13 @@
-// Development environment configuration
+/** Production-safe defaults; override per configuration via file replacement. */
 export const environment = {
-  production: false,
+  production: true,
+  dataBasePath: 'assets/data',
+  /** EmailJS (https://dashboard.emailjs.com) — fill with your own values. */
   emailjs: {
-    serviceId: 'service_your_service_id',      // Replace with your EmailJS Service ID
-    templateId: 'template_your_template_id',   // Replace with your EmailJS Template ID
-    publicKey: 'your_public_key',              // Replace with your EmailJS Public Key
-    recipientEmail: 'your-email@example.com'   // Replace with your email
-  }
-};
+    serviceId: 'service_fs34sui',
+    templateId: 'template_r81m171',
+    publicKey: '_dTIkiVF1c20MHREu',
+  },
+} as const;
 
-/**
- * SETUP INSTRUCTIONS:
- * 
- * 1. Sign up at https://www.emailjs.com/
- * 2. Create an email service and template
- * 3. Get your credentials from EmailJS dashboard:
- *    - Service ID: Email Services → Your Service
- *    - Template ID: Email Templates → Your Template
- *    - Public Key: Account → API Keys
- * 4. Replace the placeholders above with your actual values
- * 
- * See EMAIL_JS_SETUP.md for detailed instructions
- */
+export type Environment = typeof environment;

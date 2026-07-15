@@ -1,0 +1,24 @@
+{
+  "primary": [
+    { "id": "home", "label": "Home", "icon": "Home", "route": "/", "exact": true },
+    { "id": "about", "label": "About", "icon": "User", "route": "/about" },
+    { "id": "experience", "label": "Experience", "icon": "Briefcase", "route": "/experience" },
+    { "id": "projects", "label": "Projects", "icon": "Box", "route": "/projects" },
+    { "id": "case-studies", "label": "Case Studies", "icon": "FileText", "route": "/case-studies" },
+    { "id": "skills", "label": "Skills & Tech", "icon": "Code", "route": "/skills" },
+    { "id": "services", "label": "Services", "icon": "Wrench", "route": "/services" },
+    { "id": "certifications", "label": "Certifications", "icon": "Award", "route": "/certifications" },
+    { "id": "resume", "label": "Resume", "icon": "FileText", "route": "/resume" },
+    { "id": "blog", "label": "Insights & Articles", "icon": "FileText", "route": "/blog" },
+    { "id": "contact", "label": "Contact", "icon": "Send", "route": "/contact" }
+  ],
+  "navbar": [
+    { "id": "home", "label": "Home", "icon": "Home", "route": "/", "exact": true },
+    { "id": "about", "label": "About", "icon": "User", "route": "/about" },
+    { "id": "experience", "label": "Experience", "icon": "Briefcase", "route": "/experience" },
+    { "id": "projects", "label": "Projects", "icon": "Box", "route": "/projects" },
+    { "id": "skills", "label": "Skills", "icon": "Code", "route": "/skills" },
+    { "id": "blog", "label": "Blog", "icon": "FileText", "route": "/blog" },
+    { "id": "contact", "label": "Contact", "icon": "Send", "route": "/contact" }
+  ]
+}

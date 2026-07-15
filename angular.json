@@ -3,11 +3,11 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "48dd83ed-f3ae-43fc-82fe-20029e6dcb6e"
+    "analytics": "be702661-e56c-4de7-b72f-740e77c051d9"
   },
   "newProjectRoot": "projects",
   "projects": {
-    "portfolio": {
+    "my-portolio-ng22": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -22,46 +22,49 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
-            "server": "src/main.server.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
             "styles": [
               "src/styles.scss"
-            ],
-            "security": {
-              "allowedHosts": []
-            }
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "600kB",
-                  "maximumError": "1.2MB"
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "80kB",
-                  "maximumError": "120kB"
+                  "maximumWarning": "10kB",
+                  "maximumError": "16kB"
                 }
               ],
-              "outputHashing": "all",
-              "optimization": true,
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true
+              "outputHashing": "all"
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -70,11 +73,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "portfolio:build:production"
+              "buildTarget": "my-portolio-ng22:build:production"
             },
             "development": {
-              "buildTarget": "portfolio:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "buildTarget": "my-portolio-ng22:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,4 +88,3 @@
     }
   }
 }
-

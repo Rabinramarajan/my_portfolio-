@@ -1,0 +1,42 @@
+<div class="cp" [style.width.px]="size()" [style.height.px]="size()">
+  <svg
+    [attr.width]="size()"
+    [attr.height]="size()"
+    [attr.viewBox]="'0 0 ' + size() + ' ' + size()"
+    class="cp__svg"
+    role="progressbar"
+    [attr.aria-valuenow]="clamped()"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [attr.aria-label]="label()"
+  >
+    <circle
+      [attr.cx]="center()"
+      [attr.cy]="center()"
+      [attr.r]="radius()"
+      fill="none"
+      stroke="var(--color-border-subtle)"
+      [attr.stroke-width]="stroke()"
+    />
+    <circle
+      [attr.cx]="center()"
+      [attr.cy]="center()"
+      [attr.r]="radius()"
+      fill="none"
+      [attr.stroke]="strokeColor()"
+      [attr.stroke-width]="stroke()"
+      stroke-linecap="round"
+      [attr.stroke-dasharray]="circumference()"
+      [attr.stroke-dashoffset]="dashOffset()"
+      class="cp__ring"
+    />
+  </svg>
+  @if (showValue()) {
+    <div class="cp__center">
+      <span class="cp__value">{{ clamped() }}%</span>
+    </div>
+  }
+</div>
+@if (label(); as l) {
+  <span class="cp__label">{{ l }}</span>
+}

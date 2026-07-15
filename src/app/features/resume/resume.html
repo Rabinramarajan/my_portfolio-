@@ -1,0 +1,192 @@
+<app-breadcrumb current="Resume" class="rz__crumb" />
+
+<!-- Header -->
+<header class="rz-head">
+  <div class="rz-head__text">
+    <app-gradient-title lead="My" highlight="Resume" [level]="1" />
+    <p class="rz-head__sub">A developer's-eye view of my experience — browse the source files, or open the full document reader.</p>
+  </div>
+  <div class="rz-head__actions">
+    <app-animated-button variant="outline" icon="Maximize" label="Open Reader" (pressed)="openReader()" />
+    @if (profile.value(); as p) {
+      <app-animated-button variant="primary" icon="Download" label="Download PDF" [href]="p.resumeUrl" />
+    }
+  </div>
+</header>
+
+@if (resume.value(); as r) {
+  @let p = profile.value();
+
+  <!-- IDE window -->
+  <section class="ide" aria-label="Resume file browser">
+    <!-- Title bar -->
+    <div class="ide__bar">
+      <span class="ide__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="ide__crumb">
+        <app-icon name="FileCode" [size]="14" aria-hidden="true" />
+        rabin-r
+        <app-icon name="ChevronRight" [size]="12" class="ide__crumb-sep" aria-hidden="true" />
+        <span class="ide__crumb-file">{{ activeMeta().name }}</span>
+      </span>
+      <span class="ide__branch"><app-icon name="GitBranch" [size]="13" aria-hidden="true" /> main</span>
+    </div>
+
+    <div class="ide__body">
+      <!-- Explorer -->
+      <nav class="ide__explorer" aria-label="Resume sections">
+        <p class="ide__explorer-title">EXPLORER</p>
+        <ul class="ide__files">
+          @for (f of files; track f.id) {
+            <li>
+              <button
+                type="button"
+                class="ide__file"
+                [class.ide__file--active]="activeFile() === f.id"
+                (click)="select(f.id)"
+                [attr.aria-current]="activeFile() === f.id ? 'true' : null"
+              >
+                <app-icon [name]="f.icon" [size]="15" class="ide__file-icon" aria-hidden="true" />
+                <span>{{ f.name }}</span>
+              </button>
+            </li>
+          }
+        </ul>
+      </nav>
+
+      <!-- Editor -->
+      <div class="ide__editor">
+        <div class="ide__tabs">
+          <span class="ide__tab">
+            <app-icon [name]="activeMeta().icon" [size]="14" aria-hidden="true" />
+            {{ activeMeta().name }}
+            <i class="ide__tab-dot" aria-hidden="true"></i>
+          </span>
+        </div>
+
+        <div class="ide__code">
+          @switch (activeFile()) {
+            @case ('identity') {
+              <p class="ln c">// Senior Frontend Angular Developer</p>
+              <p class="ln"><span class="k">const</span> <span class="f">rabin</span> <span class="op">=</span> <span class="pn">&#123;</span></p>
+              <p class="ln in"><span class="pr">name</span>: <span class="s">'{{ p?.name }}'</span>,</p>
+              <p class="ln in"><span class="pr">role</span>: <span class="s">'{{ p?.role }}'</span>,</p>
+              <p class="ln in"><span class="pr">location</span>: <span class="s">'{{ p?.location }}'</span>,</p>
+              <p class="ln in"><span class="pr">email</span>: <span class="s">'{{ p?.email }}'</span>,</p>
+              <p class="ln in"><span class="pr">phone</span>: <span class="s">'{{ p?.phone }}'</span>,</p>
+              <p class="ln in"><span class="pr">website</span>: <span class="s">'{{ p?.website }}'</span>,</p>
+              <p class="ln"><span class="pn">&#125;</span>;</p>
+              <p class="ln">&nbsp;</p>
+              <p class="ln c">/** Summary */</p>
+              <p class="ln summary">{{ r.summary }}</p>
+            }
+
+            @case ('experience') {
+              <p class="ln c">// Career history — most recent first</p>
+              @for (job of r.work; track trackById($index, job)) {
+                <div class="ln exp">
+                  <p class="exp__head">
+                    <span class="n">{{ job.period }}</span>
+                    <span class="f">{{ job.role }}</span>
+                  </p>
+                  <p class="exp__co"><span class="op">&#64;</span>{{ job.company }} <span class="c">· {{ job.location }}</span></p>
+                  <p class="exp__desc">{{ job.description }}</p>
+                </div>
+              }
+            }
+
+            @case ('skills') {
+              <p class="ln c">// Toolbelt — grouped by domain</p>
+              <p class="ln"><span class="pn">&#123;</span></p>
+              @for (group of r.skillGroups; track trackById($index, group)) {
+                <div class="ln in skillgrp">
+                  <p class="skillgrp__key"><span class="pr">"{{ group.category }}"</span>: <span class="pn">[</span></p>
+                  <ul class="chips">
+                    @for (item of group.items; track item) {
+                      <li class="chip">{{ item }}</li>
+                    }
+                  </ul>
+                </div>
+              }
+              <p class="ln"><span class="pn">&#125;</span></p>
+            }
+
+            @case ('projects') {
+              <p class="ln c">// Selected work — production systems</p>
+              @for (proj of r.projectHighlights; track trackById($index, proj)) {
+                <div class="ln proj">
+                  <span class="proj__icon"><app-icon [name]="proj.icon" [size]="18" aria-hidden="true" /></span>
+                  <div class="proj__body">
+                    <p class="proj__title">{{ proj.title }} <span class="proj__type">{{ proj.type }}</span></p>
+                    <p class="proj__desc">{{ proj.description }}</p>
+                    <ul class="proj__tech">
+                      @for (t of proj.technologies; track t) {
+                        <li>{{ t }}</li>
+                      }
+                    </ul>
+                  </div>
+                </div>
+              }
+            }
+
+            @case ('education') {
+              <p class="ln c"># Education</p>
+              @for (edu of education.value()?.items ?? []; track trackById($index, edu)) {
+                <div class="ln edu">
+                  <p class="edu__degree">{{ edu.degree }}</p>
+                  <p class="edu__inst">{{ edu.institution }} <span class="c">· {{ edu.score }}</span></p>
+                </div>
+              }
+              <p class="ln c"># Certifications</p>
+              @for (cert of r.certifications; track trackById($index, cert)) {
+                <div class="ln cert">
+                  <p class="cert__title">{{ cert.title }}</p>
+                  <p class="cert__issuer">{{ cert.issuer }}</p>
+                </div>
+              }
+            }
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Status bar -->
+    <div class="ide__status">
+      <span class="ide__status-group">
+        <span class="ide__status-item ide__status-item--accent"><app-icon name="GitBranch" [size]="13" aria-hidden="true" /> main</span>
+        <span class="ide__status-item ide__status-item--ok"><span class="ide__pulse" aria-hidden="true"></span> {{ r.openToWork.title }}</span>
+      </span>
+      <span class="ide__status-group">
+        <span class="ide__status-item">Angular v22</span>
+        <span class="ide__status-item">UTF-8</span>
+        <span class="ide__status-item">TypeScript</span>
+      </span>
+    </div>
+  </section>
+
+  <!-- Terminal — tips -->
+  @if (r.suggestions.length) {
+    <section class="term" aria-label="Resume tips">
+      <div class="term__bar">
+        <span class="ide__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="term__title"><app-icon name="Terminal" [size]="13" aria-hidden="true" /> bash — resume-tips</span>
+      </div>
+      <div class="term__body">
+        <p class="term__cmd"><span class="term__user">rabin@portfolio</span><span class="term__punc">:</span><span class="term__path">~/resume</span><span class="term__punc">$</span> resume --improve</p>
+        @for (tip of r.suggestions; track $index) {
+          <p class="term__line"><span class="term__arrow">➜</span> {{ tip }}</p>
+        }
+        <p class="term__cmd"><span class="term__user">rabin@portfolio</span><span class="term__punc">:</span><span class="term__path">~/resume</span><span class="term__punc">$</span> <span class="term__caret" aria-hidden="true"></span></p>
+      </div>
+    </section>
+  }
+
+  <!-- Fullscreen document reader -->
+  @if (readerOpen()) {
+    <app-resume-reader
+      [resume]="r"
+      [profile]="profile.value()"
+      [education]="education.value()?.items ?? []"
+      (closed)="closeReader()"
+    />
+  }
+}

@@ -3,29 +3,32 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { provideRouter, withPreloading, PreloadAllModules, withViewTransitions } from '@angular/router';
-import { provideHttpClient, withXsrfConfiguration } from '@angular/common/http';
-
+import { provideHttpClient } from '@angular/common/http';
+import {
+  provideRouter,
+  TitleStrategy,
+  withComponentInputBinding,
+  withInMemoryScrolling,
+  withViewTransitions,
+} from '@angular/router';
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { AppTitleStrategy } from './core/services';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    // HTTP client with XSRF protection (minimal overhead)
-    provideHttpClient(
-      withXsrfConfiguration({
-        cookieName: 'X-CSRF-TOKEN',
-        headerName: 'X-CSRF-TOKEN',
-      })
-    ),
-    // Router with aggressive preloading + native View Transitions API (250ms crossfade + rise)
+    provideHttpClient(),
     provideRouter(
       routes,
-      withPreloading(PreloadAllModules),
-      withViewTransitions()
+      withComponentInputBinding(),
+      withViewTransitions({ skipInitialTransition: true }),
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'enabled',
+        anchorScrolling: 'enabled',
+      }),
     ),
-    provideClientHydration(withEventReplay()),
+    { provide: TitleStrategy, useClass: AppTitleStrategy },
   ],
 };

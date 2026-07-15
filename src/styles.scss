@@ -1,203 +1,213 @@
-@use './scss/tokens.scss' as *;
-@use './scss/variables.scss' as *;
-@use './scss/design-tokens-premium.scss' as *;
-@use './scss/animations-premium.scss' as *;
-@use './scss/nav.scss' as *;
-@use './scss/scroll.scss' as *;
-@use './scss/animations.scss' as *;
-@use './scss/animation-sections.scss' as *;
-@use './scss/ui.scss' as *;
+/* ============================================================
+   Global Styles
+   Design tokens are centralized here as CSS custom properties
+   and consumed by component-scoped SCSS. NO hardcoded values
+   in components.
+   ============================================================ */
 
-/* ===== SELF-HOSTED FONTS (NO EXTERNAL CDN DEPENDENCY) ===== */
+:root {
+  /* ---- Brand palette ---- */
+  --color-brand-purple: #8b5cf6;
+  --color-brand-purple-dark: #7c3aed;
+  --color-brand-violet: #a855f7;
+  --color-brand-blue: #3b82f6;
+  --color-brand-blue-dark: #2563eb;
+  --color-brand-cyan: #22d3ee;
 
-/* Display Face — General Sans (Fontshare, free license) */
-@font-face {
-  font-family: 'General Sans';
-  src: url('/fonts/GeneralSans-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'General Sans';
-  src: url('/fonts/GeneralSans-Semibold.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
+  /* ---- Surfaces (dark theme baseline) ---- */
+  --color-bg-base: #08080c;
+  --color-bg-elevated: #0d0d16;
+  --color-surface: #12121d;
+  --color-surface-glass: rgb(255 255 255 / 4%);
+  --color-border-subtle: rgb(255 255 255 / 8%);
 
-/* Body Face — Inter (self-hosted, latin subset only) */
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Semibold.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
+  /* ---- Text ---- */
+  --color-fg: #f8fafc;
+  --color-fg-muted: #94a3b8;
+  --color-fg-subtle: #64748b;
+
+  /* ---- Semantic ---- */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
+
+  /* ---- Radius ---- */
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
+
+  /* ---- Fonts ---- */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* ---- Gradient tokens (reference other vars) ---- */
+  --gradient-brand: linear-gradient(135deg, var(--color-brand-purple), var(--color-brand-blue));
 }
 
-/* Mono Face — JetBrains Mono (self-hosted, below-fold only) */
-@font-face {
-  font-family: 'JetBrains Mono';
-  src: url('/fonts/JetBrains-Mono-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-html {
-  height: 100%;
-}
-
+/* Minimal reset — replaces the former Tailwind preflight. */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+button {
+  font: inherit;
+}
+
+/* ---- Light theme override (data-theme attribute stamped on <html>) ---- */
+:root[data-theme='light'] {
+  --color-bg-base: #f8fafc;
+  --color-bg-elevated: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-glass: rgb(0 0 0 / 3%);
+  --color-border-subtle: rgb(0 0 0 / 8%);
+  --color-fg: #0f172a;
+  --color-fg-muted: #475569;
+  --color-fg-subtle: #64748b;
+}
+
+html,
 body {
-  background-color: var(--bg-primary);
-  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px);
-  background-size: 32px 32px;
-  background-position: center top;
-  background-attachment: fixed;
-  color: var(--text-primary);
-  font-family: 'Inter', 'Roboto', sans-serif;
+  min-height: 100%;
+}
+
+/* Prevent any incidental horizontal scroll (decorative glows, floating chips)
+   without creating a scroll container (keeps position: sticky working). */
+html {
+  overflow-x: clip;
+}
+
+body {
   margin: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
+  background-color: var(--color-bg-base);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ===== UTILITY ===== */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-a { color: inherit; }
-
-img, svg { display: block; }
-/* Safety: never let an image overflow its container / cause horizontal scroll.
-   Aspect ratio is already preserved via each <img>'s width/height attributes,
-   so we intentionally do NOT force height:auto (it would break object-fit covers). */
-img { max-width: 100%; }
-
-/* ===== MOBILE: prevent iOS focus-zoom on inputs ===== */
-/* Any input font-size < 16px makes iOS Safari zoom in on focus. */
-@media (max-width: 768px) {
-  input:not([type='checkbox']):not([type='radio']),
-  textarea,
-  select {
-    font-size: 16px !important;
+/* Floating animation used by decorative graphics (hero, 404). */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
   }
 }
 
-/* ===== ACCESSIBILITY: FOCUS INDICATORS ===== */
-/* Visible focus ring for keyboard users only; mouse clicks stay clean. */
-a, button, input, select, textarea, [tabindex] {
-  &:focus-visible {
-    outline: 2px solid var(--accent-primary);
-    outline-offset: 3px;
-    border-radius: 4px;
-  }
-  &:focus:not(:focus-visible) {
-    outline: none;
-  }
-}
-
-/* ===== ACCESSIBILITY: SKIP LINK ===== */
-.skip-to-main {
-  position: fixed;
-  top: -60px;
-  left: 16px;
-  z-index: var(--z-toast);
-  padding: 10px 18px;
-  background: var(--accent-primary);
-  color: #fff;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  transition: top var(--transition-base);
-
-  &:focus {
-    top: 16px;
-  }
-  &:focus-visible {
-    outline: 2px solid #fff;
-    outline-offset: 2px;
-  }
-}
-
-/* ===== VIEW TRANSITIONS API (Route Transitions) ===== */
-/* Native page transitions: 250ms crossfade + subtle rise on navigation */
-@supports (view-transition-name: initial) {
-  ::view-transition-old(root) {
-    animation: fadeOut 250ms cubic-bezier(0.4, 0, 1, 1) forwards;
-  }
-
-  ::view-transition-new(root) {
-    animation: fadeInUp 250ms cubic-bezier(0, 0, 0.2, 1) forwards;
-  }
-
-  @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(24px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-/* Disable transitions for users who prefer reduced motion */
+/* Respect users who prefer reduced motion. */
 @media (prefers-reduced-motion: reduce) {
-  @supports (view-transition-name: initial) {
-    ::view-transition-old(root),
-    ::view-transition-new(root) {
-      animation: none !important;
-    }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-/* ===== MOBILE OVERRIDES ===== */
-@media (max-width: 860px) {
-  .container {
-    padding: 0 16px !important;
+/* Remove the focus outline on programmatic focus targets (skip-link anchors). */
+[tabindex='-1']:focus {
+  outline: none;
+}
+
+/* Lock body scroll while a fullscreen overlay (e.g. Resume reader) is open. */
+body.rz-lock {
+  overflow: hidden;
+}
+
+/* Reusable gradient-text utility */
+.text-gradient-brand {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---- Global utilities (used across templates) ---- */
+
+/* Visually hidden but accessible to assistive tech. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip-to-content link (index.html): hidden until focused. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  border-radius: 0.5rem;
+  background: var(--color-brand-purple);
+  padding: 0.5rem 1rem;
+  color: #fff;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
   }
 }
 
-@media (max-width: 480px) {
-  .container {
-    padding: 0 14px !important;
-    max-width: 100% !important;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Print — optimize for paper/PDF (chiefly the Resume). */
+@media print {
+  :root {
+    --color-bg-base: #ffffff;
+    --color-bg-elevated: #ffffff;
+    --color-surface: #ffffff;
+    --color-surface-glass: #ffffff;
+    --color-border-subtle: rgb(0 0 0 / 12%);
+    --color-fg: #0f172a;
+    --color-fg-muted: #334155;
+    --color-fg-subtle: #64748b;
   }
 
-  body {
-    overflow-x: hidden;
+  app-sidebar,
+  app-navbar,
+  app-footer,
+  app-background-glow,
+  app-theme-switcher,
+  app-breadcrumb {
+    display: none !important;
   }
 
+  main,
+  #main-content {
+    padding: 0 !important;
+  }
+
+  app-glass-card,
+  app-experience-card,
+  app-project-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
 }

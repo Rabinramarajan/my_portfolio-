@@ -1,0 +1,18 @@
+{
+  "badge": "Get to know me",
+  "subtitleParts": [
+    { "text": "Products, not features.", "accent": "purple" },
+    { "text": "Clean code.", "accent": "default" },
+    { "text": "Measurable outcomes.", "accent": "blue" }
+  ],
+  "bio": "I'm Rabin R, a Senior Frontend Angular Developer with 4+ years of experience engineering critical systems for government and enterprise clients — including immigration portals for Fiji and pension platforms serving thousands of users. I believe building products that scale requires discipline: strong type systems, accessible-first design, automated testing, and measurable outcomes.",
+  "signature": "Engineer building products, not just features.",
+  "quote": { "text": "Building products that scale requires discipline — not just shipping features." },
+  "journey": [
+    { "id": "j2018", "year": "2018", "description": "Began B.Sc. Information Technology at National College, Tiruchirappalli." },
+    { "id": "j2021", "year": "2021", "description": "Graduated and specialized in modern frontend development & Angular." },
+    { "id": "j2022", "year": "2022", "description": "Joined ITGalax — engineering government portals for 10,000+ users." },
+    { "id": "j2024", "year": "2024", "description": "Led adoption of Angular Signals & standalone components across teams." },
+    { "id": "j2026", "year": "2026+", "description": "Consulting on AI/ML-driven analytics dashboards & open-source Angular tooling." }
+  ]
+}

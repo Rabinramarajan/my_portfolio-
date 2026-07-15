@@ -1,0 +1,59 @@
+<svg
+  [attr.width]="'100%'"
+  [attr.viewBox]="'0 0 ' + width() + ' ' + height()"
+  preserveAspectRatio="xMidYMid meet"
+  role="img"
+  aria-label="Network growth over time"
+>
+  <defs>
+    <linearGradient id="lineArea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" [attr.stop-color]="stroke()" stop-opacity="0.28" />
+      <stop offset="100%" [attr.stop-color]="stroke()" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <path [attr.d]="areaPath()" fill="url(#lineArea)" />
+  <path
+    [attr.d]="linePath()"
+    fill="none"
+    [attr.stroke]="stroke()"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  @for (dot of dots(); track $index) {
+    <circle [attr.cx]="dot.x" [attr.cy]="dot.y" r="3" [attr.fill]="stroke()" />
+    <text
+      [attr.x]="dot.x"
+      [attr.y]="height() - 6"
+      text-anchor="middle"
+      class="lc__label"
+    >
+      {{ dot.label }}
+    </text>
+  }
+
+  @if (last(); as l) {
+    @if (peakLabel(); as label) {
+      <g>
+        <rect
+          [attr.x]="l.x - 20"
+          [attr.y]="l.y - 26"
+          width="40"
+          height="18"
+          rx="9"
+          [attr.fill]="stroke()"
+        />
+        <text
+          [attr.x]="l.x"
+          [attr.y]="l.y - 13"
+          text-anchor="middle"
+          class="lc__badge"
+        >
+          {{ label }}
+        </text>
+      </g>
+    }
+  }
+</svg>

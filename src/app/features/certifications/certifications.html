@@ -1,0 +1,44 @@
+<app-page-layout
+  breadcrumb="Certifications"
+  titleLead="Certifications &"
+  titleHighlight="Credentials"
+  subtitle="Professional certifications and training that back my day-to-day engineering practice."
+>
+  @if (certificates.value(); as cfg) {
+    <div class="cert-grid" appStagger>
+      @for (cert of cfg.items; track trackById($index, cert)) {
+        <app-glass-card padding="lg">
+          <article class="cert">
+            <span class="cert__badge" aria-hidden="true">
+              <app-icon name="Award" [size]="24" />
+            </span>
+
+            <div class="cert__body">
+              <h2 class="cert__title">{{ cert.title }}</h2>
+              <p class="cert__issuer">{{ cert.issuer }}</p>
+
+              <div class="cert__meta">
+                <span class="cert__date">
+                  <app-icon name="Calendar" [size]="15" aria-hidden="true" />
+                  {{ formatDate(cert.date) }}
+                </span>
+
+                @if (cert.credentialUrl) {
+                  <a
+                    class="cert__link"
+                    [href]="cert.credentialUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Verify
+                    <app-icon name="ExternalLink" [size]="14" aria-hidden="true" />
+                  </a>
+                }
+              </div>
+            </div>
+          </article>
+        </app-glass-card>
+      }
+    </div>
+  }
+</app-page-layout>

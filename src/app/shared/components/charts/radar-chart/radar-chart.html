@@ -1,0 +1,41 @@
+<svg
+  [attr.width]="size()"
+  [attr.height]="size()"
+  [attr.viewBox]="'0 0 ' + size() + ' ' + size()"
+  role="img"
+  aria-label="Skill radar chart"
+>
+  <!-- Grid rings -->
+  @for (ring of gridRings(); track $index) {
+    <polygon [attr.points]="ring" fill="none" stroke="var(--color-border-subtle)" />
+  }
+
+  <!-- Axis spokes -->
+  @for (axis of axisPoints(); track $index) {
+    <line
+      [attr.x1]="cx()"
+      [attr.y1]="cx()"
+      [attr.x2]="axis.x"
+      [attr.y2]="axis.y"
+      stroke="var(--color-border-subtle)"
+    />
+    <text
+      [attr.x]="axis.labelX"
+      [attr.y]="axis.labelY"
+      [attr.text-anchor]="axis.anchor"
+      dominant-baseline="middle"
+      class="radar__label"
+    >
+      {{ axis.label }}
+    </text>
+  }
+
+  <!-- Data polygon -->
+  <polygon
+    [attr.points]="dataPoints()"
+    fill="color-mix(in srgb, var(--color-brand-purple) 30%, transparent)"
+    stroke="var(--color-brand-purple)"
+    stroke-width="2"
+    stroke-linejoin="round"
+  />
+</svg>

@@ -1,0 +1,29 @@
+{
+  "name": "Rabin R",
+  "shortName": "Rabin R",
+  "role": "Senior Frontend Angular Developer",
+  "greeting": "Hello, I'm",
+  "tagline": "Angular · TypeScript · RxJS",
+  "bio": "Senior Frontend Angular Developer with 4+ years of experience architecting enterprise-grade web applications for government and financial sectors — serving 10,000+ users across three countries.",
+  "signature": "Rabin R",
+  "location": "Chennai, Tamil Nadu, India",
+  "email": "rabinr2607@gmail.com",
+  "phone": "+91 97893 76992",
+  "website": "www.rabinr.in",
+  "avatar": "assets/images/profile.png",
+  "heroImage": "assets/images/profile.png",
+  "logo": "assets/images/logo.svg",
+  "resumeUrl": "assets/files/rabin-cv.pdf",
+  "availability": {
+    "available": true,
+    "label": "Available for new opportunities",
+    "caption": "Let's build something impactful!"
+  },
+  "roleHighlights": ["Frontend Developer", "Angular Engineer"],
+  "whatIDo": [
+    { "icon": "Briefcase", "label": "Enterprise Angular Apps" },
+    { "icon": "Zap", "label": "Performance Optimization" },
+    { "icon": "Smartphone", "label": "Cross-platform Mobile" },
+    { "icon": "CheckCircle2", "label": "WCAG 2.1 AA Accessibility" }
+  ]
+}

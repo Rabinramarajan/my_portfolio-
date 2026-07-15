@@ -1,0 +1,114 @@
+{
+  "categories": [
+    { "name": "All Articles", "count": 24 },
+    { "name": "Angular", "count": 8 },
+    { "name": "TypeScript", "count": 6 },
+    { "name": "Ionic", "count": 4 },
+    { "name": "Performance", "count": 3 },
+    { "name": "Design", "count": 2 },
+    { "name": "JavaScript", "count": 1 }
+  ],
+  "popularIds": ["b1", "b2", "b4"],
+  "newsletter": {
+    "heading": "Stay in the Loop",
+    "caption": "Subscribe to my newsletter and get the latest articles and insights delivered straight to your inbox.",
+    "placeholder": "Enter your email"
+  },
+  "quote": {
+    "text": "The more you learn, the more you earn.",
+    "author": "Warren Buffett"
+  },
+  "posts": [
+    {
+      "id": "b1",
+      "slug": "building-scalable-angular-applications",
+      "title": "Building Scalable Angular Applications: Best Practices",
+      "excerpt": "Explore proven architecture patterns, state management strategies, and performance tips for building enterprise-grade Angular applications.",
+      "cover": "assets/images/blog/angular.svg",
+      "category": "Angular",
+      "tags": ["Angular", "Architecture", "Signals"],
+      "author": "Rabin R",
+      "date": "2024-05-18",
+      "readingMinutes": 8,
+      "featured": true
+    },
+    {
+      "id": "b2",
+      "slug": "advanced-state-management-ngrx",
+      "title": "Advanced State Management with NgRx",
+      "excerpt": "Learn how to manage complex state in large-scale Angular applications effectively.",
+      "cover": "assets/images/blog/ngrx.svg",
+      "category": "Angular",
+      "tags": ["Angular", "NgRx", "State"],
+      "author": "Rabin R",
+      "date": "2024-05-14",
+      "readingMinutes": 6,
+      "featured": false
+    },
+    {
+      "id": "b3",
+      "slug": "web-performance-optimization",
+      "title": "Web Performance Optimization Techniques",
+      "excerpt": "Practical tips to improve your web app performance and deliver blazing fast experiences.",
+      "cover": "assets/images/blog/performance.svg",
+      "category": "Performance",
+      "tags": ["Performance", "Web Vitals"],
+      "author": "Rabin R",
+      "date": "2024-05-10",
+      "readingMinutes": 7,
+      "featured": false
+    },
+    {
+      "id": "b4",
+      "slug": "typescript-tips",
+      "title": "TypeScript Tips That Boost Productivity",
+      "excerpt": "Essential TypeScript tips and tricks that help you write cleaner and better code.",
+      "cover": "assets/images/blog/typescript.svg",
+      "category": "TypeScript",
+      "tags": ["TypeScript", "DX"],
+      "author": "Rabin R",
+      "date": "2024-05-06",
+      "readingMinutes": 5,
+      "featured": false
+    },
+    {
+      "id": "b5",
+      "slug": "cross-platform-ionic-8",
+      "title": "Building Cross-platform Apps with Ionic 8",
+      "excerpt": "Leverage the power of Ionic 8 to build smooth and performant mobile applications.",
+      "cover": "assets/images/blog/ionic.svg",
+      "category": "Ionic",
+      "tags": ["Ionic", "Mobile"],
+      "author": "Rabin R",
+      "date": "2024-05-02",
+      "readingMinutes": 6,
+      "featured": false
+    },
+    {
+      "id": "b6",
+      "slug": "design-systems-consistent-ui",
+      "title": "Design Systems: Building Consistent UI",
+      "excerpt": "How design systems improve consistency, collaboration, and scalability across products.",
+      "cover": "assets/images/blog/design.svg",
+      "category": "Design",
+      "tags": ["Design", "UI/UX"],
+      "author": "Rabin R",
+      "date": "2024-04-28",
+      "readingMinutes": 6,
+      "featured": false
+    },
+    {
+      "id": "b7",
+      "slug": "modern-javascript-features",
+      "title": "Modern JavaScript Features You Should Use",
+      "excerpt": "Explore powerful modern JS features that make development easier and more efficient.",
+      "cover": "assets/images/blog/javascript.svg",
+      "category": "JavaScript",
+      "tags": ["JavaScript", "ES2024"],
+      "author": "Rabin R",
+      "date": "2024-04-24",
+      "readingMinutes": 5,
+      "featured": false
+    }
+  ]
+}

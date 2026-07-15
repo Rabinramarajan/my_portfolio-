@@ -1,0 +1,82 @@
+{
+  "items": [
+    {
+      "id": "angular",
+      "title": "Angular Development",
+      "description": "Enterprise-grade Angular applications built with modern signals, standalone components and a scalable, maintainable architecture.",
+      "icon": "Code",
+      "accent": "purple",
+      "features": [
+        "Angular 17–22 with signals & standalone APIs",
+        "Modular, component-driven architecture",
+        "State management with RxJS & signals",
+        "Migration & upgrade of legacy Angular apps"
+      ]
+    },
+    {
+      "id": "frontend",
+      "title": "Frontend Engineering",
+      "description": "Responsive, accessible and pixel-accurate interfaces from design handoff to production, with clean, testable code.",
+      "icon": "LayoutGrid",
+      "accent": "blue",
+      "features": [
+        "TypeScript-first, SOLID-driven codebases",
+        "Responsive layouts across all breakpoints",
+        "Design-system & reusable component libraries",
+        "Figma / design handoff to production"
+      ]
+    },
+    {
+      "id": "ionic",
+      "title": "Ionic & Cross-Platform Apps",
+      "description": "Cross-platform mobile apps for iOS and Android from a single Angular + Ionic codebase, shipped to the app stores.",
+      "icon": "Smartphone",
+      "accent": "cyan",
+      "features": [
+        "Ionic + Angular hybrid mobile apps",
+        "Native device features via Capacitor",
+        "Single codebase for iOS & Android",
+        "App store build & release support"
+      ]
+    },
+    {
+      "id": "api",
+      "title": "API Integration",
+      "description": "Reliable integration of REST APIs into the frontend with robust error handling, typed contracts and clean data flows.",
+      "icon": "Server",
+      "accent": "violet",
+      "features": [
+        "REST API integration & typed models",
+        "Auth flows (JWT, OAuth) & interceptors",
+        "Robust loading & error states",
+        "Efficient caching & data synchronisation"
+      ]
+    },
+    {
+      "id": "ui",
+      "title": "UI Development",
+      "description": "Polished, accessible user interfaces with attention to detail, micro-interactions and WCAG-compliant markup.",
+      "icon": "Accessibility",
+      "accent": "green",
+      "features": [
+        "WCAG-compliant, accessible interfaces",
+        "SCSS / Tailwind CSS styling systems",
+        "Micro-interactions & motion",
+        "Cross-browser consistency"
+      ]
+    },
+    {
+      "id": "performance",
+      "title": "Performance Optimization",
+      "description": "Faster load times and smoother runtime performance through profiling, lazy loading and bundle optimisation.",
+      "icon": "Gauge",
+      "accent": "orange",
+      "features": [
+        "Core Web Vitals & Lighthouse improvements",
+        "Lazy loading & route-level code splitting",
+        "Bundle size analysis & reduction",
+        "Change-detection & runtime tuning"
+      ]
+    }
+  ]
+}

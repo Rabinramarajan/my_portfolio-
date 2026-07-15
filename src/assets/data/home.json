@@ -1,0 +1,20 @@
+{
+  "hero": {
+    "availabilityLabel": "Available for new opportunities",
+    "headlineLead": "I Engineer Products That",
+    "headlineHighlight": "Scale & Perform",
+    "subtitle": "Senior Frontend Angular Developer with 4+ years building enterprise-grade web & mobile applications for government and financial sectors — serving 10,000+ users across three countries.",
+    "ctas": [
+      { "id": "work", "label": "Explore My Work", "variant": "primary", "icon": "ArrowRight", "route": "/projects" },
+      { "id": "resume", "label": "Download Resume", "variant": "outline", "icon": "Download", "href": "assets/files/rabin-cv.pdf" }
+    ],
+    "highlights": [
+      { "id": "clean", "icon": "Zap", "title": "Clean Code", "description": "Type-safe, testable, component-driven Angular built to scale." },
+      { "id": "responsive", "icon": "Monitor", "title": "Responsive Design", "description": "Seamless experiences across all devices and screen sizes." },
+      { "id": "user", "icon": "CheckCircle2", "title": "Accessible First", "description": "WCAG 2.1 AA compliant interfaces usable by everyone." },
+      { "id": "performance", "icon": "Rocket", "title": "Performance First", "description": "50% faster loads and 40% fewer API calls through optimization." }
+    ],
+    "techHeading": "Technologies I work with",
+    "techProgress": 90
+  }
+}

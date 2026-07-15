@@ -1,0 +1,67 @@
+<aside class="sb">
+  <!-- Brand -->
+  @if (profile.value(); as p) {
+    <a routerLink="/" class="sb__brand" aria-label="Home" (click)="navigate.emit()">
+      <span class="sb__brand-mark text-gradient-brand" aria-hidden="true">R.</span>
+      <span>
+        <span class="sb__name">{{ p.name }}</span>
+        <span class="sb__role">{{ p.role }}</span>
+      </span>
+    </a>
+  }
+
+  <!-- Primary nav (only this area scrolls if the viewport is short) -->
+  <nav class="sb__nav" aria-label="Primary">
+    @for (item of navigation.value()?.primary ?? []; track trackById($index, item)) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="sb__link--active"
+        [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+        (click)="navigate.emit()"
+        class="sb__link"
+      >
+        <app-icon [name]="item.icon" [size]="18" aria-hidden="true" />
+        <span>{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+
+  <!-- Pinned footer -->
+  <div class="sb__footer">
+    <!-- CV -->
+    @if (profile.value(); as p) {
+      <app-animated-button
+        variant="primary"
+        size="sm"
+        icon="Download"
+        label="Download CV"
+        [href]="p.resumeUrl"
+        [block]="true"
+      />
+    }
+
+    <!-- Socials -->
+    @if (socials.value(); as s) {
+      <ul class="sb__socials">
+        @for (link of s.links; track trackById($index, link)) {
+          <li>
+            <a
+              [href]="link.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              [attr.aria-label]="link.label"
+              class="sb__social"
+            >
+              <app-icon [name]="link.icon" [size]="16" aria-hidden="true" />
+            </a>
+          </li>
+        }
+      </ul>
+    }
+
+    <!-- Theme -->
+    @if (showThemeToggle()) {
+      <app-theme-switcher variant="switch" />
+    }
+  </div>
+</aside>

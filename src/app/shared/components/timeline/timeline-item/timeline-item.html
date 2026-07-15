@@ -1,0 +1,22 @@
+<li class="ti">
+  <!-- Marker -->
+  <div class="ti__marker">
+    <p class="ti__primary">{{ markerPrimary() }}</p>
+    @if (markerSecondary(); as s) {
+      <p class="ti__secondary">{{ s }}</p>
+    }
+  </div>
+
+  <!-- Connector -->
+  <div class="ti__connector" aria-hidden="true">
+    <span class="ti__node" [style]="nodeStyle()"></span>
+    @if (!last()) {
+      <span class="ti__line"></span>
+    }
+  </div>
+
+  <!-- Content -->
+  <div class="ti__content" [class.ti__content--gap]="!last()">
+    <ng-content />
+  </div>
+</li>

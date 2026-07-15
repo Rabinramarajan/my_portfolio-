@@ -1,0 +1,41 @@
+<nav class="nav" aria-label="Primary">
+  <!-- Brand -->
+  @if (profile.value(); as p) {
+    <a routerLink="/" class="nav__brand" aria-label="Home">
+      <span class="nav__brand-mark text-gradient-brand" aria-hidden="true">R.</span>
+      <span class="nav__brand-name">{{ p.name }}</span>
+    </a>
+  }
+
+  <!-- Links -->
+  <ul class="nav__links">
+    @for (
+      item of navigation.value()?.navbar ?? navigation.value()?.primary ?? [];
+      track trackById($index, item)
+    ) {
+      <li>
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="nav__link--active"
+          [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+          class="nav__link"
+          >{{ item.label }}</a
+        >
+      </li>
+    }
+  </ul>
+
+  <!-- Actions -->
+  <div class="nav__actions">
+    <app-theme-switcher variant="icon" />
+    @if (profile.value(); as p) {
+      <app-animated-button
+        variant="primary"
+        size="sm"
+        icon="Download"
+        label="Resume"
+        [href]="p.resumeUrl"
+      />
+    }
+  </div>
+</nav>

@@ -1,0 +1,166 @@
+<app-breadcrumb current="Contact" class="ct__crumb" />
+
+<!-- Header -->
+<header class="ct-head">
+  <div class="ct-head__glow" aria-hidden="true"></div>
+  <div class="ct-head__main">
+    <h1 class="ct-title">Get In <span class="text-gradient-brand">Touch</span></h1>
+    <p class="ct-subtitle">
+      Have a project in mind or just want to say hello? I'd love to hear from you.
+    </p>
+  </div>
+  @if (contact.value()?.responseTime) {
+    <span class="ct-pill">
+      <span class="ct-pill__dot" aria-hidden="true"></span>
+      Available for new opportunities
+    </span>
+  }
+</header>
+
+@if (contact.value(); as c) {
+  <div class="ct-grid">
+    <!-- Left: info panel -->
+    <aside class="ct-side">
+      <!-- Channels -->
+      <app-glass-card padding="md" class="ct-panel ct-card ct-card--purple">
+        <div class="ct-panel__head">
+          <span class="ct-form__icon"><app-icon name="MessageSquare" [size]="20" aria-hidden="true" /></span>
+          <div>
+            <h2 class="ct-form__title">Contact Information</h2>
+            <p class="ct-form__sub">Reach me through any of these channels.</p>
+          </div>
+        </div>
+
+        <ul class="ct-channels">
+          @for (channel of c.channels; track trackById($index, channel)) {
+            <li>
+              <a [href]="channel.href" class="ct-channel" [class]="'ct-accent--' + badgeAccent(channel.accent)">
+                <span class="ct-badge">
+                  <app-icon [name]="channel.icon" [size]="18" aria-hidden="true" />
+                </span>
+                <span class="ct-channel__body">
+                  <span class="ct-channel__label">{{ channel.label }}</span>
+                  <span class="ct-channel__value">{{ channel.value }}</span>
+                </span>
+                <app-icon name="ArrowRight" [size]="16" class="ct-channel__arrow" aria-hidden="true" />
+              </a>
+            </li>
+          }
+        </ul>
+
+        <hr class="ct-divider" />
+
+        <!-- Available for -->
+        <h3 class="ct-side__title">I'm Available For</h3>
+        <ul class="ct-avail">
+          @for (item of c.availableFor; track trackById($index, item)) {
+            <li class="ct-avail__item">
+              <span class="ct-avail__check"><app-icon name="Check" [size]="12" aria-hidden="true" /></span>
+              {{ item.label }}
+            </li>
+          }
+        </ul>
+
+        <div class="ct-response">
+          <p class="ct-response__title">
+            <app-icon name="Clock" [size]="14" aria-hidden="true" /> Quick Response
+          </p>
+          <p class="ct-response__text">{{ c.responseTime }}</p>
+        </div>
+      </app-glass-card>
+    </aside>
+
+    <!-- Right: form -->
+    <app-glass-card padding="md" class="ct-form-card ct-card ct-card--blue">
+      <div class="ct-form__head">
+        <span class="ct-form__icon"><app-icon name="Send" [size]="20" aria-hidden="true" /></span>
+        <div>
+          <h2 class="ct-form__title">Send Me a Message</h2>
+          <p class="ct-form__sub">I will get back to you as soon as possible.</p>
+        </div>
+      </div>
+
+      @if (sent()) {
+        <p class="ct-success" role="status">
+          <app-icon name="Check" [size]="16" aria-hidden="true" />
+          Thanks! Your message has been sent. I'll be in touch soon.
+        </p>
+      }
+      @if (error(); as err) {
+        <p class="ct-error-banner" role="alert">
+          <app-icon name="AlertTriangle" [size]="16" aria-hidden="true" />
+          {{ err }}
+        </p>
+      }
+
+      <form novalidate (submit)="$event.preventDefault(); onSubmit()">
+        <div class="ct-fields">
+          <div>
+            <label for="c-name" class="ct-label">Your Name</label>
+            <input id="c-name" type="text" placeholder="Enter your name" [formField]="contactForm.name" class="ct-input" />
+            @if (contactForm.name().touched() && contactForm.name().invalid()) {
+              <p class="ct-error">{{ contactForm.name().errors()[0]?.message }}</p>
+            }
+          </div>
+          <div>
+            <label for="c-email" class="ct-label">Your Email</label>
+            <input id="c-email" type="email" placeholder="Enter your email" [formField]="contactForm.email" class="ct-input" />
+            @if (contactForm.email().touched() && contactForm.email().invalid()) {
+              <p class="ct-error">{{ contactForm.email().errors()[0]?.message }}</p>
+            }
+          </div>
+        </div>
+
+        <div class="ct-field">
+          <label for="c-subject" class="ct-label">Subject</label>
+          <input id="c-subject" type="text" placeholder="What is this regarding?" [formField]="contactForm.subject" class="ct-input" />
+          @if (contactForm.subject().touched() && contactForm.subject().invalid()) {
+            <p class="ct-error">{{ contactForm.subject().errors()[0]?.message }}</p>
+          }
+        </div>
+
+        <div class="ct-field">
+          <label for="c-message" class="ct-label">Message</label>
+          <textarea id="c-message" rows="4" placeholder="Write your message here..." [formField]="contactForm.message" class="ct-input ct-textarea"></textarea>
+          @if (contactForm.message().touched() && contactForm.message().invalid()) {
+            <p class="ct-error">{{ contactForm.message().errors()[0]?.message }}</p>
+          }
+        </div>
+
+        <div class="ct-submit">
+          <app-animated-button type="submit" variant="primary" icon="Send" label="Send Message" [loading]="sending()" />
+          <span class="ct-safe"><span aria-hidden="true">🔒</span> Your information is safe with me.</span>
+        </div>
+      </form>
+
+      <!-- Location map -->
+      <div class="ct-map ct-map--inline">
+        <img
+          [src]="c.location.mapImage"
+          [alt]="'Map showing ' + c.location.label"
+          class="ct-map__img"
+          loading="lazy"
+        />
+        <div class="ct-map__overlay">
+          <div class="ct-map__info">
+            <span class="ct-map__badge"><app-icon name="MapPin" [size]="18" aria-hidden="true" /></span>
+            <div>
+              <p class="ct-map__label">{{ c.location.label }}</p>
+              <p class="ct-map__note">Based here — open to remote &amp; on-site collaboration.</p>
+            </div>
+          </div>
+          <app-animated-button
+            variant="outline"
+            size="sm"
+            icon="MapPin"
+            iconPosition="left"
+            label="Open in Google Maps"
+            [href]="c.location.mapUrl"
+          />
+        </div>
+      </div>
+    </app-glass-card>
+  </div>
+}
+
+<app-footer class="ct__footer" />

@@ -1,0 +1,30 @@
+@if (variant() === 'tile') {
+  <div class="tc">
+    <img
+      [src]="technology().logo"
+      [alt]="technology().name"
+      [width]="size()"
+      [height]="size()"
+      loading="lazy"
+      decoding="async"
+      class="tc__logo"
+      [style.width.px]="size()"
+      [style.height.px]="size()"
+    />
+    @if (showLabel()) {
+      <span class="tc__name">{{ technology().name }}</span>
+    }
+  </div>
+} @else {
+  <img
+    [src]="technology().logo"
+    [alt]="technology().name"
+    [width]="size()"
+    [height]="size()"
+    loading="lazy"
+    decoding="async"
+    class="tc__logo"
+    [style.width.px]="size()"
+    [style.height.px]="size()"
+  />
+}

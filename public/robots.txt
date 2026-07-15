@@ -1,18 +1,4 @@
-# Allow all crawlers to index the entire site
 User-agent: *
 Allow: /
 
-# Explicitly allow important paths
-Allow: /blog/
-Allow: /hire-me/
-Allow: /projects/
-
-# Disallow admin/private paths (if any added later)
-Disallow: /admin/
-Disallow: /private/
-
-# Crawl-delay for polite crawling (optional, most crawlers ignore)
-Crawl-delay: 1
-
-# Specify sitemap location for better SEO
-Sitemap: https://rabinr.dev/sitemap.xml
+Sitemap: https://www.rabinr.in/sitemap.xml

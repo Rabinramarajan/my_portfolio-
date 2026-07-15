@@ -1,0 +1,140 @@
+:host {
+  display: block;
+}
+
+.svc-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .svc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .svc-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.svc {
+  --c: var(--color-brand-purple);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.svc--blue {
+  --c: var(--color-brand-blue);
+}
+.svc--cyan {
+  --c: var(--color-brand-cyan);
+}
+.svc--violet {
+  --c: var(--color-brand-violet);
+}
+.svc--green {
+  --c: var(--color-brand-green);
+}
+.svc--orange {
+  --c: var(--color-brand-orange);
+}
+
+.svc__badge {
+  display: inline-flex;
+  height: 3rem;
+  width: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.85rem;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+}
+
+.svc__title {
+  margin-top: 1.1rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-fg);
+}
+
+.svc__desc {
+  margin-top: 0.55rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-fg-muted);
+}
+
+.svc__features {
+  margin-top: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.svc__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--color-fg);
+}
+
+.svc__check {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  color: var(--c);
+}
+
+/* CTA */
+.svc-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .svc-cta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.svc-cta__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-fg);
+}
+
+.svc-cta__sub {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--color-fg-muted);
+}
+
+.svc-cta__btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.35rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(90deg, var(--color-brand-purple), var(--color-brand-blue));
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.svc-cta__btn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}

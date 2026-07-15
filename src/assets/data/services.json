@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "id": "enterprise",
+      "title": "Enterprise-Grade Delivery",
+      "description": "Mission-critical apps with complex logic and high concurrency for 10,000+ users.",
+      "icon": "Briefcase",
+      "accent": "purple"
+    },
+    {
+      "id": "clean",
+      "title": "Clean Code Practices",
+      "description": "Readable, self-documenting, testable code following SOLID and best practices.",
+      "icon": "Code",
+      "accent": "blue"
+    },
+    {
+      "id": "architecture",
+      "title": "Frontend Architecture",
+      "description": "Modular, component-based architectures built for reusability and scale.",
+      "icon": "Box",
+      "accent": "cyan"
+    },
+    {
+      "id": "learning",
+      "title": "Continuous Learning",
+      "description": "Always adopting the latest — currently AI/ML integration and open-source tooling.",
+      "icon": "BookOpen",
+      "accent": "violet"
+    }
+  ]
+}

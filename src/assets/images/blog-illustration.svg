@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 300" fill="none">
+  <defs>
+    <linearGradient id="blScreen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1a1140"/><stop offset="1" stop-color="#2a1a5e"/></linearGradient>
+    <linearGradient id="blGlow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7c5cff"/><stop offset="1" stop-color="#3ba7ff"/></linearGradient>
+    <radialGradient id="blHalo" cx="0.5" cy="0.5" r="0.5"><stop stop-color="#7c5cff" stop-opacity="0.35"/><stop offset="1" stop-color="#7c5cff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <circle cx="240" cy="150" r="150" fill="url(#blHalo)"/>
+  <path d="M120 290 Q90 200 180 180 M340 290 Q380 200 300 160" stroke="#7c5cff" stroke-opacity="0.25" stroke-dasharray="3 6"/>
+  <!-- article sheet -->
+  <rect x="150" y="70" width="160" height="180" rx="12" fill="url(#blScreen)" stroke="url(#blGlow)" stroke-width="1.5" stroke-opacity="0.6"/>
+  <rect x="168" y="90" width="124" height="40" rx="6" fill="#0c1030"/>
+  <path d="M222 100 l-10 12 l10 12 M258 100 l10 12 l-10 12" stroke="#3ed6c0" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <g stroke="#4e8ef7" stroke-opacity="0.6" stroke-width="6" stroke-linecap="round">
+    <path d="M170 150 h120"/><path d="M170 170 h120"/><path d="M170 190 h90"/><path d="M170 210 h120"/><path d="M170 230 h70"/>
+  </g>
+  <!-- floating chips -->
+  <g><rect x="308" y="44" width="50" height="50" rx="12" fill="#0f1740" stroke="#3ba7ff" stroke-opacity="0.6"/><path d="M322 78 l-10 -12 l10 -12 M344 54 l10 12 l-10 12" stroke="#3ba7ff" stroke-width="3" fill="none" stroke-linecap="round"/></g>
+  <g><rect x="96" y="110" width="48" height="48" rx="12" fill="#141033" stroke="url(#blGlow)" stroke-opacity="0.7"/><path d="M120 122 l10 6 v12 l-10 6 l-10 -6 v-12 Z" stroke="#c9b8ff" stroke-width="1.5" fill="none"/></g>
+  <circle cx="112" cy="200" r="10" fill="#7c5cff" fill-opacity="0.45"/>
+  <circle cx="360" cy="180" r="7" fill="#3ba7ff" fill-opacity="0.5"/>
+</svg>

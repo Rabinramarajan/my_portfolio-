@@ -1,0 +1,33 @@
+@let exp = experience();
+<app-glass-card padding="md" [interactive]="true" class="ec-card" [style.--ec-accent]="accentColor()">
+  <div class="ec">
+    <!-- Left: icon + main -->
+    <div class="ec__main">
+      @if (exp.icon; as icon) {
+        <span class="ec__icon">
+          <app-icon [name]="icon" [size]="22" aria-hidden="true" />
+        </span>
+      }
+      <div class="ec__body">
+        <h3 class="ec__role text-gradient-brand">{{ exp.role }}</h3>
+        <div class="ec__meta">
+          <span class="ec__company">{{ exp.company }}</span>
+          <app-badge [accent]="typeAccent()">{{ exp.employmentType }}</app-badge>
+        </div>
+        <p class="ec__desc">{{ exp.description }}</p>
+      </div>
+    </div>
+
+    <!-- Right: achievements -->
+    @if (exp.achievements.length) {
+      <ul class="ec__achievements">
+        @for (achievement of exp.achievements; track trackByValue($index, achievement)) {
+          <li class="ec__achievement">
+            <span class="ec__bullet"></span>
+            {{ achievement }}
+          </li>
+        }
+      </ul>
+    }
+  </div>
+</app-glass-card>

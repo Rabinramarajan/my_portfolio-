@@ -1,0 +1,127 @@
+<app-breadcrumb current="About Me" class="ab__crumb" />
+
+@if (about.value(); as a) {
+  @if (profile.value(); as p) {
+    <!-- Hero -->
+    <section class="ab-hero" appReveal>
+      <div class="ab-hero__content">
+        <app-badge accent="purple">
+          <span class="ab-badge">
+            <app-icon name="User" [size]="14" aria-hidden="true" /> {{ a.badge }}
+          </span>
+        </app-badge>
+
+        <h1 class="ab-hero__title">
+          More About <span class="text-gradient-brand">Me.</span>
+        </h1>
+
+        <p class="ab-hero__subtitle">
+          @for (part of a.subtitleParts; track $index) {
+            <span [style.color]="partColor(part)">{{ part.text }}</span>
+          }
+        </p>
+
+        <p class="ab-hero__bio">{{ a.bio }}</p>
+
+        <p class="ab-hero__signature">{{ a.signature }}</p>
+      </div>
+
+      <!-- Profile visual -->
+      <div class="ab-visual">
+        <div
+          class="ab-visual__glow"
+          style="background: radial-gradient(circle, var(--color-brand-purple), transparent 65%)"
+          aria-hidden="true"
+        ></div>
+        <div
+          class="ab-visual__ring"
+          style="background: conic-gradient(from 0deg, var(--color-brand-purple), var(--color-brand-blue), var(--color-brand-cyan), transparent 60%, var(--color-brand-purple))"
+          aria-hidden="true"
+        ></div>
+        <div class="ab-visual__portrait">
+          <img [src]="p.avatar" [alt]="p.name" class="ab-visual__img" loading="lazy" decoding="async" />
+        </div>
+        <span class="ab-visual__badge">
+          <app-icon name="Code" [size]="18" aria-hidden="true" />
+        </span>
+        <div class="ab-visual__chip">
+          <span class="ab-visual__sig">{{ p.signature }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="ab-stats">
+      @for (stat of aboutStats(); track trackById($index, stat)) {
+        <app-stats-card [stat]="stat" />
+      }
+    </section>
+
+    <!-- What I Do + Core Values -->
+    <section class="ab-duo">
+      <!-- What I Do -->
+      <app-glass-card padding="md" class="ab-card ab-card--purple">
+        <h2 class="ab-card__heading">
+          <span class="ab-card__chip"><app-icon name="Wrench" [size]="16" aria-hidden="true" /></span>
+          What I Do
+        </h2>
+        <ul class="ab-tiles">
+          @for (item of p.whatIDo ?? []; track $index) {
+            <li class="ab-tile">
+              <span class="ab-icon">
+                <app-icon [name]="item.icon" [size]="18" aria-hidden="true" />
+              </span>
+              <span class="ab-tile__label">{{ item.label }}</span>
+            </li>
+          }
+        </ul>
+        <a routerLink="/skills" class="ab-link">
+          View all skills <app-icon name="ChevronRight" [size]="14" aria-hidden="true" />
+        </a>
+      </app-glass-card>
+
+      <!-- Core Values -->
+      <app-glass-card padding="md" class="ab-card ab-card--cyan">
+        <h2 class="ab-card__heading">
+          <span class="ab-card__chip"><app-icon name="Heart" [size]="16" aria-hidden="true" /></span>
+          Core Values
+        </h2>
+        <ul class="ab-values">
+          @for (value of services.value()?.items ?? []; track trackById($index, value)) {
+            <li class="ab-value">
+              <span class="ab-icon">
+                <app-icon [name]="value.icon" [size]="18" aria-hidden="true" />
+              </span>
+              <span>
+                <span class="ab-value__title">{{ value.title }}</span>
+                <span class="ab-value__desc">{{ value.description }}</span>
+              </span>
+            </li>
+          }
+        </ul>
+      </app-glass-card>
+    </section>
+
+    <!-- My Journey — horizontal timeline -->
+    <app-glass-card padding="md" class="ab-card ab-card--blue ab-journey-card">
+      <h2 class="ab-card__heading">
+        <span class="ab-card__chip"><app-icon name="TrendingUp" [size]="16" aria-hidden="true" /></span>
+        My Journey
+      </h2>
+      <ol class="ab-htl">
+        @for (milestone of a.journey; track trackById($index, milestone)) {
+          <li class="ab-htl__item">
+            <span class="ab-htl__node"></span>
+            <p class="ab-htl__year">{{ milestone.year }}</p>
+            <p class="ab-htl__desc">{{ milestone.description }}</p>
+          </li>
+        }
+      </ol>
+    </app-glass-card>
+
+    <!-- Quote -->
+    <app-quote-card [text]="a.quote.text" [compact]="true" class="ab-quote" />
+  }
+}
+
+<app-footer class="ab__footer" />

@@ -1,0 +1,178 @@
+<app-page-layout
+  breadcrumb="Insights & Articles"
+  titleLead="Insights &"
+  titleHighlight="Articles"
+  subtitle="Thoughts, tutorials, and insights on web development, performance, and building better user experiences."
+>
+  <div slot="header-aside">
+    <img
+      src="assets/images/blog-illustration.svg"
+      alt=""
+      class="bl-hero"
+      aria-hidden="true"
+      loading="lazy"
+    />
+  </div>
+
+  @if (blog.value(); as b) {
+    <!-- Controls -->
+    <div class="bl-controls">
+      <app-search-input class="bl-search" [(value)]="search" placeholder="Search articles..." />
+      <label class="bl-sort">
+        <span class="sr-only">Sort articles</span>
+        <select class="bl-select" [value]="sort()" (change)="setSort($any($event.target).value)">
+          @for (option of sortOptions; track option) {
+            <option [value]="option">{{ option }}</option>
+          }
+        </select>
+        <span class="bl-sort__caret" aria-hidden="true">▾</span>
+      </label>
+    </div>
+
+    <!-- Category pills -->
+    <div class="bl-pills" role="tablist" aria-label="Filter articles by category">
+      @for (cat of b.categories; track cat.name) {
+        <button
+          type="button"
+          class="bl-pill"
+          [class.bl-pill--active]="cat.name === category()"
+          [attr.aria-pressed]="cat.name === category()"
+          (click)="category.set(cat.name)"
+        >
+          {{ cat.name }}
+          <span class="bl-pill__count">{{ cat.count }}</span>
+        </button>
+      }
+    </div>
+
+    <div class="bl-grid">
+      <!-- Main column -->
+      <div class="bl-main">
+        <!-- Featured -->
+        @if (featured(); as f) {
+          <section>
+            <h2 class="bl-heading">
+              <span class="bl-dot"></span> Featured Article
+            </h2>
+            <app-glass-card padding="lg">
+              <div class="bl-feat">
+                <div class="bl-feat__content">
+                  <span class="bl-feat__tag">Featured</span>
+                  <h3 class="bl-feat__title">{{ f.title }}</h3>
+                  <p class="bl-feat__excerpt">{{ f.excerpt }}</p>
+                  <div class="bl-feat__meta">
+                    <img
+                      [src]="profile.value()?.avatar"
+                      [alt]="f.author"
+                      class="bl-feat__avatar"
+                      loading="lazy"
+                    />
+                    <span class="bl-feat__author">{{ f.author }}</span>
+                    <span>• {{ f.date | date: 'MMM d, y' }}</span>
+                    <span>• {{ f.readingMinutes }} min read</span>
+                  </div>
+                  <app-animated-button
+                    class="bl-feat__btn"
+                    variant="primary"
+                    size="sm"
+                    icon="ArrowRight"
+                    label="Read Article"
+                    [routerLink]="'/blog/' + f.slug"
+                  />
+                </div>
+                <img [src]="f.cover" [alt]="f.title" class="bl-feat__cover" loading="lazy" />
+              </div>
+            </app-glass-card>
+          </section>
+        }
+
+        <!-- Latest -->
+        <section>
+          <h2 class="bl-heading">
+            <span class="bl-dot"></span> Latest Articles
+          </h2>
+          @if (latest().length) {
+            <div class="bl-latest" appStagger>
+              @for (post of latest(); track trackById($index, post)) {
+                <app-blog-card [post]="post" />
+              }
+            </div>
+          } @else {
+            <p class="bl-empty">No articles match your search.</p>
+          }
+          <div class="bl-viewall">
+            <app-animated-button variant="secondary" size="sm" icon="ArrowRight" label="View All Articles" />
+          </div>
+        </section>
+
+        <!-- Share thoughts -->
+        <app-glass-card padding="md">
+          <div class="bl-share">
+            <div class="bl-share__left">
+              <span class="bl-share__icon">
+                <app-icon name="PenTool" [size]="20" aria-hidden="true" />
+              </span>
+              <span>
+                <span class="bl-share__title">Share Your Thoughts</span>
+                <span class="bl-share__text">I'd love to hear your thoughts or suggestions. Let's start a conversation!</span>
+              </span>
+            </div>
+            <app-animated-button
+              variant="secondary"
+              size="sm"
+              icon="ArrowRight"
+              label="Start a Discussion"
+              routerLink="/contact"
+            />
+          </div>
+        </app-glass-card>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="bl-side">
+        <!-- Popular -->
+        <app-glass-card padding="md">
+          <h2 class="bl-side__heading">
+            <app-icon name="TrendingUp" [size]="18" class="bl-accent-icon" aria-hidden="true" />
+            Popular Articles
+          </h2>
+          <ol class="bl-pop">
+            @for (post of popular(); track trackById($index, post); let i = $index) {
+              <li>
+                <a [routerLink]="['/blog', post.slug]" class="bl-pop__item">
+                  <span class="bl-pop__num">0{{ i + 1 }}</span>
+                  <img [src]="post.cover" [alt]="post.title" class="bl-pop__thumb" loading="lazy" />
+                  <span class="bl-pop__body">
+                    <span class="bl-pop__title">{{ post.title }}</span>
+                    <span class="bl-pop__date">{{ post.date | date: 'MMM d, y' }}</span>
+                  </span>
+                </a>
+              </li>
+            }
+          </ol>
+        </app-glass-card>
+
+        <!-- Newsletter -->
+        <div class="bl-news">
+          <h2 class="bl-news__title">
+            <app-icon name="Send" [size]="18" class="bl-accent-icon" aria-hidden="true" />
+            {{ b.newsletter.heading }}
+          </h2>
+          <p class="bl-news__text">{{ b.newsletter.caption }}</p>
+          <form class="bl-news__form" (submit)="$event.preventDefault()">
+            <input
+              type="email"
+              [placeholder]="b.newsletter.placeholder"
+              aria-label="Email address"
+              class="bl-news__input"
+            />
+            <app-animated-button type="submit" variant="primary" size="sm" icon="ArrowRight" label="Subscribe" [block]="true" />
+          </form>
+        </div>
+
+        <!-- Quote -->
+        <app-quote-card [text]="b.quote.text" [author]="b.quote.author" [compact]="true" />
+      </div>
+    </div>
+  }
+</app-page-layout>

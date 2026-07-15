@@ -1,0 +1,71 @@
+{
+  "timeline": [
+    {
+      "id": "rstack-consultant",
+      "role": "Frontend Developer Consultant",
+      "company": "RSTACK Solutions Private Limited",
+      "employmentType": "Contract",
+      "startYear": "2026",
+      "endYear": "Present",
+      "location": "Chennai, India (Remote)",
+      "description": "Designing and developing an interactive front-end interface and experience for a web-based analytics application using modern frontend technologies.",
+      "icon": "Code",
+      "accent": "purple",
+      "featured": true,
+      "achievements": [
+        "Integrating REST APIs with AI/ML models to generate predictions and power intelligent decision-making",
+        "Delivering production-grade work on a structured schedule with milestone-based timesheets and code reviews"
+      ]
+    },
+    {
+      "id": "freelance-zellavora",
+      "role": "Frontend Angular Developer",
+      "company": "Freelance · Zellavora",
+      "employmentType": "Freelance",
+      "startYear": "2026",
+      "endYear": "Present",
+      "location": "Remote",
+      "description": "Ship production-grade SPAs and hybrid mobile apps across multiple client projects using Angular, TypeScript, Ionic and REST APIs.",
+      "icon": "Rocket",
+      "accent": "blue",
+      "achievements": [
+        "Build reusable component libraries and scalable architecture enabling faster delivery",
+        "Optimize performance through Angular Signals, lazy loading and smart API integration patterns"
+      ]
+    },
+    {
+      "id": "itgalax-angular",
+      "role": "Frontend Angular Developer",
+      "company": "ITGalax Solutions Pvt Ltd",
+      "employmentType": "Full Time",
+      "startYear": "2022",
+      "endYear": "2026",
+      "location": "Chennai, India",
+      "description": "Engineered government portals and pension management platforms serving 10,000+ active users across three countries.",
+      "icon": "Briefcase",
+      "accent": "cyan",
+      "achievements": [
+        "Reduced API consumption by 40% and improved performance by 50% through frontend optimization and RxJS stream patterns",
+        "Delivered cross-platform mobile apps (iOS/Android) with biometric auth, offline capabilities and enterprise-grade architecture"
+      ]
+    }
+  ],
+  "highlights": [
+    { "label": "Frontend", "value": 90 },
+    { "label": "UI/UX", "value": 80 },
+    { "label": "Performance", "value": 85 },
+    { "label": "Leadership", "value": 75 },
+    { "label": "Problem Solving", "value": 95 }
+  ],
+  "evolution": [
+    { "id": "angular", "label": "Angular", "year": "2020", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg", "accent": "red" },
+    { "id": "ionic", "label": "Ionic", "year": "2021", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg", "accent": "blue" },
+    { "id": "typescript", "label": "TypeScript", "year": "2021", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", "accent": "blue" },
+    { "id": "rxjs", "label": "RxJS", "year": "2022", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rxjs/rxjs-original.svg", "accent": "violet" },
+    { "id": "flutter", "label": "Flutter", "year": "2023", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", "accent": "cyan" }
+  ],
+  "quote": {
+    "text": "The best way to predict the future is to create it.",
+    "author": "Rabin R"
+  }
+}

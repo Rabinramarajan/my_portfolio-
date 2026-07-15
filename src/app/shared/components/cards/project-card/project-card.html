@@ -1,0 +1,169 @@
+@let p = project();
+<app-glass-card padding="none" [interactive]="true" class="pjc__card">
+  <div class="pjc__top">
+    <!-- Media -->
+    <div
+      class="pjc__media"
+      (click)="modalOpen.set(true)"
+      (keydown.enter)="modalOpen.set(true)"
+      (keydown.space)="modalOpen.set(true)"
+      tabindex="0"
+      role="button"
+    >
+      <img
+        [src]="imageUrl()"
+        [alt]="p.title"
+        class="pjc__img"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="pjc__overlay"></div>
+
+      @if (!isUpcoming()) {
+        <!-- Completed check -->
+        <span class="pjc__check" aria-label="Completed">
+          <app-icon name="Check" [size]="15" aria-hidden="true" />
+        </span>
+      }
+
+      @if (p.liveUrl) {
+        <a
+          [href]="p.liveUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="'Open ' + p.title + ' live demo'"
+          class="pjc__live"
+          (click)="$event.stopPropagation()"
+        >
+          <app-icon name="ExternalLink" [size]="15" aria-hidden="true" />
+        </a>
+      }
+    </div>
+
+    <!-- Body -->
+    <div class="pjc__body">
+      <h3 class="pjc__title">{{ p.title }}</h3>
+
+      <app-badge [accent]="categoryAccent()" class="pjc__category">{{ p.categoryLabel }}</app-badge>
+
+      <p class="pjc__desc">{{ p.description }}</p>
+
+      @if (isUpcoming()) {
+        <!-- Progress -->
+        <div class="pjc__progress">
+          <div class="pjc__progress-head">
+            <span class="pjc__progress-label">Progress</span>
+            <span class="pjc__progress-value">{{ p.progress ?? 0 }}%</span>
+          </div>
+          <app-progress-bar [value]="p.progress ?? 0" [showValue]="false" height="0.375rem" />
+        </div>
+      } @else {
+        <!-- Tech chips -->
+        <ul class="pjc__chips">
+          @for (chip of techChips(); track $index) {
+            <li class="pjc__chip" [class]="'pjc__chip--' + chip.accent">
+              {{ chip.label }}
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  </div>
+
+  <!-- Footer (full width) -->
+  <div class="pjc__footer">
+    @if (isUpcoming()) {
+      <div class="pjc__footer-row">
+        <span class="pjc__est">
+          <app-icon name="CalendarDays" [size]="15" aria-hidden="true" />
+          Est. {{ p.estimatedDate }}
+        </span>
+        @if (p.caseStudyUrl) {
+          <app-animated-button
+            variant="secondary"
+            size="sm"
+            icon="ArrowRight"
+            label="Details"
+            [routerLink]="p.caseStudyUrl"
+          />
+        } @else {
+          <app-animated-button
+            variant="secondary"
+            size="sm"
+            icon="ArrowRight"
+            label="Details"
+            (pressed)="modalOpen.set(true)"
+          />
+        }
+      </div>
+    } @else {
+      <a
+        class="pjc__casestudy"
+        [routerLink]="p.caseStudyUrl ?? null"
+        (click)="p.caseStudyUrl ? null : modalOpen.set(true)"
+      >
+        View Case Study
+        <app-icon name="ArrowRight" [size]="15" aria-hidden="true" />
+      </a>
+    }
+  </div>
+
+  <!-- Image gallery modal -->
+  <app-modal [(open)]="modalOpen" [title]="p.title" size="xl">
+    <div class="pjc__gallery">
+      <div class="pjc__gallery-main">
+        <img
+          [src]="selectedImage()"
+          [alt]="p.title"
+          class="pjc__gallery-img"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      @if (hasMultipleImages()) {
+        <div class="pjc__gallery-nav">
+          <button type="button" class="pjc__nav-btn" (click)="prevImage()">
+            <app-icon name="ChevronLeft" [size]="16" aria-hidden="true" />
+            <span class="pjc__nav-label">Prev</span>
+          </button>
+
+          <p class="pjc__gallery-count">{{ currentImageIndex() + 1 }} / {{ images().length }}</p>
+
+          <button type="button" class="pjc__nav-btn" (click)="nextImage()">
+            <span class="pjc__nav-label pjc__nav-label--pre">Next</span>
+            <app-icon name="ChevronRight" [size]="16" aria-hidden="true" />
+          </button>
+        </div>
+
+        <div class="pjc__thumbs">
+          @for (image of images(); track $index; let i = $index) {
+            <button
+              type="button"
+              class="pjc__thumb"
+              [class.pjc__thumb--active]="i === currentImageIndex()"
+              (click)="currentImageIndex.set(i)"
+            >
+              <img
+                [src]="image"
+                [alt]="p.title + ' thumbnail ' + (i + 1)"
+                class="pjc__thumb-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+          }
+        </div>
+      }
+    </div>
+
+    <span slot="footer">
+      <app-animated-button
+        variant="outline"
+        size="sm"
+        label="Close"
+        (pressed)="modalOpen.set(false)"
+      />
+    </span>
+  </app-modal>
+</app-glass-card>

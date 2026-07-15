@@ -1,0 +1,92 @@
+<app-page-layout
+  breadcrumb="Skills & Technologies"
+  titleLead="Skills &"
+  titleHighlight="Technologies"
+  subtitle="A curated toolkit of technologies and frameworks I use to build modern, scalable and high-performance applications."
+>
+  <!-- Header aside: hero illustration -->
+  <img
+    slot="header-aside"
+    src="assets/images/skills-hero.svg"
+    alt=""
+    aria-hidden="true"
+    class="sk-hero"
+    loading="lazy"
+  />
+
+  @if (skills.value(); as sk) {
+    <!-- Category grid -->
+    <div class="sk-grid">
+      @for (cat of sk.categories; track trackById($index, cat)) {
+        <app-glass-card padding="lg">
+          <!-- Card header -->
+          <div class="sk-card__head">
+            <div class="sk-card__head-left">
+              <span class="sk-badge" [class]="'sk-badge--' + badgeAccent(cat.accent)">
+                <app-icon [name]="cat.icon" [size]="22" aria-hidden="true" />
+              </span>
+              <h2 class="sk-card__title">{{ cat.label }}</h2>
+            </div>
+            <span class="sk-dots" aria-hidden="true">
+              @for (dot of [1, 2, 3, 4, 5, 6, 7, 8, 9]; track dot) {
+                <span class="sk-dot"></span>
+              }
+            </span>
+          </div>
+
+          <!-- Tiles -->
+          <ul class="sk-tiles" appStagger>
+            @for (skill of cat.skills; track trackById($index, skill)) {
+              <li class="sk-tile">
+                <span class="sk-tile__icon">
+                  @if (skill.logo) {
+                    <img [src]="skill.logo" [alt]="skill.name" class="sk-tile__logo" loading="lazy" />
+                  } @else if (skill.icon) {
+                    <app-icon [name]="skill.icon" [size]="26" class="sk-tile__glyph" aria-hidden="true" />
+                  }
+                </span>
+                <span class="sk-tile__name">{{ skill.name }}</span>
+              </li>
+            }
+          </ul>
+        </app-glass-card>
+      }
+    </div>
+
+    <!-- Footer info cards -->
+    <div class="sk-footer">
+      <app-glass-card padding="lg">
+        <div class="sk-info">
+          <span class="sk-info__icon">
+            <app-icon name="Star" [size]="24" aria-hidden="true" />
+          </span>
+          <div>
+            <h2 class="sk-info__title">What I value most</h2>
+            <ul class="sk-values">
+              @for (value of sk.values; track $index; let last = $last) {
+                <li class="sk-value">
+                  {{ value }}
+                  @if (!last) {
+                    <span class="sk-value__sep" aria-hidden="true"></span>
+                  }
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+      </app-glass-card>
+
+      <app-glass-card padding="lg">
+        <div class="sk-info">
+          <span class="sk-info__icon">
+            <app-icon name="Rocket" [size]="24" aria-hidden="true" />
+          </span>
+          <div>
+            <h2 class="sk-info__title">Always Exploring</h2>
+            <p class="sk-info__text">{{ sk.learningCard.text }}</p>
+          </div>
+        </div>
+      </app-glass-card>
+    </div>
+  }
+</app-page-layout>

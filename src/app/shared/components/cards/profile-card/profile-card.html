@@ -1,0 +1,26 @@
+@let p = profile();
+<app-glass-card padding="md">
+  <div class="pc">
+    <div class="pc__avatar">
+      <img [src]="p.avatar" [alt]="p.name" class="pc__img" loading="lazy" decoding="async" />
+    </div>
+    <div class="pc__body">
+      <h2 class="pc__name">{{ p.name }}</h2>
+      <p class="pc__role">{{ p.role }}</p>
+      <ul class="pc__contacts">
+        @for (row of contacts(); track row.icon) {
+          <li class="pc__contact">
+            <app-icon [name]="row.icon" [size]="15" aria-hidden="true" />
+            <span class="pc__value">{{ row.value }}</span>
+          </li>
+        }
+      </ul>
+      @if (p.availability.available) {
+        <p class="pc__avail">
+          <span class="pc__dot animate-pulse"></span>
+          Available for new opportunities
+        </p>
+      }
+    </div>
+  </div>
+</app-glass-card>

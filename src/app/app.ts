@@ -1,21 +1,28 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { Header } from './shared/templates/header/header';
-import { Footer } from './shared/templates/footer/footer';
-import { ToastComponent } from './shared/components/toast/toast.component';
-import { BackToTopComponent } from './shared/components/back-to-top/back-to-top.component';
-import { WhatsAppWidgetComponent } from './shared/components/whatsapp-widget/whatsapp-widget.component';
+import { inject as injectVercelAnalytics } from '@vercel/analytics';
+import { injectSpeedInsights } from '@vercel/speed-insights';
+import { ThemeService } from './core/services';
+import { environment } from '../environments/environment';
+
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    Header,
-    Footer,
-    ToastComponent,
-    BackToTopComponent,
-    WhatsAppWidgetComponent,
-  ],
-  templateUrl: './app.html'
+  imports: [RouterOutlet],
+  template: `<router-outlet />`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App {}
+export class App {
+  constructor() {
+    // Instantiate eagerly so the theme effect applies before first paint.
+    inject(ThemeService);
+
+    // Vercel Web Analytics + Speed Insights — browser-only (skipped during
+    // prerender) and enabled solely in production builds.
+    if (environment.production && isPlatformBrowser(inject(PLATFORM_ID))) {
+      injectVercelAnalytics({ mode: 'production' });
+      injectSpeedInsights();
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<footer class="ft" role="contentinfo">
+  <div class="ft__bottom">
+    <p class="ft__copy">&copy; {{ year }} {{ profile.value()?.name }}. All rights reserved.</p>
+    <ul class="ft__bottom-links">
+      @for (link of footer.value()?.bottomLinks ?? []; track $index) {
+        <li>
+          <a [href]="link.url" class="ft__bottom-link">{{ link.label }}</a>
+        </li>
+      }
+    </ul>
+    <p class="ft__credit">
+      Designed &amp; Developed with <span class="ft__heart">&hearts;</span> by
+      <span class="ft__accent">{{ profile.value()?.name }}</span>
+    </p>
+  </div>
+</footer>

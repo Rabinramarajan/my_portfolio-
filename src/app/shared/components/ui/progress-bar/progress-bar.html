@@ -1,0 +1,21 @@
+@if (label() || showValue()) {
+  <div class="progress__head">
+    @if (label(); as l) {
+      <span class="progress__label">{{ l }}</span>
+    }
+    @if (showValue()) {
+      <span class="progress__value">{{ clamped() }}%</span>
+    }
+  </div>
+}
+<div
+  class="progress__track"
+  [style.height]="height()"
+  role="progressbar"
+  [attr.aria-valuenow]="clamped()"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  [attr.aria-label]="label()"
+>
+  <div class="progress__fill" [style]="fillStyle()"></div>
+</div>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" fill="none">
+  <defs>
+    <linearGradient id="d3Bg" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0b0620"/>
+      <stop offset="1" stop-color="#241046"/>
+    </linearGradient>
+    <linearGradient id="d3A" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#a06bff"/><stop offset="1" stop-color="#5a2cff"/>
+    </linearGradient>
+    <linearGradient id="d3B" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3ba7ff"/><stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+    <radialGradient id="d3Halo" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#7c5cff" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#7c5cff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#d3Bg)"/>
+  <g stroke="#a06bff" stroke-opacity="0.08">
+    <path d="M0 180 L640 180M320 0 L320 360M120 60 L520 300M520 60 L120 300"/>
+  </g>
+  <circle cx="320" cy="180" r="130" fill="url(#d3Halo)"/>
+  <g stroke-width="2" fill="none">
+    <path d="M320 84 L404 132 L404 228 L320 276 L236 228 L236 132 Z" stroke="url(#d3A)"/>
+    <path d="M320 84 L320 180 L404 132 M320 180 L236 132 M320 180 L320 276" stroke="url(#d3B)" stroke-opacity="0.8"/>
+    <path d="M320 132 L362 156 L362 204 L320 228 L278 204 L278 156 Z" stroke="url(#d3B)" stroke-opacity="0.5"/>
+  </g>
+  <g fill="#c9b8ff">
+    <circle cx="320" cy="84" r="4"/><circle cx="404" cy="132" r="4"/><circle cx="404" cy="228" r="4"/>
+    <circle cx="320" cy="276" r="4"/><circle cx="236" cy="228" r="4"/><circle cx="236" cy="132" r="4"/>
+  </g>
+</svg>

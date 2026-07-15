@@ -1,0 +1,124 @@
+<app-page-layout
+  breadcrumb="Projects"
+  titleLead="My"
+  titleHighlight="Projects"
+  subtitle="A collection of projects that reflect my passion for development and problem-solving."
+>
+  <!-- Header aside: collaboration CTA -->
+  <div slot="header-aside">
+    <app-glass-card padding="lg" class="pj-cta-card">
+      <div class="pj-cta">
+        <span class="pj-cta__icon">
+          <app-icon name="Rocket" [size]="22" aria-hidden="true" />
+        </span>
+        <div>
+          <h2 class="pj-cta__title">Building something exciting?</h2>
+          <p class="pj-cta__text">Let's collaborate and bring ideas to life.</p>
+          <app-animated-button
+            class="pj-cta__btn"
+            variant="primary"
+            size="sm"
+            icon="ArrowRight"
+            label="Start a Project"
+            routerLink="/contact"
+          />
+        </div>
+      </div>
+    </app-glass-card>
+  </div>
+
+  <!-- Controls -->
+  <div class="pj-controls">
+    <!-- Status tabs -->
+    <div class="pj-tabs" role="group" aria-label="Filter projects by status">
+      @for (tab of [
+        { key: 'all', label: 'All Projects', count: totalCount() },
+        { key: 'finished', label: 'Finished', count: finishedCount() },
+        { key: 'upcoming', label: 'Upcoming', count: upcomingCount() }
+      ]; track tab.key) {
+        <button
+          type="button"
+          class="pj-tab"
+          [class.pj-tab--active]="filter() === tab.key"
+          [attr.aria-pressed]="filter() === tab.key"
+          (click)="setFilter($any(tab.key))"
+        >
+          {{ tab.label }}
+          <span class="pj-tab__count" [class.pj-tab__count--active]="filter() === tab.key">
+            {{ tab.count }}
+          </span>
+        </button>
+      }
+    </div>
+
+    <!-- Sort -->
+    <label class="pj-sort">
+      <span class="sr-only">Sort projects</span>
+      <select class="pj-select" [value]="sort()" (change)="setSort($any($event.target).value)">
+        @for (option of sortOptions; track option) {
+          <option [value]="option">Sort by: {{ option }}</option>
+        }
+      </select>
+      <app-icon name="ChevronDown" [size]="16" class="pj-sort__icon" aria-hidden="true" />
+    </label>
+  </div>
+
+  <!-- Two-column showcase -->
+  <div class="pj-grid">
+    <!-- Finished -->
+    @if (showFinished()) {
+      <section>
+        <div class="pj-sec-head pj-sec-head--success">
+          <h2 class="pj-sec-title">Finished Projects</h2>
+          <span class="pj-sec-badge pj-sec-badge--success">{{ finishedCount() }} Completed</span>
+        </div>
+
+        @if (finished().length) {
+          <div class="pj-cards" appStagger>
+            @for (project of finished(); track trackById($index, project)) {
+              <app-project-card [project]="project" />
+            }
+          </div>
+
+          <app-glass-card padding="none" [interactive]="true" class="pj-viewall">
+            <a routerLink="/projects" class="pj-viewall-link pj-viewall-link--success">
+              <app-icon name="LayoutGrid" [size]="16" aria-hidden="true" />
+              View All Finished Projects
+              <app-icon name="ArrowRight" [size]="16" aria-hidden="true" />
+            </a>
+          </app-glass-card>
+        } @else {
+          <p class="pj-empty">No finished projects yet.</p>
+        }
+      </section>
+    }
+
+    <!-- Upcoming -->
+    @if (showUpcoming()) {
+      <section>
+        <div class="pj-sec-head pj-sec-head--purple">
+          <h2 class="pj-sec-title">Upcoming Projects</h2>
+          <span class="pj-sec-badge pj-sec-badge--purple">{{ upcomingCount() }} In Progress</span>
+        </div>
+
+        @if (upcoming().length) {
+          <div class="pj-cards" appStagger>
+            @for (project of upcoming(); track trackById($index, project)) {
+              <app-project-card [project]="project" />
+            }
+          </div>
+
+          <app-glass-card padding="none" [interactive]="true" class="pj-viewall">
+            <a routerLink="/projects" class="pj-viewall-link pj-viewall-link--purple">
+              <app-icon name="Sparkles" [size]="16" aria-hidden="true" />
+              View All Upcoming Projects
+              <app-icon name="ArrowRight" [size]="16" aria-hidden="true" />
+            </a>
+          </app-glass-card>
+        } @else {
+          <p class="pj-empty">No upcoming projects.</p>
+        }
+      </section>
+    }
+  </div>
+</app-page-layout>

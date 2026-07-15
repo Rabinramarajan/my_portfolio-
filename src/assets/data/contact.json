@@ -1,0 +1,24 @@
+{
+  "channels": [
+    { "id": "email", "icon": "Mail", "label": "Email", "value": "rabinr2607@gmail.com", "href": "mailto:rabinr2607@gmail.com", "accent": "purple" },
+    { "id": "phone", "icon": "Phone", "label": "Phone", "value": "+91 97893 76992", "href": "tel:+919789376992", "accent": "blue" },
+    { "id": "location", "icon": "MapPin", "label": "Location", "value": "Chennai, Tamil Nadu, India", "href": "https://maps.google.com/?q=Chennai", "accent": "green" },
+    { "id": "github", "icon": "Github", "label": "GitHub", "value": "@rabinr", "href": "https://github.com/rabinr", "accent": "amber" }
+  ],
+  "availableFor": [
+    { "id": "fulltime", "label": "Full-time Opportunities" },
+    { "id": "freelance", "label": "Freelance & Consulting" },
+    { "id": "collab", "label": "Open Source Collaborations" },
+    { "id": "tech", "label": "Tech Discussions" }
+  ],
+  "location": {
+    "label": "Chennai",
+    "mapUrl": "https://maps.google.com/?q=Chennai",
+    "mapImage": "assets/images/map.svg"
+  },
+  "quote": {
+    "text": "Great things in business are never done by one person. They're done by a team of people.",
+    "author": "Steve Jobs"
+  },
+  "responseTime": "I usually respond within 24 hours. Let's connect and create something impactful together!"
+}

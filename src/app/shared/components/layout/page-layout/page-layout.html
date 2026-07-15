@@ -1,0 +1,16 @@
+<app-breadcrumb [current]="breadcrumb()" class="pl__crumb" />
+
+<header class="pl__header">
+  <div class="pl__head-main">
+    <app-gradient-title [lead]="titleLead()" [highlight]="titleHighlight()" [level]="1" />
+    <div class="pl__bar"></div>
+    @if (subtitle(); as s) {
+      <p class="pl__subtitle">{{ s }}</p>
+    }
+  </div>
+  <div class="pl__aside">
+    <ng-content select="[slot=header-aside]" />
+  </div>
+</header>
+
+<ng-content />

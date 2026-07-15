@@ -1,0 +1,214 @@
+{
+  "categories": ["All Projects", "Web Applications", "Mobile Apps", "Dashboard", "AI / ML"],
+  "items": [
+    {
+      "id": "fiji-immigration",
+      "title": "Fiji Immigration External Management System",
+      "category": "Web Applications",
+      "categoryLabel": "Government Citizen Portal",
+      "description": "A secure digital self-service platform enabling individuals, employers, and businesses to apply for visas, work permits, residence permits, citizenship, investor permits, study permits, and other immigration services online. The portal streamlines application submission, document uploads, appointment scheduling, payment integration, application tracking, and status notifications through a modern role-based experience.",
+      "image": [
+        "assets/images/fiji_external_application/image1.png",
+        "assets/images/fiji_external_application/image2.png",
+        "assets/images/fiji_external_application/image3.png",
+        "assets/images/fiji_external_application/image4.png",
+        "assets/images/fiji_external_application/image5.png",
+        "assets/images/fiji_external_application/image6.png",
+        "assets/images/fiji_external_application/image7.png",
+        "assets/images/fiji_external_application/image8.png"
+      ],
+      "technologies": [
+        "Angular",
+        "TypeScript",
+        "Angular Signals",
+        "RxJS",
+        "Tailwind CSS",
+        "REST APIs"
+      ],
+      "featured": true,
+      "status": "finished",
+      "caseStudyUrl": "/case-studies/fiji-immigration",
+      "createdAt": "2024-06-01"
+    },
+    {
+      "id": "fiji-immigration-internal",
+      "title": "Fiji Immigration Internal Management System",
+      "category": "Web Applications",
+      "categoryLabel": "Government Operations Portal",
+      "description": "An enterprise-grade internal platform built for immigration officers and government administrators to manage end-to-end immigration operations. The system supports application assessment, document verification, workflow automation, permit approvals, visa processing, citizenship management, border operations, compliance monitoring, reporting, user administration, and role-based access control across multiple immigration services.",
+      "image": [
+        "assets/images/fiji_internal_application/image1.png",
+        "assets/images/fiji_internal_application/image2.png",
+        "assets/images/fiji_internal_application/image3.png",
+        "assets/images/fiji_internal_application/image4.png",
+        "assets/images/fiji_internal_application/image5.png"
+      ],
+      "technologies": [
+        "Angular",
+        "TypeScript",
+        "Angular Signals",
+        "RxJS",
+        "Tailwind CSS",
+        "REST APIs"
+      ],
+      "featured": true,
+      "status": "finished",
+      "caseStudyUrl": "/case-studies/fiji-immigration-internal",
+      "createdAt": "2024-07-01"
+    },
+    {
+      "id": "prims",
+      "title": "PRIMS Member Portal",
+      "category": "Enterprise Applications",
+      "categoryLabel": "Pension Member Portal",
+      "description": "A secure self-service pension portal that empowers members to manage their retirement accounts online. The platform provides real-time access to contribution history, account balances, benefit statements, personal profile management, document services, claim submissions, beneficiary details, and retirement-related information through an intuitive, responsive user experience.",
+      "image": [
+        "assets/images/prims_member_portal/image1.png",
+        "assets/images/prims_member_portal/image2.png",
+        "assets/images/prims_member_portal/image3.png",
+        "assets/images/prims_member_portal/image4.png",
+        "assets/images/prims_member_portal/image5.png"
+      ],
+      "technologies": [
+        "Angular",
+        "TypeScript",
+        "Angular Signals",
+        "RxJS",
+        "Angular Material",
+        "REST APIs"
+      ],
+      "featured": true,
+      "status": "finished",
+      "caseStudyUrl": "/case-studies/prims",
+      "createdAt": "2023-09-01"
+    },
+    {
+      "id": "vnpf",
+      "title": "VNPF blo mi — Member Mobile Application",
+      "category": "Mobile Applications",
+      "categoryLabel": "Provident Fund Mobile App",
+      "description": "A secure cross-platform mobile application developed for Vanuatu National Provident Fund (VNPF), enabling members to conveniently manage their provident fund services anytime, anywhere. The app provides real-time access to account balances, contribution history, loan details, withdrawal requests, insurance information, and member profile management, while allowing users to submit loan, insurance, and withdrawal applications through a seamless digital experience.",
+      "image": [
+        "assets/images/vnpf_mobile/image1.png",
+        "assets/images/vnpf_mobile/image2.png",
+        "assets/images/vnpf_mobile/image3.png",
+        "assets/images/vnpf_mobile/image4.png",
+        "assets/images/vnpf_mobile/image5.png",
+        "assets/images/vnpf_mobile/image6.png"
+      ],
+      "technologies": ["Ionic Angular", "Angular", "TypeScript", "Capacitor", "RxJS", "REST APIs"],
+      "featured": true,
+      "status": "finished",
+      "caseStudyUrl": "/case-studies/vnpf",
+      "createdAt": "2023-03-01"
+    },
+    {
+      "id": "zellavora",
+      "title": "Zellavora AI Resume Builder",
+      "category": "AI / ML",
+      "categoryLabel": "AI Product",
+      "description": "An AI-powered resume builder that turns guided inputs into tailored, ATS-friendly resumes — pairing a live preview editor with AI content generation and one-click PDF export.",
+      "image": "assets/images/projects/zellavora.svg",
+      "technologies": ["Angular", "TypeScript", "RxJS", "Tailwind CSS", "AI Integration"],
+      "featured": true,
+      "status": "finished",
+      "liveUrl": "https://www.rabinr.in",
+      "caseStudyUrl": "/case-studies/zellavora",
+      "createdAt": "2026-02-01"
+    },
+    {
+      "id": "ai-task-manager",
+      "title": "AI Task Manager",
+      "category": "AI / ML",
+      "categoryLabel": "Web Application",
+      "description": "Smart task management app with AI suggestions and productivity insights.",
+      "image": "assets/images/projects/ai-task-manager.svg",
+      "technologies": ["Angular", "TypeScript", "RxJS", "AI Integration"],
+      "featured": true,
+      "status": "upcoming",
+      "progress": 35,
+      "estimatedDate": "Q3 2026",
+      "createdAt": "2026-05-01"
+    },
+    {
+      "id": "personal-finance-tracker",
+      "title": "Personal Finance Tracker",
+      "category": "Web Applications",
+      "categoryLabel": "Web Application",
+      "description": "Track expenses, set budgets & achieve financial goals with beautiful analytics.",
+      "image": "assets/images/projects/personal-finance-tracker.svg",
+      "technologies": ["Angular", "TypeScript", "Tailwind CSS", "REST APIs"],
+      "featured": false,
+      "status": "upcoming",
+      "progress": 20,
+      "estimatedDate": "Q3 2026",
+      "createdAt": "2026-04-15"
+    },
+    {
+      "id": "telehealth-platform",
+      "title": "Telehealth Platform",
+      "category": "Mobile Applications",
+      "categoryLabel": "Mobile Application",
+      "description": "Remote consultation platform connecting doctors and patients seamlessly.",
+      "image": "assets/images/projects/telehealth-platform.svg",
+      "technologies": ["Ionic Angular", "Angular", "TypeScript", "Capacitor"],
+      "featured": false,
+      "status": "upcoming",
+      "progress": 50,
+      "estimatedDate": "Q4 2026",
+      "createdAt": "2026-03-20"
+    },
+    {
+      "id": "3d-portfolio-experience",
+      "title": "3D Portfolio Experience",
+      "category": "Web Applications",
+      "categoryLabel": "Web Application",
+      "description": "An immersive 3D interactive portfolio experience using Three.js and WebGL.",
+      "image": "assets/images/projects/3d-portfolio-experience.svg",
+      "technologies": ["Angular", "TypeScript", "Tailwind CSS"],
+      "featured": false,
+      "status": "upcoming",
+      "progress": 15,
+      "estimatedDate": "Q4 2026",
+      "createdAt": "2026-02-10"
+    }
+  ],
+  "process": [
+    {
+      "order": "01",
+      "title": "Discover",
+      "description": "Understanding requirements",
+      "icon": "Search"
+    },
+    {
+      "order": "02",
+      "title": "Plan",
+      "description": "Planning architecture and strategy",
+      "icon": "FileText"
+    },
+    {
+      "order": "03",
+      "title": "Design",
+      "description": "Creating user-friendly and modern UI",
+      "icon": "PenTool"
+    },
+    {
+      "order": "04",
+      "title": "Develop",
+      "description": "Building scalable and efficient code",
+      "icon": "Code"
+    },
+    {
+      "order": "05",
+      "title": "Test",
+      "description": "Testing for quality and performance",
+      "icon": "CheckCircle2"
+    },
+    {
+      "order": "06",
+      "title": "Deploy",
+      "description": "Launching and continuous support",
+      "icon": "Rocket"
+    }
+  ]
+}

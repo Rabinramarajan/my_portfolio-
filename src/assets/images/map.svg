@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 270" fill="none">
+  <defs>
+    <linearGradient id="mapBg" x1="0" y1="0" x2="480" y2="270" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0d1330"/><stop offset="1" stop-color="#1a1240"/>
+    </linearGradient>
+    <linearGradient id="pinG" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7c5cff"/><stop offset="1" stop-color="#3ba7ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="270" fill="url(#mapBg)"/>
+  <g stroke="#3ba7ff" stroke-opacity="0.12" stroke-width="1">
+    <path d="M0 60 H480 M0 120 H480 M0 180 H480 M0 225 H480 M80 0 V270 M160 0 V270 M240 0 V270 M320 0 V270 M400 0 V270"/>
+  </g>
+  <path d="M40 150 Q120 90 200 130 T360 110 L440 150" stroke="#7c5cff" stroke-opacity="0.35" stroke-width="2" fill="none"/>
+  <path d="M60 210 Q180 170 260 200 T460 190" stroke="#3ba7ff" stroke-opacity="0.25" stroke-width="2" fill="none"/>
+  <circle cx="240" cy="120" r="34" fill="url(#pinG)" fill-opacity="0.12"/>
+  <circle cx="240" cy="120" r="20" fill="url(#pinG)" fill-opacity="0.2"/>
+  <path d="M240 96 c-13 0 -22 10 -22 22 c0 16 22 34 22 34 c0 0 22 -18 22 -34 c0 -12 -9 -22 -22 -22 Z" fill="url(#pinG)"/>
+  <circle cx="240" cy="118" r="7" fill="#0d1330"/>
+</svg>

@@ -1,0 +1,13 @@
+<app-glass-card padding="sm">
+  <div class="sc">
+    @if (stat().icon; as icon) {
+      <span class="sc__icon" [style]="iconStyle()">
+        <app-icon [name]="icon" [size]="20" aria-hidden="true" />
+      </span>
+    }
+    <div class="sc__body">
+      <p class="sc__value">{{ stat().value }}</p>
+      <p class="sc__label">{{ stat().label }}</p>
+    </div>
+  </div>
+</app-glass-card>

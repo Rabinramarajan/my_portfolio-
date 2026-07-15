@@ -1,0 +1,227 @@
+:host {
+  display: block;
+}
+
+.sk-hero {
+  display: none;
+  width: 100%;
+  max-width: 28rem;
+  /* Reserve layout space before the SVG loads (matches its 460×300 viewBox). */
+  aspect-ratio: 460 / 300;
+  height: auto;
+}
+
+.sk-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.sk-card__head {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.sk-card__head-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sk-badge {
+  --c: var(--color-brand-purple);
+  display: inline-flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 10%, transparent);
+}
+.sk-badge--violet {
+  --c: var(--color-brand-violet);
+}
+.sk-badge--blue {
+  --c: var(--color-brand-blue);
+}
+.sk-badge--cyan {
+  --c: var(--color-brand-cyan);
+}
+.sk-badge--green {
+  --c: var(--color-success);
+}
+.sk-badge--orange,
+.sk-badge--amber {
+  --c: var(--color-warning);
+}
+.sk-badge--red {
+  --c: var(--color-danger);
+}
+
+.sk-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-fg);
+  margin: 0;
+}
+
+.sk-dots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.125rem;
+  opacity: 0.3;
+}
+
+.sk-dot {
+  height: 0.25rem;
+  width: 0.25rem;
+  border-radius: 9999px;
+  background: var(--color-fg-muted);
+}
+
+.sk-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sk-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-surface-glass);
+  padding: 0.75rem;
+  text-align: center;
+  transition: border-color 0.15s;
+}
+
+.sk-tile:hover {
+  border-color: color-mix(in srgb, var(--color-brand-purple) 40%, transparent);
+}
+
+.sk-tile__icon {
+  display: flex;
+  height: 2.25rem;
+  width: 2.25rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.sk-tile__logo {
+  height: 2rem;
+  width: 2rem;
+  object-fit: contain;
+}
+
+.sk-tile__glyph {
+  color: var(--color-brand-purple);
+}
+
+.sk-tile__name {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-fg-muted);
+}
+
+.sk-footer {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.sk-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sk-info__icon {
+  display: inline-flex;
+  height: 3.5rem;
+  width: 3.5rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--color-brand-purple) 25%, transparent);
+  background: color-mix(in srgb, var(--color-brand-purple) 10%, transparent);
+  color: var(--color-brand-purple);
+}
+
+.sk-info__title {
+  font-weight: 700;
+  color: var(--color-fg);
+  margin: 0;
+}
+
+.sk-values {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.5rem;
+  row-gap: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--color-fg-muted);
+}
+
+.sk-value {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sk-value__sep {
+  height: 0.25rem;
+  width: 0.25rem;
+  border-radius: 9999px;
+  background: var(--color-brand-purple);
+}
+
+.sk-info__text {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.625;
+  color: var(--color-fg-muted);
+}
+
+@media (min-width: 640px) {
+  .sk-tiles {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .sk-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .sk-hero {
+    display: block;
+  }
+  .sk-footer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .sk-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
