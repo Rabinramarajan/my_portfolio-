@@ -1,0 +1,19 @@
+<!-- srcset/sizes are attribute bindings, not property bindings: the server DOM
+     has no `srcset` property, so `[srcset]` throws NotYetImplemented during
+     prerendering and takes the rest of this template's bindings down with it,
+     leaving the LCP image with no src at all in the static HTML. -->
+<picture>
+  <source type="image/webp" [attr.srcset]="webpSrcset()" [attr.sizes]="sizes()" />
+  <img
+    class="ri__img"
+    [src]="fallbackSrc()"
+    [alt]="alt()"
+    [attr.aria-hidden]="decorative() ? true : null"
+    [attr.role]="decorative() ? 'presentation' : null"
+    [attr.width]="meta().intrinsic.width"
+    [attr.height]="meta().intrinsic.height"
+    [attr.loading]="loading()"
+    [attr.fetchpriority]="priority() ? 'high' : null"
+    decoding="async"
+  />
+</picture>

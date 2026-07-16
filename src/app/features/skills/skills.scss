@@ -4,11 +4,17 @@
 
 .sk-hero {
   display: none;
+  margin: 0;
   width: 100%;
   max-width: 28rem;
-  /* Reserve layout space before the SVG loads (matches its 460×300 viewBox). */
-  aspect-ratio: 460 / 300;
-  height: auto;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border-subtle);
+  aspect-ratio: 3 / 2;
+}
+
+.sk-hero__img {
+  height: 100%;
 }
 
 .sk-grid {
@@ -83,7 +89,10 @@
 
 .sk-tiles {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Names are ellipsised on a single line, so a track narrower than ~6rem
+     truncates the longer ones ("Tailwind CSS", "PostgreSQL"). Let the row drop
+     to 2 tiles on narrow phones rather than clipping. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 6rem), 1fr));
   gap: 0.75rem;
   list-style: none;
   margin: 0;

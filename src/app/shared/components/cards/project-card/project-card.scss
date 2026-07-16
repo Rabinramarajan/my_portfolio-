@@ -60,10 +60,12 @@
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 30%);
 }
 
-.pjc__live {
+/* Action buttons stack right-to-left from the top corner: live demo sits
+   outermost, source moves inboard when both are present. */
+.pjc__live,
+.pjc__code {
   position: absolute;
   top: 0.5rem;
-  right: 0.5rem;
   display: inline-flex;
   height: 2rem;
   width: 2rem;
@@ -77,7 +79,21 @@
   transition: color 0.15s;
 }
 
-.pjc__live:hover {
+.pjc__live {
+  right: 0.5rem;
+}
+
+/* Sits beside the live link when both render, and takes the corner when alone. */
+.pjc__code {
+  right: 0.5rem;
+}
+
+.pjc__code:has(~ .pjc__live) {
+  right: 3rem;
+}
+
+.pjc__live:hover,
+.pjc__code:hover {
   color: var(--color-fg);
 }
 
@@ -199,6 +215,8 @@
 .pjc__casestudy {
   display: inline-flex;
   align-items: center;
+  /* WCAG 2.5.8: keep the tap box at least 24px tall on touch screens. */
+  min-height: 1.5rem;
   gap: 0.5rem;
   font-size: 0.875rem;
   font-weight: 600;

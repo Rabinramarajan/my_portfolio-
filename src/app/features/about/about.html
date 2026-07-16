@@ -11,9 +11,7 @@
           </span>
         </app-badge>
 
-        <h1 class="ab-hero__title">
-          More About <span class="text-gradient-brand">Me.</span>
-        </h1>
+        <h1 class="ab-hero__title">More About <span class="text-gradient-brand">Me.</span></h1>
 
         <p class="ab-hero__subtitle">
           @for (part of a.subtitleParts; track $index) {
@@ -35,11 +33,26 @@
         ></div>
         <div
           class="ab-visual__ring"
-          style="background: conic-gradient(from 0deg, var(--color-brand-purple), var(--color-brand-blue), var(--color-brand-cyan), transparent 60%, var(--color-brand-purple))"
+          style="
+            background: conic-gradient(
+              from 0deg,
+              var(--color-brand-purple),
+              var(--color-brand-blue),
+              var(--color-brand-cyan),
+              transparent 60%,
+              var(--color-brand-purple)
+            );
+          "
           aria-hidden="true"
         ></div>
         <div class="ab-visual__portrait">
-          <img [src]="p.avatar" [alt]="p.name" class="ab-visual__img" loading="lazy" decoding="async" />
+          <img
+            [src]="p.avatar"
+            [alt]="p.name"
+            class="ab-visual__img"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <span class="ab-visual__badge">
           <app-icon name="Code" [size]="18" aria-hidden="true" />
@@ -48,6 +61,30 @@
           <span class="ab-visual__sig">{{ p.signature }}</span>
         </div>
       </div>
+    </section>
+
+    <!-- Contact sheet — three frames from the working set, pinned like proofs -->
+    <section class="ab-sheet" appReveal aria-labelledby="ab-sheet-heading">
+      <h2 id="ab-sheet-heading" class="sr-only">Where I work</h2>
+
+      <ul class="ab-sheet__strip" role="list">
+        @for (frame of sheet; track frame.name) {
+          <li class="ab-sheet__item" [class]="'ab-sheet__item--' + frame.name">
+            <figure class="ab-sheet__frame">
+              <app-responsive-image
+                [name]="frame.name"
+                [alt]="frame.alt"
+                sizes="(min-width: 1024px) 22rem, (min-width: 640px) 40vw, 78vw"
+                class="ab-sheet__img"
+              />
+              <figcaption class="ab-sheet__caption">
+                <span class="ab-sheet__index">{{ frame.index }}</span>
+                <span class="ab-sheet__label">{{ frame.caption }}</span>
+              </figcaption>
+            </figure>
+          </li>
+        }
+      </ul>
     </section>
 
     <!-- Stats -->
@@ -62,7 +99,9 @@
       <!-- What I Do -->
       <app-glass-card padding="md" class="ab-card ab-card--purple">
         <h2 class="ab-card__heading">
-          <span class="ab-card__chip"><app-icon name="Wrench" [size]="16" aria-hidden="true" /></span>
+          <span class="ab-card__chip"
+            ><app-icon name="Wrench" [size]="16" aria-hidden="true"
+          /></span>
           What I Do
         </h2>
         <ul class="ab-tiles">
@@ -83,7 +122,9 @@
       <!-- Core Values -->
       <app-glass-card padding="md" class="ab-card ab-card--cyan">
         <h2 class="ab-card__heading">
-          <span class="ab-card__chip"><app-icon name="Heart" [size]="16" aria-hidden="true" /></span>
+          <span class="ab-card__chip"
+            ><app-icon name="Heart" [size]="16" aria-hidden="true"
+          /></span>
           Core Values
         </h2>
         <ul class="ab-values">
@@ -105,7 +146,9 @@
     <!-- My Journey — horizontal timeline -->
     <app-glass-card padding="md" class="ab-card ab-card--blue ab-journey-card">
       <h2 class="ab-card__heading">
-        <span class="ab-card__chip"><app-icon name="TrendingUp" [size]="16" aria-hidden="true" /></span>
+        <span class="ab-card__chip"
+          ><app-icon name="TrendingUp" [size]="16" aria-hidden="true"
+        /></span>
         My Journey
       </h2>
       <ol class="ab-htl">
@@ -119,8 +162,18 @@
       </ol>
     </app-glass-card>
 
-    <!-- Quote -->
-    <app-quote-card [text]="a.quote.text" [compact]="true" class="ab-quote" />
+    <!-- Quote, paired with a workspace portrait -->
+    <section class="ab-story" appReveal>
+      <figure class="ab-story__figure">
+        <app-responsive-image
+          name="contact-portrait"
+          [alt]="p.name + ' at his workspace'"
+          sizes="(min-width: 900px) 22rem, 100vw"
+          class="ab-story__img"
+        />
+      </figure>
+      <app-quote-card [text]="a.quote.text" [compact]="true" class="ab-quote" />
+    </section>
   }
 }
 

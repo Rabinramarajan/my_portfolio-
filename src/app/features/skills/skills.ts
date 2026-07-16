@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { DataService, AccentColor, trackById } from '../../core';
-import { PageLayout, GlassCard, Stagger } from '../../shared';
+import { PageLayout, GlassCard, Stagger, ResponsiveImage } from '../../shared';
 import { Icon } from '../../shared/components/ui/icon/icon';
-
 
 /** Skills & Technologies page — category card grid of tech tiles. */
 @Component({
   selector: 'app-skills',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Icon, PageLayout, GlassCard, Stagger],
+  imports: [Icon, PageLayout, GlassCard, Stagger, ResponsiveImage],
   templateUrl: './skills.html',
   styleUrl: './skills.scss',
   host: { class: 'block' },

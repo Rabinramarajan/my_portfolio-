@@ -131,10 +131,35 @@
   color: #fff;
   text-decoration: none;
   background: linear-gradient(90deg, var(--color-brand-purple), var(--color-brand-blue));
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
 }
 
 .svc-cta__btn:hover {
   opacity: 0.92;
   transform: translateY(-1px);
+}
+
+/* Header aside: architecture whiteboard. Hidden on narrow screens where the
+   diagram's text would be too small to read (matches .sk-hero convention). */
+.svc-hero {
+  display: none;
+  margin: 0;
+  width: 100%;
+  max-width: 28rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border-subtle);
+  aspect-ratio: 3 / 2;
+}
+
+.svc-hero__img {
+  height: 100%;
+}
+
+@media (min-width: 1024px) {
+  .svc-hero {
+    display: block;
+  }
 }

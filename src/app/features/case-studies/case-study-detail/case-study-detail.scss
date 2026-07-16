@@ -10,6 +10,8 @@
 .csd__back {
   display: inline-flex;
   align-items: center;
+  /* WCAG 2.5.8: keep the tap box at least 24px tall on touch screens. */
+  min-height: 1.5rem;
   gap: 0.35rem;
   font-size: 0.875rem;
   font-weight: 600;
@@ -85,7 +87,9 @@
   text-decoration: none;
   color: var(--color-fg);
   border: 1px solid color-mix(in srgb, var(--color-fg) 15%, transparent);
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
 }
 
 .csd__btn:hover {

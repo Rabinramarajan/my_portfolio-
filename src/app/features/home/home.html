@@ -1,16 +1,50 @@
 @if (profile.value(); as p) {
   @if (home.value()?.hero; as hero) {
-    <!-- Hero -->
+    <!-- Hero — asymmetric editorial: oversized headline crossing a portrait
+         that bleeds off the top-right edge. Sized to fill the viewport. -->
     <section class="hero" appReveal>
-      <!-- Left: content -->
+      <!-- Ambient backdrop: workspace photo, darkened well below text contrast -->
+      <div class="hero__backdrop" aria-hidden="true">
+        <!-- This is the LCP element. `priority` marks it fetchpriority=high so
+             it is not queued behind the JS chunks; it is the only image on the
+             page marked high, since competing high-priority images cancel out. -->
+        <app-responsive-image
+          name="hero-golden-hour"
+          alt=""
+          sizes="100vw"
+          priority
+          class="hero__backdrop-img"
+        />
+      </div>
+
+      <!-- Portrait, anchored to and bleeding past the top-right edge. Its inner
+           edge is feathered into the page so the headline stays readable. -->
+      <div class="hero__visual" aria-hidden="true">
+        <!-- Decorative (the wrapper is aria-hidden), and larger than the
+             backdrop that actually sets LCP. Browsers give an in-viewport image
+             High priority by default, so without this hint it competes with —
+             and delays — the LCP element on a phone connection. Still eager: it
+             is above the fold, so lazy-loading would cost it a round trip. -->
+        <img
+          [src]="p.heroImage ?? p.avatar"
+          [alt]="p.name"
+          class="hero__portrait-img"
+          loading="eager"
+          fetchpriority="low"
+          decoding="async"
+        />
+      </div>
+
+      <!-- Content -->
       <div class="hero__content">
-        <span class="hero__avail">
+        <span class="hero__eyebrow">
           <span class="hero__avail-dot animate-pulse"></span>
           {{ hero.availabilityLabel }}
         </span>
 
         <h1 class="hero__title">
-          {{ hero.headlineLead }} <span class="text-gradient-brand">{{ hero.headlineHighlight }}</span>
+          {{ hero.headlineLead }}
+          <span class="text-gradient-brand">{{ hero.headlineHighlight }}</span>
         </h1>
 
         <p class="hero__subtitle">{{ hero.subtitle }}</p>
@@ -27,71 +61,27 @@
             />
           }
         </div>
-
-        <!-- Stats -->
-        <div class="hero__stats">
-          @for (stat of homeStats(); track trackById($index, stat)) {
-            <div class="hero__stat">
-              @if (stat.icon; as icon) {
-                <app-icon
-                  [name]="icon"
-                  [size]="22"
-                  [style.color]="accentColor(stat.accent)"
-                  aria-hidden="true"
-                />
-              }
-              <span class="hero__stat-value">{{ stat.value }}</span>
-              <span class="hero__stat-label">{{ stat.label }}</span>
-            </div>
-          }
-        </div>
       </div>
 
-      <!-- Right: portrait visual -->
-      <div class="hero__visual">
-        <!-- Ambient glow -->
-        <div
-          class="hero__glow"
-          style="background: radial-gradient(circle, var(--color-brand-purple), transparent 68%)"
-          aria-hidden="true"
-        ></div>
-
-        <!-- Rotating gradient ring -->
-        <div
-          class="hero__ring"
-          style="background: conic-gradient(from 0deg, var(--color-brand-purple), var(--color-brand-blue), transparent 55%, var(--color-brand-purple))"
-          aria-hidden="true"
-        ></div>
-
-        <!-- Portrait -->
-        <div class="hero__portrait">
-          <img
-            [src]="p.heroImage ?? p.avatar"
-            [alt]="p.name"
-            class="hero__portrait-img"
-            loading="eager"
-            decoding="async"
-          />
-          <!-- Legibility gradient + signature -->
-          <div class="hero__portrait-fade" aria-hidden="true"></div>
-          <span class="hero__signature" aria-hidden="true">{{ p.signature }}</span>
-        </div>
-
-        <!-- Floating code chip -->
-        <span class="hero__chip hero__chip--code">
-          <app-icon name="Code" [size]="22" aria-hidden="true" />
-        </span>
-
-        <!-- Floating availability chip -->
-        <span class="hero__chip hero__chip--avail">
-          <span class="hero__avail-dot animate-pulse"></span> Open to work
-        </span>
-      </div>
+      <!-- Stats — thin editorial baseline strip pinned to the hero's foot -->
+      <dl class="hero__stats">
+        @for (stat of homeStats(); track trackById($index, stat)) {
+          <div class="hero__stat">
+            <dt class="hero__stat-label">{{ stat.label }}</dt>
+            <dd class="hero__stat-value" [style.--stat-accent]="accentColor(stat.accent)">
+              {{ stat.value }}
+            </dd>
+          </div>
+        }
+      </dl>
     </section>
 
     <!-- Highlights + technologies -->
     <div class="home-grid">
-      <!-- What I do -->
+      <!-- What I do. The heading is for structure only — the cards read as a
+           group visually, but without it the h1 jumps straight to the cards' h3
+           and screen-reader users get no name for this section. -->
+      <h2 class="sr-only">What I do</h2>
       <div class="highlights">
         @for (item of hero.highlights; track trackById($index, item); let i = $index) {
           <app-glass-card padding="md" [interactive]="true">
@@ -129,6 +119,16 @@
           </a>
         </div>
       </app-glass-card>
+    </div>
+
+    <!-- Full-bleed divider before the footer -->
+    <div class="home__divider" aria-hidden="true">
+      <app-responsive-image
+        name="divider-night-desk"
+        alt=""
+        sizes="100vw"
+        class="home__divider-img"
+      />
     </div>
   }
 }

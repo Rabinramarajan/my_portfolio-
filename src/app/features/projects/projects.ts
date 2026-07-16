@@ -1,9 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DataService, Project, trackById } from '../../core';
-import { PageLayout, GlassCard, ProjectCard, AnimatedButton, Stagger } from '../../shared';
+import {
+  PageLayout,
+  GlassCard,
+  ProjectCard,
+  AnimatedButton,
+  Stagger,
+  ResponsiveImage,
+} from '../../shared';
 import { Icon } from '../../shared/components/ui/icon/icon';
-
 
 type StatusFilter = 'all' | 'finished' | 'upcoming';
 const SORTS = ['Latest', 'Oldest', 'Featured', 'A–Z'] as const;
@@ -13,7 +19,16 @@ type SortOption = (typeof SORTS)[number];
 @Component({
   selector: 'app-projects',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Icon, PageLayout, GlassCard, ProjectCard, AnimatedButton, Stagger],
+  imports: [
+    RouterLink,
+    Icon,
+    PageLayout,
+    GlassCard,
+    ProjectCard,
+    AnimatedButton,
+    Stagger,
+    ResponsiveImage,
+  ],
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
   host: { class: 'block' },

@@ -151,7 +151,7 @@
 .ab-stats {
   margin-top: 1.25rem;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
   gap: 1rem;
 }
 
@@ -362,6 +362,8 @@
   margin-top: 1.25rem;
   display: inline-flex;
   align-items: center;
+  /* WCAG 2.5.8: keep the tap box at least 24px tall on touch screens. */
+  min-height: 1.5rem;
   gap: 0.25rem;
   font-size: 0.875rem;
   color: var(--card-accent, var(--color-brand-purple));
@@ -440,8 +442,159 @@
   color: var(--color-fg-muted);
 }
 
-.ab-quote {
+/* Contact sheet — proof frames pinned between the hero and the stats row.
+   Each frame is capped near 22rem: the sources top out at 1600px, so this is
+   the largest they render without upscaling on a 2x display. */
+.ab-sheet {
+  margin: 2.5rem 0 0;
+}
+
+.ab-sheet__strip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ab-sheet__item {
+  width: min(72vw, 16rem);
+}
+
+.ab-sheet__frame {
+  position: relative;
+  margin: 0;
+  padding: 0.6rem 0.6rem 0;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border-subtle);
+  background: color-mix(in srgb, var(--color-bg-elevated) 70%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 40px -24px rgb(0 0 0 / 70%);
+}
+
+/* Square proofs: a middle ground that crops the portrait and the two landscape
+   shots comparably, so no frame loses its subject. */
+.ab-sheet__img {
+  display: block;
+  overflow: hidden;
+  border-radius: 0.4rem;
+  aspect-ratio: 1 / 1;
+
+  --ri-object-position: center 28%;
+}
+
+.ab-sheet__caption {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.15rem 0.6rem;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.ab-sheet__index {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.6875rem;
+  color: var(--color-brand-purple);
+  letter-spacing: 0.06em;
+}
+
+.ab-sheet__label {
+  color: var(--color-fg-muted);
+  letter-spacing: 0.01em;
+}
+
+/* The two landscape shots have their subject off-centre; nudge the crop so the
+   face survives the square. */
+.ab-sheet__item--about-coffee-shop .ab-sheet__img {
+  --ri-object-position: center 34%;
+}
+
+.ab-sheet__item--about-monitors .ab-sheet__img {
+  --ri-object-position: 38% 32%;
+}
+
+@media (min-width: 640px) {
+  .ab-sheet__strip {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* The scatter: prints laid down by hand, overlapping, not a tidy row. Negative
+     margins pull the frames into each other; the centre sits proud and low. */
+  .ab-sheet__item {
+    width: clamp(12rem, 22vw, 15rem);
+  }
+
+  .ab-sheet__item--about-portrait {
+    rotate: -5deg;
+    translate: 8% 0.5rem;
+    z-index: 1;
+  }
+
+  .ab-sheet__item--about-coffee-shop {
+    margin-inline: -1.75rem;
+    rotate: 2deg;
+    translate: 0 -0.75rem;
+    z-index: 3;
+  }
+
+  .ab-sheet__item--about-monitors {
+    rotate: 5deg;
+    translate: -8% 0.75rem;
+    z-index: 2;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 640px) {
+  .ab-sheet__frame {
+    transition:
+      rotate 250ms ease,
+      translate 250ms ease;
+  }
+
+  /* Straighten and lift on approach — the "pick up the print" gesture. */
+  .ab-sheet__item:hover .ab-sheet__frame,
+  .ab-sheet__item:focus-within .ab-sheet__frame {
+    rotate: 0deg;
+    translate: 0 -0.5rem;
+  }
+}
+
+/* The scatter relies on overlap; without it the frames just look misaligned. */
+@media (prefers-contrast: more) {
+  .ab-sheet__item {
+    rotate: none;
+    translate: none;
+  }
+}
+
+/* Quote paired with a portrait */
+.ab-story {
   margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.ab-story__figure {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid var(--color-border-subtle);
+  aspect-ratio: 4 / 5;
+}
+
+.ab-story__img {
+  height: 100%;
+}
+
+.ab-quote {
   display: block;
 }
 
@@ -456,6 +609,12 @@
   }
   .ab-stats {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .ab-story {
+    grid-template-columns: 22rem minmax(0, 1fr);
   }
 }
 

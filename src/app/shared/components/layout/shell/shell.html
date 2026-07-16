@@ -2,7 +2,14 @@
 
 <!-- Mobile top bar -->
 <header class="shell__topbar">
-  <a routerLink="/" class="shell__brand" aria-label="Home">
+  <!-- The accessible name must start with the visible text, or speech-input
+       users cannot activate the link by saying what they see. A bare
+       aria-label="Home" replaced the visible name instead of extending it. -->
+  <a
+    routerLink="/"
+    class="shell__brand"
+    [attr.aria-label]="(profile.value()?.name ?? '') + ' — home'"
+  >
     <span class="shell__brand-mark text-gradient-brand" aria-hidden="true">R.</span>
     <span class="shell__brand-name">{{ profile.value()?.name }}</span>
   </a>

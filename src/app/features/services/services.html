@@ -4,6 +4,16 @@
   titleHighlight="Offer"
   subtitle="Freelance and contract frontend engineering — from full Angular builds to focused performance and UI work. Here's how I can help."
 >
+  <!-- Header aside: architecture whiteboard -->
+  <figure slot="header-aside" class="svc-hero">
+    <app-responsive-image
+      name="services-whiteboard"
+      alt="Whiteboard system architecture: an Angular client calling an Nginx API gateway, which routes to auth, user and file services on Node.js, backed by PostgreSQL, Redis and AWS S3, with GitHub Actions and Docker deploying to AWS."
+      sizes="(min-width: 1024px) 28rem, 100vw"
+      class="svc-hero__img"
+    />
+  </figure>
+
   @if (offerings.value(); as cfg) {
     <div class="svc-grid" appStagger>
       @for (svc of cfg.items; track trackById($index, svc)) {

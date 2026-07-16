@@ -10,3 +10,4 @@ export * from './tabs/tabs';
 export * from './pagination/pagination';
 export * from './accordion/accordion';
 export * from './code-block/code-block';
+export * from './responsive-image/responsive-image';

@@ -1,5 +1,45 @@
 :host {
   display: block;
+  position: relative;
+  isolation: isolate;
+}
+
+/*
+ * Header backdrop. Deliberately faint: the screens in this photo show mock UI,
+ * so it must stay texture rather than resolve into a readable "screenshot".
+ */
+.pj-backdrop {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 26rem;
+  transform: translateX(-50%);
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.1;
+
+  --pj-backdrop-fade:
+    linear-gradient(to bottom, #000 40%, transparent),
+    linear-gradient(to right, transparent, #000 20%, #000 80%, transparent);
+  -webkit-mask-image: var(--pj-backdrop-fade);
+  mask-image: var(--pj-backdrop-fade);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.pj-backdrop__img {
+  height: 100%;
+
+  /* Blur keeps the mock UI on the screens as texture, never readable content. */
+  --ri-filter: blur(2px);
+}
+
+@media (prefers-contrast: more) {
+  .pj-backdrop {
+    display: none;
+  }
 }
 
 .pj-cta-card {

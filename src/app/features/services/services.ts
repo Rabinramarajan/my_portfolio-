@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DataService, AccentColor, trackById } from '../../core';
-import { PageLayout, GlassCard, Stagger } from '../../shared';
+import { PageLayout, GlassCard, Stagger, ResponsiveImage } from '../../shared';
 import { Icon } from '../../shared/components/ui/icon/icon';
 
 /** Services page — freelance offerings grid derived from real skill set. */
 @Component({
   selector: 'app-services',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Icon, RouterLink, PageLayout, GlassCard, Stagger],
+  imports: [Icon, RouterLink, PageLayout, GlassCard, Stagger, ResponsiveImage],
   templateUrl: './services.html',
   styleUrl: './services.scss',
   host: { class: 'block' },

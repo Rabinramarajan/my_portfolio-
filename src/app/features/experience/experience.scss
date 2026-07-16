@@ -10,14 +10,24 @@
 
 .ex-aside__stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Each card is an icon chip beside its value/label, so it needs ~11rem before
+     the label starts shredding. Below that, drop to a single column. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
   gap: 0.75rem;
 }
 
-.ex-aside__img {
+.ex-aside__figure {
   display: none;
-  height: 7rem;
-  width: auto;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border-subtle);
+  aspect-ratio: 3 / 2;
+  max-width: 26rem;
+}
+
+.ex-aside__img {
+  height: 100%;
 }
 
 .ex-grid {
@@ -203,7 +213,7 @@
 }
 
 @media (min-width: 1280px) {
-  .ex-aside__img {
+  .ex-aside__figure {
     display: block;
   }
   .ex-grid {

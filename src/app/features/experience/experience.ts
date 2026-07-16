@@ -1,8 +1,19 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { DataService, trackById } from '../../core';
-import { PageLayout, FilterTabs, GlassCard, ProgressBar, QuoteCard, StatsCard, Timeline, TimelineItem, ExperienceCard, Footer } from '../../shared';
+import {
+  PageLayout,
+  FilterTabs,
+  GlassCard,
+  ProgressBar,
+  QuoteCard,
+  StatsCard,
+  Timeline,
+  TimelineItem,
+  ExperienceCard,
+  Footer,
+  ResponsiveImage,
+} from '../../shared';
 import { Icon } from '../../shared/components/ui/icon/icon';
-
 
 const ALL = 'All Experience';
 
@@ -22,6 +33,7 @@ const ALL = 'All Experience';
     TimelineItem,
     ExperienceCard,
     Footer,
+    ResponsiveImage,
   ],
   templateUrl: './experience.html',
   styleUrl: './experience.scss',

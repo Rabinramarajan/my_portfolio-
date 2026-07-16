@@ -4,15 +4,15 @@
   titleHighlight="Technologies"
   subtitle="A curated toolkit of technologies and frameworks I use to build modern, scalable and high-performance applications."
 >
-  <!-- Header aside: hero illustration -->
-  <img
-    slot="header-aside"
-    src="assets/images/skills-hero.svg"
-    alt=""
-    aria-hidden="true"
-    class="sk-hero"
-    loading="lazy"
-  />
+  <!-- Header aside: hero photo -->
+  <figure slot="header-aside" class="sk-hero">
+    <app-responsive-image
+      name="skills-keyboard"
+      alt=""
+      sizes="(min-width: 1024px) 28rem, 100vw"
+      class="sk-hero__img"
+    />
+  </figure>
 
   @if (skills.value(); as sk) {
     <!-- Category grid -->
@@ -40,9 +40,19 @@
               <li class="sk-tile">
                 <span class="sk-tile__icon">
                   @if (skill.logo) {
-                    <img [src]="skill.logo" [alt]="skill.name" class="sk-tile__logo" loading="lazy" />
+                    <img
+                      [src]="skill.logo"
+                      [alt]="skill.name"
+                      class="sk-tile__logo"
+                      loading="lazy"
+                    />
                   } @else if (skill.icon) {
-                    <app-icon [name]="skill.icon" [size]="26" class="sk-tile__glyph" aria-hidden="true" />
+                    <app-icon
+                      [name]="skill.icon"
+                      [size]="26"
+                      class="sk-tile__glyph"
+                      aria-hidden="true"
+                    />
                   }
                 </span>
                 <span class="sk-tile__name">{{ skill.name }}</span>

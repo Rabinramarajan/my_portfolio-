@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+picture {
+  display: contents;
+}
+
+// width/height are set for aspect-ratio reservation (no CLS); the element still
+// fills whatever box the consumer gives it.
+//
+// Crop and filter come in as custom properties rather than being styled by the
+// consumer directly: this <img> carries this component's encapsulation
+// attribute, so a parent's `.foo :where(img)` selector can never match it.
+// Custom properties inherit across that boundary.
+.ri__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: var(--ri-object-fit, cover);
+  object-position: var(--ri-object-position, center);
+  filter: var(--ri-filter, none);
+}

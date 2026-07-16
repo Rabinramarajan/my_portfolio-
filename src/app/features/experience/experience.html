@@ -11,13 +11,14 @@
         <app-stats-card [stat]="stat" />
       }
     </div>
-    <img
-      src="assets/images/astronaut.png"
-      alt=""
-      class="ex-aside__img"
-      aria-hidden="true"
-      loading="lazy"
-    />
+    <figure class="ex-aside__figure">
+      <app-responsive-image
+        name="experience-collaboration"
+        alt="Reviewing code on a monitor with a colleague at the office"
+        sizes="(min-width: 1024px) 26rem, 100vw"
+        class="ex-aside__img"
+      />
+    </figure>
   </div>
 
   <div class="ex-grid">
@@ -28,7 +29,6 @@
       <app-timeline>
         @for (exp of timeline(); track trackById($index, exp); let last = $last) {
           <app-timeline-item
-           
             [markerPrimary]="exp.startYear"
             [markerSecondary]="exp.endYear"
             [accent]="exp.accent ?? 'purple'"
@@ -58,12 +58,63 @@
           <!-- Decorative multi-ring -->
           <div class="ex-ring" aria-hidden="true">
             <svg viewBox="0 0 112 112" class="ex-ring__svg">
-              <circle cx="56" cy="56" r="50" fill="none" stroke="var(--color-border-subtle)" stroke-width="5" />
-              <circle cx="56" cy="56" r="50" fill="none" stroke="var(--color-brand-purple)" stroke-width="5" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="70" />
-              <circle cx="56" cy="56" r="40" fill="none" stroke="var(--color-border-subtle)" stroke-width="5" />
-              <circle cx="56" cy="56" r="40" fill="none" stroke="var(--color-brand-blue)" stroke-width="5" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="90" />
-              <circle cx="56" cy="56" r="30" fill="none" stroke="var(--color-border-subtle)" stroke-width="5" />
-              <circle cx="56" cy="56" r="30" fill="none" stroke="var(--color-brand-cyan)" stroke-width="5" stroke-linecap="round" stroke-dasharray="188" stroke-dashoffset="50" />
+              <circle
+                cx="56"
+                cy="56"
+                r="50"
+                fill="none"
+                stroke="var(--color-border-subtle)"
+                stroke-width="5"
+              />
+              <circle
+                cx="56"
+                cy="56"
+                r="50"
+                fill="none"
+                stroke="var(--color-brand-purple)"
+                stroke-width="5"
+                stroke-linecap="round"
+                stroke-dasharray="314"
+                stroke-dashoffset="70"
+              />
+              <circle
+                cx="56"
+                cy="56"
+                r="40"
+                fill="none"
+                stroke="var(--color-border-subtle)"
+                stroke-width="5"
+              />
+              <circle
+                cx="56"
+                cy="56"
+                r="40"
+                fill="none"
+                stroke="var(--color-brand-blue)"
+                stroke-width="5"
+                stroke-linecap="round"
+                stroke-dasharray="251"
+                stroke-dashoffset="90"
+              />
+              <circle
+                cx="56"
+                cy="56"
+                r="30"
+                fill="none"
+                stroke="var(--color-border-subtle)"
+                stroke-width="5"
+              />
+              <circle
+                cx="56"
+                cy="56"
+                r="30"
+                fill="none"
+                stroke="var(--color-brand-cyan)"
+                stroke-width="5"
+                stroke-linecap="round"
+                stroke-dasharray="188"
+                stroke-dashoffset="50"
+              />
             </svg>
             <span class="ex-ring__center">
               <app-icon name="Briefcase" [size]="22" />
@@ -76,7 +127,9 @@
       @if (experience.value()?.evolution; as evolution) {
         <app-glass-card padding="md" class="ex-card ex-card--blue">
           <h2 class="ex-heading ex-heading--lg">
-            <span class="ex-chip ex-chip--blue"><app-icon name="TrendingUp" [size]="16" aria-hidden="true" /></span>
+            <span class="ex-chip ex-chip--blue"
+              ><app-icon name="TrendingUp" [size]="16" aria-hidden="true"
+            /></span>
             Skills Evolution
           </h2>
           <ol class="ex-evo">

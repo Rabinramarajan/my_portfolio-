@@ -1,3 +1,18 @@
+<!--
+  Ambient workspace backdrop for the page header. Held at low opacity so it
+  reads as texture: the monitor content is mock UI, not shipped product, and
+  must never be legible enough to be mistaken for a project screenshot.
+-->
+<div class="pj-backdrop" aria-hidden="true">
+  <app-responsive-image
+    name="projects-flatlay"
+    alt=""
+    sizes="100vw"
+    eager
+    class="pj-backdrop__img"
+  />
+</div>
+
 <app-page-layout
   breadcrumb="Projects"
   titleLead="My"
@@ -31,11 +46,14 @@
   <div class="pj-controls">
     <!-- Status tabs -->
     <div class="pj-tabs" role="group" aria-label="Filter projects by status">
-      @for (tab of [
-        { key: 'all', label: 'All Projects', count: totalCount() },
-        { key: 'finished', label: 'Finished', count: finishedCount() },
-        { key: 'upcoming', label: 'Upcoming', count: upcomingCount() }
-      ]; track tab.key) {
+      @for (
+        tab of [
+          { key: 'all', label: 'All Projects', count: totalCount() },
+          { key: 'finished', label: 'Finished', count: finishedCount() },
+          { key: 'upcoming', label: 'Upcoming', count: upcomingCount() },
+        ];
+        track tab.key
+      ) {
         <button
           type="button"
           class="pj-tab"

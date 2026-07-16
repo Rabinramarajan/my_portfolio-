@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { AccentColor, accentVar } from '../../../../core';
 
-
 /**
  * A single timeline row: a two-line marker, a connector line with a glowing
  * node, and projected content. Set `last` to stop the connector line.
@@ -14,15 +13,23 @@ import { AccentColor, accentVar } from '../../../../core';
     :host {
       display: block;
     }
+    /* Phones: a fixed date column would leave the card too narrow to set a job
+       title on one line, so the date sits above the content and the connector
+       runs down the left of both rows. The row layout returns at 768px. */
     .ti {
-      display: flex;
-      gap: 1rem;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      grid-template-areas:
+        'connector marker'
+        'connector content';
+      column-gap: 0.75rem;
     }
     .ti__marker {
-      width: 4rem;
-      flex-shrink: 0;
-      padding-top: 0.25rem;
-      text-align: right;
+      grid-area: marker;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      padding-bottom: 0.375rem;
     }
     .ti__primary {
       font-size: 1.125rem;
@@ -37,6 +44,7 @@ import { AccentColor, accentVar } from '../../../../core';
       margin: 0;
     }
     .ti__connector {
+      grid-area: connector;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -56,15 +64,25 @@ import { AccentColor, accentVar } from '../../../../core';
       background: var(--color-border-subtle);
     }
     .ti__content {
+      grid-area: content;
       min-width: 0;
-      flex: 1;
     }
     .ti__content--gap {
       padding-bottom: 2rem;
     }
     @media (min-width: 768px) {
+      .ti {
+        grid-template-columns: 5rem auto minmax(0, 1fr);
+        grid-template-areas: 'marker connector content';
+        column-gap: 1rem;
+      }
       .ti__marker {
-        width: 5rem;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0;
+        padding-top: 0.25rem;
+        padding-bottom: 0;
+        text-align: right;
       }
     }
   `,

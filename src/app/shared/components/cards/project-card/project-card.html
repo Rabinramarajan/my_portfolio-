@@ -10,13 +10,7 @@
       tabindex="0"
       role="button"
     >
-      <img
-        [src]="imageUrl()"
-        [alt]="p.title"
-        class="pjc__img"
-        loading="lazy"
-        decoding="async"
-      />
+      <img [src]="imageUrl()" [alt]="p.title" class="pjc__img" loading="lazy" decoding="async" />
       <div class="pjc__overlay"></div>
 
       @if (!isUpcoming()) {
@@ -24,6 +18,19 @@
         <span class="pjc__check" aria-label="Completed">
           <app-icon name="Check" [size]="15" aria-hidden="true" />
         </span>
+      }
+
+      @if (p.codeUrl) {
+        <a
+          [href]="p.codeUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="'View ' + p.title + ' source on GitHub'"
+          class="pjc__code"
+          (click)="$event.stopPropagation()"
+        >
+          <app-icon name="Github" [size]="15" aria-hidden="true" />
+        </a>
       }
 
       @if (p.liveUrl) {

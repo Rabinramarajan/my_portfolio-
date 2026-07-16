@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { email, form, FormField, minLength, required, submit } from '@angular/forms/signals';
 import { DataService, EmailService, trackById, AccentColor } from '../../core';
-import { Breadcrumb, GlassCard, AnimatedButton, Footer } from '../../shared';
+import { Breadcrumb, GlassCard, AnimatedButton, Footer, ResponsiveImage } from '../../shared';
 import { Icon } from '../../shared/components/ui/icon/icon';
-
-
 
 interface ContactMessage {
   name: string;
@@ -19,7 +17,7 @@ const EMPTY: ContactMessage = { name: '', email: '', subject: '', message: '' };
 @Component({
   selector: 'app-contact',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormField, Icon, Breadcrumb, GlassCard, AnimatedButton, Footer],
+  imports: [FormField, Icon, Breadcrumb, GlassCard, AnimatedButton, Footer, ResponsiveImage],
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
   host: { class: 'block' },

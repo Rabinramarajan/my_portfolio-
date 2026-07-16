@@ -8,11 +8,11 @@
   height: 100%;
   width: 18rem;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
   overflow: hidden;
   border-right: 1px solid var(--color-border-subtle);
   background: var(--color-bg-elevated);
-  padding: 1.5rem 1.25rem;
+  padding: 1.25rem 1.25rem;
 }
 
 .sb__brand {
@@ -49,8 +49,33 @@
   flex: 1;
   flex-direction: column;
   gap: 0.125rem;
+  /* Scrolls only when the link list outgrows a short viewport. */
   overflow-y: auto;
   padding-right: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-subtle) transparent;
+}
+
+/* Chrome/Safari before standard scrollbar-* support. */
+.sb__nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sb__nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sb__nav::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: var(--color-border-subtle);
+}
+
+.sb__nav:hover {
+  scrollbar-color: var(--color-fg-subtle) transparent;
+}
+
+.sb__nav:hover::-webkit-scrollbar-thumb {
+  background: var(--color-fg-subtle);
 }
 
 .sb__link {
@@ -59,7 +84,7 @@
   align-items: center;
   gap: 0.75rem;
   border-radius: 0.75rem;
-  padding: 0.625rem 0.75rem;
+  padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-fg-muted);
