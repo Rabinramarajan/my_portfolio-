@@ -1,7 +1,17 @@
+/* The host carries an `inline-flex` class, but no such rule survived the
+   Tailwind removal, so the element defaulted to `display: inline` and could
+   never be stretched by a parent layout. Honour the intent here instead. */
+:host {
+  display: inline-flex;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  /* Natural width while the host shrink-wraps; fills the host when a caller
+     stretches it (grid/flex stretch), e.g. the full-width hero CTAs on phones. */
+  flex: 1 1 auto;
   border-radius: 9999px;
   font-weight: 500;
   cursor: pointer;

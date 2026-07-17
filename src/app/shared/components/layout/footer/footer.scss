@@ -2,16 +2,29 @@
   display: block;
 }
 
+/* In the flow on phones. Pinned, this bar stacks into three rows — 111px, or
+   14% of a phone viewport permanently spent on a copyright line, against 53px
+   on desktop — and the shell reserved only 80px for it, so page content ran
+   underneath. It pins from 768px up, where it collapses to a single ~55px row.
+   The per-page hosts (.home__footer, .ab__footer, …) already set margin-top for
+   an in-flow footer; those margins do nothing while this is fixed. */
 .ft {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 40;
+  /* Full-bleed: back out of .shell__main's side and bottom padding so the bar
+     still meets the viewport edges instead of reading as a floating panel.
+     These track the padding in shell.scss. */
+  margin-inline: -1rem;
+  margin-bottom: -1.5rem;
   border-top: 1px solid var(--color-border-subtle);
   background: color-mix(in srgb, var(--color-bg-elevated) 88%, transparent);
   backdrop-filter: blur(12px);
   padding: 0.875rem 1.5rem;
+}
+
+/* Matches .shell__main's wider side padding from this width up. */
+@media (min-width: 640px) {
+  .ft {
+    margin-inline: -1.5rem;
+  }
 }
 
 .ft__bottom {
@@ -64,6 +77,13 @@
 
 @media (min-width: 768px) {
   .ft {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    /* Pinned again — it escapes the padding on its own. */
+    margin: 0;
     padding: 0.875rem 2.5rem;
   }
   .ft__bottom {

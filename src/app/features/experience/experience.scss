@@ -9,6 +9,10 @@
 }
 
 .ex-aside__stats {
+  /* Fill the row. As a plain flex item this shrink-wrapped to one 11rem track
+     and left ~167px of dead space beside the cards on a phone, where the figure
+     next to it is display: none. */
+  flex: 1;
   display: grid;
   /* Each card is an icon chip beside its value/label, so it needs ~11rem before
      the label starts shredding. Below that, drop to a single column. */
@@ -34,6 +38,14 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
+}
+
+/* Grid items default to min-width: auto, so this card refuses to shrink below
+   its min-content — and the filter strip inside is a nowrap scroll container
+   whose content is wider than a phone. Without this the card blows past its
+   track and off-screen, silently cropped by .shell__main's overflow-x: clip. */
+.ex-timeline-card {
+  min-width: 0;
 }
 
 .ex-filters {

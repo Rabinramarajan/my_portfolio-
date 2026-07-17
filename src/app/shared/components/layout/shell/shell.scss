@@ -81,8 +81,6 @@
   min-width: 0;
   flex: 1;
   padding: 1.5rem 1rem;
-  /* Reserve space for the fixed footer bar */
-  padding-bottom: 5rem;
   /* Full-bleed decorations (hero backdrop, home divider) use a 100vw trick that
      overruns the right edge because this column is offset by the sidebar. Clip
      the horizontal overflow here so it never produces a sideways scrollbar,

@@ -127,10 +127,32 @@
   text-wrap: pretty;
 }
 
+/* Phones get equal, full-width CTAs. Wrapped flex sized each button to its own
+   label, so they landed on two rows at two different widths. */
 .hero__ctas {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 0.75rem;
+  /* .hero__content is a flex column with align-items: flex-start, so this row
+     would otherwise shrink-wrap and the columns below would have nothing to
+     divide up. */
+  align-self: stretch;
+}
+
+@media (min-width: 480px) {
+  .hero__ctas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Roomy enough for the buttons to sit at their natural size again — stretched
+   to half a 768px hero they read as oversized. */
+@media (min-width: 768px) {
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-self: flex-start;
+  }
 }
 
 /* Portrait, bleeding past the top edge and anchored to the right. Its inner
@@ -170,30 +192,50 @@
   object-position: center 18%;
 }
 
-/* Stats — a thin baseline strip pinned to the foot of the hero. */
+/* Stats — a thin baseline strip pinned to the foot of the hero. Grid, not
+   wrapped flex: flex sized each cell to its own content, so the four figures
+   never lined up across the two rows a phone wraps them into. */
 .hero__stats {
   position: relative;
   z-index: 2;
   margin: 0;
   margin-top: 1.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 0;
   padding-top: 1.25rem;
   border-top: 1px solid var(--color-border-subtle);
   max-width: 40rem;
 }
 
 .hero__stat {
-  flex: 1 1 auto;
-  min-width: 5.5rem;
   padding-inline: 1.25rem;
   border-left: 1px solid var(--color-border-subtle);
 }
 
-.hero__stat:first-child {
+/* Divider sits between columns, never down the leading edge. Keyed to the
+   column count, so it has to move with the breakpoint below. */
+.hero__stat:nth-child(2n + 1) {
   padding-left: 0;
   border-left: 0;
+}
+
+@media (min-width: 640px) {
+  .hero__stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  /* One row now, so only the very first cell drops its divider. */
+  .hero__stat:nth-child(2n + 1) {
+    padding-left: 1.25rem;
+    border-left: 1px solid var(--color-border-subtle);
+  }
+
+  .hero__stat:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
 }
 
 .hero__stat-label {
@@ -251,11 +293,14 @@
   color: var(--color-fg-muted);
 }
 
+/* Phones stack it. Side by side, the nowrap heading claims most of the card and
+   leaves the grid about two tiles wide, so the logos break into a 2/2/1 stack.
+   Given the full width they sit on one row. The row layout returns at 640px. */
 .tech {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem 1.25rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
 }
 
 .tech__heading {
@@ -266,17 +311,34 @@
   white-space: nowrap;
 }
 
+/* One row that the logos share. Wrapped flex can't do this — it breaks a line
+   before it shrinks anything, so the 5th tile orphaned onto its own row at
+   320px. Columns cap at 3rem and shrink together below that. */
 .tech__grid {
-  display: flex;
-  flex-wrap: wrap;
-  flex: 1;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 3rem);
+  justify-content: start;
   gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .tech {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+  }
+
+  .tech__grid {
+    flex: 1;
+  }
 }
 
 .tech__item {
   display: flex;
-  height: 3rem;
-  width: 3rem;
+  /* Sized by the grid column above; stays square as it shrinks. */
+  aspect-ratio: 1;
   align-items: center;
   justify-content: center;
   border-radius: 0.75rem;

@@ -39,13 +39,28 @@ import { trackByValue } from '../../../../core';
     }
     .tabs {
       display: flex;
-      flex-wrap: wrap;
+      /* This is a pill, so it only reads correctly as a single row. Wrapping
+         turned it into an 84px oval with two rows floating inside it and dead
+         curved space at both ends on a phone. Scroll the overflow instead —
+         where the options already fit, no scrollbar appears and nothing moves. */
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
       align-items: center;
       gap: 0.25rem;
       border-radius: 9999px;
       border: 1px solid var(--color-border-subtle);
       background: var(--color-surface-glass);
       padding: 0.25rem;
+    }
+    /* The strip is swiped, not dragged by a bar. */
+    .tabs::-webkit-scrollbar {
+      display: none;
+    }
+    /* Overflow rather than squash the labels. */
+    app-chip {
+      flex: 0 0 auto;
     }
   `,
 })
