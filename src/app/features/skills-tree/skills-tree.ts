@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../core/services/data.service';
 import { PageLayout, GlassCard, Stagger } from '../../shared';
@@ -16,17 +16,11 @@ import type { SkillBranch, SkillsTreeConfig } from '../../core/models';
 })
 export class SkillsTreePage {
   private readonly dataService = inject(DataService);
-  readonly skillsTree = signal<SkillsTreeConfig | null>(null);
+  readonly skillsTree = computed(() => {
+    const resource = this.dataService.load('skills-tree');
+    return resource as unknown as SkillsTreeConfig;
+  });
   protected selectedBranch = signal<SkillBranch | null>(null);
-
-  constructor() {
-    effect(() => {
-      const resource = this.dataService.load('skills-tree');
-      if (resource) {
-        this.skillsTree.set(resource as unknown as SkillsTreeConfig);
-      }
-    });
-  }
 
   protected selectBranch(branch: SkillBranch): void {
     this.selectedBranch.set(this.selectedBranch() === branch ? null : branch);

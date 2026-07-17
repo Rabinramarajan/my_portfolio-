@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../core/services/data.service';
 import { PageLayout, GlassCard, Stagger } from '../../shared';
@@ -16,16 +16,10 @@ import type { CareerRoadmapConfig } from '../../core/models';
 })
 export class CareerRoadmapPage {
   private readonly dataService = inject(DataService);
-  readonly roadmap = signal<CareerRoadmapConfig | null>(null);
-
-  constructor() {
-    effect(() => {
-      const resource = this.dataService.load('career-roadmap');
-      if (resource) {
-        this.roadmap.set(resource as unknown as CareerRoadmapConfig);
-      }
-    });
-  }
+  readonly roadmap = computed(() => {
+    const resource = this.dataService.load('career-roadmap');
+    return resource as unknown as CareerRoadmapConfig;
+  });
 
   protected getTypeIcon(type: string): string {
     const iconMap: Record<string, string> = {

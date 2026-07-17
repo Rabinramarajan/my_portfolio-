@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../core/services/data.service';
 import { PageLayout, GlassCard, Stagger } from '../../shared';
@@ -15,14 +15,8 @@ import type { WorldMapConfig } from '../../core/models';
 })
 export class WorldMapPage {
   private readonly dataService = inject(DataService);
-  readonly worldMap = signal<WorldMapConfig | null>(null);
-
-  constructor() {
-    effect(() => {
-      const resource = this.dataService.load('world-map');
-      if (resource) {
-        this.worldMap.set(resource as unknown as WorldMapConfig);
-      }
-    });
-  }
+  readonly worldMap = computed(() => {
+    const resource = this.dataService.load('world-map');
+    return resource as unknown as WorldMapConfig;
+  });
 }
