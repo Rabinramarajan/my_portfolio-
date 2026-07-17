@@ -20,6 +20,11 @@ import type {
   CertificatesConfig,
   OfferingsConfig,
   CaseStudiesConfig,
+  AwardsConfig,
+  TestimonialsConfig,
+  OpenSourceConfig,
+  TalksConfig,
+  CommunityConfig,
 } from '../models';
 
 /**
@@ -49,6 +54,11 @@ export interface DataResources {
   readonly certificates: CertificatesConfig;
   readonly offerings: OfferingsConfig;
   readonly 'case-studies': CaseStudiesConfig;
+  readonly awards: AwardsConfig;
+  readonly testimonials: TestimonialsConfig;
+  readonly opensource: OpenSourceConfig;
+  readonly talks: TalksConfig;
+  readonly community: CommunityConfig;
 }
 
 /** Valid data keys. */
@@ -77,4 +87,9 @@ export const DATA_FILES: Readonly<Record<DataKey, string>> = {
   certificates: 'certificates.json',
   offerings: 'offerings.json',
   'case-studies': 'case-studies.json',
+  awards: 'awards.json',
+  testimonials: 'testimonials.json',
+  opensource: 'opensource.json',
+  talks: 'talks.json',
+  community: 'community.json',
 } as const;

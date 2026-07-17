@@ -1,0 +1,79 @@
+<app-page-layout
+  breadcrumb="Talks"
+  titleLead="Tech Talks &"
+  titleHighlight="Presentations"
+  subtitle="Conference talks, webinars, and technical presentations I've delivered."
+>
+  @if (talks.value(); as cfg) {
+    <div class="talks-grid" appStagger>
+      @for (talk of cfg.items; track trackById($index, talk)) {
+        <app-glass-card padding="lg">
+          <article class="talk">
+            <span class="talk__badge" aria-hidden="true">
+              <app-icon [name]="talk.icon || 'Mic'" [size]="24" />
+            </span>
+
+            <div class="talk__body">
+              <h2 class="talk__title">{{ talk.title }}</h2>
+              <p class="talk__event">{{ talk.eventName }}</p>
+
+              @if (talk.location) {
+                <p class="talk__location">
+                  <app-icon name="MapPin" [size]="14" aria-hidden="true" />
+                  {{ talk.location }}
+                </p>
+              }
+
+              @if (talk.description) {
+                <p class="talk__description">{{ talk.description }}</p>
+              }
+
+              <div class="talk__meta">
+                <span class="talk__date">
+                  <app-icon name="Calendar" [size]="15" aria-hidden="true" />
+                  {{ formatDate(talk.date) }}
+                </span>
+              </div>
+
+              <div class="talk__links">
+                @if (talk.videoUrl) {
+                  <a
+                    class="talk__link"
+                    [href]="talk.videoUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <app-icon name="Play" [size]="14" aria-hidden="true" />
+                    Video
+                  </a>
+                }
+                @if (talk.slidesUrl) {
+                  <a
+                    class="talk__link"
+                    [href]="talk.slidesUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <app-icon name="FileText" [size]="14" aria-hidden="true" />
+                    Slides
+                  </a>
+                }
+                @if (talk.link) {
+                  <a
+                    class="talk__link"
+                    [href]="talk.link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <app-icon name="ExternalLink" [size]="14" aria-hidden="true" />
+                    More
+                  </a>
+                }
+              </div>
+            </div>
+          </article>
+        </app-glass-card>
+      }
+    </div>
+  }
+</app-page-layout>

@@ -19,3 +19,8 @@ export * from './certificate.model';
 export * from './service.model';
 export * from './offering.model';
 export * from './case-study.model';
+export * from './award.model';
+export * from './testimonial.model';
+export * from './opensource.model';
+export * from './talk.model';
+export * from './community.model';

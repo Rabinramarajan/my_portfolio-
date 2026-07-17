@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "title": "Outstanding Performance Award",
+      "issuer": "Your Company",
+      "date": "2024-12-15",
+      "description": "Recognized for exceptional contribution to the Angular migration project that improved application performance by 40%.",
+      "icon": "award",
+      "accent": "amber"
+    },
+    {
+      "id": "2",
+      "title": "Innovation Award",
+      "issuer": "Tech Community",
+      "date": "2024-06-20",
+      "description": "Awarded for innovative approach to implementing real-time data synchronization in enterprise applications.",
+      "icon": "star",
+      "accent": "blue"
+    }
+  ]
+}

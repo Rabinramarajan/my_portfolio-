@@ -58,7 +58,12 @@ export const routes: Routes = [
         data: {
           description:
             'Selected work by Rabin R — immigration portals, pension platforms and cross-platform mobile apps built with Angular, Ionic and TypeScript.',
-          keywords: ['Angular Projects', 'Government Portals', 'Enterprise Web Apps', 'Case Studies'],
+          keywords: [
+            'Angular Projects',
+            'Government Portals',
+            'Enterprise Web Apps',
+            'Case Studies',
+          ],
         },
         loadComponent: () => import('./features/projects/projects').then((m) => m.ProjectsPage),
       },
@@ -88,7 +93,12 @@ export const routes: Routes = [
         data: {
           description:
             'In-depth case studies by Rabin R — government immigration portals, pension platforms and cross-platform mobile apps: the problem, the solution, the architecture and the results.',
-          keywords: ['Angular Case Studies', 'Frontend Case Study', 'Government Portal', 'Enterprise Web Apps'],
+          keywords: [
+            'Angular Case Studies',
+            'Frontend Case Study',
+            'Government Portal',
+            'Enterprise Web Apps',
+          ],
         },
         loadComponent: () =>
           import('./features/case-studies/case-studies').then((m) => m.CaseStudiesPage),
@@ -107,7 +117,12 @@ export const routes: Routes = [
         data: {
           description:
             'Freelance frontend services by Rabin R — Angular development, Ionic cross-platform apps, API integration, UI development and performance optimization.',
-          keywords: ['Freelance Angular Developer', 'Ionic App Development', 'Frontend Services', 'Hire Angular Developer'],
+          keywords: [
+            'Freelance Angular Developer',
+            'Ionic App Development',
+            'Frontend Services',
+            'Hire Angular Developer',
+          ],
         },
         loadComponent: () => import('./features/services/services').then((m) => m.ServicesPage),
       },
@@ -117,10 +132,66 @@ export const routes: Routes = [
         data: {
           description:
             'Professional certifications and credentials of Rabin R — Applied AI & ML (IIT Patna) and Web Design & Development, backing his frontend engineering practice.',
-          keywords: ['Rabin R Certifications', 'Angular Developer Credentials', 'Web Development Certificate'],
+          keywords: [
+            'Rabin R Certifications',
+            'Angular Developer Credentials',
+            'Web Development Certificate',
+          ],
         },
         loadComponent: () =>
           import('./features/certifications/certifications').then((m) => m.CertificationsPage),
+      },
+      {
+        path: 'awards',
+        title: 'Awards & Achievements',
+        data: {
+          description:
+            'Awards and recognition from organizations and communities for professional excellence and contributions.',
+          keywords: ['Awards', 'Achievements', 'Recognition', 'Professional Awards'],
+        },
+        loadComponent: () => import('./features/awards/awards').then((m) => m.AwardsPage),
+      },
+      {
+        path: 'testimonials',
+        title: 'Testimonials',
+        data: {
+          description:
+            'Client and colleague testimonials about my work, expertise, and collaboration style.',
+          keywords: ['Testimonials', 'References', 'Client Feedback', 'Reviews'],
+        },
+        loadComponent: () =>
+          import('./features/testimonials/testimonials').then((m) => m.TestimonialsPage),
+      },
+      {
+        path: 'opensource',
+        title: 'Open Source',
+        data: {
+          description:
+            'Notable contributions to open source projects including bug fixes, features, and documentation.',
+          keywords: ['Open Source', 'GitHub', 'Contributions', 'Community'],
+        },
+        loadComponent: () =>
+          import('./features/opensource/opensource').then((m) => m.OpenSourcePage),
+      },
+      {
+        path: 'talks',
+        title: 'Tech Talks',
+        data: {
+          description:
+            'Conference talks, webinars, and technical presentations on frontend development and engineering.',
+          keywords: ['Talks', 'Speaking', 'Presentations', 'Conferences', 'Webinars'],
+        },
+        loadComponent: () => import('./features/talks/talks').then((m) => m.TalksPage),
+      },
+      {
+        path: 'community',
+        title: 'Community',
+        data: {
+          description:
+            'Community contributions including mentoring, volunteering, and building developer communities.',
+          keywords: ['Community', 'Mentoring', 'Volunteering', 'Developer Community'],
+        },
+        loadComponent: () => import('./features/community/community').then((m) => m.CommunityPage),
       },
       {
         path: 'blog',

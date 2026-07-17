@@ -1,0 +1,52 @@
+<app-page-layout
+  breadcrumb="Community"
+  titleLead="Community"
+  titleHighlight="Contributions"
+  subtitle="Mentoring, volunteering, and contributing to the developer community."
+>
+  @if (contributions.value(); as cfg) {
+    <div class="community-grid" appStagger>
+      @for (contribution of cfg.items; track trackById($index, contribution)) {
+        <app-glass-card padding="lg">
+          <article class="community-item">
+            <span class="community-item__badge" aria-hidden="true">
+              <app-icon [name]="contribution.icon || 'Users'" [size]="24" />
+            </span>
+
+            <div class="community-item__body">
+              <h2 class="community-item__title">{{ contribution.title }}</h2>
+              <span class="community-item__type">{{ contribution.type }}</span>
+
+              @if (contribution.organization) {
+                <p class="community-item__organization">{{ contribution.organization }}</p>
+              }
+
+              @if (contribution.description) {
+                <p class="community-item__description">{{ contribution.description }}</p>
+              }
+
+              <div class="community-item__meta">
+                <span class="community-item__date">
+                  <app-icon name="Calendar" [size]="15" aria-hidden="true" />
+                  {{ formatDate(contribution.date) }}
+                </span>
+
+                @if (contribution.link) {
+                  <a
+                    class="community-item__link"
+                    [href]="contribution.link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Learn More
+                    <app-icon name="ExternalLink" [size]="14" aria-hidden="true" />
+                  </a>
+                }
+              </div>
+            </div>
+          </article>
+        </app-glass-card>
+      }
+    </div>
+  }
+</app-page-layout>

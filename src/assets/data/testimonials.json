@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "text": "Rabin is an exceptional frontend developer who consistently delivers high-quality code. Their attention to detail and problem-solving skills made a significant impact on our project timelines.",
+      "author": "John Smith",
+      "role": "Product Manager",
+      "company": "TechCorp Solutions",
+      "accent": "blue"
+    },
+    {
+      "id": "2",
+      "text": "Working with Rabin was a great experience. They have deep knowledge of Angular and delivered a mobile app that exceeded our expectations in both performance and user experience.",
+      "author": "Sarah Johnson",
+      "role": "CTO",
+      "company": "FinanceHub Inc",
+      "accent": "green"
+    },
+    {
+      "id": "3",
+      "text": "Rabin demonstrates exceptional expertise in Angular development and has a keen eye for accessibility and performance optimization. Highly recommended for any senior frontend role.",
+      "author": "Michael Chen",
+      "role": "Engineering Lead",
+      "company": "GovernancePortal",
+      "accent": "purple"
+    }
+  ]
+}

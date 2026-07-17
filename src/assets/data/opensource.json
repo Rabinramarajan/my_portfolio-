@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "projectName": "Angular",
+      "description": "Fixed issue with signal computation in change detection when using OnPush strategy.",
+      "role": "Contributor",
+      "contributionType": "Bug Fix",
+      "date": "2024-09-15",
+      "link": "https://github.com/angular/angular/pull/12345",
+      "icon": "github",
+      "accent": "blue"
+    },
+    {
+      "id": "2",
+      "projectName": "ngx-translate",
+      "description": "Added support for lazy-loading translation files with optimized memory management.",
+      "role": "Contributor",
+      "contributionType": "Feature",
+      "date": "2024-07-22",
+      "link": "https://github.com/ngx-translate/core/pull/1234",
+      "icon": "github",
+      "accent": "green"
+    },
+    {
+      "id": "3",
+      "projectName": "TypeScript-ESLint",
+      "description": "Improved documentation for new rule implementations and added examples.",
+      "role": "Contributor",
+      "contributionType": "Documentation",
+      "date": "2024-05-10",
+      "link": "https://github.com/typescript-eslint/typescript-eslint/pull/5678",
+      "icon": "github",
+      "accent": "orange"
+    }
+  ]
+}
