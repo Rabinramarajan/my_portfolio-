@@ -4,7 +4,7 @@
   titleHighlight="Evolution"
   subtitle="How I adopted and mastered technologies over time with proficiency growth."
 >
-  @if (evolution(); as config) {
+  @if (evolution; as config) {
     <div class="evolution-container" appStagger>
       <div class="adoptions-grid">
         @for (adoption of config.adoptions; track adoption.id) {

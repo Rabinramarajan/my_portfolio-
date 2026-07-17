@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../core/services/data.service';
 import { PageLayout, GlassCard, Stagger } from '../../shared';
@@ -16,10 +16,7 @@ import type { TechEvolutionConfig } from '../../core/models';
 })
 export class TechEvolutionPage {
   private readonly dataService = inject(DataService);
-  readonly evolution = computed(() => {
-    const resource = this.dataService.load('tech-evolution');
-    return resource as unknown as TechEvolutionConfig;
-  });
+  readonly evolution = this.dataService.load('tech-evolution') as unknown as TechEvolutionConfig;
 
   protected getCategoryColor(category: string): string {
     const colorMap: Record<string, string> = {

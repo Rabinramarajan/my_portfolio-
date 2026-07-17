@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../core/services/data.service';
 import { PageLayout, GlassCard, Stagger } from '../../shared';
@@ -16,10 +16,9 @@ import type { LearningTimelineConfig } from '../../core/models';
 })
 export class LearningTimelinePage {
   private readonly dataService = inject(DataService);
-  readonly timeline = computed(() => {
-    const resource = this.dataService.load('learning-timeline');
-    return resource as unknown as LearningTimelineConfig;
-  });
+  readonly timeline = this.dataService.load(
+    'learning-timeline',
+  ) as unknown as LearningTimelineConfig;
 
   protected getCategoryIcon(category: string): string {
     const iconMap: Record<string, string> = {

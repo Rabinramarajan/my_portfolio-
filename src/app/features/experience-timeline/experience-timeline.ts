@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../core/services/data.service';
 import { PageLayout, GlassCard, Stagger } from '../../shared';
@@ -15,10 +15,9 @@ import type { ExperienceTimelineConfig } from '../../core/models';
 })
 export class ExperienceTimelinePage {
   private readonly dataService = inject(DataService);
-  readonly timeline = computed(() => {
-    const resource = this.dataService.load('experience-timeline');
-    return resource as unknown as ExperienceTimelineConfig;
-  });
+  readonly timeline = this.dataService.load(
+    'experience-timeline',
+  ) as unknown as ExperienceTimelineConfig;
 
   protected isCurrentRole(endDate: string | undefined): boolean {
     return !endDate;

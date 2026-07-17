@@ -4,7 +4,7 @@
   titleHighlight="Timeline"
   subtitle="Continuous learning journey with courses, certifications, and workshops."
 >
-  @if (timeline(); as config) {
+  @if (timeline; as config) {
     <div class="learning-container" appStagger>
       <div class="entries-grid">
         @for (entry of config.entries; track entry.id) {
