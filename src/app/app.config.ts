@@ -1,11 +1,13 @@
 import {
   ApplicationConfig,
+  DestroyRef,
   inject,
   isDevMode,
   provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { provideHttpClient } from '@angular/common/http';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import {
@@ -29,9 +31,10 @@ import { AppTitleStrategy } from './core/services';
  */
 function activateUpdatesOnNextLoad(): void {
   const updates = inject(SwUpdate);
+  const destroyRef = inject(DestroyRef);
   if (!updates.isEnabled) return;
 
-  updates.versionUpdates.subscribe((event) => {
+  updates.versionUpdates.pipe(takeUntilDestroyed(destroyRef)).subscribe((event) => {
     if (event.type === 'VERSION_READY') void updates.activateUpdate();
   });
 }
