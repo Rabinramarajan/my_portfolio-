@@ -1,0 +1,350 @@
+<app-page-layout
+  breadcrumb="Settings"
+  titleLead="Portfolio"
+  titleHighlight="Settings"
+  subtitle="Customize your portfolio appearance, behavior, and accessibility options."
+>
+  <div class="settings-container" appStagger>
+    <!-- Theme Customizer -->
+    <section class="settings-section">
+      <app-glass-card padding="lg">
+        <div class="setting-group">
+          <div class="setting-header">
+            <h3 class="setting-title">
+              <app-icon name="Sun" [size]="24" aria-hidden="true" />
+              Theme
+            </h3>
+            <p class="setting-description">Choose between light, dark, or automatic theme</p>
+          </div>
+
+          <div class="option-grid">
+            @for (themeOption of themes; track themeOption) {
+              <label class="option-radio">
+                <input
+                  type="radio"
+                  name="theme"
+                  [value]="themeOption"
+                  [checked]="theme() === themeOption"
+                  (change)="updateTheme(themeOption)"
+                />
+                <span class="option-label">{{ getThemeLabel(themeOption) }}</span>
+              </label>
+            }
+          </div>
+        </div>
+      </app-glass-card>
+    </section>
+
+    <!-- Accent Color Picker -->
+    <section class="settings-section">
+      <app-glass-card padding="lg">
+        <div class="setting-group">
+          <div class="setting-header">
+            <h3 class="setting-title">
+              <app-icon name="Palette" [size]="24" aria-hidden="true" />
+              Accent Color
+            </h3>
+            <p class="setting-description">Select your preferred accent color</p>
+          </div>
+
+          <div class="color-grid">
+            @for (color of accentColors; track color) {
+              <label class="color-option" [class.active]="accentColor() === color">
+                <input
+                  type="radio"
+                  name="accentColor"
+                  [value]="color"
+                  [checked]="accentColor() === color"
+                  (change)="updateAccentColor(color)"
+                  class="hidden-radio"
+                />
+                <span
+                  class="color-swatch"
+                  [class]="'color-' + color"
+                  [title]="getColorLabel(color)"
+                ></span>
+              </label>
+            }
+          </div>
+        </div>
+      </app-glass-card>
+    </section>
+
+    <!-- Font Selector -->
+    <section class="settings-section">
+      <app-glass-card padding="lg">
+        <div class="setting-group">
+          <div class="setting-header">
+            <h3 class="setting-title">
+              <app-icon name="Type" [size]="24" aria-hidden="true" />
+              Font Family
+            </h3>
+            <p class="setting-description">Choose your preferred font style</p>
+          </div>
+
+          <div class="option-grid">
+            @for (fontOption of fontFamilies; track fontOption) {
+              <label class="option-radio">
+                <input
+                  type="radio"
+                  name="fontFamily"
+                  [value]="fontOption"
+                  [checked]="font().family === fontOption"
+                  (change)="updateFont(fontOption)"
+                />
+                <span class="option-label">{{ getFontLabel(fontOption) }}</span>
+              </label>
+            }
+          </div>
+
+          <!-- Font Adjustments -->
+          <div class="setting-subsection">
+            <h4 class="subsection-title">Font Adjustments</h4>
+
+            <div class="adjustment-group">
+              <label class="checkbox-option">
+                <input
+                  type="checkbox"
+                  [checked]="font().dyslexiaFriendly"
+                  (change)="updateDyslexiaFriendly($event.target.checked)"
+                />
+                <span>Enable Dyslexia-Friendly Font</span>
+              </label>
+              <p class="option-note">Improves readability for users with dyslexia</p>
+            </div>
+
+            <div class="adjustment-group">
+              <label class="setting-label">Line Height</label>
+              <select
+                [(ngModel)]="font().lineHeight"
+                (ngModelChange)="updateLineHeight($event)"
+                class="select-input"
+              >
+                <option value="normal">Normal</option>
+                <option value="relaxed">Relaxed</option>
+                <option value="loose">Loose</option>
+              </select>
+            </div>
+
+            <div class="adjustment-group">
+              <label class="setting-label">Letter Spacing</label>
+              <select
+                [(ngModel)]="font().letterSpacing"
+                (ngModelChange)="updateLetterSpacing($event)"
+                class="select-input"
+              >
+                <option value="normal">Normal</option>
+                <option value="wide">Wide</option>
+                <option value="wider">Wider</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </app-glass-card>
+    </section>
+
+    <!-- Layout Switcher -->
+    <section class="settings-section">
+      <app-glass-card padding="lg">
+        <div class="setting-group">
+          <div class="setting-header">
+            <h3 class="setting-title">
+              <app-icon name="Layout" [size]="24" aria-hidden="true" />
+              Layout Style
+            </h3>
+            <p class="setting-description">Choose your preferred layout presentation</p>
+          </div>
+
+          <div class="option-grid">
+            @for (layoutOption of layouts; track layoutOption) {
+              <label class="option-radio">
+                <input
+                  type="radio"
+                  name="layout"
+                  [value]="layoutOption"
+                  [checked]="layout() === layoutOption"
+                  (change)="updateLayout(layoutOption)"
+                />
+                <span class="option-label">
+                  {{ layoutOption.charAt(0).toUpperCase() + layoutOption.slice(1) }}
+                </span>
+              </label>
+            }
+          </div>
+        </div>
+      </app-glass-card>
+    </section>
+
+    <!-- Content Density -->
+    <section class="settings-section">
+      <app-glass-card padding="lg">
+        <div class="setting-group">
+          <div class="setting-header">
+            <h3 class="setting-title">
+              <app-icon name="Maximize2" [size]="24" aria-hidden="true" />
+              Content Density
+            </h3>
+            <p class="setting-description">Adjust the spacing and density of content</p>
+          </div>
+
+          <div class="option-grid">
+            @for (density of densities; track density) {
+              <label class="option-radio">
+                <input
+                  type="radio"
+                  name="density"
+                  [value]="density"
+                  [checked]="contentDensity() === density"
+                  (change)="updateContentDensity(density)"
+                />
+                <span class="option-label">
+                  {{ density.charAt(0).toUpperCase() + density.slice(1) }}
+                </span>
+              </label>
+            }
+          </div>
+        </div>
+      </app-glass-card>
+    </section>
+
+    <!-- Accessibility Mode -->
+    <section class="settings-section">
+      <app-glass-card padding="lg">
+        <div class="setting-group">
+          <div class="setting-header">
+            <h3 class="setting-title">
+              <app-icon name="Eye" [size]="24" aria-hidden="true" />
+              Accessibility
+            </h3>
+            <p class="setting-description">Enhance accessibility features and readability</p>
+          </div>
+
+          <div class="accessibility-options">
+            <!-- Enable Accessibility Mode -->
+            <div class="a11y-option">
+              <label class="checkbox-option">
+                <input
+                  type="checkbox"
+                  [checked]="accessibility().enabled"
+                  (change)="updateAccessibilityEnabled($event.target.checked)"
+                />
+                <span class="checkbox-label">Enable Accessibility Mode</span>
+              </label>
+              <p class="option-note">Master toggle for all accessibility features</p>
+            </div>
+
+            @if (accessibility().enabled) {
+              <!-- High Contrast -->
+              <div class="a11y-option">
+                <label class="checkbox-option">
+                  <input
+                    type="checkbox"
+                    [checked]="accessibility().highContrast"
+                    (change)="updateHighContrast($event.target.checked)"
+                  />
+                  <span class="checkbox-label">High Contrast Mode</span>
+                </label>
+                <p class="option-note">Increases color contrast for better visibility</p>
+              </div>
+
+              <!-- Larger Text -->
+              <div class="a11y-option">
+                <label class="checkbox-option">
+                  <input
+                    type="checkbox"
+                    [checked]="accessibility().largerText"
+                    (change)="updateLargerText($event.target.checked)"
+                  />
+                  <span class="checkbox-label">Larger Text</span>
+                </label>
+                <p class="option-note">Increases base font size across the portfolio</p>
+              </div>
+
+              <!-- Reduce Motion -->
+              <div class="a11y-option">
+                <label class="checkbox-option">
+                  <input
+                    type="checkbox"
+                    [checked]="accessibility().reduceMotion"
+                    (change)="updateReduceMotion($event.target.checked)"
+                  />
+                  <span class="checkbox-label">Reduce Motion</span>
+                </label>
+                <p class="option-note">Minimizes animations and transitions</p>
+              </div>
+
+              <!-- Font Size Adjustment -->
+              <div class="a11y-option">
+                <label class="setting-label">Font Size</label>
+                <select
+                  [(ngModel)]="accessibility().fontSize"
+                  (ngModelChange)="updateFontSize($event)"
+                  class="select-input"
+                >
+                  <option value="normal">Normal</option>
+                  <option value="large">Large</option>
+                  <option value="xlarge">Extra Large</option>
+                </select>
+              </div>
+            }
+          </div>
+        </div>
+      </app-glass-card>
+    </section>
+
+    <!-- Behavior Settings -->
+    <section class="settings-section">
+      <app-glass-card padding="lg">
+        <div class="setting-group">
+          <div class="setting-header">
+            <h3 class="setting-title">
+              <app-icon name="Settings" [size]="24" aria-hidden="true" />
+              Behavior & Effects
+            </h3>
+            <p class="setting-description">Control portfolio behavior and visual effects</p>
+          </div>
+
+          <div class="behavior-options">
+            <label class="checkbox-option">
+              <input type="checkbox" [checked]="soundEnabled()" (change)="toggleSound()" />
+              <span class="checkbox-label">Enable Sound Effects</span>
+            </label>
+
+            <label class="checkbox-option">
+              <input
+                type="checkbox"
+                [checked]="animationsEnabled()"
+                (change)="toggleAnimations()"
+              />
+              <span class="checkbox-label">Enable Animations</span>
+            </label>
+          </div>
+        </div>
+      </app-glass-card>
+    </section>
+
+    <!-- Reset Button -->
+    <section class="settings-section settings-actions">
+      <button class="btn btn--secondary" (click)="resetDefaults()">
+        <app-icon name="RotateCcw" [size]="18" aria-hidden="true" />
+        Reset to Defaults
+      </button>
+      <p class="reset-note">This will restore all settings to their default values</p>
+    </section>
+
+    <!-- Settings Info -->
+    <div class="settings-info">
+      <app-glass-card padding="md">
+        <div class="info-content">
+          <app-icon name="Info" [size]="20" aria-hidden="true" />
+          <div class="info-text">
+            <p class="info-title">Your settings are automatically saved</p>
+            <p class="info-description">
+              All personalization preferences are stored in your browser and synced across sessions.
+            </p>
+          </div>
+        </div>
+      </app-glass-card>
+    </div>
+  </div>
+</app-page-layout>

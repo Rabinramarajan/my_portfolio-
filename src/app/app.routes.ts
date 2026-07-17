@@ -127,6 +127,16 @@ export const routes: Routes = [
         loadComponent: () => import('./features/services/services').then((m) => m.ServicesPage),
       },
       {
+        path: 'settings',
+        title: 'Settings',
+        data: {
+          description:
+            'Customize your portfolio with themes, colors, fonts, layouts, and accessibility options.',
+          keywords: ['Settings', 'Personalization', 'Accessibility', 'Theme', 'Customization'],
+        },
+        loadComponent: () => import('./features/settings/settings').then((m) => m.SettingsPage),
+      },
+      {
         path: 'analytics',
         title: 'Analytics',
         data: {
