@@ -44,11 +44,13 @@ export class ProjectsPage {
 
   private readonly items = computed<readonly Project[]>(() => this.projects.value()?.items ?? []);
 
+  private readonly sortedItems = computed<readonly Project[]>(() => this.applySort(this.items()));
+
   protected readonly finished = computed<readonly Project[]>(() =>
-    this.applySort(this.items().filter((p) => p.status === 'finished')),
+    this.sortedItems().filter((p) => p.status === 'finished'),
   );
   protected readonly upcoming = computed<readonly Project[]>(() =>
-    this.applySort(this.items().filter((p) => p.status === 'upcoming')),
+    this.sortedItems().filter((p) => p.status === 'upcoming'),
   );
 
   protected readonly totalCount = computed(() => this.items().length);

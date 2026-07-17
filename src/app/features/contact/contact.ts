@@ -68,12 +68,26 @@ export class ContactPage {
         // Clear touched/dirty state so validation errors don't linger on the
         // now-empty fields (reset() does not change the data model itself).
         this.contactForm().reset();
-      } catch {
-        this.error.set('Something went wrong while sending your message. Please try again.');
+      } catch (err) {
+        this.error.set(this.getErrorMessage(err));
+        console.error('Contact form submission error:', err);
       }
       return undefined;
     });
 
     this.sending.set(false);
+  }
+
+  private getErrorMessage(error: unknown): string {
+    if (error instanceof Error) {
+      const message = error.message.toLowerCase();
+      if (message.includes('network') || message.includes('failed to fetch')) {
+        return 'Network error. Please check your connection and try again.';
+      }
+      if (message.includes('timeout')) {
+        return 'Request timed out. Please try again.';
+      }
+    }
+    return 'Something went wrong while sending your message. Please try again or contact the site owner.';
   }
 }

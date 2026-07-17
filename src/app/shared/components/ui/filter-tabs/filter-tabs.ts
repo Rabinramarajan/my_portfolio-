@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, model } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  QueryList,
+  ViewChildren,
+  model,
+} from '@angular/core';
 
 import { Chip } from '../chip/chip';
 import { trackByValue } from '../../../../core';
@@ -16,6 +23,7 @@ import { trackByValue } from '../../../../core';
     <div class="tabs" role="tablist">
       @for (option of options(); track trackByValue($index, option); let i = $index) {
         <app-chip
+          #tab
           role="tab"
           [selected]="option === selected()"
           [attr.aria-selected]="option === selected()"
@@ -65,6 +73,8 @@ import { trackByValue } from '../../../../core';
   `,
 })
 export class FilterTabs {
+  @ViewChildren('tab') private readonly tabs!: QueryList<ElementRef<HTMLElement>>;
+
   /** Available options. */
   readonly options = model.required<readonly string[]>();
   /** Currently selected option (two-way bindable). */
@@ -88,7 +98,6 @@ export class FilterTabs {
     if (option === undefined) return;
     event.preventDefault();
     this.selected.set(option);
-    const tabs = (event.currentTarget as HTMLElement).closest('[role="tablist"]');
-    tabs?.querySelectorAll<HTMLElement>('[role="tab"]')[index]?.focus();
+    this.tabs?.get(index)?.nativeElement.focus();
   }
 }

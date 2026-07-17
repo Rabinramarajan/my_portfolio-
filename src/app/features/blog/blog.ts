@@ -2,9 +2,16 @@ import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DataService, BlogPost, trackById } from '../../core';
-import { PageLayout, SearchInput, BlogCard, GlassCard, QuoteCard, AnimatedButton, Stagger } from '../../shared';
+import {
+  PageLayout,
+  SearchInput,
+  BlogCard,
+  GlassCard,
+  QuoteCard,
+  AnimatedButton,
+  Stagger,
+} from '../../shared';
 import { Icon } from '../../shared/components/ui/icon/icon';
-
 
 const ALL = 'All Articles';
 const SORTS = ['Most Recent', 'Oldest', 'Popular'] as const;
@@ -50,18 +57,14 @@ export class BlogPage {
     const cat = this.category();
     const term = this.search().trim().toLowerCase();
     const filtered = posts.filter(
-      (p) =>
-        (cat === ALL || p.category === cat) &&
-        (term === '' || this.matchesTerm(p, term)),
+      (p) => (cat === ALL || p.category === cat) && (term === '' || this.matchesTerm(p, term)),
     );
     return this.applySort([...filtered], this.sort(), this.blog.value()?.popularIds ?? []);
   });
 
   protected readonly popular = computed<readonly BlogPost[]>(() => {
-    const posts = this.blog.value()?.posts ?? [];
-    return (this.blog.value()?.popularIds ?? [])
-      .map((id) => posts.find((p) => p.id === id))
-      .filter((p): p is BlogPost => p !== undefined);
+    const ids = new Set(this.blog.value()?.popularIds ?? []);
+    return (this.blog.value()?.posts ?? []).filter((p) => ids.has(p.id));
   });
 
   protected readonly trackById = trackById;
