@@ -24,3 +24,5 @@ export * from './testimonial.model';
 export * from './opensource.model';
 export * from './talk.model';
 export * from './community.model';
+export * from './recruiter.model';
+export * from './resume-version.model';

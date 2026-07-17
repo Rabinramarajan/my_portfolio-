@@ -127,6 +127,16 @@ export const routes: Routes = [
         loadComponent: () => import('./features/services/services').then((m) => m.ServicesPage),
       },
       {
+        path: 'recruiter',
+        title: 'Recruiter Hub',
+        data: {
+          description:
+            'Recruiter-focused hub with interview Q&A, resume versions, availability, salary preferences, and project inquiry wizard.',
+          keywords: ['Hire Rabin', 'Interview Prep', 'Resume', 'Availability', 'Project Inquiry'],
+        },
+        loadComponent: () => import('./features/recruiter/recruiter').then((m) => m.RecruiterPage),
+      },
+      {
         path: 'certifications',
         title: 'Certifications',
         data: {

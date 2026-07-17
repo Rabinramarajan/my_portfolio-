@@ -1,0 +1,53 @@
+{
+  "versions": [
+    {
+      "id": "frontend",
+      "type": "Frontend",
+      "summary": "Senior Frontend Angular Developer with 4+ years building high-performance, accessible web applications for government and enterprise clients. Expert in Angular, TypeScript, RxJS, and modern web standards.",
+      "highlights": [
+        "4+ years enterprise Angular development (versions 2-18)",
+        "Proficient in TypeScript, RxJS, Angular Signals, and reactive patterns",
+        "Expert in web accessibility (WCAG 2.1) and performance optimization",
+        "Built immigration portals, pension platforms serving 10,000+ users",
+        "40%+ performance improvements through optimization techniques",
+        "Strong foundation in Ionic cross-platform mobile development"
+      ],
+      "featuredExperience": [],
+      "relevantSkills": [],
+      "downloadUrl": "/assets/resume-frontend.pdf"
+    },
+    {
+      "id": "full-stack",
+      "type": "Full Stack",
+      "summary": "Full Stack Developer with 4+ years enterprise experience across Angular frontend, Node.js/Express backend, and deployment infrastructure. Skilled in building end-to-end solutions with TypeScript across the stack.",
+      "highlights": [
+        "Frontend: Angular 2-18, TypeScript, RxJS, Tailwind CSS",
+        "Backend: Node.js, Express, REST APIs, database design",
+        "DevOps: Docker, cloud deployment, CI/CD pipelines",
+        "Full-stack project delivery for government and financial sectors",
+        "Database optimization and query performance tuning",
+        "API design and integration expertise"
+      ],
+      "featuredExperience": [],
+      "relevantSkills": [],
+      "downloadUrl": "/assets/resume-fullstack.pdf"
+    },
+    {
+      "id": "freelance",
+      "type": "Freelance",
+      "summary": "Senior Freelance Developer available for contract work. Specialized in Angular, Ionic, and end-to-end web development. Proven track record delivering projects on time for startups and enterprises.",
+      "highlights": [
+        "Available for immediate engagement on contract projects",
+        "Fixed-price and time & materials models available",
+        "Rapid project turnaround with high-quality deliverables",
+        "Experience with startups and Fortune 500 companies",
+        "Excellent communication and project management",
+        "Can scale to team leads for larger engagements"
+      ],
+      "featuredExperience": [],
+      "relevantSkills": [],
+      "downloadUrl": "/assets/resume-freelance.pdf"
+    }
+  ],
+  "defaultVersion": "Frontend"
+}

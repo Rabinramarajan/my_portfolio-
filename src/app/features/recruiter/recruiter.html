@@ -1,0 +1,337 @@
+<app-page-layout
+  breadcrumb="Recruiter Hub"
+  titleLead="Recruiter"
+  titleHighlight="Hub"
+  subtitle="One-stop destination for hiring information, interview prep, and project inquiries."
+>
+  <!-- Resume Versions Selector -->
+  <section class="recruiter-section">
+    <div class="section-header">
+      <h2 class="section-title">
+        <app-icon name="FileText" [size]="24" aria-hidden="true" />
+        Resume Versions
+      </h2>
+      <p class="section-subtitle">Choose the resume version that best fits your needs</p>
+    </div>
+
+    @if (resumeVersions.value()) {
+      <div class="resume-tabs">
+        @for (version of resumeVersions.value()!.versions; track version.id) {
+          <button
+            class="resume-tab"
+            [class.active]="resumeVersion() === version.type"
+            (click)="selectResumeVersion(version.type)"
+            [attr.aria-label]="'View ' + version.type + ' resume'"
+          >
+            <app-icon name="Download" [size]="16" aria-hidden="true" />
+            {{ version.type }}
+          </button>
+        }
+      </div>
+
+      @for (version of resumeVersions.value()!.versions; track version.id) {
+        @if (resumeVersion() === version.type) {
+          <div class="resume-preview" appStagger>
+            <app-glass-card padding="lg">
+              <article class="resume-card">
+                <h3 class="resume-card__title">{{ version.type }} Specialist</h3>
+                <p class="resume-card__summary">{{ version.summary }}</p>
+
+                <div class="resume-card__highlights">
+                  <h4 class="resume-card__label">Key Highlights</h4>
+                  <ul class="resume-card__list">
+                    @for (highlight of version.highlights; track highlight) {
+                      <li>{{ highlight }}</li>
+                    }
+                  </ul>
+                </div>
+
+                <div class="resume-card__actions">
+                  <a
+                    [href]="version.downloadUrl"
+                    class="btn btn--primary"
+                    download
+                    [attr.aria-label]="'Download ' + version.type + ' resume'"
+                  >
+                    <app-icon name="Download" [size]="16" aria-hidden="true" />
+                    Download PDF
+                  </a>
+                </div>
+              </article>
+            </app-glass-card>
+          </div>
+        }
+      }
+    }
+  </section>
+
+  <!-- Interview Q&A -->
+  @if (recruiter.value()) {
+    <section class="recruiter-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <app-icon name="HelpCircle" [size]="24" aria-hidden="true" />
+          Interview Questions & Answers
+        </h2>
+        <p class="section-subtitle">Common interview questions and my responses</p>
+      </div>
+
+      <div class="interview-filters">
+        <button
+          class="filter-tag"
+          [class.active]="selectedCategory() === 'All'"
+          (click)="selectCategory('All')"
+        >
+          All
+        </button>
+        <button
+          class="filter-tag"
+          [class.active]="selectedCategory() === 'Technical'"
+          (click)="selectCategory('Technical')"
+        >
+          Technical
+        </button>
+        <button
+          class="filter-tag"
+          [class.active]="selectedCategory() === 'Behavioral'"
+          (click)="selectCategory('Behavioral')"
+        >
+          Behavioral
+        </button>
+        <button
+          class="filter-tag"
+          [class.active]="selectedCategory() === 'Domain'"
+          (click)="selectCategory('Domain')"
+        >
+          Domain
+        </button>
+        <button
+          class="filter-tag"
+          [class.active]="selectedCategory() === 'Experience'"
+          (click)="selectCategory('Experience')"
+        >
+          Experience
+        </button>
+      </div>
+
+      <div class="interviews-grid" appStagger>
+        @for (
+          interview of filteredInterviews(recruiter.value()!.interviews);
+          track trackById($index, interview)
+        ) {
+          <app-glass-card padding="lg">
+            <article class="interview-card">
+              <div class="interview-header">
+                <h3 class="interview-question">{{ interview.question }}</h3>
+                <span class="interview-category" [class]="'category-' + interview.category">
+                  {{ interview.category }}
+                </span>
+              </div>
+
+              <p class="interview-answer">{{ interview.answer }}</p>
+
+              @if (interview.relatedSkills && interview.relatedSkills.length > 0) {
+                <div class="interview-skills">
+                  @for (skill of interview.relatedSkills; track skill) {
+                    <span class="skill-tag">{{ skill }}</span>
+                  }
+                </div>
+              }
+            </article>
+          </app-glass-card>
+        }
+      </div>
+    </section>
+
+    <!-- Availability -->
+    <section class="recruiter-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <app-icon name="Calendar" [size]="24" aria-hidden="true" />
+          Availability
+        </h2>
+        <p class="section-subtitle">My working hours and timezone</p>
+      </div>
+
+      <div class="availability-container">
+        <app-glass-card padding="lg">
+          <div class="availability-content">
+            <div class="availability-grid">
+              @for (slot of recruiter.value()!.availability; track slot.id) {
+                <div class="availability-slot">
+                  <span class="slot-day">{{ slot.dayOfWeek }}</span>
+                  <span class="slot-time">{{ slot.startTime }} - {{ slot.endTime }}</span>
+                  <span class="slot-tz">{{ slot.timezone }}</span>
+                </div>
+              }
+            </div>
+
+            <div class="availability-actions">
+              <a
+                [href]="recruiter.value()!.meetingSchedulerUrl"
+                class="btn btn--primary"
+                target="_blank"
+              >
+                <app-icon name="Clock" [size]="16" aria-hidden="true" />
+                Schedule a Meeting
+              </a>
+            </div>
+          </div>
+        </app-glass-card>
+      </div>
+    </section>
+
+    <!-- Salary Preferences -->
+    <section class="recruiter-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <app-icon name="DollarSign" [size]="24" aria-hidden="true" />
+          Salary & Contract Preferences
+        </h2>
+        <p class="section-subtitle">Expected compensation by employment type</p>
+      </div>
+
+      <div class="salary-grid">
+        @for (preference of recruiter.value()!.salaryPreferences; track preference.id) {
+          <app-glass-card padding="lg">
+            <article class="salary-card">
+              <h3 class="salary-type">{{ preference.employmentType }}</h3>
+              <div class="salary-range">
+                <span class="salary-label">Expected Range:</span>
+                <div class="salary-amounts">
+                  <span class="salary-min">{{ formatSalary(preference.minSalary) }}</span>
+                  <span class="salary-sep">-</span>
+                  @if (preference.maxSalary) {
+                    <span class="salary-max">{{ formatSalary(preference.maxSalary) }}</span>
+                  } @else {
+                    <span class="salary-max">Open</span>
+                  }
+                </div>
+              </div>
+              <p class="salary-note">
+                {{ preference.negotiable ? 'Negotiable' : 'Fixed' }}
+              </p>
+            </article>
+          </app-glass-card>
+        }
+      </div>
+    </section>
+
+    <!-- Hire Me Wizard -->
+    <section class="recruiter-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <app-icon name="Zap" [size]="24" aria-hidden="true" />
+          Project Inquiry
+        </h2>
+        <p class="section-subtitle">Start a project inquiry with me</p>
+      </div>
+
+      <div class="hire-wizard-container">
+        @if (!showWizard()) {
+          <app-glass-card padding="lg">
+            <div class="hire-welcome">
+              <h3>Ready to Work Together?</h3>
+              <p>Tell me about your project and let's explore if we're a great fit.</p>
+              <button class="btn btn--primary" (click)="showWizard.set(true)">
+                <app-icon name="Send" [size]="16" aria-hidden="true" />
+                Start Project Inquiry
+              </button>
+            </div>
+          </app-glass-card>
+        } @else {
+          <app-glass-card padding="lg">
+            <div class="hire-wizard">
+              <div class="wizard-progress">
+                <div class="wizard-steps">
+                  @for (step of [1, 2, 3, 4]; track step) {
+                    <div class="wizard-step" [class.active]="wizardStep() === step">
+                      {{ step }}
+                    </div>
+                  }
+                </div>
+              </div>
+
+              <!-- Step 1: Project Type -->
+              @if (wizardStep() === 1) {
+                <div class="wizard-content" appStagger>
+                  <h3>What type of project do you have?</h3>
+                  <div class="wizard-options">
+                    @for (type of recruiter.value()!.hireMeWizard.projectTypes; track type.id) {
+                      <label class="wizard-option">
+                        <input type="radio" name="projectType" />
+                        <span>{{ type.label }}</span>
+                      </label>
+                    }
+                  </div>
+                </div>
+              }
+
+              <!-- Step 2: Budget -->
+              @if (wizardStep() === 2) {
+                <div class="wizard-content" appStagger>
+                  <h3>What's your budget range?</h3>
+                  <div class="wizard-options">
+                    @for (budget of recruiter.value()!.hireMeWizard.budgetRanges; track budget.id) {
+                      <label class="wizard-option">
+                        <input type="radio" name="budget" />
+                        <span>{{ budget.label }}</span>
+                      </label>
+                    }
+                  </div>
+                </div>
+              }
+
+              <!-- Step 3: Timeline -->
+              @if (wizardStep() === 3) {
+                <div class="wizard-content" appStagger>
+                  <h3>When do you need this completed?</h3>
+                  <div class="wizard-options">
+                    @for (
+                      timeline of recruiter.value()!.hireMeWizard.timelineOptions;
+                      track timeline.id
+                    ) {
+                      <label class="wizard-option">
+                        <input type="radio" name="timeline" />
+                        <span>{{ timeline.label }}</span>
+                      </label>
+                    }
+                  </div>
+                </div>
+              }
+
+              <!-- Step 4: Contact -->
+              @if (wizardStep() === 4) {
+                <div class="wizard-content" appStagger>
+                  <h3>Let's connect!</h3>
+                  <p>Click below to send me your project details:</p>
+                  <a
+                    href="mailto:rabinr2607@gmail.com?subject=Project%20Inquiry"
+                    class="btn btn--primary"
+                  >
+                    <app-icon name="Mail" [size]="16" aria-hidden="true" />
+                    Send Project Details
+                  </a>
+                </div>
+              }
+
+              <div class="wizard-actions">
+                <button
+                  class="btn btn--secondary"
+                  (click)="prevStep()"
+                  [disabled]="wizardStep() === 1"
+                >
+                  Back
+                </button>
+                @if (wizardStep() < 4) {
+                  <button class="btn btn--primary" (click)="nextStep()">Next</button>
+                }
+                <button class="btn btn--tertiary" (click)="closeWizard()">Close</button>
+              </div>
+            </div>
+          </app-glass-card>
+        }
+      </div>
+    </section>
+  }
+</app-page-layout>

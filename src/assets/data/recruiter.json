@@ -1,0 +1,135 @@
+{
+  "interviews": [
+    {
+      "id": "1",
+      "question": "Tell me about your experience with Angular",
+      "answer": "I have 4+ years of professional Angular experience, building enterprise-grade applications. I've worked with Angular 2+ versions, implementing complex state management with RxJS, optimizing change detection, and creating accessible, performant applications. I'm proficient with Angular Signals, lazy loading, and server-side rendering.",
+      "category": "Technical",
+      "relatedSkills": ["Angular", "TypeScript", "RxJS"]
+    },
+    {
+      "id": "2",
+      "question": "Describe your approach to performance optimization",
+      "answer": "I focus on multiple layers: lazy loading modules and components, using OnPush change detection, memoizing computed properties, optimizing bundle size, implementing virtual scrolling for large lists, and monitoring with Chrome DevTools and Lighthouse. I've achieved 40%+ performance improvements in past projects through systematic optimization.",
+      "category": "Technical",
+      "relatedSkills": ["Performance", "Angular", "Optimization"]
+    },
+    {
+      "id": "3",
+      "question": "How do you approach accessibility in web applications?",
+      "answer": "I implement WCAG 2.1 standards by using semantic HTML, ARIA attributes, keyboard navigation, color contrast, focus management, and screen reader testing. I view accessibility as essential, not optional. I've added comprehensive ARIA attributes to contact forms, implemented proper heading hierarchies, and ensured all interactive elements are keyboard accessible.",
+      "category": "Technical",
+      "relatedSkills": ["Accessibility", "WCAG", "HTML/CSS"]
+    },
+    {
+      "id": "4",
+      "question": "Tell me about a time you solved a complex technical problem",
+      "answer": "I identified and fixed a memory leak in service worker subscription that was causing progressive performance degradation. By implementing proper cleanup with takeUntilDestroyed, I prevented the accumulation of subscriptions. This required understanding RxJS lifecycle, Angular dependency injection, and lifecycle hooks.",
+      "category": "Behavioral",
+      "relatedSkills": ["RxJS", "Angular", "Problem Solving"]
+    },
+    {
+      "id": "5",
+      "question": "How do you handle tight deadlines?",
+      "answer": "I prioritize ruthlessly, focusing on core functionality first, then incrementally add polish. I communicate proactively about timeline risks, break work into smaller deliverables, and automate testing/deployment to reduce manual overhead. In my government portal projects, we delivered on schedule while maintaining code quality.",
+      "category": "Behavioral",
+      "relatedSkills": ["Time Management", "Communication"]
+    },
+    {
+      "id": "6",
+      "question": "What's your experience with cross-platform mobile development?",
+      "answer": "I've built multiple Ionic applications for iOS and Android, sharing 95%+ code between platforms. I'm experienced with Capacitor plugins, native module integration, responsive design for various screen sizes, and publishing to app stores. I've delivered apps serving 10,000+ users across government and enterprise sectors.",
+      "category": "Domain",
+      "relatedSkills": ["Ionic", "React Native", "Mobile"]
+    }
+  ],
+  "availability": [
+    {
+      "id": "1",
+      "dayOfWeek": "Monday",
+      "startTime": "09:00",
+      "endTime": "18:00",
+      "timezone": "IST"
+    },
+    {
+      "id": "2",
+      "dayOfWeek": "Tuesday",
+      "startTime": "09:00",
+      "endTime": "18:00",
+      "timezone": "IST"
+    },
+    {
+      "id": "3",
+      "dayOfWeek": "Wednesday",
+      "startTime": "09:00",
+      "endTime": "18:00",
+      "timezone": "IST"
+    },
+    {
+      "id": "4",
+      "dayOfWeek": "Thursday",
+      "startTime": "09:00",
+      "endTime": "18:00",
+      "timezone": "IST"
+    },
+    {
+      "id": "5",
+      "dayOfWeek": "Friday",
+      "startTime": "09:00",
+      "endTime": "18:00",
+      "timezone": "IST"
+    }
+  ],
+  "salaryPreferences": [
+    {
+      "id": "1",
+      "employmentType": "Full Time",
+      "currencyCode": "USD",
+      "minSalary": 80000,
+      "maxSalary": 150000,
+      "negotiable": true
+    },
+    {
+      "id": "2",
+      "employmentType": "Contract",
+      "currencyCode": "USD",
+      "minSalary": 80,
+      "maxSalary": 150,
+      "negotiable": true
+    },
+    {
+      "id": "3",
+      "employmentType": "Freelance",
+      "currencyCode": "USD",
+      "minSalary": 50,
+      "maxSalary": 200,
+      "negotiable": true
+    }
+  ],
+  "hireMeWizard": {
+    "projectTypes": [
+      { "id": "1", "label": "Web Application Development" },
+      { "id": "2", "label": "Mobile App (Ionic/React Native)" },
+      { "id": "3", "label": "Performance Optimization" },
+      { "id": "4", "label": "Accessibility Audit & Implementation" },
+      { "id": "5", "label": "API Integration" },
+      { "id": "6", "label": "UI/UX Development" },
+      { "id": "7", "label": "Code Review & Architecture" }
+    ],
+    "budgetRanges": [
+      { "id": "1", "label": "Under $5,000" },
+      { "id": "2", "label": "$5,000 - $15,000" },
+      { "id": "3", "label": "$15,000 - $50,000" },
+      { "id": "4", "label": "$50,000 - $100,000" },
+      { "id": "5", "label": "$100,000+" }
+    ],
+    "timelineOptions": [
+      { "id": "1", "label": "ASAP (1-2 weeks)" },
+      { "id": "2", "label": "This month" },
+      { "id": "3", "label": "Next month" },
+      { "id": "4", "label": "Flexible" }
+    ]
+  },
+  "meetingSchedulerUrl": "https://calendly.com/rabinr2607",
+  "atsResumeUrl": "/assets/resume-ats.pdf"
+}

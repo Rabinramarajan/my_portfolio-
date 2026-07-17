@@ -25,6 +25,8 @@ import type {
   OpenSourceConfig,
   TalksConfig,
   CommunityConfig,
+  RecruiterConfig,
+  ResumeVersionsConfig,
 } from '../models';
 
 /**
@@ -59,6 +61,8 @@ export interface DataResources {
   readonly opensource: OpenSourceConfig;
   readonly talks: TalksConfig;
   readonly community: CommunityConfig;
+  readonly recruiter: RecruiterConfig;
+  readonly 'resume-versions': ResumeVersionsConfig;
 }
 
 /** Valid data keys. */
@@ -92,4 +96,6 @@ export const DATA_FILES: Readonly<Record<DataKey, string>> = {
   opensource: 'opensource.json',
   talks: 'talks.json',
   community: 'community.json',
+  recruiter: 'recruiter.json',
+  'resume-versions': 'resume-versions.json',
 } as const;
