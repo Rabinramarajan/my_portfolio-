@@ -127,6 +127,22 @@ export const routes: Routes = [
         loadComponent: () => import('./features/services/services').then((m) => m.ServicesPage),
       },
       {
+        path: 'analytics',
+        title: 'Analytics',
+        data: {
+          description:
+            'Portfolio analytics dashboard with visitor metrics, GitHub activity, technologies mastered, and detailed performance statistics.',
+          keywords: [
+            'Analytics',
+            'Metrics',
+            'Statistics',
+            'Portfolio Performance',
+            'Visitor Analytics',
+          ],
+        },
+        loadComponent: () => import('./features/analytics/analytics').then((m) => m.AnalyticsPage),
+      },
+      {
         path: 'showcase',
         title: 'Developer Showcase',
         data: {

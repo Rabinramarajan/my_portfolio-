@@ -1,0 +1,457 @@
+<app-page-layout
+  breadcrumb="Analytics"
+  titleLead="Analytics"
+  titleHighlight="Dashboard"
+  subtitle="Portfolio metrics, performance statistics, and visitor insights."
+>
+  @if (analytics.value()) {
+    <!-- Top Stats Row -->
+    <div class="top-stats-grid" appStagger>
+      <!-- Total Visitors -->
+      <app-glass-card padding="lg">
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3 class="stat-label">Total Visitors</h3>
+            <app-icon name="Users" [size]="24" aria-hidden="true" />
+          </div>
+          <div class="stat-value">{{ analytics.value()!.visitors.totalVisitors }}</div>
+          <p class="stat-detail">
+            {{ analytics.value()!.visitors.uniqueVisitors }} unique visitors
+          </p>
+        </div>
+      </app-glass-card>
+
+      <!-- Portfolio Sessions -->
+      <app-glass-card padding="lg">
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3 class="stat-label">Sessions</h3>
+            <app-icon name="Activity" [size]="24" aria-hidden="true" />
+          </div>
+          <div class="stat-value">{{ analytics.value()!.visitors.sessions }}</div>
+          <p class="stat-detail">{{ analytics.value()!.visitors.pageViews }} page views</p>
+        </div>
+      </app-glass-card>
+
+      <!-- Avg Session Duration -->
+      <app-glass-card padding="lg">
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3 class="stat-label">Avg Duration</h3>
+            <app-icon name="Clock" [size]="24" aria-hidden="true" />
+          </div>
+          <div class="stat-value">
+            {{ formatDuration(analytics.value()!.sessions.averageSessionDuration) }}
+          </div>
+          <p class="stat-detail">
+            Median: {{ formatDuration(analytics.value()!.sessions.medianSessionDuration) }}
+          </p>
+        </div>
+      </app-glass-card>
+
+      <!-- GitHub Commits -->
+      <app-glass-card padding="lg">
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3 class="stat-label">GitHub Commits</h3>
+            <app-icon name="GitBranch" [size]="24" aria-hidden="true" />
+          </div>
+          <div class="stat-value">{{ analytics.value()!.github.totalCommits }}</div>
+          <p class="stat-detail">
+            {{ analytics.value()!.github.repositoriesContributed }} repositories
+          </p>
+        </div>
+      </app-glass-card>
+
+      <!-- Resume Downloads -->
+      <app-glass-card padding="lg">
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3 class="stat-label">Resume Downloads</h3>
+            <app-icon name="Download" [size]="24" aria-hidden="true" />
+          </div>
+          <div class="stat-value">{{ analytics.value()!.resumeDownloads.totalDownloads }}</div>
+          <p class="stat-detail">All versions combined</p>
+        </div>
+      </app-glass-card>
+
+      <!-- Years of Experience -->
+      <app-glass-card padding="lg">
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3 class="stat-label">Experience</h3>
+            <app-icon name="Briefcase" [size]="24" aria-hidden="true" />
+          </div>
+          <div class="stat-value">{{ analytics.value()!.experience.totalYears }}+ yrs</div>
+          <p class="stat-detail">Since {{ analytics.value()!.experience.startYear }}</p>
+        </div>
+      </app-glass-card>
+    </div>
+
+    <!-- Projects Completed Section -->
+    <section class="analytics-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <app-icon name="CheckSquare" [size]="24" aria-hidden="true" />
+          Projects Completed
+        </h2>
+      </div>
+
+      <app-glass-card padding="lg">
+        <div class="projects-overview">
+          <div class="project-stat">
+            <span class="project-count">{{ analytics.value()!.projects.completed }}</span>
+            <span class="project-label">Completed</span>
+            <div class="progress-bar">
+              <div
+                class="progress-fill"
+                [style.width.%]="
+                  calculateCompletionRate(
+                    analytics.value()!.projects.completed,
+                    analytics.value()!.projects.total
+                  )
+                "
+              ></div>
+            </div>
+          </div>
+
+          <div class="projects-breakdown">
+            <div class="breakdown-item">
+              <span class="breakdown-label">Total Projects</span>
+              <span class="breakdown-value">{{ analytics.value()!.projects.total }}</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">In Progress</span>
+              <span class="breakdown-value">{{ analytics.value()!.projects.inProgress }}</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Archived</span>
+              <span class="breakdown-value">{{ analytics.value()!.projects.archived }}</span>
+            </div>
+          </div>
+        </div>
+      </app-glass-card>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="analytics-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <app-icon name="Calendar" [size]="24" aria-hidden="true" />
+          Professional Timeline
+        </h2>
+      </div>
+
+      <div class="timeline" appStagger>
+        @for (milestone of analytics.value()!.experience.milestones; track milestone.year) {
+          <app-glass-card padding="lg">
+            <article class="timeline-item">
+              <div class="timeline-year">{{ milestone.year }}</div>
+              <div class="timeline-event">{{ milestone.event }}</div>
+            </article>
+          </app-glass-card>
+        }
+      </div>
+    </section>
+
+    <!-- Technologies Mastered -->
+    <section class="analytics-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <app-icon name="Zap" [size]="24" aria-hidden="true" />
+          Technologies Mastered
+        </h2>
+      </div>
+
+      <div class="tech-grid" appStagger>
+        @for (tech of topTechs(); track tech.id) {
+          <app-glass-card padding="lg">
+            <article class="tech-card">
+              <div class="tech-header">
+                <h3 class="tech-name">{{ tech.name }}</h3>
+                <span class="tech-category">{{ tech.category }}</span>
+              </div>
+
+              <div class="tech-proficiency">
+                <div class="proficiency-bar">
+                  <div class="proficiency-fill" [style.width.%]="tech.proficiency"></div>
+                </div>
+                <span class="proficiency-percentage">{{ tech.proficiency }}%</span>
+              </div>
+
+              <div class="tech-details">
+                <div class="tech-stat">
+                  <span class="detail-label">Years Used</span>
+                  <span class="detail-value">{{ tech.yearsUsed }}+</span>
+                </div>
+                <div class="tech-stat">
+                  <span class="detail-label">Projects</span>
+                  <span class="detail-value">{{ tech.projects }}</span>
+                </div>
+              </div>
+            </article>
+          </app-glass-card>
+        }
+      </div>
+    </section>
+
+    <!-- GitHub Commits Timeline -->
+    <section class="analytics-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <app-icon name="TrendingUp" [size]="24" aria-hidden="true" />
+          GitHub Activity
+        </h2>
+      </div>
+
+      <div class="github-stats" appStagger>
+        <app-glass-card padding="lg">
+          <div class="github-overview">
+            <div class="github-stat">
+              <span class="stat-label">Pull Requests</span>
+              <span class="stat-value">{{ analytics.value()!.github.pullRequests }}</span>
+            </div>
+            <div class="github-stat">
+              <span class="stat-label">Issues</span>
+              <span class="stat-value">{{ analytics.value()!.github.issues }}</span>
+            </div>
+            <div class="github-stat">
+              <span class="stat-label">Followers</span>
+              <span class="stat-value">{{ analytics.value()!.github.followers }}</span>
+            </div>
+          </div>
+        </app-glass-card>
+
+        <app-glass-card padding="lg">
+          <div class="commit-chart">
+            <h4 class="chart-title">Yearly Commits</h4>
+            <div class="chart-bars">
+              @for (entry of analytics.value()!.github.yearlyCommits; track entry.year) {
+                <div class="chart-bar-item">
+                  <div class="chart-bar">
+                    <div
+                      class="chart-bar-fill"
+                      [style.height.%]="(entry.commits / 750) * 100"
+                      [title]="entry.commits + ' commits'"
+                    ></div>
+                  </div>
+                  <span class="chart-label">{{ entry.year }}</span>
+                </div>
+              }
+            </div>
+          </div>
+        </app-glass-card>
+      </div>
+    </section>
+
+    <!-- Visitor Analytics -->
+    <section class="analytics-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <app-icon name="Globe" [size]="24" aria-hidden="true" />
+          Visitor Analytics
+        </h2>
+      </div>
+
+      <div class="analytics-grid" appStagger>
+        <!-- Monthly Visitors -->
+        <app-glass-card padding="lg">
+          <div class="chart-container">
+            <h4 class="chart-title">Monthly Visitors</h4>
+            <div class="mini-chart">
+              @for (data of analytics.value()!.visitors.monthlyData; track data.month) {
+                <div
+                  class="mini-bar"
+                  [style.height.%]="(data.visitors / 1500) * 100"
+                  [title]="data.visitors + ' visitors'"
+                ></div>
+              }
+            </div>
+          </div>
+        </app-glass-card>
+
+        <!-- Bounce Rate -->
+        <app-glass-card padding="lg">
+          <div class="metric-display">
+            <h4 class="metric-title">Bounce Rate</h4>
+            <div class="metric-circle">
+              <div class="metric-value">{{ analytics.value()!.visitors.bounceRate }}%</div>
+            </div>
+            <p class="metric-description">Lower is better</p>
+          </div>
+        </app-glass-card>
+      </div>
+    </section>
+
+    <!-- Geographic Distribution -->
+    <section class="analytics-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <app-icon name="Map" [size]="24" aria-hidden="true" />
+          Countries Visited From
+        </h2>
+      </div>
+
+      <div class="geo-list" appStagger>
+        @for (country of topCountries(); track country.id) {
+          <app-glass-card padding="lg">
+            <article class="geo-item">
+              <div class="geo-header">
+                <h3 class="geo-country">{{ country.country }}</h3>
+                <span class="geo-code">{{ country.countryCode }}</span>
+              </div>
+
+              <div class="geo-stats">
+                <div class="geo-bar">
+                  <div class="geo-bar-fill" [style.width.%]="country.percentage * 2.5"></div>
+                </div>
+                <span class="geo-percentage">{{ country.percentage }}%</span>
+              </div>
+
+              <span class="geo-visitors">{{ country.visitors }} visitors</span>
+            </article>
+          </app-glass-card>
+        }
+      </div>
+    </section>
+
+    <!-- Most Viewed Project -->
+    <section class="analytics-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <app-icon name="Eye" [size]="24" aria-hidden="true" />
+          Most Viewed Project
+        </h2>
+      </div>
+
+      <app-glass-card padding="lg">
+        <article class="project-detail" appStagger>
+          <div class="project-name">{{ analytics.value()!.projectViews.projectName }}</div>
+
+          <div class="project-metrics">
+            <div class="metric">
+              <span class="metric-label">Views</span>
+              <span class="metric-value">{{ analytics.value()!.projectViews.views }}</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Clicks</span>
+              <span class="metric-value">{{ analytics.value()!.projectViews.clicks }}</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">CTR</span>
+              <span class="metric-value"
+                >{{ analytics.value()!.projectViews.clickThroughRate }}%</span
+              >
+            </div>
+            <div class="metric">
+              <span class="metric-label">Avg Time</span>
+              <span class="metric-value">{{
+                formatDuration(analytics.value()!.projectViews.avgTimeSpent)
+              }}</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Bounce Rate</span>
+              <span class="metric-value">{{ analytics.value()!.projectViews.bounceRate }}%</span>
+            </div>
+          </div>
+
+          <div class="project-bar">
+            <div
+              class="project-bar-fill"
+              [style.width.%]="(analytics.value()!.projectViews.views / 4000) * 100"
+            ></div>
+          </div>
+        </article>
+      </app-glass-card>
+    </section>
+
+    <!-- Session Duration Distribution -->
+    <section class="analytics-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <app-icon name="Clock" [size]="24" aria-hidden="true" />
+          Session Duration Distribution
+        </h2>
+      </div>
+
+      <div class="session-distribution" appStagger>
+        @for (dist of analytics.value()!.sessions.sessionDistribution; track dist.range) {
+          <app-glass-card padding="lg">
+            <article class="distribution-item">
+              <div class="dist-header">
+                <h4 class="dist-range">{{ dist.range }}</h4>
+                <span class="dist-percentage">{{ dist.percentage }}%</span>
+              </div>
+
+              <div class="dist-bar">
+                <div class="dist-bar-fill" [style.width.%]="dist.percentage"></div>
+              </div>
+
+              <span class="dist-count">{{ dist.count }} sessions</span>
+            </article>
+          </app-glass-card>
+        }
+      </div>
+    </section>
+
+    <!-- Resume Download Analytics -->
+    <section class="analytics-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <app-icon name="Download" [size]="24" aria-hidden="true" />
+          Resume Download Analytics
+        </h2>
+      </div>
+
+      <div class="download-grid" appStagger>
+        <!-- Download Breakdown -->
+        <app-glass-card padding="lg">
+          <div class="download-breakdown">
+            <h4 class="chart-title">Downloads by Version</h4>
+            <div class="breakdown-list">
+              <div class="breakdown-row">
+                <span class="breakdown-label">Frontend Specialist</span>
+                <span class="breakdown-value">{{
+                  analytics.value()!.resumeDownloads.frontendDownloads
+                }}</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="breakdown-label">Full Stack Developer</span>
+                <span class="breakdown-value">{{
+                  analytics.value()!.resumeDownloads.fullStackDownloads
+                }}</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="breakdown-label">Freelance Consultant</span>
+                <span class="breakdown-value">{{
+                  analytics.value()!.resumeDownloads.freelanceDownloads
+                }}</span>
+              </div>
+            </div>
+          </div>
+        </app-glass-card>
+
+        <!-- Monthly Downloads -->
+        <app-glass-card padding="lg">
+          <div class="monthly-downloads">
+            <h4 class="chart-title">Monthly Trend</h4>
+            <div class="trend-chart">
+              @for (data of analytics.value()!.resumeDownloads.monthlyDownloads; track data.month) {
+                <div
+                  class="trend-bar"
+                  [style.height.%]="(data.downloads / 60) * 100"
+                  [title]="data.downloads + ' downloads'"
+                ></div>
+              }
+            </div>
+          </div>
+        </app-glass-card>
+      </div>
+    </section>
+
+    <!-- Last Updated -->
+    <div class="last-updated">
+      Last updated: {{ analytics.value()!.lastUpdated | date: 'MMM d, y, h:mm a' }}
+    </div>
+  }
+</app-page-layout>

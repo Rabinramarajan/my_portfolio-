@@ -28,6 +28,7 @@ import type {
   RecruiterConfig,
   ResumeVersionsConfig,
   DeveloperShowcaseConfig,
+  AnalyticsDashboardConfig,
 } from '../models';
 
 /**
@@ -65,6 +66,7 @@ export interface DataResources {
   readonly recruiter: RecruiterConfig;
   readonly 'resume-versions': ResumeVersionsConfig;
   readonly showcase: DeveloperShowcaseConfig;
+  readonly analytics: AnalyticsDashboardConfig;
 }
 
 /** Valid data keys. */
@@ -101,4 +103,5 @@ export const DATA_FILES: Readonly<Record<DataKey, string>> = {
   recruiter: 'recruiter.json',
   'resume-versions': 'resume-versions.json',
   showcase: 'showcase.json',
+  analytics: 'analytics.json',
 } as const;

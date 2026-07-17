@@ -27,3 +27,4 @@ export * from './community.model';
 export * from './recruiter.model';
 export * from './resume-version.model';
 export * from './showcase.model';
+export * from './analytics.model';
