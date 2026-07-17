@@ -1,0 +1,71 @@
+{
+  "comparisons": [
+    {
+      "id": "bundle-v1.2.0",
+      "version": "v1.2.0 (Current)",
+      "date": "2026-07-15",
+      "totalSize": 405.87,
+      "totalGzipped": 112.12,
+      "metrics": [
+        {
+          "id": "chunk-main",
+          "name": "Main Bundle",
+          "size": 19.43,
+          "gzippedSize": 5.55,
+          "type": "main",
+          "modules": 45,
+          "percentage": 4.8
+        },
+        {
+          "id": "chunk-vendor",
+          "name": "Vendor (Angular, RxJS)",
+          "size": 383.76,
+          "gzippedSize": 105.61,
+          "type": "vendor",
+          "modules": 180,
+          "percentage": 94.6
+        },
+        {
+          "id": "chunk-shared",
+          "name": "Shared Components",
+          "size": 34.31,
+          "gzippedSize": 7.88,
+          "type": "lazy",
+          "modules": 25,
+          "percentage": 8.5
+        }
+      ],
+      "trend": "down",
+      "changePercent": -3.5
+    },
+    {
+      "id": "bundle-v1.1.0",
+      "version": "v1.1.0 (Previous)",
+      "date": "2026-06-15",
+      "totalSize": 420.5,
+      "totalGzipped": 115.8,
+      "metrics": [
+        {
+          "id": "chunk-main-prev",
+          "name": "Main Bundle",
+          "size": 21.5,
+          "gzippedSize": 6.2,
+          "type": "main",
+          "modules": 48,
+          "percentage": 5.1
+        },
+        {
+          "id": "chunk-vendor-prev",
+          "name": "Vendor (Angular, RxJS)",
+          "size": 398.2,
+          "gzippedSize": 109.1,
+          "type": "vendor",
+          "modules": 195,
+          "percentage": 94.7
+        }
+      ],
+      "trend": "up",
+      "changePercent": 4.2
+    }
+  ]
+}

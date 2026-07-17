@@ -1,0 +1,76 @@
+{
+  "benchmarks": [
+    {
+      "id": "perf-initial-load-mobile",
+      "date": "2026-07-15",
+      "metric": "Initial Load Time (Mobile)",
+      "value": 2100,
+      "unit": "ms",
+      "category": "load-time",
+      "device": "mobile",
+      "previousValue": 2400,
+      "target": 2000,
+      "status": "good"
+    },
+    {
+      "id": "perf-initial-load-desktop",
+      "date": "2026-07-15",
+      "metric": "Initial Load Time (Desktop)",
+      "value": 1400,
+      "unit": "ms",
+      "category": "load-time",
+      "device": "desktop",
+      "previousValue": 1600,
+      "target": 1200,
+      "status": "good"
+    },
+    {
+      "id": "perf-first-paint",
+      "date": "2026-07-15",
+      "metric": "First Contentful Paint",
+      "value": 1200,
+      "unit": "ms",
+      "category": "render",
+      "device": "mobile",
+      "previousValue": 1400,
+      "target": 1000,
+      "status": "good"
+    },
+    {
+      "id": "perf-bundle-size",
+      "date": "2026-07-15",
+      "metric": "Main Bundle Size",
+      "value": 405.87,
+      "unit": "KB",
+      "category": "network",
+      "device": "desktop",
+      "previousValue": 420,
+      "target": 400,
+      "status": "good"
+    },
+    {
+      "id": "perf-memory-usage",
+      "date": "2026-07-15",
+      "metric": "Memory Usage (Typical)",
+      "value": 45,
+      "unit": "MB",
+      "category": "memory",
+      "device": "mobile",
+      "previousValue": 52,
+      "target": 40,
+      "status": "good"
+    },
+    {
+      "id": "perf-cpu-idle",
+      "date": "2026-07-15",
+      "metric": "Time to Interactive",
+      "value": 2800,
+      "unit": "ms",
+      "category": "cpu",
+      "device": "mobile",
+      "previousValue": 3200,
+      "target": 2500,
+      "status": "good"
+    }
+  ]
+}

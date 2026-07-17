@@ -1,0 +1,64 @@
+{
+  "scores": [
+    {
+      "id": "lh-mobile-latest",
+      "date": "2026-07-15",
+      "overall": 95,
+      "performance": 98,
+      "accessibility": 94,
+      "bestPractices": 96,
+      "seo": 92,
+      "pwa": 90,
+      "device": "mobile",
+      "url": "https://rabinr.dev",
+      "timeToFCP": 1200,
+      "timeToDOMContentLoaded": 2100,
+      "timeToLargestContentfulPaint": 2800
+    },
+    {
+      "id": "lh-desktop-latest",
+      "date": "2026-07-15",
+      "overall": 98,
+      "performance": 99,
+      "accessibility": 97,
+      "bestPractices": 98,
+      "seo": 96,
+      "pwa": 95,
+      "device": "desktop",
+      "url": "https://rabinr.dev",
+      "timeToFCP": 800,
+      "timeToDOMContentLoaded": 1400,
+      "timeToLargestContentfulPaint": 1900
+    },
+    {
+      "id": "lh-mobile-prev",
+      "date": "2026-06-15",
+      "overall": 92,
+      "performance": 95,
+      "accessibility": 92,
+      "bestPractices": 94,
+      "seo": 90,
+      "pwa": 88,
+      "device": "mobile",
+      "url": "https://rabinr.dev",
+      "timeToFCP": 1400,
+      "timeToDOMContentLoaded": 2400,
+      "timeToLargestContentfulPaint": 3200
+    },
+    {
+      "id": "lh-desktop-prev",
+      "date": "2026-06-15",
+      "overall": 96,
+      "performance": 98,
+      "accessibility": 95,
+      "bestPractices": 96,
+      "seo": 94,
+      "pwa": 93,
+      "device": "desktop",
+      "url": "https://rabinr.dev",
+      "timeToFCP": 900,
+      "timeToDOMContentLoaded": 1600,
+      "timeToLargestContentfulPaint": 2200
+    }
+  ]
+}

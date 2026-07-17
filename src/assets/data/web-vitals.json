@@ -1,0 +1,98 @@
+{
+  "metrics": [
+    {
+      "id": "web-vitals-mobile-latest",
+      "date": "2026-07-15",
+      "device": "mobile",
+      "url": "https://rabinr.dev",
+      "vitals": [
+        {
+          "id": "lcp-mobile",
+          "name": "LCP",
+          "value": 2800,
+          "unit": "ms",
+          "rating": "good",
+          "threshold": {
+            "good": 2500,
+            "poor": 4000
+          },
+          "description": "Largest Contentful Paint - time when largest element renders",
+          "optimization": "Optimize images, reduce server response time, minimize CSS, defer non-critical JS"
+        },
+        {
+          "id": "fid-mobile",
+          "name": "FID",
+          "value": 45,
+          "unit": "ms",
+          "rating": "good",
+          "threshold": {
+            "good": 100,
+            "poor": 300
+          },
+          "description": "First Input Delay - time from first interaction to response",
+          "optimization": "Break up long JavaScript tasks, use web workers, lazy-load non-critical features"
+        },
+        {
+          "id": "cls-mobile",
+          "name": "CLS",
+          "value": 0.05,
+          "unit": "score",
+          "rating": "good",
+          "threshold": {
+            "good": 0.1,
+            "poor": 0.25
+          },
+          "description": "Cumulative Layout Shift - visual stability during page load",
+          "optimization": "Reserve space for dynamic content, avoid unsized media, use transform animations"
+        }
+      ]
+    },
+    {
+      "id": "web-vitals-desktop-latest",
+      "date": "2026-07-15",
+      "device": "desktop",
+      "url": "https://rabinr.dev",
+      "vitals": [
+        {
+          "id": "lcp-desktop",
+          "name": "LCP",
+          "value": 1900,
+          "unit": "ms",
+          "rating": "good",
+          "threshold": {
+            "good": 2500,
+            "poor": 4000
+          },
+          "description": "Largest Contentful Paint - time when largest element renders",
+          "optimization": "Optimize images, reduce server response time, minimize CSS, defer non-critical JS"
+        },
+        {
+          "id": "fid-desktop",
+          "name": "FID",
+          "value": 35,
+          "unit": "ms",
+          "rating": "good",
+          "threshold": {
+            "good": 100,
+            "poor": 300
+          },
+          "description": "First Input Delay - time from first interaction to response",
+          "optimization": "Break up long JavaScript tasks, use web workers, lazy-load non-critical features"
+        },
+        {
+          "id": "cls-desktop",
+          "name": "CLS",
+          "value": 0.03,
+          "unit": "score",
+          "rating": "good",
+          "threshold": {
+            "good": 0.1,
+            "poor": 0.25
+          },
+          "description": "Cumulative Layout Shift - visual stability during page load",
+          "optimization": "Reserve space for dynamic content, avoid unsized media, use transform animations"
+        }
+      ]
+    }
+  ]
+}

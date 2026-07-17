@@ -35,6 +35,11 @@ import type {
   WorldMapConfig,
   ExperienceTimelineConfig,
   SkillsTreeConfig,
+  LighthouseConfig,
+  PerformanceConfig,
+  SecurityConfig,
+  BundleSizeConfig,
+  WebVitalsConfig,
 } from '../models';
 
 /**
@@ -79,6 +84,11 @@ export interface DataResources {
   readonly 'world-map': WorldMapConfig;
   readonly 'experience-timeline': ExperienceTimelineConfig;
   readonly 'skills-tree': SkillsTreeConfig;
+  readonly lighthouse: LighthouseConfig;
+  readonly performance: PerformanceConfig;
+  readonly security: SecurityConfig;
+  readonly 'bundle-size': BundleSizeConfig;
+  readonly 'web-vitals': WebVitalsConfig;
 }
 
 /** Valid data keys. */
@@ -122,4 +132,9 @@ export const DATA_FILES: Readonly<Record<DataKey, string>> = {
   'world-map': 'world-map.json',
   'experience-timeline': 'experience-timeline.json',
   'skills-tree': 'skills-tree.json',
+  lighthouse: 'lighthouse.json',
+  performance: 'performance.json',
+  security: 'security.json',
+  'bundle-size': 'bundle-size.json',
+  'web-vitals': 'web-vitals.json',
 } as const;

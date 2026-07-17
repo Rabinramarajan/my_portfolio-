@@ -35,3 +35,8 @@ export * from './tech-evolution.model';
 export * from './world-map.model';
 export * from './experience-timeline.model';
 export * from './skills-tree.model';
+export * from './lighthouse.model';
+export * from './performance.model';
+export * from './security.model';
+export * from './bundle-size.model';
+export * from './web-vitals.model';

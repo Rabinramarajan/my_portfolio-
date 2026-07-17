@@ -1,0 +1,92 @@
+{
+  "practices": [
+    {
+      "id": "sec-https",
+      "title": "HTTPS Everywhere",
+      "category": "infrastructure",
+      "severity": "critical",
+      "description": "All traffic is encrypted using HTTPS with modern TLS 1.3",
+      "implementation": "SSL/TLS certificate from Let's Encrypt, automatic renewal, strict HSTS headers",
+      "relatedTools": ["Let's Encrypt", "Certbot", "nginx"],
+      "status": "implemented",
+      "impact": "Prevents man-in-the-middle attacks and protects user data in transit"
+    },
+    {
+      "id": "sec-csp",
+      "title": "Content Security Policy",
+      "category": "code-quality",
+      "severity": "high",
+      "description": "Strict CSP headers prevent XSS and injection attacks",
+      "implementation": "Configured CSP headers blocking inline scripts and external resources except whitelisted",
+      "relatedTools": ["nginx", "Angular"],
+      "status": "implemented",
+      "impact": "Mitigates 90% of XSS attacks by preventing malicious script injection"
+    },
+    {
+      "id": "sec-dependabot",
+      "title": "Automated Dependency Updates",
+      "category": "code-quality",
+      "severity": "high",
+      "description": "Automated security patches for npm dependencies",
+      "implementation": "GitHub Dependabot configured for weekly security updates with automated testing",
+      "relatedTools": ["GitHub Dependabot", "npm audit"],
+      "status": "implemented",
+      "impact": "Catches and patches known vulnerabilities within 1-2 weeks of release"
+    },
+    {
+      "id": "sec-cors",
+      "title": "CORS Configuration",
+      "category": "infrastructure",
+      "severity": "high",
+      "description": "Strict CORS policies limit cross-origin requests",
+      "implementation": "Explicit origin whitelist, credentials disabled for cross-origin",
+      "relatedTools": ["nginx"],
+      "status": "implemented",
+      "impact": "Prevents unauthorized cross-origin API access"
+    },
+    {
+      "id": "sec-headers",
+      "title": "Security Headers",
+      "category": "infrastructure",
+      "severity": "high",
+      "description": "Comprehensive security headers (X-Frame-Options, X-Content-Type-Options, etc)",
+      "implementation": "All modern security headers configured including HSTS, nosniff, noopen",
+      "relatedTools": ["nginx"],
+      "status": "implemented",
+      "impact": "Prevents clickjacking, MIME-type sniffing, and other common attacks"
+    },
+    {
+      "id": "sec-auth-token",
+      "title": "Secure Token Management",
+      "category": "authentication",
+      "severity": "critical",
+      "description": "Secure handling of authentication tokens",
+      "implementation": "HttpOnly, Secure, SameSite cookies; no tokens in localStorage",
+      "relatedTools": ["Angular", "express-session"],
+      "status": "implemented",
+      "impact": "Prevents XSS token theft and CSRF attacks"
+    },
+    {
+      "id": "sec-input-validation",
+      "title": "Input Validation",
+      "category": "code-quality",
+      "severity": "high",
+      "description": "All user inputs validated and sanitized",
+      "implementation": "DOMPurify for HTML sanitization, Angular built-in sanitization",
+      "relatedTools": ["DOMPurify", "Angular"],
+      "status": "implemented",
+      "impact": "Prevents injection attacks and malicious payload execution"
+    },
+    {
+      "id": "sec-rate-limiting",
+      "title": "Rate Limiting",
+      "category": "infrastructure",
+      "severity": "medium",
+      "description": "API rate limiting to prevent abuse",
+      "implementation": "nginx rate limiting with configurable thresholds per endpoint",
+      "relatedTools": ["nginx", "redis"],
+      "status": "implemented",
+      "impact": "Prevents brute-force attacks and DDoS-style abuse"
+    }
+  ]
+}
