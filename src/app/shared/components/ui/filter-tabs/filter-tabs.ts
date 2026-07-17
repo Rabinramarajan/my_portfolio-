@@ -73,7 +73,7 @@ export class FilterTabs {
   protected readonly trackByValue = trackByValue;
 
   /** Move selection by `delta` (with wrap-around) and focus the new tab. */
-  protected move(delta: number, event: Event): void {
+  move(delta: number, event: Event): void {
     const options = this.options();
     if (!options.length) return;
     const current = options.indexOf(this.selected());
@@ -82,7 +82,7 @@ export class FilterTabs {
   }
 
   /** Select the option at `index` and move focus to its tab. */
-  protected moveTo(index: number, event: Event): void {
+  moveTo(index: number, event: Event): void {
     const options = this.options();
     const option = options[index];
     if (option === undefined) return;
