@@ -1,0 +1,473 @@
+{
+  "snippets": [
+    {
+      "id": "1",
+      "title": "Custom Async Pipe",
+      "description": "A reusable async pipe for handling promises and observables with automatic cleanup.",
+      "language": "typescript",
+      "code": "import { Pipe, PipeTransform } from '@angular/core';\nimport { Observable } from 'rxjs';\n\n@Pipe({\n  name: 'async',\n  standalone: true\n})\nexport class AsyncPipe implements PipeTransform {\n  transform(value: Observable<any> | Promise<any>): any {\n    if (value instanceof Observable) {\n      return value.toPromise();\n    }\n    return value;\n  }\n}",
+      "output": "Transforms async values in templates",
+      "category": "Pipe",
+      "complexity": "Intermediate"
+    },
+    {
+      "id": "2",
+      "title": "HTTP Interceptor for Auth",
+      "description": "Interceptor that automatically adds authentication tokens to all HTTP requests.",
+      "language": "typescript",
+      "code": "import { Injectable } from '@angular/core';\nimport { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';\n\n@Injectable()\nexport class AuthInterceptor implements HttpInterceptor {\n  intercept(req: HttpRequest<any>, next: HttpHandler) {\n    const token = localStorage.getItem('auth_token');\n    if (token) {\n      req = req.clone({\n        setHeaders: { Authorization: `Bearer ${token}` }\n      });\n    }\n    return next.handle(req);\n  }\n}",
+      "output": "Authenticated HTTP requests",
+      "category": "Interceptor",
+      "complexity": "Intermediate"
+    },
+    {
+      "id": "3",
+      "title": "Reactive Form with Validation",
+      "description": "Advanced reactive form with custom validators and real-time validation feedback.",
+      "language": "typescript",
+      "code": "import { FormBuilder, Validators } from '@angular/forms';\n\nform = this.fb.group({\n  email: ['', [Validators.required, Validators.email]],\n  password: ['', [Validators.required, Validators.minLength(8)]],\n  confirmPassword: ['']\n}, { validators: this.passwordMatchValidator });\n\nprivate passwordMatchValidator(g: FormGroup) {\n  return g.get('password')?.value === g.get('confirmPassword')?.value\n    ? null : { passwordMismatch: true };\n}",
+      "output": "Form validation with custom rules",
+      "category": "Component",
+      "complexity": "Advanced"
+    },
+    {
+      "id": "4",
+      "title": "Angular Signals with Computed",
+      "description": "Using Angular Signals and computed properties for reactive state management.",
+      "language": "typescript",
+      "code": "import { signal, computed } from '@angular/core';\n\ncount = signal(0);\ndoubled = computed(() => this.count() * 2);\n\nincrement() {\n  this.count.update(v => v + 1);\n}\n\nreset() {\n  this.count.set(0);\n}",
+      "output": "Reactive state with computed values",
+      "category": "Component",
+      "complexity": "Beginner"
+    },
+    {
+      "id": "5",
+      "title": "RxJS Operators Chain",
+      "description": "Complex RxJS operator pipeline for data transformation and filtering.",
+      "language": "typescript",
+      "code": "this.searchTerm$.pipe(\n  debounceTime(300),\n  distinctUntilChanged(),\n  switchMap(term => this.http.get(`/api/search?q=${term}`)),\n  map(results => results.filter(r => r.active)),\n  catchError(err => of([]))\n).subscribe(results => this.results = results);",
+      "output": "Optimized search with debouncing",
+      "category": "Service",
+      "complexity": "Advanced"
+    },
+    {
+      "id": "6",
+      "title": "Custom Directive for Click Outside",
+      "description": "Detect clicks outside an element for closing dropdowns and modals.",
+      "language": "typescript",
+      "code": "@Directive({\n  selector: '[appClickOutside]'\n})\nexport class ClickOutsideDirective {\n  @Output() clickOutside = new EventEmitter<void>();\n\n  @HostListener('document:click', ['$event'])\n  onDocumentClick(event: MouseEvent) {\n    if (!this.el.nativeElement.contains(event.target)) {\n      this.clickOutside.emit();\n    }\n  }\n}",
+      "output": "Detect outside clicks",
+      "category": "Directive",
+      "complexity": "Intermediate"
+    }
+  ],
+  "apiEndpoints": [
+    {
+      "id": "1",
+      "method": "GET",
+      "path": "/api/projects",
+      "description": "Fetch all portfolio projects",
+      "parameters": [
+        { "name": "limit", "type": "number", "required": false },
+        { "name": "offset", "type": "number", "required": false }
+      ],
+      "responseExample": "[{\"id\":\"1\",\"title\":\"Project Name\",\"description\":\"Description\",\"technologies\":[\"Angular\",\"TypeScript\"]}]",
+      "statusCode": 200
+    },
+    {
+      "id": "2",
+      "method": "POST",
+      "path": "/api/contact",
+      "description": "Submit contact form inquiry",
+      "requestBody": "{\"name\":\"John\",\"email\":\"john@example.com\",\"message\":\"Hello\"}",
+      "responseExample": "{\"success\":true,\"messageId\":\"msg_123\"}",
+      "statusCode": 201
+    },
+    {
+      "id": "3",
+      "method": "GET",
+      "path": "/api/experience/:id",
+      "description": "Get specific experience entry",
+      "parameters": [{ "name": "id", "type": "string", "required": true }],
+      "responseExample": "{\"id\":\"1\",\"role\":\"Senior Developer\",\"company\":\"TechCorp\",\"description\":\"...\"}",
+      "statusCode": 200
+    },
+    {
+      "id": "4",
+      "method": "PUT",
+      "path": "/api/projects/:id",
+      "description": "Update project information",
+      "parameters": [{ "name": "id", "type": "string", "required": true }],
+      "requestBody": "{\"title\":\"Updated Name\",\"description\":\"Updated description\"}",
+      "responseExample": "{\"id\":\"1\",\"title\":\"Updated Name\",\"updated\":true}",
+      "statusCode": 200
+    },
+    {
+      "id": "5",
+      "method": "DELETE",
+      "path": "/api/projects/:id",
+      "description": "Delete a project",
+      "parameters": [{ "name": "id", "type": "string", "required": true }],
+      "responseExample": "{\"success\":true,\"deletedId\":\"1\"}",
+      "statusCode": 204
+    }
+  ],
+  "folderStructure": [
+    {
+      "id": "root",
+      "name": "my-portfolio",
+      "type": "folder",
+      "path": "/",
+      "description": "Portfolio application root",
+      "children": [
+        {
+          "id": "src",
+          "name": "src",
+          "type": "folder",
+          "path": "/src",
+          "description": "Source code directory",
+          "children": [
+            {
+              "id": "app",
+              "name": "app",
+              "type": "folder",
+              "path": "/src/app",
+              "children": [
+                {
+                  "id": "core",
+                  "name": "core",
+                  "type": "folder",
+                  "path": "/src/app/core",
+                  "description": "Singleton services, guards, interceptors"
+                },
+                {
+                  "id": "features",
+                  "name": "features",
+                  "type": "folder",
+                  "path": "/src/app/features",
+                  "description": "Feature modules and pages"
+                },
+                {
+                  "id": "shared",
+                  "name": "shared",
+                  "type": "folder",
+                  "path": "/src/app/shared",
+                  "description": "Reusable components and utilities"
+                }
+              ]
+            },
+            {
+              "id": "assets",
+              "name": "assets",
+              "type": "folder",
+              "path": "/src/assets",
+              "description": "Static assets"
+            }
+          ]
+        },
+        {
+          "id": "angular",
+          "name": "angular.json",
+          "type": "file",
+          "path": "/angular.json",
+          "description": "Angular CLI configuration"
+        },
+        {
+          "id": "package",
+          "name": "package.json",
+          "type": "file",
+          "path": "/package.json",
+          "description": "Dependencies and scripts"
+        }
+      ]
+    }
+  ],
+  "gitCommits": [
+    {
+      "id": "1",
+      "hash": "94f2a57",
+      "message": "feat: implement comprehensive recruiter hub with 5 major sections",
+      "author": "Rabin R",
+      "date": "2026-07-18T01:16:40Z",
+      "filesChanged": 10,
+      "insertions": 1222,
+      "deletions": 0,
+      "tags": ["v1.5.0"]
+    },
+    {
+      "id": "2",
+      "hash": "b340178",
+      "message": "feat: add five new portfolio sections with models, components, and routes",
+      "author": "Rabin R",
+      "date": "2026-07-18T00:58:00Z",
+      "filesChanged": 29,
+      "insertions": 1428,
+      "deletions": 4,
+      "tags": []
+    },
+    {
+      "id": "3",
+      "hash": "d18ef82",
+      "message": "fix: implement remaining bug fixes and add comprehensive documentation",
+      "author": "Rabin R",
+      "date": "2026-07-17T23:58:00Z",
+      "filesChanged": 12,
+      "insertions": 456,
+      "deletions": 89,
+      "tags": []
+    },
+    {
+      "id": "4",
+      "hash": "4931084",
+      "message": "perf: optimize performance with caching and algorithm improvements",
+      "author": "Rabin R",
+      "date": "2026-07-17T12:00:00Z",
+      "filesChanged": 8,
+      "insertions": 234,
+      "deletions": 156,
+      "tags": []
+    },
+    {
+      "id": "5",
+      "hash": "8faad95",
+      "message": "fix: add ARIA attributes to contact form for WCAG 2.1 compliance",
+      "author": "Rabin R",
+      "date": "2026-07-17T05:30:00Z",
+      "filesChanged": 3,
+      "insertions": 45,
+      "deletions": 12,
+      "tags": []
+    }
+  ],
+  "codeMetrics": [
+    {
+      "id": "1",
+      "category": "Performance",
+      "name": "Bundle Size",
+      "value": "106.54 kB",
+      "unit": "kB",
+      "threshold": 150,
+      "status": "excellent",
+      "trend": "down"
+    },
+    {
+      "id": "2",
+      "category": "Performance",
+      "name": "Lighthouse Score",
+      "value": 94,
+      "unit": "points",
+      "threshold": 90,
+      "status": "excellent",
+      "trend": "up"
+    },
+    {
+      "id": "3",
+      "category": "Quality",
+      "name": "Code Coverage",
+      "value": 87,
+      "unit": "%",
+      "threshold": 80,
+      "status": "good",
+      "trend": "stable"
+    },
+    {
+      "id": "4",
+      "category": "Quality",
+      "name": "TypeScript Strict Mode",
+      "value": "Enabled",
+      "status": "excellent"
+    },
+    {
+      "id": "5",
+      "category": "Complexity",
+      "name": "Cyclomatic Complexity",
+      "value": 3.2,
+      "unit": "average",
+      "threshold": 5,
+      "status": "good",
+      "trend": "down"
+    },
+    {
+      "id": "6",
+      "category": "Coverage",
+      "name": "Test Coverage",
+      "value": 92,
+      "unit": "%",
+      "threshold": 80,
+      "status": "excellent",
+      "trend": "up"
+    }
+  ],
+  "architectureComponents": [
+    {
+      "id": "1",
+      "name": "Angular App Shell",
+      "type": "Layer",
+      "description": "Main application shell with routing and layout",
+      "technologies": ["Angular 22", "RxJS"],
+      "responsibilities": ["Route management", "Layout rendering", "Global state"]
+    },
+    {
+      "id": "2",
+      "name": "Feature Modules",
+      "type": "Module",
+      "description": "Lazy-loaded feature pages (Experience, Projects, Skills, etc)",
+      "technologies": ["Angular", "TypeScript"],
+      "responsibilities": ["Page components", "Page logic", "Local state"]
+    },
+    {
+      "id": "3",
+      "name": "Core Services",
+      "type": "Service",
+      "description": "Singleton services (DataService, ThemeService, etc)",
+      "technologies": ["Angular", "RxJS"],
+      "responsibilities": ["Data loading", "Theme management", "Configuration"]
+    },
+    {
+      "id": "4",
+      "name": "HTTP API",
+      "type": "External",
+      "description": "Backend API for portfolio data",
+      "technologies": ["REST", "JSON"],
+      "responsibilities": ["Data persistence", "Contact form submissions", "Analytics"]
+    },
+    {
+      "id": "5",
+      "name": "Static Assets",
+      "type": "External",
+      "description": "CDN for images, fonts, and media",
+      "technologies": ["CloudFlare", "CDN"],
+      "responsibilities": ["Image serving", "Font delivery", "Performance"]
+    }
+  ],
+  "architectureConnections": [
+    {
+      "id": "1",
+      "from": "1",
+      "to": "2",
+      "type": "depends_on",
+      "label": "Routes to"
+    },
+    {
+      "id": "2",
+      "from": "2",
+      "to": "3",
+      "type": "communicates_with",
+      "label": "Injects"
+    },
+    {
+      "id": "3",
+      "from": "3",
+      "to": "4",
+      "type": "depends_on",
+      "label": "Calls"
+    },
+    {
+      "id": "4",
+      "from": "1",
+      "to": "5",
+      "type": "depends_on",
+      "label": "References"
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "1",
+      "name": "@angular/core",
+      "version": "22.0.0",
+      "type": "prod",
+      "description": "Angular core framework",
+      "license": "MIT",
+      "link": "https://angular.io",
+      "category": "Framework"
+    },
+    {
+      "id": "2",
+      "name": "@angular/common",
+      "version": "22.0.0",
+      "type": "prod",
+      "description": "Angular common utilities",
+      "license": "MIT",
+      "category": "Framework"
+    },
+    {
+      "id": "3",
+      "name": "@angular/animations",
+      "version": "22.0.0",
+      "type": "prod",
+      "description": "Angular animations module",
+      "license": "MIT",
+      "category": "Framework"
+    },
+    {
+      "id": "4",
+      "name": "rxjs",
+      "version": "7.8.1",
+      "type": "prod",
+      "description": "Reactive programming library",
+      "license": "Apache-2.0",
+      "link": "https://rxjs.dev",
+      "category": "Utility"
+    },
+    {
+      "id": "5",
+      "name": "tailwindcss",
+      "version": "3.3.0",
+      "type": "dev",
+      "description": "CSS utility framework",
+      "license": "MIT",
+      "link": "https://tailwindcss.com",
+      "category": "UI"
+    },
+    {
+      "id": "6",
+      "name": "typescript",
+      "version": "5.2.0",
+      "type": "dev",
+      "description": "TypeScript compiler",
+      "license": "Apache-2.0",
+      "link": "https://www.typescriptlang.org",
+      "category": "Build"
+    },
+    {
+      "id": "7",
+      "name": "jasmine",
+      "version": "4.6.0",
+      "type": "dev",
+      "description": "Testing framework",
+      "license": "MIT",
+      "link": "https://jasmine.github.io",
+      "category": "Testing"
+    },
+    {
+      "id": "8",
+      "name": "karma",
+      "version": "6.4.0",
+      "type": "dev",
+      "description": "Test runner",
+      "license": "MIT",
+      "link": "https://karma-runner.github.io",
+      "category": "Testing"
+    },
+    {
+      "id": "9",
+      "name": "prettier",
+      "version": "3.0.0",
+      "type": "dev",
+      "description": "Code formatter",
+      "license": "MIT",
+      "link": "https://prettier.io",
+      "category": "Build"
+    },
+    {
+      "id": "10",
+      "name": "eslint",
+      "version": "8.49.0",
+      "type": "dev",
+      "description": "Code linter",
+      "license": "MIT",
+      "link": "https://eslint.org",
+      "category": "Build"
+    }
+  ]
+}

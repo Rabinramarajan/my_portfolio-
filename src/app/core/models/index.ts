@@ -26,3 +26,4 @@ export * from './talk.model';
 export * from './community.model';
 export * from './recruiter.model';
 export * from './resume-version.model';
+export * from './showcase.model';

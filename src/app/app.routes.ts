@@ -127,6 +127,22 @@ export const routes: Routes = [
         loadComponent: () => import('./features/services/services').then((m) => m.ServicesPage),
       },
       {
+        path: 'showcase',
+        title: 'Developer Showcase',
+        data: {
+          description:
+            'Interactive code playground, API explorer, architecture diagrams, code metrics, and project dependencies showcase.',
+          keywords: [
+            'Code Showcase',
+            'Portfolio Demo',
+            'API Documentation',
+            'Architecture',
+            'Code Snippets',
+          ],
+        },
+        loadComponent: () => import('./features/showcase/showcase').then((m) => m.ShowcasePage),
+      },
+      {
         path: 'recruiter',
         title: 'Recruiter Hub',
         data: {

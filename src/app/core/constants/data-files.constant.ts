@@ -27,6 +27,7 @@ import type {
   CommunityConfig,
   RecruiterConfig,
   ResumeVersionsConfig,
+  DeveloperShowcaseConfig,
 } from '../models';
 
 /**
@@ -63,6 +64,7 @@ export interface DataResources {
   readonly community: CommunityConfig;
   readonly recruiter: RecruiterConfig;
   readonly 'resume-versions': ResumeVersionsConfig;
+  readonly showcase: DeveloperShowcaseConfig;
 }
 
 /** Valid data keys. */
@@ -98,4 +100,5 @@ export const DATA_FILES: Readonly<Record<DataKey, string>> = {
   community: 'community.json',
   recruiter: 'recruiter.json',
   'resume-versions': 'resume-versions.json',
+  showcase: 'showcase.json',
 } as const;
