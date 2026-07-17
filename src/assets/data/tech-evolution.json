@@ -1,0 +1,104 @@
+{
+  "adoptions": [
+    {
+      "id": "tech-angular",
+      "technology": "Angular",
+      "dateAdopted": "2021-03-01",
+      "category": "frontend",
+      "initialProficiency": "intermediate",
+      "currentProficiency": "expert",
+      "keyProjects": ["Government Portal", "Pension Platform", "Enterprise CRM"],
+      "evolution": "From Angular 10 fundamentals to Angular 22 Signals expert, leading architecture decisions"
+    },
+    {
+      "id": "tech-typescript",
+      "technology": "TypeScript",
+      "dateAdopted": "2021-03-01",
+      "category": "frontend",
+      "initialProficiency": "beginner",
+      "currentProficiency": "expert",
+      "keyProjects": ["All projects since 2021"],
+      "evolution": "Progressed from basic types to advanced generics and complex type systems"
+    },
+    {
+      "id": "tech-rxjs",
+      "technology": "RxJS",
+      "dateAdopted": "2021-06-01",
+      "category": "frontend",
+      "initialProficiency": "beginner",
+      "currentProficiency": "advanced",
+      "keyProjects": ["State Management", "Real-time Features", "API Integration"],
+      "evolution": "Learned from simple subscriptions to complex observable patterns and state management"
+    },
+    {
+      "id": "tech-ionic",
+      "technology": "Ionic",
+      "dateAdopted": "2022-04-01",
+      "category": "mobile",
+      "initialProficiency": "beginner",
+      "currentProficiency": "expert",
+      "keyProjects": ["Mobile Banking App", "Field Service App", "Customer Portal Mobile"],
+      "evolution": "Became specialized in cross-platform mobile development with Ionic 5-7"
+    },
+    {
+      "id": "tech-tailwind",
+      "technology": "Tailwind CSS",
+      "dateAdopted": "2022-02-01",
+      "category": "frontend",
+      "initialProficiency": "beginner",
+      "currentProficiency": "advanced",
+      "keyProjects": ["Portfolio", "Design System", "UI Components"],
+      "evolution": "Adopted utility-first CSS and built scalable design systems"
+    },
+    {
+      "id": "tech-signals",
+      "technology": "Angular Signals",
+      "dateAdopted": "2023-05-01",
+      "category": "frontend",
+      "initialProficiency": "intermediate",
+      "currentProficiency": "expert",
+      "keyProjects": ["Signals Migration Project", "Portfolio Personalization"],
+      "evolution": "Pioneered adoption in company, migrated legacy RxJS code to signals"
+    },
+    {
+      "id": "tech-docker",
+      "technology": "Docker",
+      "dateAdopted": "2023-09-01",
+      "category": "devops",
+      "initialProficiency": "beginner",
+      "currentProficiency": "intermediate",
+      "keyProjects": ["CI/CD Pipeline", "Local Development", "Production Deployment"],
+      "evolution": "Learned containerization for application deployment and local development"
+    },
+    {
+      "id": "tech-nestjs",
+      "technology": "NestJS",
+      "dateAdopted": "2024-03-01",
+      "category": "backend",
+      "initialProficiency": "beginner",
+      "currentProficiency": "advanced",
+      "keyProjects": ["API Services", "Microservices", "GraphQL Servers"],
+      "evolution": "Expanded to full-stack development with backend expertise"
+    },
+    {
+      "id": "tech-ai",
+      "technology": "AI/LLM Integration",
+      "dateAdopted": "2025-01-01",
+      "category": "architecture",
+      "initialProficiency": "beginner",
+      "currentProficiency": "intermediate",
+      "keyProjects": ["Claude API Integration", "AI Features", "Prompt Engineering"],
+      "evolution": "Exploring AI integration patterns in web applications"
+    },
+    {
+      "id": "tech-accessibility",
+      "technology": "WCAG Accessibility",
+      "dateAdopted": "2024-01-01",
+      "category": "architecture",
+      "initialProficiency": "intermediate",
+      "currentProficiency": "expert",
+      "keyProjects": ["Portfolio Accessibility", "Enterprise Applications", "Compliance"],
+      "evolution": "Became company expert in accessible web development and WCAG compliance"
+    }
+  ]
+}

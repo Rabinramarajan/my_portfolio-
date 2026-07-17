@@ -1,0 +1,111 @@
+{
+  "entries": [
+    {
+      "id": "cert-angular-1",
+      "date": "2021-06-15",
+      "title": "Angular Fundamentals",
+      "provider": "Angular University",
+      "category": "course",
+      "description": "Complete Angular fundamentals course covering components, services, RxJS, and routing",
+      "skillsLearned": ["Angular", "TypeScript", "RxJS", "Dependency Injection"],
+      "impact": "high"
+    },
+    {
+      "id": "cert-typescript-1",
+      "date": "2021-09-20",
+      "title": "Advanced TypeScript",
+      "provider": "Frontend Masters",
+      "category": "course",
+      "description": "Deep dive into TypeScript generics, decorators, and type system",
+      "skillsLearned": ["TypeScript", "Advanced Types", "Decorators"],
+      "impact": "high"
+    },
+    {
+      "id": "cert-rxjs-1",
+      "date": "2022-02-10",
+      "title": "RxJS Complete Guide",
+      "provider": "Udemy",
+      "category": "course",
+      "description": "Complete RxJS training covering observables, operators, and state management patterns",
+      "skillsLearned": ["RxJS", "Reactive Programming", "State Management"],
+      "impact": "high"
+    },
+    {
+      "id": "cert-ionic-1",
+      "date": "2022-05-15",
+      "title": "Ionic Framework Certification",
+      "provider": "Ionic Academy",
+      "category": "certification",
+      "description": "Official Ionic framework certification covering mobile app development",
+      "skillsLearned": ["Ionic", "Cordova", "Mobile Development", "Cross-platform Apps"],
+      "certificateUrl": "https://ionic.io/certificates",
+      "impact": "high"
+    },
+    {
+      "id": "conf-ng-2022",
+      "date": "2022-09-15",
+      "title": "ng-conf 2022",
+      "provider": "Angular Conference",
+      "category": "conference",
+      "description": "Attended annual Angular conference with keynotes on latest framework features",
+      "skillsLearned": ["Angular 14 Features", "Performance", "Architecture Patterns"],
+      "impact": "medium"
+    },
+    {
+      "id": "workshop-performance-1",
+      "date": "2023-03-20",
+      "title": "Web Performance Optimization Workshop",
+      "provider": "Web.dev",
+      "category": "workshop",
+      "description": "Advanced workshop on Core Web Vitals, bundle optimization, and performance best practices",
+      "skillsLearned": [
+        "Performance Optimization",
+        "Bundle Analysis",
+        "Core Web Vitals",
+        "Lighthouse"
+      ],
+      "impact": "high"
+    },
+    {
+      "id": "cert-signals-1",
+      "date": "2023-06-01",
+      "title": "Angular Signals Mastery",
+      "provider": "Angular University",
+      "category": "course",
+      "description": "In-depth course on Angular Signals and zoneless change detection",
+      "skillsLearned": ["Angular Signals", "Zoneless Architecture", "Performance"],
+      "impact": "high"
+    },
+    {
+      "id": "cert-accessibility-1",
+      "date": "2024-01-15",
+      "title": "WCAG 2.1 Accessibility Certification",
+      "provider": "Deque University",
+      "category": "certification",
+      "description": "Professional certification in WCAG 2.1 AA/AAA compliance and accessible web development",
+      "skillsLearned": ["WCAG 2.1", "ARIA", "Accessibility Testing", "Screen Readers"],
+      "certificateUrl": "https://dequeuniversity.com/certificates",
+      "impact": "high"
+    },
+    {
+      "id": "course-nestjs-1",
+      "date": "2024-04-10",
+      "title": "NestJS Complete Course",
+      "provider": "Complete Coding",
+      "category": "course",
+      "description": "Full-stack NestJS course covering backend architecture, databases, and microservices",
+      "skillsLearned": ["NestJS", "Node.js", "Database Design", "REST APIs", "GraphQL"],
+      "impact": "high"
+    },
+    {
+      "id": "workshop-ai-1",
+      "date": "2025-01-20",
+      "title": "AI Integration for Web Developers",
+      "provider": "Anthropic",
+      "category": "workshop",
+      "description": "Hands-on workshop on integrating Claude API and AI features into web applications",
+      "skillsLearned": ["Claude API", "LLM Integration", "AI/ML for Web", "Prompt Engineering"],
+      "impact": "high"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "events": [
+    {
+      "id": "exp-2021-junior",
+      "startDate": "2021-03-01",
+      "endDate": "2022-05-31",
+      "company": "Tech Solutions Inc",
+      "role": "Junior Frontend Developer",
+      "description": "Started career as a junior developer focusing on Angular applications for government clients",
+      "keyAccomplishments": [
+        "Developed 8 Angular applications from scratch",
+        "Implemented responsive UI components library",
+        "Reduced bundle size by 25% through optimization"
+      ],
+      "technologies": ["Angular", "TypeScript", "RxJS", "HTML5", "CSS3"],
+      "teamSize": 4,
+      "impactMetrics": {
+        "Applications": "8",
+        "Bundle Size Reduction": "25%",
+        "Code Coverage": "85%"
+      }
+    },
+    {
+      "id": "exp-2022-senior",
+      "startDate": "2022-06-01",
+      "endDate": "2023-09-30",
+      "company": "Enterprise Apps Ltd",
+      "role": "Senior Frontend Developer",
+      "description": "Promoted to senior role leading frontend architecture decisions and mentoring junior developers",
+      "keyAccomplishments": [
+        "Led architecture migration from Angular 12 to Angular 15",
+        "Mentored 3 junior developers with 100% promotion rate",
+        "Implemented CI/CD pipeline reducing deployment time by 60%",
+        "Built mobile apps using Ionic framework for iOS/Android"
+      ],
+      "technologies": ["Angular", "TypeScript", "Ionic", "NgRx", "Tailwind CSS", "Docker"],
+      "teamSize": 6,
+      "impactMetrics": {
+        "Team Size Managed": "3",
+        "Deployment Time Reduction": "60%",
+        "Mobile Apps Delivered": "5"
+      }
+    },
+    {
+      "id": "exp-2023-lead",
+      "startDate": "2023-10-01",
+      "endDate": "2024-12-31",
+      "company": "Digital Innovations Group",
+      "role": "Lead Frontend Engineer",
+      "description": "Advanced to lead position managing multiple projects and engineering team of 5 developers",
+      "keyAccomplishments": [
+        "Managed 5 engineers across 8 concurrent projects",
+        "Established frontend coding standards and best practices",
+        "Pioneered Angular Signals adoption in company",
+        "Achieved WCAG 2.1 AA compliance for all projects",
+        "Reduced technical debt by 40% through refactoring initiatives"
+      ],
+      "technologies": ["Angular", "Signals", "TypeScript", "NestJS", "WCAG", "Performance"],
+      "teamSize": 5,
+      "impactMetrics": {
+        "Team Size Led": "5",
+        "Projects Delivered": "8",
+        "Technical Debt Reduction": "40%",
+        "Accessibility Compliance": "100%"
+      }
+    },
+    {
+      "id": "exp-2025-fullstack",
+      "startDate": "2025-01-01",
+      "endDate": null,
+      "company": "Global Tech Ventures",
+      "role": "Full-Stack Engineer",
+      "description": "Current role as full-stack engineer with end-to-end project ownership and architecture design",
+      "keyAccomplishments": [
+        "Designed full-stack solutions for enterprise clients",
+        "Integrated Claude API for AI-powered features",
+        "Built microservices architecture with NestJS",
+        "Established accessibility and performance standards",
+        "Mentoring team on AI/ML integration patterns"
+      ],
+      "technologies": ["Angular", "NestJS", "TypeScript", "Claude API", "Kubernetes", "GraphQL"],
+      "teamSize": 7,
+      "impactMetrics": {
+        "Projects Owned": "4",
+        "AI Features Delivered": "6",
+        "Uptime SLA": "99.9%",
+        "Performance Score": "95+"
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+<app-page-layout
+  breadcrumb="Learning"
+  titleLead="Educational"
+  titleHighlight="Timeline"
+  subtitle="Continuous learning journey with courses, certifications, and workshops."
+>
+  @if (timeline(); as config) {
+    <div class="learning-container" appStagger>
+      <div class="entries-grid">
+        @for (entry of config.entries; track entry.id) {
+          <app-glass-card padding="lg" class="learning-card">
+            <div class="learning-header">
+              <div class="category-icon" [class]="'icon-' + entry.category">
+                <app-icon [name]="getCategoryIcon(entry.category)" [size]="20" aria-hidden="true" />
+              </div>
+              <div class="learning-info">
+                <h3 class="learning-title">{{ entry.title }}</h3>
+                <p class="learning-provider">{{ entry.provider }}</p>
+              </div>
+            </div>
+
+            <time class="learning-date">{{ entry.date | date: 'MMM d, yyyy' }}</time>
+
+            <p class="learning-description">{{ entry.description }}</p>
+
+            <div class="impact-badge" [class]="'impact-' + entry.impact">
+              <span>{{ entry.impact | titlecase }} Impact</span>
+            </div>
+
+            <div class="skills-learned">
+              <p class="skills-label">Skills Learned:</p>
+              <div class="skill-tags">
+                @for (skill of entry.skillsLearned; track skill) {
+                  <span class="skill-tag">{{ skill }}</span>
+                }
+              </div>
+            </div>
+
+            <div class="category-badge">{{ entry.category | titlecase }}</div>
+          </app-glass-card>
+        }
+      </div>
+    </div>
+  }
+</app-page-layout>

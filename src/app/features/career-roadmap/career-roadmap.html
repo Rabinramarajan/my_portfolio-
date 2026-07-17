@@ -1,0 +1,86 @@
+<app-page-layout
+  breadcrumb="Career"
+  titleLead="Professional"
+  titleHighlight="Roadmap"
+  subtitle="Timeline of career milestones, promotions, and achievements."
+>
+  @if (roadmap(); as config) {
+    <div class="roadmap-container" appStagger>
+      <!-- Timeline Container -->
+      <div class="timeline-wrapper">
+        <!-- Vertical Line -->
+        <div class="timeline-line"></div>
+
+        <!-- Milestones -->
+        <div class="milestones-list">
+          @for (milestone of config.milestones; track milestone.id; let even = $even) {
+            <div class="milestone-item" [class]="'milestone-' + milestone.type">
+              <!-- Milestone Dot -->
+              <div class="milestone-dot" [class]="'dot-' + getTypeColor(milestone.type)">
+                <app-icon [name]="getTypeIcon(milestone.type)" [size]="16" aria-hidden="true" />
+              </div>
+
+              <!-- Milestone Content -->
+              <app-glass-card
+                [class]="even ? 'milestone-card-left' : 'milestone-card-right'"
+                padding="lg"
+              >
+                <div class="milestone-content">
+                  <div class="milestone-header">
+                    <h3 class="milestone-title">{{ milestone.title }}</h3>
+                    <time class="milestone-date">{{ milestone.date | date: 'MMM yyyy' }}</time>
+                  </div>
+
+                  <p class="milestone-description">{{ milestone.description }}</p>
+
+                  <div class="milestone-impact">
+                    <app-icon name="Zap" [size]="16" aria-hidden="true" />
+                    <span>{{ milestone.impact }}</span>
+                  </div>
+
+                  @if (milestone.technologies && milestone.technologies.length > 0) {
+                    <div class="milestone-technologies">
+                      @for (tech of milestone.technologies; track tech) {
+                        <span class="tech-badge">{{ tech }}</span>
+                      }
+                    </div>
+                  }
+
+                  <div class="milestone-type-badge" [class]="'type-' + milestone.type">
+                    {{ milestone.type | titlecase }}
+                  </div>
+                </div>
+              </app-glass-card>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Summary Stats -->
+      <div class="roadmap-summary">
+        <app-glass-card padding="lg">
+          <div class="summary-stats">
+            <div class="stat">
+              <div class="stat-value">{{ (config.milestones | slice: 0 : 1).length }}</div>
+              <div class="stat-label">Promotions</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">
+                {{ (config.milestones | slice: 0 : 100).length }}
+              </div>
+              <div class="stat-label">Total Milestones</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">4+</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">8</div>
+              <div class="stat-label">Key Achievements</div>
+            </div>
+          </div>
+        </app-glass-card>
+      </div>
+    </div>
+  }
+</app-page-layout>

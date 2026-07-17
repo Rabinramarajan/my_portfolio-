@@ -1,0 +1,95 @@
+<app-page-layout
+  breadcrumb="Geography"
+  titleLead="Client"
+  titleHighlight="Locations"
+  subtitle="Global reach: Client locations and industries served worldwide."
+>
+  @if (worldMap(); as config) {
+    <div class="map-container" appStagger>
+      <!-- Global Stats -->
+      <app-glass-card padding="lg" class="global-stats">
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-icon">🌍</div>
+            <div class="stat-content">
+              <div class="stat-value">{{ config.locations.length }}</div>
+              <div class="stat-label">Countries</div>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon">🏢</div>
+            <div class="stat-content">
+              <div class="stat-value">
+                {{ config.locations.reduce((sum, loc) => sum + loc.clientCount, 0) }}
+              </div>
+              <div class="stat-label">Clients</div>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon">📊</div>
+            <div class="stat-content">
+              <div class="stat-value">
+                {{ config.locations.reduce((sum, loc) => sum + loc.projectCount, 0) }}
+              </div>
+              <div class="stat-label">Projects</div>
+            </div>
+          </div>
+        </div>
+      </app-glass-card>
+
+      <!-- Locations Grid -->
+      <div class="locations-grid">
+        @for (location of config.locations; track location.id) {
+          <app-glass-card padding="lg" class="location-card">
+            <div class="location-header">
+              <h3 class="location-name">{{ location.country }}</h3>
+              @if (location.city) {
+                <p class="location-city">{{ location.city }}</p>
+              }
+            </div>
+
+            <div class="location-stats">
+              <div class="location-stat">
+                <span class="stat-label">Clients:</span>
+                <span class="stat-value">{{ location.clientCount }}</span>
+              </div>
+              <div class="location-stat">
+                <span class="stat-label">Projects:</span>
+                <span class="stat-value">{{ location.projectCount }}</span>
+              </div>
+            </div>
+
+            @if (location.industries && location.industries.length > 0) {
+              <div class="industries">
+                <p class="industries-label">Industries:</p>
+                <div class="industry-tags">
+                  @for (industry of location.industries; track industry) {
+                    <span class="industry-tag">{{ industry }}</span>
+                  }
+                </div>
+              </div>
+            }
+
+            @if (location.notableclients && location.notableclients.length > 0) {
+              <div class="notable-clients">
+                <p class="clients-label">Notable Clients:</p>
+                <ul class="clients-list">
+                  @for (client of location.notableclients; track client) {
+                    <li class="client-item">{{ client }}</li>
+                  }
+                </ul>
+              </div>
+            }
+
+            <div class="coordinates">
+              <small class="coordinate-text">
+                {{ location.latitude | number: '0.2-2' }},
+                {{ location.longitude | number: '0.2-2' }}
+              </small>
+            </div>
+          </app-glass-card>
+        }
+      </div>
+    </div>
+  }
+</app-page-layout>

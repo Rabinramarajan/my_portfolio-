@@ -1,0 +1,182 @@
+:host {
+  display: block;
+}
+
+.learning-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.entries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.learning-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.learning-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.category-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+
+  &.icon-certification {
+    background: linear-gradient(135deg, #3b82f6, #1e40af);
+    color: white;
+  }
+
+  &.icon-course {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+  }
+
+  &.icon-workshop {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+  }
+
+  &.icon-conference {
+    background: linear-gradient(135deg, #a855f7, #7c3aed);
+    color: white;
+  }
+
+  &.icon-self-study {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.learning-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.learning-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-fg);
+  margin: 0;
+  word-break: break-word;
+}
+
+.learning-provider {
+  font-size: 0.85rem;
+  color: var(--color-fg-muted);
+  margin: 0.25rem 0 0;
+}
+
+.learning-date {
+  font-size: 0.8rem;
+  color: var(--color-fg-muted);
+}
+
+.learning-description {
+  font-size: 0.9rem;
+  color: var(--color-fg-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.impact-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content;
+
+  &.impact-high {
+    background: color-mix(in srgb, #10b981 20%, transparent);
+    color: #047857;
+  }
+
+  &.impact-medium {
+    background: color-mix(in srgb, #3b82f6 20%, transparent);
+    color: #1e40af;
+  }
+
+  &.impact-low {
+    background: color-mix(in srgb, #f59e0b 20%, transparent);
+    color: #b45309;
+  }
+}
+
+.skills-learned {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skills-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-fg-muted);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.skill-tag {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-fg-secondary);
+  font-weight: 500;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 0.35rem 0.6rem;
+  background: color-mix(in srgb, var(--color-brand-blue) 15%, transparent);
+  border: 1px solid var(--color-brand-blue);
+  border-radius: 0.35rem;
+  font-size: 0.7rem;
+  color: var(--color-brand-blue);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  width: fit-content;
+}
+
+@media (max-width: 640px) {
+  .entries-grid {
+    grid-template-columns: 1fr;
+  }
+}

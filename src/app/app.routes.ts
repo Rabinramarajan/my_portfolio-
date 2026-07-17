@@ -252,6 +252,75 @@ export const routes: Routes = [
         loadComponent: () => import('./features/blog/blog').then((m) => m.BlogPage),
       },
       {
+        path: 'career-roadmap',
+        title: 'Career Roadmap',
+        data: {
+          description:
+            'Professional career timeline with milestones, promotions, and achievements from junior developer to lead engineer.',
+          keywords: ['Career', 'Roadmap', 'Professional Growth', 'Milestones'],
+        },
+        loadComponent: () =>
+          import('./features/career-roadmap/career-roadmap').then((m) => m.CareerRoadmapPage),
+      },
+      {
+        path: 'learning-timeline',
+        title: 'Learning Timeline',
+        data: {
+          description:
+            'Educational journey with certifications, courses, workshops, and continuous learning achievements.',
+          keywords: ['Learning', 'Education', 'Certifications', 'Skills'],
+        },
+        loadComponent: () =>
+          import('./features/learning-timeline/learning-timeline').then(
+            (m) => m.LearningTimelinePage,
+          ),
+      },
+      {
+        path: 'tech-evolution',
+        title: 'Technology Evolution',
+        data: {
+          description:
+            'How technologies were adopted and mastered over time with proficiency progression.',
+          keywords: ['Technology', 'Evolution', 'Proficiency', 'Learning Path'],
+        },
+        loadComponent: () =>
+          import('./features/tech-evolution/tech-evolution').then((m) => m.TechEvolutionPage),
+      },
+      {
+        path: 'world-map',
+        title: 'World Map',
+        data: {
+          description:
+            'Global reach showing client locations, industries served, and international project experience.',
+          keywords: ['Global', 'Clients', 'Locations', 'International'],
+        },
+        loadComponent: () => import('./features/world-map/world-map').then((m) => m.WorldMapPage),
+      },
+      {
+        path: 'experience-timeline',
+        title: 'Experience Timeline',
+        data: {
+          description:
+            'Detailed work experience timeline with accomplishments, technologies, and impact metrics.',
+          keywords: ['Experience', 'Work History', 'Professional'],
+        },
+        loadComponent: () =>
+          import('./features/experience-timeline/experience-timeline').then(
+            (m) => m.ExperienceTimelinePage,
+          ),
+      },
+      {
+        path: 'skills-tree',
+        title: 'Skills Tree',
+        data: {
+          description:
+            'Game-style skill progression with unlock levels, proficiency tracking, and mastery visualization.',
+          keywords: ['Skills', 'Progression', 'Mastery', 'Gamification'],
+        },
+        loadComponent: () =>
+          import('./features/skills-tree/skills-tree').then((m) => m.SkillsTreePage),
+      },
+      {
         path: 'contact',
         title: 'Contact',
         data: {

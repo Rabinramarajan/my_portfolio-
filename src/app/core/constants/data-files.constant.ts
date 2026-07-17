@@ -29,6 +29,12 @@ import type {
   ResumeVersionsConfig,
   DeveloperShowcaseConfig,
   AnalyticsDashboardConfig,
+  CareerRoadmapConfig,
+  LearningTimelineConfig,
+  TechEvolutionConfig,
+  WorldMapConfig,
+  ExperienceTimelineConfig,
+  SkillsTreeConfig,
 } from '../models';
 
 /**
@@ -67,6 +73,12 @@ export interface DataResources {
   readonly 'resume-versions': ResumeVersionsConfig;
   readonly showcase: DeveloperShowcaseConfig;
   readonly analytics: AnalyticsDashboardConfig;
+  readonly 'career-roadmap': CareerRoadmapConfig;
+  readonly 'learning-timeline': LearningTimelineConfig;
+  readonly 'tech-evolution': TechEvolutionConfig;
+  readonly 'world-map': WorldMapConfig;
+  readonly 'experience-timeline': ExperienceTimelineConfig;
+  readonly 'skills-tree': SkillsTreeConfig;
 }
 
 /** Valid data keys. */
@@ -104,4 +116,10 @@ export const DATA_FILES: Readonly<Record<DataKey, string>> = {
   'resume-versions': 'resume-versions.json',
   showcase: 'showcase.json',
   analytics: 'analytics.json',
+  'career-roadmap': 'career-roadmap.json',
+  'learning-timeline': 'learning-timeline.json',
+  'tech-evolution': 'tech-evolution.json',
+  'world-map': 'world-map.json',
+  'experience-timeline': 'experience-timeline.json',
+  'skills-tree': 'skills-tree.json',
 } as const;

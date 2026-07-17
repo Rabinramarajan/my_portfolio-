@@ -1,0 +1,334 @@
+{
+  "branches": [
+    {
+      "id": "core-skills",
+      "name": "Core Skills",
+      "description": "Foundational development skills",
+      "icon": "Code",
+      "skills": [
+        {
+          "id": "typescript-master",
+          "name": "TypeScript Master",
+          "description": "Advanced TypeScript with generics, decorators, and complex type systems",
+          "category": "core",
+          "proficiency": "expert",
+          "yearsOfExperience": 4,
+          "prerequisites": [],
+          "relatedSkills": ["JavaScript", "OOP"],
+          "projects": ["All projects since 2021"],
+          "level": 10,
+          "xp": 4500,
+          "unlocked": true
+        },
+        {
+          "id": "web-standards",
+          "name": "Web Standards",
+          "description": "HTML5, CSS3, responsive design, and accessibility (WCAG 2.1)",
+          "category": "core",
+          "proficiency": "expert",
+          "yearsOfExperience": 4,
+          "prerequisites": [],
+          "relatedSkills": ["CSS", "HTML", "Accessibility"],
+          "projects": ["Portfolio", "Enterprise CRM"],
+          "level": 9,
+          "xp": 4200,
+          "unlocked": true
+        },
+        {
+          "id": "problem-solving",
+          "name": "Problem Solving",
+          "description": "Debugging, algorithm optimization, and complex system design",
+          "category": "core",
+          "proficiency": "expert",
+          "yearsOfExperience": 4,
+          "prerequisites": [],
+          "relatedSkills": ["Algorithm Design", "System Architecture"],
+          "projects": ["All projects"],
+          "level": 8,
+          "xp": 3800,
+          "unlocked": true
+        }
+      ]
+    },
+    {
+      "id": "frontend-branch",
+      "name": "Frontend",
+      "description": "Frontend framework and library expertise",
+      "icon": "Palette",
+      "skills": [
+        {
+          "id": "angular-expert",
+          "name": "Angular Expert",
+          "description": "Angular 22 with Signals, performance optimization, and architecture",
+          "category": "frontend",
+          "proficiency": "expert",
+          "yearsOfExperience": 4,
+          "prerequisites": ["typescript-master"],
+          "relatedSkills": ["RxJS", "NgRx"],
+          "projects": ["Government Portal", "Enterprise CRM", "Portfolio"],
+          "level": 10,
+          "xp": 5000,
+          "unlocked": true
+        },
+        {
+          "id": "signals-specialist",
+          "name": "Signals Specialist",
+          "description": "Angular Signals and zoneless change detection",
+          "category": "frontend",
+          "proficiency": "expert",
+          "yearsOfExperience": 2,
+          "prerequisites": ["angular-expert"],
+          "relatedSkills": ["Reactive Programming", "Performance"],
+          "projects": ["Signals Migration", "Portfolio Personalization"],
+          "level": 9,
+          "xp": 4000,
+          "unlocked": true
+        },
+        {
+          "id": "rxjs-master",
+          "name": "RxJS Master",
+          "description": "Observables, operators, and reactive programming patterns",
+          "category": "frontend",
+          "proficiency": "advanced",
+          "yearsOfExperience": 3,
+          "prerequisites": ["angular-expert"],
+          "relatedSkills": ["Async Programming", "State Management"],
+          "projects": ["Real-time Features", "State Management"],
+          "level": 8,
+          "xp": 3600,
+          "unlocked": true
+        },
+        {
+          "id": "tailwind-expert",
+          "name": "Tailwind CSS Expert",
+          "description": "Utility-first CSS, design systems, and responsive design",
+          "category": "frontend",
+          "proficiency": "advanced",
+          "yearsOfExperience": 3,
+          "prerequisites": ["web-standards"],
+          "relatedSkills": ["CSS Variables", "Design Systems"],
+          "projects": ["Portfolio", "Design System", "UI Library"],
+          "level": 8,
+          "xp": 3400,
+          "unlocked": true
+        },
+        {
+          "id": "performance-optimizer",
+          "name": "Performance Optimizer",
+          "description": "Bundle optimization, Core Web Vitals, and performance metrics",
+          "category": "frontend",
+          "proficiency": "advanced",
+          "yearsOfExperience": 2,
+          "prerequisites": ["angular-expert"],
+          "relatedSkills": ["Lighthouse", "Bundle Analysis"],
+          "projects": ["Portfolio", "Enterprise Applications"],
+          "level": 8,
+          "xp": 3500,
+          "unlocked": true
+        }
+      ]
+    },
+    {
+      "id": "mobile-branch",
+      "name": "Mobile",
+      "description": "Cross-platform mobile development",
+      "icon": "Smartphone",
+      "skills": [
+        {
+          "id": "ionic-expert",
+          "name": "Ionic Expert",
+          "description": "Ionic framework for iOS and Android development",
+          "category": "mobile",
+          "proficiency": "expert",
+          "yearsOfExperience": 3,
+          "prerequisites": ["angular-expert"],
+          "relatedSkills": ["Cordova", "Native APIs"],
+          "projects": ["Mobile Banking", "Field Service App", "Customer Portal"],
+          "level": 9,
+          "xp": 4200,
+          "unlocked": true
+        },
+        {
+          "id": "native-integration",
+          "name": "Native Integration",
+          "description": "Native plugins, device APIs, and platform-specific integration",
+          "category": "mobile",
+          "proficiency": "advanced",
+          "yearsOfExperience": 2,
+          "prerequisites": ["ionic-expert"],
+          "relatedSkills": ["Cordova", "Native Code"],
+          "projects": ["Mobile Banking", "Field Service"],
+          "level": 7,
+          "xp": 3100,
+          "unlocked": true
+        },
+        {
+          "id": "mobile-ux",
+          "name": "Mobile UX Design",
+          "description": "Mobile-first design, gesture handling, and touch optimization",
+          "category": "mobile",
+          "proficiency": "advanced",
+          "yearsOfExperience": 3,
+          "prerequisites": [],
+          "relatedSkills": ["UX Design", "Responsive Design"],
+          "projects": ["All mobile projects"],
+          "level": 8,
+          "xp": 3400,
+          "unlocked": true
+        }
+      ]
+    },
+    {
+      "id": "backend-branch",
+      "name": "Backend",
+      "description": "Full-stack and backend development",
+      "icon": "Server",
+      "skills": [
+        {
+          "id": "nestjs-master",
+          "name": "NestJS Master",
+          "description": "NestJS framework, microservices, and scalable backend architecture",
+          "category": "backend",
+          "proficiency": "advanced",
+          "yearsOfExperience": 1,
+          "prerequisites": ["typescript-master"],
+          "relatedSkills": ["Node.js", "Architecture"],
+          "projects": ["API Services", "Microservices", "GraphQL"],
+          "level": 8,
+          "xp": 3400,
+          "unlocked": true
+        },
+        {
+          "id": "database-design",
+          "name": "Database Design",
+          "description": "SQL, NoSQL, schema design, and query optimization",
+          "category": "backend",
+          "proficiency": "advanced",
+          "yearsOfExperience": 2,
+          "prerequisites": ["problem-solving"],
+          "relatedSkills": ["SQL", "MongoDB", "Performance"],
+          "projects": ["API Services", "Data-heavy applications"],
+          "level": 7,
+          "xp": 3100,
+          "unlocked": true
+        },
+        {
+          "id": "graphql-expert",
+          "name": "GraphQL Expert",
+          "description": "GraphQL API design, queries, mutations, and subscriptions",
+          "category": "backend",
+          "proficiency": "advanced",
+          "yearsOfExperience": 1,
+          "prerequisites": ["nestjs-master"],
+          "relatedSkills": ["API Design", "Type Safety"],
+          "projects": ["GraphQL Servers", "API Services"],
+          "level": 8,
+          "xp": 3300,
+          "unlocked": true
+        }
+      ]
+    },
+    {
+      "id": "devops-branch",
+      "name": "DevOps",
+      "description": "Infrastructure and deployment expertise",
+      "icon": "Zap",
+      "skills": [
+        {
+          "id": "docker-master",
+          "name": "Docker Master",
+          "description": "Docker containerization, images, and orchestration",
+          "category": "devops",
+          "proficiency": "intermediate",
+          "yearsOfExperience": 1,
+          "prerequisites": [],
+          "relatedSkills": ["Kubernetes", "CI/CD"],
+          "projects": ["CI/CD Pipeline", "Deployment"],
+          "level": 7,
+          "xp": 2800,
+          "unlocked": true
+        },
+        {
+          "id": "kubernetes-expert",
+          "name": "Kubernetes Expert",
+          "description": "Kubernetes orchestration, deployment, and scaling",
+          "category": "devops",
+          "proficiency": "intermediate",
+          "yearsOfExperience": 1,
+          "prerequisites": ["docker-master"],
+          "relatedSkills": ["Container Orchestration", "DevOps"],
+          "projects": ["Production Deployment"],
+          "level": 7,
+          "xp": 2900,
+          "unlocked": true
+        },
+        {
+          "id": "ci-cd-pipeline",
+          "name": "CI/CD Pipeline",
+          "description": "GitHub Actions, automated testing, and continuous deployment",
+          "category": "devops",
+          "proficiency": "advanced",
+          "yearsOfExperience": 2,
+          "prerequisites": [],
+          "relatedSkills": ["Automation", "Testing"],
+          "projects": ["All projects", "Enterprise deployments"],
+          "level": 8,
+          "xp": 3200,
+          "unlocked": true
+        }
+      ]
+    },
+    {
+      "id": "soft-skills-branch",
+      "name": "Soft Skills",
+      "description": "Leadership and communication",
+      "icon": "Users",
+      "skills": [
+        {
+          "id": "team-leadership",
+          "name": "Team Leadership",
+          "description": "Managing teams, code reviews, and mentoring developers",
+          "category": "soft-skills",
+          "proficiency": "advanced",
+          "yearsOfExperience": 2,
+          "prerequisites": [],
+          "relatedSkills": ["Mentoring", "Communication"],
+          "projects": ["Team Management", "Mentoring"],
+          "level": 8,
+          "xp": 3300,
+          "unlocked": true
+        },
+        {
+          "id": "technical-writing",
+          "name": "Technical Writing",
+          "description": "Documentation, README files, and technical articles",
+          "category": "soft-skills",
+          "proficiency": "advanced",
+          "yearsOfExperience": 3,
+          "prerequisites": [],
+          "relatedSkills": ["Communication", "Documentation"],
+          "projects": ["Portfolio", "Project Documentation"],
+          "level": 8,
+          "xp": 3200,
+          "unlocked": true
+        },
+        {
+          "id": "mentoring",
+          "name": "Mentoring",
+          "description": "Developer mentoring, knowledge sharing, and team growth",
+          "category": "soft-skills",
+          "proficiency": "advanced",
+          "yearsOfExperience": 2,
+          "prerequisites": ["team-leadership"],
+          "relatedSkills": ["Teaching", "Leadership"],
+          "projects": ["Junior developer mentoring"],
+          "level": 8,
+          "xp": 3100,
+          "unlocked": true
+        }
+      ]
+    }
+  ],
+  "totalXp": 89500,
+  "totalLevel": 52
+}

@@ -1,0 +1,87 @@
+<app-page-layout
+  breadcrumb="Work"
+  titleLead="Professional"
+  titleHighlight="Timeline"
+  subtitle="Detailed work experience with achievements, technologies, and metrics."
+>
+  @if (timeline(); as config) {
+    <div class="timeline-container" appStagger>
+      <div class="events-list">
+        @for (event of config.events; track event.id; let first = $first; let last = $last) {
+          <div class="event-wrapper">
+            <!-- Timeline Connector Line -->
+            @if (!last) {
+              <div class="connector-line"></div>
+            }
+
+            <!-- Event Dot -->
+            <div class="event-dot" [class.current]="isCurrentRole(event.endDate)"></div>
+
+            <!-- Event Card -->
+            <app-glass-card padding="lg" class="event-card">
+              <div class="event-header">
+                <div class="role-info">
+                  <h3 class="event-role">{{ event.role }}</h3>
+                  <p class="event-company">{{ event.company }}</p>
+                </div>
+                @if (isCurrentRole(event.endDate)) {
+                  <span class="current-badge">Current</span>
+                }
+              </div>
+
+              <p class="event-duration">
+                {{ event.startDate | date: 'MMM yyyy' }} –
+                @if (isCurrentRole(event.endDate)) {
+                  <span class="current-text">Present</span>
+                } @else {
+                  {{ event.endDate | date: 'MMM yyyy' }}
+                }
+              </p>
+
+              <p class="event-description">{{ event.description }}</p>
+
+              <!-- Accomplishments -->
+              @if (event.keyAccomplishments && event.keyAccomplishments.length > 0) {
+                <div class="accomplishments">
+                  <p class="accomplishments-title">Key Accomplishments:</p>
+                  <ul class="accomplishments-list">
+                    @for (accomplishment of event.keyAccomplishments; track accomplishment) {
+                      <li class="accomplishment-item">{{ accomplishment }}</li>
+                    }
+                  </ul>
+                </div>
+              }
+
+              <!-- Technologies -->
+              @if (event.technologies && event.technologies.length > 0) {
+                <div class="technologies">
+                  <p class="technologies-title">Technologies:</p>
+                  <div class="tech-list">
+                    @for (tech of event.technologies; track tech) {
+                      <span class="tech-badge">{{ tech }}</span>
+                    }
+                  </div>
+                </div>
+              }
+
+              <!-- Impact Metrics -->
+              @if (event.impactMetrics && (event.impactMetrics | keyvalue).length > 0) {
+                <div class="metrics">
+                  <p class="metrics-title">Impact Metrics:</p>
+                  <div class="metrics-grid">
+                    @for (metric of event.impactMetrics | keyvalue; track metric.key) {
+                      <div class="metric">
+                        <span class="metric-label">{{ metric.key }}:</span>
+                        <span class="metric-value">{{ metric.value }}</span>
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+            </app-glass-card>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</app-page-layout>
