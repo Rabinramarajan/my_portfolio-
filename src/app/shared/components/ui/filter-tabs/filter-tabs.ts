@@ -1,4 +1,5 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -29,8 +30,8 @@ import { trackByValue } from '../../../../core';
           [attr.aria-selected]="option === selected()"
           [attr.tabindex]="option === selected() ? 0 : -1"
           (click)="selected.set(option)"
-          (keydown.enter)="selected.set(option)"
-          (keydown.space)="selected.set(option)"
+          (keydown.enter)="handleEnter($event)"
+          (keydown.space)="handleSpace($event)"
           (keydown.arrowRight)="move(1, $event)"
           (keydown.arrowLeft)="move(-1, $event)"
           (keydown.home)="moveTo(0, $event)"
@@ -82,6 +83,32 @@ export class FilterTabs {
 
   protected readonly trackByValue = trackByValue;
 
+  /** Handle Enter key to select current chip. */
+  handleEnter(event: Event): void {
+    if (event instanceof KeyboardEvent) {
+      event.preventDefault();
+      const target = event.target as HTMLElement;
+      const chipElement = target.closest('app-chip');
+      if (chipElement?.textContent) {
+        const option = chipElement.textContent.trim();
+        this.selected.set(option);
+      }
+    }
+  }
+
+  /** Handle Space key to select current chip. */
+  handleSpace(event: Event): void {
+    if (event instanceof KeyboardEvent) {
+      event.preventDefault();
+      const target = event.target as HTMLElement;
+      const chipElement = target.closest('app-chip');
+      if (chipElement?.textContent) {
+        const option = chipElement.textContent.trim();
+        this.selected.set(option);
+      }
+    }
+  }
+
   /** Move selection by `delta` (with wrap-around) and focus the new tab. */
   move(delta: number, event: Event): void {
     const options = this.options();
@@ -98,6 +125,9 @@ export class FilterTabs {
     if (option === undefined) return;
     event.preventDefault();
     this.selected.set(option);
-    this.tabs?.get(index)?.nativeElement.focus();
+    // Defer focus until after change detection completes to ensure DOM bindings are updated
+    afterNextRender(() => {
+      this.tabs?.get(index)?.nativeElement.focus();
+    });
   }
 }

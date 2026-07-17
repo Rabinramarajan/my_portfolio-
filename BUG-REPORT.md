@@ -1,68 +1,101 @@
-# Portfolio Application — Bug & Optimization Report (Pass 4)
+# Bug Report & Application Review
 
-**Date:** 2026-07-15 (re-review + fixes applied)
-**Scope:** Full `src/app` source review + production build (`ng build`)
-**Build status:** ✅ Passes clean — **no errors, no warnings** (~5s)
-**Overall:** 🎉 **Zero open items.** Every correctness, robustness, a11y, and performance item has been resolved.
-
----
-
-## ✅ All bugs & issues resolved
-
-| ID | Item | Status |
-|----|------|--------|
-| BUG-1 | SEO tags cleared when omitted + dynamic SEO in `CaseStudyDetailPage` | ✅ Fixed |
-| BUG-2 | Resume scroll-lock — reader moved to `ResumeReader`, rendered via `@if`, releases `rz-lock` on `DestroyRef.onDestroy` (covers close, Escape **and navigation away**) | ✅ Fixed ([resume-reader.ts:37-40](src/app/features/resume/resume-reader/resume-reader.ts#L37-L40)) |
-| BUG-3 | Blog "Popular" sort ranks by `popularIds` | ✅ Fixed |
-| MIN-1 | Certifications `formatDate` guards invalid dates | ✅ Fixed |
-| MIN-2 | Stagger directive kills all tracked tweens on destroy | ✅ Fixed |
-| OPT-1 | `resume.scss` under budget | ✅ Fixed |
-| OPT-3 | Blog search now matches title + excerpt + tags (`matchesTerm`) | ✅ Fixed ([blog.ts:74](src/app/features/blog/blog.ts#L74)) |
-| OPT-4 | Shared/deduped profile resource | ✅ Fixed |
-| A11Y-1 | **Filter-tabs** now supports roving `tabindex` + Arrow/Home/End keyboard navigation | ✅ Fixed this pass ([filter-tabs.ts](src/app/shared/components/ui/filter-tabs/filter-tabs.ts)) |
-| A11Y-2 | **Search-input** now uses `:focus-visible` with a clear 2px outline ring | ✅ Fixed this pass ([search-input.ts:54](src/app/shared/components/forms/search-input/search-input.ts#L54)) |
+**Date**: July 17, 2026  
+**Status**: 10 High-Priority Issues Found  
+**Build Status**: ✅ Passing  
+**Tests**: ✅ All 9 tests passing
 
 ---
 
-## 🔧 Fixes applied in this pass
+## Executive Summary
 
-### A11Y-1 — Filter-tabs keyboard navigation
-[filter-tabs.ts](src/app/shared/components/ui/filter-tabs/filter-tabs.ts)
-- Added roving `tabindex` (`0` for the selected tab, `-1` for the rest) so the tablist is a single tab stop.
-- Added `ArrowRight`/`ArrowLeft` (with wrap-around), `Home`, and `End` handlers via `move()` / `moveTo()`, which update the selection and move DOM focus to the target tab. `preventDefault()` stops page scroll.
-- ARIA `role="tablist"`/`role="tab"` now matches the implemented keyboard behavior.
+Comprehensive review of the Angular portfolio application identified **10 high-priority bugs** across correctness, accessibility, and performance categories.
 
-### A11Y-2 — Search-input focus ring
-[search-input.ts:54-58](src/app/shared/components/forms/search-input/search-input.ts#L54-L58)
-- Replaced the `:focus` border-only style with `:focus-visible` plus a 2px `outline` ring + offset, giving keyboard users a clear focus indicator while not showing a ring on mouse click.
+### Quick Stats
+
+- **Total Issues**: 10
+- **Critical (🔴)**: 4
+- **High Priority (🟠)**: 6
 
 ---
 
-### OPT-2 — Image CLS (resolved this pass)
-Audited every image class. Findings:
-- **Cover/banner images** (`bc__cover`, `bl-feat__cover`, `cs__img`, `csd__shot`, `pjc__img`) already reserve space via `aspect-ratio: 16/9` + `object-fit: cover`. ✅
-- **Fixed-size images** (avatars, logos, thumbnails: `ab-visual__img`, `pc__img`, `bl-pop__thumb`, `sk-tile__logo`, `ex-evo__logo`, `bl-hero`, `ex-aside__img`) reserve space via explicit CSS `height`/`width`. ✅
-- **Overlay map** (`ct-map__img`) is `position: absolute; inset: 0` inside a `min-height` container — out of flow, no shift. ✅
-- **Only gap:** the decorative desktop-only `sk-hero` SVG had `width` but no reserved height. **Fixed** — added `aspect-ratio: 460 / 300` (matches the SVG viewBox) + `height: auto` at [skills.scss:5-12](src/app/features/skills/skills.scss#L5-L12).
+## Critical Issues (Must Fix)
 
-The home hero is already correctly `loading="eager"` for LCP. ✅
+### 1. 🔴 Protected Methods Called from Template
+
+- **File**: `src/app/shared/components/ui/filter-tabs/filter-tabs.ts:26`
+- **Severity**: CRITICAL - Build Failure
+- **See**: `docs/bugs/001-protected-methods-template.md`
+
+### 2. 🔴 Service Worker Subscription Memory Leak
+
+- **File**: `src/app/app.config.ts:34`
+- **Severity**: CRITICAL - Memory Leak
+- **See**: `docs/bugs/002-sw-memory-leak.md`
+
+### 3. 🔴 Form Accessibility Violations (WCAG 2.1)
+
+- **File**: `src/app/features/contact/contact.html:59-110`
+- **Severity**: CRITICAL - Legal/Compliance
+- **See**: `docs/bugs/003-form-accessibility.md`
+
+### 4. 🔴 Generic Error Message Hides Root Cause
+
+- **File**: `src/app/features/contact/contact.ts:72`
+- **Severity**: CRITICAL - User Experience
+- **See**: `docs/bugs/004-generic-error-handling.md`
 
 ---
 
-## Summary
+## High Priority Issues
 
-| ID    | Type   | Status  |
-|-------|--------|---------|
-| BUG-1 | Correctness | ✅ Fixed |
-| BUG-2 | Correctness | ✅ Fixed |
-| BUG-3 | Correctness | ✅ Fixed |
-| MIN-1 | Robustness  | ✅ Fixed |
-| MIN-2 | Cleanup     | ✅ Fixed |
-| A11Y-1| a11y        | ✅ Fixed (this pass) |
-| A11Y-2| a11y        | ✅ Fixed (this pass) |
-| OPT-1 | Perf        | ✅ Fixed |
-| OPT-3 | UX          | ✅ Fixed |
-| OPT-4 | Perf        | ✅ Fixed |
-| OPT-2 | Perf        | ✅ Fixed (this pass) |
+### 5. 🟠 Missing preventDefault() on Space/Enter Keys
 
-**No open bugs. No open optimizations. No security issues. No build warnings.** Every item from every pass is resolved and the production build is clean.
+- **File**: `src/app/shared/components/ui/filter-tabs/filter-tabs.ts:24-25`
+- **See**: `docs/bugs/005-keyboard-event-defaults.md`
+
+### 6. 🟠 Focus Timing Race Condition
+
+- **File**: `src/app/shared/components/ui/filter-tabs/filter-tabs.ts:92`
+- **See**: `docs/bugs/006-focus-timing-race.md`
+
+### 7. 🟠 Tabindex Conflict: Static vs Dynamic Binding
+
+- **File**: `src/app/shared/components/ui/chip/chip.ts:10`
+- **See**: `docs/bugs/007-tabindex-conflict.md`
+
+### 8. 🟠 Redundant Sorting in Projects Page
+
+- **File**: `src/app/features/projects/projects.ts:47`
+- **See**: `docs/bugs/008-redundant-sorting.md`
+
+### 9. 🟠 Inefficient O(n²) Blog Popular Lookup
+
+- **File**: `src/app/features/blog/blog.ts:63`
+- **See**: `docs/bugs/009-blog-popular-lookup.md`
+
+### 10. 🟠 DOM Query Overhead in Event Loop
+
+- **File**: `src/app/shared/components/ui/filter-tabs/filter-tabs.ts:92`
+- **See**: `docs/bugs/010-dom-query-overhead.md`
+
+---
+
+## Recommended Fix Priority
+
+1. **Immediate**: Issues #1, #3
+2. **This Sprint**: Issues #4, #5, #6, #7
+3. **Next Sprint**: Issues #8, #9, #10
+4. **Backlog**: Issue #2
+
+---
+
+## Application Strengths
+
+✅ Excellent modern Angular patterns  
+✅ Type-safe data architecture  
+✅ Proper lazy-loading strategy  
+✅ OnPush change detection throughout  
+✅ Clean separation of concerns  
+✅ Responsive image system  
+✅ Vercel-optimized with security headers

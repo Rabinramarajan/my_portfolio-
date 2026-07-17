@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   template: `<ng-content />`,
   host: {
     role: 'button',
-    tabindex: '0',
+    '[attr.tabindex]': '-1',
     class: 'chip',
     '[class.chip--selected]': 'selected()',
     '[attr.aria-pressed]': 'selected()',
