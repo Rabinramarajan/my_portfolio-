@@ -4,13 +4,8 @@
   titleHighlight="Journey"
   subtitle="A timeline of my professional growth, skills evolution, and the impact I've created."
 >
-  <!-- Header aside: astronaut + stats -->
+  <!-- Header aside: astronaut only -->
   <div slot="header-aside" class="ex-aside">
-    <div class="ex-aside__stats">
-      @for (stat of experienceStats(); track trackById($index, stat)) {
-        <app-stats-card [stat]="stat" />
-      }
-    </div>
     <figure class="ex-aside__figure">
       <app-responsive-image
         name="experience-collaboration"
@@ -22,6 +17,13 @@
   </div>
 
   <div class="ex-grid">
+    <!-- Stats column -->
+    <div class="ex-stats-column">
+      @for (stat of experienceStats(); track trackById($index, stat)) {
+        <app-stats-card [stat]="stat" />
+      }
+    </div>
+
     <!-- Timeline -->
     <app-glass-card padding="md" class="ex-timeline-card">
       <app-filter-tabs class="ex-filters" [options]="filters()" [(selected)]="filter" />

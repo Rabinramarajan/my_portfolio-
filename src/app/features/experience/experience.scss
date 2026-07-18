@@ -8,18 +8,6 @@
   gap: 1rem;
 }
 
-.ex-aside__stats {
-  /* Fill the row. As a plain flex item this shrink-wrapped to one 11rem track
-     and left ~167px of dead space beside the cards on a phone, where the figure
-     next to it is display: none. */
-  flex: 1;
-  display: grid;
-  /* Each card is an icon chip beside its value/label, so it needs ~11rem before
-     the label starts shredding. Below that, drop to a single column. */
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
-  gap: 0.75rem;
-}
-
 .ex-aside__figure {
   display: none;
   margin: 0;
@@ -38,6 +26,12 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
+}
+
+.ex-stats-column {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: 0.75rem;
 }
 
 /* Grid items default to min-width: auto, so this card refuses to shrink below
@@ -227,11 +221,28 @@
 @media (min-width: 1280px) {
   .ex-aside__figure {
     display: block;
+    /* 26rem @ 3:2 = ~17rem tall, which towers over the title+subtitle block and
+       leaves dead space beneath the subtitle (header top-aligns its columns).
+       Cap the width so the image height tracks the text column instead. */
+    max-width: 19rem;
   }
+  /* Timeline gets the lion's share; the rail sits alongside. Stats span the
+     full width as a strip on top so the left column is never left empty
+     beside the (much taller) timeline. */
   .ex-grid {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    align-items: start;
+  }
+  .ex-stats-column {
+    grid-column: 1 / -1;
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .ex-timeline-card {
-    grid-column: span 2 / span 2;
+    grid-column: 1;
+  }
+  .ex-right {
+    grid-column: 2;
+    position: sticky;
+    top: 1.25rem;
   }
 }

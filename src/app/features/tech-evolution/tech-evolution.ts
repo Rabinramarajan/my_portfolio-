@@ -2,14 +2,13 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../core/services/data.service';
 import { PageLayout, GlassCard, Stagger } from '../../shared';
-import { Icon } from '../../shared/components/ui/icon/icon';
 import type { TechEvolutionConfig } from '../../core/models';
 
 @Component({
   selector: 'app-tech-evolution',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, PageLayout, GlassCard, Stagger, Icon],
+  imports: [CommonModule, PageLayout, GlassCard, Stagger],
   templateUrl: './tech-evolution.html',
   styleUrl: './tech-evolution.scss',
   host: { class: 'block' },
