@@ -19,27 +19,18 @@ import type {
   ThemeConfig,
   CertificatesConfig,
   OfferingsConfig,
-  CaseStudiesConfig,
-  AwardsConfig,
-  TestimonialsConfig,
-  OpenSourceConfig,
-  TalksConfig,
-  CommunityConfig,
   RecruiterConfig,
   ResumeVersionsConfig,
   DeveloperShowcaseConfig,
-  AnalyticsDashboardConfig,
   CareerRoadmapConfig,
   LearningTimelineConfig,
-  TechEvolutionConfig,
-  WorldMapConfig,
   ExperienceTimelineConfig,
-  SkillsTreeConfig,
   LighthouseConfig,
   PerformanceConfig,
   SecurityConfig,
   BundleSizeConfig,
   WebVitalsConfig,
+  KnowledgeConfig,
 } from '../models';
 
 /**
@@ -68,27 +59,18 @@ export interface DataResources {
   readonly services: ServicesConfig;
   readonly certificates: CertificatesConfig;
   readonly offerings: OfferingsConfig;
-  readonly 'case-studies': CaseStudiesConfig;
-  readonly awards: AwardsConfig;
-  readonly testimonials: TestimonialsConfig;
-  readonly opensource: OpenSourceConfig;
-  readonly talks: TalksConfig;
-  readonly community: CommunityConfig;
   readonly recruiter: RecruiterConfig;
   readonly 'resume-versions': ResumeVersionsConfig;
   readonly showcase: DeveloperShowcaseConfig;
-  readonly analytics: AnalyticsDashboardConfig;
   readonly 'career-roadmap': CareerRoadmapConfig;
   readonly 'learning-timeline': LearningTimelineConfig;
-  readonly 'tech-evolution': TechEvolutionConfig;
-  readonly 'world-map': WorldMapConfig;
   readonly 'experience-timeline': ExperienceTimelineConfig;
-  readonly 'skills-tree': SkillsTreeConfig;
   readonly lighthouse: LighthouseConfig;
   readonly performance: PerformanceConfig;
   readonly security: SecurityConfig;
   readonly 'bundle-size': BundleSizeConfig;
   readonly 'web-vitals': WebVitalsConfig;
+  readonly knowledge: KnowledgeConfig;
 }
 
 /** Valid data keys. */
@@ -116,25 +98,16 @@ export const DATA_FILES: Readonly<Record<DataKey, string>> = {
   services: 'services.json',
   certificates: 'certificates.json',
   offerings: 'offerings.json',
-  'case-studies': 'case-studies.json',
-  awards: 'awards.json',
-  testimonials: 'testimonials.json',
-  opensource: 'opensource.json',
-  talks: 'talks.json',
-  community: 'community.json',
   recruiter: 'recruiter.json',
   'resume-versions': 'resume-versions.json',
   showcase: 'showcase.json',
-  analytics: 'analytics.json',
   'career-roadmap': 'career-roadmap.json',
   'learning-timeline': 'learning-timeline.json',
-  'tech-evolution': 'tech-evolution.json',
-  'world-map': 'world-map.json',
   'experience-timeline': 'experience-timeline.json',
-  'skills-tree': 'skills-tree.json',
   lighthouse: 'lighthouse.json',
   performance: 'performance.json',
   security: 'security.json',
   'bundle-size': 'bundle-size.json',
   'web-vitals': 'web-vitals.json',
+  knowledge: 'knowledge.json',
 } as const;

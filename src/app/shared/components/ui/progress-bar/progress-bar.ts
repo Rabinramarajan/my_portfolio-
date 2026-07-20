@@ -17,6 +17,12 @@ export class ProgressBar {
   /** Optional label rendered above the track. */
   readonly label = input<string | null>(null);
   readonly showValue = input(true);
+  /**
+   * Accessible name for the progressbar when no visible {@link label} is shown
+   * (e.g. compact bars inside cards). Ensures `role="progressbar"` always has a
+   * name — WCAG 4.1.2 / axe `aria-progressbar-name`.
+   */
+  readonly ariaLabel = input('Progress');
 
   protected readonly clamped = computed(() => Math.min(100, Math.max(0, this.value())));
 

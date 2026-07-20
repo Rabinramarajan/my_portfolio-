@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "my-portolio-ng22": {
+    "my-portfolio-ng22": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -38,7 +38,7 @@
                 "ignore": ["images/my_working_img/**", "images/profile.png"]
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": ["node_modules/@angular/cdk/overlay-prebuilt.css", "src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -50,8 +50,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "10kB",
-                  "maximumError": "16kB"
+                  "maximumWarning": "18kB",
+                  "maximumError": "24kB"
                 }
               ],
               "outputHashing": "all",
@@ -75,10 +75,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "my-portolio-ng22:build:production"
+              "buildTarget": "my-portfolio-ng22:build:production"
             },
             "development": {
-              "buildTarget": "my-portolio-ng22:build:development"
+              "buildTarget": "my-portfolio-ng22:build:development"
             }
           },
           "defaultConfiguration": "development"

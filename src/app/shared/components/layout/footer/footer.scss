@@ -72,7 +72,8 @@
 }
 
 .ft__accent {
-  color: var(--color-brand-purple);
+  /* theme-aware accent clears 4.5:1 on the light footer surface (raw brand is 4.2). */
+  color: var(--color-link-accent);
 }
 
 @media (min-width: 768px) {

@@ -1,23 +1,29 @@
 <app-page-layout
   breadcrumb="Services"
-  titleLead="Services I"
-  titleHighlight="Offer"
-  subtitle="Freelance and contract frontend engineering — from full Angular builds to focused performance and UI work. Here's how I can help."
+  titleLead="My"
+  titleHighlight="Services"
+  subtitle="I help businesses and individuals build modern, scalable and high-performance web and mobile applications."
 >
-  <!-- Header aside: architecture whiteboard -->
-  <figure slot="header-aside" class="svc-hero">
-    <app-responsive-image
-      name="services-whiteboard"
-      alt="Whiteboard system architecture: an Angular client calling an Nginx API gateway, which routes to auth, user and file services on Node.js, backed by PostgreSQL, Redis and AWS S3, with GitHub Actions and Docker deploying to AWS."
-      sizes="(min-width: 1024px) 28rem, 100vw"
-      class="svc-hero__img"
-    />
-  </figure>
+  <!-- Header aside: quality & commitment -->
+  <div slot="header-aside">
+    <app-glass-card padding="lg" class="svc-quality">
+      <span class="svc-quality__icon" aria-hidden="true">
+        <app-icon name="Star" [size]="20" />
+      </span>
+      <div>
+        <p class="svc-quality__title">Quality &amp; Commitment</p>
+        <p class="svc-quality__text">
+          I focus on delivering clean, efficient solutions with attention to detail and on-time
+          delivery.
+        </p>
+      </div>
+    </app-glass-card>
+  </div>
 
   @if (offerings.value(); as cfg) {
     <div class="svc-grid" appStagger>
       @for (svc of cfg.items; track trackById($index, svc)) {
-        <app-glass-card padding="lg">
+        <app-glass-card padding="lg" [interactive]="true" class="svc-cell">
           <article class="svc" [class]="'svc--' + accent(svc.accent)">
             <span class="svc__badge" aria-hidden="true">
               <app-icon [name]="svc.icon" [size]="24" />
@@ -29,7 +35,7 @@
             <ul class="svc__features">
               @for (feature of svc.features; track $index) {
                 <li class="svc__feature">
-                  <app-icon name="Check" [size]="16" class="svc__check" aria-hidden="true" />
+                  <app-icon name="CheckCircle2" [size]="16" class="svc__check" aria-hidden="true" />
                   <span>{{ feature }}</span>
                 </li>
               }
@@ -39,18 +45,52 @@
       }
     </div>
 
-    <!-- CTA -->
-    <app-glass-card padding="lg">
-      <div class="svc-cta">
-        <div class="svc-cta__text">
-          <h2 class="svc-cta__title">Have a project in mind?</h2>
-          <p class="svc-cta__sub">
-            Tell me what you're building and I'll get back to you with how I can help.
+    <!-- My Approach -->
+    @if (cfg.approach; as steps) {
+      <app-glass-card padding="lg" class="svc-approach">
+        <div class="svc-approach__intro">
+          <h2 class="svc-approach__title">My Approach</h2>
+          <p class="svc-approach__sub">
+            A simple and effective process that ensures quality results.
           </p>
+          <a routerLink="/contact" class="svc-approach__btn">
+            Start a Project
+            <app-icon name="ArrowUpRight" [size]="16" aria-hidden="true" />
+          </a>
+        </div>
+
+        <ol class="svc-steps">
+          @for (step of steps; track step.title; let i = $index) {
+            <li class="svc-step">
+              <span class="svc-step__icon" aria-hidden="true">
+                <app-icon [name]="step.icon" [size]="22" />
+              </span>
+              <span class="svc-step__num">{{ stepNo(i) }}</span>
+              <p class="svc-step__title">{{ step.title }}</p>
+              <p class="svc-step__desc">{{ step.description }}</p>
+            </li>
+          }
+        </ol>
+      </app-glass-card>
+    }
+
+    <!-- CTA -->
+    <app-glass-card padding="lg" class="svc-cta-card">
+      <div class="svc-cta">
+        <div class="svc-cta__lead">
+          <span class="svc-cta__icon" aria-hidden="true">
+            <app-icon name="MessageSquare" [size]="22" />
+          </span>
+          <div class="svc-cta__text">
+            <h2 class="svc-cta__title">Have a project in mind?</h2>
+            <p class="svc-cta__sub">
+              Let's discuss your idea and create something amazing together.
+            </p>
+          </div>
         </div>
         <a routerLink="/contact" class="svc-cta__btn">
-          Start a conversation
-          <app-icon name="Send" [size]="16" aria-hidden="true" />
+          Contact Me
+          <app-icon name="ArrowUpRight" [size]="16" aria-hidden="true" />
         </a>
       </div>
     </app-glass-card>

@@ -1,350 +1,472 @@
 <app-page-layout
   breadcrumb="Settings"
-  titleLead="Portfolio"
-  titleHighlight="Settings"
-  subtitle="Customize your portfolio appearance, behavior, and accessibility options."
+  titleLead="Settings"
+  titleHighlight=""
+  subtitle="Manage your preferences and personalize your experience."
 >
-  <div class="settings-container" appStagger>
-    <!-- Theme Customizer -->
-    <section class="settings-section">
-      <app-glass-card padding="lg">
-        <div class="setting-group">
-          <div class="setting-header">
-            <h3 class="setting-title">
-              <app-icon name="Sun" [size]="24" aria-hidden="true" />
-              Theme
-            </h3>
-            <p class="setting-description">Choose between light, dark, or automatic theme</p>
-          </div>
+  <!-- Header aside: Save Changes -->
+  <div slot="header-aside">
+    <button type="button" class="st-save" [class.st-save--done]="saved()" (click)="saveChanges()">
+      <app-icon [name]="saved() ? 'Check' : 'Download'" [size]="16" aria-hidden="true" />
+      {{ saved() ? 'Saved' : 'Save Changes' }}
+    </button>
+  </div>
 
-          <div class="option-grid">
-            @for (themeOption of themes; track themeOption) {
-              <label class="option-radio">
-                <input
-                  type="radio"
-                  name="theme"
-                  [value]="themeOption"
-                  [checked]="theme() === themeOption"
-                  (change)="updateTheme(themeOption)"
-                />
-                <span class="option-label">{{ getThemeLabel(themeOption) }}</span>
-              </label>
-            }
-          </div>
-        </div>
-      </app-glass-card>
-    </section>
+  <div class="st-layout">
+    <!-- Left: section nav -->
+    <app-glass-card padding="sm" class="st-nav-card">
+      <nav class="st-nav" aria-label="Settings sections">
+        @for (item of nav; track item.key) {
+          <button
+            type="button"
+            class="st-nav__item"
+            [class.st-nav__item--active]="section() === item.key"
+            [class.st-nav__item--danger]="item.key === 'danger'"
+            (click)="setSection(item.key)"
+          >
+            <app-icon [name]="item.icon" [size]="18" aria-hidden="true" />
+            {{ item.label }}
+          </button>
+        }
+      </nav>
+    </app-glass-card>
 
-    <!-- Accent Color Picker -->
-    <section class="settings-section">
-      <app-glass-card padding="lg">
-        <div class="setting-group">
-          <div class="setting-header">
-            <h3 class="setting-title">
-              <app-icon name="Palette" [size]="24" aria-hidden="true" />
-              Accent Color
-            </h3>
-            <p class="setting-description">Select your preferred accent color</p>
-          </div>
-
-          <div class="color-grid">
-            @for (color of accentColors; track color) {
-              <label class="color-option" [class.active]="accentColor() === color">
-                <input
-                  type="radio"
-                  name="accentColor"
-                  [value]="color"
-                  [checked]="accentColor() === color"
-                  (change)="updateAccentColor(color)"
-                  class="hidden-radio"
-                />
-                <span
-                  class="color-swatch"
-                  [class]="'color-' + color"
-                  [title]="getColorLabel(color)"
-                ></span>
-              </label>
-            }
-          </div>
-        </div>
-      </app-glass-card>
-    </section>
-
-    <!-- Font Selector -->
-    <section class="settings-section">
-      <app-glass-card padding="lg">
-        <div class="setting-group">
-          <div class="setting-header">
-            <h3 class="setting-title">
-              <app-icon name="Type" [size]="24" aria-hidden="true" />
-              Font Family
-            </h3>
-            <p class="setting-description">Choose your preferred font style</p>
-          </div>
-
-          <div class="option-grid">
-            @for (fontOption of fontFamilies; track fontOption) {
-              <label class="option-radio">
-                <input
-                  type="radio"
-                  name="fontFamily"
-                  [value]="fontOption"
-                  [checked]="font().family === fontOption"
-                  (change)="updateFont(fontOption)"
-                />
-                <span class="option-label">{{ getFontLabel(fontOption) }}</span>
-              </label>
-            }
-          </div>
-
-          <!-- Font Adjustments -->
-          <div class="setting-subsection">
-            <h4 class="subsection-title">Font Adjustments</h4>
-
-            <div class="adjustment-group">
-              <label class="checkbox-option">
-                <input
-                  type="checkbox"
-                  [checked]="font().dyslexiaFriendly"
-                  (change)="updateDyslexiaFriendly($event.target.checked)"
-                />
-                <span>Enable Dyslexia-Friendly Font</span>
-              </label>
-              <p class="option-note">Improves readability for users with dyslexia</p>
+    <!-- Right: content panel -->
+    <app-glass-card padding="lg" class="st-panel">
+      @switch (section()) {
+        <!-- ── Profile ─────────────────────────────── -->
+        @case ('profile') {
+          <header class="st-panel__head">
+            <div>
+              <h2 class="st-panel__title">Profile Information</h2>
+              <p class="st-panel__sub">
+                Update your personal information and how it appears on your site.
+              </p>
             </div>
-
-            <div class="adjustment-group">
-              <label class="setting-label">Line Height</label>
-              <select
-                [(ngModel)]="font().lineHeight"
-                (ngModelChange)="updateLineHeight($event)"
-                class="select-input"
-              >
-                <option value="normal">Normal</option>
-                <option value="relaxed">Relaxed</option>
-                <option value="loose">Loose</option>
-              </select>
+            <div class="st-avatar">
+              @if (avatar()) {
+                <img [src]="avatar()" alt="" width="72" height="72" class="st-avatar__img" />
+              }
+              <span class="st-avatar__edit" aria-hidden="true">
+                <app-icon name="PenTool" [size]="13" />
+              </span>
             </div>
+          </header>
 
-            <div class="adjustment-group">
-              <label class="setting-label">Letter Spacing</label>
-              <select
-                [(ngModel)]="font().letterSpacing"
-                (ngModelChange)="updateLetterSpacing($event)"
-                class="select-input"
-              >
-                <option value="normal">Normal</option>
-                <option value="wide">Wide</option>
-                <option value="wider">Wider</option>
-              </select>
+          <div class="st-form">
+            <div class="st-field">
+              <label class="st-label" for="pf-name">Full Name</label>
+              <input
+                id="pf-name"
+                class="st-input"
+                type="text"
+                [value]="form().name"
+                (input)="updateField('name', $any($event.target).value)"
+              />
+            </div>
+            <div class="st-field">
+              <label class="st-label" for="pf-title">Title</label>
+              <input
+                id="pf-title"
+                class="st-input"
+                type="text"
+                [value]="form().title"
+                (input)="updateField('title', $any($event.target).value)"
+              />
+            </div>
+            <div class="st-field">
+              <label class="st-label" for="pf-email">Email</label>
+              <input
+                id="pf-email"
+                class="st-input"
+                type="email"
+                [value]="form().email"
+                (input)="updateField('email', $any($event.target).value)"
+              />
+            </div>
+            <div class="st-field">
+              <label class="st-label" for="pf-loc">Location</label>
+              <div class="st-input-icon">
+                <app-icon name="MapPin" [size]="16" aria-hidden="true" />
+                <input
+                  id="pf-loc"
+                  class="st-input"
+                  type="text"
+                  [value]="form().location"
+                  (input)="updateField('location', $any($event.target).value)"
+                />
+              </div>
+            </div>
+            <div class="st-field st-field--full">
+              <label class="st-label" for="pf-bio">Bio</label>
+              <textarea
+                id="pf-bio"
+                class="st-input st-textarea"
+                rows="3"
+                (input)="updateField('bio', $any($event.target).value)"
+                >{{ form().bio }}</textarea>
+            </div>
+            <div class="st-field st-field--full">
+              <label class="st-label" for="pf-web">Website</label>
+              <div class="st-input-icon">
+                <app-icon name="Globe" [size]="16" aria-hidden="true" />
+                <input
+                  id="pf-web"
+                  class="st-input"
+                  type="url"
+                  [value]="form().website"
+                  (input)="updateField('website', $any($event.target).value)"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </app-glass-card>
-    </section>
 
-    <!-- Layout Switcher -->
-    <section class="settings-section">
-      <app-glass-card padding="lg">
-        <div class="setting-group">
-          <div class="setting-header">
-            <h3 class="setting-title">
-              <app-icon name="Layout" [size]="24" aria-hidden="true" />
-              Layout Style
-            </h3>
-            <p class="setting-description">Choose your preferred layout presentation</p>
-          </div>
+          <div class="st-divider"></div>
 
-          <div class="option-grid">
-            @for (layoutOption of layouts; track layoutOption) {
-              <label class="option-radio">
-                <input
-                  type="radio"
-                  name="layout"
-                  [value]="layoutOption"
-                  [checked]="layout() === layoutOption"
-                  (change)="updateLayout(layoutOption)"
-                />
-                <span class="option-label">
-                  {{ layoutOption.charAt(0).toUpperCase() + layoutOption.slice(1) }}
-                </span>
-              </label>
-            }
-          </div>
-        </div>
-      </app-glass-card>
-    </section>
-
-    <!-- Content Density -->
-    <section class="settings-section">
-      <app-glass-card padding="lg">
-        <div class="setting-group">
-          <div class="setting-header">
-            <h3 class="setting-title">
-              <app-icon name="Maximize2" [size]="24" aria-hidden="true" />
-              Content Density
-            </h3>
-            <p class="setting-description">Adjust the spacing and density of content</p>
-          </div>
-
-          <div class="option-grid">
-            @for (density of densities; track density) {
-              <label class="option-radio">
-                <input
-                  type="radio"
-                  name="density"
-                  [value]="density"
-                  [checked]="contentDensity() === density"
-                  (change)="updateContentDensity(density)"
-                />
-                <span class="option-label">
-                  {{ density.charAt(0).toUpperCase() + density.slice(1) }}
-                </span>
-              </label>
-            }
-          </div>
-        </div>
-      </app-glass-card>
-    </section>
-
-    <!-- Accessibility Mode -->
-    <section class="settings-section">
-      <app-glass-card padding="lg">
-        <div class="setting-group">
-          <div class="setting-header">
-            <h3 class="setting-title">
-              <app-icon name="Eye" [size]="24" aria-hidden="true" />
-              Accessibility
-            </h3>
-            <p class="setting-description">Enhance accessibility features and readability</p>
-          </div>
-
-          <div class="accessibility-options">
-            <!-- Enable Accessibility Mode -->
-            <div class="a11y-option">
-              <label class="checkbox-option">
-                <input
-                  type="checkbox"
-                  [checked]="accessibility().enabled"
-                  (change)="updateAccessibilityEnabled($event.target.checked)"
-                />
-                <span class="checkbox-label">Enable Accessibility Mode</span>
-              </label>
-              <p class="option-note">Master toggle for all accessibility features</p>
-            </div>
-
-            @if (accessibility().enabled) {
-              <!-- High Contrast -->
-              <div class="a11y-option">
-                <label class="checkbox-option">
-                  <input
-                    type="checkbox"
-                    [checked]="accessibility().highContrast"
-                    (change)="updateHighContrast($event.target.checked)"
-                  />
-                  <span class="checkbox-label">High Contrast Mode</span>
-                </label>
-                <p class="option-note">Increases color contrast for better visibility</p>
-              </div>
-
-              <!-- Larger Text -->
-              <div class="a11y-option">
-                <label class="checkbox-option">
-                  <input
-                    type="checkbox"
-                    [checked]="accessibility().largerText"
-                    (change)="updateLargerText($event.target.checked)"
-                  />
-                  <span class="checkbox-label">Larger Text</span>
-                </label>
-                <p class="option-note">Increases base font size across the portfolio</p>
-              </div>
-
-              <!-- Reduce Motion -->
-              <div class="a11y-option">
-                <label class="checkbox-option">
-                  <input
-                    type="checkbox"
-                    [checked]="accessibility().reduceMotion"
-                    (change)="updateReduceMotion($event.target.checked)"
-                  />
-                  <span class="checkbox-label">Reduce Motion</span>
-                </label>
-                <p class="option-note">Minimizes animations and transitions</p>
-              </div>
-
-              <!-- Font Size Adjustment -->
-              <div class="a11y-option">
-                <label class="setting-label">Font Size</label>
-                <select
-                  [(ngModel)]="accessibility().fontSize"
-                  (ngModelChange)="updateFontSize($event)"
-                  class="select-input"
-                >
-                  <option value="normal">Normal</option>
-                  <option value="large">Large</option>
-                  <option value="xlarge">Extra Large</option>
-                </select>
-              </div>
-            }
-          </div>
-        </div>
-      </app-glass-card>
-    </section>
-
-    <!-- Behavior Settings -->
-    <section class="settings-section">
-      <app-glass-card padding="lg">
-        <div class="setting-group">
-          <div class="setting-header">
-            <h3 class="setting-title">
-              <app-icon name="Settings" [size]="24" aria-hidden="true" />
-              Behavior & Effects
-            </h3>
-            <p class="setting-description">Control portfolio behavior and visual effects</p>
-          </div>
-
-          <div class="behavior-options">
-            <label class="checkbox-option">
-              <input type="checkbox" [checked]="soundEnabled()" (change)="toggleSound()" />
-              <span class="checkbox-label">Enable Sound Effects</span>
-            </label>
-
-            <label class="checkbox-option">
+          <h3 class="st-subtitle">Profile Display Settings</h3>
+          <p class="st-panel__sub">Choose what to show on your portfolio.</p>
+          <div class="st-toggles">
+            <label class="st-toggle">
+              <span class="st-toggle__icon" aria-hidden="true"
+                ><app-icon name="Mail" [size]="16"
+              /></span>
+              <span class="st-toggle__text">
+                <span class="st-toggle__name">Show Email</span>
+                <span class="st-toggle__desc">Display email address on the contact page</span>
+              </span>
               <input
                 type="checkbox"
+                class="st-switch"
+                [checked]="showEmail()"
+                (change)="showEmail.set($any($event.target).checked)"
+              />
+            </label>
+            <label class="st-toggle">
+              <span class="st-toggle__icon" aria-hidden="true"
+                ><app-icon name="MapPin" [size]="16"
+              /></span>
+              <span class="st-toggle__text">
+                <span class="st-toggle__name">Show Location</span>
+                <span class="st-toggle__desc">Display your location on the website</span>
+              </span>
+              <input
+                type="checkbox"
+                class="st-switch"
+                [checked]="showLocation()"
+                (change)="showLocation.set($any($event.target).checked)"
+              />
+            </label>
+            <label class="st-toggle">
+              <span class="st-toggle__icon" aria-hidden="true"
+                ><app-icon name="Globe" [size]="16"
+              /></span>
+              <span class="st-toggle__text">
+                <span class="st-toggle__name">Show Social Links</span>
+                <span class="st-toggle__desc">Display social media links in footer</span>
+              </span>
+              <input
+                type="checkbox"
+                class="st-switch"
+                [checked]="showSocial()"
+                (change)="showSocial.set($any($event.target).checked)"
+              />
+            </label>
+          </div>
+        }
+
+        <!-- ── Appearance ──────────────────────────── -->
+        @case ('appearance') {
+          <header class="st-panel__head">
+            <div>
+              <h2 class="st-panel__title">Appearance</h2>
+              <p class="st-panel__sub">
+                Theme, accent color and layout — applied instantly and saved to your browser.
+              </p>
+            </div>
+          </header>
+
+          <h3 class="st-subtitle">Theme</h3>
+          <div class="st-chips">
+            @for (t of themes; track t) {
+              <button
+                type="button"
+                class="st-chip"
+                [class.st-chip--active]="theme() === t"
+                (click)="updateTheme(t)"
+              >
+                {{ getThemeLabel(t) }}
+              </button>
+            }
+          </div>
+
+          <div class="st-divider"></div>
+          <h3 class="st-subtitle">Accent Color</h3>
+          <div class="st-swatches">
+            @for (color of accentColors; track color) {
+              <button
+                type="button"
+                class="st-swatch"
+                [class]="'color-' + color"
+                [class.st-swatch--active]="accentColor() === color"
+                [title]="getColorLabel(color)"
+                [attr.aria-label]="getColorLabel(color)"
+                (click)="updateAccentColor(color)"
+              ></button>
+            }
+          </div>
+
+          <div class="st-divider"></div>
+          <h3 class="st-subtitle">Layout Style</h3>
+          <div class="st-chips">
+            @for (l of layouts; track l) {
+              <button
+                type="button"
+                class="st-chip"
+                [class.st-chip--active]="layout() === l"
+                (click)="updateLayout(l)"
+              >
+                {{ titleCase(l) }}
+              </button>
+            }
+          </div>
+
+          <div class="st-divider"></div>
+          <h3 class="st-subtitle">Content Density</h3>
+          <div class="st-chips">
+            @for (d of densities; track d) {
+              <button
+                type="button"
+                class="st-chip"
+                [class.st-chip--active]="contentDensity() === d"
+                (click)="updateContentDensity(d)"
+              >
+                {{ titleCase(d) }}
+              </button>
+            }
+          </div>
+        }
+
+        <!-- ── Typography ──────────────────────────── -->
+        @case ('typography') {
+          <header class="st-panel__head">
+            <div>
+              <h2 class="st-panel__title">Typography</h2>
+              <p class="st-panel__sub">Pick a font and fine-tune readability.</p>
+            </div>
+          </header>
+
+          <h3 class="st-subtitle">Font Family</h3>
+          <div class="st-chips">
+            @for (f of fontFamilies; track f) {
+              <button
+                type="button"
+                class="st-chip"
+                [class.st-chip--active]="font().family === f"
+                (click)="updateFont(f)"
+              >
+                {{ getFontLabel(f) }}
+              </button>
+            }
+          </div>
+
+          <div class="st-divider"></div>
+          <div class="st-toggles">
+            <label class="st-toggle">
+              <span class="st-toggle__text">
+                <span class="st-toggle__name">Dyslexia-Friendly Font</span>
+                <span class="st-toggle__desc">Improves readability for users with dyslexia</span>
+              </span>
+              <input
+                type="checkbox"
+                class="st-switch"
+                [checked]="font().dyslexiaFriendly"
+                (change)="updateDyslexiaFriendly($any($event.target).checked)"
+              />
+            </label>
+          </div>
+
+          <div class="st-field st-field--full">
+            <label class="st-label" for="ty-lh">Line Height</label>
+            <select
+              id="ty-lh"
+              class="st-input"
+              [(ngModel)]="font().lineHeight"
+              (ngModelChange)="updateLineHeight($event)"
+            >
+              <option value="normal">Normal</option>
+              <option value="relaxed">Relaxed</option>
+              <option value="loose">Loose</option>
+            </select>
+          </div>
+          <div class="st-field st-field--full">
+            <label class="st-label" for="ty-ls">Letter Spacing</label>
+            <select
+              id="ty-ls"
+              class="st-input"
+              [(ngModel)]="font().letterSpacing"
+              (ngModelChange)="updateLetterSpacing($event)"
+            >
+              <option value="normal">Normal</option>
+              <option value="wide">Wide</option>
+              <option value="wider">Wider</option>
+            </select>
+          </div>
+        }
+
+        <!-- ── Accessibility ───────────────────────── -->
+        @case ('accessibility') {
+          <header class="st-panel__head">
+            <div>
+              <h2 class="st-panel__title">Accessibility</h2>
+              <p class="st-panel__sub">Enhance accessibility features and readability.</p>
+            </div>
+          </header>
+
+          <div class="st-toggles">
+            <label class="st-toggle">
+              <span class="st-toggle__text">
+                <span class="st-toggle__name">Enable Accessibility Mode</span>
+                <span class="st-toggle__desc">Master toggle for all accessibility features</span>
+              </span>
+              <input
+                type="checkbox"
+                class="st-switch"
+                [checked]="accessibility().enabled"
+                (change)="updateAccessibilityEnabled($any($event.target).checked)"
+              />
+            </label>
+
+            @if (accessibility().enabled) {
+              <label class="st-toggle">
+                <span class="st-toggle__text">
+                  <span class="st-toggle__name">High Contrast Mode</span>
+                  <span class="st-toggle__desc"
+                    >Increases color contrast for better visibility</span
+                  >
+                </span>
+                <input
+                  type="checkbox"
+                  class="st-switch"
+                  [checked]="accessibility().highContrast"
+                  (change)="updateHighContrast($any($event.target).checked)"
+                />
+              </label>
+              <label class="st-toggle">
+                <span class="st-toggle__text">
+                  <span class="st-toggle__name">Larger Text</span>
+                  <span class="st-toggle__desc">Increases base font size across the portfolio</span>
+                </span>
+                <input
+                  type="checkbox"
+                  class="st-switch"
+                  [checked]="accessibility().largerText"
+                  (change)="updateLargerText($any($event.target).checked)"
+                />
+              </label>
+              <label class="st-toggle">
+                <span class="st-toggle__text">
+                  <span class="st-toggle__name">Reduce Motion</span>
+                  <span class="st-toggle__desc">Minimizes animations and transitions</span>
+                </span>
+                <input
+                  type="checkbox"
+                  class="st-switch"
+                  [checked]="accessibility().reduceMotion"
+                  (change)="updateReduceMotion($any($event.target).checked)"
+                />
+              </label>
+            }
+          </div>
+
+          @if (accessibility().enabled) {
+            <div class="st-field st-field--full">
+              <label class="st-label" for="a11y-size">Font Size</label>
+              <select
+                id="a11y-size"
+                class="st-input"
+                [(ngModel)]="accessibility().fontSize"
+                (ngModelChange)="updateFontSize($event)"
+              >
+                <option value="normal">Normal</option>
+                <option value="large">Large</option>
+                <option value="xlarge">Extra Large</option>
+              </select>
+            </div>
+          }
+        }
+
+        <!-- ── Preferences ─────────────────────────── -->
+        @case ('preferences') {
+          <header class="st-panel__head">
+            <div>
+              <h2 class="st-panel__title">Preferences</h2>
+              <p class="st-panel__sub">Control portfolio behavior and visual effects.</p>
+            </div>
+          </header>
+
+          <div class="st-toggles">
+            <label class="st-toggle">
+              <span class="st-toggle__text">
+                <span class="st-toggle__name">Sound Effects</span>
+                <span class="st-toggle__desc">Play subtle sounds on interactions</span>
+              </span>
+              <input
+                type="checkbox"
+                class="st-switch"
+                [checked]="soundEnabled()"
+                (change)="toggleSound()"
+              />
+            </label>
+            <label class="st-toggle">
+              <span class="st-toggle__text">
+                <span class="st-toggle__name">Animations</span>
+                <span class="st-toggle__desc">Enable scroll and hover motion effects</span>
+              </span>
+              <input
+                type="checkbox"
+                class="st-switch"
                 [checked]="animationsEnabled()"
                 (change)="toggleAnimations()"
               />
-              <span class="checkbox-label">Enable Animations</span>
             </label>
           </div>
-        </div>
-      </app-glass-card>
-    </section>
+        }
 
-    <!-- Reset Button -->
-    <section class="settings-section settings-actions">
-      <button class="btn btn--secondary" (click)="resetDefaults()">
-        <app-icon name="RotateCcw" [size]="18" aria-hidden="true" />
-        Reset to Defaults
-      </button>
-      <p class="reset-note">This will restore all settings to their default values</p>
-    </section>
+        <!-- ── Danger Zone ─────────────────────────── -->
+        @case ('danger') {
+          <header class="st-panel__head">
+            <div>
+              <h2 class="st-panel__title">Danger Zone</h2>
+              <p class="st-panel__sub">Irreversible actions. Proceed with care.</p>
+            </div>
+          </header>
 
-    <!-- Settings Info -->
-    <div class="settings-info">
-      <app-glass-card padding="md">
-        <div class="info-content">
-          <app-icon name="Info" [size]="20" aria-hidden="true" />
-          <div class="info-text">
-            <p class="info-title">Your settings are automatically saved</p>
-            <p class="info-description">
-              All personalization preferences are stored in your browser and synced across sessions.
-            </p>
+          <div class="st-danger">
+            <div>
+              <p class="st-danger__title">Reset all settings</p>
+              <p class="st-danger__desc">
+                Restore every personalization preference to its default value.
+              </p>
+            </div>
+            <button type="button" class="st-danger__btn" (click)="resetDefaults()">
+              <app-icon name="AlertTriangle" [size]="16" aria-hidden="true" />
+              Reset to Defaults
+            </button>
           </div>
-        </div>
-      </app-glass-card>
-    </div>
+        }
+      }
+    </app-glass-card>
   </div>
+
+  <!-- Footer: Security banner -->
+  <app-glass-card padding="lg" class="st-security">
+    <span class="st-security__icon" aria-hidden="true"><app-icon name="Shield" [size]="24" /></span>
+    <div class="st-security__text">
+      <p class="st-security__title">Security First</p>
+      <p class="st-security__sub">
+        Your personalization settings are stored only in your browser — never uploaded or shared
+        with third parties.
+      </p>
+    </div>
+  </app-glass-card>
 </app-page-layout>

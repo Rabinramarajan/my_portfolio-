@@ -2,6 +2,37 @@
   display: block;
 }
 
+/* ── Header aside: Quality & Commitment ──────────────── */
+.svc-quality {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  max-width: 20rem;
+}
+.svc-quality__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.85rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-brand-purple), var(--color-brand-blue));
+}
+.svc-quality__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-fg);
+}
+.svc-quality__text {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--color-fg-muted);
+}
+
+/* ── Offerings grid ──────────────────────────────────── */
 .svc-grid {
   display: grid;
   gap: 1.5rem;
@@ -19,6 +50,10 @@
   .svc-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+.svc-cell {
+  height: 100%;
 }
 
 .svc {
@@ -58,7 +93,7 @@
 .svc__title {
   margin-top: 1.1rem;
   font-size: 1.15rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-fg);
 }
 
@@ -91,7 +126,120 @@
   color: var(--c);
 }
 
-/* CTA */
+/* ── My Approach ─────────────────────────────────────── */
+.svc-approach {
+  display: grid;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .svc-approach {
+    grid-template-columns: 15rem 1fr;
+    align-items: center;
+  }
+}
+
+.svc-approach__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-fg);
+}
+.svc-approach__sub {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-fg-muted);
+}
+.svc-approach__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.1rem;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, var(--color-brand-purple), var(--color-brand-blue));
+  transition: transform 0.15s ease;
+}
+.svc-approach__btn:hover {
+  transform: translateY(-1px);
+}
+
+.svc-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 720px) {
+  .svc-steps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.svc-step {
+  position: relative;
+  text-align: center;
+}
+
+/* Connector line between step icons (desktop, 4-across only) */
+@media (min-width: 720px) {
+  .svc-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    left: calc(50% + 1.75rem);
+    right: calc(-50% + 1.75rem);
+    height: 2px;
+    background: var(--color-border-subtle);
+  }
+}
+
+.svc-step__icon {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  color: var(--color-brand-purple);
+  background: color-mix(in srgb, var(--color-brand-purple) 12%, var(--color-surface-glass));
+  border: 1px solid color-mix(in srgb, var(--color-brand-purple) 30%, transparent);
+  border-radius: 50%;
+}
+.svc-step__num {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-fg-subtle);
+}
+.svc-step__title {
+  margin-top: 0.15rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-fg);
+}
+.svc-step__desc {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--color-fg-muted);
+}
+
+/* ── CTA ─────────────────────────────────────────────── */
+.svc-cta-card {
+  background: color-mix(in srgb, var(--color-brand-purple) 8%, var(--color-surface-glass));
+}
 .svc-cta {
   display: flex;
   flex-direction: column;
@@ -107,14 +255,30 @@
   }
 }
 
+.svc-cta__lead {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.svc-cta__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.85rem;
+  color: var(--color-brand-purple);
+  background: color-mix(in srgb, var(--color-brand-purple) 14%, transparent);
+}
 .svc-cta__title {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: var(--color-fg);
 }
 
 .svc-cta__sub {
-  margin-top: 0.4rem;
+  margin-top: 0.3rem;
   font-size: 0.9rem;
   color: var(--color-fg-muted);
 }
@@ -139,27 +303,4 @@
 .svc-cta__btn:hover {
   opacity: 0.92;
   transform: translateY(-1px);
-}
-
-/* Header aside: architecture whiteboard. Hidden on narrow screens where the
-   diagram's text would be too small to read (matches .sk-hero convention). */
-.svc-hero {
-  display: none;
-  margin: 0;
-  width: 100%;
-  max-width: 28rem;
-  overflow: hidden;
-  border-radius: 1rem;
-  border: 1px solid var(--color-border-subtle);
-  aspect-ratio: 3 / 2;
-}
-
-.svc-hero__img {
-  height: 100%;
-}
-
-@media (min-width: 1024px) {
-  .svc-hero {
-    display: block;
-  }
 }

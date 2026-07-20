@@ -52,7 +52,7 @@
         </p>
       }
 
-      <form novalidate (submit)="$event.preventDefault(); onSubmit()">
+      <form novalidate data-testid="contact-form" (submit)="$event.preventDefault(); onSubmit()">
         <div class="ct-row">
           <div class="ct-field">
             <label for="c-name" class="ct-label">Your name</label>

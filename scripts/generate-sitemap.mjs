@@ -23,7 +23,6 @@ const ORIGIN = 'https://www.rabinr.in';
 const HINTS = {
   '': { changefreq: 'monthly', priority: '1.0' },
   projects: { changefreq: 'monthly', priority: '0.9' },
-  'case-studies': { changefreq: 'monthly', priority: '0.9' },
   about: { changefreq: 'monthly', priority: '0.8' },
   experience: { changefreq: 'monthly', priority: '0.8' },
   services: { changefreq: 'monthly', priority: '0.8' },

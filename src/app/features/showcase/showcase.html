@@ -1,478 +1,374 @@
 <app-page-layout
-  breadcrumb="Developer Showcase"
+  breadcrumb="Showcase"
   titleLead="Developer"
   titleHighlight="Showcase"
-  subtitle="Interactive code playground, API explorer, metrics, and architecture visualization."
+  subtitle="A look under the hood — interactive code snippets, an API explorer, the architecture map, quality metrics, dependencies and recent git activity behind this portfolio."
 >
-  @if (showcase.value()) {
-    <!-- Code Snippets Section -->
-    <section class="showcase-section">
-      <div class="section-header">
-        <h2 class="section-title">
-          <app-icon name="Code" [size]="24" aria-hidden="true" />
-          Code Snippets
-        </h2>
-        <p class="section-subtitle">Interactive code examples and patterns</p>
-      </div>
+  <!-- Tab switcher -->
+  <div class="sc-tabs" role="tablist" aria-label="Showcase sections">
+    @for (tab of tabs; track tab.id) {
+      <button
+        type="button"
+        role="tab"
+        class="sc-tab"
+        [class.sc-tab--active]="activeTab() === tab.id"
+        [attr.aria-selected]="activeTab() === tab.id"
+        (click)="setTab(tab.id)"
+      >
+        <app-icon [name]="tab.icon" [size]="16" aria-hidden="true" />
+        {{ tab.label }}
+      </button>
+    }
+  </div>
 
-      <div class="filter-group">
-        <div class="filter-set">
-          <label class="filter-label">Category:</label>
-          <select
-            [ngModel]="selectedCategory()"
-            (ngModelChange)="selectedCategory.set($event)"
-            class="filter-select"
-          >
-            <option value="All">All</option>
-            <option value="Component">Component</option>
-            <option value="Service">Service</option>
-            <option value="Directive">Directive</option>
-            <option value="Pipe">Pipe</option>
-            <option value="Guard">Guard</option>
-            <option value="Interceptor">Interceptor</option>
-          </select>
-        </div>
-
-        <div class="filter-set">
-          <label class="filter-label">Complexity:</label>
-          <select
-            [ngModel]="selectedComplexity()"
-            (ngModelChange)="selectedComplexity.set($event)"
-            class="filter-select"
-          >
-            <option value="All">All</option>
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="snippets-grid" appStagger>
-        @for (snippet of filteredSnippets(showcase.value()!.snippets); track snippet.id) {
-          <app-glass-card padding="lg">
-            <article class="snippet-card">
-              <div class="snippet-header">
-                <h3 class="snippet-title">{{ snippet.title }}</h3>
-                <div class="snippet-badges">
-                  <span
-                    class="badge badge--complexity"
-                    [class]="'complexity-' + snippet.complexity"
-                  >
-                    {{ snippet.complexity }}
-                  </span>
-                  <span class="badge badge--category">{{ snippet.category }}</span>
-                </div>
-              </div>
-
-              <p class="snippet-description">{{ snippet.description }}</p>
-
-              <button class="btn btn--secondary btn--small" (click)="selectSnippet(snippet.id)">
-                @if (selectedSnippet() === snippet.id) {
-                  <app-icon name="ChevronUp" [size]="14" aria-hidden="true" />
-                  Hide Code
-                } @else {
-                  <app-icon name="ChevronDown" [size]="14" aria-hidden="true" />
-                  View Code
-                }
-              </button>
-
-              @if (selectedSnippet() === snippet.id) {
-                <div class="snippet-code">
-                  <pre><code>{{ snippet.code }}</code></pre>
-                  <button
-                    class="btn btn--small"
-                    (click)="copyToClipboard(snippet.code)"
-                    title="Copy code"
-                  >
-                    <app-icon name="Copy" [size]="14" aria-hidden="true" />
-                    Copy
-                  </button>
-                </div>
-              }
-
-              @if (snippet.output) {
-                <div class="snippet-output">
-                  <span class="output-label">Output:</span>
-                  <span class="output-value">{{ snippet.output }}</span>
-                </div>
-              }
-            </article>
-          </app-glass-card>
-        }
-      </div>
-    </section>
-
-    <!-- API Explorer Section -->
-    <section class="showcase-section">
-      <div class="section-header">
-        <h2 class="section-title">
-          <app-icon name="Zap" [size]="24" aria-hidden="true" />
-          API Explorer
-        </h2>
-        <p class="section-subtitle">REST API endpoints documentation</p>
-      </div>
-
-      <div class="filter-group">
-        <div class="filter-set">
-          <label class="filter-label">Method:</label>
-          <select
-            [ngModel]="selectedApiMethod()"
-            (ngModelChange)="selectedApiMethod.set($event)"
-            class="filter-select"
-          >
-            <option value="All">All</option>
-            <option value="GET">GET</option>
-            <option value="POST">POST</option>
-            <option value="PUT">PUT</option>
-            <option value="DELETE">DELETE</option>
-            <option value="PATCH">PATCH</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="endpoints-list" appStagger>
-        @for (endpoint of filteredEndpoints(showcase.value()!.apiEndpoints); track endpoint.id) {
-          <app-glass-card padding="lg">
-            <article class="endpoint-card">
-              <div class="endpoint-header">
-                <span class="method" [class]="'method-' + endpoint.method">{{
-                  endpoint.method
-                }}</span>
-                <span class="path">{{ endpoint.path }}</span>
-                <span class="status-code">{{ endpoint.statusCode }}</span>
-              </div>
-
-              <p class="endpoint-description">{{ endpoint.description }}</p>
-
-              @if (endpoint.parameters && endpoint.parameters.length > 0) {
-                <div class="parameters">
-                  <h4>Parameters:</h4>
-                  <ul>
-                    @for (param of endpoint.parameters; track param.name) {
-                      <li>
-                        <code>{{ param.name }}</code>
-                        <span class="type">{{ param.type }}</span>
-                        @if (param.required) {
-                          <span class="required">required</span>
-                        }
-                      </li>
-                    }
-                  </ul>
-                </div>
-              }
-
-              @if (endpoint.requestBody) {
-                <div class="request-body">
-                  <h4>Request Body:</h4>
-                  <pre><code>{{ endpoint.requestBody }}</code></pre>
-                </div>
-              }
-
-              <div class="response-example">
-                <h4>Response Example:</h4>
-                <pre><code>{{ endpoint.responseExample }}</code></pre>
-              </div>
-            </article>
-          </app-glass-card>
-        }
-      </div>
-    </section>
-
-    <!-- Folder Structure Section -->
-    <section class="showcase-section">
-      <div class="section-header">
-        <h2 class="section-title">
-          <app-icon name="Folder" [size]="24" aria-hidden="true" />
-          Project Structure
-        </h2>
-        <p class="section-subtitle">Application folder and file organization</p>
-      </div>
-
-      <app-glass-card padding="lg">
-        <div class="folder-explorer" appStagger>
-          @for (entry of showcase.value()!.folderStructure; track entry.id) {
-            <div class="folder-entry">
-              @if (entry.type === 'folder') {
-                <span class="folder-icon">
-                  <app-icon name="Folder" [size]="18" aria-hidden="true" />
-                </span>
-              } @else {
-                <span class="file-icon">
-                  <app-icon name="File" [size]="18" aria-hidden="true" />
-                </span>
-              }
-              <span class="entry-name">{{ entry.name }}</span>
-              @if (entry.description) {
-                <span class="entry-description">{{ entry.description }}</span>
-              }
-            </div>
-            @if (entry.children && entry.children.length > 0) {
-              <div class="folder-children">
-                @for (child of entry.children; track child.id) {
-                  <div class="folder-entry folder-entry--nested">
-                    @if (child.type === 'folder') {
-                      <span class="folder-icon">
-                        <app-icon name="Folder" [size]="16" aria-hidden="true" />
-                      </span>
-                    } @else {
-                      <span class="file-icon">
-                        <app-icon name="File" [size]="16" aria-hidden="true" />
-                      </span>
-                    }
-                    <span class="entry-name">{{ child.name }}</span>
-                    @if (child.description) {
-                      <span class="entry-description">{{ child.description }}</span>
-                    }
-                  </div>
-                }
-              </div>
-            }
+  @if (isLoading()) {
+    <p class="sc-empty">Loading showcase…</p>
+  } @else {
+    <!-- ══ Code Snippets ══ -->
+    @if (activeTab() === 'snippets') {
+      <section class="sc-panel" aria-label="Code snippets">
+        <div class="sc-chips">
+          @for (cat of snippetCategories(); track cat) {
+            <button
+              type="button"
+              class="sc-chip"
+              [class.sc-chip--active]="snippetCategory() === cat"
+              (click)="setSnippetCategory(cat)"
+            >
+              {{ cat }}
+            </button>
           }
         </div>
-      </app-glass-card>
-    </section>
 
-    <!-- Git Timeline Section -->
-    <section class="showcase-section">
-      <div class="section-header">
-        <h2 class="section-title">
-          <app-icon name="GitBranch" [size]="24" aria-hidden="true" />
-          Git Timeline
-        </h2>
-        <p class="section-subtitle">Recent commits and release history</p>
-      </div>
-
-      <div class="timeline-container" appStagger>
-        @for (commit of showcase.value()!.gitCommits; track commit.id) {
-          <div class="timeline-item">
-            <app-glass-card padding="lg">
-              <article class="commit-card">
-                <div class="commit-header">
-                  <div class="commit-info">
-                    <h3 class="commit-message">{{ commit.message }}</h3>
-                    <div class="commit-meta">
-                      <span class="commit-author">{{ commit.author }}</span>
-                      <span class="commit-date">{{ formatDate(commit.date) }}</span>
-                      <code class="commit-hash">{{ commit.hash }}</code>
-                    </div>
-                  </div>
-                  <button class="btn btn--small" (click)="toggleCommit(commit.id)">
-                    @if (expandedCommit() === commit.id) {
-                      <app-icon name="ChevronUp" [size]="14" aria-hidden="true" />
-                    } @else {
-                      <app-icon name="ChevronDown" [size]="14" aria-hidden="true" />
-                    }
-                  </button>
-                </div>
-
-                @if (expandedCommit() === commit.id) {
-                  <div class="commit-details">
-                    <div class="stat">
-                      <span class="stat-label">Files Changed:</span>
-                      <span class="stat-value">{{ commit.filesChanged }}</span>
-                    </div>
-                    <div class="stat">
-                      <span class="stat-label">Insertions:</span>
-                      <span class="stat-value stat-value--green">+{{ commit.insertions }}</span>
-                    </div>
-                    <div class="stat">
-                      <span class="stat-label">Deletions:</span>
-                      <span class="stat-value stat-value--red">-{{ commit.deletions }}</span>
-                    </div>
-                    @if (commit.tags && commit.tags.length > 0) {
-                      <div class="commit-tags">
-                        @for (tag of commit.tags; track tag) {
-                          <span class="tag">{{ tag }}</span>
-                        }
-                      </div>
-                    }
-                  </div>
-                }
-              </article>
-            </app-glass-card>
-          </div>
-        }
-      </div>
-    </section>
-
-    <!-- Code Metrics Section -->
-    <section class="showcase-section">
-      <div class="section-header">
-        <h2 class="section-title">
-          <app-icon name="BarChart3" [size]="24" aria-hidden="true" />
-          Code Metrics
-        </h2>
-        <p class="section-subtitle">Performance, quality, and coverage metrics</p>
-      </div>
-
-      <div class="filter-group">
-        <div class="filter-set">
-          <label class="filter-label">Category:</label>
-          <select
-            [ngModel]="selectedMetricCategory()"
-            (ngModelChange)="selectedMetricCategory.set($event)"
-            class="filter-select"
-          >
-            <option value="All">All</option>
-            <option value="Performance">Performance</option>
-            <option value="Quality">Quality</option>
-            <option value="Coverage">Coverage</option>
-            <option value="Complexity">Complexity</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="metrics-grid" appStagger>
-        @for (metric of filteredMetrics(showcase.value()!.codeMetrics); track metric.id) {
-          <app-glass-card padding="lg">
-            <article class="metric-card">
-              <div class="metric-header">
-                <h3 class="metric-name">{{ metric.name }}</h3>
-                <app-icon
-                  [name]="getStatusIcon(metric.status)"
-                  [size]="20"
-                  aria-hidden="true"
-                  [style.color]="getStatusColor(metric.status)"
-                />
-              </div>
-
-              <div class="metric-value">
-                {{ metric.value }}
-                @if (metric.unit) {
-                  <span class="metric-unit">{{ metric.unit }}</span>
-                }
-              </div>
-
-              <span class="metric-category">{{ metric.category }}</span>
-
-              @if (metric.trend) {
-                <div class="metric-trend" [class]="'trend-' + metric.trend">
-                  @if (metric.trend === 'up') {
-                    <app-icon name="TrendingUp" [size]="14" aria-hidden="true" />
-                    <span>Improving</span>
-                  } @else if (metric.trend === 'down') {
-                    <app-icon name="TrendingDown" [size]="14" aria-hidden="true" />
-                    <span>Declining</span>
-                  } @else {
-                    <app-icon name="Minus" [size]="14" aria-hidden="true" />
-                    <span>Stable</span>
-                  }
-                </div>
-              }
-            </article>
-          </app-glass-card>
-        }
-      </div>
-    </section>
-
-    <!-- Architecture Diagram Section -->
-    <section class="showcase-section">
-      <div class="section-header">
-        <h2 class="section-title">
-          <app-icon name="Layers" [size]="24" aria-hidden="true" />
-          Architecture Diagram
-        </h2>
-        <p class="section-subtitle">System layers, services, and dependencies</p>
-      </div>
-
-      <app-glass-card padding="lg">
-        <div class="architecture-diagram" appStagger>
-          <div class="arch-components">
-            @for (component of showcase.value()!.architectureComponents; track component.id) {
-              <div class="arch-component" [class]="'type-' + component.type">
-                <h4>{{ component.name }}</h4>
-                <p class="component-type">{{ component.type }}</p>
-                <p class="component-desc">{{ component.description }}</p>
-                @if (component.technologies && component.technologies.length > 0) {
-                  <div class="component-techs">
-                    @for (tech of component.technologies; track tech) {
-                      <span class="tech-badge">{{ tech }}</span>
-                    }
-                  </div>
-                }
-              </div>
+        <div class="sc-play">
+          <!-- Snippet list -->
+          <ul class="sc-snips" appStagger>
+            @for (snip of filteredSnippets(); track snip.id) {
+              <li>
+                <button
+                  type="button"
+                  class="sc-snip"
+                  [class.sc-snip--active]="selectedSnippet()?.id === snip.id"
+                  [style.--c]="complexityAccent(snip.complexity)"
+                  (click)="selectSnippet(snip.id)"
+                >
+                  <span class="sc-snip__head">
+                    <span class="sc-snip__title">{{ snip.title }}</span>
+                    <span class="sc-snip__badge">{{ snip.complexity }}</span>
+                  </span>
+                  <span class="sc-snip__meta">{{ snip.category }} · {{ snip.language }}</span>
+                </button>
+              </li>
             }
-          </div>
+          </ul>
 
-          <div class="arch-connections">
-            <p class="connection-label">Component Dependencies:</p>
-            <ul>
-              @for (conn of showcase.value()!.architectureConnections; track conn.id) {
-                <li>
-                  {{ conn.from }} <span class="conn-type">{{ conn.type }}</span> {{ conn.to }}
-                  @if (conn.label) {
-                    <span class="conn-label">({{ conn.label }})</span>
-                  }
-                </li>
-              }
-            </ul>
-          </div>
-        </div>
-      </app-glass-card>
-    </section>
-
-    <!-- Dependencies Section -->
-    <section class="showcase-section">
-      <div class="section-header">
-        <h2 class="section-title">
-          <app-icon name="Package" [size]="24" aria-hidden="true" />
-          Project Dependencies
-        </h2>
-        <p class="section-subtitle">Framework, utilities, and development tools</p>
-      </div>
-
-      <div class="dependencies-grid" appStagger>
-        @for (dep of showcase.value()!.dependencies; track dep.id) {
-          <app-glass-card padding="lg">
-            <article class="dependency-card" [class]="'type-' + dep.type">
-              <div class="dep-header">
-                <h3 class="dep-name">{{ dep.name }}</h3>
-                <span class="dep-version">{{ dep.version }}</span>
-              </div>
-
-              <span class="dep-category">{{ dep.category }}</span>
-              <span class="dep-type">{{ dep.type }}</span>
-
-              @if (dep.description) {
-                <p class="dep-description">{{ dep.description }}</p>
-              }
-
-              <button class="btn btn--small" (click)="toggleDependency(dep.id)">
-                @if (expandedDependency() === dep.id) {
-                  <app-icon name="ChevronUp" [size]="14" aria-hidden="true" />
-                  Hide
-                } @else {
-                  <app-icon name="ChevronDown" [size]="14" aria-hidden="true" />
-                  Details
-                }
-              </button>
-
-              @if (expandedDependency() === dep.id) {
-                <div class="dep-details">
-                  @if (dep.license) {
-                    <div class="detail">
-                      <span class="detail-label">License:</span>
-                      <span class="detail-value">{{ dep.license }}</span>
-                    </div>
-                  }
-                  @if (dep.link) {
-                    <a
-                      [href]="dep.link"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="detail-link"
-                    >
-                      <app-icon name="ExternalLink" [size]="14" aria-hidden="true" />
-                      Visit Website
-                    </a>
-                  }
+          <!-- Selected snippet -->
+          @if (selectedSnippet(); as snip) {
+            <app-glass-card
+              padding="none"
+              class="sc-code"
+              [style.--c]="complexityAccent(snip.complexity)"
+            >
+              <header class="sc-code__bar">
+                <span class="sc-code__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="sc-code__lang">{{ snip.language }}</span>
+                <button type="button" class="sc-copy" (click)="copy(snip.code, snip.id)">
+                  <app-icon
+                    [name]="copiedId() === snip.id ? 'Check' : 'Copy'"
+                    [size]="14"
+                    aria-hidden="true"
+                  />
+                  {{ copiedId() === snip.id ? 'Copied' : 'Copy' }}
+                </button>
+              </header>
+              <p class="sc-code__desc">{{ snip.description }}</p>
+              <pre class="sc-code__pre"><code>{{ snip.code }}</code></pre>
+              @if (snip.output) {
+                <div class="sc-code__out">
+                  <app-icon name="Terminal" [size]="14" aria-hidden="true" />
+                  <span>{{ snip.output }}</span>
                 </div>
               }
-            </article>
-          </app-glass-card>
+            </app-glass-card>
+          }
+        </div>
+      </section>
+    }
+
+    <!-- ══ API Explorer ══ -->
+    @if (activeTab() === 'api') {
+      <section class="sc-panel" aria-label="API explorer">
+        <ul class="sc-endpoints" appStagger>
+          @for (ep of apiEndpoints(); track ep.id) {
+            <li>
+              <app-glass-card padding="none" class="sc-ep" [style.--c]="methodAccent(ep.method)">
+                <button
+                  type="button"
+                  class="sc-ep__row"
+                  [attr.aria-expanded]="openEndpoint() === ep.id"
+                  (click)="toggleEndpoint(ep.id)"
+                >
+                  <span class="sc-ep__method">{{ ep.method }}</span>
+                  <code class="sc-ep__path">{{ ep.path }}</code>
+                  <span class="sc-ep__desc">{{ ep.description }}</span>
+                  <span class="sc-ep__status">{{ ep.statusCode }}</span>
+                  <app-icon
+                    name="ChevronDown"
+                    [size]="16"
+                    class="sc-ep__chev"
+                    [class.sc-ep__chev--open]="openEndpoint() === ep.id"
+                    aria-hidden="true"
+                  />
+                </button>
+                @if (openEndpoint() === ep.id) {
+                  <div class="sc-ep__body">
+                    @if (ep.parameters?.length) {
+                      <h4 class="sc-ep__h">Parameters</h4>
+                      <ul class="sc-params">
+                        @for (p of ep.parameters; track p.name) {
+                          <li>
+                            <code>{{ p.name }}</code>
+                            <span class="sc-params__type">{{ p.type }}</span>
+                            <span class="sc-params__req" [class.sc-params__req--yes]="p.required">
+                              {{ p.required ? 'required' : 'optional' }}
+                            </span>
+                          </li>
+                        }
+                      </ul>
+                    }
+                    @if (ep.requestBody) {
+                      <h4 class="sc-ep__h">Request body</h4>
+                      <pre class="sc-code__pre"><code>{{ ep.requestBody }}</code></pre>
+                    }
+                    <h4 class="sc-ep__h">Response</h4>
+                    <pre class="sc-code__pre"><code>{{ ep.responseExample }}</code></pre>
+                  </div>
+                }
+              </app-glass-card>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+
+    <!-- ══ Architecture ══ -->
+    @if (activeTab() === 'architecture') {
+      <section class="sc-panel" aria-label="Architecture">
+        <ul class="sc-arch" appStagger>
+          @for (comp of architectureComponents(); track comp.id) {
+            <li>
+              <app-glass-card padding="lg" class="sc-arch__card">
+                <div class="sc-arch__head">
+                  <span class="sc-arch__icon" aria-hidden="true"
+                    ><app-icon [name]="componentIcon(comp.type)" [size]="20"
+                  /></span>
+                  <div>
+                    <h3 class="sc-arch__name">{{ comp.name }}</h3>
+                    <span class="sc-arch__type">{{ comp.type }}</span>
+                  </div>
+                </div>
+                <p class="sc-arch__desc">{{ comp.description }}</p>
+                @if (comp.technologies?.length) {
+                  <ul class="sc-taglist">
+                    @for (t of comp.technologies; track t) {
+                      <li class="sc-tag">{{ t }}</li>
+                    }
+                  </ul>
+                }
+                @if (comp.responsibilities?.length) {
+                  <ul class="sc-resp">
+                    @for (r of comp.responsibilities; track r) {
+                      <li><app-icon name="Check" [size]="13" aria-hidden="true" /> {{ r }}</li>
+                    }
+                  </ul>
+                }
+              </app-glass-card>
+            </li>
+          }
+        </ul>
+
+        <h3 class="sc-subhead">Connections</h3>
+        <ul class="sc-conns">
+          @for (con of architectureConnections(); track con.id) {
+            <li class="sc-conn">
+              <span class="sc-conn__node">{{ componentName(con.from) }}</span>
+              <span class="sc-conn__arrow">
+                <span class="sc-conn__label">{{ con.label || con.type }}</span>
+                <app-icon name="ArrowRight" [size]="15" aria-hidden="true" />
+              </span>
+              <span class="sc-conn__node">{{ componentName(con.to) }}</span>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+
+    <!-- ══ Metrics ══ -->
+    @if (activeTab() === 'metrics') {
+      <section class="sc-panel" aria-label="Code metrics">
+        <ul class="sc-metrics" appStagger>
+          @for (m of codeMetrics(); track m.id) {
+            <li>
+              <app-glass-card padding="lg" class="sc-metric" [style.--c]="metricAccent(m.status)">
+                <div class="sc-metric__top">
+                  <span class="sc-metric__cat">{{ m.category }}</span>
+                  @if (m.trend) {
+                    <app-icon
+                      [name]="trendIcon(m.trend)"
+                      [size]="15"
+                      class="sc-metric__trend"
+                      [class.sc-metric__trend--down]="m.trend === 'down'"
+                      aria-hidden="true"
+                    />
+                  }
+                </div>
+                <span class="sc-metric__val"
+                  >{{ m.value
+                  }}<small>{{ m.unit && m.unit !== m.value ? ' ' + m.unit : '' }}</small></span
+                >
+                <span class="sc-metric__name">{{ m.name }}</span>
+                @if (metricPct(m); as pct) {
+                  <span class="sc-metric__bar" [style.--pct.%]="pct" aria-hidden="true"></span>
+                }
+                <span class="sc-metric__badge">{{ m.status }}</span>
+              </app-glass-card>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+
+    <!-- ══ Dependencies ══ -->
+    @if (activeTab() === 'dependencies') {
+      <section class="sc-panel" aria-label="Dependencies">
+        <p class="sc-count">{{ dependencyCount() }} packages</p>
+        @for (group of dependencyGroups(); track group.category) {
+          <h3 class="sc-subhead">{{ group.category }}</h3>
+          <ul class="sc-deps" appStagger>
+            @for (dep of group.items; track dep.id) {
+              <li>
+                <app-glass-card padding="md" class="sc-dep" [style.--c]="depTypeAccent(dep.type)">
+                  <div class="sc-dep__head">
+                    <span class="sc-dep__name">{{ dep.name }}</span>
+                    <span class="sc-dep__type">{{ dep.type }}</span>
+                  </div>
+                  <span class="sc-dep__ver">v{{ dep.version }}</span>
+                  @if (dep.description) {
+                    <p class="sc-dep__desc">{{ dep.description }}</p>
+                  }
+                  <div class="sc-dep__foot">
+                    @if (dep.license) {
+                      <span class="sc-dep__license">{{ dep.license }}</span>
+                    }
+                    @if (dep.link) {
+                      <a
+                        class="sc-dep__link"
+                        [href]="dep.link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Docs <app-icon name="ExternalLink" [size]="13" aria-hidden="true" />
+                      </a>
+                    }
+                  </div>
+                </app-glass-card>
+              </li>
+            }
+          </ul>
         }
-      </div>
-    </section>
+      </section>
+    }
+
+    <!-- ══ Git Activity ══ -->
+    @if (activeTab() === 'activity') {
+      <section class="sc-panel" aria-label="Git activity">
+        <ol class="sc-commits" appStagger>
+          @for (c of gitCommits(); track c.id) {
+            <li class="sc-commit">
+              <span class="sc-commit__dot" aria-hidden="true"
+                ><app-icon name="GitBranch" [size]="14"
+              /></span>
+              <app-glass-card padding="md" class="sc-commit__card">
+                <div class="sc-commit__head">
+                  <code class="sc-commit__hash">{{ c.hash }}</code>
+                  @for (tag of c.tags; track tag) {
+                    <span class="sc-commit__tag">{{ tag }}</span>
+                  }
+                  <span class="sc-commit__date">{{ shortDate(c.date) }}</span>
+                </div>
+                <p class="sc-commit__msg">{{ c.message }}</p>
+                <div class="sc-commit__stats">
+                  <span>{{ c.filesChanged }} files</span>
+                  <span class="sc-commit__ins">+{{ c.insertions }}</span>
+                  <span class="sc-commit__del">−{{ c.deletions }}</span>
+                  <span class="sc-commit__author">{{ c.author }}</span>
+                </div>
+              </app-glass-card>
+            </li>
+          }
+        </ol>
+      </section>
+    }
+
+    <!-- ══ Folder Structure ══ -->
+    @if (activeTab() === 'structure') {
+      <section class="sc-panel" aria-label="Project structure">
+        <app-glass-card padding="lg" class="sc-tree">
+          <ul class="sc-tree__list">
+            @for (row of folderRows(); track row.entry.id) {
+              <li
+                class="sc-tree__row"
+                [class.sc-tree__row--folder]="row.entry.type === 'folder'"
+                [style.--depth]="row.depth"
+              >
+                @if (row.hasChildren) {
+                  <button
+                    type="button"
+                    class="sc-tree__toggle"
+                    (click)="toggleFolder(row.entry.id)"
+                    [attr.aria-expanded]="!isCollapsed(row.entry.id)"
+                    [attr.aria-label]="'Toggle ' + row.entry.name"
+                  >
+                    <app-icon
+                      name="ChevronRight"
+                      [size]="14"
+                      class="sc-tree__chev"
+                      [class.sc-tree__chev--open]="!isCollapsed(row.entry.id)"
+                      aria-hidden="true"
+                    />
+                  </button>
+                } @else {
+                  <span class="sc-tree__toggle" aria-hidden="true"></span>
+                }
+                <app-icon
+                  [name]="row.entry.type === 'folder' ? 'Folder' : 'FileCode'"
+                  [size]="15"
+                  class="sc-tree__ficon"
+                  aria-hidden="true"
+                />
+                <span class="sc-tree__name">{{ row.entry.name }}</span>
+                @if (row.entry.description) {
+                  <span class="sc-tree__desc">{{ row.entry.description }}</span>
+                }
+              </li>
+            }
+          </ul>
+        </app-glass-card>
+      </section>
+    }
   }
+
+  <!-- CTA -->
+  <app-glass-card padding="lg" class="sc-cta">
+    <div>
+      <p class="sc-cta__title">Want to see this applied to your product?</p>
+      <p class="sc-cta__sub">Explore the projects or start a conversation.</p>
+    </div>
+    <div class="sc-cta__actions">
+      <a routerLink="/projects" class="sc-cta__ghost">View Projects</a>
+      <a routerLink="/contact" class="sc-cta__btn">
+        Get In Touch <app-icon name="ArrowUpRight" [size]="16" aria-hidden="true" />
+      </a>
+    </div>
+  </app-glass-card>
 </app-page-layout>

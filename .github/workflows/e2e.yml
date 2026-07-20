@@ -1,0 +1,89 @@
+name: E2E
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Cancel superseded runs on the same ref to save CI minutes.
+concurrency:
+  group: e2e-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Blocking gate: functional specs (nav, home, projects, contact).
+  # - PRs run a fast chromium + webkit pair for quick feedback.
+  # - Pushes to main add firefox + both mobile viewports for full coverage.
+  # Visual regression and a11y are excluded here (see below).
+  functional:
+    name: functional (${{ matrix.project }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        # Ternary expansion: the wider list only on main-branch pushes.
+        project: ${{ github.event_name == 'push' && fromJSON('["chromium","webkit","firefox","mobile-chrome","mobile-safari"]') || fromJSON('["chromium","webkit"]') }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        # Install all engines — project names (e.g. mobile-chrome) are not valid
+        # `install` targets, and mobile projects reuse the desktop engines anyway.
+        run: npx playwright install --with-deps
+
+      - name: Run functional E2E
+        # The webServer block in playwright.config.ts boots `ng serve` for us.
+        # Exclude the visual suite (win32-only baselines) and the a11y suite
+        # (runs as its own non-blocking job).
+        run: npx playwright test --project=${{ matrix.project }} --grep-invert "Visual regression|a11y:"
+
+      - name: Upload report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ matrix.project }}
+          path: playwright-report/
+          retention-days: 7
+
+  # Non-blocking: accessibility scans. Kept off the required gate for now because
+  # of a known, tracked backlog (color-contrast, nested-interactive). It still
+  # runs on every PR so regressions are visible; flip `continue-on-error` to
+  # false once the backlog is cleared to make it enforcing.
+  a11y:
+    name: a11y (advisory)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run accessibility scans
+        run: npx playwright test a11y --project=chromium
+
+      - name: Upload report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-a11y
+          path: playwright-report/
+          retention-days: 7

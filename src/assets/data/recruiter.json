@@ -1,4 +1,120 @@
 {
+  "overview": {
+    "headline": "Frontend Angular Developer",
+    "intro": "Thank you for visiting! Here's a quick snapshot of my professional journey, skills, and what I can bring to your team.",
+    "quickFacts": {
+      "location": "Chennai, Tamil Nadu, India",
+      "experience": "4+ Years of Experience",
+      "notice": "Immediate / 30 Days Notice"
+    },
+    "whyWorkWithMe": [
+      "Strong in Angular, TypeScript & Modern Web Tech",
+      "Clean Code, Scalable Architecture & Best Practices",
+      "Problem Solver with a Product Mindset",
+      "Collaborative, Adaptive & Fast Learner",
+      "Focus on Performance & User Experience"
+    ],
+    "stats": [
+      {
+        "value": "4+",
+        "label": "Years Experience",
+        "icon": "Briefcase"
+      },
+      {
+        "value": "8+",
+        "label": "Projects Completed",
+        "icon": "Box"
+      },
+      {
+        "value": "3+",
+        "label": "Products Delivered",
+        "icon": "Rocket"
+      },
+      {
+        "value": "100%",
+        "label": "Client Satisfaction",
+        "icon": "Heart"
+      },
+      {
+        "value": "Available",
+        "label": "For Opportunities",
+        "icon": "MessageSquare",
+        "available": true
+      }
+    ],
+    "coreSkills": [
+      "Angular (17+)",
+      "TypeScript",
+      "JavaScript",
+      "RxJS",
+      "HTML5",
+      "CSS3 / SCSS",
+      "TailwindCSS",
+      "Angular Material",
+      "Ionic",
+      "Signals",
+      "Zoneless Angular",
+      "SSR",
+      "REST APIs",
+      "Node.js",
+      "Express.js",
+      "PostgreSQL",
+      "MySQL",
+      "Git",
+      "CI/CD",
+      "Figma",
+      "Jest / Playwright"
+    ],
+    "highlights": [
+      {
+        "role": "Frontend Angular Consultant",
+        "company": "RStack Solutions (Product-Based Healthcare Company)",
+        "period": "Jun 2026 - Present",
+        "description": "Working on enterprise-level applications using Angular 22, Signals, Zoneless architecture and building scalable frontend solutions."
+      },
+      {
+        "role": "Freelance Frontend Developer",
+        "company": "",
+        "period": "2023 - 2026",
+        "description": "Delivered multiple web applications for clients across different domains using Angular, Ionic and modern web technologies."
+      },
+      {
+        "role": "Frontend Developer",
+        "company": "",
+        "period": "2021 - 2023",
+        "description": "Built responsive, high-performance web applications and collaborated with cross-functional teams."
+      }
+    ],
+    "bring": [
+      "Build scalable, maintainable and high-performance applications",
+      "Write clean, testable and well-documented code",
+      "Translate complex requirements into efficient solutions",
+      "Improve UX, performance and overall product quality",
+      "Collaborate effectively and deliver on time"
+    ],
+    "opportunities": [
+      {
+        "label": "Frontend Developer (Angular)",
+        "icon": "Code"
+      },
+      {
+        "label": "Full Stack Developer",
+        "icon": "Layers"
+      },
+      {
+        "label": "Angular Consultant",
+        "icon": "Briefcase"
+      },
+      {
+        "label": "Remote / Hybrid / On-site",
+        "icon": "Globe"
+      }
+    ],
+    "cta": {
+      "title": "Let's build something amazing together!",
+      "text": "I'm currently open to new opportunities. Let's discuss how I can contribute to your team's success."
+    }
+  },
   "interviews": [
     {
       "id": "1",
@@ -108,26 +224,74 @@
   ],
   "hireMeWizard": {
     "projectTypes": [
-      { "id": "1", "label": "Web Application Development" },
-      { "id": "2", "label": "Mobile App (Ionic/React Native)" },
-      { "id": "3", "label": "Performance Optimization" },
-      { "id": "4", "label": "Accessibility Audit & Implementation" },
-      { "id": "5", "label": "API Integration" },
-      { "id": "6", "label": "UI/UX Development" },
-      { "id": "7", "label": "Code Review & Architecture" }
+      {
+        "id": "1",
+        "label": "Web Application Development"
+      },
+      {
+        "id": "2",
+        "label": "Mobile App (Ionic/React Native)"
+      },
+      {
+        "id": "3",
+        "label": "Performance Optimization"
+      },
+      {
+        "id": "4",
+        "label": "Accessibility Audit & Implementation"
+      },
+      {
+        "id": "5",
+        "label": "API Integration"
+      },
+      {
+        "id": "6",
+        "label": "UI/UX Development"
+      },
+      {
+        "id": "7",
+        "label": "Code Review & Architecture"
+      }
     ],
     "budgetRanges": [
-      { "id": "1", "label": "Under $5,000" },
-      { "id": "2", "label": "$5,000 - $15,000" },
-      { "id": "3", "label": "$15,000 - $50,000" },
-      { "id": "4", "label": "$50,000 - $100,000" },
-      { "id": "5", "label": "$100,000+" }
+      {
+        "id": "1",
+        "label": "Under $5,000"
+      },
+      {
+        "id": "2",
+        "label": "$5,000 - $15,000"
+      },
+      {
+        "id": "3",
+        "label": "$15,000 - $50,000"
+      },
+      {
+        "id": "4",
+        "label": "$50,000 - $100,000"
+      },
+      {
+        "id": "5",
+        "label": "$100,000+"
+      }
     ],
     "timelineOptions": [
-      { "id": "1", "label": "ASAP (1-2 weeks)" },
-      { "id": "2", "label": "This month" },
-      { "id": "3", "label": "Next month" },
-      { "id": "4", "label": "Flexible" }
+      {
+        "id": "1",
+        "label": "ASAP (1-2 weeks)"
+      },
+      {
+        "id": "2",
+        "label": "This month"
+      },
+      {
+        "id": "3",
+        "label": "Next month"
+      },
+      {
+        "id": "4",
+        "label": "Flexible"
+      }
     ]
   },
   "meetingSchedulerUrl": "https://calendly.com/rabinr2607",

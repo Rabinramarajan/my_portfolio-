@@ -15,7 +15,7 @@
   [attr.aria-valuenow]="clamped()"
   aria-valuemin="0"
   aria-valuemax="100"
-  [attr.aria-label]="label()"
+  [attr.aria-label]="label() ?? ariaLabel()"
 >
   <div class="progress__fill" [style]="fillStyle()"></div>
 </div>

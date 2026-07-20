@@ -78,5 +78,27 @@
         "Change-detection & runtime tuning"
       ]
     }
+  ],
+  "approach": [
+    {
+      "title": "Discover",
+      "description": "Understanding your requirements, users and goals.",
+      "icon": "Search"
+    },
+    {
+      "title": "Plan",
+      "description": "Mapping the structure, features and timeline.",
+      "icon": "Layers"
+    },
+    {
+      "title": "Build",
+      "description": "Building clean, scalable and efficient solutions.",
+      "icon": "Code"
+    },
+    {
+      "title": "Deliver",
+      "description": "Testing, deployment and continuous support.",
+      "icon": "Send"
+    }
   ]
 }

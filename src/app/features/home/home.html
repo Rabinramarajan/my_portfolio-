@@ -2,7 +2,7 @@
   @if (home.value()?.hero; as hero) {
     <!-- Hero — asymmetric editorial: oversized headline crossing a portrait
          that bleeds off the top-right edge. Sized to fill the viewport. -->
-    <section class="hero" appReveal>
+    <section class="hero" appReveal data-testid="hero">
       <!-- Ambient backdrop: workspace photo, darkened well below text contrast -->
       <div class="hero__backdrop" aria-hidden="true">
         <!-- This is the LCP element. `priority` marks it fetchpriority=high so
@@ -47,7 +47,7 @@
           <span class="text-gradient-brand">{{ hero.headlineHighlight }}</span>
         </h1>
 
-        <p class="hero__subtitle">{{ hero.subtitle }}</p>
+        <p class="hero__subtitle" data-testid="hero-subtitle">{{ hero.subtitle }}</p>
 
         <div class="hero__ctas">
           @for (cta of hero.ctas; track trackById($index, cta)) {

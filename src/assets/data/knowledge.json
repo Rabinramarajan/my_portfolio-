@@ -1,0 +1,279 @@
+{
+  "categories": [
+    {
+      "key": "angular-tips",
+      "label": "Angular Tips",
+      "blurb": "Small, high-leverage Angular techniques worth keeping close.",
+      "icon": "Zap",
+      "accent": "red"
+    },
+    {
+      "key": "snippets",
+      "label": "Snippets",
+      "blurb": "Reusable, copy-paste code I reach for again and again.",
+      "icon": "Code",
+      "accent": "cyan"
+    },
+    {
+      "key": "interview",
+      "label": "Interview Prep",
+      "blurb": "Answers and mental models for frontend interviews.",
+      "icon": "MessageSquare",
+      "accent": "blue"
+    },
+    {
+      "key": "patterns",
+      "label": "Design Patterns",
+      "blurb": "Classic patterns framed for real component code.",
+      "icon": "Layers",
+      "accent": "purple"
+    },
+    {
+      "key": "system-design",
+      "label": "System Design",
+      "blurb": "Notes on designing frontend systems that scale.",
+      "icon": "Server",
+      "accent": "violet"
+    },
+    {
+      "key": "architecture",
+      "label": "Architecture",
+      "blurb": "Case studies on structuring non-trivial applications.",
+      "icon": "Grid3x3",
+      "accent": "amber"
+    },
+    {
+      "key": "bug-diary",
+      "label": "Bug Diary",
+      "blurb": "Gnarly bugs, the root cause, and how they were fixed.",
+      "icon": "AlertTriangle",
+      "accent": "orange"
+    },
+    {
+      "key": "journal",
+      "label": "Learning Journal",
+      "blurb": "A weekly note on what I learned and shipped.",
+      "icon": "BookOpen",
+      "accent": "green"
+    }
+  ],
+  "entries": [
+    {
+      "id": "k-signals-computed",
+      "slug": "prefer-computed-over-effect",
+      "title": "Prefer computed() over effect() for derived state",
+      "category": "angular-tips",
+      "summary": "Reach for effect() only for side effects — derived values belong in computed(), which stays pull-based and glitch-free.",
+      "tags": ["Angular", "Signals", "State"],
+      "date": "2026-07-14",
+      "readingMinutes": 3,
+      "difficulty": "intermediate",
+      "featured": true,
+      "body": [
+        {
+          "paragraphs": [
+            "A recurring smell in signal code is using effect() to copy one signal into another. It works, but it makes the value push-based and eagerly recomputed, and it runs outside the reactive graph the template consumes.",
+            "computed() is the right tool: it is lazy, memoized, and only recalculates when a dependency it actually read has changed."
+          ]
+        },
+        {
+          "heading": "The fix",
+          "code": {
+            "language": "typescript",
+            "code": "// Avoid: eager, imperative, easy to desync\nreadonly full = signal('');\nconstructor() {\n  effect(() => this.full.set(`${this.first()} ${this.last()}`));\n}\n\n// Prefer: lazy, memoized, no extra signal to keep in sync\nreadonly full = computed(() => `${this.first()} ${this.last()}`);"
+          }
+        },
+        {
+          "heading": "When effect IS right",
+          "bullets": [
+            "Writing to localStorage or the URL when state changes.",
+            "Imperatively calling a non-signal API (chart redraw, focus).",
+            "Logging / analytics on a state transition."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k-track-by",
+      "slug": "always-track-in-for-blocks",
+      "title": "Always give @for a stable track expression",
+      "category": "angular-tips",
+      "summary": "A bad track key re-creates the whole list on every change — wrecking animations, focus and performance.",
+      "tags": ["Angular", "Control Flow", "Performance"],
+      "date": "2026-07-02",
+      "readingMinutes": 2,
+      "difficulty": "beginner",
+      "body": [
+        {
+          "paragraphs": [
+            "The new @for block requires a track expression. Track by a stable identity (an id), not by the object reference or $index unless the list is truly static."
+          ],
+          "code": {
+            "language": "html",
+            "code": "@for (item of items(); track item.id) {\n  <app-card [item]=\"item\" />\n}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k-debounce-signal",
+      "slug": "debounced-signal-snippet",
+      "title": "A tiny debounced signal helper",
+      "category": "snippets",
+      "summary": "Wrap any signal in a debounced read — handy for search inputs without pulling in RxJS.",
+      "tags": ["Angular", "Signals", "RxJS-free"],
+      "date": "2026-07-10",
+      "readingMinutes": 4,
+      "difficulty": "advanced",
+      "featured": true,
+      "body": [
+        {
+          "paragraphs": [
+            "Drop this into a shared util and debounce a source signal without a Subject in sight."
+          ],
+          "code": {
+            "language": "typescript",
+            "code": "export function debounced<T>(source: () => T, ms: number): Signal<T> {\n  const out = signal(source());\n  let handle: ReturnType<typeof setTimeout>;\n  effect((onCleanup) => {\n    const value = source();\n    handle = setTimeout(() => out.set(value), ms);\n    onCleanup(() => clearTimeout(handle));\n  });\n  return out.asReadonly();\n}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k-event-loop",
+      "slug": "explain-the-event-loop",
+      "title": "Explaining the event loop in an interview",
+      "category": "interview",
+      "summary": "Microtasks vs macrotasks, and why a Promise callback always beats a setTimeout(0).",
+      "tags": ["JavaScript", "Concurrency"],
+      "date": "2026-06-28",
+      "readingMinutes": 5,
+      "difficulty": "intermediate",
+      "body": [
+        {
+          "paragraphs": [
+            "The call stack runs synchronous code. When it empties, the loop drains the microtask queue (Promises, queueMicrotask, MutationObserver) completely, then takes exactly one macrotask (timers, I/O, events) and repeats.",
+            "That is why a resolved Promise callback runs before a setTimeout(0) queued at the same time."
+          ],
+          "bullets": [
+            "Microtasks: Promise.then, await continuations, queueMicrotask.",
+            "Macrotasks: setTimeout, setInterval, DOM events, message channel.",
+            "Rendering happens between macrotasks, after microtasks drain."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k-facade-pattern",
+      "slug": "facade-pattern-for-lazy-embeds",
+      "title": "The facade pattern for heavy third-party embeds",
+      "category": "patterns",
+      "summary": "Show a cheap placeholder and only mount the expensive widget on interaction — the same idea behind lite-youtube.",
+      "tags": ["Patterns", "Performance", "Angular"],
+      "date": "2026-07-06",
+      "readingMinutes": 4,
+      "difficulty": "intermediate",
+      "body": [
+        {
+          "paragraphs": [
+            "A facade renders a lightweight stand-in (a poster image and a play button) and defers the real, heavy component until the user actually asks for it. It keeps hundreds of kilobytes of embed off the initial load.",
+            "I use exactly this in the portfolio's video player: until you click, there is no iframe in the DOM at all."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k-frontend-caching",
+      "slug": "layers-of-frontend-caching",
+      "title": "The layers of caching in a frontend system",
+      "category": "system-design",
+      "summary": "From HTTP cache headers to service workers to in-memory signals — where each layer belongs.",
+      "tags": ["System Design", "Caching", "PWA"],
+      "date": "2026-06-20",
+      "readingMinutes": 7,
+      "difficulty": "advanced",
+      "body": [
+        {
+          "paragraphs": [
+            "Caching is not one decision but a stack of them, each with a different invalidation story."
+          ],
+          "bullets": [
+            "CDN / edge: immutable, content-hashed assets, cache forever.",
+            "HTTP cache: ETags and max-age for API responses that tolerate staleness.",
+            "Service worker: offline shell and stale-while-revalidate for data.",
+            "In-memory (signals/resource): dedupe within a session, cleared on reload."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k-feature-first",
+      "slug": "feature-first-angular-architecture",
+      "title": "Case study: feature-first architecture in this portfolio",
+      "category": "architecture",
+      "summary": "How lazy routes, a typed DataService and a shared component barrel keep 30+ pages maintainable.",
+      "tags": ["Architecture", "Angular", "Scalability"],
+      "date": "2026-07-16",
+      "readingMinutes": 8,
+      "difficulty": "advanced",
+      "featured": true,
+      "body": [
+        {
+          "paragraphs": [
+            "Every page is a lazy-loaded standalone component under features/. Content lives in JSON, fetched through a single typed DataService built on httpResource, so pages never hand-roll HTTP or hold loading booleans.",
+            "Shared UI is exported from one barrel and styled entirely with CSS custom-property design tokens, so a page composes primitives without reaching into their internals."
+          ],
+          "bullets": [
+            "core/ — models, services, tokens, constants. No UI.",
+            "shared/ — reusable components, directives, layout.",
+            "features/ — one folder per route, lazy-loaded."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k-ssr-innerhtml",
+      "slug": "innerhtml-binding-breaks-ssr",
+      "title": "Bug: an [innerHTML] binding silently broke every image on the page",
+      "category": "bug-diary",
+      "summary": "The server DOM has no innerHTML setter — the throw halted the update pass and stripped the srcset off the hero image.",
+      "tags": ["Angular", "SSR", "Debugging"],
+      "date": "2026-07-12",
+      "readingMinutes": 6,
+      "difficulty": "advanced",
+      "featured": true,
+      "body": [
+        {
+          "paragraphs": [
+            "Symptom: after adding an icon component that set SVG geometry via [innerHTML], the prerendered hero image lost its srcset and src — but only in the SSR output.",
+            "Root cause: the server-side DOM shim has no innerHTML setter, so the binding threw during prerendering. Because a throw aborts the rest of the change-detection pass for that view, every binding after it — including the hero's srcset — was silently skipped."
+          ]
+        },
+        {
+          "heading": "The fix",
+          "paragraphs": [
+            "Write the geometry to the element after render instead, via afterRenderEffect, which never runs on the server. Prerendering then emits a bare <svg> frame and the client fills it in, so hydration still matches."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "k-journal-2026-w29",
+      "slug": "week-29-2026",
+      "title": "Week 29, 2026 — E2E stability and rich media",
+      "category": "journal",
+      "summary": "Tamed WebKit hydration flakiness under parallel Playwright runs and shipped a lazy video + before/after media kit.",
+      "tags": ["Journal", "Testing", "Angular"],
+      "date": "2026-07-19",
+      "readingMinutes": 3,
+      "difficulty": "beginner",
+      "body": [
+        {
+          "paragraphs": [
+            "This week was mostly about reliability. Desktop-WebKit was timing out under parallel Playwright workers because a single dev server starved on hydration; conditional workers plus toPass + networkidle waits fixed it.",
+            "Then I built reusable media components — a facade video player and a before/after slider — and started this Knowledge Hub to keep notes like this one in public."
+          ]
+        }
+      ]
+    }
+  ]
+}

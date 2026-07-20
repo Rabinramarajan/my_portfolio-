@@ -1,23 +1,119 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PersonalizationService } from '../../core/services/personalization.service';
-import { PageLayout, GlassCard, Stagger } from '../../shared';
+import { DataService } from '../../core';
+import { PageLayout, GlassCard } from '../../shared';
 import { Icon } from '../../shared/components/ui/icon/icon';
 import type { ThemeMode, FontFamily, LayoutStyle, ContentDensity } from '../../core/models';
 import type { AccentColor } from '../../core/types/common.types';
 
-/** Settings & Personalization page — customize portfolio appearance and behavior. */
+/** Left-nav section keys for the settings panel. */
+type SettingsSection =
+  'profile' | 'appearance' | 'typography' | 'accessibility' | 'preferences' | 'danger';
+
+interface NavItem {
+  readonly key: SettingsSection;
+  readonly label: string;
+  readonly icon: string;
+}
+
+/** Locally-edited profile fields (prefilled from profile.json; not persisted server-side). */
+interface ProfileForm {
+  name: string;
+  title: string;
+  email: string;
+  location: string;
+  bio: string;
+  website: string;
+}
+
+/**
+ * Settings & Personalization — a two-panel layout with a left section nav and a
+ * right content panel. Appearance, typography, accessibility and preferences are
+ * real, live-persisted personalization controls; the Profile tab is a local-only
+ * form prefilled from profile.json (a static portfolio has no profile backend).
+ */
 @Component({
   selector: 'app-settings',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Icon, PageLayout, GlassCard, Stagger, FormsModule],
+  imports: [Icon, PageLayout, GlassCard, FormsModule],
   templateUrl: './settings.html',
   styleUrl: './settings.scss',
   host: { class: 'block' },
 })
 export class SettingsPage {
   protected readonly personalization = inject(PersonalizationService);
+  private readonly data = inject(DataService);
+  private readonly profileResource = this.data.load('profile');
 
+  // ── Section navigation ──────────────────────────────
+  protected readonly section = signal<SettingsSection>('profile');
+  protected readonly nav: readonly NavItem[] = [
+    { key: 'profile', label: 'Profile', icon: 'User' },
+    { key: 'appearance', label: 'Appearance', icon: 'Sparkles' },
+    { key: 'typography', label: 'Typography', icon: 'PenTool' },
+    { key: 'accessibility', label: 'Accessibility', icon: 'Accessibility' },
+    { key: 'preferences', label: 'Preferences', icon: 'Wrench' },
+    { key: 'danger', label: 'Danger Zone', icon: 'AlertTriangle' },
+  ];
+
+  protected setSection(key: SettingsSection): void {
+    this.section.set(key);
+  }
+
+  // ── Profile form (local-only) ───────────────────────
+  protected readonly avatar = computed(() => this.profileResource.value()?.avatar ?? '');
+  protected readonly form = signal<ProfileForm>({
+    name: '',
+    title: '',
+    email: '',
+    location: '',
+    bio: '',
+    website: '',
+  });
+  protected readonly saved = signal(false);
+
+  constructor() {
+    // Seed the editable form once profile.json resolves.
+    let seeded = false;
+    effect(() => {
+      const p = this.profileResource.value();
+      if (!p || seeded) return;
+      seeded = true;
+      this.form.set({
+        name: p.name ?? '',
+        title: p.role ?? '',
+        email: p.email ?? '',
+        location: p.location ?? '',
+        bio: p.bio ?? '',
+        website: p.website ?? '',
+      });
+    });
+  }
+
+  protected updateField<K extends keyof ProfileForm>(key: K, value: ProfileForm[K]): void {
+    this.form.update((f) => ({ ...f, [key]: value }));
+    this.saved.set(false);
+  }
+
+  /** Local-only save — flashes confirmation. No profile backend on a static site. */
+  protected saveChanges(): void {
+    this.saved.set(true);
+  }
+
+  // ── Profile display toggles (local) ─────────────────
+  protected readonly showEmail = signal(true);
+  protected readonly showLocation = signal(true);
+  protected readonly showSocial = signal(true);
+
+  // ── Personalization state (real, live) ──────────────
   readonly theme = this.personalization.theme;
   readonly accentColor = this.personalization.accentColor;
   readonly font = this.personalization.font;
@@ -47,11 +143,6 @@ export class SettingsPage {
   ];
   protected readonly layouts: LayoutStyle[] = ['default', 'minimal', 'spacious'];
   protected readonly densities: ContentDensity[] = ['compact', 'normal', 'expanded'];
-  protected readonly fontSizes: Array<'normal' | 'large' | 'xlarge'> = [
-    'normal',
-    'large',
-    'xlarge',
-  ];
 
   protected updateTheme(theme: ThemeMode): void {
     this.personalization.setTheme(theme);
@@ -136,5 +227,9 @@ export class SettingsPage {
       dyslexic: 'OpenDyslexic',
     };
     return labels[font];
+  }
+
+  protected titleCase(value: string): string {
+    return value.charAt(0).toUpperCase() + value.slice(1);
   }
 }

@@ -16,7 +16,10 @@ import type { CareerRoadmapConfig } from '../../core/models';
 })
 export class CareerRoadmapPage {
   private readonly dataService = inject(DataService);
-  readonly roadmap = this.dataService.load('career-roadmap') as unknown as CareerRoadmapConfig;
+  private readonly roadmapResource = this.dataService.load('career-roadmap');
+  get roadmap(): CareerRoadmapConfig | undefined {
+    return this.roadmapResource.value() as CareerRoadmapConfig | undefined;
+  }
 
   protected getTypeIcon(type: string): string {
     const iconMap: Record<string, string> = {

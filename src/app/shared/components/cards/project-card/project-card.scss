@@ -215,6 +215,9 @@
 .pjc__casestudy {
   display: inline-flex;
   align-items: center;
+  background: none;
+  border: 0;
+  padding: 0;
   /* WCAG 2.5.8: keep the tap box at least 24px tall on touch screens. */
   min-height: 1.5rem;
   gap: 0.5rem;

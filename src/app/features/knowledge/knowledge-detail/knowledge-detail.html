@@ -1,0 +1,229 @@
+@if (entry(); as e) {
+  <div class="kd" [style.--c]="accent()">
+    <!-- Breadcrumb -->
+    <nav class="kd-crumb" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a>
+      <app-icon name="ChevronRight" [size]="14" aria-hidden="true" />
+      <a routerLink="/knowledge">Knowledge Hub</a>
+      @if (meta(); as m) {
+        <app-icon name="ChevronRight" [size]="14" aria-hidden="true" />
+        <span>{{ m.label }}</span>
+      }
+    </nav>
+
+    <div class="kd-layout">
+      <!-- Main article -->
+      <article class="kd-main" appStagger>
+        <div class="kd-badges">
+          @if (meta(); as m) {
+            <span class="kd-badge kd-badge--cat">{{ m.label }}</span>
+          }
+          @if (e.difficulty) {
+            <span class="kd-badge kd-badge--level">{{ e.difficulty }}</span>
+          }
+        </div>
+
+        <h1 class="kd-title">
+          {{ e.title }}
+          @if (e.featured) {
+            <app-icon name="Sparkles" [size]="22" class="kd-title__star" aria-hidden="true" />
+          }
+        </h1>
+        <p class="kd-summary">{{ e.summary }}</p>
+
+        <!-- Byline + actions -->
+        <div class="kd-byline">
+          <div class="kd-author">
+            <img class="kd-author__avatar" [src]="author().avatar" alt="" width="40" height="40" />
+            <div>
+              <p class="kd-author__name">{{ author().name }}</p>
+              <p class="kd-author__meta">
+                {{ formatDate(e.date) }} · {{ e.readingMinutes }} min read
+              </p>
+            </div>
+          </div>
+          <div class="kd-actions">
+            <button
+              type="button"
+              class="kd-act"
+              [class.kd-act--on]="bookmarked()"
+              (click)="toggleBookmark()"
+            >
+              <app-icon name="BookOpen" [size]="15" aria-hidden="true" />
+              {{ bookmarked() ? 'Saved' : 'Bookmark' }}
+            </button>
+            <button type="button" class="kd-act" (click)="share()">
+              <app-icon name="Send" [size]="15" aria-hidden="true" />
+              Share
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero banner -->
+        <div class="kd-hero" aria-hidden="true">
+          <div class="kd-hero__text">
+            <span class="kd-hero__cat">{{ meta()?.label }}</span>
+            <span class="kd-hero__title">{{ e.title }}</span>
+          </div>
+          <app-icon [name]="iconFor(e)" [size]="96" class="kd-hero__icon" />
+        </div>
+
+        <!-- Body -->
+        <div class="kd-body">
+          @for (section of e.body; track $index; let i = $index) {
+            @let label = section.heading ?? (i === 0 ? 'Introduction' : '');
+            <section class="kd-section" [id]="label ? sectionId(label, i) : null">
+              @if (label) {
+                <h2 class="kd-h2">
+                  <span class="kd-h2__hash" aria-hidden="true">#</span>
+                  {{ label }}
+                </h2>
+              }
+              @for (para of section.paragraphs ?? []; track $index) {
+                <p class="kd-p">{{ para }}</p>
+              }
+              @if (section.bullets; as bullets) {
+                <ul class="kd-list">
+                  @for (bullet of bullets; track $index) {
+                    <li>{{ bullet }}</li>
+                  }
+                </ul>
+              }
+              @if (section.code; as code) {
+                <app-code-block class="kd-code" [code]="code.code" />
+              }
+            </section>
+          }
+        </div>
+
+        <!-- Prev / Next -->
+        <nav class="kd-nav" aria-label="Article navigation">
+          @if (prev(); as p) {
+            <a class="kd-nav__link kd-nav__link--prev" [routerLink]="['/knowledge', p.slug]">
+              <span class="kd-nav__dir"
+                ><app-icon name="ChevronLeft" [size]="14" aria-hidden="true" /> Previous</span
+              >
+              <span class="kd-nav__title">{{ p.title }}</span>
+            </a>
+          } @else {
+            <span></span>
+          }
+
+          <a class="kd-nav__hub" routerLink="/knowledge" aria-label="All articles">
+            <app-icon name="Grid3x3" [size]="18" aria-hidden="true" />
+          </a>
+
+          @if (next(); as n) {
+            <a class="kd-nav__link kd-nav__link--next" [routerLink]="['/knowledge', n.slug]">
+              <span class="kd-nav__dir"
+                >Next <app-icon name="ChevronRight" [size]="14" aria-hidden="true"
+              /></span>
+              <span class="kd-nav__title">{{ n.title }}</span>
+            </a>
+          } @else {
+            <span></span>
+          }
+        </nav>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="kd-side">
+        <!-- Table of contents -->
+        @if (toc().length) {
+          <app-glass-card padding="lg" class="kd-toc">
+            <h2 class="kd-side__title">Table of Contents</h2>
+            <ul class="kd-toc__list">
+              @for (item of toc(); track item.id) {
+                <li>
+                  <a [href]="'#' + item.id">{{ item.label }}</a>
+                </li>
+              }
+            </ul>
+          </app-glass-card>
+        }
+
+        <!-- Rating -->
+        <app-glass-card padding="lg" class="kd-rate">
+          <h2 class="kd-side__title">Did you find this helpful?</h2>
+          <div class="kd-stars" role="group" aria-label="Rate this article">
+            @for (star of [1, 2, 3, 4, 5]; track star) {
+              <button
+                type="button"
+                class="kd-star"
+                [class.kd-star--on]="rating() >= star"
+                [attr.aria-label]="star + ' star' + (star > 1 ? 's' : '')"
+                (click)="rate(star)"
+              >
+                <app-icon name="Star" [size]="20" aria-hidden="true" />
+              </button>
+            }
+          </div>
+          <p class="kd-rate__note">
+            {{ rated() ? 'Thanks for your feedback!' : 'Tap a star to rate.' }}
+          </p>
+        </app-glass-card>
+
+        <!-- Related -->
+        @if (related().length) {
+          <app-glass-card padding="lg" class="kd-related">
+            <h2 class="kd-side__title">Related Articles</h2>
+            <ul class="kd-related__list">
+              @for (r of related(); track r.id) {
+                <li>
+                  <a
+                    [routerLink]="['/knowledge', r.slug]"
+                    class="kd-related__item"
+                    [style.--c]="accentFor(r)"
+                  >
+                    <span class="kd-related__thumb" aria-hidden="true">
+                      <app-icon [name]="iconFor(r)" [size]="20" />
+                    </span>
+                    <span class="kd-related__text">
+                      <span class="kd-related__title">{{ r.title }}</span>
+                      <span class="kd-related__meta"
+                        >{{ formatDate(r.date) }} · {{ r.readingMinutes }} min read</span
+                      >
+                    </span>
+                  </a>
+                </li>
+              }
+            </ul>
+            <a routerLink="/knowledge" class="kd-related__all">
+              View All Articles <app-icon name="ArrowUpRight" [size]="14" aria-hidden="true" />
+            </a>
+          </app-glass-card>
+        }
+
+        <!-- Newsletter -->
+        <div class="kd-news">
+          <span class="kd-news__icon" aria-hidden="true"><app-icon name="Mail" [size]="26" /></span>
+          <p class="kd-news__title">Stay in the loop</p>
+          <p class="kd-news__sub">Get the latest articles and insights delivered to your inbox.</p>
+          <form class="kd-news__form" (submit)="$event.preventDefault()">
+            <input
+              type="email"
+              class="kd-news__input"
+              placeholder="Enter your email"
+              aria-label="Email address"
+            />
+            <button type="submit" class="kd-news__btn">Subscribe</button>
+          </form>
+          <p class="kd-news__fine">No spam. Unsubscribe anytime.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+} @else if (notFound()) {
+  <div class="kd-missing">
+    <app-glass-card padding="lg">
+      <h1 class="kd-title">Note not found</h1>
+      <p class="kd-summary">That entry doesn't exist or may have been renamed.</p>
+      <a class="kd-back" routerLink="/knowledge">
+        <app-icon name="ChevronLeft" [size]="16" aria-hidden="true" />
+        Back to Knowledge Hub
+      </a>
+    </app-glass-card>
+  </div>
+} @else {
+  <p class="kd-loading">Loading…</p>
+}

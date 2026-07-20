@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "ng build",
-  "outputDirectory": "dist/my-portolio-ng22/browser",
+  "outputDirectory": "dist/my-portfolio-ng22/browser",
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [{ "source": "/((?!assets/).*)", "destination": "/index.html" }],

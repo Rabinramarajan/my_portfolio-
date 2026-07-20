@@ -1,4 +1,5 @@
 export * from './ui';
+export * from './media';
 export * from './buttons';
 export * from './cards';
 export * from './charts';

@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { provideHttpClient } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import {
   provideRouter,
@@ -50,6 +51,7 @@ export const appConfig: ApplicationConfig = {
     // paint, which is what held LCP at 3.5s.
     provideClientHydration(withEventReplay()),
     provideHttpClient(),
+    provideAnimationsAsync(),
     provideRouter(
       routes,
       withComponentInputBinding(),

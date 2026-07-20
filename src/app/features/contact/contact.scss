@@ -92,7 +92,8 @@
   padding: 0.375rem 0.875rem;
   font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--color-success);
+  /* contrast-safe green (raw success is 2.01 on the light tint). */
+  color: var(--color-link-success);
 }
 
 .ct-status__dot {

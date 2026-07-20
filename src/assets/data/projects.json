@@ -27,7 +27,6 @@
       ],
       "featured": true,
       "status": "finished",
-      "caseStudyUrl": "/case-studies/fiji-immigration",
       "createdAt": "2024-06-01"
     },
     {
@@ -53,7 +52,6 @@
       ],
       "featured": true,
       "status": "finished",
-      "caseStudyUrl": "/case-studies/fiji-immigration-internal",
       "createdAt": "2024-07-01"
     },
     {
@@ -79,7 +77,6 @@
       ],
       "featured": true,
       "status": "finished",
-      "caseStudyUrl": "/case-studies/prims",
       "createdAt": "2023-09-01"
     },
     {
@@ -99,7 +96,6 @@
       "technologies": ["Ionic Angular", "Angular", "TypeScript", "Capacitor", "RxJS", "REST APIs"],
       "featured": true,
       "status": "finished",
-      "caseStudyUrl": "/case-studies/vnpf",
       "createdAt": "2023-03-01"
     },
     {
@@ -113,7 +109,6 @@
       "featured": true,
       "status": "finished",
       "liveUrl": "https://www.rabinr.in",
-      "caseStudyUrl": "/case-studies/zellavora",
       "createdAt": "2026-02-01"
     },
     {

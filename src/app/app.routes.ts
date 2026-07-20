@@ -88,30 +88,6 @@ export const routes: Routes = [
         loadComponent: () => import('./features/resume/resume').then((m) => m.ResumePage),
       },
       {
-        path: 'case-studies',
-        title: 'Case Studies',
-        data: {
-          description:
-            'In-depth case studies by Rabin R — government immigration portals, pension platforms and cross-platform mobile apps: the problem, the solution, the architecture and the results.',
-          keywords: [
-            'Angular Case Studies',
-            'Frontend Case Study',
-            'Government Portal',
-            'Enterprise Web Apps',
-          ],
-        },
-        loadComponent: () =>
-          import('./features/case-studies/case-studies').then((m) => m.CaseStudiesPage),
-      },
-      {
-        path: 'case-studies/:id',
-        title: 'Case Study',
-        loadComponent: () =>
-          import('./features/case-studies/case-study-detail/case-study-detail').then(
-            (m) => m.CaseStudyDetailPage,
-          ),
-      },
-      {
         path: 'services',
         title: 'Services',
         data: {
@@ -135,22 +111,6 @@ export const routes: Routes = [
           keywords: ['Settings', 'Personalization', 'Accessibility', 'Theme', 'Customization'],
         },
         loadComponent: () => import('./features/settings/settings').then((m) => m.SettingsPage),
-      },
-      {
-        path: 'analytics',
-        title: 'Analytics',
-        data: {
-          description:
-            'Portfolio analytics dashboard with visitor metrics, GitHub activity, technologies mastered, and detailed performance statistics.',
-          keywords: [
-            'Analytics',
-            'Metrics',
-            'Statistics',
-            'Portfolio Performance',
-            'Visitor Analytics',
-          ],
-        },
-        loadComponent: () => import('./features/analytics/analytics').then((m) => m.AnalyticsPage),
       },
       {
         path: 'showcase',
@@ -194,62 +154,35 @@ export const routes: Routes = [
           import('./features/certifications/certifications').then((m) => m.CertificationsPage),
       },
       {
-        path: 'awards',
-        title: 'Awards & Achievements',
-        data: {
-          description:
-            'Awards and recognition from organizations and communities for professional excellence and contributions.',
-          keywords: ['Awards', 'Achievements', 'Recognition', 'Professional Awards'],
-        },
-        loadComponent: () => import('./features/awards/awards').then((m) => m.AwardsPage),
-      },
-      {
-        path: 'testimonials',
-        title: 'Testimonials',
-        data: {
-          description:
-            'Client and colleague testimonials about my work, expertise, and collaboration style.',
-          keywords: ['Testimonials', 'References', 'Client Feedback', 'Reviews'],
-        },
-        loadComponent: () =>
-          import('./features/testimonials/testimonials').then((m) => m.TestimonialsPage),
-      },
-      {
-        path: 'opensource',
-        title: 'Open Source',
-        data: {
-          description:
-            'Notable contributions to open source projects including bug fixes, features, and documentation.',
-          keywords: ['Open Source', 'GitHub', 'Contributions', 'Community'],
-        },
-        loadComponent: () =>
-          import('./features/opensource/opensource').then((m) => m.OpenSourcePage),
-      },
-      {
-        path: 'talks',
-        title: 'Tech Talks',
-        data: {
-          description:
-            'Conference talks, webinars, and technical presentations on frontend development and engineering.',
-          keywords: ['Talks', 'Speaking', 'Presentations', 'Conferences', 'Webinars'],
-        },
-        loadComponent: () => import('./features/talks/talks').then((m) => m.TalksPage),
-      },
-      {
-        path: 'community',
-        title: 'Community',
-        data: {
-          description:
-            'Community contributions including mentoring, volunteering, and building developer communities.',
-          keywords: ['Community', 'Mentoring', 'Volunteering', 'Developer Community'],
-        },
-        loadComponent: () => import('./features/community/community').then((m) => m.CommunityPage),
-      },
-      {
         path: 'blog',
         title: 'Blog',
         data: { description: 'Articles, tutorials and insights on frontend development.' },
         loadComponent: () => import('./features/blog/blog').then((m) => m.BlogPage),
+      },
+      {
+        path: 'knowledge',
+        title: 'Knowledge Hub',
+        data: {
+          description:
+            'A living library of Angular tips, reusable snippets, interview notes, design patterns, system design write-ups and a bug-solving diary by Rabin R.',
+          keywords: [
+            'Angular Tips',
+            'Code Snippets',
+            'Interview Preparation',
+            'Design Patterns',
+            'System Design',
+            'Frontend Notes',
+          ],
+        },
+        loadComponent: () => import('./features/knowledge/knowledge').then((m) => m.KnowledgePage),
+      },
+      {
+        path: 'knowledge/:slug',
+        title: 'Knowledge',
+        loadComponent: () =>
+          import('./features/knowledge/knowledge-detail/knowledge-detail').then(
+            (m) => m.KnowledgeDetailPage,
+          ),
       },
       {
         path: 'career-roadmap',
@@ -276,27 +209,6 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'tech-evolution',
-        title: 'Technology Evolution',
-        data: {
-          description:
-            'How technologies were adopted and mastered over time with proficiency progression.',
-          keywords: ['Technology', 'Evolution', 'Proficiency', 'Learning Path'],
-        },
-        loadComponent: () =>
-          import('./features/tech-evolution/tech-evolution').then((m) => m.TechEvolutionPage),
-      },
-      {
-        path: 'world-map',
-        title: 'World Map',
-        data: {
-          description:
-            'Global reach showing client locations, industries served, and international project experience.',
-          keywords: ['Global', 'Clients', 'Locations', 'International'],
-        },
-        loadComponent: () => import('./features/world-map/world-map').then((m) => m.WorldMapPage),
-      },
-      {
         path: 'experience-timeline',
         title: 'Experience Timeline',
         data: {
@@ -308,17 +220,6 @@ export const routes: Routes = [
           import('./features/experience-timeline/experience-timeline').then(
             (m) => m.ExperienceTimelinePage,
           ),
-      },
-      {
-        path: 'skills-tree',
-        title: 'Skills Tree',
-        data: {
-          description:
-            'Game-style skill progression with unlock levels, proficiency tracking, and mastery visualization.',
-          keywords: ['Skills', 'Progression', 'Mastery', 'Gamification'],
-        },
-        loadComponent: () =>
-          import('./features/skills-tree/skills-tree').then((m) => m.SkillsTreePage),
       },
       {
         path: 'contact',

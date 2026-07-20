@@ -1,0 +1,152 @@
+<app-page-layout
+  breadcrumb="Knowledge Hub"
+  titleLead="Knowledge"
+  titleHighlight="Hub"
+  subtitle="Thoughts, tutorials and insights on frontend development, best practices and modern technologies."
+>
+  <!-- Header aside: search -->
+  <div slot="header-aside" class="kh-search">
+    <app-icon name="Search" [size]="18" class="kh-search__icon" aria-hidden="true" />
+    <input
+      type="search"
+      class="kh-search__input"
+      placeholder="Search articles…"
+      [value]="query()"
+      (input)="onSearch($event)"
+      aria-label="Search the knowledge hub"
+    />
+  </div>
+
+  <!-- Category filter -->
+  <div class="kh-filters" role="group" aria-label="Filter by topic">
+    <button
+      type="button"
+      class="kh-chip"
+      [class.kh-chip--active]="category() === 'all'"
+      (click)="setCategory('all')"
+    >
+      <app-icon name="Grid3x3" [size]="15" aria-hidden="true" />
+      All
+    </button>
+    @for (cat of categories(); track cat.key) {
+      <button
+        type="button"
+        class="kh-chip"
+        [class.kh-chip--active]="category() === cat.key"
+        [style.--c]="categoryAccent(cat)"
+        (click)="setCategory(cat.key)"
+      >
+        <app-icon [name]="cat.icon" [size]="15" aria-hidden="true" />
+        {{ cat.label }}
+      </button>
+    }
+  </div>
+
+  @if (isLoading()) {
+    <p class="kh-empty">Loading knowledge…</p>
+  } @else if (!hasResults()) {
+    <div class="kh-empty">
+      <app-icon name="Search" [size]="28" aria-hidden="true" />
+      <p>No notes match your search.</p>
+    </div>
+  } @else {
+    <!-- Featured article -->
+    @if (featured(); as hero) {
+      <a
+        class="kh-feature-link"
+        [routerLink]="['/knowledge', hero.slug]"
+        [style.--c]="accentFor(hero)"
+      >
+        <app-glass-card padding="none" [interactive]="true" class="kh-feature">
+          <div class="kh-feature__body">
+            <span class="kh-feature__badge">Featured Article</span>
+            <h2 class="kh-feature__title">{{ hero.title }}</h2>
+            <p class="kh-feature__summary">{{ hero.summary }}</p>
+            <div class="kh-byline">
+              <img class="kh-byline__avatar" [src]="author.avatar" alt="" width="40" height="40" />
+              <div>
+                <p class="kh-byline__name">{{ author.name }}</p>
+                <p class="kh-byline__meta">
+                  {{ formatDate(hero.date) }} · {{ hero.readingMinutes }} min read
+                </p>
+              </div>
+            </div>
+            <span class="kh-feature__cta">
+              Read Article <app-icon name="ArrowRight" [size]="16" aria-hidden="true" />
+            </span>
+          </div>
+          <div class="kh-feature__visual" aria-hidden="true">
+            @if (metaFor(hero.category); as meta) {
+              <app-icon [name]="meta.icon" [size]="88" />
+            }
+          </div>
+        </app-glass-card>
+      </a>
+    }
+
+    <!-- Latest articles -->
+    <div class="kh-section-head">
+      <h2 class="kh-section-title">Latest Articles</h2>
+      <span class="kh-section-count">{{ visible().length }} articles</span>
+    </div>
+
+    <ul class="kh-grid" appStagger>
+      @for (entry of visible(); track entry.id) {
+        <li class="kh-cell">
+          <a class="kh-link" [routerLink]="['/knowledge', entry.slug]">
+            <app-glass-card
+              padding="none"
+              [interactive]="true"
+              class="kh-card"
+              [style.--c]="accentFor(entry)"
+            >
+              <div class="kh-card__thumb" aria-hidden="true">
+                @if (metaFor(entry.category); as meta) {
+                  <span class="kh-card__cat">
+                    <app-icon [name]="meta.icon" [size]="13" aria-hidden="true" />
+                    {{ meta.label }}
+                  </span>
+                  <app-icon [name]="meta.icon" [size]="52" class="kh-card__thumb-icon" />
+                }
+              </div>
+
+              <div class="kh-card__body">
+                <h3 class="kh-card__title">{{ entry.title }}</h3>
+                <p class="kh-card__summary">{{ entry.summary }}</p>
+
+                <div class="kh-card__foot">
+                  <span>{{ formatDate(entry.date) }} · {{ entry.readingMinutes }} min read</span>
+                  <span class="kh-card__more" aria-hidden="true">
+                    <app-icon name="ArrowRight" [size]="15" />
+                  </span>
+                </div>
+              </div>
+            </app-glass-card>
+          </a>
+        </li>
+      }
+    </ul>
+  }
+
+  <!-- Newsletter -->
+  <app-glass-card padding="lg" class="kh-news">
+    <div class="kh-news__intro">
+      <span class="kh-news__icon"><app-icon name="Mail" [size]="24" aria-hidden="true" /></span>
+      <div>
+        <p class="kh-news__title">Stay Updated</p>
+        <p class="kh-news__sub">Get the latest articles and insights directly in your inbox.</p>
+      </div>
+    </div>
+    <form class="kh-news__form" (submit)="$event.preventDefault()">
+      <input
+        type="email"
+        class="kh-news__input"
+        placeholder="Enter your email"
+        aria-label="Email address"
+      />
+      <button type="submit" class="kh-news__btn">
+        Subscribe <app-icon name="Send" [size]="15" aria-hidden="true" />
+      </button>
+    </form>
+  </app-glass-card>
+</app-page-layout>

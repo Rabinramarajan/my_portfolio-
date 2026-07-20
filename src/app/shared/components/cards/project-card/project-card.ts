@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 import { AnimatedButton } from '../../buttons/animated-button/animated-button';
 import { Badge } from '../../ui/badge/badge';
 import { GlassCard } from '../../ui/glass-card/glass-card';
-import { Modal } from '../../overlay/modal/modal';
+import { CaseStudyDialog } from '../../overlay/case-study-dialog/case-study-dialog';
 import { ProgressBar } from '../../ui/progress-bar/progress-bar';
 import { AccentColor, Project, trackByValue } from '../../../../core';
 import { Icon } from '../../ui/icon/icon';
@@ -47,7 +48,7 @@ function categoryAccent(category: string): AccentColor {
 @Component({
   selector: 'app-project-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Icon, AnimatedButton, Badge, GlassCard, Modal, ProgressBar],
+  imports: [RouterLink, Icon, AnimatedButton, Badge, GlassCard, ProgressBar],
   templateUrl: './project-card.html',
   styleUrl: './project-card.scss',
   host: { class: 'block' },
@@ -69,26 +70,23 @@ export class ProjectCard {
       ),
   );
 
-  protected readonly images = computed<string[]>(() => {
+  protected readonly imageUrl = computed<string>(() => {
     const image: string | readonly string[] = this.project().image;
-    return typeof image === 'string' ? [image] : [...image];
+    return (typeof image === 'string' ? image : image[0]) ?? '';
   });
-  protected readonly imageUrl = computed<string>(() => this.images()[0] ?? '');
-  protected readonly selectedImage = computed<string>(
-    () => this.images()[this.currentImageIndex()] ?? '',
-  );
-  protected readonly hasMultipleImages = computed(() => this.images().length > 1);
-  protected readonly modalOpen = signal(false);
-  protected readonly currentImageIndex = signal(0);
 
-  protected prevImage(): void {
-    this.currentImageIndex.update(
-      (current) => (current - 1 + this.images().length) % this.images().length,
-    );
-  }
+  private readonly dialog = inject(MatDialog);
 
-  protected nextImage(): void {
-    this.currentImageIndex.update((current) => (current + 1) % this.images().length);
+  /** Opens the case-study popup (MatDialog) for this project. */
+  protected openCaseStudy(): void {
+    this.dialog.open(CaseStudyDialog, {
+      data: this.project(),
+      panelClass: 'csd-dialog-panel',
+      width: 'min(58rem, 94vw)',
+      maxWidth: '94vw',
+      autoFocus: 'dialog',
+      restoreFocus: true,
+    });
   }
 
   protected readonly trackByValue = trackByValue;

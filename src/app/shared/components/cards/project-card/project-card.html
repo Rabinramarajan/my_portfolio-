@@ -1,21 +1,17 @@
 @let p = project();
-<app-glass-card padding="none" [interactive]="true" class="pjc__card">
+<app-glass-card padding="none" [interactive]="true" class="pjc__card" data-testid="project-card">
   <div class="pjc__top">
-    <!-- Media -->
-    <div
-      class="pjc__media"
-      (click)="modalOpen.set(true)"
-      (keydown.enter)="modalOpen.set(true)"
-      (keydown.space)="modalOpen.set(true)"
-      tabindex="0"
-      role="button"
-    >
+    <!-- Media. This is a mouse convenience for opening the gallery; keyboard and
+         AT users reach the same modal via the footer "View Case Study"/"Details"
+         control, so it carries no button role — nesting the code/live links inside
+         an interactive control would violate WCAG (nested-interactive). -->
+    <div class="pjc__media" (click)="openCaseStudy()">
       <img [src]="imageUrl()" [alt]="p.title" class="pjc__img" loading="lazy" decoding="async" />
       <div class="pjc__overlay"></div>
 
       @if (!isUpcoming()) {
         <!-- Completed check -->
-        <span class="pjc__check" aria-label="Completed">
+        <span class="pjc__check" role="img" aria-label="Completed">
           <app-icon name="Check" [size]="15" aria-hidden="true" />
         </span>
       }
@@ -99,78 +95,15 @@
             size="sm"
             icon="ArrowRight"
             label="Details"
-            (pressed)="modalOpen.set(true)"
+            (pressed)="openCaseStudy()"
           />
         }
       </div>
     } @else {
-      <a
-        class="pjc__casestudy"
-        [routerLink]="p.caseStudyUrl ?? null"
-        (click)="p.caseStudyUrl ? null : modalOpen.set(true)"
-      >
+      <button type="button" class="pjc__casestudy" (click)="openCaseStudy()">
         View Case Study
         <app-icon name="ArrowRight" [size]="15" aria-hidden="true" />
-      </a>
+      </button>
     }
   </div>
-
-  <!-- Image gallery modal -->
-  <app-modal [(open)]="modalOpen" [title]="p.title" size="xl">
-    <div class="pjc__gallery">
-      <div class="pjc__gallery-main">
-        <img
-          [src]="selectedImage()"
-          [alt]="p.title"
-          class="pjc__gallery-img"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-
-      @if (hasMultipleImages()) {
-        <div class="pjc__gallery-nav">
-          <button type="button" class="pjc__nav-btn" (click)="prevImage()">
-            <app-icon name="ChevronLeft" [size]="16" aria-hidden="true" />
-            <span class="pjc__nav-label">Prev</span>
-          </button>
-
-          <p class="pjc__gallery-count">{{ currentImageIndex() + 1 }} / {{ images().length }}</p>
-
-          <button type="button" class="pjc__nav-btn" (click)="nextImage()">
-            <span class="pjc__nav-label pjc__nav-label--pre">Next</span>
-            <app-icon name="ChevronRight" [size]="16" aria-hidden="true" />
-          </button>
-        </div>
-
-        <div class="pjc__thumbs">
-          @for (image of images(); track $index; let i = $index) {
-            <button
-              type="button"
-              class="pjc__thumb"
-              [class.pjc__thumb--active]="i === currentImageIndex()"
-              (click)="currentImageIndex.set(i)"
-            >
-              <img
-                [src]="image"
-                [alt]="p.title + ' thumbnail ' + (i + 1)"
-                class="pjc__thumb-img"
-                loading="lazy"
-                decoding="async"
-              />
-            </button>
-          }
-        </div>
-      }
-    </div>
-
-    <span slot="footer">
-      <app-animated-button
-        variant="outline"
-        size="sm"
-        label="Close"
-        (pressed)="modalOpen.set(false)"
-      />
-    </span>
-  </app-modal>
 </app-glass-card>

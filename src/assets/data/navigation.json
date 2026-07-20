@@ -4,12 +4,18 @@
     { "id": "about", "label": "About", "icon": "User", "route": "/about" },
     { "id": "experience", "label": "Experience", "icon": "Briefcase", "route": "/experience" },
     { "id": "projects", "label": "Projects", "icon": "Box", "route": "/projects" },
-    { "id": "case-studies", "label": "Case Studies", "icon": "FileText", "route": "/case-studies" },
+    { "id": "showcase", "label": "Developer Showcase", "icon": "Terminal", "route": "/showcase" },
     { "id": "skills", "label": "Skills & Tech", "icon": "Code", "route": "/skills" },
     { "id": "services", "label": "Services", "icon": "Wrench", "route": "/services" },
-    { "id": "certifications", "label": "Certifications", "icon": "Award", "route": "/certifications" },
+    {
+      "id": "certifications",
+      "label": "Certifications",
+      "icon": "Award",
+      "route": "/certifications"
+    },
     { "id": "resume", "label": "Resume", "icon": "FileText", "route": "/resume" },
     { "id": "blog", "label": "Insights & Articles", "icon": "FileText", "route": "/blog" },
+    { "id": "knowledge", "label": "Knowledge Hub", "icon": "BookOpen", "route": "/knowledge" },
     { "id": "contact", "label": "Contact", "icon": "Send", "route": "/contact" }
   ],
   "navbar": [

@@ -81,8 +81,16 @@ export class AboutPage {
 
   protected readonly trackById = trackById;
 
-  /** Resolve a subtitle phrase colour (null → inherit foreground). */
+  /**
+   * Resolve a subtitle phrase colour (null → inherit foreground). Subtitle parts
+   * are body text, so purple/green route to the contrast-safe link tokens (raw
+   * brand accents fall below 4.5:1 on the light surface).
+   */
   protected partColor(part: AboutSubtitlePart): string | null {
-    return !part.accent || part.accent === 'default' ? null : accentVar(part.accent);
+    if (!part.accent || part.accent === 'default') return null;
+    if (part.accent === 'purple') return 'var(--color-link-accent)';
+    if (part.accent === 'green') return 'var(--color-link-success)';
+    if (part.accent === 'blue') return 'var(--color-link-blue)';
+    return accentVar(part.accent);
   }
 }

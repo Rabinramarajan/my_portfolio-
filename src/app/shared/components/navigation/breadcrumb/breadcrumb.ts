@@ -38,7 +38,8 @@ import { Icon } from '../../ui/icon/icon';
       color: var(--color-fg);
     }
     .bc__current {
-      color: var(--color-brand-purple);
+      /* contrast-safe accent (raw brand-purple is 4.04 on the light surface). */
+      color: var(--color-link-accent);
     }
   `,
 })
