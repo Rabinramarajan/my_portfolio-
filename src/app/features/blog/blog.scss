@@ -72,7 +72,10 @@
   font-weight: 500;
   color: var(--color-fg-muted);
   cursor: pointer;
-  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  transition:
+    color 0.15s,
+    border-color 0.15s,
+    background 0.15s;
 }
 
 .bl-pill:hover {

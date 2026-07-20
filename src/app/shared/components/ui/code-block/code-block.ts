@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angu
 import { DOCUMENT } from '@angular/common';
 import { Icon } from '../icon/icon';
 
-
 /** Code snippet with a copy-to-clipboard action. */
 @Component({
   selector: 'app-code-block',

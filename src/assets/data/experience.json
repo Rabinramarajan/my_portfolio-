@@ -58,11 +58,41 @@
     { "label": "Problem Solving", "value": 95 }
   ],
   "evolution": [
-    { "id": "angular", "label": "Angular", "year": "2020", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg", "accent": "red" },
-    { "id": "ionic", "label": "Ionic", "year": "2021", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg", "accent": "blue" },
-    { "id": "typescript", "label": "TypeScript", "year": "2021", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", "accent": "blue" },
-    { "id": "rxjs", "label": "RxJS", "year": "2022", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rxjs/rxjs-original.svg", "accent": "violet" },
-    { "id": "flutter", "label": "Flutter", "year": "2023", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", "accent": "cyan" }
+    {
+      "id": "angular",
+      "label": "Angular",
+      "year": "2020",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg",
+      "accent": "red"
+    },
+    {
+      "id": "ionic",
+      "label": "Ionic",
+      "year": "2021",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg",
+      "accent": "blue"
+    },
+    {
+      "id": "typescript",
+      "label": "TypeScript",
+      "year": "2021",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      "accent": "blue"
+    },
+    {
+      "id": "rxjs",
+      "label": "RxJS",
+      "year": "2022",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rxjs/rxjs-original.svg",
+      "accent": "violet"
+    },
+    {
+      "id": "flutter",
+      "label": "Flutter",
+      "year": "2023",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
+      "accent": "cyan"
+    }
   ],
   "quote": {
     "text": "The best way to predict the future is to create it.",

@@ -53,9 +53,7 @@ export class CircularProgress {
   protected readonly clamped = computed(() => Math.min(100, Math.max(0, this.value())));
   protected readonly radius = computed(() => (this.size() - this.stroke()) / 2);
   protected readonly circumference = computed(() => 2 * Math.PI * this.radius());
-  protected readonly dashOffset = computed(
-    () => this.circumference() * (1 - this.clamped() / 100),
-  );
+  protected readonly dashOffset = computed(() => this.circumference() * (1 - this.clamped() / 100));
   protected readonly center = computed(() => this.size() / 2);
   protected readonly strokeColor = computed(() => accentVar(this.accent()));
 }

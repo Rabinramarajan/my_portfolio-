@@ -25,20 +25,92 @@
     }
   ],
   "professionalSkills": [
-    { "id": "angular", "name": "Angular", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg", "level": 95, "accent": "red" },
-    { "id": "typescript", "name": "TypeScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", "level": 92, "accent": "blue" },
-    { "id": "rxjs", "name": "RxJS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rxjs/rxjs-original.svg", "level": 90, "accent": "violet" },
-    { "id": "javascript", "name": "JavaScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "level": 90, "accent": "amber" },
-    { "id": "html5", "name": "HTML5", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", "level": 95, "accent": "orange" },
-    { "id": "css", "name": "CSS3 / SCSS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", "level": 90, "accent": "blue" },
-    { "id": "ionic", "name": "Ionic Angular", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg", "level": 88, "accent": "blue" },
-    { "id": "tailwind", "name": "Tailwind CSS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", "level": 88, "accent": "cyan" }
+    {
+      "id": "angular",
+      "name": "Angular",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg",
+      "level": 95,
+      "accent": "red"
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      "level": 92,
+      "accent": "blue"
+    },
+    {
+      "id": "rxjs",
+      "name": "RxJS",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rxjs/rxjs-original.svg",
+      "level": 90,
+      "accent": "violet"
+    },
+    {
+      "id": "javascript",
+      "name": "JavaScript",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+      "level": 90,
+      "accent": "amber"
+    },
+    {
+      "id": "html5",
+      "name": "HTML5",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+      "level": 95,
+      "accent": "orange"
+    },
+    {
+      "id": "css",
+      "name": "CSS3 / SCSS",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+      "level": 90,
+      "accent": "blue"
+    },
+    {
+      "id": "ionic",
+      "name": "Ionic Angular",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg",
+      "level": 88,
+      "accent": "blue"
+    },
+    {
+      "id": "tailwind",
+      "name": "Tailwind CSS",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+      "level": 88,
+      "accent": "cyan"
+    }
   ],
   "achievements": [
-    { "id": "a1", "icon": "Trophy", "title": "Fiji Immigration Portal", "description": "Owned the full frontend architecture for a national immigration platform, earning client commendation for UI and performance", "accent": "amber" },
-    { "id": "a2", "icon": "Zap", "title": "Angular Signals Adoption", "description": "Led the team's migration to Angular Signals and standalone components for faster, more maintainable UIs", "accent": "violet" },
-    { "id": "a3", "icon": "Star", "title": "Performance Optimization", "description": "Cut API consumption by 40% and improved load performance by 50% through RxJS and rendering optimizations", "accent": "purple" },
-    { "id": "a4", "icon": "Rocket", "title": "Cross-Platform Mobile", "description": "Shipped iOS & Android provident-fund apps with biometric auth and offline support via Ionic + Capacitor", "accent": "cyan" }
+    {
+      "id": "a1",
+      "icon": "Trophy",
+      "title": "Fiji Immigration Portal",
+      "description": "Owned the full frontend architecture for a national immigration platform, earning client commendation for UI and performance",
+      "accent": "amber"
+    },
+    {
+      "id": "a2",
+      "icon": "Zap",
+      "title": "Angular Signals Adoption",
+      "description": "Led the team's migration to Angular Signals and standalone components for faster, more maintainable UIs",
+      "accent": "violet"
+    },
+    {
+      "id": "a3",
+      "icon": "Star",
+      "title": "Performance Optimization",
+      "description": "Cut API consumption by 40% and improved load performance by 50% through RxJS and rendering optimizations",
+      "accent": "purple"
+    },
+    {
+      "id": "a4",
+      "icon": "Rocket",
+      "title": "Cross-Platform Mobile",
+      "description": "Shipped iOS & Android provident-fund apps with biometric auth and offline support via Ionic + Capacitor",
+      "accent": "cyan"
+    }
   ],
   "languages": [
     { "id": "tamil", "name": "Tamil", "level": "Native", "value": 100, "accent": "cyan" },
@@ -71,7 +143,11 @@
     }
   ],
   "certifications": [
-    { "id": "c1", "title": "Applied AI & ML Essentials", "issuer": "IIT Patna (Vishlesan i-Hub) × Masai" },
+    {
+      "id": "c1",
+      "title": "Applied AI & ML Essentials",
+      "issuer": "IIT Patna (Vishlesan i-Hub) × Masai"
+    },
     { "id": "c2", "title": "Web Design & Development", "issuer": "Web D School, Chennai" }
   ],
   "projectHighlights": [

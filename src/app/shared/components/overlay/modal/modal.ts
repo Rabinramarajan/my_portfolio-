@@ -10,7 +10,6 @@ import {
 import { MOTION, gsap, prefersReducedMotion } from '../../../animations';
 import { Icon } from '../../ui/icon/icon';
 
-
 /** Centered dialog. Visibility two-way bound via `open`; projects body + [slot=footer]. */
 @Component({
   selector: 'app-modal',

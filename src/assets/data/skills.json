@@ -17,14 +17,62 @@
       "icon": "Monitor",
       "accent": "blue",
       "skills": [
-        { "id": "angular", "name": "Angular", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg", "level": 95, "accent": "red" },
-        { "id": "typescript", "name": "TypeScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", "level": 92, "accent": "blue" },
-        { "id": "javascript", "name": "JavaScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "level": 90, "accent": "amber" },
-        { "id": "html5", "name": "HTML5", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", "level": 95, "accent": "orange" },
-        { "id": "css3", "name": "CSS3", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", "level": 90, "accent": "blue" },
-        { "id": "sass", "name": "Sass", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg", "level": 88, "accent": "violet" },
-        { "id": "tailwind", "name": "Tailwind CSS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", "level": 88, "accent": "cyan" },
-        { "id": "rxjs", "name": "RxJS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rxjs/rxjs-original.svg", "level": 90, "accent": "violet" }
+        {
+          "id": "angular",
+          "name": "Angular",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg",
+          "level": 95,
+          "accent": "red"
+        },
+        {
+          "id": "typescript",
+          "name": "TypeScript",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+          "level": 92,
+          "accent": "blue"
+        },
+        {
+          "id": "javascript",
+          "name": "JavaScript",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+          "level": 90,
+          "accent": "amber"
+        },
+        {
+          "id": "html5",
+          "name": "HTML5",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+          "level": 95,
+          "accent": "orange"
+        },
+        {
+          "id": "css3",
+          "name": "CSS3",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+          "level": 90,
+          "accent": "blue"
+        },
+        {
+          "id": "sass",
+          "name": "Sass",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg",
+          "level": 88,
+          "accent": "violet"
+        },
+        {
+          "id": "tailwind",
+          "name": "Tailwind CSS",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+          "level": 88,
+          "accent": "cyan"
+        },
+        {
+          "id": "rxjs",
+          "name": "RxJS",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rxjs/rxjs-original.svg",
+          "level": 90,
+          "accent": "violet"
+        }
       ]
     },
     {
@@ -33,11 +81,41 @@
       "icon": "Smartphone",
       "accent": "cyan",
       "skills": [
-        { "id": "ionic", "name": "Ionic", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg", "level": 88, "accent": "blue" },
-        { "id": "flutter", "name": "Flutter", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", "level": 78, "accent": "blue" },
-        { "id": "capacitor", "name": "Capacitor", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/capacitor/capacitor-original.svg", "level": 85, "accent": "blue" },
-        { "id": "android", "name": "Android", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg", "level": 72, "accent": "green" },
-        { "id": "ios", "name": "iOS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg", "level": 68, "accent": "blue" },
+        {
+          "id": "ionic",
+          "name": "Ionic",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg",
+          "level": 88,
+          "accent": "blue"
+        },
+        {
+          "id": "flutter",
+          "name": "Flutter",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
+          "level": 78,
+          "accent": "blue"
+        },
+        {
+          "id": "capacitor",
+          "name": "Capacitor",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/capacitor/capacitor-original.svg",
+          "level": 85,
+          "accent": "blue"
+        },
+        {
+          "id": "android",
+          "name": "Android",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg",
+          "level": 72,
+          "accent": "green"
+        },
+        {
+          "id": "ios",
+          "name": "iOS",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg",
+          "level": 68,
+          "accent": "blue"
+        },
         { "id": "pwa", "name": "PWA", "icon": "Smartphone", "level": 85, "accent": "purple" }
       ]
     },
@@ -47,11 +125,41 @@
       "icon": "PenTool",
       "accent": "purple",
       "skills": [
-        { "id": "figma", "name": "Figma", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", "level": 88, "accent": "violet" },
-        { "id": "xd", "name": "Adobe XD", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg", "level": 80, "accent": "violet" },
-        { "id": "photoshop", "name": "Photoshop", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg", "level": 78, "accent": "blue" },
-        { "id": "illustrator", "name": "Illustrator", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg", "level": 72, "accent": "orange" },
-        { "id": "canva", "name": "Canva", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg", "level": 85, "accent": "cyan" },
+        {
+          "id": "figma",
+          "name": "Figma",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+          "level": 88,
+          "accent": "violet"
+        },
+        {
+          "id": "xd",
+          "name": "Adobe XD",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg",
+          "level": 80,
+          "accent": "violet"
+        },
+        {
+          "id": "photoshop",
+          "name": "Photoshop",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg",
+          "level": 78,
+          "accent": "blue"
+        },
+        {
+          "id": "illustrator",
+          "name": "Illustrator",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg",
+          "level": 72,
+          "accent": "orange"
+        },
+        {
+          "id": "canva",
+          "name": "Canva",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg",
+          "level": 85,
+          "accent": "cyan"
+        },
         { "id": "sketch", "name": "Sketch", "icon": "PenTool", "level": 65, "accent": "amber" }
       ]
     },
@@ -61,12 +169,42 @@
       "icon": "Server",
       "accent": "green",
       "skills": [
-        { "id": "node", "name": "Node.js", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", "level": 75, "accent": "green" },
-        { "id": "express", "name": "Express.js", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", "level": 74, "accent": "blue" },
-        { "id": "python", "name": "Python", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", "level": 68, "accent": "amber" },
-        { "id": "php", "name": "PHP", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg", "level": 62, "accent": "violet" },
+        {
+          "id": "node",
+          "name": "Node.js",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+          "level": 75,
+          "accent": "green"
+        },
+        {
+          "id": "express",
+          "name": "Express.js",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+          "level": 74,
+          "accent": "blue"
+        },
+        {
+          "id": "python",
+          "name": "Python",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+          "level": 68,
+          "accent": "amber"
+        },
+        {
+          "id": "php",
+          "name": "PHP",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
+          "level": 62,
+          "accent": "violet"
+        },
         { "id": "rest", "name": "REST API", "icon": "Server", "level": 92, "accent": "purple" },
-        { "id": "graphql", "name": "GraphQL", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg", "level": 70, "accent": "violet" }
+        {
+          "id": "graphql",
+          "name": "GraphQL",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg",
+          "level": 70,
+          "accent": "violet"
+        }
       ]
     },
     {
@@ -75,12 +213,48 @@
       "icon": "Database",
       "accent": "amber",
       "skills": [
-        { "id": "firebase", "name": "Firebase", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", "level": 85, "accent": "orange" },
-        { "id": "mysql", "name": "MySQL", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", "level": 78, "accent": "blue" },
-        { "id": "mongodb", "name": "MongoDB", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg", "level": 74, "accent": "green" },
-        { "id": "postgres", "name": "PostgreSQL", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg", "level": 72, "accent": "blue" },
-        { "id": "supabase", "name": "Supabase", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg", "level": 70, "accent": "green" },
-        { "id": "aws", "name": "AWS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg", "level": 62, "accent": "amber" }
+        {
+          "id": "firebase",
+          "name": "Firebase",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+          "level": 85,
+          "accent": "orange"
+        },
+        {
+          "id": "mysql",
+          "name": "MySQL",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+          "level": 78,
+          "accent": "blue"
+        },
+        {
+          "id": "mongodb",
+          "name": "MongoDB",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+          "level": 74,
+          "accent": "green"
+        },
+        {
+          "id": "postgres",
+          "name": "PostgreSQL",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+          "level": 72,
+          "accent": "blue"
+        },
+        {
+          "id": "supabase",
+          "name": "Supabase",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
+          "level": 70,
+          "accent": "green"
+        },
+        {
+          "id": "aws",
+          "name": "AWS",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg",
+          "level": 62,
+          "accent": "amber"
+        }
       ]
     },
     {
@@ -89,11 +263,41 @@
       "icon": "Wrench",
       "accent": "violet",
       "skills": [
-        { "id": "git", "name": "Git", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", "level": 92, "accent": "orange" },
-        { "id": "github", "name": "GitHub", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", "level": 92, "accent": "purple" },
-        { "id": "vscode", "name": "VS Code", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", "level": 95, "accent": "blue" },
-        { "id": "postman", "name": "Postman", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg", "level": 88, "accent": "orange" },
-        { "id": "eslint", "name": "ESLint", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eslint/eslint-original.svg", "level": 85, "accent": "violet" },
+        {
+          "id": "git",
+          "name": "Git",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+          "level": 92,
+          "accent": "orange"
+        },
+        {
+          "id": "github",
+          "name": "GitHub",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+          "level": 92,
+          "accent": "purple"
+        },
+        {
+          "id": "vscode",
+          "name": "VS Code",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
+          "level": 95,
+          "accent": "blue"
+        },
+        {
+          "id": "postman",
+          "name": "Postman",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
+          "level": 88,
+          "accent": "orange"
+        },
+        {
+          "id": "eslint",
+          "name": "ESLint",
+          "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eslint/eslint-original.svg",
+          "level": 85,
+          "accent": "violet"
+        },
         { "id": "prettier", "name": "Prettier", "icon": "Wrench", "level": 85, "accent": "cyan" }
       ]
     }
@@ -115,8 +319,26 @@
     { "id": "team", "label": "Team Collaboration", "value": 90, "accent": "green" }
   ],
   "exploring": [
-    { "id": "ai", "name": "AI / ML Integration", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg", "progress": 70, "accent": "purple" },
-    { "id": "nextjs", "name": "Open-source Libs", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", "progress": 65, "accent": "cyan" },
-    { "id": "dotnet", "name": ".NET Core", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg", "progress": 55, "accent": "violet" }
+    {
+      "id": "ai",
+      "name": "AI / ML Integration",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg",
+      "progress": 70,
+      "accent": "purple"
+    },
+    {
+      "id": "nextjs",
+      "name": "Open-source Libs",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+      "progress": 65,
+      "accent": "cyan"
+    },
+    {
+      "id": "dotnet",
+      "name": ".NET Core",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg",
+      "progress": 55,
+      "accent": "violet"
+    }
   ]
 }

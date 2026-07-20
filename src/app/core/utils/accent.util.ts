@@ -16,6 +16,9 @@ export const ACCENT_VAR: Readonly<Record<AccentColor, string>> = {
 };
 
 /** Resolve an accent (with a safe default) to its CSS var reference. */
-export function accentVar(accent: AccentColor | undefined, fallback: AccentColor = 'purple'): string {
+export function accentVar(
+  accent: AccentColor | undefined,
+  fallback: AccentColor = 'purple',
+): string {
   return ACCENT_VAR[accent ?? fallback];
 }

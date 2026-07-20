@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 import { Icon } from '../../ui/icon/icon';
 
-
 /** Accessible checkbox with a custom indicator; two-way bound via `checked`. */
 @Component({
   selector: 'app-checkbox',

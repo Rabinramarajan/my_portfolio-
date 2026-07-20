@@ -1,37 +1,182 @@
 {
   "top": [
-    { "id": "angular", "name": "Angular", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg", "accent": "red" },
-    { "id": "typescript", "name": "TypeScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", "accent": "blue" },
-    { "id": "rxjs", "name": "RxJS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rxjs/rxjs-original.svg", "accent": "violet" },
-    { "id": "javascript", "name": "JavaScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "accent": "amber" },
-    { "id": "tailwind", "name": "Tailwind", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", "accent": "cyan" }
+    {
+      "id": "angular",
+      "name": "Angular",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg",
+      "accent": "red"
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      "accent": "blue"
+    },
+    {
+      "id": "rxjs",
+      "name": "RxJS",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rxjs/rxjs-original.svg",
+      "accent": "violet"
+    },
+    {
+      "id": "javascript",
+      "name": "JavaScript",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+      "accent": "amber"
+    },
+    {
+      "id": "tailwind",
+      "name": "Tailwind",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+      "accent": "cyan"
+    }
   ],
   "popular": [
-    { "id": "angular", "name": "Angular", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg", "accent": "red" },
-    { "id": "ionic", "name": "Ionic", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg", "accent": "blue" },
-    { "id": "flutter", "name": "Flutter", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", "accent": "cyan" },
-    { "id": "typescript", "name": "TypeScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", "accent": "blue" },
-    { "id": "firebase", "name": "Firebase", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", "accent": "amber" },
-    { "id": "nodejs", "name": "Node.js", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", "accent": "green" },
-    { "id": "git", "name": "Git", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", "accent": "orange" },
-    { "id": "github", "name": "GitHub", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", "accent": "purple" },
-    { "id": "docker", "name": "Docker", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", "accent": "blue" },
-    { "id": "figma", "name": "Figma", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", "accent": "violet" },
-    { "id": "vscode", "name": "VS Code", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", "accent": "blue" },
-    { "id": "postman", "name": "Postman", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg", "accent": "orange" }
+    {
+      "id": "angular",
+      "name": "Angular",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg",
+      "accent": "red"
+    },
+    {
+      "id": "ionic",
+      "name": "Ionic",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg",
+      "accent": "blue"
+    },
+    {
+      "id": "flutter",
+      "name": "Flutter",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
+      "accent": "cyan"
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      "accent": "blue"
+    },
+    {
+      "id": "firebase",
+      "name": "Firebase",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+      "accent": "amber"
+    },
+    {
+      "id": "nodejs",
+      "name": "Node.js",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+      "accent": "green"
+    },
+    {
+      "id": "git",
+      "name": "Git",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+      "accent": "orange"
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+      "accent": "purple"
+    },
+    {
+      "id": "docker",
+      "name": "Docker",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+      "accent": "blue"
+    },
+    {
+      "id": "figma",
+      "name": "Figma",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+      "accent": "violet"
+    },
+    {
+      "id": "vscode",
+      "name": "VS Code",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
+      "accent": "blue"
+    },
+    {
+      "id": "postman",
+      "name": "Postman",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
+      "accent": "orange"
+    }
   ],
   "arsenal": [
-    { "id": "angular", "name": "Angular", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg", "accent": "red" },
-    { "id": "ionic", "name": "Ionic", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg", "accent": "blue" },
-    { "id": "flutter", "name": "Flutter", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg", "accent": "cyan" },
-    { "id": "typescript", "name": "TypeScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg", "accent": "blue" },
-    { "id": "javascript", "name": "JavaScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", "accent": "amber" },
-    { "id": "html5", "name": "HTML5", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", "accent": "orange" },
-    { "id": "css3", "name": "CSS3", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", "accent": "blue" },
-    { "id": "sass", "name": "Sass", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg", "accent": "red" },
-    { "id": "firebase", "name": "Firebase", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg", "accent": "amber" },
-    { "id": "git", "name": "Git", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", "accent": "orange" },
-    { "id": "figma", "name": "Figma", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", "accent": "violet" },
-    { "id": "tailwind", "name": "Tailwind", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", "accent": "cyan" }
+    {
+      "id": "angular",
+      "name": "Angular",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg",
+      "accent": "red"
+    },
+    {
+      "id": "ionic",
+      "name": "Ionic",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ionic/ionic-original.svg",
+      "accent": "blue"
+    },
+    {
+      "id": "flutter",
+      "name": "Flutter",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
+      "accent": "cyan"
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      "accent": "blue"
+    },
+    {
+      "id": "javascript",
+      "name": "JavaScript",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+      "accent": "amber"
+    },
+    {
+      "id": "html5",
+      "name": "HTML5",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+      "accent": "orange"
+    },
+    {
+      "id": "css3",
+      "name": "CSS3",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+      "accent": "blue"
+    },
+    {
+      "id": "sass",
+      "name": "Sass",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg",
+      "accent": "red"
+    },
+    {
+      "id": "firebase",
+      "name": "Firebase",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+      "accent": "amber"
+    },
+    {
+      "id": "git",
+      "name": "Git",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+      "accent": "orange"
+    },
+    {
+      "id": "figma",
+      "name": "Figma",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+      "accent": "violet"
+    },
+    {
+      "id": "tailwind",
+      "name": "Tailwind",
+      "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+      "accent": "cyan"
+    }
   ]
 }

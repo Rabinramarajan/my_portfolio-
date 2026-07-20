@@ -24,12 +24,7 @@
 
   @for (dot of dots(); track $index) {
     <circle [attr.cx]="dot.x" [attr.cy]="dot.y" r="3" [attr.fill]="stroke()" />
-    <text
-      [attr.x]="dot.x"
-      [attr.y]="height() - 6"
-      text-anchor="middle"
-      class="lc__label"
-    >
+    <text [attr.x]="dot.x" [attr.y]="height() - 6" text-anchor="middle" class="lc__label">
       {{ dot.label }}
     </text>
   }
@@ -45,12 +40,7 @@
           rx="9"
           [attr.fill]="stroke()"
         />
-        <text
-          [attr.x]="l.x"
-          [attr.y]="l.y - 13"
-          text-anchor="middle"
-          class="lc__badge"
-        >
+        <text [attr.x]="l.x" [attr.y]="l.y - 13" text-anchor="middle" class="lc__badge">
           {{ label }}
         </text>
       </g>

@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core
 import { Icon } from '../../ui/icon/icon';
 import { ThemeService } from '../../../../core';
 
-
 export type ThemeSwitcherVariant = 'switch' | 'icon';
 
 /**

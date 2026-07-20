@@ -13,13 +13,19 @@ export type HeadingLevel = 1 | 2 | 3;
   template: `
     @switch (level()) {
       @case (1) {
-        <h1 class="gt">{{ lead() }} <span class="text-gradient-brand">{{ highlight() }}</span></h1>
+        <h1 class="gt">
+          {{ lead() }} <span class="text-gradient-brand">{{ highlight() }}</span>
+        </h1>
       }
       @case (2) {
-        <h2 class="gt">{{ lead() }} <span class="text-gradient-brand">{{ highlight() }}</span></h2>
+        <h2 class="gt">
+          {{ lead() }} <span class="text-gradient-brand">{{ highlight() }}</span>
+        </h2>
       }
       @default {
-        <h3 class="gt">{{ lead() }} <span class="text-gradient-brand">{{ highlight() }}</span></h3>
+        <h3 class="gt">
+          {{ lead() }} <span class="text-gradient-brand">{{ highlight() }}</span>
+        </h3>
       }
     }
   `,

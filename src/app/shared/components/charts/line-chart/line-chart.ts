@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { GrowthPoint, AccentColor, accentVar } from '../../../../core';
 
-
 /** Reusable SVG line/area chart with x-axis labels and an end-point badge. */
 @Component({
   selector: 'app-line-chart',
@@ -63,7 +62,11 @@ export class LineChart {
     const baseY = this.height() - this.padY;
     const first = c[0];
     const lastPt = c[c.length - 1];
-    return `M${first.x},${baseY} ` + c.map((p) => `L${p.x},${p.y}`).join(' ') + ` L${lastPt.x},${baseY} Z`;
+    return (
+      `M${first.x},${baseY} ` +
+      c.map((p) => `L${p.x},${p.y}`).join(' ') +
+      ` L${lastPt.x},${baseY} Z`
+    );
   });
 
   protected readonly dots = this.coords;

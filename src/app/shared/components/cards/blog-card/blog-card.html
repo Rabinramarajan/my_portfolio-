@@ -9,11 +9,7 @@
     <p class="bc__excerpt">{{ p.excerpt }}</p>
     <div class="bc__meta">
       <span>{{ p.date | date: 'MMM d, y' }} • {{ p.readingMinutes }} min read</span>
-      <a
-        [routerLink]="['/blog', p.slug]"
-        [attr.aria-label]="'Read ' + p.title"
-        class="bc__arrow"
-      >
+      <a [routerLink]="['/blog', p.slug]" [attr.aria-label]="'Read ' + p.title" class="bc__arrow">
         <app-icon name="ArrowRight" [size]="15" aria-hidden="true" />
       </a>
     </div>

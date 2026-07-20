@@ -4,7 +4,14 @@
   "defaults": {
     "title": "Rabin R — Senior Frontend Angular Developer",
     "description": "Senior Frontend Angular Developer with 4+ years building enterprise-grade web & mobile applications using Angular, TypeScript and RxJS for government and financial sectors.",
-    "keywords": ["Angular Developer", "Frontend Developer", "TypeScript", "RxJS", "Angular Signals", "WCAG 2.1 AA"],
+    "keywords": [
+      "Angular Developer",
+      "Frontend Developer",
+      "TypeScript",
+      "RxJS",
+      "Angular Signals",
+      "WCAG 2.1 AA"
+    ],
     "image": "assets/images/og-cover.png"
   },
   "routes": {}

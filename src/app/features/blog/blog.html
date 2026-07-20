@@ -51,9 +51,7 @@
         <!-- Featured -->
         @if (featured(); as f) {
           <section>
-            <h2 class="bl-heading">
-              <span class="bl-dot"></span> Featured Article
-            </h2>
+            <h2 class="bl-heading"><span class="bl-dot"></span> Featured Article</h2>
             <app-glass-card padding="lg">
               <div class="bl-feat">
                 <div class="bl-feat__content">
@@ -88,9 +86,7 @@
 
         <!-- Latest -->
         <section>
-          <h2 class="bl-heading">
-            <span class="bl-dot"></span> Latest Articles
-          </h2>
+          <h2 class="bl-heading"><span class="bl-dot"></span> Latest Articles</h2>
           @if (latest().length) {
             <div class="bl-latest" appStagger>
               @for (post of latest(); track trackById($index, post)) {
@@ -101,7 +97,12 @@
             <p class="bl-empty">No articles match your search.</p>
           }
           <div class="bl-viewall">
-            <app-animated-button variant="secondary" size="sm" icon="ArrowRight" label="View All Articles" />
+            <app-animated-button
+              variant="secondary"
+              size="sm"
+              icon="ArrowRight"
+              label="View All Articles"
+            />
           </div>
         </section>
 
@@ -114,7 +115,9 @@
               </span>
               <span>
                 <span class="bl-share__title">Share Your Thoughts</span>
-                <span class="bl-share__text">I'd love to hear your thoughts or suggestions. Let's start a conversation!</span>
+                <span class="bl-share__text"
+                  >I'd love to hear your thoughts or suggestions. Let's start a conversation!</span
+                >
               </span>
             </div>
             <app-animated-button
@@ -166,7 +169,14 @@
               aria-label="Email address"
               class="bl-news__input"
             />
-            <app-animated-button type="submit" variant="primary" size="sm" icon="ArrowRight" label="Subscribe" [block]="true" />
+            <app-animated-button
+              type="submit"
+              variant="primary"
+              size="sm"
+              icon="ArrowRight"
+              label="Subscribe"
+              [block]="true"
+            />
           </form>
         </div>
 

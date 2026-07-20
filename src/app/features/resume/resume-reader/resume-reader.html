@@ -3,17 +3,27 @@
 
 <div class="reader" role="dialog" aria-modal="true" aria-label="Resume document">
   <div class="reader__bar">
-    <p class="reader__title"><app-icon name="FileText" [size]="16" aria-hidden="true" /> {{ p?.shortName ?? 'Rabin R' }} — Resume</p>
+    <p class="reader__title">
+      <app-icon name="FileText" [size]="16" aria-hidden="true" /> {{ p?.shortName ?? 'Rabin R' }} —
+      Resume
+    </p>
     <div class="reader__actions">
       <button type="button" class="reader__btn" (click)="print()">
-        <app-icon name="Printer" [size]="15" aria-hidden="true" /> <span class="reader__btn-label">Print</span>
+        <app-icon name="Printer" [size]="15" aria-hidden="true" />
+        <span class="reader__btn-label">Print</span>
       </button>
       @if (p?.resumeUrl; as url) {
         <a class="reader__btn" [href]="url" target="_blank" rel="noopener">
-          <app-icon name="Download" [size]="15" aria-hidden="true" /> <span class="reader__btn-label">PDF</span>
+          <app-icon name="Download" [size]="15" aria-hidden="true" />
+          <span class="reader__btn-label">PDF</span>
         </a>
       }
-      <button type="button" class="reader__btn reader__btn--close" (click)="closed.emit()" aria-label="Close reader">
+      <button
+        type="button"
+        class="reader__btn reader__btn--close"
+        (click)="closed.emit()"
+        aria-label="Close reader"
+      >
         <app-icon name="X" [size]="16" aria-hidden="true" />
       </button>
     </div>
@@ -28,10 +38,18 @@
           <p class="paper__role">{{ p?.role ?? 'Frontend Developer' }}</p>
         </div>
         <ul class="paper__contacts">
-          @if (p?.email; as email) { <li><app-icon name="Mail" [size]="14" aria-hidden="true" />{{ email }}</li> }
-          @if (p?.phone; as phone) { <li><app-icon name="Phone" [size]="14" aria-hidden="true" />{{ phone }}</li> }
-          @if (p?.location; as loc) { <li><app-icon name="MapPin" [size]="14" aria-hidden="true" />{{ loc }}</li> }
-          @if (p?.website; as web) { <li><app-icon name="Globe" [size]="14" aria-hidden="true" />{{ web }}</li> }
+          @if (p?.email; as email) {
+            <li><app-icon name="Mail" [size]="14" aria-hidden="true" />{{ email }}</li>
+          }
+          @if (p?.phone; as phone) {
+            <li><app-icon name="Phone" [size]="14" aria-hidden="true" />{{ phone }}</li>
+          }
+          @if (p?.location; as loc) {
+            <li><app-icon name="MapPin" [size]="14" aria-hidden="true" />{{ loc }}</li>
+          }
+          @if (p?.website; as web) {
+            <li><app-icon name="Globe" [size]="14" aria-hidden="true" />{{ web }}</li>
+          }
         </ul>
       </header>
 
@@ -60,7 +78,9 @@
             <ul class="paper__list">
               @for (proj of r.projectHighlights; track trackById($index, proj)) {
                 <li>
-                  <p class="paper__proj-title">{{ proj.title }} <span class="paper__tag">{{ proj.type }}</span></p>
+                  <p class="paper__proj-title">
+                    {{ proj.title }} <span class="paper__tag">{{ proj.type }}</span>
+                  </p>
                   <p class="paper__proj-desc">{{ proj.description }}</p>
                   <p class="paper__proj-tech">{{ proj.technologies.join(' · ') }}</p>
                 </li>

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { RadarAxis } from '../../../../core';
 
-
 interface Point {
   readonly x: number;
   readonly y: number;

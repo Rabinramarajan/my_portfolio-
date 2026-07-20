@@ -1,11 +1,7 @@
 import type { IconName } from '../types/common.types';
 
 export type ProjectCategory =
-  | 'Web Applications'
-  | 'Mobile Apps'
-  | 'Dashboard'
-  | 'E-Commerce'
-  | 'UI/UX';
+  'Web Applications' | 'Mobile Apps' | 'Dashboard' | 'E-Commerce' | 'UI/UX';
 
 /** Lifecycle stage of a project — drives the two-column layout. */
 export type ProjectStatus = 'finished' | 'upcoming';

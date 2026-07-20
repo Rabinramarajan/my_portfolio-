@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 import { trackByValue } from '../../../../core';
 
-
 export interface RadioOption {
   readonly label: string;
   readonly value: string;

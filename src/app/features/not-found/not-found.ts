@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AnimatedButton, BackgroundGlow } from '../../shared';
 
-
-
 /** 404 page. */
 @Component({
   selector: 'app-not-found',
@@ -11,12 +9,7 @@ import { AnimatedButton, BackgroundGlow } from '../../shared';
   template: `
     <app-background-glow />
     <main class="nf">
-      <img
-        src="assets/images/astronaut.png"
-        alt=""
-        class="nf__img"
-        aria-hidden="true"
-      />
+      <img src="assets/images/astronaut.png" alt="" class="nf__img" aria-hidden="true" />
       <p class="nf__code text-gradient-brand">404</p>
       <h1 class="nf__title">Lost in space</h1>
       <p class="nf__text">
@@ -30,7 +23,13 @@ import { AnimatedButton, BackgroundGlow } from '../../shared';
           label="Back to Home"
           routerLink="/"
         />
-        <app-animated-button variant="outline" icon="Box" iconPosition="left" label="View Projects" routerLink="/projects" />
+        <app-animated-button
+          variant="outline"
+          icon="Box"
+          iconPosition="left"
+          label="View Projects"
+          routerLink="/projects"
+        />
       </div>
     </main>
   `,

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
-
 import { AnimatedButton } from '../../buttons/animated-button/animated-button';
 import { ThemeSwitcher } from '../../layout/theme-switcher/theme-switcher';
 import { DataService, trackById } from '../../../../core';

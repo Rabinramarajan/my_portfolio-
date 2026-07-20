@@ -22,15 +22,107 @@
     {
       "id": "b1",
       "slug": "building-scalable-angular-applications",
-      "title": "Building Scalable Angular Applications: Best Practices",
-      "excerpt": "Explore proven architecture patterns, state management strategies, and performance tips for building enterprise-grade Angular applications.",
+      "title": "Modern Angular 17 with Signals & Zoneless",
+      "titleIcon": "⚡",
+      "excerpt": "Explore how Angular 17, Signals, and Zoneless architecture together create a faster, simpler, and more predictable developer experience.",
       "cover": "assets/images/blog/angular.svg",
       "category": "Angular",
-      "tags": ["Angular", "Architecture", "Signals"],
-      "author": "Rabin R",
-      "date": "2024-05-18",
-      "readingMinutes": 8,
-      "featured": true
+      "tags": ["Angular", "Signals", "Zoneless", "Performance", "TypeScript"],
+      "author": "Rabin R.",
+      "date": "2024-06-10",
+      "updatedDate": "2024-06-11",
+      "readingMinutes": 7,
+      "likes": 42,
+      "featured": true,
+      "body": [
+        {
+          "heading": "Introduction",
+          "paragraphs": [
+            "Angular has evolved significantly over the years, and Angular 17 is a huge step towards a more efficient and developer-friendly framework. With Signals and the ability to go Zoneless, we can build blazing fast applications with less boilerplate and more predictability."
+          ]
+        },
+        {
+          "heading": "Why Signals?",
+          "paragraphs": [
+            "Signals bring fine-grained reactivity to Angular. They help us track state changes with precision and eliminate unnecessary change detection cycles."
+          ],
+          "code": {
+            "filename": "app.component.ts",
+            "language": "TS",
+            "code": "import { Component, signal, computed } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  template: `\n    <h1>{{ count() }}</h1>\n    <button (click)=\"increment()\">Increment</button>\n  `,\n})\nexport class AppComponent {\n  count = signal(0);\n  double = computed(() => this.count() * 2);\n\n  increment() {\n    this.count.update(c => c + 1);\n  }\n}"
+          },
+          "callout": {
+            "icon": "💡",
+            "text": "Tip: Signals are composable, synchronous, and incredibly lightweight."
+          }
+        },
+        {
+          "heading": "Going Zoneless",
+          "paragraphs": [
+            "Zoneless Angular means no more NgZone.js. Change detection is now explicit and controlled using Signals and event-driven updates."
+          ],
+          "code": {
+            "filename": "main.ts",
+            "language": "TS",
+            "code": "bootstrapApplication(AppComponent, {\n  providers: [\n    provideZoneChangeDetection({ eventCoalescing: true }),\n  ]\n});"
+          },
+          "callout": {
+            "icon": "⚡",
+            "text": "This reduces overhead, improves performance, and gives you full control."
+          }
+        },
+        {
+          "heading": "Signals vs RxJS",
+          "paragraphs": [
+            "While RxJS remains powerful for complex async streams, Signals are ideal for synchronous state management. They're simpler to reason about and integrate natively with Angular's change detection.",
+            "For most component-level state, Signals replace BehaviorSubjects and provide a cleaner API. RxJS still shines for HTTP streams, WebSocket connections, and complex event orchestration."
+          ],
+          "bullets": [
+            "Signals: synchronous, fine-grained, template-native",
+            "RxJS: async streams, complex transformations, side effects",
+            "Use both together for the best of both worlds"
+          ]
+        },
+        {
+          "heading": "Performance Impact",
+          "paragraphs": [
+            "By combining Signals with Zoneless change detection, Angular 17 applications see dramatic performance improvements:",
+            "In benchmarks, Zoneless Angular apps show 30-50% faster initial render times and significantly reduced memory overhead compared to Zone.js-based applications."
+          ],
+          "bullets": [
+            "No Zone.js overhead — smaller bundle size (~15KB less)",
+            "Fine-grained change detection — only affected components re-render",
+            "Computed signals are lazily evaluated and cached",
+            "Event coalescing batches multiple updates into a single render pass"
+          ]
+        },
+        {
+          "heading": "Best Practices",
+          "paragraphs": [
+            "To get the most out of Angular 17's new features, follow these best practices:"
+          ],
+          "bullets": [
+            "Use signals for all component-level state",
+            "Prefer computed() over manual derivation",
+            "Use effect() sparingly — only for side effects like logging or localStorage",
+            "Migrate from BehaviorSubject to signal() where possible",
+            "Leverage the new control flow syntax (@if, @for, @switch)",
+            "Enable Zoneless mode in new projects from day one"
+          ]
+        },
+        {
+          "heading": "Conclusion",
+          "paragraphs": [
+            "Angular 17 with Signals and Zoneless architecture represents a significant leap forward for the framework. The combination of fine-grained reactivity, reduced boilerplate, and improved performance makes it an excellent choice for building modern web applications.",
+            "Whether you're starting a new project or migrating an existing one, adopting Signals and going Zoneless will pay dividends in developer experience and application performance."
+          ]
+        }
+      ],
+      "takeaway": {
+        "icon": "🚀",
+        "title": "The Takeaway",
+        "text": "Signals + Zoneless = A faster, cleaner, and future-ready Angular. Embrace the change and build better apps! 🚀"
+      }
     },
     {
       "id": "b2",
@@ -40,9 +132,10 @@
       "cover": "assets/images/blog/ngrx.svg",
       "category": "Angular",
       "tags": ["Angular", "NgRx", "State"],
-      "author": "Rabin R",
+      "author": "Rabin R.",
       "date": "2024-05-14",
       "readingMinutes": 6,
+      "likes": 38,
       "featured": false
     },
     {
@@ -53,9 +146,10 @@
       "cover": "assets/images/blog/performance.svg",
       "category": "Performance",
       "tags": ["Performance", "Web Vitals"],
-      "author": "Rabin R",
+      "author": "Rabin R.",
       "date": "2024-05-10",
       "readingMinutes": 7,
+      "likes": 29,
       "featured": false
     },
     {
@@ -66,9 +160,10 @@
       "cover": "assets/images/blog/typescript.svg",
       "category": "TypeScript",
       "tags": ["TypeScript", "DX"],
-      "author": "Rabin R",
+      "author": "Rabin R.",
       "date": "2024-05-06",
       "readingMinutes": 5,
+      "likes": 35,
       "featured": false
     },
     {
@@ -79,9 +174,10 @@
       "cover": "assets/images/blog/ionic.svg",
       "category": "Ionic",
       "tags": ["Ionic", "Mobile"],
-      "author": "Rabin R",
+      "author": "Rabin R.",
       "date": "2024-05-02",
       "readingMinutes": 6,
+      "likes": 22,
       "featured": false
     },
     {
@@ -92,9 +188,10 @@
       "cover": "assets/images/blog/design.svg",
       "category": "Design",
       "tags": ["Design", "UI/UX"],
-      "author": "Rabin R",
+      "author": "Rabin R.",
       "date": "2024-04-28",
       "readingMinutes": 6,
+      "likes": 18,
       "featured": false
     },
     {
@@ -105,9 +202,10 @@
       "cover": "assets/images/blog/javascript.svg",
       "category": "JavaScript",
       "tags": ["JavaScript", "ES2024"],
-      "author": "Rabin R",
+      "author": "Rabin R.",
       "date": "2024-04-24",
       "readingMinutes": 5,
+      "likes": 15,
       "featured": false
     }
   ]

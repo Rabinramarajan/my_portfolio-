@@ -6,7 +6,6 @@ import { injectSpeedInsights } from '@vercel/speed-insights';
 import { ThemeService } from './core/services';
 import { environment } from '../environments/environment';
 
-
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],

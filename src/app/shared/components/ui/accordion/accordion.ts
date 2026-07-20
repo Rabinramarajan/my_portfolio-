@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
 import { Icon } from '../icon/icon';
 
-
 export interface AccordionItem {
   readonly title: string;
   readonly content: string;

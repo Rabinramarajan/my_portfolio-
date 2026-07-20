@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, model } from '@angular/core';
 import { Icon } from '../icon/icon';
 
-
 /** Numeric pagination; current page two-way bound via `page` (1-indexed). */
 @Component({
   selector: 'app-pagination',
@@ -84,9 +83,7 @@ export class Pagination {
   readonly total = input.required<number>();
   readonly page = model(1);
 
-  protected readonly pages = computed(() =>
-    Array.from({ length: this.total() }, (_, i) => i + 1),
-  );
+  protected readonly pages = computed(() => Array.from({ length: this.total() }, (_, i) => i + 1));
 
   protected go(p: number): void {
     if (p >= 1 && p <= this.total()) {

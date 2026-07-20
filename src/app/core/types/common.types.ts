@@ -14,14 +14,7 @@ export type Nullable<T> = T | null;
 
 /** Brand accent used across cards, tags, progress, glows. */
 export type AccentColor =
-  | 'purple'
-  | 'violet'
-  | 'blue'
-  | 'cyan'
-  | 'green'
-  | 'orange'
-  | 'red'
-  | 'amber';
+  'purple' | 'violet' | 'blue' | 'cyan' | 'green' | 'orange' | 'red' | 'amber';
 
 /** Semantic status used by alerts / badges. */
 export type StatusVariant = 'success' | 'info' | 'warning' | 'danger' | 'neutral';

@@ -44,8 +44,7 @@ export class AnimatedButton {
   readonly pressed = output<void>();
 
   protected readonly classes = computed(
-    () =>
-      `btn btn--${this.variant()} btn--${this.size()}${this.block() ? ' btn--block' : ''}`,
+    () => `btn btn--${this.variant()} btn--${this.size()}${this.block() ? ' btn--block' : ''}`,
   );
 
   protected readonly iconSize = computed(() => ICON_SIZE[this.size()]);

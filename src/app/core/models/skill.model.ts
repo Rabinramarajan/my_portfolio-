@@ -54,7 +54,11 @@ export interface SkillsConfig {
   readonly exploring: readonly LearningItem[];
   readonly learningScore: Percentage;
   readonly learningCard: { readonly heading: string; readonly text: string };
-  readonly highlights: readonly { readonly value: string; readonly label: string; readonly icon: IconName }[];
+  readonly highlights: readonly {
+    readonly value: string;
+    readonly label: string;
+    readonly icon: IconName;
+  }[];
   /** "What I value most" chips. */
   readonly values: readonly string[];
 }

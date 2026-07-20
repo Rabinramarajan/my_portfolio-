@@ -1,11 +1,4 @@
-import {
-  DestroyRef,
-  Directive,
-  ElementRef,
-  afterNextRender,
-  inject,
-  input,
-} from '@angular/core';
+import { DestroyRef, Directive, ElementRef, afterNextRender, inject, input } from '@angular/core';
 import { MOTION, gsap, prefersReducedMotion } from './gsap.core';
 
 /**
@@ -63,7 +56,7 @@ export class Stagger {
             if (!selector || node.matches(selector)) {
               added.push(node);
             } else {
-              added.push(...(Array.from(node.querySelectorAll<HTMLElement>(selector))));
+              added.push(...Array.from(node.querySelectorAll<HTMLElement>(selector)));
             }
           });
         }

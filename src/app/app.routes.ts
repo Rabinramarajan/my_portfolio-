@@ -160,6 +160,12 @@ export const routes: Routes = [
         loadComponent: () => import('./features/blog/blog').then((m) => m.BlogPage),
       },
       {
+        path: 'blog/:slug',
+        title: 'Blog Article',
+        loadComponent: () =>
+          import('./features/blog/blog-detail/blog-detail').then((m) => m.BlogDetailPage),
+      },
+      {
         path: 'knowledge',
         title: 'Knowledge Hub',
         data: {

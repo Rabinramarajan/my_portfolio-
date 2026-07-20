@@ -1,9 +1,37 @@
 {
   "heading": "Let's Connect",
   "links": [
-    { "id": "github", "platform": "github", "label": "GitHub", "icon": "Github", "url": "https://github.com/rabinr", "handle": "@rabinr" },
-    { "id": "linkedin", "platform": "linkedin", "label": "LinkedIn", "icon": "Linkedin", "url": "https://linkedin.com/in/rabinr", "handle": "in/rabinr" },
-    { "id": "portfolio", "platform": "twitter", "label": "Portfolio", "icon": "Globe", "url": "https://www.rabinr.in", "handle": "rabinr.in" },
-    { "id": "email", "platform": "email", "label": "Email", "icon": "Mail", "url": "mailto:rabinr2607@gmail.com", "handle": "rabinr2607@gmail.com" }
+    {
+      "id": "github",
+      "platform": "github",
+      "label": "GitHub",
+      "icon": "Github",
+      "url": "https://github.com/rabinr",
+      "handle": "@rabinr"
+    },
+    {
+      "id": "linkedin",
+      "platform": "linkedin",
+      "label": "LinkedIn",
+      "icon": "Linkedin",
+      "url": "https://linkedin.com/in/rabinr",
+      "handle": "in/rabinr"
+    },
+    {
+      "id": "portfolio",
+      "platform": "twitter",
+      "label": "Portfolio",
+      "icon": "Globe",
+      "url": "https://www.rabinr.in",
+      "handle": "rabinr.in"
+    },
+    {
+      "id": "email",
+      "platform": "email",
+      "label": "Email",
+      "icon": "Mail",
+      "url": "mailto:rabinr2607@gmail.com",
+      "handle": "rabinr2607@gmail.com"
+    }
   ]
 }

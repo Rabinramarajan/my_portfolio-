@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { DataService, trackById } from '../../core';
 import { Breadcrumb, GradientTitle, AnimatedButton } from '../../shared';
 import { Icon } from '../../shared/components/ui/icon/icon';

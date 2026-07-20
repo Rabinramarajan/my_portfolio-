@@ -1,13 +1,7 @@
 import type { IconName } from '../types/common.types';
 
 export type SocialPlatform =
-  | 'github'
-  | 'linkedin'
-  | 'twitter'
-  | 'instagram'
-  | 'youtube'
-  | 'email'
-  | 'whatsapp';
+  'github' | 'linkedin' | 'twitter' | 'instagram' | 'youtube' | 'email' | 'whatsapp';
 
 /** Social channel used in sidebar, footer, contact, linkedin pages. */
 export interface SocialLink {

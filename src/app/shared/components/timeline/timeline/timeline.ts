@@ -4,7 +4,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'app-timeline',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<ol class="tl"><ng-content /></ol>`,
+  template: `<ol class="tl">
+    <ng-content />
+  </ol>`,
   styles: `
     :host {
       display: block;

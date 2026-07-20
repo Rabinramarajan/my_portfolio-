@@ -1,16 +1,46 @@
 {
   "home": [
-    { "id": "years", "value": "4+", "label": "Years Experience", "icon": "Calendar", "accent": "purple" },
+    {
+      "id": "years",
+      "value": "4+",
+      "label": "Years Experience",
+      "icon": "Calendar",
+      "accent": "purple"
+    },
     { "id": "users", "value": "10K+", "label": "Users Served", "icon": "Users", "accent": "blue" },
     { "id": "countries", "value": "3", "label": "Countries", "icon": "Globe", "accent": "green" },
     { "id": "perf", "value": "50%", "label": "Faster Load", "icon": "Zap", "accent": "orange" }
   ],
   "about": [
-    { "id": "years", "value": "4+", "label": "Years Experience", "icon": "Calendar", "accent": "purple" },
-    { "id": "technologies", "value": "15+", "label": "Technologies", "icon": "Layers", "accent": "violet" },
-    { "id": "components", "value": "100+", "label": "UI Components", "icon": "LayoutGrid", "accent": "blue" },
+    {
+      "id": "years",
+      "value": "4+",
+      "label": "Years Experience",
+      "icon": "Calendar",
+      "accent": "purple"
+    },
+    {
+      "id": "technologies",
+      "value": "15+",
+      "label": "Technologies",
+      "icon": "Layers",
+      "accent": "violet"
+    },
+    {
+      "id": "components",
+      "value": "100+",
+      "label": "UI Components",
+      "icon": "LayoutGrid",
+      "accent": "blue"
+    },
     { "id": "users", "value": "10K+", "label": "Users Served", "icon": "Users", "accent": "cyan" },
-    { "id": "countries", "value": "3", "label": "Countries Served", "icon": "Globe", "accent": "amber" }
+    {
+      "id": "countries",
+      "value": "3",
+      "label": "Countries Served",
+      "icon": "Globe",
+      "accent": "amber"
+    }
   ],
   "resume": [
     { "id": "years", "value": "4+", "label": "Years Exp.", "icon": "Calendar", "accent": "purple" },
@@ -19,13 +49,43 @@
     { "id": "perf", "value": "50%", "label": "Faster", "icon": "Zap", "accent": "amber" }
   ],
   "experience": [
-    { "id": "years", "value": "4+", "label": "Years Experience", "icon": "Rocket", "accent": "purple" },
-    { "id": "companies", "value": "3", "label": "Companies Worked", "icon": "Briefcase", "accent": "violet" },
-    { "id": "delivered", "value": "15+", "label": "Projects Delivered", "icon": "Code", "accent": "blue" }
+    {
+      "id": "years",
+      "value": "4+",
+      "label": "Years Experience",
+      "icon": "Rocket",
+      "accent": "purple"
+    },
+    {
+      "id": "companies",
+      "value": "3",
+      "label": "Companies Worked",
+      "icon": "Briefcase",
+      "accent": "violet"
+    },
+    {
+      "id": "delivered",
+      "value": "15+",
+      "label": "Projects Delivered",
+      "icon": "Code",
+      "accent": "blue"
+    }
   ],
   "projects": [
-    { "id": "shipped", "value": "15+", "label": "Projects Shipped", "icon": "Box", "accent": "purple" },
-    { "id": "users", "value": "10K+", "label": "Users Impacted", "icon": "TrendingUp", "accent": "blue" },
+    {
+      "id": "shipped",
+      "value": "15+",
+      "label": "Projects Shipped",
+      "icon": "Box",
+      "accent": "purple"
+    },
+    {
+      "id": "users",
+      "value": "10K+",
+      "label": "Users Impacted",
+      "icon": "TrendingUp",
+      "accent": "blue"
+    },
     { "id": "countries", "value": "3", "label": "Countries", "icon": "Globe", "accent": "cyan" },
     { "id": "years", "value": "4+", "label": "Years Experience", "icon": "Star", "accent": "amber" }
   ]

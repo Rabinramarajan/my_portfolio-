@@ -1,10 +1,4 @@
-import {
-  DestroyRef,
-  Directive,
-  ElementRef,
-  afterNextRender,
-  inject,
-} from '@angular/core';
+import { DestroyRef, Directive, ElementRef, afterNextRender, inject } from '@angular/core';
 import { MOTION, gsap, prefersReducedMotion } from './gsap.core';
 
 /**

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 import { Icon } from '../../ui/icon/icon';
 
-
 /** Debounce-free search box with a leading icon, two-way bound via `value`. */
 @Component({
   selector: 'app-search-input',

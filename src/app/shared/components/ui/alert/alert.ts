@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, computed, input, output } from '@an
 import { StatusVariant, IconName } from '../../../../core';
 import { Icon } from '../icon/icon';
 
-
 const VARIANT: Readonly<Record<StatusVariant, IconName>> = {
   success: 'CheckCircle2',
   info: 'Info',
@@ -21,7 +20,12 @@ const VARIANT: Readonly<Record<StatusVariant, IconName>> = {
       <app-icon [name]="icon()" [size]="18" aria-hidden="true" />
       <span class="alert__body"><ng-content /></span>
       @if (dismissible()) {
-        <button type="button" class="alert__dismiss" aria-label="Dismiss" (click)="dismissed.emit()">
+        <button
+          type="button"
+          class="alert__dismiss"
+          aria-label="Dismiss"
+          (click)="dismissed.emit()"
+        >
           <app-icon name="X" [size]="16" aria-hidden="true" />
         </button>
       }
