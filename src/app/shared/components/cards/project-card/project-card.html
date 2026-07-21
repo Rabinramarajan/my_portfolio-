@@ -100,10 +100,10 @@
         }
       </div>
     } @else {
-      <button type="button" class="pjc__casestudy" (click)="openCaseStudy()">
+      <a class="pjc__casestudy" [routerLink]="['/projects', p.id]">
         View Case Study
         <app-icon name="ArrowRight" [size]="15" aria-hidden="true" />
-      </button>
+      </a>
     }
   </div>
 </app-glass-card>

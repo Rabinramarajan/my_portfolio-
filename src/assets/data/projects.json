@@ -27,7 +27,66 @@
       ],
       "featured": true,
       "status": "finished",
-      "createdAt": "2024-06-01"
+      "createdAt": "2024-06-01",
+      "detail": {
+        "tier": "Enterprise",
+        "overview": "The Fiji Immigration External Management System is a secure, scalable government portal built to streamline the end-to-end visa and permit application process for international applicants, employers and businesses. It replaces a counter-and-paper workflow with a guided online journey — reducing manual data entry, making every application status transparent to the applicant, and cutting the turnaround time officers need to reach a decision.",
+        "pillars": [
+          { "title": "End-to-end Application Flow", "icon": "GitBranch" },
+          { "title": "Document Verification", "icon": "FileText" },
+          { "title": "Real-time Tracking", "icon": "Target" },
+          { "title": "Role-based Access Control", "icon": "Shield" }
+        ],
+        "features": [
+          "User registration & profile management",
+          "Role-based access (Applicant / Agent / Officer)",
+          "Visa applications across multiple categories",
+          "Appointment scheduling & payment integration",
+          "Document upload & verification",
+          "Audit logs & activity monitoring",
+          "Application tracking with real-time status",
+          "Email & in-app status notifications",
+          "Secure messaging with immigration officers",
+          "Responsive design for all devices"
+        ],
+        "stack": [
+          { "name": "Angular", "short": "A", "accent": "red" },
+          { "name": "TypeScript", "short": "TS", "accent": "blue" },
+          { "name": "Angular Signals", "short": "Sg", "accent": "purple" },
+          { "name": "RxJS", "short": "Rx", "accent": "violet" },
+          { "name": "Tailwind CSS", "short": "Tw", "accent": "cyan" },
+          { "name": "Chart.js", "short": "Ch", "accent": "orange" },
+          { "name": "REST APIs", "short": "API", "accent": "green" },
+          { "name": "JWT Auth", "short": "JWT", "accent": "amber" }
+        ],
+        "summary": [
+          { "label": "Client", "value": "Fiji Immigration Department", "icon": "Briefcase" },
+          { "label": "Industry", "value": "Government / Immigration", "icon": "Globe" },
+          { "label": "Duration", "value": "Oct 2023 – Feb 2024 (5 months)", "icon": "Clock" },
+          { "label": "My Role", "value": "Frontend Developer", "icon": "User" },
+          { "label": "Team Size", "value": "6 members", "icon": "Users" }
+        ],
+        "challenges": [
+          "Handling large passport and supporting-document uploads securely, with strict size and format validation.",
+          "Implementing a multi-step application flow that stays resumable across sessions and categories.",
+          "Keeping applicants informed with real-time status updates and notifications.",
+          "Maintaining performance with large datasets on the reporting and listing screens."
+        ],
+        "solutions": [
+          "Chunked file uploads with per-file progress indicators and client-side validation.",
+          "A reusable stepper plus typed form components shared across every permit category.",
+          "RxJS-driven polling and push notifications for live application status.",
+          "Optimized API calls with lazy loading, virtual scrolling and response caching."
+        ],
+        "metrics": [
+          { "value": "50K+", "label": "Applications processed", "icon": "Folder" },
+          { "value": "95%", "label": "Faster processing", "icon": "Gauge" },
+          { "value": "99.9%", "label": "System uptime", "icon": "Zap" },
+          { "value": "30+", "label": "Government officers using", "icon": "Users" }
+        ],
+        "related": ["prims", "vnpf", "zellavora"],
+        "quote": "Great systems are built with clarity of purpose, clean code, and a focus on user impact."
+      }
     },
     {
       "id": "fiji-immigration-internal",

@@ -1,4 +1,4 @@
-import type { IconName } from '../types/common.types';
+import type { AccentColor, IconName } from '../types/common.types';
 
 export type ProjectCategory =
   'Web Applications' | 'Mobile Apps' | 'Dashboard' | 'E-Commerce' | 'UI/UX';
@@ -26,6 +26,59 @@ export interface Project {
   readonly codeUrl?: string;
   readonly caseStudyUrl?: string;
   readonly createdAt: string;
+  /** Long-form case study powering `/projects/:slug` (falls back to `id`). */
+  readonly detail?: ProjectDetail;
+}
+
+/** A labelled fact in the detail page's "Project Summary" sidebar card. */
+export interface ProjectSummaryFact {
+  readonly label: string;
+  readonly value: string;
+  readonly icon: IconName;
+}
+
+/** A headline number in the "Project Highlights" grid. */
+export interface ProjectMetric {
+  readonly value: string;
+  readonly label: string;
+  readonly icon: IconName;
+}
+
+/** One of the four capability tiles under "About the Project". */
+export interface ProjectPillar {
+  readonly title: string;
+  readonly icon: IconName;
+}
+
+/** A named technology in the detail page's tech-stack strip. */
+export interface ProjectTech {
+  readonly name: string;
+  /** Short badge text used when no brand logo is available, e.g. "TS". */
+  readonly short: string;
+  readonly accent: AccentColor;
+}
+
+/**
+ * Long-form content for the `/projects/:slug` detail page.
+ * Every field is optional — each section hides when its data is absent, so
+ * projects without a written case study still render a valid (shorter) page.
+ */
+export interface ProjectDetail {
+  /** Badge beside the page title, e.g. "Enterprise". */
+  readonly tier?: string;
+  /** Full narrative shown under "About the Project". */
+  readonly overview?: string;
+  readonly pillars?: readonly ProjectPillar[];
+  readonly features?: readonly string[];
+  readonly stack?: readonly ProjectTech[];
+  readonly summary?: readonly ProjectSummaryFact[];
+  readonly challenges?: readonly string[];
+  readonly solutions?: readonly string[];
+  readonly metrics?: readonly ProjectMetric[];
+  /** Ids of related projects rendered in the sidebar. */
+  readonly related?: readonly string[];
+  /** Closing pull-quote in the footer band. */
+  readonly quote?: string;
 }
 
 /** A single step in the "Project Process" strip. */

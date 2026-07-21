@@ -20,7 +20,7 @@ import {
 } from '@angular/router';
 import { provideServiceWorker, SwUpdate } from '@angular/service-worker';
 import { routes } from './app.routes';
-import { AppTitleStrategy } from './core/services';
+import { AppTitleStrategy, VercelService, WebVitalsService } from './core/services';
 
 /**
  * Swaps in a new build as soon as one is cached, so the next page load runs it.
@@ -38,6 +38,11 @@ function activateUpdatesOnNextLoad(): void {
   updates.versionUpdates.pipe(takeUntilDestroyed(destroyRef)).subscribe((event) => {
     if (event.type === 'VERSION_READY') void updates.activateUpdate();
   });
+}
+
+function initializeVercel(): void {
+  inject(VercelService);
+  inject(WebVitalsService);
 }
 
 export const appConfig: ApplicationConfig = {
@@ -68,6 +73,9 @@ export const appConfig: ApplicationConfig = {
       // off the critical path, so it cannot compete with the first paint.
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    VercelService,
+    WebVitalsService,
     provideAppInitializer(activateUpdatesOnNextLoad),
+    provideAppInitializer(initializeVercel),
   ],
 };

@@ -68,6 +68,14 @@ export const routes: Routes = [
         loadComponent: () => import('./features/projects/projects').then((m) => m.ProjectsPage),
       },
       {
+        path: 'projects/:slug',
+        title: 'Case Study',
+        loadComponent: () =>
+          import('./features/projects/project-detail/project-detail').then(
+            (m) => m.ProjectDetailPage,
+          ),
+      },
+      {
         path: 'skills',
         title: 'Skills & Technologies',
         data: {

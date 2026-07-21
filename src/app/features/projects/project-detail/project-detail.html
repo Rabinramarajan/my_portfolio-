@@ -1,0 +1,335 @@
+@if (project(); as p) {
+  @let d = detail();
+
+  <div class="pd">
+    <!-- ─── Breadcrumb + back ─── -->
+    <div class="pd-top">
+      <nav class="pd-crumb" aria-label="Breadcrumb">
+        <a routerLink="/">Home</a>
+        <app-icon name="ChevronRight" [size]="14" aria-hidden="true" />
+        <a routerLink="/projects">Projects</a>
+        <app-icon name="ChevronRight" [size]="14" aria-hidden="true" />
+        <span>{{ p.title }}</span>
+      </nav>
+
+      <a routerLink="/projects" class="pd-back">
+        <app-icon name="ChevronLeft" [size]="14" aria-hidden="true" />
+        Back to Projects
+      </a>
+    </div>
+
+    <!-- ─── Hero ─── -->
+    <header class="pd-hero">
+      <div class="pd-hero__text">
+        <h1 class="pd-hero__title">
+          {{ p.title }}
+          @if (d?.tier; as tier) {
+            <span class="pd-tier"
+              ><app-icon name="Sparkles" [size]="12" aria-hidden="true" />{{ tier }}</span
+            >
+          }
+        </h1>
+        <p class="pd-hero__desc">{{ p.description }}</p>
+        <ul class="pd-chips">
+          @for (tech of p.technologies; track tech) {
+            <li class="pd-chip">{{ tech }}</li>
+          }
+        </ul>
+      </div>
+
+      @if (hero()) {
+        <div class="pd-hero__media">
+          <img [src]="hero()" [alt]="p.title + ' — dashboard preview'" loading="eager" />
+        </div>
+      }
+    </header>
+
+    <!-- ─── Section nav ─── -->
+    <nav class="pd-tabs" aria-label="Case study sections">
+      @for (tab of tabs(); track tab.id) {
+        <button
+          type="button"
+          class="pd-tab"
+          [class.pd-tab--active]="activeTab() === tab.id"
+          [attr.aria-current]="activeTab() === tab.id ? 'true' : null"
+          (click)="select(tab.id)"
+        >
+          <app-icon [name]="tab.icon" [size]="15" aria-hidden="true" />
+          {{ tab.label }}
+        </button>
+      }
+    </nav>
+
+    <div class="pd-layout">
+      <!-- ═══════════════ MAIN ═══════════════ -->
+      <div class="pd-main">
+        <!-- About -->
+        <section class="pd-card" id="pd-overview">
+          <h2 class="pd-card__title">
+            <app-icon name="Info" [size]="18" aria-hidden="true" />
+            About the Project
+          </h2>
+          <p class="pd-prose">{{ d?.overview ?? p.description }}</p>
+
+          @if (d?.pillars; as pillars) {
+            <ul class="pd-pillars">
+              @for (pillar of pillars; track pillar.title) {
+                <li class="pd-pillar">
+                  <app-icon [name]="pillar.icon" [size]="18" aria-hidden="true" />
+                  <span>{{ pillar.title }}</span>
+                </li>
+              }
+            </ul>
+          }
+        </section>
+
+        <!-- Key features -->
+        @if (d?.features; as features) {
+          <section class="pd-card" id="pd-features">
+            <h2 class="pd-card__title">
+              <app-icon name="Star" [size]="18" aria-hidden="true" />
+              Key Features
+            </h2>
+            <ul class="pd-features">
+              @for (feature of features; track feature) {
+                <li class="pd-feature">
+                  <app-icon name="CheckCircle2" [size]="16" aria-hidden="true" />
+                  {{ feature }}
+                </li>
+              }
+            </ul>
+          </section>
+        }
+
+        <!-- Tech stack -->
+        @if (d?.stack; as stack) {
+          <section class="pd-card" id="pd-stack">
+            <h2 class="pd-card__title">
+              <app-icon name="Code" [size]="18" aria-hidden="true" />
+              Tech Stack
+            </h2>
+            <ul class="pd-stack">
+              @for (tech of stack; track tech.name) {
+                <li class="pd-tech" [attr.data-accent]="tech.accent">
+                  <span class="pd-tech__badge" aria-hidden="true">{{ tech.short }}</span>
+                  <span class="pd-tech__name">{{ tech.name }}</span>
+                </li>
+              }
+            </ul>
+          </section>
+        }
+
+        <!-- Screenshots -->
+        @if (gallery().length > 1) {
+          <section class="pd-card" id="pd-screenshots">
+            <h2 class="pd-card__title">
+              <app-icon name="LayoutGrid" [size]="18" aria-hidden="true" />
+              Project Screenshots
+            </h2>
+
+            <div class="pd-gallery">
+              <button
+                type="button"
+                class="pd-gallery__nav pd-gallery__nav--prev"
+                (click)="prevSlide()"
+                aria-label="Previous screenshot"
+              >
+                <app-icon name="ChevronLeft" [size]="18" aria-hidden="true" />
+              </button>
+
+              <div class="pd-gallery__viewport">
+                <div class="pd-gallery__track" [style.--pd-slide]="slide()">
+                  @for (shot of gallery(); track shot; let i = $index) {
+                    <figure class="pd-shot">
+                      <img [src]="shot" [alt]="p.title + ' screenshot ' + (i + 1)" loading="lazy" />
+                    </figure>
+                  }
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="pd-gallery__nav pd-gallery__nav--next"
+                (click)="nextSlide()"
+                aria-label="Next screenshot"
+              >
+                <app-icon name="ChevronRight" [size]="18" aria-hidden="true" />
+              </button>
+            </div>
+
+            <div class="pd-dots">
+              @for (shot of gallery(); track shot; let i = $index) {
+                <button
+                  type="button"
+                  class="pd-dot"
+                  [class.pd-dot--active]="slide() === i"
+                  [attr.aria-label]="'Go to screenshot ' + (i + 1)"
+                  (click)="goToSlide(i)"
+                ></button>
+              }
+            </div>
+          </section>
+        }
+
+        <!-- Impact -->
+        @if (d?.metrics; as metrics) {
+          <section class="pd-card" id="pd-impact">
+            <h2 class="pd-card__title">
+              <app-icon name="TrendingUp" [size]="18" aria-hidden="true" />
+              Project Highlights
+            </h2>
+            <ul class="pd-metrics">
+              @for (metric of metrics; track metric.label) {
+                <li class="pd-metric">
+                  <app-icon [name]="metric.icon" [size]="20" aria-hidden="true" />
+                  <div>
+                    <p class="pd-metric__value">{{ metric.value }}</p>
+                    <p class="pd-metric__label">{{ metric.label }}</p>
+                  </div>
+                </li>
+              }
+            </ul>
+          </section>
+        }
+      </div>
+
+      <!-- ═══════════════ SIDEBAR ═══════════════ -->
+      <aside class="pd-side">
+        <!-- Summary -->
+        @if (d?.summary; as summary) {
+          <section class="pd-card pd-card--tight">
+            <h2 class="pd-card__title">Project Summary</h2>
+            <dl class="pd-facts">
+              @for (fact of summary; track fact.label) {
+                <div class="pd-fact">
+                  <span class="pd-fact__icon" aria-hidden="true">
+                    <app-icon [name]="fact.icon" [size]="16" />
+                  </span>
+                  <div>
+                    <dt>{{ fact.label }}</dt>
+                    <dd>{{ fact.value }}</dd>
+                  </div>
+                </div>
+              }
+            </dl>
+
+            @if (p.liveUrl) {
+              <a class="pd-cta" [href]="p.liveUrl" target="_blank" rel="noopener noreferrer">
+                View Live Project
+                <app-icon name="ArrowUpRight" [size]="15" aria-hidden="true" />
+              </a>
+            }
+            @if (p.codeUrl) {
+              <a
+                class="pd-cta pd-cta--ghost"
+                [href]="p.codeUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Source
+                <app-icon name="Github" [size]="15" aria-hidden="true" />
+              </a>
+            }
+          </section>
+        }
+
+        <!-- Challenges -->
+        @if (d?.challenges; as challenges) {
+          <section class="pd-card pd-card--tight">
+            <h2 class="pd-card__title pd-card__title--warn">
+              <app-icon name="AlertTriangle" [size]="17" aria-hidden="true" />
+              Challenges
+            </h2>
+            <ul class="pd-bullets pd-bullets--warn">
+              @for (item of challenges; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </section>
+        }
+
+        <!-- Solutions -->
+        @if (d?.solutions; as solutions) {
+          <section class="pd-card pd-card--tight">
+            <h2 class="pd-card__title pd-card__title--ok">
+              <app-icon name="CheckCircle2" [size]="17" aria-hidden="true" />
+              Solutions
+            </h2>
+            <ul class="pd-bullets pd-bullets--ok">
+              @for (item of solutions; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </section>
+        }
+
+        <!-- Related -->
+        @if (related().length) {
+          <section class="pd-card pd-card--tight">
+            <h2 class="pd-card__title">Related Projects</h2>
+            <ul class="pd-related">
+              @for (item of related(); track item.id) {
+                <li>
+                  <a [routerLink]="['/projects', item.id]" class="pd-related__link">
+                    <span class="pd-related__text">
+                      <span class="pd-related__title">{{ item.title }}</span>
+                      <span class="pd-related__meta">{{ item.categoryLabel }}</span>
+                    </span>
+                    <app-icon name="ArrowUpRight" [size]="15" aria-hidden="true" />
+                  </a>
+                </li>
+              }
+            </ul>
+            <a routerLink="/projects" class="pd-related__all">
+              View all projects
+              <app-icon name="ArrowUpRight" [size]="13" aria-hidden="true" />
+            </a>
+          </section>
+        }
+
+        <!-- Share -->
+        <section class="pd-card pd-card--tight">
+          <h2 class="pd-card__title">Share this project</h2>
+          <div class="pd-share">
+            <button
+              type="button"
+              class="pd-share__btn"
+              (click)="shareTo('twitter')"
+              aria-label="Share on X"
+            >
+              <app-icon name="Twitter" [size]="16" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              class="pd-share__btn"
+              (click)="shareTo('linkedin')"
+              aria-label="Share on LinkedIn"
+            >
+              <app-icon name="Linkedin" [size]="16" aria-hidden="true" />
+            </button>
+            <button type="button" class="pd-share__btn" (click)="copyLink()" aria-label="Copy link">
+              <app-icon name="Copy" [size]="16" aria-hidden="true" />
+            </button>
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <!-- ─── Closing quote ─── -->
+    @if (d?.quote; as quote) {
+      <blockquote class="pd-quote">
+        <app-icon name="Quote" [size]="34" aria-hidden="true" />
+        <p>{{ quote }}</p>
+      </blockquote>
+    }
+  </div>
+} @else if (notFound()) {
+  <div class="pd-empty">
+    <h1>Project not found</h1>
+    <p>The case study you’re looking for doesn’t exist or has been moved.</p>
+    <a routerLink="/projects" class="pd-back">
+      <app-icon name="ChevronLeft" [size]="14" aria-hidden="true" />
+      Back to Projects
+    </a>
+  </div>
+}
