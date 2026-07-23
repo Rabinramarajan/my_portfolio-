@@ -103,8 +103,9 @@
                 id="pf-bio"
                 class="st-input st-textarea"
                 rows="3"
+                [value]="form().bio"
                 (input)="updateField('bio', $any($event.target).value)"
-                >{{ form().bio }}</textarea>
+              ></textarea>
             </div>
             <div class="st-field st-field--full">
               <label class="st-label" for="pf-web">Website</label>
@@ -290,8 +291,8 @@
             <select
               id="ty-lh"
               class="st-input"
-              [(ngModel)]="font().lineHeight"
-              (ngModelChange)="updateLineHeight($event)"
+              [value]="font().lineHeight"
+              (change)="updateLineHeight($any($event.target).value)"
             >
               <option value="normal">Normal</option>
               <option value="relaxed">Relaxed</option>
@@ -303,8 +304,8 @@
             <select
               id="ty-ls"
               class="st-input"
-              [(ngModel)]="font().letterSpacing"
-              (ngModelChange)="updateLetterSpacing($event)"
+              [value]="font().letterSpacing"
+              (change)="updateLetterSpacing($any($event.target).value)"
             >
               <option value="normal">Normal</option>
               <option value="wide">Wide</option>
@@ -384,8 +385,8 @@
               <select
                 id="a11y-size"
                 class="st-input"
-                [(ngModel)]="accessibility().fontSize"
-                (ngModelChange)="updateFontSize($event)"
+                [value]="accessibility().fontSize"
+                (change)="updateFontSizeA11y($any($event.target).value)"
               >
                 <option value="normal">Normal</option>
                 <option value="large">Large</option>

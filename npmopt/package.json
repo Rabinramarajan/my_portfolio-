@@ -1,0 +1,7 @@
+{
+  "name": "t",
+  "version": "1.0.0",
+  "scripts": {
+    "probe": "node -e \"console.log(1,JSON.stringify(process.env.NODE_OPTIONS));process.emitWarning(2,'ExperimentalWarning')\""
+  }
+}

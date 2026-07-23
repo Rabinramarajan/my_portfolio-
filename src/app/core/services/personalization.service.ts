@@ -1,5 +1,5 @@
-import { Injectable, effect, inject, signal } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Injectable, PLATFORM_ID, effect, inject, signal } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import type {
   ContentDensity,
   FontSettings,
@@ -16,6 +16,7 @@ const STORAGE_KEY = 'portfolio-personalization';
 @Injectable({ providedIn: 'root' })
 export class PersonalizationService {
   private readonly document = inject(DOCUMENT);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   private readonly settings = signal<PersonalizationSettings>(
     this.loadFromStorage() ?? DEFAULT_PERSONALIZATION_SETTINGS,
@@ -63,6 +64,7 @@ export class PersonalizationService {
   }
 
   private loadFromStorage(): PersonalizationSettings | null {
+    if (!this.isBrowser) return null;
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       return stored ? JSON.parse(stored) : null;
@@ -72,6 +74,7 @@ export class PersonalizationService {
   }
 
   private persistSettings(): void {
+    if (!this.isBrowser) return;
     try {
       const current: PersonalizationSettings = {
         theme: this.theme(),

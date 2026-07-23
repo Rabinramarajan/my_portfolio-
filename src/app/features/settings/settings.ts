@@ -1,11 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  PLATFORM_ID,
   computed,
   effect,
   inject,
   signal,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PersonalizationService } from '../../core/services/personalization.service';
 import { DataService } from '../../core';
@@ -51,6 +53,7 @@ interface ProfileForm {
 export class SettingsPage {
   protected readonly personalization = inject(PersonalizationService);
   private readonly data = inject(DataService);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private readonly profileResource = this.data.load('profile');
 
   // ── Section navigation ──────────────────────────────
@@ -96,6 +99,14 @@ export class SettingsPage {
         website: p.website ?? '',
       });
     });
+
+    // Persist display settings whenever they change.
+    effect(() => {
+      this.showEmail();
+      this.showLocation();
+      this.showSocial();
+      this.persistDisplaySettings();
+    });
   }
 
   protected updateField<K extends keyof ProfileForm>(key: K, value: ProfileForm[K]): void {
@@ -106,12 +117,45 @@ export class SettingsPage {
   /** Local-only save — flashes confirmation. No profile backend on a static site. */
   protected saveChanges(): void {
     this.saved.set(true);
+    setTimeout(() => this.saved.set(false), 2000);
   }
 
-  // ── Profile display toggles (local) ─────────────────
-  protected readonly showEmail = signal(true);
-  protected readonly showLocation = signal(true);
-  protected readonly showSocial = signal(true);
+  // ── Profile display toggles (persistent to localStorage) ─────────────────
+  protected readonly showEmail = signal(this.loadDisplaySettings().showEmail);
+  protected readonly showLocation = signal(this.loadDisplaySettings().showLocation);
+  protected readonly showSocial = signal(this.loadDisplaySettings().showSocial);
+
+  private loadDisplaySettings(): {
+    showEmail: boolean;
+    showLocation: boolean;
+    showSocial: boolean;
+  } {
+    if (!this.isBrowser) return { showEmail: true, showLocation: true, showSocial: true };
+    try {
+      const stored = localStorage.getItem('portfolio-display-settings');
+      return stored
+        ? JSON.parse(stored)
+        : { showEmail: true, showLocation: true, showSocial: true };
+    } catch {
+      return { showEmail: true, showLocation: true, showSocial: true };
+    }
+  }
+
+  private persistDisplaySettings(): void {
+    if (!this.isBrowser) return;
+    try {
+      localStorage.setItem(
+        'portfolio-display-settings',
+        JSON.stringify({
+          showEmail: this.showEmail(),
+          showLocation: this.showLocation(),
+          showSocial: this.showSocial(),
+        }),
+      );
+    } catch {
+      // Silently fail on SSR or storage quota
+    }
+  }
 
   // ── Personalization state (real, live) ──────────────
   readonly theme = this.personalization.theme;
@@ -160,12 +204,16 @@ export class SettingsPage {
     this.personalization.setFont({ dyslexiaFriendly: enabled });
   }
 
-  protected updateLineHeight(height: 'normal' | 'relaxed' | 'loose'): void {
-    this.personalization.setFont({ lineHeight: height });
+  protected updateLineHeight(height: string): void {
+    this.personalization.setFont({ lineHeight: height as 'normal' | 'relaxed' | 'loose' });
   }
 
-  protected updateLetterSpacing(spacing: 'normal' | 'wide' | 'wider'): void {
-    this.personalization.setFont({ letterSpacing: spacing });
+  protected updateLetterSpacing(spacing: string): void {
+    this.personalization.setFont({ letterSpacing: spacing as 'normal' | 'wide' | 'wider' });
+  }
+
+  protected updateFontSizeA11y(size: string): void {
+    this.personalization.setAccessibility({ fontSize: size as 'normal' | 'large' | 'xlarge' });
   }
 
   protected updateLayout(layout: LayoutStyle): void {

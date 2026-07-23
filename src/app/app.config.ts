@@ -21,15 +21,8 @@ import {
 import { provideServiceWorker, SwUpdate } from '@angular/service-worker';
 import { routes } from './app.routes';
 import { AppTitleStrategy, VercelService, WebVitalsService } from './core/services';
+import { provideZvIcons } from '@zellavora/icons';
 
-/**
- * Swaps in a new build as soon as one is cached, so the next page load runs it.
- *
- * Without this the worker serves the installed version indefinitely and a
- * visitor can sit on a stale build long after a deploy. It deliberately does
- * not force a reload — yanking the page out from under someone mid-read costs
- * more than showing them the previous version for one more visit.
- */
 function activateUpdatesOnNextLoad(): void {
   const updates = inject(SwUpdate);
   const destroyRef = inject(DestroyRef);
@@ -47,6 +40,7 @@ function initializeVercel(): void {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideZvIcons(),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     // Reuses the prerendered DOM instead of discarding and re-rendering it, and
