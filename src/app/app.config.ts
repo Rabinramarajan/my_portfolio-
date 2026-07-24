@@ -20,7 +20,13 @@ import {
 } from '@angular/router';
 import { provideServiceWorker, SwUpdate } from '@angular/service-worker';
 import { routes } from './app.routes';
-import { AppTitleStrategy, VercelService, WebVitalsService } from './core/services';
+import {
+  AppSettingsService,
+  AppTitleStrategy,
+  STORAGE_CONFIG,
+  VercelService,
+  WebVitalsService,
+} from './core/services';
 import { provideZvIcons } from '@zellavora/icons';
 
 function activateUpdatesOnNextLoad(): void {
@@ -43,11 +49,7 @@ export const appConfig: ApplicationConfig = {
     provideZvIcons(),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    // Reuses the prerendered DOM instead of discarding and re-rendering it, and
-    // — via the default HTTP transfer cache — inlines the JSON the pages fetch
-    // into the HTML. Without this the prerender buys nothing: the client blanks
-    // the page on boot and re-fetches profile.json/home.json before the hero can
-    // paint, which is what held LCP at 3.5s.
+
     provideClientHydration(withEventReplay()),
     provideHttpClient(),
     provideAnimationsAsync(),
@@ -63,13 +65,31 @@ export const appConfig: ApplicationConfig = {
     { provide: TitleStrategy, useClass: AppTitleStrategy },
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
-      // Registering only once the app is stable keeps the worker's own fetches
-      // off the critical path, so it cannot compete with the first paint.
       registrationStrategy: 'registerWhenStable:30000',
     }),
     VercelService,
     WebVitalsService,
     provideAppInitializer(activateUpdatesOnNextLoad),
     provideAppInitializer(initializeVercel),
+    {
+      provide: STORAGE_CONFIG,
+      useFactory: () => {
+        const settings = inject(AppSettingsService);
+        return {
+          prefix: 'rabin-portfolio.',
+          encryptionKey: settings.storageKey,
+          encryptByDefault: true,
+          encryptIndexedDb: false,
+          dbName: 'rabin-portfolio-db',
+          dbVersion: 2,
+          storeName: 'keyval',
+          stores: ['keyval', 'documents', 'audit'],
+          defaultBackend: 'local' as const,
+          defaultTtl: 0,
+          channel: 'rabin-portfolio-storage',
+          cleanupInterval: 60_000,
+        };
+      },
+    },
   ],
 };

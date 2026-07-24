@@ -1,635 +1,1056 @@
 # StorageService — Usage Guide
 
-A single-file, signal-powered storage layer for Angular 22 (standalone, zoneless, SSR-safe).
-One API over **localStorage**, **sessionStorage**, **IndexedDB**, and an in-memory driver.
-
-Source: [`src/app/core/services/storage.service.ts`](../src/app/core/services/storage.service.ts)
+A single-file, signal-aware storage layer for Angular. One service, four backends
+(`local`, `session`, `idb`, `memory`), with TTL, AES encryption, cross-tab sync,
+rich serialization, and SSR safety.
 
 ---
 
 ## Table of contents
 
-1. [Setup](#1-setup)
-2. [Two ways to read](#2-two-ways-to-read-async-vs-signal)
+1. [Install & wire up](#1-install--wire-up)
+2. [Configuration](#2-configuration)
 3. [Core CRUD](#3-core-crud)
-4. [Signals](#4-signals)
-5. [Value mutators](#5-value-mutators)
-6. [Expiry & TTL](#6-expiry--ttl)
-7. [Picking a driver](#7-picking-a-driver)
-8. [Encryption](#8-encryption)
-9. [Batch & transactions](#9-batch--transactions)
-10. [Watching changes & multi-tab sync](#10-watching-changes--multi-tab-sync)
-11. [IndexedDB: pagination & search](#11-indexeddb-pagination--search)
-12. [Backup: snapshot / export / import](#12-backup-snapshot--export--import)
-13. [Validation](#13-validation)
-14. [Rich types you can store](#14-rich-types-you-can-store)
-15. [SSR behaviour](#15-ssr-behaviour)
+4. [Backends](#4-backends)
+5. [TTL / expiration](#5-ttl--expiration)
+6. [Signals](#6-signals)
+7. [Querying](#7-querying)
+8. [Mutation helpers](#8-mutation-helpers)
+9. [Array & primitive helpers](#9-array--primitive-helpers)
+10. [Bulk & transactions](#10-bulk--transactions)
+11. [Export / import / snapshots](#11-export--import--snapshots)
+12. [Encryption](#12-encryption)
+13. [Serialization](#13-serialization)
+14. [Cross-tab sync](#14-cross-tab-sync)
+15. [SSR](#15-ssr)
 16. [Error handling](#16-error-handling)
-17. [Diagnostics](#17-diagnostics)
-18. [Testing](#18-testing)
-19. [API reference](#19-api-reference)
+17. [Maintenance & teardown](#17-maintenance--teardown)
+18. [Full API reference](#18-full-api-reference)
+19. [Recipes](#19-recipes)
 20. [Gotchas](#20-gotchas)
 
 ---
 
-## 1. Setup
+## 1. Install & wire up
 
-The service is `providedIn: 'root'` — it works with zero configuration:
+### Dependencies
+
+```bash
+npm install crypto-js
+npm install -D @types/crypto-js
+```
+
+`@angular/core/rxjs-interop` and `rxjs` ship with Angular — no extra install.
+
+### Drop in the file
+
+Place `storage.service.ts` anywhere under `src/app` (convention:
+`src/app/core/services/storage.service.ts`). It is `providedIn: 'root'`, so
+there is nothing to register.
+
+### Inject it
 
 ```ts
+import { Component, inject } from '@angular/core';
 import { StorageService } from './core/services/storage.service';
 
-export class MyComponent {
+@Component({ selector: 'app-root', template: '' })
+export class AppComponent {
   private readonly storage = inject(StorageService);
 }
 ```
 
-To configure it, add `provideStorage()` to your app config:
+### Verify `resource()` compiles
+
+The service exposes an `idbEntries` resource using the `{ params, loader,
+defaultValue }` signature. That property was called `request` before Angular 20.
+If your build fails on it:
+
+```ts
+// Angular 19
+readonly idbEntries = resource({ request: () => this.revision(), loader: ... });
+```
+
+Or delete the `idbEntries` field entirely — nothing else depends on it.
+
+---
+
+## 2. Configuration
+
+Defaults are applied automatically. Override any subset via `STORAGE_CONFIG`.
 
 ```ts
 // app.config.ts
-import { provideStorage } from './core/services/storage.service';
+import { ApplicationConfig, inject } from '@angular/core';
+import { STORAGE_CONFIG } from './core/services/storage.service';
+import { AppSettingsService } from './core/services/app-settings.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideStorage({
-      namespace: 'portfolio', // every key is prefixed "portfolio:"
-      driver: 'local', // 'local' | 'session' | 'indexeddb' | 'memory'
-      defaultTtl: 1000 * 60 * 60, // 1h TTL on writes that don't specify one
-      cacheSize: 512,
-      syncAcrossTabs: true,
-      debug: !environment.production,
-    }),
+    {
+      provide: STORAGE_CONFIG,
+      useFactory: () => {
+        const settings = inject(AppSettingsService);
+        return {
+          prefix: 'myapp.',
+          encryptionKey: settings.storageKey,
+          encryptByDefault: true,
+          encryptIndexedDb: false,
+          dbName: 'myapp-db',
+          dbVersion: 2,
+          storeName: 'keyval',
+          stores: ['keyval', 'documents', 'audit'],
+          defaultBackend: 'local' as const,
+          defaultTtl: 0,
+          channel: 'myapp-storage',
+          cleanupInterval: 60_000,
+        };
+      },
+    },
   ],
 };
 ```
 
-### All config options
+### Every option
 
-| Option                             | Default                               | What it does                                   |
-| ---------------------------------- | ------------------------------------- | ---------------------------------------------- |
-| `driver`                           | `'local'`                             | Default backend                                |
-| `namespace`                        | `'zv'`                                | Key prefix (`"zv:theme"`)                      |
-| `defaultTtl`                       | —                                     | TTL applied when a write doesn't specify one   |
-| `encryptByDefault`                 | `false`                               | Encrypt every write (requires `encryptionKey`) |
-| `encryptionKey`                    | —                                     | AES-GCM passphrase                             |
-| `keyDerivationIterations`          | `150_000`                             | PBKDF2 rounds                                  |
-| `cacheSize`                        | `256`                                 | LRU capacity                                   |
-| `cacheTtl`                         | `60_000`                              | Cache slot lifetime (ms)                       |
-| `syncAcrossTabs`                   | `true`                                | BroadcastChannel + `storage` events            |
-| `channelName`                      | `'zv-storage'`                        | BroadcastChannel name                          |
-| `cleanupInterval`                  | `120_000`                             | Expiry sweep interval; `0` disables            |
-| `dbName` / `dbStore` / `dbVersion` | `'zv-storage-db'` / `'records'` / `1` | IndexedDB schema                               |
-| `dbIndexes`                        | `by_updated`, `by_expires`            | Secondary indexes                              |
-| `fallbackToMemory`                 | `true`                                | Degrade to memory instead of throwing          |
-| `debug`                            | `false`                               | `console.debug` diagnostics                    |
+| Option             | Type                | Default                    | Meaning                                                                                                              |
+| ------------------ | ------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `prefix`           | `string`            | `'app.'`                   | Prepended to every `localStorage`/`sessionStorage` key. Namespaces your app so `clear()` never touches foreign keys. |
+| `encryptionKey`    | `string`            | `'change-me-at-bootstrap'` | AES passphrase. **Change this.**                                                                                     |
+| `encryptByDefault` | `boolean`           | `true`                     | Encrypt `local`/`session` payloads.                                                                                  |
+| `encryptIndexedDb` | `boolean`           | `false`                    | Encrypt IndexedDB payloads too.                                                                                      |
+| `dbName`           | `string`            | `'app-db'`                 | IndexedDB database name.                                                                                             |
+| `dbVersion`        | `number`            | `1`                        | Schema version. Bump to trigger `upgradeDB()`.                                                                       |
+| `storeName`        | `string`            | `'keyval'`                 | Default object store.                                                                                                |
+| `stores`           | `readonly string[]` | `['keyval']`               | Extra stores created on upgrade.                                                                                     |
+| `defaultBackend`   | `StorageBackend`    | `'local'`                  | Used when no `backend` option is passed.                                                                             |
+| `defaultTtl`       | `number`            | `0`                        | Default TTL in ms. `0` = never expires.                                                                              |
+| `channel`          | `string`            | `'app-storage'`            | BroadcastChannel name for cross-tab sync.                                                                            |
+| `cleanupInterval`  | `number`            | `60_000`                   | Auto-run `clearExpired()` every N ms. `0` disables.                                                                  |
 
-> Setting `encryptByDefault: true` without an `encryptionKey` throws a `StorageEncryptionError` at startup — deliberately, so it fails loudly rather than silently storing plaintext.
-
----
-
-## 2. Two ways to read: async vs signal
-
-This matters, so it comes first.
-
-**IndexedDB cannot be read synchronously.** To keep one API across all four drivers, every
-direct method returns a `Promise`. If you want synchronous reads in a template, use a
-**signal** — it hydrates once and then reads from memory instantly.
-
-```ts
-// Async — precise, awaits the real backend
-const theme = await storage.get<string>('theme');
-
-// Signal — sync after hydration, auto-updates, template-friendly
-readonly theme = this.storage.signal<string>('theme', 'dark');
-// template: {{ theme() }}
-```
-
-Rule of thumb: **signals for UI state, `await` for logic that must be certain.**
+> **Note on `encryptionKey`:** a passphrase shipped in a browser bundle is
+> obfuscation, not security. It stops casual DevTools inspection and shoulder
+> surfing. It does not protect against a determined attacker who has your JS.
+> Never store anything you'd genuinely mind being read.
 
 ---
 
 ## 3. Core CRUD
 
+All core methods are `async` and generic.
+
 ```ts
-await storage.set('user', { id: 1, name: 'Ada' });
-await storage.set('token', 'abc', { ttl: 60_000 }); // expires in 60s
-await storage.set('draft', text, { driver: 'session' }); // different backend
+// Write
+await this.storage.set<User>('profile', { id: 1, name: 'Rabin' });
 
-const user = await storage.get<User>('user');
-const name = await storage.get('name', { fallback: 'Guest' });
-const otp = await storage.get('otp', { consume: true }); // read-once, then deleted
+// Read
+const user = await this.storage.get<User>('profile'); // User | undefined
 
-await storage.remove('token');
-await storage.clear(); // namespace only, not the whole origin
+// Delete one key
+await this.storage.remove('profile');
+
+// Delete everything under the prefix, for one backend
+await this.storage.clear();
 ```
 
-### Inspecting
+`get()` returns `undefined` — never `null` — for missing, expired, or
+unreadable keys.
+
+### Options object
+
+Every method that touches storage accepts an optional `StorageOptions`:
 
 ```ts
-await storage.exists('user'); // true — present and not expired
-await storage.has('tags', 'angular'); // membership in array / Set / Map / object / string
-await storage.keys(); // ['user', 'theme', ...]  (namespace stripped)
-await storage.values<User>();
-await storage.entries<User>(); // [['user', {...}], ...]
-await storage.count(); // live (non-expired) record count
-await storage.size(); // approximate bytes
-await storage.info('user'); // { createdAt, updatedAt, expiresAt, encrypted, bytes }
+interface StorageOptions {
+  backend?: 'local' | 'session' | 'idb' | 'memory';
+  ttl?: number; // ms; 0/undefined = never expires
+  encrypt?: boolean; // per-call override
+  store?: string; // IndexedDB object store override
+}
 ```
 
-`clear()` only removes keys inside your namespace — it never wipes other apps' data on the
-same origin.
-
-### Moving keys
-
 ```ts
-await storage.rename('old', 'new'); // preserves metadata
-await storage.copy('draft', 'draft.backup');
-await storage.move('cart', 'cart', { targetDriver: 'indexeddb' }); // promote across drivers
+await this.storage.set('draft', body, {
+  backend: 'idb',
+  store: 'documents',
+  ttl: 86_400_000,
+  encrypt: true,
+});
 ```
 
 ---
 
-## 4. Signals
+## 4. Backends
 
-`signal()` returns a `WritableSignal` bound to a key. Writing to it persists automatically.
+| Backend   | Persists         | Scope            | Capacity       | Use for                              |
+| --------- | ---------------- | ---------------- | -------------- | ------------------------------------ |
+| `local`   | Yes              | Origin, all tabs | ~5 MB          | Tokens, preferences, cached lookups  |
+| `session` | Until tab closes | One tab          | ~5 MB          | Wizard state, per-tab context        |
+| `idb`     | Yes              | Origin, all tabs | Hundreds of MB | Documents, offline data, large lists |
+| `memory`  | No               | This JS context  | RAM            | SSR fallback, ephemeral state, tests |
 
 ```ts
-export class SettingsPage {
+await this.storage.set('token', jwt); // local (default)
+await this.storage.set('step', 3, { backend: 'session' });
+await this.storage.set('doc', blob, { backend: 'idb' });
+await this.storage.set('tmp', x, { backend: 'memory' });
+```
+
+**Keys are namespaced by backend.** `get('token')` on `local` and
+`get('token', { backend: 'session' })` are two entirely separate records with
+separate cache entries and separate signals. Be consistent about which backend a
+key lives in, or wrap it:
+
+```ts
+private readonly session = { backend: 'session' } as const;
+await this.storage.set('step', 3, this.session);
+await this.storage.get<number>('step', this.session);
+```
+
+---
+
+## 5. TTL / expiration
+
+```ts
+// Expires in 10 minutes
+await this.storage.set('otp', code, { ttl: 600_000 });
+
+// Never expires (default)
+await this.storage.set('theme', 'dark');
+```
+
+Expiry is enforced three ways:
+
+1. **On read** — `get()` checks the envelope, deletes the record, returns `undefined`.
+2. **On a timer** — `clearExpired()` runs every `cleanupInterval` ms.
+3. **Manually** — call `clearExpired()` or `cleanup()` yourself.
+
+```ts
+const removed = await this.storage.clearExpired();
+console.log(`${removed} expired records purged`);
+```
+
+`copy()`, `move()`, and `import()` preserve the _remaining_ TTL, not the
+original duration — a record with 30s left keeps 30s, not the full window.
+
+---
+
+## 6. Signals
+
+This is the part that changes how you write components.
+
+### Basic
+
+```ts
+@Component({
+  template: `
+    <p>Welcome, {{ profile()?.name ?? 'guest' }}</p>
+    <button (click)="rename()">Rename</button>
+  `,
+})
+export class ProfileComponent {
   private readonly storage = inject(StorageService);
 
-  readonly theme = this.storage.signal<'light' | 'dark'>('theme', 'light');
-  readonly prefs = this.storage.signal<Prefs>('prefs', DEFAULT_PREFS);
+  readonly profile = this.storage.signal<User>('profile');
 
-  toggleTheme(): void {
-    this.theme.set(this.theme() === 'dark' ? 'light' : 'dark'); // persisted for you
+  async rename(): Promise<void> {
+    await this.storage.merge<User>('profile', { name: 'New name' });
+    // this.profile() already reflects the new value — no manual refresh
   }
 }
 ```
 
-```html
-<p>Theme: {{ theme() }}</p>
-@if (theme.loading()) { <app-spinner /> } @if (theme.error(); as err) {
-<p class="error">{{ err.message }}</p>
+### How hydration works
+
+A signal has to have a value _synchronously_, but storage reads are async. So:
+
+- `signal('profile')` returns **immediately** with the cached value, your
+  `initialValue`, or `undefined`
+- a background read hydrates it a tick later
+- from then on it's warm — `set()`/`remove()`/`update()`/`merge()` update it
+  synchronously via the memory cache
+
+```ts
+readonly theme = this.storage.signal<string>('theme', 'light'); // initial value
+```
+
+If you need to know whether hydration finished, await a `get()` first, or use
+`resource()` in your own component.
+
+### Reuse
+
+Signals are cached by `backend::key`. Calling `signal('profile')` twice returns
+the _same_ `WritableSignal` — cheap to call, safe to call in a template-adjacent
+getter.
+
+### Which methods update signals
+
+| Method                                            | Updates signal                                        |
+| ------------------------------------------------- | ----------------------------------------------------- |
+| `set`, `update`, `merge`                          | Yes                                                   |
+| `remove`                                          | Yes → `undefined`                                     |
+| `clear`                                           | Yes → all signals for that backend become `undefined` |
+| `push`/`pop`/`shift`/`unshift`/`append`/`prepend` | Yes (they call `set`)                                 |
+| `increment`/`decrement`/`toggle`                  | Yes                                                   |
+| `bulkSet`/`bulkRemove`                            | Yes                                                   |
+| `transaction`                                     | Yes, after commit                                     |
+| Another tab writing                               | Yes, via BroadcastChannel                             |
+
+### Derived signals
+
+```ts
+readonly isAdmin = this.storage.select<User, boolean>(
+  'profile',
+  (user) => user?.role === 'admin',
+);
+
+// Or plain computed()
+readonly initials = computed(() => {
+  const name = this.profile()?.name ?? '';
+  return name.split(' ').map((p) => p[0]).join('');
+});
+```
+
+### Watching
+
+```ts
+export class TokenWatcher {
+  private readonly storage = inject(StorageService);
+  private readonly destroyRef = inject(DestroyRef);
+
+  constructor() {
+    const stop = this.storage.watch<string>('token', (token) => {
+      if (!token) {
+        this.router.navigate(['/login']);
+      }
+    });
+    this.destroyRef.onDestroy(stop);
+  }
 }
 ```
 
-Each bound signal carries extras:
+`watch()` returns an unsubscribe function. Call it, or it lives as long as the
+service.
 
-| Member      | Type                                        | Purpose                                |
-| ----------- | ------------------------------------------- | -------------------------------------- |
-| `key`       | `string`                                    | The bound key                          |
-| `status()`  | `'idle' \| 'loading' \| 'ready' \| 'error'` | Load lifecycle                         |
-| `loading()` | `boolean`                                   | Shorthand for `status() === 'loading'` |
-| `error()`   | `StorageError \| undefined`                 | Last failure                           |
-| `reload()`  | `Promise<T \| undefined>`                   | Re-read from the driver                |
-| `remove()`  | `Promise<void>`                             | Delete the record and reset            |
-| `destroy()` | `void`                                      | Detach the binding (keeps the record)  |
-
-Signals are **memoized per key** — calling `signal('theme')` twice returns the same instance,
-so two components stay in lockstep.
-
-### Derived state
+### RxJS interop
 
 ```ts
-readonly isDark = this.storage.computed<Theme, boolean>('theme', (t) => t === 'dark');
-```
+readonly token$ = this.storage.observe<string>('token');
 
-### `resource()`
-
-```ts
-readonly profile = this.storage.resource<Profile>('profile');
-// profile.value(), profile.isLoading(), profile.error(), profile.reload()
-```
-
-The resource reloads on **any** mutation — including changes from another browser tab.
-
-### `store()` — a small feature-state facade
-
-```ts
-readonly filters = this.storage.store('filters', { tag: '', sort: 'new' as const });
-
-filters.value();                       // always defined, falls back to the initial
-filters.patch({ tag: 'angular' });     // shallow merge + persist
-filters.reset();
-readonly tag = filters.select((f) => f.tag);
+readonly authed$ = this.storage
+  .observe<string>('token')
+  .pipe(map((t) => !!t), distinctUntilChanged());
 ```
 
 ---
 
-## 5. Value mutators
-
-Typed helpers that read-modify-write in one call.
+## 7. Querying
 
 ```ts
-// objects
-await storage.update<number>('count', (n) => (n ?? 0) + 1);
-await storage.merge<Settings>('settings', { fontSize: 16 });
-
-// arrays
-await storage.push('recent', 'angular', 'signals');
-await storage.unshift('recent', 'newest');
-const last = await storage.pop<string>('recent');
-const first = await storage.shift<string>('recent');
-
-// strings *or* arrays — type-aware
-await storage.append('log', 'line\n');
-await storage.prepend('log', 'header\n');
-
-// scalars
-await storage.toggle('sidebarOpen');
-await storage.increment('visits');
-await storage.decrement('credits', 5);
+await this.storage.exists('token'); // boolean
+await this.storage.keys(); // readonly string[]
+await this.storage.values<User>(); // readonly User[]
+await this.storage.entries<User>(); // readonly StorageEntry<User>[]
+await this.storage.count(); // number of keys
+await this.storage.size(); // approximate bytes
 ```
 
-Type mismatches throw `StorageTypeError` rather than corrupting the record — calling
-`push()` on a stored number fails loudly.
+`StorageEntry<T>` gives you metadata alongside the value:
 
-> `push()` and `unshift()` take rest-args, so they have no options parameter and always use
-> the default driver. For a non-default driver, use `update()`.
+```ts
+interface StorageEntry<T> {
+  key: string;
+  value: T;
+  backend: StorageBackend;
+  expiresAt: number | null;
+  updatedAt: number;
+}
+```
+
+### Synchronous key list
+
+```ts
+readonly keyCount = this.storage.keyCount; // Signal<number>
+readonly allKeys = this.storage.keyList;   // linkedSignal<readonly string[]>
+```
+
+These cover `local`, `session`, and `memory` only — IndexedDB is async and can't
+participate in a sync signal. Use `idbEntries` for that.
+
+### Search with pagination
+
+```ts
+const page = await this.storage.search<Order>(
+  {
+    key: 'order:', // substring match on key
+    where: (order) => order.status === 'pending', // predicate on value
+    limit: 20,
+    offset: 40,
+    direction: 'prev', // IDBCursorDirection
+  },
+  { backend: 'idb', store: 'documents' },
+);
+
+page.items; // readonly StorageEntry<Order>[]
+page.total; // total matches before pagination
+page.hasMore; // boolean
+```
+
+For `idb` this uses a real `IDBCursor` — large stores are never fully
+materialized. Unreadable records are skipped rather than aborting the scan.
 
 ---
 
-## 6. Expiry & TTL
+## 8. Mutation helpers
+
+### `update()` — read, transform, write
 
 ```ts
-await storage.set('session', data, { ttl: 15 * 60_000 }); // relative
-await storage.set('promo', data, { expiresAt: Date.parse('2026-12-25') }); // absolute
-
-await storage.expire('session', 30 * 60_000); // extend an existing record
-await storage.expire('session', null); // make it permanent
-
-await storage.cleanup(); // manual sweep → number removed
+const next = await this.storage.update<number>('visits', (n) => (n ?? 0) + 1);
 ```
 
-Expiry is enforced **lazily on read** (an expired key returns `undefined` and self-deletes)
-and **proactively** by a background sweep that runs on `requestIdleCallback` every
-`cleanupInterval` ms.
-
----
-
-## 7. Picking a driver
-
-Set a default in config, override per call:
+### `merge()` — shallow patch an object
 
 ```ts
-await storage.set('bigBlob', file, { driver: 'indexeddb' });
-await storage.set('wizardStep', 3, { driver: 'session' });
-const blob = await storage.get<Blob>('bigBlob', { driver: 'indexeddb' });
+await this.storage.merge<Settings>('settings', { theme: 'dark' });
 ```
 
-| Driver      | Use for                         | Limit                             |
-| ----------- | ------------------------------- | --------------------------------- |
-| `local`     | Preferences, tokens, small JSON | ~5 MB, synchronous under the hood |
-| `session`   | Per-tab wizard/scroll state     | ~5 MB, dies with the tab          |
-| `indexeddb` | Files, blobs, large collections | Hundreds of MB                    |
-| `memory`    | SSR, tests, throwaway cache     | Process lifetime                  |
+Shallow only. Nested objects are replaced, not merged. For deep merges do it
+yourself inside `update()`.
 
-Drivers are created lazily and cached, so mixing them costs nothing up front.
+Throws `StorageTypeError` if the existing value isn't an object.
 
-**Graceful degradation:** if the requested driver is unavailable (Safari private mode,
-disabled storage, no IndexedDB), it falls back to memory and flags `storage.degraded()`.
-Set `fallbackToMemory: false` to get a `StorageUnavailableError` instead.
-
----
-
-## 8. Encryption
-
-AES-GCM via Web Crypto, with a PBKDF2-SHA256 derived key (memoized once per service instance)
-and a fresh random IV per write.
+### `rename()` / `copy()` / `move()`
 
 ```ts
-provideStorage({ encryptionKey: 'a-user-derived-passphrase' });
+await this.storage.copy('draft', 'draft.backup');
+await this.storage.move('draft', 'published');
+await this.storage.rename('old', 'new'); // alias for move()
 ```
 
-```ts
-await storage.set('pii', record, { encrypt: true }); // opt in per write
-const record = await storage.get<Pii>('pii'); // decrypts transparently
-```
+`copy()` throws `StorageError` with code `NOT_FOUND` if the source is missing.
+All three preserve remaining TTL.
 
-Or `encryptByDefault: true` to encrypt everything.
-
-**Read this before shipping it:** a passphrase bundled in your JS is not a secret — anyone
-can open DevTools and read it. Encryption here defends against _casual_ inspection of the
-storage inspector and against other scripts scraping `localStorage`, not against a
-determined attacker with the page open. Derive the key from something the user supplies.
-Requires a secure context (HTTPS or localhost); `crypto.subtle` is undefined otherwise and
-you'll get a `StorageEncryptionError`.
-
----
-
-## 9. Batch & transactions
-
-`batch()` runs operations in order and **rolls back everything** if any step throws:
+### `batch()` — a list of mixed operations
 
 ```ts
-await storage.batch([
+await this.storage.batch([
   { type: 'set', key: 'a', value: 1 },
-  { type: 'set', key: 'b', value: 2, options: { ttl: 60_000 } },
-  { type: 'rename', key: 'old', to: 'new' },
-  { type: 'remove', key: 'stale' },
+  { type: 'merge', key: 'settings', value: { theme: 'dark' } },
+  { type: 'update', key: 'count', updater: (n: number | undefined) => (n ?? 0) + 1 },
+  { type: 'remove', key: 'temp' },
 ]);
 ```
 
-`transaction()` gives you a staged view — writes buffer and commit atomically at the end:
+Sequential, not atomic — a failure partway through leaves earlier operations
+applied. For atomicity on IndexedDB use `transaction()`.
+
+---
+
+## 9. Array & primitive helpers
+
+Each reads, mutates, and writes back. All type-checked — wrong type throws
+`StorageTypeError`.
+
+### Arrays
 
 ```ts
-await storage.transaction(async (tx) => {
-  const balance = (await tx.get<number>('balance')) ?? 0;
-  if (balance < 100) {
-    tx.abort('Insufficient balance.'); // nothing is written
-  }
-  await tx.set('balance', balance - 100);
-  await tx.set('lastPurchase', Date.now());
+await this.storage.push<string>('recent', 'item-a', 'item-b'); // → new length
+await this.storage.unshift<string>('recent', 'item-z'); // → new length
+const last = await this.storage.pop<string>('recent'); // → item | undefined
+const first = await this.storage.shift<string>('recent'); // → item | undefined
+```
+
+Missing key is treated as an empty array, so `push()` on a fresh key works.
+
+### Strings
+
+```ts
+await this.storage.append('log', 'line\n'); // → full string
+await this.storage.prepend('log', 'HEAD\n'); // → full string
+```
+
+> `append`/`prepend` are **string concatenation**. `push`/`unshift` are **array
+> operations**. They'd be duplicates otherwise.
+
+### Numbers & booleans
+
+```ts
+await this.storage.increment('count'); // +1 → new value
+await this.storage.increment('count', 5); // +5
+await this.storage.decrement('count', 2); // -2
+await this.storage.toggle('darkMode'); // → new boolean
+```
+
+Missing keys default to `0` / `false`.
+
+---
+
+## 10. Bulk & transactions
+
+### Bulk insert / delete
+
+One IndexedDB transaction for the whole batch. On other backends it falls back
+to sequential `set`/`remove` with identical semantics.
+
+```ts
+await this.storage.bulkSet(
+  new Map([
+    ['u:1', userA],
+    ['u:2', userB],
+  ]),
+  { backend: 'idb' },
+);
+
+// Or an array of tuples
+await this.storage.bulkSet(
+  [
+    ['u:1', userA],
+    ['u:2', userB],
+  ],
+  { backend: 'idb', ttl: 3_600_000 },
+);
+
+await this.storage.bulkRemove(['u:1', 'u:2'], { backend: 'idb' });
+```
+
+### `transaction()` — atomic multi-step work
+
+```ts
+const total = await this.storage.transaction(
+  async (tx) => {
+    const cart = (await tx.get<CartItem[]>('cart')) ?? [];
+    const next = [...cart, newItem];
+    await tx.set('cart', next);
+    await tx.set('cartTotal', next.length);
+    await tx.remove('cartDraft');
+    return next.length;
+  },
+  { backend: 'idb' },
+);
+```
+
+On `idb` everything runs on one transaction and aborts together if the callback
+throws. Caches and signals are refreshed after commit.
+
+> **Critical limitation:** IndexedDB transactions auto-close when the microtask
+> queue drains. Any `await` inside the callback on something that is _not_ an IDB
+> request — a `fetch`, a `setTimeout`, an HTTP call — will kill the transaction
+> mid-flight. Keep these callbacks pure storage work. Do your I/O before or after.
+
+On non-`idb` backends the callback still runs with the same shape, but there is
+no rollback.
+
+---
+
+## 11. Export / import / snapshots
+
+### Export
+
+```ts
+const dump = await this.storage.export({ backend: 'idb' });
+const json = JSON.stringify(dump);
+```
+
+`StorageDump` is plain JSON — safe to download, POST, or write to a file.
+
+### Import
+
+```ts
+const written = await this.storage.import(dump);
+const written2 = await this.storage.import(jsonString); // string works too
+```
+
+Additive — existing keys are overwritten, others left alone. Already-expired
+entries are skipped. Returns the number of records written. Throws
+`StorageError` with code `DESERIALIZATION` on an unrecognized format.
+
+### Snapshots
+
+Labelled in-memory checkpoints. Useful for "reset to defaults", undo, or test
+setup.
+
+```ts
+await this.storage.snapshot('before-import');
+await this.storage.import(userSuppliedDump);
+
+if (somethingWentWrong) {
+  await this.storage.restore('before-import'); // clears, then re-imports
+}
+```
+
+Snapshots live in memory only and vanish on reload. Persist a snapshot by
+writing the returned dump to storage yourself.
+
+---
+
+## 12. Encryption
+
+CryptoJS AES, applied to the encoded envelope before it hits the backend.
+
+```ts
+// Config defaults
+encryptByDefault: true; // local + session
+encryptIndexedDb: false; // idb
+
+// Per-call override
+await this.storage.set('public', data, { encrypt: false });
+await this.storage.set('secret', data, { backend: 'idb', encrypt: true });
+```
+
+Reads auto-detect: payloads starting with `U2FsdGVk` (CryptoJS's base64 header)
+are decrypted, others are parsed as-is. So you can flip `encryptByDefault` on an
+existing store without a migration — old plaintext records still read fine.
+
+If decryption fails (wrong key, corrupt data), the record is **deleted** and
+`get()` returns `undefined`. This is deliberate: one bad record from an old
+schema shouldn't poison every caller. If you'd rather see the error, change the
+catch block in `get()`.
+
+IndexedDB encryption is off by default because it defeats `search()`'s ability
+to filter cheaply — every record has to be decrypted during the cursor scan.
+It still works, just slower.
+
+---
+
+## 13. Serialization
+
+`encode()`/`decode()` handle far more than `JSON.stringify`:
+
+| Type                             | Round-trips                  |
+| -------------------------------- | ---------------------------- |
+| `Date`                           | Yes — real `Date` back       |
+| `Map`                            | Yes, including nested values |
+| `Set`                            | Yes                          |
+| `BigInt`                         | Yes                          |
+| `RegExp`                         | Yes, source + flags          |
+| `Infinity`, `-Infinity`, `NaN`   | Yes                          |
+| `undefined` in object properties | Yes                          |
+| Nested objects, arrays           | Yes                          |
+
+```ts
+await this.storage.set('complex', {
+  when: new Date(),
+  tags: new Set(['a', 'b']),
+  index: new Map([['k', { nested: new Date() }]]),
+  big: 9007199254740993n,
+  pattern: /^ab+c$/gi,
+  missing: undefined,
 });
+
+const back = await this.storage.get<typeof value>('complex');
+back.when instanceof Date; // true
+back.tags instanceof Set; // true
+back.index.get('k').nested; // Date
 ```
 
-Reads inside the transaction see your own staged writes. Nothing hits the driver until the
-body resolves; a throw or `abort()` discards the lot.
+**Not supported:** class instances lose their prototype (you get a plain
+object), circular references throw `StorageSerializationError`, and functions
+are dropped. Rehydrate classes yourself:
+
+```ts
+const raw = await this.storage.get<UserData>('profile');
+const user = raw ? Object.assign(new User(), raw) : undefined;
+```
 
 ---
 
-## 10. Watching changes & multi-tab sync
+## 14. Cross-tab sync
+
+Two mechanisms, automatic:
+
+- **`StorageEvent`** — native `localStorage`/`sessionStorage` change events
+- **`BroadcastChannel`** — covers IndexedDB and gives faster, richer notification
+
+When another tab writes, this tab drops its cache entry for that key and
+re-reads from storage, updating the signal. Components using
+`storage.signal('token')` re-render with no extra code.
 
 ```ts
-const stop = storage.watch<User>('user', (e) => {
-  console.log(e.key, e.previous, '→', e.value, 'via', e.source);
-});
-stop(); // unsubscribe
+// Tab A
+await storage.set('theme', 'dark');
+
+// Tab B — this signal updates on its own
+readonly theme = this.storage.signal<string>('theme');
 ```
 
-`e.source` is `'local'` | `'remote'` (another tab) | `'expire'` | `'clear'`.
+**Messages carry key + backend only, never values.** Each tab re-reads from
+storage itself. This avoids putting decrypted payloads on a channel any script
+on the origin can listen to. The cost is one extra read per tab per change —
+cheap, and usually served from the backend's own cache.
 
-RxJS flavour, if you need operators:
-
-```ts
-storage.observe<User>('user').pipe(debounceTime(300)).subscribe(...);
-```
-
-Multi-tab sync is automatic when `syncAcrossTabs` is on — a BroadcastChannel carries changes,
-with `storage` events as a fallback. Bound signals in every tab update themselves; the
-originating tab ignores its own echo.
+If `BroadcastChannel` is unavailable, the service degrades to `StorageEvent`
+only, meaning IndexedDB writes won't propagate across tabs.
 
 ---
 
-## 11. IndexedDB: pagination & search
+## 15. SSR
+
+The service checks for `window` and `document` at construction. Under SSR:
+
+- every backend silently becomes `memory`
+- no `StorageEvent` listener, no `BroadcastChannel`, no cleanup timer
+- IndexedDB is never opened
+- all methods work and return sensible values
+
+No `isPlatformBrowser` checks needed in your code, and no
+`ReferenceError: localStorage is not defined`.
 
 ```ts
-const page = await storage.paginate<Article>(0, 25, { driver: 'indexeddb' });
-// page.items → [{ key, value, info }], plus page.total / hasNext / hasPrevious
-
-const hits = await storage.search<Article>('angular', {
-  driver: 'indexeddb',
-  limit: 20,
-});
+// Safe on server and client alike
+const theme = (await this.storage.get<string>('theme')) ?? 'light';
 ```
 
-Pagination is cursor-driven, so it doesn't materialise the whole store. Both methods also
-work on the other drivers (via an in-memory slice), so you can develop against `local` and
-switch to `indexeddb` later without touching call sites.
+Note that server-side memory storage is **per-request-ish** and empty — a value
+written during SSR is not visible to the browser after hydration. Expect
+`undefined` on the server for anything the user set previously. Design your
+components to render a sensible default and update after hydration.
 
-Search is a substring match over raw payloads — a cheap prefilter, not a real index. For
-encrypted records it can't match ciphertext, so it will miss them.
-
----
-
-## 12. Backup: snapshot / export / import
-
-```ts
-const dump = await storage.export(); // plain JSON-safe object
-download(JSON.stringify(dump), 'backup.json');
-
-await storage.import(dump); // merge (default)
-await storage.import(json, { merge: false }); // replace the namespace
-
-await storage.snapshot('before-migration'); // in-memory checkpoint
-await storage.restore('before-migration'); // roll back
-```
-
-Exports contain raw envelopes, so **encrypted records stay encrypted** in the dump — they
-only decrypt on read with the right key.
-
----
-
-## 13. Validation
-
-Guard against schema drift and hand-edited storage:
-
-```ts
-import { StorageValidators as v } from './core/services/storage.service';
-
-const isUser = v.shape<User>({
-  id: v.number,
-  name: v.string,
-  role: v.oneOf('admin', 'editor'),
-});
-
-const user = await storage.get<User>('user', {
-  validate: isUser,
-  fallback: GUEST,
-});
-```
-
-A failing value throws `StorageValidationError` rather than propagating a malformed object.
-Available: `string`, `number`, `boolean`, `date`, `array(item?)`, `record(item?)`,
-`oneOf(...)`, `shape({...})`. Any type-guard function works too.
-
----
-
-## 14. Rich types you can store
-
-`JSON.stringify` is not the storage format — a structural codec runs first, so these survive
-a round-trip intact:
-
-```ts
-await storage.set('when', new Date());
-await storage.set('lookup', new Map([['a', 1]]));
-await storage.set('tags', new Set(['x', 'y']));
-await storage.set('big', 123n);
-await storage.set('re', /^ab+c$/gi);
-await storage.set('bytes', new Uint8Array([1, 2, 3]));
-await storage.set('buffer', new ArrayBuffer(8));
-await storage.set('avatar', fileFromInput, { driver: 'indexeddb' });
-
-(await storage.get<Date>('when')) instanceof Date; // true
-(await storage.get<Map<string, number>>('lookup')).get('a'); // 1
-```
-
-Also handled: `NaN`, `±Infinity`, explicit `undefined`, `Error`, `DataView`, nested
-combinations, and **cyclic object graphs** (via an internal reference table).
-
-Not storable: functions and symbols — both throw `StorageSerializationError`.
-
----
-
-## 15. SSR behaviour
-
-The service never touches `window`, `document`, `localStorage`, or `indexedDB` directly. It
-branches on `isPlatformBrowser(PLATFORM_ID)`.
-
-On the server: the memory driver is used unconditionally, tab-sync and cleanup timers are
-never installed, and nothing warns during prerender. Client-side, signals hydrate from real
-storage on the first microtask.
-
-**This means server-rendered HTML shows the initial value, not the stored one.** That's
-correct — the server has no access to the user's storage. If a flash of the default value
-matters (theme is the classic case), keep using an inline `<head>` script for that one value
-and let the service manage everything else.
-
-```ts
-readonly theme = this.storage.signal<Theme>('theme', 'light');
-// SSR renders 'light'; the browser swaps to the stored value on hydration.
-```
+Writes issued before `ready()` flips true are queued and flushed automatically
+by an `effect()`.
 
 ---
 
 ## 16. Error handling
 
-Nothing raw is ever thrown — every failure is a `StorageError` with a `code`, an optional
-`key`, and the original `cause`.
+Nothing raw ever escapes. Every failure is a `StorageError` subclass with a
+typed `code` and the original error on `cause`.
 
 ```ts
-import { StorageError, StorageQuotaExceededError } from './core/services/storage.service';
+import { StorageError, StorageQuotaError } from './storage.service';
 
 try {
-  await storage.set('big', payload);
-} catch (e) {
-  if (e instanceof StorageQuotaExceededError) {
-    await storage.cleanup();
-  } else if (e instanceof StorageError) {
-    console.error(e.code, e.key, e.cause);
+  await this.storage.set('big', hugePayload);
+} catch (error) {
+  if (error instanceof StorageQuotaError) {
+    await this.storage.cleanup();
+    return;
+  }
+  if (error instanceof StorageError) {
+    console.error(error.code, error.message, error.cause);
+    return;
+  }
+  throw error;
+}
+```
+
+### Error types
+
+| Class                         | `code`            | When                                                   |
+| ----------------------------- | ----------------- | ------------------------------------------------------ |
+| `StorageUnavailableError`     | `UNAVAILABLE`     | Backend missing, IndexedDB blocked, write failed       |
+| `StorageSerializationError`   | `SERIALIZATION`   | Circular reference, unserializable value               |
+| `StorageDeserializationError` | `DESERIALIZATION` | Corrupt payload, bad dump format                       |
+| `StorageEncryptionError`      | `ENCRYPTION`      | AES encrypt failed                                     |
+| `StorageDecryptionError`      | `DECRYPTION`      | Wrong key, corrupt ciphertext                          |
+| `StorageKeyError`             | `INVALID_KEY`     | Empty or non-string key                                |
+| `StorageQuotaError`           | `QUOTA_EXCEEDED`  | `localStorage`/`sessionStorage` full                   |
+| `StorageTypeError`            | `TYPE_MISMATCH`   | `increment()` on a string, `push()` on an object, etc. |
+| `StorageTransactionError`     | `TRANSACTION`     | IDB transaction failed or aborted                      |
+| `StorageDestroyedError`       | `DESTROYED`       | Method called after `destroy()`                        |
+
+### What does _not_ throw
+
+- `get()` on a missing key → `undefined`
+- `get()` on a corrupt/undecryptable record → deletes it, returns `undefined`
+- `search()` / `entries()` on unreadable records → skips them
+- `broadcast()` on a closed channel → silent
+
+---
+
+## 17. Maintenance & teardown
+
+```ts
+await this.storage.clearExpired(); // → count removed, all backends
+await this.storage.cleanup(); // clearExpired + purge stale cache & signals
+this.storage.destroy(); // full teardown
+```
+
+`clearExpired()` runs automatically every `cleanupInterval` ms. `destroy()` is
+wired to `DestroyRef` and fires on app teardown — you rarely call it yourself.
+After `destroy()`, every method throws `StorageDestroyedError`.
+
+`cleanup()` also drops signals that are `undefined` and uncached, which matters
+if you're generating many short-lived keys.
+
+---
+
+## 18. Full API reference
+
+### Signals (properties)
+
+| Member       | Type                                         | Description                                |
+| ------------ | -------------------------------------------- | ------------------------------------------ |
+| `ready`      | `Signal<boolean>`                            | Service initialized                        |
+| `available`  | `Signal<boolean>`                            | Ready and not destroyed                    |
+| `version`    | `Signal<number>`                             | Revision counter, bumped on every mutation |
+| `keyList`    | `linkedSignal<readonly string[]>`            | Sync key list (local/session/memory)       |
+| `keyCount`   | `Signal<number>`                             | Length of `keyList`                        |
+| `idbEntries` | `Resource<readonly StorageEntry<unknown>[]>` | Async view of the default IDB store        |
+
+### Methods
+
+| Method                                    | Returns                               |
+| ----------------------------------------- | ------------------------------------- |
+| `set<T>(key, value, options?)`            | `Promise<void>`                       |
+| `get<T>(key, options?)`                   | `Promise<T \| undefined>`             |
+| `remove(key, options?)`                   | `Promise<void>`                       |
+| `clear(options?)`                         | `Promise<void>`                       |
+| `exists(key, options?)`                   | `Promise<boolean>`                    |
+| `keys(options?)`                          | `Promise<readonly string[]>`          |
+| `values<T>(options?)`                     | `Promise<readonly T[]>`               |
+| `entries<T>(options?)`                    | `Promise<readonly StorageEntry<T>[]>` |
+| `count(options?)`                         | `Promise<number>`                     |
+| `size(options?)`                          | `Promise<number>` (approx. bytes)     |
+| `search<T>(query?, options?)`             | `Promise<StoragePage<T>>`             |
+| `update<T>(key, updater, options?)`       | `Promise<T>`                          |
+| `merge<T>(key, patch, options?)`          | `Promise<T>`                          |
+| `rename(from, to, options?)`              | `Promise<void>`                       |
+| `copy(from, to, options?)`                | `Promise<void>`                       |
+| `move(from, to, options?)`                | `Promise<void>`                       |
+| `batch(operations, options?)`             | `Promise<void>`                       |
+| `bulkSet<T>(records, options?)`           | `Promise<void>`                       |
+| `bulkRemove(keys, options?)`              | `Promise<void>`                       |
+| `transaction<R>(work, options?)`          | `Promise<R>`                          |
+| `push<T>(key, ...items)`                  | `Promise<number>`                     |
+| `pop<T>(key)`                             | `Promise<T \| undefined>`             |
+| `shift<T>(key)`                           | `Promise<T \| undefined>`             |
+| `unshift<T>(key, ...items)`               | `Promise<number>`                     |
+| `append(key, text, options?)`             | `Promise<string>`                     |
+| `prepend(key, text, options?)`            | `Promise<string>`                     |
+| `increment(key, by?, options?)`           | `Promise<number>`                     |
+| `decrement(key, by?, options?)`           | `Promise<number>`                     |
+| `toggle(key, options?)`                   | `Promise<boolean>`                    |
+| `signal<T>(key, initialValue?, options?)` | `WritableSignal<T \| undefined>`      |
+| `select<T, R>(key, project, options?)`    | `Signal<R>`                           |
+| `watch<T>(key, callback, options?)`       | `() => void` (unsubscribe)            |
+| `observe<T>(key, options?)`               | `Observable<T \| undefined>`          |
+| `export(options?)`                        | `Promise<StorageDump>`                |
+| `import(dump, options?)`                  | `Promise<number>`                     |
+| `snapshot(label?, options?)`              | `Promise<StorageDump>`                |
+| `restore(label?, options?)`               | `Promise<number>`                     |
+| `clearExpired()`                          | `Promise<number>`                     |
+| `cleanup()`                               | `Promise<number>`                     |
+| `destroy()`                               | `void`                                |
+
+---
+
+## 19. Recipes
+
+### Auth token with reactive guard
+
+```ts
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  private readonly storage = inject(StorageService);
+
+  readonly token = this.storage.signal<string>('auth.token');
+  readonly isAuthenticated = computed(() => !!this.token());
+
+  async login(credentials: Credentials): Promise<void> {
+    const { token, expiresIn } = await firstValueFrom(
+      this.http.post<LoginResponse>('/api/login', credentials),
+    );
+    await this.storage.set('auth.token', token, { ttl: expiresIn * 1000 });
+  }
+
+  async logout(): Promise<void> {
+    await this.storage.remove('auth.token');
+  }
+}
+
+export const authGuard: CanActivateFn = () =>
+  inject(AuthService).isAuthenticated() || inject(Router).createUrlTree(['/login']);
+```
+
+The token expires on its own via TTL, logout propagates to every open tab, and
+the guard reads a plain signal.
+
+### Persisted user preferences
+
+```ts
+@Injectable({ providedIn: 'root' })
+export class PreferencesService {
+  private readonly storage = inject(StorageService);
+
+  private readonly defaults: Preferences = {
+    theme: 'system',
+    density: 'comfortable',
+    language: 'en',
+  };
+
+  readonly preferences = computed<Preferences>(() => ({
+    ...this.defaults,
+    ...(this.storage.signal<Partial<Preferences>>('prefs')() ?? {}),
+  }));
+
+  readonly theme = computed(() => this.preferences().theme);
+
+  async patch(changes: Partial<Preferences>): Promise<void> {
+    await this.storage.merge<Preferences>('prefs', changes);
   }
 }
 ```
 
-| Class                         | `code`                   | Raised when                                   |
-| ----------------------------- | ------------------------ | --------------------------------------------- |
-| `StorageUnavailableError`     | `STORAGE_UNAVAILABLE`    | Driver missing and fallback disabled          |
-| `StorageSerializationError`   | `SERIALIZATION_FAILED`   | Value can't be encoded                        |
-| `StorageDeserializationError` | `DESERIALIZATION_FAILED` | Corrupt payload                               |
-| `StorageEncryptionError`      | `ENCRYPTION_FAILED`      | No key, insecure context, wrong key           |
-| `StorageQuotaExceededError`   | `QUOTA_EXCEEDED`         | Backend full                                  |
-| `StorageKeyError`             | `INVALID_KEY`            | Empty key, >512 chars, missing on rename/copy |
-| `StorageValidationError`      | `VALIDATION_FAILED`      | `validate` rejected the value                 |
-| `StorageTypeError`            | `TYPE_MISMATCH`          | `push` on a number, `merge` on an array, …    |
-| `StorageTransactionError`     | `TRANSACTION_FAILED`     | Transaction aborted or failed                 |
-| `StorageDestroyedError`       | `DESTROYED`              | Use after `destroy()`                         |
-
-Errors surfaced from background work (watchers, remote sync, driver init) don't throw —
-they land in `storage.lastError()`.
-
----
-
-## 17. Diagnostics
+### Offline cache with stale-while-revalidate
 
 ```ts
-storage.stats(); // { driver, keys, bytes, cacheHits, cacheMisses, writes, reads, evictions, signals }
-storage.driver(); // the backend actually in use
-storage.degraded(); // true if it fell back to memory
-storage.version(); // mutation counter — a cheap reactive dependency
-storage.lastError();
-storage.statusLine(); // 'local · ns="portfolio"'
-storage.isBrowser;
-storage.config; // frozen, fully resolved
+async getProducts(): Promise<Product[]> {
+  const cached = await this.storage.get<Product[]>('products', { backend: 'idb' });
+
+  const refresh = firstValueFrom(this.http.get<Product[]>('/api/products'))
+    .then((fresh) =>
+      this.storage.set('products', fresh, { backend: 'idb', ttl: 3_600_000 })
+        .then(() => fresh),
+    );
+
+  return cached ?? refresh; // instant if cached, otherwise wait
+}
 ```
 
-All of these are signals except `isBrowser` and `config`, so they drop straight into a debug
-overlay:
-
-```html
-<pre>{{ storage.stats() | json }}</pre>
-```
-
----
-
-## 18. Testing
-
-Force the memory driver for fast, isolated tests:
+### Multi-step form surviving refresh
 
 ```ts
-TestBed.configureTestingModule({
-  providers: [provideStorage({ driver: 'memory', syncAcrossTabs: false, cleanupInterval: 0 })],
+export class WizardComponent {
+  private readonly storage = inject(StorageService);
+  private readonly opts = { backend: 'session' } as const;
+
+  readonly draft = this.storage.signal<WizardDraft>('wizard', {}, this.opts);
+
+  async saveStep(step: number, data: Partial<WizardDraft>): Promise<void> {
+    await this.storage.merge<WizardDraft>('wizard', { ...data, step }, this.opts);
+  }
+
+  async finish(): Promise<void> {
+    await this.http.post('/api/submit', this.draft()).toPromise();
+    await this.storage.remove('wizard', this.opts);
+  }
+}
+```
+
+### Paginated offline table
+
+```ts
+readonly page = signal(0);
+readonly filter = signal('');
+
+readonly results = resource({
+  params: () => ({ page: this.page(), filter: this.filter() }),
+  loader: ({ params }) =>
+    this.storage.search<Order>(
+      {
+        where: (o) => o.customer.toLowerCase().includes(params.filter.toLowerCase()),
+        limit: 25,
+        offset: params.page * 25,
+      },
+      { backend: 'idb' },
+    ),
 });
-
-const storage = TestBed.inject(StorageService);
-await storage.set('k', 1);
-expect(await storage.get('k')).toBe(1);
 ```
 
-Signals hydrate on a microtask, so `await Promise.resolve()` (or `await fixture.whenStable()`)
-before asserting on a freshly created signal.
-
-You can also swap in your own backend wholesale:
+### Backup and restore
 
 ```ts
-provideStorageDriver(new MyCustomDriver()); // implements StorageDriverAdapter
+async downloadBackup(): Promise<void> {
+  const dump = await this.storage.export({ backend: 'idb' });
+  const blob = new Blob([JSON.stringify(dump, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `backup-${new Date().toISOString()}.json`;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+async restoreBackup(file: File): Promise<void> {
+  await this.storage.snapshot('pre-restore', { backend: 'idb' });
+  try {
+    const count = await this.storage.import(await file.text(), { backend: 'idb' });
+    this.toast.success(`Restored ${count} records`);
+  } catch {
+    await this.storage.restore('pre-restore', { backend: 'idb' });
+    this.toast.error('Restore failed — rolled back');
+  }
+}
 ```
 
----
+### Testing
 
-## 19. API reference
+```ts
+describe('PreferencesService', () => {
+  let storage: StorageService;
 
-### Reads / writes
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: STORAGE_CONFIG,
+          useValue: {
+            defaultBackend: 'memory' as const,
+            encryptByDefault: false,
+            cleanupInterval: 0,
+          },
+        },
+      ],
+    });
+    storage = TestBed.inject(StorageService);
+  });
 
-`set` · `get` · `remove` · `clear` · `exists` · `has` · `keys` · `values` · `entries` ·
-`size` · `count` · `info`
+  afterEach(async () => {
+    await storage.clear({ backend: 'memory' });
+  });
 
-### Keys
+  it('persists a patch', async () => {
+    const service = TestBed.inject(PreferencesService);
+    await service.patch({ theme: 'dark' });
+    expect(service.theme()).toBe('dark');
+  });
+});
+```
 
-`rename` · `copy` · `move`
-
-### Mutators
-
-`update` · `merge` · `push` · `pop` · `shift` · `unshift` · `append` · `prepend` · `toggle` ·
-`increment` · `decrement`
-
-### Lifecycle
-
-`expire` · `refresh` · `cleanup` · `destroy`
-
-### Composition
-
-`batch` · `transaction`
-
-### Reactive
-
-`signal` · `computed` · `resource` · `watch` · `observe` · `store`
-
-### Data movement
-
-`snapshot` · `restore` · `export` · `import`
-
-### Querying
-
-`paginate` · `search`
-
-### Signals exposed
-
-`version` · `driver` · `degraded` · `stats` · `lastError` · `statusLine`
-
-### Exported symbols
-
-`StorageService` · `provideStorage` · `provideStorageDriver` · `STORAGE_CONFIG` ·
-`STORAGE_DRIVER_OVERRIDE` · `STORAGE_DEFAULT_CONFIG` · `StorageValidators` ·
-`MemoryStorageDriver` · `WebStorageDriver` · `IndexedDbStorageDriver` · all error classes ·
-all types
+`memory` backend + no encryption + no cleanup timer = fast, isolated, no
+browser API mocking.
 
 ---
 
 ## 20. Gotchas
 
-- **Everything is async except signals.** IndexedDB forces this. Use signals for templates.
-- **Signals hydrate on a microtask.** The very first synchronous read returns your `initial`
-  value, not the stored one. Check `status()` if the difference matters.
-- **`push()` / `unshift()` take no options** — rest parameters occupy the tail of the
-  signature. Use `update()` for a non-default driver.
-- **`clear()` is namespace-scoped**, not origin-scoped. That's intentional.
-- **Identical writes are skipped** by default (`skipIdenticalWrites`), so `set()` with an
-  unchanged value costs a read and no write. Encrypted writes always go through, since a
-  fresh IV makes every ciphertext different.
-- **`destroy()` is terminal.** The root instance is destroyed with the app; calling it
-  yourself makes every later call throw `StorageDestroyedError`.
-- **Blob and File need IndexedDB in practice.** They serialize to base64, which inflates
-  them ~33% — fine for a small avatar, wasteful in `localStorage`'s 5 MB budget.
-- **The `search()` substring match** scans raw payloads. It's a prefilter, not an index, and
-  it cannot see inside encrypted records.
+**Signals are backend-scoped.** `signal('token')` and
+`signal('token', undefined, { backend: 'session' })` are different signals over
+different records. Be consistent, or wrap your options in a constant.
+
+**Signals start `undefined`.** First render shows the initial value; the real
+value arrives a tick later. Give an `initialValue` or handle `undefined` in
+templates. Don't assert on a signal immediately after construction in a test —
+`await` a `get()` first.
+
+**`merge()` is shallow.** Nested objects are replaced. Deep-merge inside
+`update()` if you need it.
+
+**`batch()` is not atomic.** Use `transaction()` on `idb` for that.
+
+**IDB transactions die on non-IDB awaits.** No `fetch`, no `setTimeout`, no HTTP
+inside a `transaction()` callback. Do that work outside.
+
+**Corrupt records are deleted, not surfaced.** A failed decrypt or decode
+silently removes the key. Deliberate, but change the catch in `get()` if you'd
+rather know.
+
+**Class instances lose prototypes.** You get plain objects back. Rehydrate
+manually.
+
+**Circular references throw.** `StorageSerializationError`.
+
+**The encryption key is in your bundle.** It's obfuscation, not security.
+
+**SSR memory storage starts empty.** Values the user set previously are not
+visible on the server. Render defaults, update after hydration.
+
+**`keyList` / `keyCount` skip IndexedDB.** They're synchronous; IDB isn't. Use
+`idbEntries` or `await count({ backend: 'idb' })`.
+
+**Bump `dbVersion` when changing `stores`.** New object stores are only created
+during an upgrade, and upgrades only run when the version number increases.
+
+**`size()` is approximate.** It counts UTF-16 code units of the stored strings,
+which is close to actual bytes for `localStorage` but ignores browser overhead.

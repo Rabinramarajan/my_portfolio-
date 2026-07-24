@@ -7,18 +7,21 @@
   @if (timeline; as config) {
     <div class="timeline-container" appStagger>
       <div class="events-list">
-        @for (event of config.events; track event.id; let first = $first; let last = $last) {
+        @for (event of config.events; track event.id; let index = $index; let last = $last) {
           <div class="event-wrapper">
             <!-- Timeline Connector Line -->
             @if (!last) {
               <div class="connector-line"></div>
             }
 
-            <!-- Event Dot -->
-            <div class="event-dot" [class.current]="isCurrentRole(event.endDate)"></div>
+            <!-- Step Badge with Number -->
+            <div class="step-badge" [class.current]="isCurrentRole(event.endDate)">
+              <span class="step-number">{{ getStepNumber(index) }}</span>
+            </div>
 
             <!-- Event Card -->
             <app-glass-card padding="lg" class="event-card">
+              <!-- Card Header -->
               <div class="event-header">
                 <div class="role-info">
                   <h3 class="event-role">{{ event.role }}</h3>
@@ -29,7 +32,9 @@
                 }
               </div>
 
+              <!-- Duration -->
               <p class="event-duration">
+                <span class="duration-icon">📅</span>
                 {{ event.startDate | date: 'MMM yyyy' }} –
                 @if (isCurrentRole(event.endDate)) {
                   <span class="current-text">Present</span>
@@ -38,12 +43,15 @@
                 }
               </p>
 
+              <!-- Description -->
               <p class="event-description">{{ event.description }}</p>
 
               <!-- Accomplishments -->
               @if (event.keyAccomplishments && event.keyAccomplishments.length > 0) {
                 <div class="accomplishments">
-                  <p class="accomplishments-title">Key Accomplishments:</p>
+                  <p class="accomplishments-title">
+                    <span class="section-icon">⭐</span>Key Accomplishments
+                  </p>
                   <ul class="accomplishments-list">
                     @for (accomplishment of event.keyAccomplishments; track accomplishment) {
                       <li class="accomplishment-item">{{ accomplishment }}</li>
@@ -55,7 +63,7 @@
               <!-- Technologies -->
               @if (event.technologies && event.technologies.length > 0) {
                 <div class="technologies">
-                  <p class="technologies-title">Technologies:</p>
+                  <p class="technologies-title"><span class="section-icon">🛠️</span>Technologies</p>
                   <div class="tech-list">
                     @for (tech of event.technologies; track tech) {
                       <span class="tech-badge">{{ tech }}</span>
@@ -67,11 +75,11 @@
               <!-- Impact Metrics -->
               @if (event.impactMetrics && (event.impactMetrics | keyvalue).length > 0) {
                 <div class="metrics">
-                  <p class="metrics-title">Impact Metrics:</p>
+                  <p class="metrics-title"><span class="section-icon">📊</span>Impact Metrics</p>
                   <div class="metrics-grid">
                     @for (metric of event.impactMetrics | keyvalue; track metric.key) {
                       <div class="metric">
-                        <span class="metric-label">{{ metric.key }}:</span>
+                        <span class="metric-label">{{ metric.key }}</span>
                         <span class="metric-value">{{ metric.value }}</span>
                       </div>
                     }

@@ -22,4 +22,8 @@ export class ExperienceTimelinePage {
   protected isCurrentRole(endDate: string | undefined): boolean {
     return !endDate;
   }
+
+  protected getStepNumber(index: number): number {
+    return index + 1;
+  }
 }

@@ -1,3 +1,4 @@
+export * from './app-settings.service';
 export * from './data.service';
 export * from './email.service';
 export * from './theme.service';

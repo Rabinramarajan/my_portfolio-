@@ -10,13 +10,12 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PersonalizationService } from '../../core/services/personalization.service';
-import { DataService } from '../../core';
+import { DataService, StorageService } from '../../core';
 import { PageLayout, GlassCard } from '../../shared';
 import { Icon } from '../../shared/components/ui/icon/icon';
 import type { ThemeMode, FontFamily, LayoutStyle, ContentDensity } from '../../core/models';
 import type { AccentColor } from '../../core/types/common.types';
 
-/** Left-nav section keys for the settings panel. */
 type SettingsSection =
   'profile' | 'appearance' | 'typography' | 'accessibility' | 'preferences' | 'danger';
 
@@ -26,7 +25,6 @@ interface NavItem {
   readonly icon: string;
 }
 
-/** Locally-edited profile fields (prefilled from profile.json; not persisted server-side). */
 interface ProfileForm {
   name: string;
   title: string;
@@ -36,12 +34,6 @@ interface ProfileForm {
   website: string;
 }
 
-/**
- * Settings & Personalization — a two-panel layout with a left section nav and a
- * right content panel. Appearance, typography, accessibility and preferences are
- * real, live-persisted personalization controls; the Profile tab is a local-only
- * form prefilled from profile.json (a static portfolio has no profile backend).
- */
 @Component({
   selector: 'app-settings',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -55,6 +47,7 @@ export class SettingsPage {
   private readonly data = inject(DataService);
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private readonly profileResource = this.data.load('profile');
+  private storage = inject(StorageService);
 
   // ── Section navigation ──────────────────────────────
   protected readonly section = signal<SettingsSection>('profile');
@@ -100,6 +93,22 @@ export class SettingsPage {
       });
     });
 
+    // Load display settings from storage
+    if (this.isBrowser) {
+      void this.storage
+        .get<{ showEmail: boolean; showLocation: boolean; showSocial: boolean }>(
+          'portfolio-display-settings',
+        )
+        .then((stored) => {
+          if (stored) {
+            this.showEmail.set(stored.showEmail);
+            this.showLocation.set(stored.showLocation);
+            this.showSocial.set(stored.showSocial);
+          }
+        })
+        .catch(() => undefined);
+    }
+
     // Persist display settings whenever they change.
     effect(() => {
       this.showEmail();
@@ -120,42 +129,19 @@ export class SettingsPage {
     setTimeout(() => this.saved.set(false), 2000);
   }
 
-  // ── Profile display toggles (persistent to localStorage) ─────────────────
-  protected readonly showEmail = signal(this.loadDisplaySettings().showEmail);
-  protected readonly showLocation = signal(this.loadDisplaySettings().showLocation);
-  protected readonly showSocial = signal(this.loadDisplaySettings().showSocial);
-
-  private loadDisplaySettings(): {
-    showEmail: boolean;
-    showLocation: boolean;
-    showSocial: boolean;
-  } {
-    debugger;
-    if (!this.isBrowser) return { showEmail: true, showLocation: true, showSocial: true };
-    try {
-      const stored = localStorage.getItem('portfolio-display-settings');
-      return stored
-        ? JSON.parse(stored)
-        : { showEmail: true, showLocation: true, showSocial: true };
-    } catch {
-      return { showEmail: true, showLocation: true, showSocial: true };
-    }
-  }
+  // ── Profile display toggles (persistent via StorageService) ──────────────
+  protected readonly showEmail = signal(true);
+  protected readonly showLocation = signal(true);
+  protected readonly showSocial = signal(true);
 
   private persistDisplaySettings(): void {
+    debugger;
     if (!this.isBrowser) return;
-    try {
-      localStorage.setItem(
-        'portfolio-display-settings',
-        JSON.stringify({
-          showEmail: this.showEmail(),
-          showLocation: this.showLocation(),
-          showSocial: this.showSocial(),
-        }),
-      );
-    } catch {
-      // Silently fail on SSR or storage quota
-    }
+    void this.storage.set('portfolio-display-settings', {
+      showEmail: this.showEmail(),
+      showLocation: this.showLocation(),
+      showSocial: this.showSocial(),
+    });
   }
 
   // ── Personalization state (real, live) ──────────────
