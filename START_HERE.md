@@ -46,11 +46,19 @@ Go to: https://supabase.com/dashboard
 Create project → Copy Project URL & anon key
 ```
 
-### 2️⃣ Create `.env.local`
+### 2️⃣ Add Credentials to Environment
 
-```bash
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_KEY=your-anon-public-key
+Update `src/environments/environment.development.ts`:
+
+```typescript
+export const environment = {
+  production: false,
+  supabase: {
+    url: 'https://your-project.supabase.co',
+    key: 'your-anon-public-key',
+  },
+  // ... rest of config
+};
 ```
 
 ### 3️⃣ Create Database Tables

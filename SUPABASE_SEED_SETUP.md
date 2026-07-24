@@ -11,13 +11,19 @@ Quick 5-minute setup to sync your JSON data to Supabase.
 - [ ] Copy **Project URL** from Settings → API
 - [ ] Copy **anon public key** from Settings → API
 
-### 2. Set Environment Variables
+### 2. Add Supabase Credentials to Environment
 
-Create `.env.local` in project root:
+Update `src/environments/environment.development.ts`:
 
-```bash
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_KEY=your-anon-public-key
+```typescript
+export const environment = {
+  production: false,
+  supabase: {
+    url: 'https://your-project.supabase.co',
+    key: 'your-anon-public-key',
+  },
+  // ... rest of config
+};
 ```
 
 ### 3. Create Database Tables

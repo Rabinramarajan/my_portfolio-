@@ -452,4 +452,8 @@ export class SupabaseService {
   clearCache(): void {
     this.inMemoryCache.clear();
   }
+
+  from(table: string) {
+    return this.getClient().from(table);
+  }
 }

@@ -32,7 +32,7 @@ export class App {
   }
 
   async loadProjects() {
-    const { data, error } = await this.supabase.from('projects').select('*').eq('featured', true);
+    const { data, error } = await this.supabase.from('projects').select('*');
 
     if (error) {
       console.error(error);

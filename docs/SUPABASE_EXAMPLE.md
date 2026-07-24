@@ -6,7 +6,7 @@ Practical examples of how to use the SupabaseService in your Angular 22 portfoli
 
 ### Component
 
-```typescript
+```typescriptD
 import { Component, OnInit, inject } from '@angular/core';
 import { SupabaseService } from '../../core/services';
 import { CommonModule } from '@angular/common';
