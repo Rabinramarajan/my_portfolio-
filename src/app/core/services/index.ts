@@ -6,3 +6,5 @@ export * from './app-title-strategy';
 export * from './vercel.service';
 export * from './web-vitals.service';
 export * from './og-image.service';
+export * from './personalization.service';
+export * from './storage.service';
