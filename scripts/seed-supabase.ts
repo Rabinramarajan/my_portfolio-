@@ -1,6 +1,14 @@
+import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
 import * as fs from 'fs';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+dotenv.config({ path: '.env' });
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 interface Project {
   id: string;
@@ -74,10 +82,14 @@ async function seedProjects() {
       })),
     );
 
-    if (projectError) throw projectError;
+    if (projectError) {
+      log.error(`Database error: ${projectError.code} - ${projectError.message}`);
+      throw projectError;
+    }
     log.success(`Seeded ${projects.length} projects`);
   } catch (err) {
-    log.error(`Failed to seed projects: ${err instanceof Error ? err.message : String(err)}`);
+    const errMsg = err instanceof Error ? err.message : JSON.stringify(err);
+    log.error(`Failed to seed projects: ${errMsg}`);
   }
 }
 
@@ -100,10 +112,14 @@ async function seedBlogs() {
       })),
     );
 
-    if (blogError) throw blogError;
+    if (blogError) {
+      log.error(`Database error: ${blogError.code} - ${blogError.message}`);
+      throw blogError;
+    }
     log.success(`Seeded ${posts.length} blog posts`);
   } catch (err) {
-    log.error(`Failed to seed blogs: ${err instanceof Error ? err.message : String(err)}`);
+    const errMsg = err instanceof Error ? err.message : JSON.stringify(err);
+    log.error(`Failed to seed blogs: ${errMsg}`);
   }
 }
 
@@ -134,43 +150,14 @@ async function seedSkills() {
       })),
     );
 
-    if (skillError) throw skillError;
+    if (skillError) {
+      log.error(`Database error: ${skillError.code} - ${skillError.message}`);
+      throw skillError;
+    }
     log.success(`Seeded ${allSkills.length} skills`);
   } catch (err) {
-    log.error(`Failed to seed skills: ${err instanceof Error ? err.message : String(err)}`);
-  }
-}
-
-async function seedOtherData() {
-  try {
-    log.info('Seeding other data files...');
-
-    const files = fs.readdirSync(dataDir).filter((f) => f.endsWith('.json'));
-
-    for (const file of files) {
-      if (['projects.json', 'blogs.json', 'skills.json'].includes(file)) continue;
-
-      const tableName = file.replace('.json', '');
-      const data = JSON.parse(fs.readFileSync(path.join(dataDir, file), 'utf-8'));
-
-      try {
-        const { error } = await supabase.from(tableName).insert([{ data }]);
-
-        if (error) {
-          if (error.code === 'PGRST116') {
-            log.warn(`Table '${tableName}' doesn't exist yet. Skipping...`);
-          } else {
-            throw error;
-          }
-        } else {
-          log.success(`Seeded ${tableName}`);
-        }
-      } catch (err) {
-        log.warn(`Skipped ${tableName}: ${err instanceof Error ? err.message : String(err)}`);
-      }
-    }
-  } catch (err) {
-    log.error(`Error processing data files: ${err instanceof Error ? err.message : String(err)}`);
+    const errMsg = err instanceof Error ? err.message : JSON.stringify(err);
+    log.error(`Failed to seed skills: ${errMsg}`);
   }
 }
 
@@ -185,7 +172,6 @@ async function main() {
     await seedProjects();
     await seedBlogs();
     await seedSkills();
-    await seedOtherData();
 
     console.log('\n🎉 Seed complete!');
   } catch (err) {
