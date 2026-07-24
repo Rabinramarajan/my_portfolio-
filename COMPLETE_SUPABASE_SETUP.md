@@ -18,14 +18,42 @@ Your portfolio has **31 JSON files** with data. I created **4 SQL migration file
 → Copy anon public key
 ```
 
-### Step 2: Create `.env.local` (1 min)
+### Step 2: Set Environment Variables (1 min)
 
-In your project root, create `.env.local`:
+Set your Supabase credentials as environment variables:
+
+**On Windows (PowerShell):**
+
+```powershell
+$env:SUPABASE_URL = "https://your-project.supabase.co"
+$env:SUPABASE_KEY = "your-anon-public-key"
+npm run seed
+```
+
+**On Windows (CMD):**
+
+```cmd
+set SUPABASE_URL=https://your-project.supabase.co
+set SUPABASE_KEY=your-anon-public-key
+npm run seed
+```
+
+**On Mac/Linux:**
+
+```bash
+export SUPABASE_URL="https://your-project.supabase.co"
+export SUPABASE_KEY="your-anon-public-key"
+npm run seed
+```
+
+**Or create `.env.local` (Optional):**
 
 ```bash
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_KEY=your-anon-public-key
 ```
+
+The script will read these automatically! ✨
 
 ### Step 3: Create All Database Tables (2 min)
 

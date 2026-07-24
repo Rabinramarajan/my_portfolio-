@@ -1,7 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import * as fs from 'fs';
 import * as path from 'path';
-import { environment } from '../src/environments/environment.development';
 
 interface Project {
   id: string;
@@ -34,9 +33,9 @@ interface Skill {
   [key: string]: any;
 }
 
-// Initialize Supabase client
-const supabaseUrl = environment.supabase.url || '';
-const supabaseKey = environment.supabase.key || '';
+// Initialize Supabase client from environment variables
+const supabaseUrl = process.env['SUPABASE_URL'] || '';
+const supabaseKey = process.env['SUPABASE_KEY'] || '';
 
 if (!supabaseUrl || !supabaseKey) {
   console.error('❌ Error: SUPABASE_URL and SUPABASE_KEY environment variables are required');
