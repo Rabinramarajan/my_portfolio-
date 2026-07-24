@@ -130,6 +130,7 @@ export class SettingsPage {
     showLocation: boolean;
     showSocial: boolean;
   } {
+    debugger;
     if (!this.isBrowser) return { showEmail: true, showLocation: true, showSocial: true };
     try {
       const stored = localStorage.getItem('portfolio-display-settings');
