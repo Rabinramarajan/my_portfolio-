@@ -9,3 +9,4 @@ export * from './web-vitals.service';
 export * from './og-image.service';
 export * from './personalization.service';
 export * from './storage.service';
+export * from './supabase.service';
