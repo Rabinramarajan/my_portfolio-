@@ -34,8 +34,8 @@ interface Skill {
 }
 
 // Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL || '';
-const supabaseKey = process.env.SUPABASE_KEY || '';
+const supabaseUrl = process.env['SUPABASE_URL'] || '';
+const supabaseKey = process.env['SUPABASE_KEY'] || '';
 
 if (!supabaseUrl || !supabaseKey) {
   console.error('❌ Error: SUPABASE_URL and SUPABASE_KEY environment variables are required');
@@ -114,8 +114,8 @@ async function seedSkills() {
 
     // Flatten skills from categories
     const allSkills: Skill[] = [];
-    data.categories.forEach((cat) => {
-      cat.skills.forEach((skill) => {
+    data.categories.forEach((cat: any) => {
+      cat.skills.forEach((skill: any) => {
         allSkills.push({
           ...skill,
           category: cat.id,
@@ -128,7 +128,7 @@ async function seedSkills() {
         id: s.id,
         name: s.name,
         level: s.level,
-        category: s.category,
+        category: s['category'],
         accent: s.accent,
         data: s, // Store full object as JSON
       })),

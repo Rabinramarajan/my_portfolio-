@@ -6,7 +6,7 @@
     "images": "node scripts/generate-images.mjs",
     "brand": "node scripts/generate-brand-assets.mjs",
     "sitemap": "node scripts/generate-sitemap.mjs",
-    "seed": "ts-node scripts/seed-supabase.ts",
+    "seed": "ts-node --project scripts/tsconfig.json scripts/seed-supabase.ts",
     "start": "ng serve",
     "build": "ng build",
     "build:stats": "ng build --stats-json",

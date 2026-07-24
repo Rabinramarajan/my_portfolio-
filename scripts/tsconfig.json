@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "lib": ["ES2020"]
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "../dist"]
+}
