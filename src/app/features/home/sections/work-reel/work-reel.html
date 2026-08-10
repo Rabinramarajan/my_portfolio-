@@ -16,12 +16,15 @@
     />
 
     <div class="wr__grid">
+      <!-- No `priority` here, deliberately. On the home page this reel starts
+           ~6000px down; eager-loading its first image put a 127kB screenshot on
+           the critical path and pushed LCP out by ~0.9s. `/work` still marks its
+           first two cards priority — there the grid *is* the top of the page. -->
       @for (project of projects(); track project.slug; let i = $index) {
         <app-project-card
           class="wr__item"
           [project]="project"
           [index]="label(i)"
-          [priority]="i === 0"
           [layout]="i === 0 ? 'wide' : 'tall'"
         />
       } @empty {

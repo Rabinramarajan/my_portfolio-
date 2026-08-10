@@ -17,11 +17,15 @@
         </div>
       </div>
 
-      <ol class="pr__track" #track>
-        <span class="pr__line">
+      <!-- The progress rail is decoration positioned over the list. It sits
+           outside the <ol> because a list may only contain <li> — inside, it
+           made every assistive technology read a phantom eighth item. -->
+      <div class="pr__rail">
+        <span class="pr__line" aria-hidden="true">
           <span class="pr__line-fill" #fill></span>
         </span>
 
+        <ol class="pr__track" #track>
         @for (step of steps; track step.title; let i = $index) {
           <li
             class="pr__step"
@@ -29,11 +33,15 @@
             [class.pr__step--active]="activeStep() === i"
             [class.pr__step--done]="activeStep() > i"
           >
+            <!-- The accessible name has to start with the visible text ("01"),
+                 or a voice-control user saying "click oh one" hits nothing. -->
             <button
               type="button"
               class="pr__node"
               [attr.aria-current]="activeStep() === i ? 'step' : null"
-              [attr.aria-label]="'Go to step ' + (i + 1) + ': ' + step.title"
+              [attr.aria-label]="
+                (i + 1).toString().padStart(2, '0') + ' — go to step: ' + step.title
+              "
               (click)="goTo(i)"
             >
               {{ (i + 1).toString().padStart(2, '0') }}
@@ -55,7 +63,8 @@
             </div>
           </li>
         }
-      </ol>
+        </ol>
+      </div>
     </div>
 
     <div class="pr__ending" appReveal="rise">

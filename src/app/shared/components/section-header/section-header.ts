@@ -18,6 +18,10 @@ export class SectionHeader {
   readonly heading = input.required<string>();
   readonly lede = input<string>();
   readonly align = input<'start' | 'center'>('start');
-  /** Heading level, so section order stays semantically correct. */
-  readonly level = input<2 | 3>(2);
+  /**
+   * Heading level, so section order stays semantically correct. Level 1 is for
+   * the header that opens a page — a page with no `h1` is a page search engines
+   * and screen readers have to guess the subject of.
+   */
+  readonly level = input<1 | 2 | 3>(2);
 }

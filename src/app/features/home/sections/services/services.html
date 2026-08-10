@@ -40,7 +40,7 @@
               <p class="sv__desc">{{ service.description }}</p>
 
               <div class="sv__detail">
-                <h4 class="sv__label">Typical deliverables</h4>
+                <h3 class="sv__label">Typical deliverables</h3>
                 <ul class="sv__deliverables">
                   @for (item of service.deliverables; track item) {
                     <li>{{ item }}</li>
@@ -49,7 +49,7 @@
               </div>
 
               <div class="sv__detail">
-                <h4 class="sv__label">Technologies</h4>
+                <h3 class="sv__label">Technologies</h3>
                 <ul class="sv__tech">
                   @for (tech of service.technologies; track tech) {
                     <li>{{ tech }}</li>

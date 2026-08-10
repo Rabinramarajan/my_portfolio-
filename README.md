@@ -168,10 +168,45 @@ Angular form → POST /api/contact → validate → rate limit → honeypot
 - **Errors** — SMTP failures are logged server-side and never returned; the
   client sees a message safe to show a stranger.
 
-Credentials live only in `server/.env`. Nothing SMTP-related is ever bundled
+Credentials live only in the environment. Nothing SMTP-related is ever bundled
 into the Angular app.
 
-### Deploying
+There are **two implementations of this endpoint**, and they must be changed
+together:
+
+| Path                | Runs                       | Used by                        |
+| ------------------- | -------------------------- | ------------------------------ |
+| `server/src/`       | Express, long-lived        | Local development, self-hosting |
+| `api/contact.ts`    | Vercel serverless function | The deployed site               |
+
+`api/contact.ts` is self-contained because it builds against the *root* package
+and tsconfig, while `server/` is a separate ESM package with its own
+dependencies. The schema in `server/src/contact.schema.ts` is its mirror — edit
+one, edit the other.
+
+Two behaviours differ by necessity:
+
+- **Rate limiting** is per warm instance rather than global, since a function
+  has no shared memory. It raises the cost of scripted abuse; the honeypot and
+  the SMTP provider's own quota are the other layers.
+- **The auto-reply is awaited**, not detached. A serverless invocation is frozen
+  the moment it responds, so a floating promise would never run. A failed
+  auto-reply still returns success — the owner's copy is the one that matters.
+
+### Deploying to Vercel
+
+Set these in **Project → Settings → Environment Variables** (the contact form
+returns a 502 and logs the missing names until they are present):
+
+```
+SMTP_HOST  SMTP_PORT  SMTP_SECURE  SMTP_USER  SMTP_PASSWORD
+CONTACT_RECEIVER_EMAIL  CONTACT_SENDER_EMAIL  CONTACT_SENDER_NAME
+RATE_LIMIT_WINDOW_MINUTES  RATE_LIMIT_MAX      (both optional)
+```
+
+No `ALLOWED_ORIGINS` is needed — the function is same-origin with the site.
+
+### Deploying anywhere else
 
 Run both processes behind one origin so `/api` is same-origin:
 
@@ -183,6 +218,38 @@ location /     { proxy_pass http://127.0.0.1:4000; }
 Set `ALLOWED_ORIGINS` to your production origin and add your hostname to
 `angular.json` → `security.allowedHosts` (Angular's SSRF protection rejects
 unknown `Host` headers).
+
+---
+
+## Routing and caching (`vercel.json`)
+
+The site is a full prerender, so routing is static-file routing with two
+corrections:
+
+- **Real 404s.** Vercel's default static fallback answers unknown URLs with the
+  home page at `200`, which a crawler reads as a duplicate of `/` and a visitor
+  sees as a flash of the wrong page. The catch-all rewrites to the prerendered
+  `/404` page *with a 404 status*.
+- **Cache lifetimes.** JS/CSS are content-hashed by the Angular build, so their
+  names change whenever the bytes do — they are `immutable` for a year. Media
+  filenames are *not* hashed, so they revalidate daily and serve stale while
+  they do; replacing a screenshot in place must not leave viewers on an old copy.
+
+## Canonical origin
+
+`og:url`, `<link rel="canonical">`, `sitemap.xml` and `robots.txt` are all baked
+in at build time — a prerender has no request to derive them from. A preview
+deploy inheriting the production origin would claim to *be* the production page,
+so `tools/site-origin.mjs` resolves one origin per deployment:
+
+1. `SITE_URL`, if set — the escape hatch.
+2. Production (`VERCEL_ENV=production`) → the custom domain.
+3. A preview → its own `VERCEL_URL`, so a shared preview link is self-consistent.
+4. Otherwise the custom domain.
+
+`npm run build` regenerates `src/app/core/config/site-url.ts` from that. The file
+is committed, not ignored, because `ng serve` and `ng test` do not run the build
+scripts.
 
 ---
 

@@ -15,7 +15,11 @@
   /* ---- Color: text ---- */
   --color-text: #ecece9;
   --color-text-muted: #8a8a92;
-  --color-text-faint: #5b5b63;
+  /* Raised from #5b5b63, which was 2.97:1 on --color-bg — under the 4.5:1 that
+     the 11px labels using it need. This clears 4.5:1 against both the base and
+     the light-preference background, and only gains contrast on the elevated
+     surfaces, which are lighter still. */
+  --color-text-faint: #7c7c85;
 
   /* ---- Color: accent (one, sophisticated) ---- */
   --color-accent: #c9f24d;

@@ -22,21 +22,31 @@ interface Principle {
         <!-- Editorial List (Left) -->
         <ul class="principles__list">
           @for (p of principles; track p.id; let idx = $index) {
-            <li
-              class="principles__item"
-              [class.principles__item--active]="activeIdx() === idx"
-              (mouseenter)="activeIdx.set(idx)"
-              (click)="activeIdx.set(idx)"
-            >
-              <span class="principles__num">{{ p.id }}</span>
-              <span class="principles__title">{{ p.title }}</span>
-              <span class="principles__arrow">→</span>
+            <!-- Pointer users select by hovering; keyboard users need the same
+                 control to be reachable and operable. A real <button> inside
+                 the <li> gets focus, Enter and Space for free — putting
+                 role="button" on the <li> itself would instead make it an
+                 invalid child of the list. -->
+            <li class="principles__row">
+              <button
+                type="button"
+                class="principles__item"
+                [class.principles__item--active]="activeIdx() === idx"
+                [attr.aria-pressed]="activeIdx() === idx"
+                (mouseenter)="activeIdx.set(idx)"
+                (focus)="activeIdx.set(idx)"
+                (click)="activeIdx.set(idx)"
+              >
+                <span class="principles__num">{{ p.id }}</span>
+                <span class="principles__title">{{ p.title }}</span>
+                <span class="principles__arrow" aria-hidden="true">→</span>
+              </button>
             </li>
           }
         </ul>
 
         <!-- Single Dynamic Supporting Area (Right) -->
-        <div class="principles__detail">
+        <div class="principles__detail" aria-live="polite">
           <div class="principles__detail-inner">
             <span class="principles__detail-num">{{ activePrinciple().id }}</span>
             <h4 class="principles__detail-title">{{ activePrinciple().title }}</h4>
@@ -95,6 +105,16 @@ interface Principle {
     }
 
     .principles__item {
+      /* Strips the button chrome so the control looks exactly as the list item
+         did, while keeping the semantics a keyboard user needs. */
+      appearance: none;
+      width: 100%;
+      background: none;
+      border: 0;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+
       display: flex;
       align-items: center;
       gap: var(--space-4, 1rem);
@@ -102,6 +122,12 @@ interface Principle {
       cursor: pointer;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       transition: background 0.3s ease, border-color 0.3s ease;
+
+      /* The item is keyboard-operable, so focus has to be visible. */
+      &:focus-visible {
+        outline: 2px solid var(--color-accent, #c9f24d);
+        outline-offset: -2px;
+      }
 
       &:hover,
       &--active {

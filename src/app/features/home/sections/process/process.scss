@@ -67,8 +67,13 @@
 
 /* ---- Timeline track ---- */
 
-.pr__track {
+/* Holds the positioning context that .pr__track used to own, so the decorative
+   rail can overlay the list from outside it. */
+.pr__rail {
   position: relative;
+}
+
+.pr__track {
   list-style: none;
 }
 

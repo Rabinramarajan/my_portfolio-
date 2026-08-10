@@ -1,0 +1,14 @@
+/* Type-checking for the Vercel serverless functions under `api/`.
+   Vercel compiles these itself with esbuild; this project exists so `tsc -b`
+   and the editor catch mistakes before a deploy does. */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "strict": true
+  },
+  "include": ["api/**/*.ts"]
+}

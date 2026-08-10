@@ -10,7 +10,11 @@
     </p>
   }
 
-  @if (level() === 2) {
+  @if (level() === 1) {
+    <h1 class="sh__heading">
+      <app-text-reveal [text]="heading()" />
+    </h1>
+  } @else if (level() === 2) {
     <h2 class="sh__heading">
       <app-text-reveal [text]="heading()" />
     </h2>

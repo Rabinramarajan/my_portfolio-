@@ -8,13 +8,16 @@
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 
+import { resolveOrigin } from './site-origin.mjs';
+
 const content = readFileSync(
   new URL('../src/app/core/config/portfolio.content.ts', import.meta.url),
   'utf8',
 );
 
-const origin = content.match(/SITE_URL\s*=\s*'([^']+)'/)?.[1];
-if (!origin) throw new Error('Could not read SITE_URL from portfolio.content.ts');
+// The same resolution the app is built with, so the sitemap, robots.txt and
+// every canonical tag always name one origin.
+const origin = resolveOrigin();
 
 const slugs = [...content.matchAll(/^\s{4}slug:\s*'([^']+)'/gm)].map((match) => match[1]);
 
@@ -47,4 +50,15 @@ ${urls}
 `,
 );
 
-console.info(`sitemap.xml written with ${routes.length} routes`);
+// robots.txt names the sitemap absolutely, so it has to move with the origin —
+// a preview pointing crawlers at the production sitemap defeats the exercise.
+writeFileSync(
+  new URL('../public/robots.txt', import.meta.url),
+  `User-agent: *
+Allow: /
+
+Sitemap: ${origin}/sitemap.xml
+`,
+);
+
+console.info(`sitemap.xml written with ${routes.length} routes for ${origin}`);
