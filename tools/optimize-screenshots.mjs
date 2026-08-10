@@ -28,6 +28,7 @@ const FOLDERS = [
   'fiji_internal_application',
   'insuremet',
   'prims_member_portal',
+  'process',
   'vnpf_mobile',
 ];
 

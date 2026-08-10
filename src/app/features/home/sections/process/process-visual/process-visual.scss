@@ -25,24 +25,22 @@
   padding: var(--space-9);
 }
 
-/* Every icon shares one visual language — same stroke weight, same palette —
-   so the set reads as a system rather than seven unrelated illustrations. */
-.pv__icon {
-  inline-size: min(100%, 220px);
-  block-size: auto;
-  aspect-ratio: 1;
-  stroke: var(--color-text-muted);
-  stroke-width: 2.25;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  animation: pv-in var(--duration-cinematic) var(--ease-out-expo) both;
+/* Each step's illustration fills the panel and fades in when the step becomes
+   active. The stage keeps its padding so the artwork breathes inside the frame. */
+.pv__art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 100%;
+}
 
-  rect,
-  circle,
-  path,
-  line {
-    stroke: inherit;
-  }
+.pv__img {
+  inline-size: 100%;
+  block-size: auto;
+  max-block-size: 100%;
+  object-fit: contain;
+  animation: pv-in var(--duration-cinematic) var(--ease-out-expo) both;
 }
 
 @keyframes pv-in {
@@ -58,16 +56,7 @@
 }
 
 @include reduced-motion {
-  .pv__icon {
+  .pv__img {
     animation: none;
   }
-}
-
-.pv__icon-accent {
-  stroke: var(--color-accent);
-}
-
-.pv__icon-accent-fill {
-  stroke: var(--color-accent);
-  fill: var(--color-accent);
 }
