@@ -48,11 +48,6 @@ the real light-blue government UI. They are therefore used only:
 Delete them from `SITE_MEDIA` and the projects' `preview` fields if you would
 rather not run them at all. Real screen recordings would beat both options.
 
-**Unreferenced files** still shipping in `public/`: `media/my_working_img/`
-(30 WhatsApp photos, 4MB) and `media/blog/` (7 SVGs, for an Insights section
-that does not exist). Everything in `public/` is publicly reachable once
-deployed — delete what you do not intend to publish.
-
 Two smaller `[VERIFY]` markers: `resumeUpdated` (set it to the date of the PDF
 you upload) and the Zellavora `liveUrl` (currently pointing at your homepage).
 
