@@ -151,6 +151,7 @@ export type AvailabilityState = 'available' | 'limited' | 'booked';
 /** Photography and footage used to dress the page sections, keyed by placement. */
 export interface SiteMedia {
   readonly aboutPortrait: PortfolioMedia;
+  readonly heroPortrait: PortfolioMedia;
   readonly aboutMonitors: PortfolioMedia;
   readonly aboutCoffee: PortfolioMedia;
   readonly servicesWhiteboard: PortfolioMedia;
@@ -184,6 +185,10 @@ export interface PortfolioProfile {
   readonly shortName: string;
   readonly role: string;
   readonly positioning: string;
+  /** Compact role line used in the header and hero metadata, e.g. "Frontend Angular Consultant". */
+  readonly consultLabel: string;
+  /** Short editorial location line, e.g. "Chennai, India". */
+  readonly basedIn: string;
   readonly headline: readonly string[];
   readonly valueProposition: string;
   readonly bio: readonly string[];

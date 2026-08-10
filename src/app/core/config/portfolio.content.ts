@@ -40,9 +40,11 @@ export const PROFILE: PortfolioProfile = {
   shortName: 'Rabin',
   role: 'Senior Frontend Angular Developer',
   positioning: 'Senior Frontend Angular Developer & Consultant',
-  headline: ['I engineer products', 'that scale', '& perform.'],
+  consultLabel: 'Frontend Angular Consultant',
+  basedIn: 'Chennai, India',
+  headline: ['I engineer digital products', 'that feel effortless.'],
   valueProposition:
-    'Senior Frontend Angular Developer with 4+ years building enterprise-grade web & mobile applications for government and financial sectors — serving 10,000+ users across three countries.',
+    'Senior Frontend Angular Consultant with 4+ years of experience building enterprise-grade web and mobile applications with modern Angular architecture.',
   bio: [
     "I'm Rabin R, a Senior Frontend Angular Developer with 4+ years of experience engineering critical systems for government and enterprise clients — including immigration portals for Fiji and pension platforms serving thousands of users.",
     'Most of my work lives where the stakes are real: systems people depend on to travel, to claim a pension, to do their job every day. That shapes how I build — type-safe, accessible, tested, and measured.',
@@ -761,6 +763,13 @@ export const PROJECTS: readonly PortfolioProject[] = [
  * decorative, so they carry no claim and are hidden from assistive technology.
  */
 export const SITE_MEDIA: SiteMedia = {
+  heroPortrait: photo(
+    'hero-portrait',
+    'Portrait of Rabin R',
+    960,
+    1280,
+    [640, 960],
+  ),
   aboutPortrait: photo(
     'about-portrait',
     'Rabin at his desk, with an editor and an analytics dashboard on the monitors behind him',

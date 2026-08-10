@@ -5,9 +5,9 @@
 >
   <div class="hd__inner">
     <a class="hd__logo" routerLink="/" [appCursorTarget]="'link'" (click)="closeMenu()">
-      <span class="hd__mark" aria-hidden="true"></span>
-      <span class="hd__name">{{ profile().shortName }}</span>
-      <span class="hd__role">{{ profile().role }}</span>
+      <span class="hd__mark" [attr.data-availability]="profile().availability" aria-hidden="true"></span>
+      <span class="hd__name">{{ profile().name }}</span>
+      <span class="hd__role">{{ profile().consultLabel }}</span>
     </a>
 
     <nav class="hd__nav" aria-label="Primary">

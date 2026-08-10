@@ -1,35 +1,39 @@
 @use '../../../../../styles/mixins' as *;
 
+/* ------------------------------------------------------------------ *
+ * Hero — the entrance. Tall by intent, never artificially stretched:
+ * the section grows past the first viewport into metrics and the "next
+ * chapter" bridge, so scrolling inside the hero already feels deliberate.
+ * ------------------------------------------------------------------ */
+
 .hero {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 85svh;
-  padding-block: calc(var(--header-h) + var(--space-7)) var(--space-8);
+  min-height: 92svh;
+  padding-block-start: calc(var(--header-h) + var(--space-5));
   overflow: hidden;
 }
 
-.hero__inner {
+.hero__inner,
+.hero__metrics-row,
+.hero__bridge {
   @include container(var(--container-wide));
-
-  position: relative;
-  z-index: var(--z-raised);
 }
+
+/* ---- Status ------------------------------------------------ */
 
 .hero__status {
   display: inline-flex;
   align-items: center;
   gap: var(--space-3);
-  padding: 0.4rem 0.9rem 0.4rem 0.6rem;
+  padding: 0.45rem 0.95rem 0.45rem 0.7rem;
   border-radius: var(--radius-pill);
   @include fine-border;
-
   background: rgb(255 255 255 / 3%);
   backdrop-filter: blur(10px);
+  @include eyebrow;
   font-size: var(--text-xs);
-  letter-spacing: var(--tracking-snug);
-  color: var(--color-text-muted);
+  letter-spacing: var(--tracking-widest);
+  color: var(--color-text);
 }
 
 .hero__pulse {
@@ -38,14 +42,7 @@
   height: 7px;
   border-radius: 50%;
   background: var(--color-success);
-
-  .is-limited & {
-    background: var(--color-accent);
-  }
-
-  .is-booked & {
-    background: var(--color-text-faint);
-  }
+  box-shadow: 0 0 12px rgb(110 231 168 / 45%);
 
   &::after {
     content: '';
@@ -57,27 +54,56 @@
   }
 }
 
-.hero__heading {
-  @include display(var(--text-display));
-
-  margin-block-start: var(--space-6);
-  max-width: 15ch;
+.hero__status-note {
+  margin-block-start: var(--space-2);
+  color: var(--color-text-faint);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
 }
 
-.hero__lower {
-  display: grid;
-  gap: var(--space-6);
+/* ---- Headline ------------------------------------------------ */
+
+.hero__heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 11.5vw, 3.75rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  max-width: 1000px;
   margin-block-start: var(--space-7);
 
-  @include up(lg) {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: end;
-    gap: var(--space-8);
+  @include up(md) {
+    font-size: clamp(3.75rem, 8vw, 8rem);
+    line-height: 0.94;
+    margin-block-start: var(--space-8);
+  }
+
+  @include up(xl) {
+    /* The statement never reads wider than ~11 words. */
+    max-width: 1000px;
   }
 }
 
+.hero__line {
+  display: block;
+  overflow: hidden;
+  /* Descenders are clipped at the mask's box edge, so over-deliver the padding
+     and reclaim it — the space must exist for the renderer to use. */
+  padding-block-end: 0.1em;
+  margin-block-end: -0.1em;
+}
+
+.hero__line-inner {
+  display: block;
+  will-change: transform;
+}
+
+/* ---- Supporting copy + actions ------------------------------ */
+
 .hero__value {
-  max-width: 46ch;
+  max-width: 620px;
+  margin-block-start: var(--space-6);
   color: var(--color-text-muted);
   font-size: var(--text-lg);
   line-height: var(--leading-relaxed);
@@ -88,13 +114,23 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-4);
+  margin-block-start: var(--space-7);
+
+  app-button {
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+  }
 }
+
+/* ---- Editorial metadata -------------------------------------- */
 
 .hero__meta {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-5);
-  margin-block-start: var(--space-8);
+  max-width: 820px;
+  margin-block-start: var(--space-10);
   padding-block-start: var(--space-5);
   border-block-start: 1px solid var(--color-line);
 
@@ -106,28 +142,30 @@
 
   dd {
     font-size: var(--text-sm);
+    color: var(--color-text);
     font-variant-numeric: tabular-nums;
   }
 }
 
+/* ---- Scroll cue ---------------------------------------------- */
+
 .hero__scroll {
-  @include container(var(--container-wide));
-
-  display: none;
+  display: flex;
   align-items: center;
-  gap: var(--space-3);
-  margin-block-start: var(--space-7);
+  gap: var(--space-4);
+  margin-block-start: var(--space-8);
+}
 
+.hero__scroll-label {
   @include eyebrow;
 
-  @include up(md) {
-    display: flex;
-  }
+  white-space: nowrap;
 }
 
 .hero__scroll-line {
   position: relative;
-  width: 60px;
+  flex: 1;
+  max-width: 120px;
   height: 1px;
   background: var(--color-line-strong);
   overflow: hidden;
@@ -136,11 +174,90 @@
     content: '';
     position: absolute;
     inset: 0;
+    width: 40%;
     background: var(--color-accent);
-    transform-origin: left;
-    animation: hero-scroll 2.6s var(--ease-in-out-quart) infinite;
+    animation: hero-scroll 2.4s var(--ease-in-out-quart) infinite;
   }
 }
+
+.hero__scroll-arrow {
+  color: var(--color-text-muted);
+  animation: hero-bob 2.4s var(--ease-in-out-quart) infinite;
+}
+
+/* ---- Metrics ------------------------------------------------- */
+
+.hero__metrics-row {
+  margin-block-start: var(--space-10);
+  padding-block: var(--space-6);
+  border-block: 1px solid var(--color-line);
+}
+
+/* ---- Next-chapter bridge ------------------------------------- */
+
+.hero__bridge {
+  padding-block-start: var(--space-10);
+  padding-block-end: var(--space-8);
+}
+
+.hero__bridge-index {
+  @include eyebrow;
+
+  color: var(--color-accent);
+  margin-block-end: var(--space-4);
+}
+
+.hero__bridge-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.2vw, 2.6rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: var(--tracking-snug);
+  max-width: 640px;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+/* ------------------------------------------------------------------ *
+ * Composition — asymmetric, editorial. The statement owns the space; the
+ * portrait stands beside it, its offset engineering frame proud of the
+ * image rather than shrink-wrapping it.
+ * ------------------------------------------------------------------ */
+
+.hero__body {
+  display: grid;
+  gap: var(--space-8);
+  align-items: start;
+
+  @include up(lg) {
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    gap: var(--space-10);
+    align-items: start;
+  }
+}
+
+.hero__content {
+  position: relative;
+  z-index: var(--z-raised);
+}
+
+.hero__media {
+  position: relative;
+  z-index: var(--z-raised);
+  width: min(100%, 360px);
+
+  @include up(lg) {
+    justify-self: end;
+    width: auto;
+    margin-inline-start: auto;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Motion — compositor-only dot-styles where possible. Reduced motion and
+ * no-JS keep everything visible: the entrance is an enhancement layered on
+ * a painted hero, never what makes it appear.
+ * ------------------------------------------------------------------ */
 
 @keyframes hero-pulse {
   from {
@@ -150,35 +267,39 @@
 
   to {
     opacity: 0;
-    transform: scale(3.4);
+    transform: scale(3);
   }
 }
 
 @keyframes hero-scroll {
   0% {
-    transform: scaleX(0);
-    transform-origin: left;
+    transform: translateX(-120%);
   }
 
-  50% {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-
-  51% {
-    transform: scaleX(1);
-    transform-origin: right;
+  55% {
+    transform: translateX(140%);
   }
 
   100% {
-    transform: scaleX(0);
-    transform-origin: right;
+    transform: translateX(140%);
+  }
+}
+
+@keyframes hero-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(4px);
   }
 }
 
 @include reduced-motion {
   .hero__pulse::after,
-  .hero__scroll-line::after {
+  .hero__scroll-line::after,
+  .hero__scroll-arrow {
     animation: none;
   }
 }

@@ -48,11 +48,43 @@
 
 .hd__mark {
   grid-row: span 2;
-  width: 10px;
-  height: 10px;
+  position: relative;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: var(--color-accent);
-  box-shadow: 0 0 14px var(--color-accent-glow);
+  background: var(--color-success);
+  box-shadow: 0 0 12px rgb(110 231 168 / 40%);
+
+  &[data-availability='limited'] {
+    background: var(--color-accent);
+    box-shadow: 0 0 12px var(--color-accent-glow);
+  }
+
+  &[data-availability='booked'] {
+    background: var(--color-text-faint);
+    box-shadow: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: inherit;
+    animation: hd-status 2.4s var(--ease-out-expo) infinite;
+  }
+}
+
+@keyframes hd-status {
+  from {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(2.6);
+  }
 }
 
 .hd__name {
@@ -66,6 +98,7 @@
   @include eyebrow;
 
   font-size: 9px;
+  white-space: nowrap;
   display: none;
 
   @include up(md) {
@@ -226,7 +259,9 @@
 @include reduced-motion {
   .hd,
   .mm,
-  .mm__nav a {
+  .mm__nav a,
+  .hd__mark::after {
     transition-duration: 1ms;
+    animation: none;
   }
 }
