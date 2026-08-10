@@ -36,6 +36,7 @@ app.use((_req, res) => res.status(404).json({ success: false, message: 'Not foun
 
 // Final guard: an unhandled error must never leak a stack trace to a client.
 app.use(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   (error: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
     console.error('[server] unhandled error', error);
     res.status(500).json({ success: false, message: 'Something went wrong.' });

@@ -39,11 +39,12 @@ import {
 import { Button } from '../../shared/components/button/button';
 import { ContactApi } from '../../core/services/contact-api';
 import { CursorTarget } from '../../shared/directives/cursor-target';
-import { PROFILE } from '../../core/config/portfolio.content';
+import { SITE_URL } from '../../core/config/portfolio.content';
 import { PortfolioStore } from '../../core/services/portfolio-store';
 import { Reveal } from '../../shared/directives/reveal';
 import { SectionHeader } from '../../shared/components/section-header/section-header';
 import { Seo } from '../../core/services/seo';
+import { breadcrumbSchema } from '../../core/services/structured-data';
 
 interface PackagePreset {
   readonly service: string | null;
@@ -212,10 +213,16 @@ export class Contact {
 
   constructor() {
     this.seo.apply({
-      title: `Hire ${PROFILE.name} — Senior Angular Developer | Pricing & Project Inquiry`,
-      description: `Tell ${PROFILE.name} what you're building. Transparent starting prices for Angular development, premium websites, dashboards, SSR and more. Response within one business day.`,
+      title: `Contact Rabin R | Angular Developer & Frontend Consultant`,
+      description: `Tell Rabin R what you're building. Transparent starting prices for Angular development, premium websites, dashboards, SSR and more. Response within one business day.`,
       path: '/contact',
     });
+    this.seo.setStructuredData(
+      breadcrumbSchema([
+        { name: 'Home', url: SITE_URL },
+        { name: 'Contact', url: `${SITE_URL}/contact` },
+      ]),
+    );
   }
 
   protected isSelected(control: AbstractControl, value: string): boolean {

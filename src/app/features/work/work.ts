@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 
-import { PROFILE } from '../../core/config/portfolio.content';
+import { SITE_URL } from '../../core/config/portfolio.content';
 import { PortfolioStore } from '../../core/services/portfolio-store';
 import { ProjectCard } from '../../shared/components/project-card/project-card';
 import { SectionHeader } from '../../shared/components/section-header/section-header';
 import { Seo } from '../../core/services/seo';
+import { breadcrumbSchema } from '../../core/services/structured-data';
 import type { ProjectCategory } from '../../core/models/portfolio.models';
 
 @Component({
@@ -33,11 +34,17 @@ export class Work {
 
   constructor() {
     this.seo.apply({
-      title: `Selected Work — ${PROFILE.name}`,
+      title: `Angular Projects & Case Studies | Rabin R`,
       description:
-        'Case studies from enterprise applications, dashboards and design systems built with Angular.',
+        'Explore Angular projects and case studies by Rabin R — enterprise platforms, government portals, and cross-platform mobile apps built with Angular, TypeScript, and RxJS.',
       path: '/work',
     });
+    this.seo.setStructuredData(
+      breadcrumbSchema([
+        { name: 'Home', url: SITE_URL },
+        { name: 'Work', url: `${SITE_URL}/work` },
+      ]),
+    );
   }
 
   protected label(index: number): string {

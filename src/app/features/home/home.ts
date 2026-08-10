@@ -4,7 +4,6 @@ import { About } from './sections/about/about';
 import { MediaImage } from '../../shared/components/media-image/media-image';
 import { Experience } from './sections/experience/experience';
 import { Hero } from './sections/hero/hero';
-import { PROFILE } from '../../core/config/portfolio.content';
 import { Process } from './sections/process/process';
 import { PortfolioStore } from '../../core/services/portfolio-store';
 import { Seo } from '../../core/services/seo';
@@ -27,8 +26,9 @@ export class Home {
 
   constructor() {
     this.seo.apply({
-      title: `${PROFILE.name} — ${PROFILE.role}`,
-      description: PROFILE.valueProposition,
+      title: `Rabin R | Angular Developer & Frontend Software Engineer`,
+      description:
+        'Rabin R is a Senior Angular Developer and Frontend Software Engineer with 4+ years building enterprise-grade web & mobile applications with Angular, TypeScript, RxJS, Ionic, and SSR.',
       path: '/',
       type: 'profile',
     });

@@ -9,7 +9,8 @@ import { Reveal } from '../../shared/directives/reveal';
 import { Seo } from '../../core/services/seo';
 import { TextReveal } from '../../shared/components/text-reveal/text-reveal';
 import { VideoShowcase } from '../../shared/components/video-showcase/video-showcase';
-import { projectSchema } from '../../core/services/structured-data';
+import { breadcrumbSchema, projectSchema } from '../../core/services/structured-data';
+import { SITE_URL } from '../../core/config/portfolio.content';
 
 /**
  * Case study page.
@@ -46,14 +47,24 @@ export class ProjectDetail {
       }
 
       this.seo.apply({
-        title: `${project.title} — ${project.category} case study | ${PROFILE.name}`,
+        title: `${project.title} — ${project.category} Case Study | ${PROFILE.name}`,
         description: project.summary,
         path: `/work/${project.slug}`,
         image: project.hero.src,
         type: 'article',
         publishedYear: project.year,
       });
-      this.seo.setStructuredData(projectSchema(project));
+      this.seo.setStructuredData({
+        '@context': 'https://schema.org',
+        '@graph': [
+          projectSchema(project),
+          breadcrumbSchema([
+            { name: 'Home', url: SITE_URL },
+            { name: 'Work', url: `${SITE_URL}/work` },
+            { name: project.title, url: `${SITE_URL}/work/${project.slug}` },
+          ]),
+        ],
+      });
     });
   }
 }

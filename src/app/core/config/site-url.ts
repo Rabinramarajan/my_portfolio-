@@ -4,4 +4,4 @@
  * Regenerated on every build from the deployment environment. See
  * tools/site-origin.mjs for how the value is chosen.
  */
-export const SITE_URL = 'https://www.rabinr.in';
+export const SITE_URL = 'https://rabinr.in';

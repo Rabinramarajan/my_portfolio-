@@ -56,6 +56,7 @@ writeFileSync(
   new URL('../public/robots.txt', import.meta.url),
   `User-agent: *
 Allow: /
+Disallow: /404
 
 Sitemap: ${origin}/sitemap.xml
 `,

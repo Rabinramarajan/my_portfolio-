@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /404
 
-Sitemap: https://www.rabinr.in/sitemap.xml
+Sitemap: https://rabinr.in/sitemap.xml

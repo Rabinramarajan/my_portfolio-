@@ -9,7 +9,7 @@
  */
 
 /** The custom domain. Used for production and as the offline default. */
-export const DEFAULT_ORIGIN = 'https://www.rabinr.in';
+export const DEFAULT_ORIGIN = 'https://rabinr.in';
 
 export function resolveOrigin(env = process.env) {
   // An explicit setting always wins — it is the escape hatch for self-hosting
