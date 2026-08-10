@@ -33,7 +33,6 @@ export class Motion {
 
   async load(): Promise<Gsap | null> {
     if (this.abandoned || !this.device.animationsEnabled()) {
-      this.releasePreHide();
       return null;
     }
     this.pending ??= this.importGsap();
@@ -44,7 +43,6 @@ export class Motion {
     const gsap = await Promise.race([this.loadGsap(), this.budget()]);
     if (!gsap) {
       this.abandoned = true;
-      this.releasePreHide();
       return null;
     }
     return gsap;
@@ -84,13 +82,5 @@ export class Motion {
     );
   }
 
-  /**
-   * Drops the global pre-hide so anything still waiting on it becomes visible.
-   * Individual directives clear their own element as they animate; this is the
-   * session-wide "there will be no animation" case.
-   */
-  private releasePreHide(): void {
-    const root = this.document.documentElement;
-    if (root.getAttribute('data-motion') === 'pending') root.setAttribute('data-motion', 'off');
-  }
+
 }

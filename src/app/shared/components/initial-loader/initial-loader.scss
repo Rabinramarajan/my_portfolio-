@@ -1,0 +1,88 @@
+@use '../../../../styles/tokens' as *;
+
+:host {
+  display: block;
+}
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: var(--color-background, #08080a);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  clip-path: inset(0 0 0 0); /* Used for GSAP wipe */
+
+  &--hidden {
+    display: none;
+    pointer-events: none;
+  }
+}
+
+.loader__line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-accent, #c9f24d);
+  transform-origin: left center;
+  transform: scaleX(0); /* GSAP will animate this */
+}
+
+.loader__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  opacity: 0; /* GSAP will animate this */
+  transform: translateY(10px);
+}
+
+.loader__identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.loader__name {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  color: var(--color-text, #ffffff);
+}
+
+.loader__role {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--color-text-muted, #a0a0a0);
+  text-transform: uppercase;
+}
+
+.loader__status {
+  position: relative;
+  height: 1.5rem; /* fixed height to contain absolute texts */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader__stage-text {
+  position: absolute;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--color-text-faint, #666666);
+  opacity: 0;
+  white-space: nowrap;
+
+  &--active {
+    opacity: 1;
+  }
+}

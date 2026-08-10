@@ -43,14 +43,39 @@ export class Reveal {
   readonly start = input('top 96%');
 
   constructor() {
-    afterNextRender(() => void this.animate());
+    afterNextRender(() => void this.observe());
+  }
+
+  private observe(): void {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          observer.disconnect();
+          void this.animate();
+        }
+      },
+      { rootMargin: '1200px' }
+    );
+    
+    observer.observe(this.host.nativeElement);
+    this.teardown.register(() => observer.disconnect());
   }
 
   private async animate(): Promise<void> {
+    const startMs = performance.now();
     const gsap = await this.motion.load();
     if (!gsap || this.teardown.destroyed) return this.release();
 
     const element = this.host.nativeElement;
+    
+    // If GSAP loaded late (e.g. slow network) and the element is already painted in the viewport,
+    // skip the entrance animation. Otherwise it will flash hidden and ruin LCP.
+    if (performance.now() - startMs > 250) {
+      const rect = element.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        return this.release();
+      }
+    }
     const targets =
       this.variant() === 'stagger' || this.variant() === 'lines'
         ? (Array.from(element.querySelectorAll(this.items())) as HTMLElement[])

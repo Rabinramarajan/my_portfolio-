@@ -29,15 +29,25 @@ export class WebglField {
   private readonly teardown = asyncTeardown();
   private readonly canvasRef = viewChild<ElementRef<HTMLCanvasElement>>('canvas');
 
-  protected readonly enabled = this.device.webglEnabled;
+  protected readonly performanceTier = this.device.performanceTier;
 
   constructor() {
-    afterNextRender(() => void this.start());
+    afterNextRender(() => {
+      // Defer WebGL initialization heavily so it doesn't block initial page load or TBT.
+      setTimeout(() => {
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(() => void this.start());
+        } else {
+          this.start();
+        }
+      }, 2500);
+    });
   }
 
   private async start(): Promise<void> {
     const canvas = this.canvasRef()?.nativeElement;
-    if (!canvas || !this.enabled()) return;
+    const tier = this.performanceTier();
+    if (!canvas || tier === 'disabled') return;
 
     const THREE = await import('three');
     // The view can be torn down while Three.js is still downloading.
@@ -48,11 +58,13 @@ export class WebglField {
     camera.position.z = 14;
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
-    // Capping DPR at 1.75 is the single biggest lever on fill-rate cost; the
-    // difference is imperceptible for a soft particle field.
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+    
+    // Scale quality based on tier
+    const dpr = tier === 'high' ? Math.min(window.devicePixelRatio, 1.5) : 
+                tier === 'medium' ? Math.min(window.devicePixelRatio, 1.25) : 1.0;
+    renderer.setPixelRatio(dpr);
 
-    const COUNT = 2600;
+    const COUNT = tier === 'high' ? 2600 : tier === 'medium' ? 1200 : 400;
     const positions = new Float32Array(COUNT * 3);
     const scales = new Float32Array(COUNT);
     for (let i = 0; i < COUNT; i++) {

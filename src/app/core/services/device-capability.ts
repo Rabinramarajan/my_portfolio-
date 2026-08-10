@@ -33,15 +33,20 @@ export class DeviceCapability {
   /** Master switch for scroll animation, parallax and reveals. */
   readonly animationsEnabled = computed(() => this.isBrowser && !this.prefersReducedMotion());
 
-  /** Master switch for WebGL scenes — deliberately stricter than `animationsEnabled`. */
   readonly webglEnabled = computed(
     () =>
       this.animationsEnabled() &&
-      !this.lowPowerHardware() &&
       !this.saveData() &&
-      !this.isMobile() &&
       this.supportsWebgl(),
   );
+
+  readonly performanceTier = computed<'high' | 'medium' | 'low' | 'disabled'>(() => {
+    if (!this.webglEnabled()) return 'disabled';
+    if (this.saveData()) return 'disabled';
+    if (this.lowPowerHardware() && this.isMobile()) return 'low';
+    if (this.lowPowerHardware() || this.isMobile() || this.isTablet()) return 'medium';
+    return 'high';
+  });
 
   readonly customCursorEnabled = computed(
     () => this.animationsEnabled() && this.hasPrecisePointer() && !this.isTouch(),

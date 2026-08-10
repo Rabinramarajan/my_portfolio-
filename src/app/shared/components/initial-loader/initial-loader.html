@@ -1,0 +1,23 @@
+<div 
+  #container
+  class="loader"
+  [class.loader--hidden]="isHidden()"
+  [attr.aria-hidden]="isHidden()"
+  aria-label="Loading portfolio"
+  role="status"
+>
+  <div class="loader__line" #line></div>
+
+  <div class="loader__content">
+    <div class="loader__identity">
+      <span class="loader__name">RABIN R</span>
+      <span class="loader__role">FRONTEND ANGULAR CONSULTANT</span>
+    </div>
+
+    <div class="loader__status" #textStage>
+      @for (stage of stages; track stage; let first = $first) {
+        <span class="loader__stage-text" [class.loader__stage-text--active]="first">{{ stage }}</span>
+      }
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 <div class="wf" aria-hidden="true">
-  @if (enabled()) {
+  @if (performanceTier() !== 'disabled') {
     <canvas #canvas class="wf__canvas"></canvas>
   } @else {
     <!-- Static light-field: the premium look without a single GPU cycle. -->
