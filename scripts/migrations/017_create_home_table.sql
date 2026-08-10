@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS home (
-  id SERIAL PRIMARY KEY, heading TEXT, subheading TEXT, data JSONB NOT NULL,
-  inserted_at TIMESTAMP DEFAULT NOW(), updated_at TIMESTAMP DEFAULT NOW()
-);
-ALTER TABLE home ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Allow public read access" ON home FOR SELECT USING (true);

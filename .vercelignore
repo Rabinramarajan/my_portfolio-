@@ -1,8 +1,0 @@
-.angular
-.vscode
-.husky
-node_modules
-dist
-UX
-BUG-REPORT.md
-*.log
