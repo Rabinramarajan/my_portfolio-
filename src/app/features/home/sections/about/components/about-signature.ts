@@ -1,17 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  HostListener,
+  ElementRef,
+  NgZone,
+  afterNextRender,
   inject,
-  signal,
 } from '@angular/core';
 import { DeviceCapability } from '../../../../../core/services/device-capability';
+import { asyncTeardown } from '../../../../../shared/utils/async-teardown';
 
 @Component({
   selector: 'app-about-signature',
   standalone: true,
   template: `
-    <div class="about-signature" [style.--mx.px]="mouseX()" [style.--my.px]="mouseY()">
+    <div class="about-signature" #signature>
       <svg class="about-signature__svg" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="sigGrid" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -47,7 +49,7 @@ import { DeviceCapability } from '../../../../../core/services/device-capability
     .about-signature__svg {
       width: 100%;
       height: 100%;
-      transform: translate(calc(var(--mx, 0) * 0.015), calc(var(--my, 0) * 0.015));
+      transform: translate(0, 0);
       transition: transform 0.2s ease-out;
     }
   `],
@@ -55,13 +57,34 @@ import { DeviceCapability } from '../../../../../core/services/device-capability
 })
 export class AboutSignature {
   private readonly device = inject(DeviceCapability);
-  protected readonly mouseX = signal(0);
-  protected readonly mouseY = signal(0);
+  private readonly ngZone = inject(NgZone);
+  private readonly host = inject(ElementRef);
+  private readonly teardown = asyncTeardown();
 
-  @HostListener('window:mousemove', ['$event'])
-  onMouseMove(e: MouseEvent): void {
-    if (!this.device.animationsEnabled()) return;
-    this.mouseX.set(e.clientX - window.innerWidth / 2);
-    this.mouseY.set(e.clientY - window.innerHeight / 2);
+  constructor() {
+    afterNextRender(() => {
+      this.ngZone.runOutsideAngular(() => {
+        const target = this.host.nativeElement.querySelector('.about-signature__svg') as HTMLElement;
+        let ticking = false;
+        let mx = 0;
+        let my = 0;
+
+        const onMouseMove = (e: MouseEvent) => {
+          if (!this.device.animationsEnabled()) return;
+          mx = (e.clientX - window.innerWidth / 2) * 0.015;
+          my = (e.clientY - window.innerHeight / 2) * 0.015;
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              target.style.transform = `translate(${mx}px, ${my}px)`;
+              ticking = false;
+            });
+            ticking = true;
+          }
+        };
+
+        window.addEventListener('mousemove', onMouseMove, { passive: true });
+        this.teardown.register(() => window.removeEventListener('mousemove', onMouseMove));
+      });
+    });
   }
 }

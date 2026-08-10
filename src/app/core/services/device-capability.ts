@@ -43,8 +43,9 @@ export class DeviceCapability {
   readonly performanceTier = computed<'high' | 'medium' | 'low' | 'disabled'>(() => {
     if (!this.webglEnabled()) return 'disabled';
     if (this.saveData()) return 'disabled';
-    if (this.lowPowerHardware() && this.isMobile()) return 'low';
-    if (this.lowPowerHardware() || this.isMobile() || this.isTablet()) return 'medium';
+    if (this.isMobile()) return 'disabled';
+    if (this.lowPowerHardware()) return 'low';
+    if (this.isTablet()) return 'medium';
     return 'high';
   });
 
