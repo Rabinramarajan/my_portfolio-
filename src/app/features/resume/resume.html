@@ -1,0 +1,94 @@
+<div class="rs">
+  <div class="rs__inner">
+    <app-section-header
+      eyebrow="Résumé"
+      heading="The short version."
+      lede="Everything below is also available as a PDF. The web version is the one I keep current."
+    />
+
+    <div class="rs__actions no-print">
+      <app-button [href]="profile().resumeUrl" size="lg">Download PDF</app-button>
+      <button type="button" class="rs__print" (click)="print()">Print this page</button>
+      <p class="rs__updated">
+        Last updated
+        <time [attr.datetime]="profile().resumeUpdated">{{ updated() | date: 'MMMM y' }}</time>
+      </p>
+    </div>
+
+    <article class="rs__doc">
+      <header class="rs__head">
+        <h2 class="rs__name">{{ profile().name }}</h2>
+        <p class="rs__role">{{ profile().role }}</p>
+        <p class="rs__contact">
+          <a [href]="'mailto:' + profile().email">{{ profile().email }}</a>
+          <span aria-hidden="true">·</span>
+          {{ profile().location }}
+        </p>
+      </header>
+
+      <section class="rs__section">
+        <h3 class="rs__label">Profile</h3>
+        <p class="rs__summary">{{ profile().valueProposition }}</p>
+      </section>
+
+      <section class="rs__section">
+        <h3 class="rs__label">Experience</h3>
+        @for (role of experience(); track role.company + role.start) {
+          <div class="rs__role-block">
+            <div class="rs__role-head">
+              <h4>{{ role.role }} — {{ role.company }}</h4>
+              <span class="rs__period"
+                >{{ role.start }} — {{ role.end }} · {{ role.location }}</span
+              >
+            </div>
+            <p class="rs__role-summary">{{ role.summary }}</p>
+            <ul class="rs__bullets">
+              @for (achievement of role.achievements; track achievement) {
+                <li>{{ achievement }}</li>
+              }
+            </ul>
+            <p class="rs__stack">{{ role.technologies.join(' · ') }}</p>
+          </div>
+        }
+      </section>
+
+      <section class="rs__section">
+        <h3 class="rs__label">Education</h3>
+        @for (item of education(); track item.institution) {
+          <div class="rs__role-block">
+            <div class="rs__role-head">
+              <h4>{{ item.qualification }}</h4>
+              <span class="rs__period">
+                {{ item.institution }} · {{ item.start }} — {{ item.end }} · {{ item.location }}
+              </span>
+            </div>
+          </div>
+        }
+      </section>
+
+      <section class="rs__section">
+        <h3 class="rs__label">Certifications</h3>
+        @for (item of certifications(); track item.name) {
+          <div class="rs__role-block">
+            <div class="rs__role-head">
+              <h4>{{ item.name }}</h4>
+              <span class="rs__period">{{ item.issuer }} · {{ item.date }}</span>
+            </div>
+          </div>
+        }
+      </section>
+
+      <section class="rs__section">
+        <h3 class="rs__label">Skills</h3>
+        <dl class="rs__skills">
+          @for (cluster of skills(); track cluster.group) {
+            <div>
+              <dt>{{ cluster.group }}</dt>
+              <dd>{{ cluster.items.join(' · ') }}</dd>
+            </div>
+          }
+        </dl>
+      </section>
+    </article>
+  </div>
+</div>

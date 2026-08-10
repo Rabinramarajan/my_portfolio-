@@ -1,0 +1,73 @@
+@use '../../../../../../styles/mixins' as *;
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 100%;
+  min-block-size: 280px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+  background:
+    radial-gradient(120% 120% at 50% 0%, rgb(201 242 77 / 6%), transparent 60%),
+    var(--color-surface);
+  overflow: hidden;
+}
+
+.pv__stage {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-9);
+}
+
+/* Every icon shares one visual language — same stroke weight, same palette —
+   so the set reads as a system rather than seven unrelated illustrations. */
+.pv__icon {
+  inline-size: min(100%, 220px);
+  block-size: auto;
+  aspect-ratio: 1;
+  stroke: var(--color-text-muted);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: pv-in var(--duration-cinematic) var(--ease-out-expo) both;
+
+  rect,
+  circle,
+  path,
+  line {
+    stroke: inherit;
+  }
+}
+
+@keyframes pv-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@include reduced-motion {
+  .pv__icon {
+    animation: none;
+  }
+}
+
+.pv__icon-accent {
+  stroke: var(--color-accent);
+}
+
+.pv__icon-accent-fill {
+  stroke: var(--color-accent);
+  fill: var(--color-accent);
+}

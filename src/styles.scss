@@ -1,0 +1,214 @@
+@use './styles/tokens';
+@use './styles/mixins' as *;
+
+/* ------------------------------------------------------------------ *
+ * Reset — minimal and opinionated
+ * ------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* The header is permanently pinned, so anything scrolled to — anchor links,
+     `scrollIntoView`, focus moves — would otherwise land underneath it. This
+     reserves its height on every scroll target in one place. */
+  scroll-padding-block-start: calc(var(--header-h) + var(--space-5));
+}
+
+@include reduced-motion {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  font-synthesis-weight: none;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  @include focus-ring;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+/* ------------------------------------------------------------------ *
+ * Atmosphere — grain overlay applied once, at the document level
+ * ------------------------------------------------------------------ */
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ------------------------------------------------------------------ *
+ * Utilities
+ * ------------------------------------------------------------------ */
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: var(--z-overlay);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  transform: translateY(-200%);
+
+  &:focus-visible {
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Scroll-reveal pre-hide
+ * ------------------------------------------------------------------ */
+
+/* Reveal targets are authored in their final state, so between first paint and
+   GSAP resolving they would be visible — and then get yanked back to their
+   "from" state to animate, a flash on every load. `data-motion="pending"` is
+   stamped by an inline <head> script before the first frame, so the hidden
+   state is there from the start; each directive drops `data-revealed` on its
+   host the instant its tween owns the element, handing the styling back.
+
+   Only ever hides opacity: enough to prevent the flash, while leaving the
+   per-variant transform and clip-path entirely to the directive, so the two
+   definitions can never drift out of sync.
+
+   `data-motion="off"` is the escape hatch — set if GSAP fails or takes too long
+   — and deliberately does not match, so content cannot stay hidden forever. */
+html[data-motion='pending'] {
+  [data-reveal]:not([data-revealed]),
+  app-text-reveal:not([data-revealed]) {
+    opacity: 0;
+  }
+}
+
+/* Belt and braces: a visitor who flips the OS setting mid-session, and any
+   environment where the inline script ran before the media query was
+   answerable, must still end up with visible content. */
+@include reduced-motion {
+  html[data-motion='pending'] {
+    [data-reveal]:not([data-revealed]),
+    app-text-reveal:not([data-revealed]) {
+      opacity: 1;
+    }
+  }
+}
+
+/* Custom-cursor mode hides the native pointer on interactive surfaces. */
+html[data-cursor='custom'] {
+  @include hover-capable {
+    body,
+    a,
+    button,
+    [role='button'] {
+      cursor: none;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Print — resume-friendly
+ * ------------------------------------------------------------------ */
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  body::after,
+  app-header,
+  app-footer,
+  app-cursor,
+  app-scroll-progress,
+  .no-print {
+    display: none !important;
+  }
+}

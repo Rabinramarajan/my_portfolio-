@@ -1,0 +1,137 @@
+@if (project(); as p) {
+  <article class="cs" [style.--case-accent]="p.accent">
+    <header class="cs__hero">
+      <div class="cs__inner">
+        <nav class="cs__crumbs" aria-label="Breadcrumb">
+          <a routerLink="/work">Work</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{{ p.title }}</span>
+        </nav>
+
+        <p class="cs__category">{{ p.category }}</p>
+        <h1 class="cs__title">
+          <app-text-reveal [text]="p.title" />
+        </h1>
+        <p class="cs__tagline" appReveal="rise">{{ p.tagline }}</p>
+
+        <dl class="cs__meta" appReveal="stagger">
+          <div data-reveal-item>
+            <dt>Client</dt>
+            <dd>{{ p.client }}</dd>
+          </div>
+          <div data-reveal-item>
+            <dt>Role</dt>
+            <dd>{{ p.role }}</dd>
+          </div>
+          <div data-reveal-item>
+            <dt>Year</dt>
+            <dd>{{ p.year }}</dd>
+          </div>
+          <div data-reveal-item>
+            <dt>Category</dt>
+            <dd>{{ p.category }}</dd>
+          </div>
+        </dl>
+
+        @if (p.liveUrl || p.repoUrl) {
+          <div class="cs__links">
+            @if (p.liveUrl; as live) {
+              <app-button [href]="live" size="md">Visit live site</app-button>
+            }
+            @if (p.repoUrl; as repo) {
+              <app-button [href]="repo" variant="secondary">View source</app-button>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="cs__hero-media">
+        <app-media-image [media]="p.hero" [priority]="true" sizes="100vw" [rounded]="false" />
+      </div>
+    </header>
+
+    <div class="cs__inner cs__body">
+      <!-- Problem / solution / impact: the summary a busy reader needs first. -->
+      <section class="cs__summary">
+        <div class="cs__col" appReveal="rise">
+          <h2 class="cs__label">The problem</h2>
+          <p>{{ p.problem }}</p>
+        </div>
+        <div class="cs__col" appReveal="rise" [delay]="0.08">
+          <h2 class="cs__label">The solution</h2>
+          <p>{{ p.solution }}</p>
+        </div>
+      </section>
+
+      @if (p.impact.length) {
+        <ul class="cs__impact" appReveal="stagger">
+          @for (item of p.impact; track item.label) {
+            <li data-reveal-item>
+              <span class="cs__impact-value">{{ item.value }}</span>
+              <span class="cs__impact-label">{{ item.label }}</span>
+            </li>
+          }
+        </ul>
+      }
+
+      @if (p.preview; as preview) {
+        <div class="cs__preview" appReveal="mask">
+          <app-video-showcase [video]="preview" [controls]="true" />
+        </div>
+      }
+
+      @for (section of p.caseStudy; track section.index) {
+        <section class="cs__section" appReveal="rise">
+          <div class="cs__section-head">
+            <span class="cs__index">{{ section.index }}</span>
+            <h2 class="cs__heading">{{ section.title }}</h2>
+          </div>
+          <div class="cs__prose">
+            @for (paragraph of section.body; track $index) {
+              <p>{{ paragraph }}</p>
+            }
+            @for (item of section.media; track item.src) {
+              <app-media-image class="cs__inline-media" [media]="item" [parallax]="true" />
+            }
+          </div>
+        </section>
+      }
+
+      <section class="cs__section" appReveal="rise">
+        <div class="cs__section-head">
+          <span class="cs__index">08</span>
+          <h2 class="cs__heading">Technologies</h2>
+        </div>
+        <ul class="cs__tech">
+          @for (tech of p.technologies; track tech) {
+            <li>{{ tech }}</li>
+          }
+        </ul>
+      </section>
+
+      @if (p.gallery.length) {
+        <section class="cs__section" appReveal="rise">
+          <div class="cs__section-head">
+            <span class="cs__index">09</span>
+            <h2 class="cs__heading">Screenshots</h2>
+          </div>
+          <div class="cs__gallery">
+            @for (item of p.gallery; track item.src) {
+              <app-media-image [media]="item" [parallax]="true" />
+            }
+          </div>
+        </section>
+      }
+    </div>
+
+    @if (next(); as nextProject) {
+      <aside class="cs__next">
+        <a class="cs__next-link" [routerLink]="['/work', nextProject.slug]">
+          <span class="cs__label">Next project</span>
+          <span class="cs__next-title">{{ nextProject.title }}</span>
+          <span class="cs__next-tagline">{{ nextProject.tagline }}</span>
+        </a>
+      </aside>
+    }
+  </article>
+}

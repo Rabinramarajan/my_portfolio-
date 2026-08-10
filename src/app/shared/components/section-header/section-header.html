@@ -1,0 +1,26 @@
+<header class="sh" [class.sh--center]="align() === 'center'">
+  @if (index() || eyebrow()) {
+    <p class="sh__meta" appReveal="fade">
+      @if (index(); as i) {
+        <span class="sh__index">{{ i }}</span>
+      }
+      @if (eyebrow(); as e) {
+        <span class="sh__eyebrow">{{ e }}</span>
+      }
+    </p>
+  }
+
+  @if (level() === 2) {
+    <h2 class="sh__heading">
+      <app-text-reveal [text]="heading()" />
+    </h2>
+  } @else {
+    <h3 class="sh__heading">
+      <app-text-reveal [text]="heading()" />
+    </h3>
+  }
+
+  @if (lede(); as text) {
+    <p class="sh__lede" appReveal="rise" [delay]="0.1">{{ text }}</p>
+  }
+</header>

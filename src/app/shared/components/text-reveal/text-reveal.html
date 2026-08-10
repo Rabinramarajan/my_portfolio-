@@ -1,0 +1,9 @@
+@for (line of wordsPerLine(); track $index) {
+  <span class="tr__line">
+    @for (word of line; track $index) {
+      <span class="tr__mask"
+        ><span class="tr__inner">{{ word }}</span></span
+      ><span class="tr__space">&ngsp;</span>
+    }
+  </span>
+}

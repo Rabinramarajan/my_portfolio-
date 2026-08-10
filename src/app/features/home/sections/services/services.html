@@ -1,0 +1,70 @@
+<section id="services" class="sv">
+  <div class="sv__inner">
+    <app-section-header
+      index="02"
+      eyebrow="Services"
+      heading="What I'm usually hired to do."
+      lede="Most engagements start with one of these and grow from there. All of them assume I'm working inside your team, not around it."
+    />
+
+    <app-media-image
+      class="sv__figure"
+      [media]="media().servicesWhiteboard"
+      [parallax]="true"
+      sizes="(max-width: 1024px) 100vw, 70vw"
+      appReveal="mask"
+    />
+
+    <ul class="sv__list">
+      @for (service of services(); track service.index) {
+        <li class="sv__row" [class.is-open]="openIndex() === service.index" appReveal="rise">
+          <button
+            type="button"
+            class="sv__head"
+            (click)="toggle(service.index)"
+            [attr.aria-expanded]="openIndex() === service.index"
+            [attr.aria-controls]="'service-panel-' + service.index"
+            [appCursorTarget]="'hover'"
+          >
+            <span class="sv__index">{{ service.index }}</span>
+            <span class="sv__title">{{ service.title }}</span>
+            <span class="sv__icon" aria-hidden="true"></span>
+          </button>
+
+          <div
+            class="sv__panel"
+            [id]="'service-panel-' + service.index"
+            [attr.hidden]="openIndex() === service.index ? null : ''"
+          >
+            <div class="sv__panel-inner">
+              <p class="sv__desc">{{ service.description }}</p>
+
+              <div class="sv__detail">
+                <h4 class="sv__label">Typical deliverables</h4>
+                <ul class="sv__deliverables">
+                  @for (item of service.deliverables; track item) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+              </div>
+
+              <div class="sv__detail">
+                <h4 class="sv__label">Technologies</h4>
+                <ul class="sv__tech">
+                  @for (tech of service.technologies; track tech) {
+                    <li>{{ tech }}</li>
+                  }
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+      }
+    </ul>
+
+    <div class="sv__cta" appReveal="fade">
+      <p>Not sure which of these you need? That's usually the first thing we work out together.</p>
+      <app-button routerLink="/contact" variant="secondary">Start a conversation</app-button>
+    </div>
+  </div>
+</section>

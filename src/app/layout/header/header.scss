@@ -1,0 +1,232 @@
+@use '../../../styles/mixins' as *;
+
+.hd {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: var(--z-header);
+  transition:
+    background-color var(--duration-slow) var(--ease-out-expo),
+    border-color var(--duration-slow) var(--ease-out-expo),
+    box-shadow var(--duration-slow) var(--ease-out-expo);
+  border-block-end: 1px solid transparent;
+
+  &.is-scrolled {
+    background: rgb(8 8 10 / 72%);
+    backdrop-filter: blur(18px) saturate(140%);
+    border-block-end-color: var(--color-line);
+    box-shadow: 0 12px 30px -24px rgb(0 0 0 / 90%);
+  }
+
+  /* The header must stay above the fullscreen menu, or the overlay swallows
+     clicks on the close control and the menu becomes a trap. */
+  &.is-open {
+    z-index: calc(var(--z-menu) + 1);
+    background: transparent;
+    backdrop-filter: none;
+    border-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.hd__inner {
+  @include container(var(--container-wide));
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: var(--header-h);
+}
+
+.hd__logo {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: 0 var(--space-3);
+}
+
+.hd__mark {
+  grid-row: span 2;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 14px var(--color-accent-glow);
+}
+
+.hd__name {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 600;
+  letter-spacing: var(--tracking-snug);
+}
+
+.hd__role {
+  @include eyebrow;
+
+  font-size: 9px;
+  display: none;
+
+  @include up(md) {
+    display: block;
+  }
+}
+
+.hd__nav {
+  display: none;
+
+  @include up(lg) {
+    display: block;
+  }
+
+  ul {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  a {
+    position: relative;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    transition: color var(--duration-base) var(--ease-out-expo);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset-block-end: -4px;
+      inset-inline-start: 0;
+      width: 100%;
+      height: 1px;
+      background: currentcolor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform var(--duration-base) var(--ease-out-expo);
+    }
+
+    &:hover,
+    &.is-active {
+      color: var(--color-text);
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+}
+
+.hd__cta {
+  display: none;
+
+  @include up(lg) {
+    display: block;
+  }
+}
+
+.hd__toggle {
+  display: grid;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  place-content: center;
+
+  @include up(lg) {
+    display: none;
+  }
+
+  span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--color-text);
+    transition: transform var(--duration-base) var(--ease-out-expo);
+  }
+
+  .is-open & span:first-child {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+
+  .is-open & span:last-child {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+}
+
+/* ---- Fullscreen mobile menu ---- */
+
+.mm {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(var(--header-h) + var(--space-7)) var(--gutter) var(--space-7);
+  background: var(--color-bg-elevated);
+  /* A transform+opacity reveal, not an animated `clip-path: circle()`: the
+     circular wipe reads well but crashes WebKit outright on a full-screen
+     element, and transforms stay on the compositor anyway. */
+  opacity: 0;
+  transform: translateY(-2%) scale(1.02);
+  transform-origin: top right;
+  visibility: hidden;
+  transition:
+    opacity var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-cinematic) var(--ease-in-out-quart),
+    visibility 0s linear var(--duration-cinematic);
+
+  &.is-open {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  @include up(lg) {
+    display: none;
+  }
+}
+
+.mm__nav a {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+
+  @include display(var(--text-2xl));
+
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-slow) var(--ease-out-expo);
+  transition-delay: calc(var(--i) * 55ms + 180ms);
+
+  .mm.is-open & {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.mm__index {
+  @include eyebrow;
+
+  color: var(--color-accent);
+}
+
+.mm__foot {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+
+  a {
+    color: var(--color-text);
+  }
+}
+
+@include reduced-motion {
+  .hd,
+  .mm,
+  .mm__nav a {
+    transition-duration: 1ms;
+  }
+}

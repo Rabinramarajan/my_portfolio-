@@ -1,0 +1,56 @@
+<section class="hero" aria-labelledby="hero-heading">
+  <app-webgl-field />
+
+  <div class="hero__inner">
+    <p class="hero__status" [class]="availabilityClass()" appReveal="fade">
+      <span class="hero__pulse" aria-hidden="true"></span>
+      {{ profile().availabilityNote }}
+    </p>
+
+    <h1 id="hero-heading" class="hero__heading">
+      <app-text-reveal
+        [text]="profile().headline.join(' ')"
+        [lines]="profile().headline"
+        [delay]="0.15"
+        [stagger]="0.045"
+      />
+    </h1>
+
+    <div class="hero__lower">
+      <p class="hero__value" appReveal="rise" [delay]="0.35">
+        {{ profile().valueProposition }}
+      </p>
+
+      <div class="hero__actions" appReveal="rise" [delay]="0.45">
+        <app-button routerLink="/contact" size="lg">Let's Work Together</app-button>
+        <app-button routerLink="/work" variant="secondary" size="lg">View Selected Work</app-button>
+      </div>
+    </div>
+
+    <dl class="hero__meta" appReveal="stagger" [delay]="0.55">
+      <div data-reveal-item>
+        <dt>Role</dt>
+        <dd>{{ profile().role }}</dd>
+      </div>
+      <div data-reveal-item>
+        <dt>Based in</dt>
+        <dd>{{ profile().location }}</dd>
+      </div>
+      <div data-reveal-item>
+        <dt>Local time</dt>
+        <dd>
+          @if (localTime()) {
+            {{ localTime() }}
+          } @else {
+            {{ profile().timezone }}
+          }
+        </dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <span class="hero__scroll-line"></span>
+  </div>
+</section>

@@ -1,0 +1,17 @@
+@if (enabled()) {
+  <div
+    class="cursor"
+    [attr.data-mode]="intent().mode"
+    [class.is-visible]="visible()"
+    [class.is-pressed]="pressed()"
+    [class.has-label]="hasLabel()"
+    aria-hidden="true"
+  >
+    <span #ring class="cursor__ring">
+      @if (label(); as text) {
+        <span class="cursor__label">{{ text }}</span>
+      }
+    </span>
+    <span #dot class="cursor__dot"></span>
+  </div>
+}

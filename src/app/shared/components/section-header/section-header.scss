@@ -1,0 +1,62 @@
+@use '../../../../styles/mixins' as *;
+
+.sh {
+  max-width: 62ch;
+  margin-block-end: clamp(var(--space-5), 2.5vw, var(--space-7));
+
+  &--center {
+    margin-inline: auto;
+    text-align: center;
+  }
+}
+
+.sh__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-block-end: var(--space-4);
+
+  .sh--center & {
+    justify-content: center;
+  }
+}
+
+.sh__index {
+  @include eyebrow;
+
+  color: var(--color-accent);
+}
+
+.sh__eyebrow {
+  @include eyebrow;
+
+  position: relative;
+  padding-inline-start: var(--space-4);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: 50%;
+    width: 8px;
+    height: 1px;
+    background: var(--color-line-strong);
+  }
+}
+
+.sh__heading {
+  @include display(var(--text-3xl));
+}
+
+.sh__lede {
+  margin-block-start: var(--space-4);
+  max-width: 52ch;
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  text-wrap: pretty;
+
+  .sh--center & {
+    margin-inline: auto;
+  }
+}

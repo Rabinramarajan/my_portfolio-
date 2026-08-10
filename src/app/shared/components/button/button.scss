@@ -1,0 +1,143 @@
+@use '../../../../styles/mixins' as *;
+
+:host {
+  display: inline-block;
+}
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-snug);
+  white-space: nowrap;
+  isolation: isolate;
+  transition:
+    color var(--duration-base) var(--ease-out-expo),
+    background-color var(--duration-base) var(--ease-out-expo),
+    border-color var(--duration-base) var(--ease-out-expo);
+
+  &--lg {
+    padding: 0.85rem 1.5rem;
+    font-size: var(--text-base);
+  }
+
+  /* Sweep fill — a pseudo-element scaled on the compositor rather than an
+     animated background-position, which would repaint on every frame. */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform var(--duration-base) var(--ease-out-expo);
+  }
+
+  @include hover-capable {
+    &:hover::before {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  box-shadow: var(--shadow-accent);
+
+  &::before {
+    background: var(--color-text);
+  }
+}
+
+.btn--secondary {
+  @include fine-border(var(--color-line-strong));
+
+  color: var(--color-text);
+
+  &::before {
+    background: var(--color-text);
+  }
+
+  @include hover-capable {
+    &:hover {
+      color: var(--color-bg);
+      border-color: var(--color-text);
+    }
+  }
+}
+
+.btn--ghost {
+  padding-inline: 0.25rem;
+  color: var(--color-text-muted);
+
+  @include hover-capable {
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+}
+
+.btn__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.btn__arrow {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--duration-base) var(--ease-out-expo);
+
+  .btn:hover & {
+    transform: translateX(4px);
+  }
+}
+
+.btn__spinner {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 1rem;
+  width: 14px;
+  height: 14px;
+  margin-block-start: -7px;
+  border: 1.5px solid currentcolor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: btn-spin 700ms linear infinite;
+}
+
+.is-loading .btn__label {
+  opacity: 0.5;
+}
+
+@keyframes btn-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@include reduced-motion {
+  .btn,
+  .btn::before,
+  .btn__arrow {
+    transition: none;
+  }
+
+  .btn__spinner {
+    animation-duration: 1.6s;
+  }
+}

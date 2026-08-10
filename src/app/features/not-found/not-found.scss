@@ -1,0 +1,40 @@
+@use '../../../styles/mixins' as *;
+
+.nf {
+  display: grid;
+  place-items: center;
+  min-height: 80svh;
+  padding-block: calc(var(--header-h) + var(--space-9)) var(--section-y);
+  text-align: center;
+}
+
+.nf__inner {
+  @include container(var(--container-narrow));
+}
+
+.nf__code {
+  @include eyebrow;
+
+  color: var(--color-accent);
+}
+
+.nf__title {
+  @include display(var(--text-3xl));
+
+  margin-block-start: var(--space-4);
+}
+
+.nf__lede {
+  margin: var(--space-5) auto 0;
+  max-width: 46ch;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+.nf__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-block-start: var(--space-7);
+}

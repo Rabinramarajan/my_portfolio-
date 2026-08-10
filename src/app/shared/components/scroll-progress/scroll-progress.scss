@@ -1,0 +1,16 @@
+.sp {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: var(--z-progress);
+  height: 2px;
+  pointer-events: none;
+}
+
+.sp__bar {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent-dim), var(--color-accent));
+  transform-origin: left;
+  will-change: transform;
+}

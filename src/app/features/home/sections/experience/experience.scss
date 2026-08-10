@@ -1,0 +1,134 @@
+@use '../../../../../styles/mixins' as *;
+
+.xp {
+  padding-block: var(--section-y);
+}
+
+.xp__inner {
+  @include container(var(--container-wide));
+}
+
+.xp__figure {
+  display: block;
+  margin-block-end: var(--space-6);
+  max-width: 60ch;
+}
+
+.xp__timeline {
+  position: relative;
+  padding-inline-start: var(--space-5);
+
+  @include up(lg) {
+    padding-inline-start: 0;
+  }
+}
+
+.xp__rail {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--color-accent), var(--color-line));
+  transform-origin: top;
+
+  @include up(lg) {
+    inset-inline-start: 220px;
+  }
+}
+
+.xp__item {
+  display: grid;
+  gap: var(--space-4);
+  padding-block: clamp(2rem, 3vw, 3rem);
+  border-block-end: 1px solid var(--color-line);
+
+  @include up(lg) {
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+.xp__period {
+  position: relative;
+
+  @include eyebrow;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.xp__dot {
+  position: absolute;
+  inset-inline-start: calc(var(--space-5) * -1);
+  width: 7px;
+  height: 7px;
+  margin-inline-start: -3px;
+  border-radius: 50%;
+  background: var(--color-accent);
+
+  @include up(lg) {
+    inset-inline-start: auto;
+    inset-inline-end: -3.5px;
+  }
+}
+
+.xp__role {
+  @include display(var(--text-xl));
+}
+
+.xp__company {
+  margin-block-start: var(--space-1);
+  color: var(--color-accent);
+  font-size: var(--text-sm);
+}
+
+.xp__summary {
+  margin-block-start: var(--space-4);
+  max-width: 58ch;
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+.xp__achievements {
+  margin-block-start: var(--space-4);
+  display: grid;
+  gap: var(--space-2);
+
+  li {
+    position: relative;
+    padding-inline-start: var(--space-5);
+    max-width: 62ch;
+    font-size: var(--text-sm);
+    color: var(--color-text);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset-block-start: 0.65em;
+      inset-inline-start: 0;
+      width: 10px;
+      height: 1px;
+      background: var(--color-accent);
+    }
+  }
+}
+
+.xp__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-block-start: var(--space-5);
+
+  li {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+
+    &:not(:last-child)::after {
+      content: ' /';
+      color: var(--color-line-strong);
+    }
+  }
+}

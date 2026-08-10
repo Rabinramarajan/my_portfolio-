@@ -1,0 +1,57 @@
+@use '../../../../../styles/mixins' as *;
+
+.about {
+  position: relative;
+  padding-block: var(--section-y, 6rem);
+  overflow: hidden;
+  background: var(--color-bg, #09090b);
+}
+
+.about__inner {
+  position: relative;
+  z-index: 1;
+  @include container(var(--container-wide));
+}
+
+/* ──────────────── Profile Split Layout ──────────────── */
+.about__profile-split {
+  display: grid;
+  gap: var(--space-10, 3rem);
+  margin-block-end: var(--space-16, 5rem);
+
+  @include up(lg) {
+    grid-template-columns: minmax(0, 4.5fr) minmax(0, 7.5fr);
+    gap: var(--space-12, 4rem);
+    align-items: start;
+  }
+}
+
+.about__portrait-col {
+  width: 100%;
+}
+
+.about__story-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ──────────────── Final Statement ──────────────── */
+.about__final-statement {
+  margin-block-start: var(--space-12, 4rem);
+  padding-block-start: var(--space-8, 2.5rem);
+  border-block-start: 1px dashed rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.about__final-text {
+  font-family: var(--font-display, sans-serif);
+  font-size: clamp(1.4rem, 2.8vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--color-text, #fff);
+  max-width: 28ch;
+  margin: 0 auto;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}

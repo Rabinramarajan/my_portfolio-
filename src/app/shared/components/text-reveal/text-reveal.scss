@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+
+.tr__line {
+  display: block;
+}
+
+.tr__mask {
+  display: inline-flex;
+  overflow: hidden;
+  /* Descenders would otherwise be clipped by the mask. */
+  padding-block-end: 0.12em;
+  margin-block-end: -0.12em;
+  vertical-align: bottom;
+}
+
+/* A real space character between words, not a CSS pseudo-element — generated
+   content is invisible to `textContent`, which would leave the accessible name
+   and any copied text as one unbroken string. */
+.tr__space {
+  white-space: pre;
+}
+
+.tr__inner {
+  display: inline-block;
+  will-change: transform;
+}

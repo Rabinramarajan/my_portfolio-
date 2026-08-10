@@ -1,0 +1,246 @@
+@use '../../../styles/mixins' as *;
+
+.cs {
+  --case-accent: var(--color-accent);
+}
+
+.cs__inner {
+  @include container(var(--container-max));
+}
+
+.cs__hero {
+  padding-block-start: calc(var(--header-h) + var(--space-8));
+}
+
+.cs__crumbs {
+  display: flex;
+  gap: var(--space-2);
+
+  @include eyebrow;
+
+  margin-block-end: var(--space-6);
+
+  a:hover {
+    color: var(--color-text);
+  }
+}
+
+.cs__category {
+  @include eyebrow;
+
+  color: var(--case-accent);
+}
+
+.cs__title {
+  @include display(var(--text-4xl));
+
+  margin-block-start: var(--space-4);
+  max-width: 18ch;
+}
+
+.cs__tagline {
+  margin-block-start: var(--space-5);
+  max-width: 52ch;
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  text-wrap: pretty;
+}
+
+.cs__meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-5);
+  margin-block-start: var(--space-7);
+  padding-block-start: var(--space-5);
+  border-block-start: 1px solid var(--color-line);
+
+  dt {
+    @include eyebrow;
+
+    margin-block-end: var(--space-2);
+  }
+
+  dd {
+    font-size: var(--text-sm);
+  }
+}
+
+.cs__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-block-start: var(--space-6);
+}
+
+.cs__hero-media {
+  margin-block-start: var(--space-8);
+  aspect-ratio: 16 / 9;
+  max-height: 78vh;
+  overflow: hidden;
+}
+
+.cs__body {
+  padding-block: var(--section-y);
+}
+
+.cs__summary {
+  display: grid;
+  gap: var(--space-7);
+  padding-block-end: var(--space-8);
+
+  @include up(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  p {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+    text-wrap: pretty;
+  }
+}
+
+.cs__label {
+  @include eyebrow;
+
+  margin-block-end: var(--space-3);
+}
+
+.cs__impact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-6);
+  padding-block: var(--space-7);
+  border-block: 1px solid var(--color-line);
+
+  li {
+    display: grid;
+    gap: var(--space-2);
+  }
+}
+
+.cs__impact-value {
+  @include display(var(--text-2xl));
+
+  color: var(--case-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.cs__impact-label {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.cs__preview {
+  margin-block-start: var(--space-8);
+}
+
+.cs__section {
+  display: grid;
+  gap: var(--space-5);
+  padding-block: clamp(2rem, 3vw, 3rem);
+  border-block-end: 1px solid var(--color-line);
+
+  @include up(lg) {
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+.cs__section-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  align-self: start;
+
+  @include up(lg) {
+    position: sticky;
+    inset-block-start: calc(var(--header-h) + var(--space-5));
+  }
+}
+
+.cs__index {
+  @include eyebrow;
+
+  color: var(--case-accent);
+}
+
+.cs__heading {
+  @include display(var(--text-xl));
+}
+
+.cs__prose p {
+  max-width: 66ch;
+  margin-block-end: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  text-wrap: pretty;
+}
+
+.cs__inline-media {
+  margin-block: var(--space-6);
+}
+
+.cs__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+
+  li {
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius-pill);
+    @include fine-border;
+
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+}
+
+.cs__gallery {
+  display: grid;
+  gap: var(--space-5);
+
+  @include up(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.cs__next {
+  border-block-start: 1px solid var(--color-line);
+}
+
+.cs__next-link {
+  @include container(var(--container-max));
+
+  display: grid;
+  gap: var(--space-2);
+  padding-block: var(--space-9);
+  transition: background-color var(--duration-slow) var(--ease-out-expo);
+
+  @include hover-capable {
+    &:hover .cs__next-title {
+      color: var(--case-accent);
+      transform: translateX(10px);
+    }
+  }
+}
+
+.cs__next-title {
+  @include display(var(--text-3xl));
+
+  transition:
+    color var(--duration-base) var(--ease-out-expo),
+    transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.cs__next-tagline {
+  color: var(--color-text-muted);
+}
+
+@include reduced-motion {
+  .cs__next-title {
+    transition: none;
+  }
+}

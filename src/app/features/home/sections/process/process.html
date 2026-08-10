@@ -1,0 +1,66 @@
+<section id="process" class="pr" aria-label="My process">
+  <div class="pr__inner">
+    <app-section-header
+      index="06"
+      eyebrow="My Process / 07 Steps"
+      heading="From Idea to Impact"
+      lede="Every project follows a clear path — from understanding the problem to launching a product built to perform."
+    />
+
+    <div class="pr__layout">
+      <div class="pr__visual" aria-hidden="true">
+        <app-process-visual [activeStep]="activeStep()" />
+        <div class="pr__indicator">
+          <span class="pr__indicator-label">Process</span>
+          <span class="pr__indicator-count">{{ activeStep() + 1 }} / {{ totalSteps }}</span>
+          <span class="pr__indicator-title">{{ steps[activeStep()].eyebrow.split('/')[1] }}</span>
+        </div>
+      </div>
+
+      <ol class="pr__track" #track>
+        <span class="pr__line">
+          <span class="pr__line-fill" #fill></span>
+        </span>
+
+        @for (step of steps; track step.title; let i = $index) {
+          <li
+            class="pr__step"
+            #stepEl
+            [class.pr__step--active]="activeStep() === i"
+            [class.pr__step--done]="activeStep() > i"
+          >
+            <button
+              type="button"
+              class="pr__node"
+              [attr.aria-current]="activeStep() === i ? 'step' : null"
+              [attr.aria-label]="'Go to step ' + (i + 1) + ': ' + step.title"
+              (click)="goTo(i)"
+            >
+              {{ (i + 1).toString().padStart(2, '0') }}
+            </button>
+
+            <div class="pr__content">
+              <p class="pr__eyebrow">{{ step.eyebrow }}</p>
+              <h3 class="pr__title">{{ step.title }}</h3>
+              <p class="pr__desc">{{ step.description }}</p>
+
+              <div class="pr__outputs">
+                <span class="pr__outputs-label">{{ step.outputsLabel }}</span>
+                <ul>
+                  @for (output of step.outputs; track output) {
+                    <li>{{ output }}</li>
+                  }
+                </ul>
+              </div>
+            </div>
+          </li>
+        }
+      </ol>
+    </div>
+
+    <div class="pr__ending" appReveal="rise">
+      <p class="pr__ending-text">Ready to start?</p>
+      <a class="pr__ending-cta" href="#contact">Let's Build Something</a>
+    </div>
+  </div>
+</section>

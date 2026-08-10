@@ -1,0 +1,21 @@
+@if (hasTestimonials()) {
+  <section id="testimonials" class="ts">
+    <div class="ts__inner">
+      <app-section-header index="07" eyebrow="Testimonials" heading="In their words." />
+
+      <ul class="ts__list">
+        @for (item of testimonials(); track item.author) {
+          <li class="ts__item" appReveal="rise">
+            <figure>
+              <blockquote class="ts__quote">{{ item.quote }}</blockquote>
+              <figcaption class="ts__author">
+                <span class="ts__name">{{ item.author }}</span>
+                <span class="ts__role">{{ item.role }}, {{ item.company }}</span>
+              </figcaption>
+            </figure>
+          </li>
+        }
+      </ul>
+    </div>
+  </section>
+}

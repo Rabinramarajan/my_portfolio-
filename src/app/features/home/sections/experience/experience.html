@@ -1,0 +1,46 @@
+<section id="experience" class="xp">
+  <div class="xp__inner">
+    <app-section-header index="04" eyebrow="Experience" heading="Where I've done this before." />
+
+    <app-media-image
+      class="xp__figure"
+      [media]="media().experienceCollaboration"
+      [parallax]="true"
+      sizes="(max-width: 1024px) 100vw, 60vw"
+      appReveal="mask"
+    />
+
+    <ol class="xp__timeline">
+      <span #rail class="xp__rail" aria-hidden="true"></span>
+
+      @for (role of roles(); track role.company + role.start) {
+        <li class="xp__item" appReveal="rise">
+          <div class="xp__period">
+            <span class="xp__dot" aria-hidden="true"></span>
+            <span>{{ role.start }} — {{ role.end }}</span>
+          </div>
+
+          <div class="xp__body">
+            <h3 class="xp__role">{{ role.role }}</h3>
+            <p class="xp__company">
+              {{ role.company }} <span aria-hidden="true">·</span> {{ role.location }}
+            </p>
+            <p class="xp__summary">{{ role.summary }}</p>
+
+            <ul class="xp__achievements">
+              @for (achievement of role.achievements; track achievement) {
+                <li>{{ achievement }}</li>
+              }
+            </ul>
+
+            <ul class="xp__tech">
+              @for (tech of role.technologies; track tech) {
+                <li>{{ tech }}</li>
+              }
+            </ul>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

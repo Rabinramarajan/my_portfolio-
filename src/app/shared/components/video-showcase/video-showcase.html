@@ -1,0 +1,49 @@
+<figure class="vs-figure">
+  <div
+    class="vs"
+    [class.vs--rounded]="rounded()"
+    [style.aspect-ratio]="ratio()"
+    [attr.aria-hidden]="video().decorative ? 'true' : null"
+  >
+    <video
+      #el
+      class="vs__video"
+      [poster]="video().poster"
+      [attr.aria-label]="video().decorative ? null : video().alt"
+      [loop]="loop()"
+      [muted]="true"
+      playsinline
+      disablepictureinpicture
+      preload="metadata"
+      [width]="video().width"
+      [height]="video().height"
+      (error)="onError()"
+    >
+      @if (activated() && !posterOnly()) {
+        @if (video().webm; as webm) {
+          <source [src]="webm" type="video/webm" />
+        }
+        <source [src]="video().mp4" type="video/mp4" />
+      }
+    </video>
+
+    @if (failed()) {
+      <p class="vs__fallback">{{ video().alt }}</p>
+    }
+
+    @if (controls() && !posterOnly() && !video().decorative) {
+      <button
+        type="button"
+        class="vs__control"
+        (click)="toggle()"
+        [attr.aria-label]="playing() ? 'Pause video' : 'Play video'"
+      >
+        {{ playing() ? 'Pause' : 'Play' }}
+      </button>
+    }
+  </div>
+
+  @if (video().caption; as caption) {
+    <figcaption class="vs__caption">{{ caption }}</figcaption>
+  }
+</figure>

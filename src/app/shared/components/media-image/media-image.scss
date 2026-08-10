@@ -1,0 +1,89 @@
+@use '../../../../styles/mixins' as *;
+
+:host {
+  display: block;
+}
+
+.mi {
+  display: block;
+}
+
+/* Fixed-ratio, clipped frame. Everything visual happens in here; the caption
+   deliberately lives outside so the ratio can never crop it. */
+.mi__box {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface);
+
+  &--rounded {
+    border-radius: var(--radius-md);
+  }
+}
+
+/* Letterboxed presentation for images whose shape does not match the frame —
+   phone screenshots, chiefly. The padded, tinted ground reads as deliberate
+   framing rather than as an image that failed to fill its box. */
+.mi__box--contain {
+  padding: clamp(0.75rem, 2.5vw, 2rem);
+  background:
+    radial-gradient(80% 70% at 50% 0%, rgb(255 255 255 / 5%), transparent 70%), var(--color-surface);
+
+  .mi__img {
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+  }
+}
+
+.mi__frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mi__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Held back until load so a slow asset never flashes a half-painted frame. */
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-cinematic) var(--ease-out-expo);
+
+  :host(.is-loaded) & {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.mi__fallback {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--space-5);
+  background: linear-gradient(140deg, var(--color-surface-2), var(--color-surface));
+  color: var(--color-text-faint);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mi__caption {
+  margin-block-start: var(--space-3);
+  color: var(--color-text-faint);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+  text-wrap: pretty;
+}
+
+@include reduced-motion {
+  .mi__img {
+    transition-duration: 1ms;
+    transform: none;
+  }
+}

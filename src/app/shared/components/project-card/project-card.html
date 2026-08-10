@@ -1,0 +1,52 @@
+<article
+  class="pc"
+  [class]="'pc pc--' + layout()"
+  [style.--card-accent]="project().accent"
+  appReveal="rise"
+>
+  <a
+    class="pc__link"
+    [routerLink]="['/work', project().slug]"
+    [appCursorTarget]="'project'"
+    label="VIEW PROJECT"
+    [attr.aria-label]="'View case study: ' + project().title"
+  >
+    <div class="pc__media">
+      <app-media-image
+        [media]="project().thumbnail"
+        [priority]="priority()"
+        [parallax]="true"
+        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 40vw"
+      />
+      @if (index(); as i) {
+        <span class="pc__index">{{ i }}</span>
+      }
+    </div>
+
+    <div class="pc__body">
+      <h3 class="pc__title">{{ project().title }}</h3>
+      <p class="pc__tagline">{{ project().tagline }}</p>
+
+      <dl class="pc__meta">
+        <div>
+          <dt>Category</dt>
+          <dd>{{ project().category }}</dd>
+        </div>
+        <div>
+          <dt>Role</dt>
+          <dd>{{ project().role }}</dd>
+        </div>
+        <div>
+          <dt>Year</dt>
+          <dd>{{ project().year }}</dd>
+        </div>
+      </dl>
+
+      <ul class="pc__tech">
+        @for (tech of project().technologies.slice(0, 4); track tech) {
+          <li>{{ tech }}</li>
+        }
+      </ul>
+    </div>
+  </a>
+</article>

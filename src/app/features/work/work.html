@@ -1,0 +1,31 @@
+<div class="wk">
+  <div class="wk__inner">
+    <app-section-header
+      eyebrow="Selected Work"
+      heading="Case studies, not screenshots."
+      lede="Each project below documents the problem, the architecture and what measurably changed."
+    />
+
+    <div class="wk__filters" role="group" aria-label="Filter projects by category">
+      @for (category of categories(); track category) {
+        <button
+          type="button"
+          class="wk__filter"
+          [class.is-active]="filter() === category"
+          [attr.aria-pressed]="filter() === category"
+          (click)="filter.set(category)"
+        >
+          {{ category }}
+        </button>
+      }
+    </div>
+
+    <div class="wk__grid" aria-live="polite">
+      @for (project of projects(); track project.slug; let i = $index) {
+        <app-project-card [project]="project" [index]="label(i)" [priority]="i < 2" />
+      } @empty {
+        <p class="wk__empty">No projects in this category yet.</p>
+      }
+    </div>
+  </div>
+</div>

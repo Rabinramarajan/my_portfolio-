@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Rabin R — Senior Frontend Angular Developer</title>
+  <base href="/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#08080a" />
+  <meta name="color-scheme" content="dark" />
+
+  <!-- Fonts are self-hostable later; preconnect keeps the first paint honest
+         until then, and `display=swap` means text never waits on the network. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    media="print" onload="this.media = 'all'" />
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+  </noscript>
+
+  <!-- Runs before the server-rendered body is painted, which is the whole
+         point: scroll reveals used to inherit their hidden state from GSAP,
+         which lands ~1s after first paint, so every visitor watched the page
+         render fully and then blink back out to animate itself in. Claiming
+         `data-motion="pending"` here lets CSS hide reveal targets from the very
+         first frame — but only when JS is on and motion is wanted, so no-JS and
+         reduced-motion visitors keep the fully visible server render. -->
+  <script>
+    (function () {
+      try {
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.setAttribute('data-motion', 'pending');
+        }
+      } catch (e) {
+        /* Any failure here must leave content visible, never hidden. */
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="/media/icons/icon-192.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+</head>
+
+<body>
+  <app-root></app-root>
+</body>
+
+</html>

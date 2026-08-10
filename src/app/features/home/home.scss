@@ -1,0 +1,6 @@
+/* Full-bleed image band separating the credentials half of the page from the
+   how-I-work half. Deliberately edge-to-edge: it is a breath, not a card. */
+.home__divider {
+  display: block;
+  margin-block: var(--section-y) 0;
+}

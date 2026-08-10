@@ -1,0 +1,70 @@
+<footer class="ft">
+  <div class="ft__inner">
+    <section class="ft__cta" aria-labelledby="footer-cta">
+      <h2 id="footer-cta" class="ft__cta-heading">
+        <app-text-reveal text="Have an idea? Let's build it." [lines]="ctaLines" />
+      </h2>
+      <p class="ft__cta-lede" appReveal="rise">
+        Tell me what you're building and where it's stuck. I reply within 24 hours.
+      </p>
+      <div class="ft__cta-actions" appReveal="rise" [delay]="0.1">
+        <app-button routerLink="/contact" size="lg">Let's Work Together</app-button>
+        <app-button [href]="'mailto:' + profile().email" variant="ghost">
+          {{ profile().email }}
+        </app-button>
+      </div>
+    </section>
+
+    <div class="ft__grid">
+      <div class="ft__brand">
+        <p class="ft__name">{{ profile().name }}</p>
+        <p class="ft__role">{{ profile().role }}</p>
+        <p class="ft__statement">{{ profile().philosophy }}</p>
+      </div>
+
+      <nav class="ft__nav" aria-label="Footer">
+        <h3 class="ft__label">Navigate</h3>
+        <ul>
+          <li><a routerLink="/" [appCursorTarget]="'link'">Home</a></li>
+          <li><a routerLink="/work" [appCursorTarget]="'link'">Work</a></li>
+          <li><a routerLink="/resume" [appCursorTarget]="'link'">Résumé</a></li>
+          <li><a routerLink="/contact" [appCursorTarget]="'link'">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="ft__social">
+        <h3 class="ft__label">Elsewhere</h3>
+        <ul>
+          @for (social of profile().socials; track social.label) {
+            <li>
+              <a
+                [href]="social.url"
+                [attr.target]="social.url.startsWith('http') ? '_blank' : null"
+                [attr.rel]="social.url.startsWith('http') ? 'noopener noreferrer' : null"
+                [appCursorTarget]="'link'"
+                label="OPEN"
+              >
+                {{ social.label }}
+                <span class="ft__handle">{{ social.handle }}</span>
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div class="ft__status">
+        <h3 class="ft__label">Availability</h3>
+        <p class="ft__availability" [class]="availabilityClass()">
+          <span class="ft__pulse" aria-hidden="true"></span>
+          {{ profile().availabilityNote }}
+        </p>
+        <p class="ft__location">{{ profile().location }} · {{ profile().timezone }}</p>
+      </div>
+    </div>
+
+    <div class="ft__legal">
+      <p>© {{ year }} {{ profile().name }}. All rights reserved.</p>
+      <p>Built with Angular, GSAP and a great deal of restraint.</p>
+    </div>
+  </div>
+</footer>

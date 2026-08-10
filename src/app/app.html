@@ -1,0 +1,11 @@
+<a class="skip-link" href="#main" (click)="skipToMain($event)">Skip to content</a>
+
+<app-scroll-progress />
+<app-header />
+
+<main id="main" tabindex="-1">
+  <router-outlet />
+</main>
+
+<app-footer />
+<app-cursor />

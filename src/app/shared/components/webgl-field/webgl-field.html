@@ -1,0 +1,10 @@
+<div class="wf" aria-hidden="true">
+  @if (enabled()) {
+    <canvas #canvas class="wf__canvas"></canvas>
+  } @else {
+    <!-- Static light-field: the premium look without a single GPU cycle. -->
+    <div class="wf__fallback"></div>
+  }
+  <div class="wf__grid"></div>
+  <div class="wf__vignette"></div>
+</div>

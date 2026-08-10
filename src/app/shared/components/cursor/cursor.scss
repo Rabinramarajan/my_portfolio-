@@ -1,0 +1,96 @@
+.cursor {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: var(--z-cursor);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-base) ease;
+
+  &.is-visible {
+    opacity: 1;
+  }
+}
+
+.cursor__dot,
+.cursor__ring {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  /* GSAP writes x/y; the centring offset lives in a separate translate so the
+     two never fight over the transform property. */
+  translate: -50% -50%;
+  will-change: transform;
+}
+
+.cursor__dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-accent);
+  transition: opacity var(--duration-fast) ease;
+}
+
+.cursor__ring {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--color-line-strong);
+  backdrop-filter: invert(1) grayscale(1);
+  transition:
+    width var(--duration-base) var(--ease-out-expo),
+    height var(--duration-base) var(--ease-out-expo),
+    background-color var(--duration-base) var(--ease-out-expo),
+    border-color var(--duration-base) var(--ease-out-expo);
+}
+
+.cursor__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-accent-contrast);
+  opacity: 0;
+  transition: opacity var(--duration-fast) ease;
+  white-space: nowrap;
+}
+
+/* ---- Modes ---- */
+
+.cursor[data-mode='link'] .cursor__ring,
+.cursor[data-mode='hover'] .cursor__ring {
+  width: 58px;
+  height: 58px;
+}
+
+.cursor[data-mode='text'] .cursor__ring {
+  width: 2px;
+  height: 30px;
+  border-radius: var(--radius-xs);
+  background: var(--color-accent);
+  backdrop-filter: none;
+}
+
+.cursor.has-label {
+  .cursor__ring {
+    width: 108px;
+    height: 108px;
+    background: var(--color-accent);
+    border-color: transparent;
+    backdrop-filter: none;
+  }
+
+  .cursor__label {
+    opacity: 1;
+  }
+
+  .cursor__dot {
+    opacity: 0;
+  }
+}
+
+.cursor.is-pressed .cursor__ring {
+  scale: 0.86;
+}

@@ -1,0 +1,47 @@
+<section id="about" class="about">
+  <!-- Interactive Signature Engineering Grid Background -->
+  <app-about-signature />
+
+  <div class="about__inner">
+    <!-- Stage 1 & 2: Manifesto Intro -->
+    <app-about-manifesto appReveal="rise" />
+
+    <!-- Stage 3: Split Profile Composition (Portrait + Editorial Story) -->
+    <div class="about__profile-split">
+      <div class="about__portrait-col" appReveal="rise" [delay]="0.12">
+        <app-about-portrait [portrait]="media().aboutPortrait" />
+      </div>
+
+      <div class="about__story-col" appReveal="rise" [delay]="0.18">
+        <app-about-story />
+      </div>
+    </div>
+
+    <!-- Stage 4: "HOW I THINK" Interactive Manifesto -->
+    <div appReveal="rise">
+      <app-engineering-principles />
+    </div>
+
+    <!-- Stage 5: Career Milestones Timeline -->
+    <div appReveal="rise">
+      <app-career-timeline />
+    </div>
+
+    <!-- Stage 6: My Engineering Stack -->
+    <div appReveal="rise">
+      <app-engineering-stack />
+    </div>
+
+    <!-- Stage 7: Verified Editorial Stats -->
+    <div appReveal="rise">
+      <app-about-stats [stats]="profile().stats" />
+    </div>
+
+    <!-- Stage 8: Final Typographic Statement -->
+    <footer class="about__final-statement" appReveal="rise">
+      <p class="about__final-text">
+        "I care about the details people notice — and the architecture they never have to."
+      </p>
+    </footer>
+  </div>
+</section>

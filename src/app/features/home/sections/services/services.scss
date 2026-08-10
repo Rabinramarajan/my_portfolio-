@@ -1,0 +1,171 @@
+@use '../../../../../styles/mixins' as *;
+
+.sv {
+  padding-block: var(--section-y);
+  background: var(--color-bg-elevated);
+  border-block: 1px solid var(--color-line);
+}
+
+.sv__inner {
+  @include container(var(--container-wide));
+}
+
+.sv__figure {
+  display: block;
+  margin-block-end: var(--space-6);
+}
+
+.sv__row {
+  border-block-end: 1px solid var(--color-line);
+
+  &:first-child {
+    border-block-start: 1px solid var(--color-line);
+  }
+}
+
+.sv__head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-5);
+  width: 100%;
+  padding-block: clamp(1.25rem, 2.5vw, 2rem);
+  text-align: start;
+  transition: padding-inline var(--duration-base) var(--ease-out-expo);
+
+  @include hover-capable {
+    &:hover {
+      padding-inline: var(--space-4);
+    }
+  }
+}
+
+.sv__index {
+  @include eyebrow;
+
+  color: var(--color-accent);
+}
+
+.sv__title {
+  @include display(var(--text-xl));
+
+  transition: color var(--duration-base) var(--ease-out-expo);
+
+  .sv__head:hover &,
+  .is-open & {
+    color: var(--color-accent);
+  }
+}
+
+.sv__icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 1px;
+    background: currentcolor;
+    transition: transform var(--duration-base) var(--ease-out-expo);
+  }
+
+  &::after {
+    transform: rotate(90deg);
+  }
+
+  .is-open &::after {
+    transform: rotate(0deg);
+  }
+}
+
+.sv__panel {
+  /* `hidden` is the accessible source of truth; the grid trick animates the
+     height without hard-coding one. */
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-slow) var(--ease-in-out-quart);
+
+  &[hidden] {
+    display: grid;
+  }
+
+  .is-open & {
+    grid-template-rows: 1fr;
+  }
+}
+
+.sv__panel-inner {
+  overflow: hidden;
+  display: grid;
+  gap: var(--space-5);
+  min-height: 0;
+
+  @include up(lg) {
+    grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, 1fr));
+    gap: var(--space-7);
+  }
+}
+
+.sv__desc,
+.sv__detail {
+  padding-block-end: var(--space-6);
+}
+
+.sv__desc {
+  max-width: 52ch;
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+.sv__label {
+  @include eyebrow;
+
+  margin-block-end: var(--space-3);
+}
+
+.sv__deliverables li {
+  padding-block: var(--space-1);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+}
+
+.sv__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+
+  li {
+    padding: 0.25rem 0.7rem;
+    border-radius: var(--radius-pill);
+    @include fine-border;
+
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+  }
+}
+
+.sv__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-block-start: var(--space-7);
+
+  p {
+    max-width: 44ch;
+    color: var(--color-text-muted);
+  }
+}
+
+@include reduced-motion {
+  .sv__panel {
+    transition: none;
+  }
+}

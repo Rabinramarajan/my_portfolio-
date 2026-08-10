@@ -1,0 +1,57 @@
+<section id="skills" class="sk">
+  <div class="sk__inner">
+    <app-section-header
+      index="05"
+      eyebrow="Ecosystem"
+      heading="The tools I actually reach for."
+      lede="No percentages, no five-star ratings. Just what I use, grouped by where it sits in the stack."
+    />
+
+    <app-media-image
+      class="sk__figure"
+      [media]="media().skillsKeyboard"
+      [parallax]="true"
+      sizes="(max-width: 1024px) 100vw, 55vw"
+      appReveal="mask"
+    />
+
+    <div class="sk__filters" role="group" aria-label="Filter technologies by category">
+      <button
+        type="button"
+        class="sk__filter"
+        [class.is-active]="active() === null"
+        (click)="active.set(null)"
+        [attr.aria-pressed]="active() === null"
+      >
+        All
+      </button>
+      @for (cluster of clusters(); track cluster.group) {
+        <button
+          type="button"
+          class="sk__filter"
+          [class.is-active]="active() === cluster.group"
+          (click)="select(cluster.group)"
+          [attr.aria-pressed]="active() === cluster.group"
+        >
+          {{ cluster.group }}
+        </button>
+      }
+    </div>
+
+    <div class="sk__clusters">
+      @for (cluster of visible(); track cluster.group) {
+        <article class="sk__cluster" appReveal="rise">
+          <header class="sk__head">
+            <h3 class="sk__group">{{ cluster.group }}</h3>
+            <p class="sk__blurb">{{ cluster.blurb }}</p>
+          </header>
+          <ul class="sk__items">
+            @for (item of cluster.items; track item) {
+              <li [appCursorTarget]="'hover'">{{ item }}</li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+  </div>
+</section>

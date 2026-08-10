@@ -1,0 +1,20 @@
+{
+  "name": "Rabin R — Senior Frontend Angular Developer",
+  "short_name": "Rabin R",
+  "description": "Senior Frontend Angular Developer building enterprise-grade web and mobile applications.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#08080a",
+  "theme_color": "#08080a",
+  "icons": [
+    { "src": "/media/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/media/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    {
+      "src": "/media/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

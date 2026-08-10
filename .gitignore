@@ -35,12 +35,6 @@ yarn-error.log
 /connect.lock
 /coverage
 /libpeerconnection.log
-
-# Playwright
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
 testem.log
 /typings
 __screenshots__/
@@ -48,5 +42,14 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
-.vercel
-.env*
+
+# Environment secrets — never commit
+.env
+.env.*
+!.env.example
+server/.env
+
+# Test artefacts
+/test-results
+/playwright-report
+/blob-report

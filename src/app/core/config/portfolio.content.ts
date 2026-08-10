@@ -1,0 +1,1026 @@
+/**
+ * ─────────────────────────────────────────────────────────────────────────────
+ * PORTFOLIO CONTENT
+ * ─────────────────────────────────────────────────────────────────────────────
+ * The single editable source of truth for everything the site says.
+ *
+ * Sourced from the live portfolio at https://www.rabinr.in — facts, figures,
+ * roles, projects and technologies are taken from there rather than invented.
+ *
+ * Two things still need your input, both marked `[EXPAND]` below:
+ *   1. Case-study narrative. The existing site describes *what* each system
+ *      does; a case study also needs the problem, the approach and the outcome.
+ *      Those sections are stubbed with what is known and flagged where only you
+ *      can supply the rest.
+ *   2. Per-project metrics. The 40% / 50% / 10,000-user figures are stated on
+ *      your site at the ITGalax *role* level, so they are attached to the
+ *      engagement's flagship project only. Move or restate them if the real
+ *      attribution differs.
+ */
+
+import type {
+  PortfolioExperience,
+  PortfolioMedia,
+  PortfolioProcessStep,
+  PortfolioProfile,
+  PortfolioProject,
+  PortfolioService,
+  PortfolioSkillCluster,
+  PortfolioTestimonial,
+  PortfolioVideo,
+  SiteMedia,
+} from '../models/portfolio.models';
+
+export const SITE_URL = 'https://www.rabinr.in';
+
+export const PROFILE: PortfolioProfile = {
+  name: 'Rabin R',
+  shortName: 'Rabin',
+  role: 'Senior Frontend Angular Developer',
+  positioning: 'Senior Frontend Angular Developer & Consultant',
+  headline: ['I engineer products', 'that scale', '& perform.'],
+  valueProposition:
+    'Senior Frontend Angular Developer with 4+ years building enterprise-grade web & mobile applications for government and financial sectors — serving 10,000+ users across three countries.',
+  bio: [
+    "I'm Rabin R, a Senior Frontend Angular Developer with 4+ years of experience engineering critical systems for government and enterprise clients — including immigration portals for Fiji and pension platforms serving thousands of users.",
+    'Most of my work lives where the stakes are real: systems people depend on to travel, to claim a pension, to do their job every day. That shapes how I build — type-safe, accessible, tested, and measured.',
+    'I currently consult on AI/ML-driven analytics dashboards and ship production SPAs and cross-platform mobile apps for clients, alongside open-source Angular tooling.',
+  ],
+  philosophy:
+    'Building products that scale requires discipline: strong type systems, accessible-first design, automated testing, and measurable outcomes.',
+  location: 'Chennai, Tamil Nadu, India',
+  timezone: 'Asia/Kolkata',
+  email: 'rabinr2607@gmail.com',
+  phone: '+91 97893 76992',
+  availability: 'available',
+  availabilityNote: 'Available for new opportunities · replies within 24h',
+  industries: [
+    'Government',
+    'Immigration',
+    'Pensions & Provident Funds',
+    'Financial Services',
+    'AI & Analytics',
+  ],
+  stats: [
+    { value: 4, suffix: '+', label: 'Years experience' },
+    { value: 10, suffix: 'K+', label: 'Users served' },
+    { value: 3, suffix: '', label: 'Countries served' },
+    { value: 100, suffix: '+', label: 'UI components built' },
+  ],
+  resumeUrl: '/media/resume/rabin-r-cv.pdf', // Drop your real PDF here (currently absent).
+  resumeUpdated: '2026-08-01', // [VERIFY] set to the date of the PDF you upload.
+  education: [
+    {
+      institution: 'National College, Tiruchirappalli',
+      qualification: 'B.Sc. Information Technology',
+      start: '2018',
+      end: '2021',
+      location: 'Tiruchirappalli, India',
+    },
+  ],
+  certifications: [
+    {
+      name: 'Applied AI & ML Essentials',
+      issuer: 'IIT Patna (Vishlesan i-Hub) × Masai School',
+      date: 'May 2026',
+    },
+    { name: 'Web Design & Development', issuer: 'Web D School, Chennai', date: 'May 2022' },
+  ],
+  socials: [
+    { label: 'GitHub', handle: '@rabinr', url: 'https://github.com/rabinr' },
+    { label: 'LinkedIn', handle: '/in/rabinr', url: 'https://linkedin.com/in/rabinr' },
+    { label: 'Email', handle: 'rabinr2607@gmail.com', url: 'mailto:rabinr2607@gmail.com' },
+  ],
+};
+
+/** A raw project screenshot. Dimensions are the file's real pixel size. */
+const shot = (
+  folder: string,
+  file: string,
+  alt: string,
+  width: number,
+  height: number,
+  caption?: string,
+): PortfolioMedia => ({
+  kind: 'image',
+  src: `/media/${folder}/${file}.png`,
+  alt,
+  width,
+  height,
+  ...(caption ? { caption } : {}),
+});
+
+/**
+ * A phone screenshot. Presented letterboxed in a consistent 3:4 frame — tall
+ * portraits cropped to a landscape card show nothing but a status bar.
+ */
+const phoneShot = (
+  folder: string,
+  file: string,
+  alt: string,
+  width: number,
+  height: number,
+  caption?: string,
+): PortfolioMedia => ({
+  ...shot(folder, file, alt, width, height, caption),
+  fit: 'contain',
+  displayAspect: '3 / 4',
+});
+
+/**
+ * A photograph from `public/media/working`, which ships pre-rendered WebP at
+ * several widths alongside a JPEG fallback — so each one is declared with its
+ * full srcset rather than a single file.
+ */
+const photo = (
+  name: string,
+  alt: string,
+  width: number,
+  height: number,
+  widths: readonly number[],
+): PortfolioMedia => ({
+  kind: 'image',
+  src: `/media/working/${name}.jpg`,
+  sources: [
+    {
+      type: 'image/webp',
+      srcset: widths.map((w) => `/media/working/${name}-${w}.webp ${w}w`).join(', '),
+    },
+  ],
+  alt,
+  width,
+  height,
+});
+
+/** Motion piece with a poster frame extracted from the video itself. */
+const clip = (name: string, alt: string, extra: Partial<PortfolioVideo> = {}): PortfolioVideo => ({
+  mp4: `/media/videos/${name}.mp4`,
+  poster: `/media/posters/${name}.jpg`,
+  alt,
+  width: 1280,
+  height: 720,
+  ...extra,
+});
+
+/**
+ * ⚠ The eight files in `public/media/videos` are AI-generated stock footage
+ * (each carries a generator watermark) and none of them show the systems they
+ * are named after. They are therefore used only as clearly-labelled concept
+ * pieces and as decorative ambience — never as evidence of delivered work.
+ */
+const CONCEPT_CAPTION =
+  'Concept motion piece — an illustrative visualisation, not a recording of the delivered system.';
+
+export const PROJECTS: readonly PortfolioProject[] = [
+  {
+    slug: 'fiji-immigration-internal',
+    title: 'Fiji Immigration — Internal Management System',
+    tagline: 'The system immigration officers run a country’s borders on.',
+    category: 'Government Platform',
+    role: 'Frontend Angular Developer',
+    year: 2024,
+    client: 'Fiji Government (via ITGalax Solutions)',
+    summary:
+      'An enterprise platform for immigration officers managing end-to-end immigration operations — assessment, verification, approvals and compliance.',
+    featured: true,
+    problem:
+      'Immigration operations span application assessment, document verification, permit approvals, visa processing, citizenship and border control — work that had to move through a single system without officers losing the thread of a case.',
+    solution:
+      'A workflow-driven Angular platform with role-based access control, automated case routing and reporting, built so that each department sees exactly the case state it is responsible for.',
+    impact: [
+      // Figures as published on rabinr.in for the ITGalax engagement.
+      { label: 'API consumption', value: '−40%' },
+      { label: 'Performance improvement', value: '50%' },
+      { label: 'Active users across 3 countries', value: '10,000+' },
+    ],
+    technologies: ['Angular', 'TypeScript', 'Sails.js', 'RxJS', 'Tailwind CSS'],
+    thumbnail: shot(
+      'fiji_internal_application',
+      'image3',
+      'Officer task and workflow list showing 1,580 immigration applications with status and turnaround time',
+      1370,
+      769,
+    ),
+    hero: shot(
+      'fiji_internal_application',
+      'image1',
+      'Immi Hub Fiji Immigration internal application sign-in screen',
+      1366,
+      768,
+    ),
+    preview: clip('fiji-internal', 'Concept motion piece for the Fiji immigration platform', {
+      caption: CONCEPT_CAPTION,
+    }),
+    gallery: [
+      shot(
+        'fiji_internal_application',
+        'image2',
+        'Officer navigation across permits, citizenship, asylum and appeals, with live employer and agent request counts',
+        1378,
+        635,
+        'Every immigration category an officer works across, in one navigation.',
+      ),
+      shot(
+        'fiji_internal_application',
+        'image4',
+        'Application verification screen with checklist, qualification decision and next-action routing',
+        1367,
+        886,
+        'Verification: checklist, decision, and the routing that moves the case on.',
+      ),
+      shot(
+        'fiji_internal_application',
+        'image5',
+        'Applicant record showing personal, passport and document details across tabbed sections',
+        1367,
+        769,
+        'The applicant record officers assess against.',
+      ),
+    ],
+    caseStudy: [
+      {
+        index: '01',
+        title: 'Overview',
+        body: [
+          'An enterprise platform used by immigration officers to manage end-to-end immigration operations for the Fiji Government.',
+          'It covers application assessment, document verification, workflow automation, permit approvals, visa processing, citizenship management, border operations, compliance monitoring, reporting and user administration.',
+        ],
+      },
+      {
+        index: '02',
+        title: 'Challenge',
+        body: [
+          'Government case work is unforgiving: every application carries legal weight, several departments touch the same record, and an officer must always be able to see who did what and when.',
+          '[EXPAND] Add the specific constraint that shaped the build — the legacy system replaced, the compliance requirement, or the deadline the work ran against.',
+        ],
+      },
+      {
+        index: '03',
+        title: 'Approach',
+        body: [
+          '[EXPAND] Describe how the work was sequenced: what shipped first, how requirements were gathered with the immigration department, and how releases reached officers.',
+        ],
+      },
+      {
+        index: '05',
+        title: 'Development',
+        body: [
+          'Angular with RxJS stream patterns for the live case data, Tailwind CSS for a dense but legible officer interface, and a Sails.js API layer behind it.',
+          'Role-based access control runs through the routing and component layers together, so a permission is enforced at navigation as well as at render.',
+        ],
+      },
+      {
+        index: '07',
+        title: 'Results',
+        body: [
+          'Frontend optimisation and RxJS stream patterns cut API consumption by 40% and improved performance by 50% across the platforms delivered in this engagement, which serve 10,000+ active users in three countries.',
+        ],
+      },
+    ],
+    accent: '#c9f24d',
+  },
+  {
+    slug: 'fiji-immigration-external',
+    title: 'Fiji Immigration — Citizen Portal',
+    tagline: 'Visa and permit applications, without the queue.',
+    category: 'Citizen Portal',
+    role: 'Frontend Angular Developer',
+    year: 2024,
+    client: 'Fiji Government (via ITGalax Solutions)',
+    summary:
+      'A secure digital self-service platform where applicants file visa and permit applications, upload documents, pay and track progress.',
+    featured: true,
+    problem:
+      'Applicants needed to submit and follow immigration applications without visiting an office — from a phone, on an unreliable connection, often from another country.',
+    solution:
+      'A public-facing Angular portal handling online applications, document upload, appointment scheduling, payment integration, application tracking and status notifications.',
+    impact: [],
+    technologies: ['Angular', 'TypeScript', 'Sails.js', 'RxJS', 'Tailwind CSS'],
+    thumbnail: shot(
+      'fiji_external_application',
+      'image1',
+      'Immi Hub citizen portal welcome screen offering employer, agent and individual routes',
+      1366,
+      768,
+    ),
+    hero: shot(
+      'fiji_external_application',
+      'image3',
+      'Applicant dashboard listing existing permit applications with status, payment and turnaround',
+      1366,
+      768,
+    ),
+    preview: clip('fiji-external', 'Concept motion piece for the Fiji citizen portal', {
+      caption: CONCEPT_CAPTION,
+    }),
+    gallery: [
+      shot(
+        'fiji_external_application',
+        'image2',
+        'Employer sign-in with a separate reference-number lookup for checking application status',
+        1366,
+        768,
+        'Checking a status never requires an account.',
+      ),
+      shot(
+        'fiji_external_application',
+        'image5',
+        'Work permit application wizard showing an inline required-field validation message',
+        1366,
+        768,
+        'Validation is inline and specific, because no support desk is at the applicant’s elbow.',
+      ),
+      shot(
+        'fiji_external_application',
+        'image8',
+        'Work permit application in progress, showing receipt number and a print receipt action',
+        1366,
+        768,
+        'In progress.',
+      ),
+      shot(
+        'fiji_external_application',
+        'image6',
+        'Approved work permit application with a print permit letter action',
+        1366,
+        768,
+        'Approved — the permit letter is printable immediately.',
+      ),
+      shot(
+        'fiji_external_application',
+        'image7',
+        'Rejected work permit application offering rejection letter and appeal actions',
+        1366,
+        768,
+        'Rejected — with the appeal route surfaced, not buried.',
+      ),
+      shot(
+        'fiji_external_application',
+        'image4',
+        'Employer company profile with compliance documents, expiry dates and upload actions',
+        1366,
+        943,
+        'Compliance documents, with lapsed expiry dates flagged in red.',
+      ),
+    ],
+    caseStudy: [
+      {
+        index: '01',
+        title: 'Overview',
+        body: [
+          'The public counterpart to the officer platform: a secure self-service portal for visa and permit applications.',
+          'It supports online applications, document uploads, appointment scheduling, payment integration, application tracking and status notifications.',
+        ],
+      },
+      {
+        index: '02',
+        title: 'Challenge',
+        body: [
+          'A citizen portal has no training and no support desk at the user’s elbow. Every form has to be self-explanatory, every error recoverable, and every upload survivable on a poor connection.',
+          '[EXPAND] Add the real constraint you designed against — device mix, connection quality, or accessibility requirement.',
+        ],
+      },
+      {
+        index: '05',
+        title: 'Development',
+        body: [
+          'Built on the same Angular and Sails.js foundation as the internal system, so a change to the application model stays consistent on both sides of the counter.',
+        ],
+      },
+      {
+        index: '07',
+        title: 'Results',
+        body: ['[EXPAND] Add adoption or completion-rate figures if the department shared them.'],
+      },
+    ],
+    accent: '#7fd3ff',
+  },
+  {
+    slug: 'prims-member-portal',
+    title: 'PRIMS Member Portal',
+    tagline: 'A pension account members can actually read.',
+    category: 'Pension Platform',
+    role: 'Frontend Angular Developer',
+    year: 2023,
+    client: 'ITGalax Solutions',
+    summary:
+      'A self-service pension portal for account management: contributions, balances, benefit statements, claims and beneficiaries.',
+    featured: true,
+    problem:
+      'Pension information is dense and consequential, and members were dependent on staff to answer questions their own statements should have answered.',
+    solution:
+      'A member-facing Angular portal built on Material Design, exposing contribution history, balances, benefit statements, document services, claim submissions and beneficiary details.',
+    impact: [],
+    technologies: ['Angular', 'TypeScript', 'Sails.js', 'RxJS', 'Angular Material'],
+    thumbnail: shot(
+      'prims_member_portal',
+      'image3',
+      'Member account transaction history listing pre-tax and post-tax pension contributions',
+      1919,
+      911,
+    ),
+    hero: shot('prims_member_portal', 'image1', 'PRIMS member portal sign-in screen', 1919, 909),
+    preview: clip('prims-member-portal', 'Concept motion piece for the PRIMS member portal', {
+      caption: CONCEPT_CAPTION,
+    }),
+    gallery: [
+      shot(
+        'prims_member_portal',
+        'image2',
+        'Member dashboard summarising balance, contributions, current employer and beneficiary shares',
+        1919,
+        910,
+        'The summary a member actually opens the portal for.',
+      ),
+      shot(
+        'prims_member_portal',
+        'image5',
+        'Retirement calculator projecting annual and monthly benefit across single life and survivor options',
+        1919,
+        912,
+        'Service credit and salary in, pension options out.',
+      ),
+      shot(
+        'prims_member_portal',
+        'image4',
+        'Beneficiary management screen listing beneficiaries, relationships and share percentages',
+        1919,
+        909,
+        'Beneficiary shares, which must total 100%.',
+      ),
+    ],
+    caseStudy: [
+      {
+        index: '01',
+        title: 'Overview',
+        body: [
+          'A self-service pension portal covering contribution history, account balances, benefit statements, personal profile management, document services, claim submissions and beneficiary details.',
+        ],
+      },
+      {
+        index: '02',
+        title: 'Challenge',
+        body: [
+          'Members range widely in age and confidence with software, and the numbers on screen are ones they plan their retirement around. Clarity mattered more than density here.',
+          '[EXPAND] Add what the portal replaced and who the members are.',
+        ],
+      },
+      {
+        index: '05',
+        title: 'Development',
+        body: [
+          'Angular Material provides the accessible component base; RxJS handles the account and contribution streams behind it.',
+        ],
+      },
+    ],
+    accent: '#ffb37f',
+  },
+  {
+    slug: 'vnpf-blo-mi',
+    title: 'VNPF blo mi — Member Mobile App',
+    tagline: 'A provident fund in your pocket, on iOS and Android.',
+    category: 'Mobile Application',
+    role: 'Frontend Angular Developer',
+    year: 2023,
+    client: 'Vanuatu National Provident Fund (via ITGalax Solutions)',
+    summary:
+      'A cross-platform mobile app for VNPF members: balances, contributions, loans, withdrawals and insurance from one codebase.',
+    featured: true,
+    problem:
+      'Members needed their fund account on the device they actually own — a phone — with biometric security and usable behaviour when the network drops.',
+    solution:
+      'An Ionic + Angular app shipped to both stores from a single codebase, with Capacitor bridging to biometric authentication and native device features.',
+    impact: [],
+    technologies: ['Ionic', 'Angular', 'TypeScript', 'Capacitor', 'RxJS'],
+    thumbnail: shot(
+      'vnpf_mobile',
+      'composite-thumb',
+      'Three VNPF member app screens: welcome, home menu and transaction filters',
+      1200,
+      900,
+    ),
+    hero: shot(
+      'vnpf_mobile',
+      'composite-hero',
+      'Five VNPF member app screens: splash, welcome, home menu, biometric login and transactions',
+      1600,
+      1000,
+    ),
+    preview: clip('vnpf-mobile', 'Concept motion piece for the VNPF member app', {
+      caption: CONCEPT_CAPTION,
+    }),
+    gallery: [
+      phoneShot(
+        'vnpf_mobile',
+        'image4',
+        'VNPF member app home screen grouping account, loan, withdrawal and profile actions',
+        276,
+        679,
+        'Everything a member can do, on one screen.',
+      ),
+      phoneShot(
+        'vnpf_mobile',
+        'image2',
+        'VNPF welcome screen offering kiosk-credential login, member registration and language switching',
+        368,
+        808,
+        'Kiosk credentials, registration and a language switch on the first screen.',
+      ),
+      phoneShot(
+        'vnpf_mobile',
+        'image3',
+        'Biometric login setup offering Face ID and fingerprint toggles, with a skip option',
+        368,
+        808,
+        'Biometric sign-in is offered, never forced.',
+      ),
+      phoneShot(
+        'vnpf_mobile',
+        'image5',
+        'Transaction filter with account and date-range options, plus annual and interim statement downloads',
+        276,
+        606,
+        'Statements download as PDF or arrive by email.',
+      ),
+      phoneShot(
+        'vnpf_mobile',
+        'image6',
+        'Notification list showing withdrawal, loan approval and account credit alerts',
+        276,
+        606,
+        'Fund activity, as notifications.',
+      ),
+      phoneShot(
+        'vnpf_mobile',
+        'image1',
+        'VNPF blo mi splash screen with the Vanuatu National Provident Fund crest',
+        368,
+        808,
+        'The splash screen.',
+      ),
+    ],
+    caseStudy: [
+      {
+        index: '01',
+        title: 'Overview',
+        body: [
+          'A cross-platform mobile application for Vanuatu National Provident Fund members, covering account balances, contribution history, loan details, withdrawal requests, insurance information and profile management, plus loan, insurance and withdrawal applications.',
+        ],
+      },
+      {
+        index: '05',
+        title: 'Development',
+        body: [
+          'Ionic and Angular from one codebase, with Capacitor providing biometric authentication and offline capability — part of the cross-platform iOS/Android delivery in this engagement.',
+        ],
+      },
+      {
+        index: '07',
+        title: 'Results',
+        body: ['[EXPAND] Add install numbers or store ratings if they are public.'],
+      },
+    ],
+    accent: '#b9a6ff',
+  },
+  {
+    slug: 'insuremet',
+    title: 'InsureMet',
+    tagline: 'Policies, claims and finance for an insurer, in one console.',
+    category: 'Enterprise Platform',
+    role: 'Frontend Angular Developer',
+    year: 2025,
+    client: 'Vanuatu Insurance (via ITGalax Solutions)',
+    summary:
+      'An insurance administration platform covering product setup, policies, claims, finance and cashier operations.',
+    featured: true,
+    problem:
+      'An insurer\u2019s day spans product definition, applications, policy lifecycle, claims and money movement \u2014 usually across as many disconnected systems as there are departments.',
+    solution:
+      'A single Angular console with a module per department, a dashboard that shows the whole book at a glance, and product configuration detailed enough to define cover, premiums, bonus and grace periods without a developer.',
+    impact: [],
+    technologies: ['Angular', 'TypeScript', 'RxJS', 'Chart libraries'],
+    thumbnail: shot(
+      'insuremet',
+      'image2',
+      'InsureMet dashboard showing member counts, claims in progress and policy breakdown charts',
+      1366,
+      768,
+    ),
+    hero: shot('insuremet', 'image1', 'InsureMet sign-in screen', 1366, 786),
+    gallery: [
+      shot(
+        'insuremet',
+        'image3',
+        'Product master listing insurance products with type, effective dates and status',
+        1368,
+        784,
+        'The product master \u2014 every policy in the book starts here.',
+      ),
+      shot(
+        'insuremet',
+        'image4',
+        'Insurance product detail showing cover list, notes, history and document tabs',
+        1366,
+        768,
+        'Product detail, with its cover list, history and documents.',
+      ),
+      shot(
+        'insuremet',
+        'image5',
+        'Dialog for adding insurance cover details including premium range, age limits and grace period',
+        1368,
+        768,
+        'Cover configuration: premium bounds, age limits, bonus, penalty, grace period.',
+      ),
+    ],
+    caseStudy: [
+      {
+        index: '01',
+        title: 'Overview',
+        body: [
+          'An insurance administration platform for Vanuatu Insurance, delivered during the ITGalax engagement.',
+          'The console spans organisation setup, insurance product configuration, policy, claims, finance and cashier operations, with a dashboard summarising applications, claims and the policy book.',
+        ],
+      },
+      {
+        index: '02',
+        title: 'Challenge',
+        body: [
+          '[EXPAND] This project was not documented on rabinr.in, so the description above is drawn from the screenshots alone. Add the brief, the constraints and what it replaced.',
+        ],
+      },
+      {
+        index: '05',
+        title: 'Development',
+        body: [
+          'Angular with a module per operational area, dense data tables, and dashboard charting over application, claim and policy aggregates.',
+        ],
+      },
+      {
+        index: '07',
+        title: 'Results',
+        body: ['[EXPAND] Add outcomes if the client shared them.'],
+      },
+    ],
+    accent: '#a78bfa',
+  },
+  {
+    slug: 'zellavora-ai-resume-builder',
+    title: 'Zellavora AI Resume Builder',
+    tagline: 'Guided input in, ATS-friendly resume out.',
+    category: 'AI Product',
+    role: 'Founder & Frontend Engineer',
+    year: 2026,
+    client: 'Zellavora',
+    summary:
+      'An AI-powered resume builder that turns guided inputs into tailored, ATS-friendly resumes, with a live preview editor and one-click PDF export.',
+    featured: true,
+    problem:
+      'Resume tools either give you a blank page or a rigid template. Neither helps someone work out what to actually say about their experience.',
+    solution:
+      'A guided input flow feeding AI content generation, with a live preview editor so every change is visible immediately, and one-click PDF export at the end.',
+    impact: [],
+    technologies: ['Angular', 'TypeScript', 'RxJS', 'Tailwind CSS', 'AI'],
+    // No product screenshots supplied yet. Drop them into
+    // `public/media/zellavora/` and swap these two entries for `shot(...)` calls.
+    thumbnail: photo(
+      'projects-flatlay',
+      'Component library and code editor open across two monitors and a laptop',
+      1280,
+      720,
+      [640, 1280, 1600],
+    ),
+    hero: photo(
+      'projects-flatlay',
+      'Component library and code editor open across two monitors and a laptop',
+      1280,
+      720,
+      [640, 1280, 1600],
+    ),
+    preview: clip('zellavora-ai-resume', 'Concept motion piece for the Zellavora resume builder', {
+      caption: CONCEPT_CAPTION,
+    }),
+    gallery: [],
+    caseStudy: [
+      {
+        index: '01',
+        title: 'Overview',
+        body: [
+          'An AI-powered resume builder that turns guided inputs into tailored, ATS-friendly resumes.',
+          'Three things carry the product: a live preview editor, AI content generation, and one-click PDF export.',
+        ],
+      },
+      {
+        index: '03',
+        title: 'Approach',
+        body: [
+          '[EXPAND] Describe the product decisions — how the guided flow was designed, and where the AI helps versus where it gets out of the way.',
+        ],
+      },
+    ],
+    liveUrl: 'https://www.rabinr.in', // [VERIFY] point this at the product URL when it ships.
+    accent: '#6ee7a8',
+  },
+];
+
+/**
+ * Section photography and ambient footage.
+ *
+ * The stills in `public/media/working` ship as WebP at several widths with a
+ * JPEG fallback, so each is declared with its full srcset. The three clips here
+ * are AI-generated stock footage used purely as atmosphere \u2014 they are marked
+ * decorative, so they carry no claim and are hidden from assistive technology.
+ */
+export const SITE_MEDIA: SiteMedia = {
+  aboutPortrait: photo(
+    'about-portrait',
+    'Rabin at his desk, with an editor and an analytics dashboard on the monitors behind him',
+    1122,
+    1402,
+    [640, 1122],
+  ),
+  aboutMonitors: photo(
+    'about-monitors',
+    'Rabin working at a dual-monitor setup late in the day',
+    1280,
+    720,
+    [640, 1280, 1600],
+  ),
+  aboutCoffee: photo(
+    'about-coffee-shop',
+    'Rabin working from a laptop in a coffee shop',
+    1280,
+    720,
+    [640, 1280, 1600],
+  ),
+  servicesWhiteboard: photo(
+    'services-whiteboard',
+    'Rabin at a whiteboard explaining a system architecture: Angular client, API gateway, backend services, PostgreSQL, Redis and S3 storage',
+    1280,
+    853,
+    [640, 1280, 1536],
+  ),
+  workFlatlay: photo(
+    'projects-flatlay',
+    'Desk from above: a component library and code editor across two monitors and a laptop',
+    1280,
+    720,
+    [640, 1280, 1600],
+  ),
+  experienceCollaboration: photo(
+    'experience-collaboration',
+    'Rabin walking a colleague through code on a dual-monitor setup',
+    1280,
+    853,
+    [640, 1280, 1536],
+  ),
+  skillsKeyboard: photo(
+    'skills-keyboard',
+    'Hands on a mechanical keyboard, with a laptop and code editor beyond',
+    1280,
+    853,
+    [640, 1280, 1536],
+  ),
+  nightDeskDivider: photo(
+    'divider-night-desk',
+    'A lit desk with two monitors in an otherwise dark room',
+    1280,
+    548,
+    [640, 1280, 1600],
+  ),
+  contactPortrait: photo(
+    'contact-portrait',
+    'Portrait of Rabin lit by the screens in front of him',
+    1122,
+    1402,
+    [640, 1122],
+  ),
+  ambientLoop: clip('gif-loop-seamless', 'Abstract montage of code editors and dashboards', {
+    decorative: true,
+  }),
+  ambientOffice: clip('hero-golden-products', 'Ambient footage of an office at golden hour', {
+    decorative: true,
+  }),
+  ambientStory: clip('about-story', 'Ambient footage of a developer working at night', {
+    decorative: true,
+  }),
+};
+
+export const SERVICES: readonly PortfolioService[] = [
+  {
+    index: '01',
+    title: 'Angular Development',
+    description:
+      'Enterprise-grade Angular applications built with modern signals, standalone components and a scalable, maintainable architecture.',
+    technologies: ['Angular 17–22', 'Signals', 'Standalone APIs', 'RxJS', 'TypeScript'],
+    deliverables: [
+      'Modern Angular applications',
+      'Legacy migrations and upgrades',
+      'State management solutions',
+    ],
+  },
+  {
+    index: '02',
+    title: 'Frontend Engineering',
+    description:
+      'Responsive, accessible and pixel-accurate interfaces from design handoff to production, with clean, testable code.',
+    technologies: [
+      'TypeScript',
+      'SOLID principles',
+      'Design systems',
+      'Figma',
+      'Responsive layouts',
+    ],
+    deliverables: [
+      'Reusable component libraries',
+      'Production-ready interfaces',
+      'Testable codebases',
+    ],
+  },
+  {
+    index: '03',
+    title: 'Ionic & Cross-Platform Apps',
+    description:
+      'Cross-platform mobile apps for iOS and Android from a single Angular + Ionic codebase, shipped to the app stores.',
+    technologies: ['Ionic', 'Angular', 'Capacitor', 'Native device APIs'],
+    deliverables: ['iOS & Android apps', 'App store builds', 'Release support'],
+  },
+  {
+    index: '04',
+    title: 'API Integration',
+    description:
+      'Reliable integration of REST APIs into the frontend with robust error handling, typed contracts and clean data flows.',
+    technologies: [
+      'REST APIs',
+      'JWT / OAuth',
+      'Typed models',
+      'Interceptors',
+      'Caching strategies',
+    ],
+    deliverables: ['Auth flows', 'Error handling', 'Data synchronisation'],
+  },
+  {
+    index: '05',
+    title: 'UI Development',
+    description:
+      'Polished, accessible user interfaces with attention to detail, micro-interactions and WCAG-compliant markup.',
+    technologies: ['SCSS', 'Tailwind CSS', 'WCAG 2.1 AA', 'Motion design'],
+    deliverables: ['Accessible interfaces', 'Cross-browser consistency', 'Micro-interactions'],
+  },
+  {
+    index: '06',
+    title: 'Performance Optimization',
+    description:
+      'Faster load times and smoother runtime performance through profiling, lazy loading and bundle optimisation.',
+    technologies: ['Core Web Vitals', 'Lighthouse', 'Code splitting', 'Bundle analysis'],
+    deliverables: ['Optimised load times', 'Improved runtime performance', 'Performance budget'],
+  },
+];
+
+export const EXPERIENCE: readonly PortfolioExperience[] = [
+  {
+    company: 'RSTACK Solutions Private Limited',
+    role: 'Frontend Developer Consultant',
+    start: '2026',
+    end: 'Present',
+    location: 'Contract',
+    summary:
+      'Designing and developing an interactive front-end interface and experience for a web-based analytics application using modern frontend technologies.',
+    achievements: [
+      'Integrating REST APIs with AI/ML models to generate predictions and power intelligent decision-making.',
+      'Delivering production-grade work on a structured schedule with milestone-based timesheets and code reviews.',
+    ],
+    technologies: ['Angular', 'TypeScript', 'RxJS', 'REST APIs', 'AI/ML integration'],
+  },
+  {
+    company: 'Zellavora',
+    role: 'Frontend Angular Developer — Freelance',
+    start: '2026',
+    end: 'Present',
+    location: 'Freelance',
+    summary:
+      'Ship production-grade SPAs and hybrid mobile apps across multiple client projects using Angular, TypeScript, Ionic and REST APIs.',
+    achievements: [
+      'Build reusable component libraries and scalable architecture enabling faster delivery.',
+      'Optimize performance through Angular Signals, lazy loading and smart API integration patterns.',
+    ],
+    technologies: ['Angular', 'Signals', 'TypeScript', 'Ionic', 'REST APIs'],
+  },
+  {
+    company: 'ITGalax Solutions Pvt Ltd',
+    role: 'Frontend Angular Developer',
+    start: '2022',
+    end: '2026',
+    location: 'Full time',
+    summary:
+      'Engineered government portals and pension management platforms serving 10,000+ active users across three countries.',
+    achievements: [
+      'Reduced API consumption by 40% and improved performance by 50% through frontend optimization and RxJS stream patterns.',
+      'Delivered cross-platform mobile apps (iOS/Android) with biometric auth, offline capabilities and enterprise-grade architecture.',
+      'Led adoption of Angular Signals and standalone components across teams.',
+    ],
+    technologies: [
+      'Angular',
+      'TypeScript',
+      'RxJS',
+      'Ionic',
+      'Capacitor',
+      'Sails.js',
+      'Tailwind CSS',
+    ],
+  },
+];
+
+export const SKILLS: readonly PortfolioSkillCluster[] = [
+  {
+    group: 'Frontend',
+    blurb: 'Where the depth is.',
+    items: [
+      'Angular',
+      'TypeScript',
+      'JavaScript',
+      'HTML5',
+      'CSS3',
+      'Sass',
+      'Tailwind CSS',
+      'RxJS',
+      'Signals',
+    ],
+  },
+  {
+    group: 'Mobile',
+    blurb: 'One codebase, both stores.',
+    items: ['Ionic', 'Flutter', 'Capacitor', 'Android', 'iOS', 'PWA'],
+  },
+  {
+    group: 'Design',
+    blurb: 'I work in the design file, not just from it.',
+    items: ['Figma', 'Adobe XD', 'Photoshop', 'Illustrator', 'Canva', 'Sketch'],
+  },
+  {
+    group: 'Backend',
+    blurb: 'Enough to own an integration end to end.',
+    items: ['Node.js', 'Express.js', 'Python', 'PHP', 'REST API', 'GraphQL'],
+  },
+  {
+    group: 'Database',
+    blurb: 'Data and cloud services.',
+    items: ['Firebase', 'MySQL', 'MongoDB', 'PostgreSQL', 'Supabase', 'AWS'],
+  },
+  {
+    group: 'Tools',
+    blurb: 'Daily drivers.',
+    items: ['Git', 'GitHub', 'VS Code', 'Postman', 'ESLint', 'Prettier'],
+  },
+];
+
+export const PROCESS: readonly PortfolioProcessStep[] = [
+  {
+    index: '01',
+    title: 'Discover',
+    description: 'Understanding requirements, users, and goals before anything gets designed.',
+    outputs: ['Requirements', 'User goals', 'Success criteria'],
+  },
+  {
+    index: '02',
+    title: 'Plan',
+    description: 'Mapping structure, features, and timeline so we can disagree about it early.',
+    outputs: ['Architecture', 'Feature map', 'Timeline'],
+  },
+  {
+    index: '03',
+    title: 'Design',
+    description: 'Turning the plan into interface decisions — layout, hierarchy, and motion.',
+    outputs: ['UI direction', 'Component design', 'Design review'],
+  },
+  {
+    index: '04',
+    title: 'Build',
+    description: 'Creating clean, scalable solutions in reviewable increments.',
+    outputs: ['Component library', 'Working increments', 'Code review'],
+  },
+  {
+    index: '05',
+    title: 'Test',
+    description: 'Verifying behaviour, accessibility, and performance before anything ships.',
+    outputs: ['Test coverage', 'Accessibility check', 'Performance audit'],
+  },
+  {
+    index: '06',
+    title: 'Launch',
+    description: 'Shipping to production with monitoring and a clear rollback path.',
+    outputs: ['Production deploy', 'Monitoring', 'Launch checklist'],
+  },
+  {
+    index: '07',
+    title: 'Support',
+    description: 'The engagement does not end at launch — fixes, tweaks, and guidance after.',
+    outputs: ['Bug fixes', 'Ongoing support', 'Handover docs'],
+  },
+];
+
+/**
+ * Real testimonials only. The section renders nothing while this is empty —
+ * an absent section reads better than an invented endorsement.
+ */
+export const TESTIMONIALS: readonly PortfolioTestimonial[] = [];

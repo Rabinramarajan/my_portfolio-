@@ -1,0 +1,49 @@
+@use '../../../../../styles/mixins' as *;
+
+.wr {
+  padding-block: var(--section-y);
+}
+
+.wr__inner {
+  @include container(var(--container-wide));
+}
+
+.wr__figure {
+  display: block;
+  margin-block-end: clamp(var(--space-6), 3vw, var(--space-8));
+}
+
+.wr__grid {
+  display: grid;
+  gap: clamp(var(--space-6), 3vw, var(--space-7));
+
+  @include up(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* The first project spans the row and uses the wide layout — a deliberate
+   hierarchy rather than an undifferentiated grid of equals. */
+.wr__item:first-child {
+  @include up(md) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Alternating vertical offset gives the grid an editorial rhythm on wide
+   screens without any scroll-driven work. */
+@include up(lg) {
+  .wr__item:nth-child(odd):not(:first-child) {
+    margin-block-start: var(--space-9);
+  }
+}
+
+.wr__empty {
+  color: var(--color-text-muted);
+}
+
+.wr__cta {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--space-9);
+}

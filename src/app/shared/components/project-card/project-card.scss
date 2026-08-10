@@ -1,0 +1,125 @@
+@use '../../../../styles/mixins' as *;
+
+:host {
+  display: block;
+}
+
+.pc {
+  --card-accent: var(--color-accent);
+}
+
+.pc__link {
+  display: grid;
+  gap: var(--space-5);
+
+  .pc--wide & {
+    @include up(lg) {
+      grid-template-columns: 1.35fr 1fr;
+      gap: var(--space-7);
+      align-items: center;
+    }
+  }
+}
+
+.pc__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  @include fine-border;
+
+  app-media-image {
+    transition: transform var(--duration-cinematic) var(--ease-out-expo);
+  }
+
+  /* Accent wash that resolves on hover — the only place the per-project colour
+     appears, which keeps the grid calm when nothing is hovered. */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 80% at 50% 120%, var(--card-accent), transparent 70%);
+    opacity: 0;
+    mix-blend-mode: soft-light;
+    transition: opacity var(--duration-slow) var(--ease-out-expo);
+    pointer-events: none;
+  }
+
+  @include hover-capable {
+    .pc__link:hover & {
+      app-media-image {
+        transform: scale(1.03);
+      }
+
+      &::after {
+        opacity: 0.85;
+      }
+    }
+  }
+}
+
+.pc__index {
+  position: absolute;
+  inset-block-start: var(--space-4);
+  inset-inline-start: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+  mix-blend-mode: difference;
+}
+
+.pc__title {
+  @include display(var(--text-xl));
+
+  transition: color var(--duration-base) var(--ease-out-expo);
+
+  @include hover-capable {
+    .pc__link:hover & {
+      color: var(--card-accent);
+    }
+  }
+}
+
+.pc__tagline {
+  margin-block-start: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  text-wrap: pretty;
+}
+
+.pc__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-block-start: var(--space-5);
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid var(--color-line);
+
+  dt {
+    @include eyebrow;
+
+    margin-block-end: var(--space-1);
+  }
+
+  dd {
+    font-size: var(--text-sm);
+    color: var(--color-text);
+  }
+}
+
+.pc__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-block-start: var(--space-4);
+
+  li {
+    padding: 0.25rem 0.7rem;
+    border-radius: var(--radius-pill);
+    @include fine-border;
+
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+  }
+}

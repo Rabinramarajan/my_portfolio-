@@ -1,0 +1,77 @@
+<header
+  class="hd"
+  [class.is-scrolled]="scrolled()"
+  [class.is-open]="menuOpen()"
+>
+  <div class="hd__inner">
+    <a class="hd__logo" routerLink="/" [appCursorTarget]="'link'" (click)="closeMenu()">
+      <span class="hd__mark" aria-hidden="true"></span>
+      <span class="hd__name">{{ profile().shortName }}</span>
+      <span class="hd__role">{{ profile().role }}</span>
+    </a>
+
+    <nav class="hd__nav" aria-label="Primary">
+      <ul>
+        @for (item of nav; track item.label) {
+          <li>
+            <a
+              [routerLink]="item.path"
+              [fragment]="item.fragment"
+              routerLinkActive="is-active"
+              [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+              [appCursorTarget]="'link'"
+            >
+              {{ item.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="hd__cta">
+      <app-button routerLink="/contact" size="md">Let's Talk</app-button>
+    </div>
+
+    <button
+      type="button"
+      class="hd__toggle"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="mobile-menu"
+      [attr.aria-label]="menuLabel()"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+
+<div id="mobile-menu" class="mm" [class.is-open]="menuOpen()" [attr.inert]="menuOpen() ? null : ''">
+  <nav class="mm__nav" aria-label="Mobile">
+    <ul>
+      @for (item of nav; track item.label; let i = $index) {
+        <li [style.--i]="i">
+          <a
+            [routerLink]="item.path"
+            [fragment]="item.fragment"
+            (click)="navigateFromMenu($event, item.path, item.fragment)"
+          >
+            <span class="mm__index">{{ '0' + (i + 1) }}</span>
+            {{ item.label }}
+          </a>
+        </li>
+      }
+      <li [style.--i]="nav.length">
+        <a routerLink="/contact" (click)="navigateFromMenu($event, '/contact')">
+          <span class="mm__index">0{{ nav.length + 1 }}</span>
+          Contact
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="mm__foot">
+    <a [href]="'mailto:' + profile().email">{{ profile().email }}</a>
+    <p>{{ profile().location }}</p>
+  </div>
+</div>

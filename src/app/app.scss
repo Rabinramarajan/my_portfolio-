@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  isolation: isolate;
+}
+
+main {
+  display: block;
+  /* The header floats over the hero, so top padding is added per-page rather
+     than globally — but focus must never land under the header. */
+  scroll-margin-block-start: var(--header-h);
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -1,0 +1,9 @@
+<p class="ac__value">
+  <span class="visually-hidden">{{ value() }}{{ suffix() }}</span>
+  <span aria-hidden="true"
+    >{{ display() }}<span class="ac__suffix">{{ suffix() }}</span></span
+  >
+</p>
+@if (label(); as text) {
+  <p class="ac__label">{{ text }}</p>
+}

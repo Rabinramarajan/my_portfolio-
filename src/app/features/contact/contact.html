@@ -1,0 +1,558 @@
+<section class="ct__hero">
+  <div class="ct__hero-inner">
+    <p class="ct__hero-status" appReveal="fade">
+      <span class="ct__hero-pulse" aria-hidden="true"></span>
+      {{ profile().availabilityNote }}
+      <span class="ct__hero-sep" aria-hidden="true"></span>
+      Response within 1 business day
+    </p>
+
+    <h1 class="ct__hero-heading" appReveal="mask">
+      Have a project
+      <br />
+      in mind?
+    </h1>
+
+    <div class="ct__hero-lower">
+      <p class="ct__hero-lede" appReveal="rise" [delay]="0.15">
+        Tell me what you're building, what you need, and where you want to go. I'll review your
+        project and get back to you with the right approach.
+      </p>
+
+      <div class="ct__hero-actions" appReveal="rise" [delay]="0.25">
+        <app-button size="lg" (click)="scrollToForm()">Start a Project</app-button>
+        <app-button variant="secondary" size="lg" (click)="scrollToSection('services')"
+          >View Services</app-button
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ct__section" id="services">
+  <div class="ct__inner">
+    <app-section-header
+      index="02"
+      eyebrow="Services"
+      heading="What I usually get hired to do."
+      lede="Starting points for the work I take on. Every project is scoped individually — these are indicative, never fixed quotations."
+    />
+
+    <div class="ct__services-grid" appReveal="stagger">
+      @for (service of services; track service.title) {
+        <article class="ct__service" data-reveal-item>
+          <div class="ct__service-head">
+            <span class="ct__service-index">{{ service.index }}</span>
+            <h3 class="ct__service-title">{{ service.title }}</h3>
+          </div>
+
+          <ul class="ct__service-for">
+            @for (item of service.for; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+
+          <div class="ct__service-foot">
+            <p class="ct__service-price">
+              <span>Starting from</span>
+              {{ service.startingFrom }}
+            </p>
+            <button
+              type="button"
+              class="ct__service-select"
+              [appCursorTarget]="'link'"
+              (click)="selectService(service.title)"
+            >
+              Start with this
+              <svg class="ct__arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path
+                  d="M2 8h11M9 4l4 4-4 4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                />
+              </svg>
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="ct__section ct__section--alt" id="pricing">
+  <div class="ct__inner">
+    <app-section-header
+      index="03"
+      eyebrow="Packages"
+      heading="Three ways to scope the work."
+      lede="A package sets expectations, not a final bill. Choose one and I'll build the proposal from there."
+    />
+
+    <div class="ct__packages" appReveal="stagger">
+      @for (pkg of packages; track pkg.id) {
+        <article class="ct__package" [class.is-recommended]="pkg.recommended" data-reveal-item>
+          @if (pkg.badge) {
+            <span class="ct__package-badge">{{ pkg.badge }}</span>
+          }
+          <h3 class="ct__package-name">{{ pkg.name }}</h3>
+          <p class="ct__package-price">{{ pkg.priceFrom }}</p>
+          <p class="ct__package-for">{{ pkg.bestFor }}</p>
+
+          <ul class="ct__package-includes">
+            @for (item of pkg.includes; track item) {
+              <li>
+                <span class="ct__check" aria-hidden="true"></span>
+                {{ item }}
+              </li>
+            }
+          </ul>
+
+          <dl class="ct__package-meta">
+            <div>
+              <dt>Estimated timeline</dt>
+              <dd>{{ pkg.timeline }}</dd>
+            </div>
+          </dl>
+
+          <app-button
+            class="ct__package-cta"
+            [variant]="pkg.recommended ? 'primary' : 'secondary'"
+            (click)="applyPreset(pkg.id)"
+            >{{ pkg.cta }}</app-button
+          >
+        </article>
+      }
+    </div>
+
+    <div class="ct__custom" appReveal="rise">
+      <div class="ct__custom-body">
+        <h3 class="ct__custom-title">{{ customProject.title }}</h3>
+        <ul class="ct__custom-for">
+          @for (item of customProject.for; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </div>
+      <div class="ct__custom-action">
+        <p class="ct__custom-price">{{ customProject.price }}</p>
+        <app-button variant="secondary" (click)="applyPreset('custom')">{{
+          customProject.cta
+        }}</app-button>
+      </div>
+    </div>
+
+    <div class="ct__disclaimers">
+      <p class="ct__disclaimer">{{ pricingDisclaimer }}</p>
+      <p class="ct__disclaimer">{{ billingDisclaimer }}</p>
+      <p class="ct__disclaimer">{{ currencyNote }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="ct__section">
+  <div class="ct__inner">
+    <button
+      type="button"
+      class="ct__accordion"
+      [attr.aria-expanded]="addonsOpen()"
+      aria-controls="addons-panel"
+      [appCursorTarget]="'hover'"
+      (click)="addonsOpen.set(!addonsOpen())"
+    >
+      <span class="ct__accordion-text">
+        <span class="ct__accordion-eyebrow">Optional extras</span>
+        <span class="ct__accordion-title">Optional Add-ons</span>
+      </span>
+      <span class="ct__accordion-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="ct__accordion-panel" id="addons-panel" [class.is-open]="addonsOpen()">
+      <div class="ct__accordion-inner">
+        <p class="ct__accordion-lede">
+          Indicative ranges to help with budgeting. Select any that fit — they'll appear in your
+          project summary and I'll price them precisely in the proposal.
+        </p>
+
+        <ul class="ct__addons">
+          @for (addon of addons; track addon.label) {
+            <li>
+              <button
+                type="button"
+                class="ct__addon"
+                [class.is-selected]="isAddonSelected(addon.label)"
+                [attr.aria-pressed]="isAddonSelected(addon.label)"
+                (click)="toggleAddon(addon.label)"
+                [appCursorTarget]="'hover'"
+              >
+                <span class="ct__addon-check" aria-hidden="true"></span>
+                <span class="ct__addon-label">{{ addon.label }}</span>
+                <span class="ct__addon-range">{{ addon.range }}</span>
+              </button>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ct__section ct__section--alt">
+  <div class="ct__inner">
+    <app-section-header
+      eyebrow="After Launch"
+      heading="Keep it fast, current and secure."
+      lede="Launch is the start, not the end. Pick a maintenance plan, or continue on an hourly basis."
+    />
+
+    <div class="ct__maintenance" appReveal="stagger">
+      @for (plan of maintenancePlans; track plan.name) {
+        <article
+          class="ct__maintenance-card"
+          [class.is-recommended]="plan.recommended"
+          data-reveal-item
+        >
+          <h3 class="ct__maintenance-name">{{ plan.name }}</h3>
+          <p class="ct__maintenance-price">{{ plan.price }}</p>
+          <ul class="ct__maintenance-includes">
+            @for (item of plan.includes; track item) {
+              <li>
+                <span class="ct__check" aria-hidden="true"></span>
+                {{ item }}
+              </li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+
+    <p class="ct__disclaimer">{{ maintenanceNote }}</p>
+  </div>
+</section>
+
+<section class="ct__section" id="start-project" tabindex="-1">
+  <div class="ct__inner">
+    <app-section-header
+      index="04"
+      eyebrow="Project Discovery"
+      heading="Tell me about your project."
+      lede="A few quick choices help me scope it properly. You can skip straight to the brief — nothing here is a commitment."
+    />
+
+    <div class="ct__start-layout">
+      <div class="ct__start-main">
+        <fieldset class="ct__chooser">
+          <legend>What are you looking to build?</legend>
+          <div class="ct__chips">
+            @for (type of projectTypes; track type) {
+              <button
+                type="button"
+                class="ct__chip"
+                [class.is-selected]="isSelected(form.controls.projectType, type)"
+                [attr.aria-pressed]="isSelected(form.controls.projectType, type)"
+                [attr.aria-label]="'Project type: ' + type"
+                (click)="selectType(type)"
+                [appCursorTarget]="'hover'"
+              >
+                {{ type }}
+              </button>
+            }
+          </div>
+        </fieldset>
+
+        <fieldset class="ct__chooser">
+          <legend>Budget range</legend>
+          <div class="ct__chips">
+            @for (budget of budgets; track budget) {
+              <button
+                type="button"
+                class="ct__chip"
+                [class.is-selected]="isSelected(form.controls.budget, budget)"
+                [attr.aria-pressed]="isSelected(form.controls.budget, budget)"
+                [attr.aria-label]="'Budget: ' + budget"
+                (click)="selectBudget(budget)"
+                [appCursorTarget]="'hover'"
+              >
+                {{ budget }}
+              </button>
+            }
+          </div>
+          <p class="ct__chooser-note">{{ lowBudgetNote }}</p>
+        </fieldset>
+
+        <fieldset class="ct__chooser">
+          <legend>When do you need it?</legend>
+          <div class="ct__chips">
+            @for (timeline of timelines; track timeline) {
+              <button
+                type="button"
+                class="ct__chip"
+                [class.is-selected]="isSelected(form.controls.timeline, timeline)"
+                [attr.aria-pressed]="isSelected(form.controls.timeline, timeline)"
+                [attr.aria-label]="'Timeline: ' + timeline"
+                (click)="selectTimeline(timeline)"
+                [appCursorTarget]="'hover'"
+              >
+                {{ timeline }}
+              </button>
+            }
+          </div>
+        </fieldset>
+
+        <form class="ct__form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <!-- Honeypot: hidden from users and assistive tech, visible to bots. -->
+          <div class="ct__honeypot" aria-hidden="true">
+            <label for="website">Website</label>
+            <input
+              id="website"
+              type="text"
+              formControlName="website"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="ct__row">
+            <div class="ct__field">
+              <label for="name">Name <span aria-hidden="true">*</span></label>
+              <input
+                id="name"
+                type="text"
+                formControlName="name"
+                autocomplete="name"
+                required
+                [attr.aria-invalid]="invalid('name')"
+                [attr.aria-describedby]="errorFor('name') ? 'name-error' : null"
+              />
+              @if (errorFor('name'); as error) {
+                <p class="ct__error" id="name-error">{{ error }}</p>
+              }
+            </div>
+
+            <div class="ct__field">
+              <label for="email">Email <span aria-hidden="true">*</span></label>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                autocomplete="email"
+                required
+                [attr.aria-invalid]="invalid('email')"
+                [attr.aria-describedby]="errorFor('email') ? 'email-error' : null"
+              />
+              @if (errorFor('email'); as error) {
+                <p class="ct__error" id="email-error">{{ error }}</p>
+              }
+            </div>
+          </div>
+
+          <div class="ct__row">
+            <div class="ct__field">
+              <label for="company">Company</label>
+              <input
+                id="company"
+                type="text"
+                formControlName="company"
+                autocomplete="organization"
+              />
+            </div>
+
+            <div class="ct__field">
+              <label for="phone">Phone <span class="ct__optional">optional</span></label>
+              <input id="phone" type="tel" formControlName="phone" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="ct__field">
+            <label for="url"
+              >Website / existing product URL <span class="ct__optional">optional</span></label
+            >
+            <input
+              id="url"
+              type="url"
+              formControlName="url"
+              placeholder="https://…"
+              autocomplete="url"
+            />
+          </div>
+
+          <div class="ct__field">
+            <label for="message">
+              Project brief <span aria-hidden="true">*</span>
+              <span class="ct__optional">what are you looking to build?</span>
+            </label>
+            <textarea
+              id="message"
+              rows="7"
+              formControlName="message"
+              required
+              placeholder="Tell me about your project, goals, key features, preferred timeline, and anything else that would help me understand what you need."
+              [attr.aria-invalid]="invalid('message')"
+              [attr.aria-describedby]="errorFor('message') ? 'message-error' : null"
+            ></textarea>
+            <div class="ct__field-meta">
+              @if (errorFor('message'); as error) {
+                <p class="ct__error" id="message-error">{{ error }}</p>
+              } @else {
+                <p class="ct__hint">At least {{ briefMin }} characters.</p>
+              }
+              <p class="ct__counter" [class.is-limit]="briefRemaining() <= 0">
+                {{ briefCount() }} / {{ briefMax }}
+              </p>
+            </div>
+          </div>
+
+          <div class="ct__actions">
+            <app-button type="submit" size="lg" [loading]="submitting()" [disabled]="submitting()">
+              {{ submitting() ? 'Sending…' : 'Submit inquiry' }}
+            </app-button>
+            <p class="ct__privacy">
+              Your details are used only to reply to this enquiry. Nothing is stored or shared.
+            </p>
+          </div>
+
+          <div class="ct__status" role="status" aria-live="polite">
+            @if (state() === 'success') {
+              <p class="ct__status-msg is-success">
+                <span class="ct__status-check" aria-hidden="true"></span>
+                {{ feedback() }}
+              </p>
+            } @else if (state() === 'error' && feedback()) {
+              <p class="ct__status-msg is-error">{{ feedback() }}</p>
+            }
+          </div>
+        </form>
+      </div>
+
+      <aside class="ct__aside">
+        <section class="ct__summary" aria-label="Project summary">
+          <h2 class="ct__summary-title">Project summary</h2>
+
+          @if (summary().length > 0) {
+            <dl class="ct__summary-rows">
+              @for (row of summary(); track row.label) {
+                <div class="ct__summary-row">
+                  <dt>{{ row.label }}</dt>
+                  <dd>{{ row.value }}</dd>
+                </div>
+              }
+            </dl>
+
+            <div class="ct__summary-estimate">
+              <span>Estimated starting point</span>
+              <strong>{{ estimate() ?? 'Custom quote' }}</strong>
+            </div>
+
+            <p class="ct__summary-note">
+              Final quote will be provided after reviewing the project scope.
+            </p>
+          } @else {
+            <p class="ct__summary-empty">
+              Select a service, project type or add-ons to build a rough estimate.
+            </p>
+          }
+        </section>
+
+        <div class="ct__aside-block">
+          <h2 class="ct__label">Prefer email?</h2>
+          <a class="ct__email" [href]="'mailto:' + profile().email">{{ profile().email }}</a>
+        </div>
+
+        @if (profile().phone; as phone) {
+          <div class="ct__aside-block">
+            <h2 class="ct__label">Phone</h2>
+            <a class="ct__email" [href]="phoneHref()">{{ phone }}</a>
+          </div>
+        }
+
+        <div class="ct__aside-block">
+          <h2 class="ct__label">Response time</h2>
+          <p class="ct__note">Within 1 business day, always with a real answer.</p>
+        </div>
+
+        <div class="ct__aside-block">
+          <h2 class="ct__label">Availability</h2>
+          <p class="ct__note">{{ profile().availabilityNote }}</p>
+        </div>
+
+        <div class="ct__aside-block">
+          <h2 class="ct__label">Elsewhere</h2>
+          <ul class="ct__socials">
+            @for (social of profile().socials; track social.label) {
+              <li>
+                <a
+                  [href]="social.url"
+                  [attr.target]="social.url.startsWith('http') ? '_blank' : null"
+                  [attr.rel]="social.url.startsWith('http') ? 'noopener noreferrer' : null"
+                >
+                  {{ social.label }}
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="ct__section ct__section--alt">
+  <div class="ct__inner">
+    <app-section-header
+      eyebrow="Why work with me?"
+      heading="A premium independent engineer, not a template shop."
+      lede="No invented client counts or awards — just the way I work, and what you can hold me to."
+    />
+
+    <ul class="ct__trust" appReveal="stagger">
+      @for (item of trustPoints; track item.label) {
+        <li data-reveal-item>
+          <span class="ct__check" aria-hidden="true"></span>
+          {{ item.label }}
+        </li>
+      }
+    </ul>
+  </div>
+</section>
+
+<section class="ct__section" id="faq">
+  <div class="ct__inner">
+    <app-section-header eyebrow="FAQ" heading="Answers before you ask." />
+
+    <div class="ct__faq">
+      @for (faq of faqs; track faq.question; let i = $index) {
+        <div class="ct__faq-item" [class.is-open]="openFaq() === i">
+          <button
+            type="button"
+            class="ct__faq-q"
+            (click)="toggleFaq(i)"
+            [attr.aria-expanded]="openFaq() === i"
+            [attr.aria-controls]="'faq-' + i"
+            [appCursorTarget]="'hover'"
+          >
+            <span>{{ faq.question }}</span>
+            <span class="ct__faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="ct__faq-panel" [id]="'faq-' + i">
+            <div class="ct__faq-panel-inner">
+              <p>{{ faq.answer }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="ct__final">
+  <div class="ct__inner">
+    <h2 class="ct__final-heading" appReveal="mask">Have a serious project in mind?</h2>
+    <p class="ct__final-lede" appReveal="rise">
+      Let's turn the idea into a fast, scalable and beautifully engineered digital product.
+    </p>
+    <div class="ct__final-actions" appReveal="rise" [delay]="0.15">
+      <app-button size="lg" (click)="scrollToForm()">Start a Conversation</app-button>
+      <app-button routerLink="/work" variant="secondary" size="lg">View Selected Work</app-button>
+    </div>
+  </div>
+</section>

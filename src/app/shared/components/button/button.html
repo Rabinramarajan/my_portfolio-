@@ -1,0 +1,50 @@
+<ng-template #content>
+  <span class="btn__label" data-magnetic-inner>
+    <ng-content />
+    @if (arrow()) {
+      <svg class="btn__arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" />
+      </svg>
+    }
+  </span>
+  @if (loading()) {
+    <span class="btn__spinner" aria-hidden="true"></span>
+  }
+</ng-template>
+
+@if (routerLink(); as link) {
+  <a
+    [routerLink]="link"
+    [class]="classes()"
+    [attr.aria-label]="ariaLabel()"
+    [appMagnetic]="0.28"
+    [appCursorTarget]="'link'"
+  >
+    <ng-container *ngTemplateOutlet="content" />
+  </a>
+} @else if (href(); as url) {
+  <a
+    [href]="url"
+    [class]="classes()"
+    [attr.target]="isExternal() ? '_blank' : null"
+    [attr.rel]="isExternal() ? 'noopener noreferrer' : null"
+    [attr.aria-label]="ariaLabel()"
+    [appMagnetic]="0.28"
+    [appCursorTarget]="'link'"
+    [label]="isExternal() ? 'OPEN' : undefined"
+  >
+    <ng-container *ngTemplateOutlet="content" />
+  </a>
+} @else {
+  <button
+    [type]="type()"
+    [class]="classes()"
+    [disabled]="disabled() || loading()"
+    [attr.aria-busy]="loading()"
+    [attr.aria-label]="ariaLabel()"
+    [appMagnetic]="0.28"
+    [appCursorTarget]="'hover'"
+  >
+    <ng-container *ngTemplateOutlet="content" />
+  </button>
+}

@@ -1,0 +1,171 @@
+@use '../../../styles/mixins' as *;
+
+.rs {
+  padding-block: calc(var(--header-h) + var(--space-9)) var(--section-y);
+}
+
+.rs__inner {
+  @include container(var(--container-narrow));
+}
+
+.rs__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+  margin-block-end: var(--space-8);
+}
+
+.rs__print {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+
+  &:hover {
+    color: var(--color-text);
+  }
+}
+
+.rs__updated {
+  color: var(--color-text-faint);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.rs__doc {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border-radius: var(--radius-lg);
+  @include fine-border;
+
+  background: var(--color-bg-elevated);
+}
+
+.rs__head {
+  padding-block-end: var(--space-5);
+  border-block-end: 1px solid var(--color-line);
+}
+
+.rs__name {
+  @include display(var(--text-2xl));
+}
+
+.rs__role {
+  margin-block-start: var(--space-1);
+  color: var(--color-accent);
+}
+
+.rs__contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-block-start: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.rs__section {
+  padding-block: var(--space-6);
+  border-block-end: 1px solid var(--color-line);
+
+  &:last-child {
+    border-block-end: 0;
+  }
+}
+
+.rs__label {
+  @include eyebrow;
+
+  margin-block-end: var(--space-4);
+}
+
+.rs__summary {
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+.rs__role-block {
+  margin-block-end: var(--space-6);
+
+  &:last-child {
+    margin-block-end: 0;
+  }
+}
+
+.rs__role-head h4 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.rs__period {
+  display: block;
+  margin-block-start: var(--space-1);
+  color: var(--color-text-faint);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.rs__role-summary {
+  margin-block-start: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.rs__bullets {
+  margin-block-start: var(--space-3);
+  display: grid;
+  gap: var(--space-2);
+
+  li {
+    position: relative;
+    padding-inline-start: var(--space-5);
+    font-size: var(--text-sm);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset-block-start: 0.65em;
+      inset-inline-start: 0;
+      width: 10px;
+      height: 1px;
+      background: var(--color-accent);
+    }
+  }
+}
+
+.rs__stack {
+  margin-block-start: var(--space-3);
+  color: var(--color-text-faint);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.rs__skills {
+  display: grid;
+  gap: var(--space-4);
+
+  dt {
+    @include eyebrow;
+
+    color: var(--color-text);
+    margin-block-end: var(--space-1);
+  }
+
+  dd {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+}
+
+/* The document block is the whole point when printing — flatten it. */
+@media print {
+  .rs {
+    padding: 0;
+  }
+
+  .rs__doc {
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+}

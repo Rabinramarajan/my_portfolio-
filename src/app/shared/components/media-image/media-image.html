@@ -1,0 +1,43 @@
+<figure class="mi">
+  <!-- The frame owns the aspect ratio and the clipping. The caption must sit
+       outside it, or a fixed-ratio box crops its own caption away. -->
+  <div
+    class="mi__box"
+    [class.mi__box--rounded]="rounded()"
+    [class.mi__box--contain]="contained()"
+    [style.aspect-ratio]="ratio()"
+  >
+    @if (failed()) {
+      <div class="mi__fallback" role="img" [attr.aria-label]="media().alt">
+        <span>{{ media().alt }}</span>
+      </div>
+    } @else {
+      <picture class="mi__frame" [appCursorTarget]="'image'" [label]="cursorLabel() ?? 'EXPLORE'">
+        @for (source of media().sources; track source.type) {
+          <source [type]="source.type" [srcset]="source.srcset" [sizes]="sizes()" />
+        }
+        <!-- Parallax over-scales and shifts the image inside its frame, which would
+             crop a `contain` image at the edges — so the two are mutually exclusive. -->
+        <img
+          class="mi__img"
+          [appParallax]="parallax() && !contained() ? -70 : 0"
+          [scale]="parallax() && !contained() ? 1.12 : 1"
+          [src]="media().src"
+          [alt]="media().alt"
+          [width]="media().width"
+          [height]="media().height"
+          [sizes]="sizes()"
+          [attr.loading]="priority() ? 'eager' : 'lazy'"
+          [attr.fetchpriority]="priority() ? 'high' : 'auto'"
+          decoding="async"
+          (load)="onLoad()"
+          (error)="onError()"
+        />
+      </picture>
+    }
+  </div>
+
+  @if (media().caption; as caption) {
+    <figcaption class="mi__caption">{{ caption }}</figcaption>
+  }
+</figure>

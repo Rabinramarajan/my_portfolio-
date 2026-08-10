@@ -1,0 +1,36 @@
+<section id="work" class="wr">
+  <div class="wr__inner">
+    <app-section-header
+      index="03"
+      eyebrow="Selected Work"
+      heading="Projects where the hard part wasn't the pixels."
+      lede="A few engagements that show how I think. Each one has a full case study — the problem, the architecture, and what actually changed."
+    />
+
+    <app-media-image
+      class="wr__figure"
+      [media]="media().workFlatlay"
+      [parallax]="true"
+      sizes="100vw"
+      appReveal="mask"
+    />
+
+    <div class="wr__grid">
+      @for (project of projects(); track project.slug; let i = $index) {
+        <app-project-card
+          class="wr__item"
+          [project]="project"
+          [index]="label(i)"
+          [priority]="i === 0"
+          [layout]="i === 0 ? 'wide' : 'tall'"
+        />
+      } @empty {
+        <p class="wr__empty">Case studies are being written up. Ask me about recent work.</p>
+      }
+    </div>
+
+    <div class="wr__cta" appReveal="fade">
+      <app-button routerLink="/work" variant="secondary" size="lg">View all work</app-button>
+    </div>
+  </div>
+</section>

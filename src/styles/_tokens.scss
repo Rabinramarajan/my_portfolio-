@@ -1,0 +1,126 @@
+/**
+ * Design tokens — single source of truth for the visual system.
+ * Everything downstream consumes CSS custom properties, never raw values.
+ */
+
+:root {
+  /* ---- Color: base ---- */
+  --color-bg: #08080a;
+  --color-bg-elevated: #0d0d10;
+  --color-surface: #131317;
+  --color-surface-2: #1a1a20;
+  --color-line: rgb(255 255 255 / 8%);
+  --color-line-strong: rgb(255 255 255 / 16%);
+
+  /* ---- Color: text ---- */
+  --color-text: #ecece9;
+  --color-text-muted: #8a8a92;
+  --color-text-faint: #5b5b63;
+
+  /* ---- Color: accent (one, sophisticated) ---- */
+  --color-accent: #c9f24d;
+  --color-accent-dim: #9ec22f;
+  --color-accent-contrast: #08080a;
+  --color-accent-glow: rgb(201 242 77 / 18%);
+
+  /* ---- Color: semantic ---- */
+  --color-success: #6ee7a8;
+  --color-danger: #ff6b6b;
+
+  /* ---- Typography ---- */
+  --font-sans:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', roboto, helvetica, arial, sans-serif;
+  --font-display: 'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, sfmono-regular, menlo, monospace;
+
+  /* Fluid type scale — clamp(min, preferred, max) */
+  --text-xs: clamp(0.69rem, 0.67rem + 0.1vw, 0.75rem);
+  --text-sm: clamp(0.8rem, 0.77rem + 0.15vw, 0.875rem);
+  --text-base: clamp(0.94rem, 0.9rem + 0.2vw, 1rem);
+  --text-lg: clamp(1.06rem, 1rem + 0.3vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 1.1rem + 0.7vw, 1.75rem);
+  --text-2xl: clamp(1.6rem, 1.3rem + 1.4vw, 2.6rem);
+  --text-3xl: clamp(2.2rem, 1.5rem + 3vw, 4rem);
+  --text-4xl: clamp(2.75rem, 1.4rem + 6vw, 5.5rem);
+  --text-display: clamp(2.75rem, 7vw, 6rem);
+
+  --leading-tight: 0.94;
+  --leading-snug: 1.12;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.7;
+
+  --tracking-tight: -0.035em;
+  --tracking-snug: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
+  --tracking-widest: 0.22em;
+
+  /* ---- Spacing (compact premium scale, 8pt base) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 2rem;
+  --space-8: 2.5rem;
+  --space-9: 3rem;
+  --space-10: 4rem;
+  --space-11: 5rem;
+  --space-12: 6rem;
+
+  /* Section rhythm — mobile 40px up to desktop 96px. Intentional, not empty. */
+  --section-y: clamp(2.5rem, 7.5vw, 6rem);
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+
+  /* ---- Layout ---- */
+  --container-max: 1440px;
+  --container-narrow: 880px;
+  --container-wide: 1440px;
+  --header-h: 72px;
+
+  /* ---- Radius ---- */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  /* ---- Elevation — restrained, atmospheric ---- */
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
+  --shadow-md: 0 12px 32px -12px rgb(0 0 0 / 65%);
+  --shadow-lg: 0 40px 90px -30px rgb(0 0 0 / 80%);
+  --shadow-accent: 0 0 60px -10px var(--color-accent-glow);
+
+  /* ---- Motion ---- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+  --duration-slow: 620ms;
+  --duration-cinematic: 1100ms;
+  --transition-smooth: all var(--duration-base) var(--ease-out-expo);
+
+  /* ---- Z-index scale ---- */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-header: 200;
+  /* Above the header — the header is permanently pinned, so a progress line
+     sharing its layer would be painted over and never seen. Still below the
+     menu, which should cover everything when open. */
+  --z-progress: 250;
+  --z-menu: 300;
+  --z-cursor: 400;
+  --z-overlay: 500;
+}
+
+/* The design is deliberately dark-committed; light preference gets a softened,
+   still-premium inversion rather than a second full theme. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    --color-bg: #0b0b0d;
+  }
+}
