@@ -766,7 +766,10 @@ export const SITE_MEDIA: SiteMedia = {
     'Rabin at his desk, with an editor and an analytics dashboard on the monitors behind him',
     1122,
     1402,
-    [640, 1122],
+    // 900 bridges a wide gap: the portrait renders ~370px CSS wide, so a 2x
+    // screen wants ~740px and previously had to jump all the way to 1122 —
+    // 101kB where 54kB carries the same visible detail.
+    [640, 900, 1122],
   ),
   aboutMonitors: photo(
     'about-monitors',

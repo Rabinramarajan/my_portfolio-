@@ -25,4 +25,10 @@ export class ProjectCard {
   readonly index = input<string>();
   readonly priority = input(false);
   readonly layout = input<'tall' | 'wide'>('tall');
+  /**
+   * Level for the card's title. Defaults to 3, which is right under a section
+   * heading; the /work index passes 2 because there the page heading is the
+   * `h1` directly above the grid.
+   */
+  readonly headingLevel = input<2 | 3>(3);
 }

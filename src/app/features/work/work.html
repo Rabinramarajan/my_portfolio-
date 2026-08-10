@@ -23,7 +23,12 @@
 
     <div class="wk__grid" aria-live="polite">
       @for (project of projects(); track project.slug; let i = $index) {
-        <app-project-card [project]="project" [index]="label(i)" [priority]="i < 2" />
+        <app-project-card
+          [project]="project"
+          [index]="label(i)"
+          [priority]="i < 2"
+          [headingLevel]="2"
+        />
       } @empty {
         <p class="wk__empty">No projects in this category yet.</p>
       }

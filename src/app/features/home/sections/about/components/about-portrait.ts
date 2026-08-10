@@ -9,11 +9,17 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
   template: `
     <div class="about-portrait">
       <div class="about-portrait__frame">
+        <!-- The sizes attribute is a promise to the browser about the rendered
+             width, and 100vw was not true: the column's padding leaves the
+             portrait ~90vw on a phone and 42vw above 1024px. The overstatement
+             made every mobile visitor fetch the 1122px file for a 370px slot.
+
+             No priority flag either — the portrait sits about a viewport and a
+             half down, so eagerly fetching it competed with the hero. -->
         <app-media-image
           class="about-portrait__img"
           [media]="portrait()"
-          [priority]="true"
-          sizes="(max-width: 1024px) 100vw, 42vw"
+          sizes="(max-width: 1024px) 90vw, 42vw"
         />
 
         <!-- Editorial Frame Accents -->

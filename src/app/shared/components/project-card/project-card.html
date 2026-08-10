@@ -9,7 +9,6 @@
     [routerLink]="['/work', project().slug]"
     [appCursorTarget]="'project'"
     label="VIEW PROJECT"
-    [attr.aria-label]="'View case study: ' + project().title"
   >
     <div class="pc__media">
       <app-media-image
@@ -24,7 +23,13 @@
     </div>
 
     <div class="pc__body">
-      <h3 class="pc__title">{{ project().title }}</h3>
+      <!-- The card sits under a page <h1> on /work but under a section <h2> on
+           the home reel, so the level is the caller's to state. -->
+      @if (headingLevel() === 2) {
+        <h2 class="pc__title">{{ project().title }}</h2>
+      } @else {
+        <h3 class="pc__title">{{ project().title }}</h3>
+      }
       <p class="pc__tagline">{{ project().tagline }}</p>
 
       <dl class="pc__meta">
