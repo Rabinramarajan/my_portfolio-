@@ -71,20 +71,20 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       }
 
       .hero-ticker__item {
-        font-family: var(--font-display, 'Inter Tight', sans-serif);
+        font-family: var(--font-display);
         font-size: clamp(0.9rem, 1.4vw, 1.25rem);
         font-weight: 500;
         letter-spacing: 0.24em;
         text-transform: uppercase;
-        color: var(--color-text-muted, #8a8a92);
+        color: var(--color-text-muted);
         white-space: nowrap;
-        transition: color 0.4s var(--ease-ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+        transition: color 0.4s var(--ease-out-expo);
       }
 
       .hero-ticker__sep {
         display: inline-block;
         margin-inline: 1.6rem;
-        color: var(--color-accent, #c9f24d);
+        color: var(--color-accent);
         font-size: 0.7em;
       }
 
@@ -94,7 +94,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         }
 
         .hero-ticker__row--a:hover .hero-ticker__item {
-          color: var(--color-text, #ecece9);
+          color: var(--color-text);
         }
       }
 

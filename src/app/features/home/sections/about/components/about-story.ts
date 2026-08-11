@@ -64,36 +64,36 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
     }
 
     .about-story__eyebrow {
-      font-family: var(--font-mono, monospace);
-      font-size: var(--text-xs, 0.75rem);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--color-text-dim, #888);
-      margin-block-end: var(--space-4, 1rem);
+      color: var(--color-text-faint);
+      margin-block-end: var(--space-4);
     }
 
     .about-story__content {
       display: flex;
       flex-direction: column;
-      gap: var(--space-5, 1.25rem);
+      gap: var(--space-5);
     }
 
     .about-story__p {
-      font-family: var(--font-body, sans-serif);
+      font-family: var(--font-sans);
       font-size: clamp(1.05rem, 1.3vw, 1.2rem);
       line-height: 1.7;
-      color: var(--color-text-muted, #aaa);
+      color: var(--color-text-muted);
       margin: 0;
     }
 
     .about-story__kw {
-      color: var(--color-text, #fff);
+      color: var(--color-text);
       font-weight: 500;
       cursor: pointer;
       position: relative;
       padding-inline: 0.15em;
       transition: color 0.3s ease, background 0.3s ease;
-      border-bottom: 1px dotted var(--color-accent, #c9f24d);
+      border-bottom: 1px dotted var(--color-accent);
 
       &::after {
         content: '';
@@ -102,7 +102,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
         left: 0;
         width: 100%;
         height: 100%;
-        background: var(--color-accent, #c9f24d);
+        background: var(--color-accent);
         opacity: 0;
         z-index: -1;
         transition: opacity 0.3s ease;
@@ -111,7 +111,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 
       &:hover,
       &--active {
-        color: #000;
+        color: var(--color-accent-contrast);
         border-bottom-color: transparent;
 
         &::after {

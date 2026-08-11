@@ -49,8 +49,8 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
       position: relative;
       overflow: hidden;
       aspect-ratio: 4 / 5;
-      background: #0d0d0d;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-line);
 
       &:hover .about-portrait__img {
         transform: scale(1.03);
@@ -63,7 +63,9 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+      transition:
+        transform var(--duration-slow) var(--ease-out-expo),
+        filter var(--duration-slow) ease;
     }
 
     .about-portrait__corner {
@@ -76,15 +78,15 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
       &--tl {
         top: 12px;
         left: 12px;
-        border-top: 1.5px solid var(--color-accent, #c9f24d);
-        border-left: 1.5px solid var(--color-accent, #c9f24d);
+        border-top: 1.5px solid var(--color-accent);
+        border-left: 1.5px solid var(--color-accent);
       }
 
       &--br {
         bottom: 12px;
         right: 12px;
-        border-bottom: 1.5px solid var(--color-accent, #c9f24d);
-        border-right: 1.5px solid var(--color-accent, #c9f24d);
+        border-bottom: 1.5px solid var(--color-accent);
+        border-right: 1.5px solid var(--color-accent);
       }
     }
 
@@ -93,14 +95,14 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
       bottom: 0;
       left: 0;
       right: 0;
-      padding: var(--space-5, 1.25rem);
+      padding: var(--space-5);
       background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
-      font-family: var(--font-mono, monospace);
+      font-family: var(--font-mono);
       color: rgba(255, 255, 255, 0.8);
       z-index: 2;
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
+      gap: var(--space-1);
     }
 
     .about-portrait__meta-line {
@@ -111,12 +113,12 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
 
     .about-portrait__name {
       font-weight: 700;
-      color: var(--color-text, #fff);
+      color: var(--color-text);
       font-size: 0.75rem;
     }
 
     .about-portrait__role {
-      color: var(--color-accent, #c9f24d);
+      color: var(--color-accent);
     }
 
     .about-portrait__meta-divider {

@@ -24,45 +24,44 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
   `,
   styles: [`
     .stack {
-      margin-block-end: var(--space-12, 3.5rem);
+      margin-block-end: var(--space-12);
     }
 
     .stack__eyebrow {
-      font-family: var(--font-mono, monospace);
-      font-size: var(--text-xs, 0.75rem);
-      letter-spacing: 0.15em;
-      color: var(--color-text-dim, #888);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
       display: block;
-      margin-block-end: var(--space-5, 1.25rem);
+      margin-block-end: var(--space-5);
     }
 
     .stack__flow {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--space-3, 0.75rem) var(--space-6, 1.5rem);
+      gap: var(--space-3) var(--space-6);
       align-items: center;
     }
 
     .stack__item {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-2, 0.5rem);
-      font-family: var(--font-display, sans-serif);
+      gap: var(--space-2);
+      font-family: var(--font-display);
       font-size: clamp(1.1rem, 2vw, 1.6rem);
       font-weight: 500;
-      color: var(--color-text-muted, #777);
+      color: var(--color-text-muted);
       cursor: pointer;
       transition: color 0.3s ease, transform 0.3s ease;
       user-select: none;
 
       &:hover,
       &--active {
-        color: var(--color-text, #fff);
+        color: var(--color-text);
         transform: translateY(-2px);
 
         .stack__dot {
-          background: var(--color-accent, #c9f24d);
-          box-shadow: 0 0 10px var(--color-accent, #c9f24d);
+          background: var(--color-accent);
+          box-shadow: 0 0 10px var(--color-accent);
         }
       }
     }

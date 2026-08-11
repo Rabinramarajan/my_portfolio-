@@ -68,7 +68,7 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
       }
 
       .hero-portrait__zoom {
-        transition: transform 0.9s var(--ease-ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+        transition: transform 0.9s var(--ease-out-expo);
       }
 
       @media (hover: hover) and (pointer: fine) {
@@ -80,7 +80,7 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
       .hero-portrait__frame {
         position: relative;
         aspect-ratio: 4 / 5;
-        background: var(--color-bg-elevated, #0d0d10);
+        background: var(--color-bg-elevated);
       }
 
       /* Offset engineering frame sitting proud of the image — read separately
@@ -112,7 +112,7 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
         align-items: baseline;
         gap: 0.6rem;
         padding: 1rem 1.1rem;
-        font-family: var(--font-mono, monospace);
+        font-family: var(--font-mono);
         font-size: 0.62rem;
         letter-spacing: 0.16em;
         text-transform: uppercase;
@@ -122,7 +122,7 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
 
       .hero-portrait__stamp-name {
         font-weight: 600;
-        color: var(--color-accent, #c9f24d);
+        color: var(--color-accent);
       }
 
       .hero-portrait__stamp-line {
@@ -142,8 +142,8 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
         left: -1px;
         width: 34px;
         height: 34px;
-        border-top: 2px solid var(--color-accent, #c9f24d);
-        border-left: 2px solid var(--color-accent, #c9f24d);
+        border-top: 2px solid var(--color-accent);
+        border-left: 2px solid var(--color-accent);
       }
 
       @media (prefers-reduced-motion: reduce) {

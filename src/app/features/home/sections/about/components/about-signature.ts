@@ -17,9 +17,9 @@ import { asyncTeardown } from '../../../../../shared/utils/async-teardown';
       <svg class="about-signature__svg" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="sigGrid" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="var(--color-accent, #c9f24d)" stop-opacity="0.12" />
+            <stop offset="0%" stop-color="var(--color-accent)" stop-opacity="0.12" />
             <stop offset="50%" stop-color="#3b82f6" stop-opacity="0.06" />
-            <stop offset="100%" stop-color="var(--color-accent, #c9f24d)" stop-opacity="0.02" />
+            <stop offset="100%" stop-color="var(--color-accent)" stop-opacity="0.02" />
           </linearGradient>
         </defs>
 
@@ -29,9 +29,9 @@ import { asyncTeardown } from '../../../../../shared/utils/async-teardown';
 
         <!-- Intersecting Connection Nodes -->
         <g class="about-signature__nodes">
-          <circle cx="350" cy="100" r="3" fill="var(--color-accent, #c9f24d)" opacity="0.4" />
-          <circle cx="850" cy="280" r="3" fill="var(--color-accent, #c9f24d)" opacity="0.4" />
-          <circle cx="600" cy="460" r="3" fill="var(--color-accent, #c9f24d)" opacity="0.4" />
+          <circle cx="350" cy="100" r="3" fill="var(--color-accent)" opacity="0.4" />
+          <circle cx="850" cy="280" r="3" fill="var(--color-accent)" opacity="0.4" />
+          <circle cx="600" cy="460" r="3" fill="var(--color-accent)" opacity="0.4" />
         </g>
       </svg>
     </div>

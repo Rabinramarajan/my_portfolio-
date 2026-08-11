@@ -60,37 +60,37 @@ interface Principle {
   `,
   styles: [`
     .principles {
-      margin-block: var(--space-12, 4rem);
-      padding-block: var(--space-8, 2.5rem);
-      border-block: 1px solid rgba(255, 255, 255, 0.08);
+      margin-block: var(--space-12);
+      padding-block: var(--space-8);
+      border-block: 1px solid var(--color-line);
     }
 
     .principles__eyebrow {
-      font-family: var(--font-mono, monospace);
-      font-size: var(--text-xs, 0.75rem);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
       letter-spacing: 0.15em;
-      color: var(--color-accent, #c9f24d);
+      color: var(--color-accent);
       display: block;
-      margin-block-end: var(--space-3, 0.75rem);
+      margin-block-end: var(--space-3);
     }
 
     .principles__statement {
-      font-family: var(--font-display, sans-serif);
+      font-family: var(--font-display);
       font-size: clamp(1.5rem, 3vw, 2.4rem);
       font-weight: 400;
       line-height: 1.25;
-      color: var(--color-text, #fff);
+      color: var(--color-text);
       max-width: 32ch;
-      margin-block-end: var(--space-8, 2.5rem);
+      margin-block-end: var(--space-8);
     }
 
     .principles__body {
       display: grid;
-      gap: var(--space-8, 2.5rem);
+      gap: var(--space-8);
 
       @media (min-width: 768px) {
         grid-template-columns: 1fr 1fr;
-        gap: var(--space-10, 3.5rem);
+        gap: var(--space-10);
         align-items: center;
       }
     }
@@ -101,7 +101,7 @@ interface Principle {
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: var(--space-2, 0.5rem);
+      gap: var(--space-2);
     }
 
     .principles__item {
@@ -117,53 +117,53 @@ interface Principle {
 
       display: flex;
       align-items: center;
-      gap: var(--space-4, 1rem);
-      padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
+      gap: var(--space-4);
+      padding: var(--space-3) var(--space-4);
       cursor: pointer;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--color-line);
       transition: background 0.3s ease, border-color 0.3s ease;
 
       /* The item is keyboard-operable, so focus has to be visible. */
       &:focus-visible {
-        outline: 2px solid var(--color-accent, #c9f24d);
+        outline: 2px solid var(--color-accent);
         outline-offset: -2px;
       }
 
       &:hover,
       &--active {
         background: rgba(255, 255, 255, 0.03);
-        border-bottom-color: var(--color-accent, #c9f24d);
+        border-bottom-color: var(--color-accent);
 
         .principles__num {
-          color: var(--color-accent, #c9f24d);
+          color: var(--color-accent);
         }
 
         .principles__title {
-          color: var(--color-text, #fff);
+          color: var(--color-text);
           transform: translateX(4px);
         }
 
         .principles__arrow {
           opacity: 1;
           transform: translateX(0);
-          color: var(--color-accent, #c9f24d);
+          color: var(--color-accent);
         }
       }
     }
 
     .principles__num {
-      font-family: var(--font-mono, monospace);
-      font-size: var(--text-sm, 0.875rem);
-      color: var(--color-text-dim, #666);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-text-faint);
       transition: color 0.3s ease;
     }
 
     .principles__title {
-      font-family: var(--font-display, sans-serif);
-      font-size: var(--text-lg, 1.125rem);
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
       font-weight: 500;
       letter-spacing: 0.08em;
-      color: var(--color-text-muted, #aaa);
+      color: var(--color-text-muted);
       transition: color 0.3s ease, transform 0.3s ease;
       flex-grow: 1;
     }
@@ -177,30 +177,30 @@ interface Principle {
     /* Single Dynamic Content Area (No Cards) */
     .principles__detail {
       position: relative;
-      padding: var(--space-6, 1.5rem);
-      border-left: 2px solid var(--color-accent, #c9f24d);
+      padding: var(--space-6);
+      border-left: 2px solid var(--color-accent);
       background: linear-gradient(to right, rgba(201, 242, 77, 0.02), transparent);
     }
 
     .principles__detail-num {
-      font-family: var(--font-mono, monospace);
-      font-size: var(--text-xs, 0.75rem);
-      color: var(--color-accent, #c9f24d);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent);
       letter-spacing: 0.1em;
     }
 
     .principles__detail-title {
-      font-family: var(--font-display, sans-serif);
-      font-size: var(--text-xl, 1.5rem);
-      color: var(--color-text, #fff);
-      margin-block: var(--space-2, 0.5rem);
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: var(--color-text);
+      margin-block: var(--space-2);
     }
 
     .principles__detail-text {
-      font-family: var(--font-body, sans-serif);
-      font-size: var(--text-md, 1rem);
+      font-family: var(--font-sans);
+      font-size: var(--text-base);
       line-height: 1.6;
-      color: var(--color-text-muted, #ccc);
+      color: var(--color-text-muted);
       margin: 0;
     }
   `],

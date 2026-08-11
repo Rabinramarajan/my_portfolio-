@@ -132,11 +132,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
       .hb__data {
         position: absolute;
-        font-family: var(--font-mono, monospace);
+        font-family: var(--font-mono);
         font-size: 0.6rem;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: var(--color-text-faint, #7c7c85);
+        color: var(--color-text-faint);
         white-space: nowrap;
       }
 
@@ -167,7 +167,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         position: absolute;
         inset: auto 0 0 0;
         height: 18%;
-        background: linear-gradient(to bottom, transparent, var(--color-bg, #08080a));
+        background: linear-gradient(to bottom, transparent, var(--color-bg));
       }
     `,
   ],

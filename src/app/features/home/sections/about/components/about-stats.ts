@@ -28,10 +28,10 @@ export interface StatItem {
     .editorial-stats {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-6, 1.5rem);
-      padding-block: var(--space-8, 2rem);
-      border-block-start: 1px solid rgba(255, 255, 255, 0.08);
-      margin-block-end: var(--space-12, 3.5rem);
+      gap: var(--space-6);
+      padding-block: var(--space-8);
+      border-block-start: 1px solid var(--color-line);
+      margin-block-end: var(--space-12);
 
       @media (min-width: 768px) {
         grid-template-columns: repeat(4, 1fr);

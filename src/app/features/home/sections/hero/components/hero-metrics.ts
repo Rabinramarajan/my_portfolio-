@@ -43,7 +43,7 @@ export interface HeroMetric {
 
       .hero-metrics__item {
         padding: 0.4rem 1rem;
-        border-inline-start: 1px solid rgba(255, 255, 255, 0.08);
+        border-inline-start: 1px solid var(--color-line);
 
         &:first-child {
           border-inline-start: 0;

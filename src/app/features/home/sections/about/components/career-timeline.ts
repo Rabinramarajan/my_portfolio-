@@ -32,26 +32,26 @@ interface Milestone {
   `,
   styles: [`
     .timeline {
-      margin-block-end: var(--space-12, 3.5rem);
+      margin-block-end: var(--space-12);
     }
 
     .timeline__eyebrow {
-      font-family: var(--font-mono, monospace);
-      font-size: var(--text-xs, 0.75rem);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
       letter-spacing: 0.15em;
-      color: var(--color-text-dim, #888);
+      color: var(--color-text-faint);
       display: block;
-      margin-block-end: var(--space-6, 1.5rem);
+      margin-block-end: var(--space-6);
     }
 
     .timeline__track {
       display: grid;
       grid-template-columns: repeat(1, 1fr);
-      gap: var(--space-6, 1.5rem);
+      gap: var(--space-6);
 
       @media (min-width: 640px) {
         grid-template-columns: repeat(4, 1fr);
-        gap: var(--space-4, 1rem);
+        gap: var(--space-4);
       }
     }
 
@@ -64,21 +64,21 @@ interface Milestone {
     .timeline__marker {
       display: flex;
       align-items: center;
-      margin-block-end: var(--space-3, 0.75rem);
+      margin-block-end: var(--space-3);
     }
 
     .timeline__dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--color-accent, #c9f24d);
-      box-shadow: 0 0 10px rgba(201, 242, 77, 0.5);
+      background: var(--color-accent);
+      box-shadow: 0 0 10px var(--color-accent-glow);
       flex-shrink: 0;
     }
 
     .timeline__line {
       height: 1px;
-      background: linear-gradient(to right, var(--color-accent, #c9f24d), rgba(255, 255, 255, 0.1));
+      background: linear-gradient(to right, var(--color-accent), var(--color-line-strong));
       flex-grow: 1;
 
       @media (max-width: 639px) {
@@ -87,26 +87,26 @@ interface Milestone {
     }
 
     .timeline__year {
-      font-family: var(--font-mono, monospace);
-      font-size: var(--text-xs, 0.75rem);
-      color: var(--color-accent, #c9f24d);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent);
       letter-spacing: 0.1em;
       display: block;
-      margin-block-end: var(--space-1, 0.25rem);
+      margin-block-end: var(--space-1);
     }
 
     .timeline__role {
-      font-family: var(--font-display, sans-serif);
-      font-size: var(--text-base, 1rem);
+      font-family: var(--font-display);
+      font-size: var(--text-base);
       font-weight: 500;
-      color: var(--color-text, #fff);
+      color: var(--color-text);
       margin: 0 0 0.25rem 0;
     }
 
     .timeline__detail {
-      font-family: var(--font-body, sans-serif);
-      font-size: var(--text-xs, 0.75rem);
-      color: var(--color-text-muted, #aaa);
+      font-family: var(--font-sans);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
       line-height: 1.5;
       margin: 0;
     }

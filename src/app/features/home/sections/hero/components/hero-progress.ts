@@ -53,14 +53,14 @@ const THIS_CHAPTERS = ['hero', 'about', 'services', 'work', 'experience', 'proce
       }
 
       .hero-progress__count {
-        font-family: var(--font-mono, monospace);
+        font-family: var(--font-mono);
         font-size: 0.56rem;
         letter-spacing: 0.14em;
-        color: var(--color-text-faint, #7c7c85);
+        color: var(--color-text-faint);
       }
 
       .hero-progress__count--current {
-        color: var(--color-accent, #c9f24d);
+        color: var(--color-accent);
       }
 
       .hero-progress__track {
@@ -77,14 +77,14 @@ const THIS_CHAPTERS = ['hero', 'about', 'services', 'work', 'experience', 'proce
         position: absolute;
         inset: 0;
         height: 100%;
-        background: var(--color-accent, #c9f24d);
+        background: var(--color-accent);
         transform-origin: top;
         will-change: transform;
       }
 
       @media (min-width: 768px) {
         :host {
-          right: var(--gutter, 2rem);
+          right: var(--gutter);
         }
 
         .hero-progress__track {
