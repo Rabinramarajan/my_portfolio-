@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { MediaImage } from '../../../../../shared/components/media-image/media-image';
+import { PortfolioStore } from '../../../../../core/services/portfolio-store';
 import type { PortfolioMedia } from '../../../../../core/models/portfolio.models';
 
 @Component({
@@ -28,12 +29,12 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
 
         <!-- Overlaid Editorial Metadata -->
         <div class="about-portrait__meta">
-          <span class="about-portrait__meta-line about-portrait__name">RABIN R</span>
-          <span class="about-portrait__meta-line about-portrait__role">SENIOR FRONTEND ENGINEER</span>
+          <span class="about-portrait__meta-line about-portrait__name">{{ about().portrait.name }}</span>
+          <span class="about-portrait__meta-line about-portrait__role">{{ about().portrait.role }}</span>
           <div class="about-portrait__meta-divider"></div>
-          <span class="about-portrait__meta-line about-portrait__loc">CHENNAI / INDIA</span>
+          <span class="about-portrait__meta-line about-portrait__loc">{{ about().portrait.location }}</span>
           <span class="about-portrait__meta-line about-portrait__status">
-            <span class="about-portrait__dot"></span> AVAILABLE FOR SELECT PROJECTS
+            <span class="about-portrait__dot"></span> {{ about().portrait.status }}
           </span>
         </div>
       </div>
@@ -152,5 +153,8 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutPortrait {
+  private readonly store = inject(PortfolioStore);
   readonly portrait = input.required<PortfolioMedia>();
+
+  protected readonly about = this.store.about;
 }

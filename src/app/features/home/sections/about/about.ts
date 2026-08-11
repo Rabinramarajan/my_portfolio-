@@ -30,6 +30,7 @@ import { EngineeringStack } from './components/engineering-stack';
 })
 export class About {
   private readonly store = inject(PortfolioStore);
+  protected readonly about = this.store.about;
   protected readonly profile = this.store.profile;
   protected readonly media = this.store.media;
 }

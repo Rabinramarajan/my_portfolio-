@@ -2,9 +2,9 @@
   <div class="wk__inner">
     <app-section-header
       [level]="1"
-      eyebrow="Selected Work"
-      heading="Case studies, not screenshots."
-      lede="Each project below documents the problem, the architecture and what measurably changed."
+      [eyebrow]="sections().workPage.eyebrow"
+      [heading]="sections().workPage.heading"
+      [lede]="sections().workPage.lede"
     />
 
     <div class="wk__filters" role="group" aria-label="Filter projects by category">
@@ -30,7 +30,7 @@
           [headingLevel]="2"
         />
       } @empty {
-        <p class="wk__empty">No projects in this category yet.</p>
+        <p class="wk__empty">{{ uiCopy().workPageEmpty }}</p>
       }
     </div>
   </div>

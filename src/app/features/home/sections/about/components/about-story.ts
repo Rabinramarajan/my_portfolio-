@@ -1,60 +1,37 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+
+import { PortfolioStore } from '../../../../../core/services/portfolio-store';
+import type { AboutStoryKeyword } from '../../../../../core/models/portfolio.models';
+
+type StorySegment =
+  | { readonly type: 'text'; readonly value: string }
+  | { readonly type: 'keyword'; readonly id: string; readonly word: string };
 
 @Component({
   selector: 'app-about-story',
   standalone: true,
   template: `
     <article class="about-story">
-      <h3 class="about-story__eyebrow">ABOUT THE ENGINEER</h3>
+      <h3 class="about-story__eyebrow">{{ about().storyEyebrow }}</h3>
 
       <div class="about-story__content">
-        <p class="about-story__p">
-          I'm Rabin R, a Senior Frontend Engineer with 4+ years of experience engineering critical web and mobile systems for government and enterprise clients — including immigration platforms for Fiji and pension portals serving thousands of active users.
-        </p>
-
-        <p class="about-story__p">
-          I work at the intersection of interface design and frontend
-          <span
-            class="about-story__kw"
-            [class.about-story__kw--active]="activeKeyword() === 'architecture'"
-            (mouseenter)="activeKeyword.set('architecture')"
-            (mouseleave)="activeKeyword.set(null)"
-          >architecture</span>. My focus is building digital products that are visually precise, technically sound, and designed for maximum
-          <span
-            class="about-story__kw"
-            [class.about-story__kw--active]="activeKeyword() === 'performance'"
-            (mouseenter)="activeKeyword.set('performance')"
-            (mouseleave)="activeKeyword.set(null)"
-          >performance</span> under real-world conditions.
-        </p>
-
-        <p class="about-story__p">
-          From high-consequence government case management to modern AI-driven analytics dashboards, I care deeply about the details users feel — speed, clarity,
-          <span
-            class="about-story__kw"
-            [class.about-story__kw--active]="activeKeyword() === 'accessibility'"
-            (mouseenter)="activeKeyword.set('accessibility')"
-            (mouseleave)="activeKeyword.set(null)"
-          >accessibility</span>, fluid
-          <span
-            class="about-story__kw"
-            [class.about-story__kw--active]="activeKeyword() === 'interaction'"
-            (mouseenter)="activeKeyword.set('interaction')"
-            (mouseleave)="activeKeyword.set(null)"
-          >interaction</span>, long-term
-          <span
-            class="about-story__kw"
-            [class.about-story__kw--active]="activeKeyword() === 'scalability'"
-            (mouseenter)="activeKeyword.set('scalability')"
-            (mouseleave)="activeKeyword.set(null)"
-          >scalability</span>, and pixel
-          <span
-            class="about-story__kw"
-            [class.about-story__kw--active]="activeKeyword() === 'precision'"
-            (mouseenter)="activeKeyword.set('precision')"
-            (mouseleave)="activeKeyword.set(null)"
-          >precision</span>.
-        </p>
+        @for (paragraph of paragraphs(); track $index) {
+          <p class="about-story__p">
+            @for (segment of paragraph; track $index) {
+              @if (segment.type === 'text') {
+                {{ segment.value }}
+              } @else {
+                <span
+                  class="about-story__kw"
+                  [class.about-story__kw--active]="activeKeyword() === segment.id"
+                  (mouseenter)="activeKeyword.set(segment.id)"
+                  (mouseleave)="activeKeyword.set(null)"
+                  >{{ segment.word }}</span
+                >
+              }
+            }
+          </p>
+        }
       </div>
     </article>
   `,
@@ -123,5 +100,31 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutStory {
+  private readonly store = inject(PortfolioStore);
+  protected readonly about = this.store.about;
   protected readonly activeKeyword = signal<string | null>(null);
+
+  protected readonly paragraphs = computed(() =>
+    this.about().story.map((paragraph) => this.parse(paragraph.text, paragraph.keywords ?? [])),
+  );
+
+  private parse(text: string, keywords: readonly AboutStoryKeyword[]): readonly StorySegment[] {
+    const segments: StorySegment[] = [];
+    const byId = new Map(keywords.map((keyword) => [keyword.id, keyword]));
+    const placeholder = /\{([^}]+)\}/g;
+    let last = 0;
+    let match: RegExpExecArray | null;
+    while ((match = placeholder.exec(text)) !== null) {
+      if (match.index > last) segments.push({ type: 'text', value: text.slice(last, match.index) });
+      const keyword = byId.get(match[1]);
+      segments.push(
+        keyword
+          ? { type: 'keyword', id: keyword.id, word: keyword.word }
+          : { type: 'text', value: match[0] },
+      );
+      last = placeholder.lastIndex;
+    }
+    if (last < text.length) segments.push({ type: 'text', value: text.slice(last) });
+    return segments;
+  }
 }

@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, PLATFORM_ID, computed, inject } fro
 import { DatePipe, isPlatformBrowser } from '@angular/common';
 
 import { Button } from '../../shared/components/button/button';
-import { SITE_URL } from '../../core/config/portfolio.content';
+import { SITE_SETTINGS, SITE_URL } from '../../core/config/portfolio.content';
 import { PortfolioStore } from '../../core/services/portfolio-store';
 import { SectionHeader } from '../../shared/components/section-header/section-header';
 import { Seo } from '../../core/services/seo';
 import { breadcrumbSchema } from '../../core/services/structured-data';
+import type { PortfolioSkill } from '../../core/models/portfolio.models';
 
 /**
  * On-page résumé.
@@ -29,14 +30,20 @@ export class Resume {
   protected readonly profile = this.store.profile;
   protected readonly experience = this.store.experience;
   protected readonly skills = this.store.skills;
+  protected readonly sections = this.store.sections;
+  protected readonly uiCopy = this.store.uiCopy;
   protected readonly education = computed(() => this.profile().education);
   protected readonly certifications = computed(() => this.profile().certifications);
   protected readonly updated = computed(() => new Date(this.profile().resumeUpdated));
 
+  protected itemList(items: readonly (string | PortfolioSkill)[]): string {
+    return items.map((item) => (typeof item === 'string' ? item : item.name)).join(' · ');
+  }
+
   constructor() {
     this.seo.apply({
-      title: `Rabin R — Angular Developer Experience & Résumé`,
-      description: `Experience, skills, and background for Rabin R — Senior Frontend Angular Developer specializing in Angular, TypeScript, RxJS, Ionic, and enterprise web application architecture.`,
+      title: SITE_SETTINGS.seo.resumeTitle,
+      description: SITE_SETTINGS.seo.resumeDescription,
       path: '/resume',
       type: 'profile',
     });

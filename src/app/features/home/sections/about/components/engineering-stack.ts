@@ -1,14 +1,16 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+
+import { PortfolioStore } from '../../../../../core/services/portfolio-store';
 
 @Component({
   selector: 'app-engineering-stack',
   standalone: true,
   template: `
     <div class="stack">
-      <span class="stack__eyebrow">MY ENGINEERING STACK</span>
+      <span class="stack__eyebrow">{{ about().stackEyebrow }}</span>
 
       <div class="stack__flow">
-        @for (tech of stack; track tech; let i = $index) {
+        @for (tech of stack(); track tech; let i = $index) {
           <span
             class="stack__item"
             [class.stack__item--active]="activeTech() === tech"
@@ -81,19 +83,9 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EngineeringStack {
-  protected readonly stack: readonly string[] = [
-    'Angular',
-    'TypeScript',
-    'Signals',
-    'Zoneless',
-    'SSR',
-    'RxJS',
-    'Tailwind CSS',
-    'Node.js',
-    'PostgreSQL',
-    'Playwright',
-    'Figma',
-  ];
+  private readonly store = inject(PortfolioStore);
+  protected readonly about = this.store.about;
 
+  protected readonly stack = computed(() => this.about().engineeringStack);
   protected readonly activeTech = signal<string | null>(null);
 }

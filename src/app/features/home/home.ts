@@ -12,6 +12,7 @@ import { Services } from './sections/services/services';
 import { Skills } from './sections/skills/skills';
 import { Testimonials } from './sections/testimonials/testimonials';
 import { WorkReel } from './sections/work-reel/work-reel';
+import { SITE_SETTINGS } from '../../core/config/portfolio.content';
 import { homeSchema } from '../../core/services/structured-data';
 
 @Component({
@@ -27,9 +28,8 @@ export class Home {
 
   constructor() {
     this.seo.apply({
-      title: `Rabin R | Senior Frontend Angular Developer`,
-      description:
-        'Rabin R is a Senior Angular Developer and Frontend Software Engineer with 4+ years building enterprise-grade web & mobile applications with Angular, TypeScript, RxJS, Ionic, and SSR.',
+      title: SITE_SETTINGS.seo.homeTitle,
+      description: SITE_SETTINGS.seo.homeDescription,
       path: '/',
       type: 'profile',
     });

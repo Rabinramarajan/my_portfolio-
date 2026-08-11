@@ -4,6 +4,7 @@ import helmet from 'helmet';
 
 import { config, isProduction } from './config.js';
 import { contactRouter } from './contact.route.js';
+import { contentRouter } from './content.route.js';
 import { verifyTransport } from './mailer.js';
 
 const app = express();
@@ -31,6 +32,7 @@ app.use(express.json({ limit: '32kb' }));
 
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
 app.use('/api', contactRouter);
+app.use('/api/content', contentRouter);
 
 app.use((_req, res) => res.status(404).json({ success: false, message: 'Not found' }));
 

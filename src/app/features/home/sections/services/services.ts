@@ -17,6 +17,8 @@ import { SectionHeader } from '../../../../shared/components/section-header/sect
 export class Services {
   private readonly store = inject(PortfolioStore);
   protected readonly media = this.store.media;
+  protected readonly sections = this.store.sections;
+  protected readonly uiCopy = this.store.uiCopy;
 
   protected readonly services = this.store.services;
   /** Index of the row currently expanded; only one is open at a time. */

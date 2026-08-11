@@ -2,9 +2,9 @@
   <div class="ct__hero-inner">
     <p class="ct__hero-status" appReveal="fade">
       <span class="ct__hero-pulse" aria-hidden="true"></span>
-      {{ profile().availabilityNote }}
+      {{ contact().availability }}
       <span class="ct__hero-sep" aria-hidden="true"></span>
-      Response within 1 business day
+      {{ contact().heroNote }}
     </p>
 
     <h1 class="ct__hero-heading" appReveal="mask">
@@ -15,8 +15,7 @@
 
     <div class="ct__hero-lower">
       <p class="ct__hero-lede" appReveal="rise" [delay]="0.15">
-        Tell me what you're building, what you need, and where you want to go. I'll review your
-        project and get back to you with the right approach.
+        {{ contact().description }}
       </p>
 
       <div class="ct__hero-actions" appReveal="rise" [delay]="0.25">
@@ -467,12 +466,12 @@
 
         <div class="ct__aside-block">
           <h2 class="ct__label">Response time</h2>
-          <p class="ct__note">Within 1 business day, always with a real answer.</p>
+          <p class="ct__note">{{ contact().responseTime }}</p>
         </div>
 
         <div class="ct__aside-block">
           <h2 class="ct__label">Availability</h2>
-          <p class="ct__note">{{ profile().availabilityNote }}</p>
+          <p class="ct__note">{{ contact().availability }}</p>
         </div>
 
         <div class="ct__aside-block">

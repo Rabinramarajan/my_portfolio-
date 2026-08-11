@@ -1,6 +1,10 @@
 <section id="experience" class="xp">
   <div class="xp__inner">
-    <app-section-header index="04" eyebrow="Experience" heading="Where I've done this before." />
+    <app-section-header
+      [index]="sections().experience.index"
+      [eyebrow]="sections().experience.eyebrow"
+      [heading]="sections().experience.heading"
+    />
 
     <app-media-image
       class="xp__figure"

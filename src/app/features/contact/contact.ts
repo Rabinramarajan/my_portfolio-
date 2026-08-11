@@ -32,6 +32,7 @@ import {
   MAINTENANCE_NOTE,
   MAINTENANCE_PLANS,
   PACKAGES,
+  PACKAGE_PRESETS,
   PRICING_DISCLAIMER,
   TRUST_POINTS,
   type HirePackage,
@@ -39,46 +40,12 @@ import {
 import { Button } from '../../shared/components/button/button';
 import { ContactApi } from '../../core/services/contact-api';
 import { CursorTarget } from '../../shared/directives/cursor-target';
-import { SITE_URL } from '../../core/config/portfolio.content';
+import { SITE_SETTINGS, SITE_URL } from '../../core/config/portfolio.content';
 import { PortfolioStore } from '../../core/services/portfolio-store';
 import { Reveal } from '../../shared/directives/reveal';
 import { SectionHeader } from '../../shared/components/section-header/section-header';
 import { Seo } from '../../core/services/seo';
 import { breadcrumbSchema } from '../../core/services/structured-data';
-
-interface PackagePreset {
-  readonly service: string | null;
-  readonly type: ProjectType;
-  readonly budget: (typeof BUDGET_RANGES)[number];
-  readonly timeline: (typeof TIMELINES)[number] | null;
-}
-
-const PACKAGE_PRESETS: Record<HirePackage['id'] | 'custom', PackagePreset> = {
-  starter: {
-    service: 'Premium Portfolio',
-    type: 'Portfolio',
-    budget: '₹25,000 – ₹50,000',
-    timeline: '1–2 weeks',
-  },
-  professional: {
-    service: 'Angular Development',
-    type: 'SaaS',
-    budget: '₹50,000 – ₹1,00,000',
-    timeline: '2–4 weeks',
-  },
-  premium: {
-    service: 'Custom Web Application',
-    type: 'Custom Application',
-    budget: '₹1,00,000 – ₹2,50,000',
-    timeline: '1–2 months',
-  },
-  custom: {
-    service: null,
-    type: 'Custom Application',
-    budget: 'Not sure yet',
-    timeline: null,
-  },
-};
 
 /**
  * The Hire Me page — a project-discovery and quotation experience rather than a
@@ -121,6 +88,7 @@ export class Contact {
 
   protected readonly profile = this.store.profile;
   protected readonly media = this.store.media;
+  protected readonly contact = this.store.contact;
 
   protected readonly phoneHref = computed(() => {
     const phone = this.profile().phone;
@@ -213,8 +181,8 @@ export class Contact {
 
   constructor() {
     this.seo.apply({
-      title: `Contact Rabin R | Angular Developer & Frontend Consultant`,
-      description: `Tell Rabin R what you're building. Transparent starting prices for Angular development, premium websites, dashboards, SSR and more. Response within one business day.`,
+      title: SITE_SETTINGS.seo.contactTitle,
+      description: SITE_SETTINGS.seo.contactDescription,
       path: '/contact',
     });
     this.seo.setStructuredData(

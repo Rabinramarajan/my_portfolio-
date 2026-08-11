@@ -1,7 +1,7 @@
-import { DOCUMENT, Injectable, inject } from '@angular/core';
+﻿import { DOCUMENT, Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
-import { PROFILE, SITE_URL } from '../config/portfolio.content';
+import { SITE_SETTINGS, SITE_URL } from '../config/portfolio.content';
 
 export interface SeoMetadata {
   readonly title: string;
@@ -15,7 +15,6 @@ export interface SeoMetadata {
   readonly noIndex?: boolean;
 }
 
-const DEFAULT_IMAGE = '/media/og/default.png';
 const OG_IMAGE_WIDTH = '1200';
 const OG_IMAGE_HEIGHT = '630';
 
@@ -31,15 +30,15 @@ export class Seo {
 
   apply(data: SeoMetadata): void {
     const url = `${SITE_URL}${data.path === '/' ? '' : data.path}`;
-    const image = `${SITE_URL}${data.image ?? DEFAULT_IMAGE}`;
+    const image = `${SITE_URL}${data.image ?? SITE_SETTINGS.defaultOgImage}`;
 
     this.title.setTitle(data.title);
     this.setTags({
       description: data.description,
-      author: PROFILE.name,
+      author: SITE_SETTINGS.ownerName,
       robots: data.noIndex ? 'noindex, nofollow' : 'index, follow',
       'og:type': data.type ?? 'website',
-      'og:site_name': `${PROFILE.name} — ${PROFILE.role}`,
+      'og:site_name': SITE_SETTINGS.siteName,
       'og:title': data.title,
       'og:description': data.description,
       'og:url': url,
@@ -80,7 +79,7 @@ export class Seo {
   private setCanonical(url: string | null): void {
     let link = this.document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!url) {
-      // noindex pages should not have a canonical — remove it if present.
+      // noindex pages should not have a canonical â€” remove it if present.
       link?.remove();
       return;
     }

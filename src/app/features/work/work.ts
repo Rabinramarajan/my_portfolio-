@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 
-import { SITE_URL } from '../../core/config/portfolio.content';
+import { SITE_SETTINGS, SITE_URL } from '../../core/config/portfolio.content';
 import { PortfolioStore } from '../../core/services/portfolio-store';
 import { ProjectCard } from '../../shared/components/project-card/project-card';
 import { SectionHeader } from '../../shared/components/section-header/section-header';
@@ -19,6 +19,8 @@ export class Work {
   private readonly store = inject(PortfolioStore);
   private readonly seo = inject(Seo);
 
+  protected readonly sections = this.store.sections;
+  protected readonly uiCopy = this.store.uiCopy;
   protected readonly filter = signal<ProjectCategory | 'All'>('All');
 
   protected readonly categories = computed<readonly (ProjectCategory | 'All')[]>(() => [
@@ -34,9 +36,8 @@ export class Work {
 
   constructor() {
     this.seo.apply({
-      title: `Angular Projects & Case Studies | Rabin R`,
-      description:
-        'Explore Angular projects and case studies by Rabin R — enterprise platforms, government portals, and cross-platform mobile apps built with Angular, TypeScript, and RxJS.',
+      title: SITE_SETTINGS.seo.workTitle,
+      description: SITE_SETTINGS.seo.workDescription,
       path: '/work',
     });
     this.seo.setStructuredData(

@@ -1,7 +1,11 @@
 @if (hasTestimonials()) {
   <section id="testimonials" class="ts">
     <div class="ts__inner">
-      <app-section-header index="07" eyebrow="Testimonials" heading="In their words." />
+      <app-section-header
+        [index]="sections().testimonials.index"
+        [eyebrow]="sections().testimonials.eyebrow"
+        [heading]="sections().testimonials.heading"
+      />
 
       <ul class="ts__list">
         @for (item of testimonials(); track item.author) {

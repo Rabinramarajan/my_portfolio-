@@ -1,20 +1,16 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 
-interface Milestone {
-  year: string;
-  role: string;
-  detail: string;
-}
+import { PortfolioStore } from '../../../../../core/services/portfolio-store';
 
 @Component({
   selector: 'app-career-timeline',
   standalone: true,
   template: `
     <div class="timeline">
-      <span class="timeline__eyebrow">CAREER MILESTONES</span>
+      <span class="timeline__eyebrow">{{ about().milestonesEyebrow }}</span>
 
       <div class="timeline__track">
-        @for (m of milestones; track m.year) {
+        @for (m of milestones(); track m.year) {
           <div class="timeline__item">
             <div class="timeline__marker">
               <div class="timeline__dot"></div>
@@ -114,26 +110,7 @@ interface Milestone {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CareerTimeline {
-  protected readonly milestones: readonly Milestone[] = [
-    {
-      year: '2021',
-      role: 'B.Sc. IT Graduate',
-      detail: 'Core computer science & web technology foundations.',
-    },
-    {
-      year: '2023',
-      role: 'Frontend Developer',
-      detail: 'PRIMS Pension Portal & VNPF Ionic cross-platform mobile apps.',
-    },
-    {
-      year: '2024',
-      role: 'Senior Angular Engineer',
-      detail: 'Fiji Government Immigration Platforms serving 10,000+ users.',
-    },
-    {
-      year: '2026',
-      role: 'AI & Frontend Consultant',
-      detail: 'Applied AI/ML (IIT Patna) & Senior Angular Architecture Consultant.',
-    },
-  ];
+  private readonly store = inject(PortfolioStore);
+  protected readonly about = this.store.about;
+  protected readonly milestones = computed(() => this.about().careerMilestones);
 }

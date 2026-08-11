@@ -5,7 +5,7 @@ import { MediaImage } from '../../../../shared/components/media-image/media-imag
 import { PortfolioStore } from '../../../../core/services/portfolio-store';
 import { Reveal } from '../../../../shared/directives/reveal';
 import { SectionHeader } from '../../../../shared/components/section-header/section-header';
-import type { SkillGroup } from '../../../../core/models/portfolio.models';
+import type { PortfolioSkill, SkillGroup } from '../../../../core/models/portfolio.models';
 
 /**
  * Technology ecosystem as a filterable cluster.
@@ -23,6 +23,7 @@ import type { SkillGroup } from '../../../../core/models/portfolio.models';
 export class Skills {
   private readonly store = inject(PortfolioStore);
   protected readonly media = this.store.media;
+  protected readonly sections = this.store.sections;
 
   protected readonly clusters = this.store.skills;
   protected readonly active = signal<SkillGroup | null>(null);
@@ -31,6 +32,10 @@ export class Skills {
     const group = this.active();
     return group ? this.clusters().filter((cluster) => cluster.group === group) : this.clusters();
   });
+
+  protected itemName(item: string | PortfolioSkill): string {
+    return typeof item === 'string' ? item : item.name;
+  }
 
   protected select(group: SkillGroup): void {
     this.active.update((current) => (current === group ? null : group));

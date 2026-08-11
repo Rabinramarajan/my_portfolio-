@@ -10,6 +10,9 @@
  * ₹1,00,000, ₹2,50,000 — never "Rs." or a hard-coded USD conversion.
  */
 
+import type { BudgetRange, ProjectType, Timeline } from '../models/contact.models';
+import type { PricingPlan } from '../models/portfolio.models';
+
 export const CURRENCY_NOTE =
   'International projects available — USD pricing provided during consultation.';
 
@@ -358,6 +361,122 @@ export const TRUST_POINTS: readonly HireTrustItem[] = [
   { label: 'Clear communication' },
   { label: 'Post-launch support' },
 ];
+
+/** Strips symbols, commas and suffixes from a labelled INR price, e.g. "₹75,000+" → 75000. */
+const priceToNumber = (label: string): number =>
+  Number.parseInt(label.replace(/[^\d]/g, ''), 10) || 0;
+
+/**
+ * ─────────────────────────────────────────────────────────────────────────────
+ * PRICING PLANS — structured, single-source pricing the UI renders
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Derived from the copy blocks above so a figure exists in exactly one place.
+ * `price` is the numeric INR value for programmatic display; `priceLabel` is
+ * the exact string the page should show. Only `active` plans render.
+ */
+export const PRICING_PLANS: readonly PricingPlan[] = [
+  ...HIRE_SERVICES.map((service, index) => ({
+    id: `hire-${service.index.toLowerCase()}`,
+    name: service.title,
+    description: `Project pricing for ${service.title.toLowerCase()} — starting from ${service.startingFrom}.`,
+    currency: 'INR' as const,
+    price: priceToNumber(service.startingFrom),
+    priceLabel: service.startingFrom,
+    priceType: 'starting_from' as const,
+    billingType: 'project' as const,
+    features: [...service.for],
+    order: index + 1,
+    active: true,
+    updatedAt: '2026-08-01',
+    version: 1,
+  })),
+  ...PACKAGES.map((plan, index) => ({
+    id: `package-${plan.id}`,
+    name: `${plan.name} Package`,
+    description: plan.bestFor,
+    currency: 'INR' as const,
+    price: priceToNumber(plan.priceFrom),
+    priceLabel: plan.priceFrom,
+    priceType: 'starting_from' as const,
+    billingType: 'project' as const,
+    features: [...plan.includes],
+    recommended: plan.recommended,
+    order: HIRE_SERVICES.length + index + 1,
+    active: true,
+    updatedAt: '2026-08-01',
+    version: 1,
+  })),
+  ...MAINTENANCE_PLANS.map((plan, index) => ({
+    id: `maintenance-${plan.name.toLowerCase()}`,
+    name: `${plan.name} Maintenance`,
+    description:
+      'Ongoing care after launch: dependency updates, monitoring, bug fixes and small feature work.',
+    currency: 'INR' as const,
+    price: priceToNumber(plan.price),
+    priceLabel: plan.price,
+    priceType: 'starting_from' as const,
+    billingType: 'monthly' as const,
+    features: [...plan.includes],
+    recommended: plan.recommended,
+    order: HIRE_SERVICES.length + PACKAGES.length + index + 1,
+    active: true,
+    updatedAt: '2026-08-01',
+    version: 1,
+  })),
+  {
+    id: 'custom-project',
+    name: 'Custom Project',
+    description: CUSTOM_PROJECT.title,
+    currency: 'INR' as const,
+    price: 0,
+    priceLabel: CUSTOM_PROJECT.price,
+    priceType: 'custom' as const,
+    billingType: 'project' as const,
+    features: [...CUSTOM_PROJECT.for],
+    order: HIRE_SERVICES.length + PACKAGES.length + MAINTENANCE_PLANS.length + 1,
+    active: true,
+    updatedAt: '2026-08-01',
+    version: 1,
+  },
+];
+
+export interface PackagePreset {
+  readonly service: string | null;
+  readonly type: ProjectType;
+  readonly budget: BudgetRange;
+  readonly timeline: Timeline | null;
+}
+
+/**
+ * The discovery-form presets the "choose a package" cards apply to the form.
+ * Kept here (not in the component) so the numbers live in one place.
+ */
+export const PACKAGE_PRESETS: Record<'starter' | 'professional' | 'premium' | 'custom', PackagePreset> = {
+  starter: {
+    service: 'Premium Portfolio',
+    type: 'Portfolio',
+    budget: '₹25,000 – ₹50,000',
+    timeline: '1–2 weeks',
+  },
+  professional: {
+    service: 'Angular Development',
+    type: 'SaaS',
+    budget: '₹50,000 – ₹1,00,000',
+    timeline: '2–4 weeks',
+  },
+  premium: {
+    service: 'Custom Web Application',
+    type: 'Custom Application',
+    budget: '₹1,00,000 – ₹2,50,000',
+    timeline: '1–2 months',
+  },
+  custom: {
+    service: null,
+    type: 'Custom Application',
+    budget: 'Not sure yet',
+    timeline: null,
+  },
+};
 
 export const LOW_BUDGET_NOTE =
   'Not sure about budget? Tell me about the project and I\u2019ll suggest the most practical approach.';

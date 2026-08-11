@@ -1,10 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 
-interface Principle {
-  id: string;
-  title: string;
-  statement: string;
-}
+import { PortfolioStore } from '../../../../../core/services/portfolio-store';
 
 @Component({
   selector: 'app-engineering-principles',
@@ -12,16 +8,16 @@ interface Principle {
   template: `
     <section class="principles">
       <div class="principles__header">
-        <span class="principles__eyebrow">HOW I THINK</span>
+        <span class="principles__eyebrow">{{ about().principlesEyebrow }}</span>
         <h3 class="principles__statement">
-          "Good frontend engineering is not just about making interfaces work. It's about making complexity feel simple."
+          {{ about().philosophyStatement }}
         </h3>
       </div>
 
       <div class="principles__body">
         <!-- Editorial List (Left) -->
         <ul class="principles__list">
-          @for (p of principles; track p.id; let idx = $index) {
+          @for (p of principles(); track p.id; let idx = $index) {
             <!-- Pointer users select by hovering; keyboard users need the same
                  control to be reachable and operable. A real <button> inside
                  the <li> gets focus, Enter and Space for free — putting
@@ -207,33 +203,10 @@ interface Principle {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EngineeringPrinciples {
-  protected readonly principles: readonly Principle[] = [
-    {
-      id: '01',
-      title: 'PRECISION',
-      statement:
-        'Every spacing value, interaction pattern, and component hierarchy should have a clear architectural reason.',
-    },
-    {
-      id: '02',
-      title: 'PERFORMANCE',
-      statement:
-        'Beautiful interfaces must feel instant — measured by real-world interaction speed, frame rate, and minimal network overhead.',
-    },
-    {
-      id: '03',
-      title: 'ACCESSIBILITY',
-      statement:
-        'Great digital products are accessible-first, ensuring every user regardless of device or ability experiences effortless usability.',
-    },
-    {
-      id: '04',
-      title: 'SCALABILITY',
-      statement:
-        'Frontend architecture should gracefully support tomorrow’s complex requirements without brittle tech debt or refactoring loops.',
-    },
-  ];
+  private readonly store = inject(PortfolioStore);
+  protected readonly about = this.store.about;
 
+  protected readonly principles = computed(() => this.about().principles);
   protected readonly activeIdx = signal(0);
-  protected readonly activePrinciple = computed(() => this.principles[this.activeIdx()]);
+  protected readonly activePrinciple = computed(() => this.principles()[this.activeIdx()]);
 }

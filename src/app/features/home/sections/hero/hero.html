@@ -12,16 +12,16 @@
         <p class="hero__status-note">{{ availabilityResponse() }}</p>
 
         <h1 id="hero-heading" class="hero__heading">
-          @for (line of profile().headline; track line) {
+          @for (line of hero().headline; track line) {
             <span class="hero__line"><span class="hero__line-inner">{{ line }}</span></span>
           }
         </h1>
 
-        <p class="hero__value">{{ profile().valueProposition }}</p>
+        <p class="hero__value">{{ hero().description }}</p>
 
         <div class="hero__actions">
-          <app-button routerLink="/contact" size="lg">Let's Work Together</app-button>
-          <app-button routerLink="/work" variant="secondary" size="lg">View Selected Work</app-button>
+          <app-button [routerLink]="hero().primaryCta.href" size="lg">{{ hero().primaryCta.label }}</app-button>
+          <app-button [routerLink]="hero().secondaryCta.href" variant="secondary" size="lg">{{ hero().secondaryCta.label }}</app-button>
         </div>
       </div>
 
@@ -33,20 +33,20 @@
     <dl class="hero__meta">
       <div class="hero__meta-item">
         <dt>Role</dt>
-        <dd>{{ profile().consultLabel }}</dd>
+        <dd>{{ hero().role }}</dd>
       </div>
       <div class="hero__meta-item">
         <dt>Based in</dt>
-        <dd>{{ profile().basedIn }}</dd>
+        <dd>{{ hero().location }}</dd>
       </div>
       <div class="hero__meta-item">
         <dt>Focus</dt>
-        <dd>{{ focus }}</dd>
+        <dd>{{ hero().focus }}</dd>
       </div>
     </dl>
 
     <div class="hero__scroll" aria-hidden="true">
-      <span class="hero__scroll-label">Scroll to explore</span>
+      <span class="hero__scroll-label">{{ hero().scrollLabel }}</span>
       <span class="hero__scroll-line"></span>
       <span class="hero__scroll-arrow">↓</span>
     </div>
@@ -59,9 +59,9 @@
   </div>
 
   <footer class="hero__bridge" aria-label="Next chapter">
-    <p class="hero__bridge-index">01 — About</p>
+    <p class="hero__bridge-index">{{ hero().bridge.index }}</p>
     <p class="hero__bridge-quote">
-      Engineering is only half the job. The other half is understanding the experience.
+      {{ hero().bridge.quote }}
     </p>
   </footer>
 

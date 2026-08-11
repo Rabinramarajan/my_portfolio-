@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { Button } from '../../shared/components/button/button';
 import { Seo } from '../../core/services/seo';
 import { TextReveal } from '../../shared/components/text-reveal/text-reveal';
+import { SITE_SETTINGS } from '../../core/config/portfolio.content';
 
 @Component({
   selector: 'app-not-found',
@@ -17,8 +18,8 @@ export class NotFound {
 
   constructor() {
     this.seo.apply({
-      title: 'Page Not Found — Rabin R',
-      description: 'The page you are looking for does not exist. Browse Angular projects, experience, and more from Rabin R.',
+      title: SITE_SETTINGS.seo.notFoundTitle,
+      description: SITE_SETTINGS.seo.notFoundDescription,
       path: '/404',
       noIndex: true,
     });

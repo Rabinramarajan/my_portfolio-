@@ -17,6 +17,8 @@ import { SectionHeader } from '../../../../shared/components/section-header/sect
 export class WorkReel {
   private readonly store = inject(PortfolioStore);
   protected readonly media = this.store.media;
+  protected readonly sections = this.store.sections;
+  protected readonly uiCopy = this.store.uiCopy;
   protected readonly projects = this.store.featuredProjects;
 
   protected label(index: number): string {

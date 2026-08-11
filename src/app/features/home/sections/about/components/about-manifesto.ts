@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+
+import { PortfolioStore } from '../../../../../core/services/portfolio-store';
 
 @Component({
   selector: 'app-about-manifesto',
@@ -6,13 +8,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `
     <header class="about-manifesto">
       <div class="about-manifesto__eyebrow">
-        <span class="about-manifesto__index">01</span>
+        <span class="about-manifesto__index">{{ about().sectionIndex }}</span>
         <span class="about-manifesto__slash">/</span>
-        <span class="about-manifesto__label">ABOUT</span>
+        <span class="about-manifesto__label">{{ about().sectionLabel }}</span>
       </div>
 
       <h2 class="about-manifesto__heading">
-        Where thoughtful interfaces meet serious engineering.
+        {{ about().manifestoHeading }}
       </h2>
     </header>
   `,
@@ -46,4 +48,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AboutManifesto {}
+export class AboutManifesto {
+  private readonly store = inject(PortfolioStore);
+  protected readonly about = this.store.about;
+}

@@ -1,10 +1,10 @@
 <section id="process" class="pr" aria-label="My process">
   <div class="pr__inner">
     <app-section-header
-      index="06"
-      eyebrow="My Process / 07 Steps"
-      heading="From Idea to Impact"
-      lede="Every project follows a clear path — from understanding the problem to launching a product built to perform."
+      [index]="sections().process.index"
+      [eyebrow]="sections().process.eyebrow"
+      [heading]="sections().process.heading"
+      [lede]="sections().process.lede"
     />
 
     <div class="pr__layout">
@@ -12,8 +12,8 @@
         <app-process-visual [activeStep]="activeStep()" />
         <div class="pr__indicator">
           <span class="pr__indicator-label">Process</span>
-          <span class="pr__indicator-count">{{ activeStep() + 1 }} / {{ totalSteps }}</span>
-          <span class="pr__indicator-title">{{ steps[activeStep()].eyebrow.split('/')[1] }}</span>
+          <span class="pr__indicator-count">{{ activeStep() + 1 }} / {{ totalSteps() }}</span>
+          <span class="pr__indicator-title">{{ steps()[activeStep()].eyebrow.split('/')[1] }}</span>
         </div>
       </div>
 
@@ -26,7 +26,7 @@
         </span>
 
         <ol class="pr__track" #track>
-        @for (step of steps; track step.title; let i = $index) {
+        @for (step of steps(); track step.title; let i = $index) {
           <li
             class="pr__step"
             #stepEl
@@ -68,8 +68,8 @@
     </div>
 
     <div class="pr__ending" appReveal="rise">
-      <p class="pr__ending-text">Ready to start?</p>
-      <a class="pr__ending-cta" href="#contact">Let's Build Something</a>
+      <p class="pr__ending-text">{{ uiCopy().processEnding.text }}</p>
+      <a class="pr__ending-cta" href="#contact">{{ uiCopy().processEnding.cta }}</a>
     </div>
   </div>
 </section>

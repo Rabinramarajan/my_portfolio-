@@ -21,6 +21,7 @@ import { SectionHeader } from '../../../../shared/components/section-header/sect
 export class Testimonials {
   private readonly store = inject(PortfolioStore);
 
+  protected readonly sections = this.store.sections;
   protected readonly testimonials = this.store.testimonials;
   protected readonly hasTestimonials = this.store.hasTestimonials;
 }

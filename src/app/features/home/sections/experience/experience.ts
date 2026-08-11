@@ -24,6 +24,7 @@ import { asyncTeardown } from '../../../../shared/utils/async-teardown';
 export class Experience {
   private readonly store = inject(PortfolioStore);
   protected readonly media = this.store.media;
+  protected readonly sections = this.store.sections;
   private readonly motion = inject(Motion);
   private readonly teardown = asyncTeardown();
   private readonly railRef = viewChild<ElementRef<HTMLElement>>('rail');

@@ -1,10 +1,10 @@
 <section id="skills" class="sk">
   <div class="sk__inner">
     <app-section-header
-      index="05"
-      eyebrow="Ecosystem"
-      heading="The tools I actually reach for."
-      lede="No percentages, no five-star ratings. Just what I use, grouped by where it sits in the stack."
+      [index]="sections().skills.index"
+      [eyebrow]="sections().skills.eyebrow"
+      [heading]="sections().skills.heading"
+      [lede]="sections().skills.lede"
     />
 
     <app-media-image
@@ -47,7 +47,7 @@
           </header>
           <ul class="sk__items">
             @for (item of cluster.items; track item) {
-              <li [appCursorTarget]="'hover'">{{ item }}</li>
+              <li [appCursorTarget]="'hover'">{{ itemName(item) }}</li>
             }
           </ul>
         </article>

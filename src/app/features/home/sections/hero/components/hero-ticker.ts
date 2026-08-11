@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+
+import { PortfolioStore } from '../../../../../core/services/portfolio-store';
 
 /**
- * Technology ticker under the hero — the "animated skill language" of the
+ * Technology ticker under the hero ï¿½?" the "animated skill language" of the
  * page. Purely CSS: two bands translate via compositor-only `translate3d`
  * keyframes in opposite directions, pause on hover, and stop outright for
  * reduced motion. No per-frame JavaScript, no signal writes.
@@ -13,21 +15,21 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     <aside class="hero-ticker" aria-hidden="true">
       <div class="hero-ticker__row hero-ticker__row--a">
         <div class="hero-ticker__band">
-          @for (item of items; track item) {
-            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">✦</span></span>
+          @for (item of items(); track item) {
+            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">âœ¦</span></span>
           }
-          @for (item of items; track item) {
-            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">✦</span></span>
+          @for (item of items(); track item) {
+            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">âœ¦</span></span>
           }
         </div>
       </div>
       <div class="hero-ticker__row hero-ticker__row--b">
         <div class="hero-ticker__band">
-          @for (item of items; track item) {
-            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">✦</span></span>
+          @for (item of items(); track item) {
+            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">âœ¦</span></span>
           }
-          @for (item of items; track item) {
-            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">✦</span></span>
+          @for (item of items(); track item) {
+            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">âœ¦</span></span>
           }
         </div>
       </div>
@@ -114,20 +116,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroTicker {
-  protected readonly items = [
-    'Angular',
-    'TypeScript',
-    'Signals',
-    'Zoneless',
-    'SSR',
-    'RxJS',
-    'Tailwind',
-    'Node.js',
-    'PostgreSQL',
-    'Playwright',
-    'Figma',
-    'Ionic',
-    'Capacitor',
-    'REST APIs',
-  ];
+  private readonly store = inject(PortfolioStore);
+
+  protected readonly items = computed(() => this.store.hero().technologies);
 }

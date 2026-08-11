@@ -48,32 +48,24 @@ export class Hero {
 
   protected readonly profile = this.store.profile;
   protected readonly media = this.store.media;
+  protected readonly hero = this.store.hero;
 
-  /** Only verified numbers ride in the hero row — nothing is invented. */
+  /** Only verified numbers ride in the hero row �?" nothing is invented. */
   protected readonly heroMetrics = computed<readonly HeroMetric[]>(() =>
     this.profile()
-      .stats.filter((stat) => HERO_METRIC_LABELS.includes(stat.label))
+      .stats.filter((stat) => this.hero().metricsLabels.includes(stat.label))
       .map((stat) => ({ value: stat.value, suffix: stat.suffix, label: stat.label })),
   );
 
-  protected readonly availabilityLabel = computed(() => {
-    switch (this.profile().availability) {
-      case 'limited':
-        return 'Accepting select projects';
-      case 'booked':
-        return 'Currently booked';
-      default:
-        return 'Available for select projects';
-    }
-  });
+  protected readonly availabilityLabel = computed(
+    () => this.hero().availabilityLabels[this.profile().availability],
+  );
 
   protected readonly availabilityResponse = computed(() =>
     this.profile().availability === 'available'
-      ? 'Usually responds within 1 business day'
+      ? this.hero().availabilityResponse
       : this.profile().availabilityNote,
   );
-
-  protected readonly focus = 'Angular · TypeScript · Product Engineering';
 
   constructor() {
     afterNextRender(() => void this.run());
@@ -180,9 +172,3 @@ export class Hero {
     this.teardown.register(() => ctx.revert());
   }
 }
-
-const HERO_METRIC_LABELS: readonly string[] = [
-  'Years experience',
-  'Users served',
-  'UI components built',
-];

@@ -1,10 +1,10 @@
 <section id="services" class="sv">
   <div class="sv__inner">
     <app-section-header
-      index="02"
-      eyebrow="Services"
-      heading="What I'm usually hired to do."
-      lede="Most engagements start with one of these and grow from there. All of them assume I'm working inside your team, not around it."
+      [index]="sections().services.index"
+      [eyebrow]="sections().services.eyebrow"
+      [heading]="sections().services.heading"
+      [lede]="sections().services.lede"
     />
 
     <app-media-image
@@ -63,8 +63,8 @@
     </ul>
 
     <div class="sv__cta" appReveal="fade">
-      <p>Not sure which of these you need? That's usually the first thing we work out together.</p>
-      <app-button routerLink="/contact" variant="secondary">Start a conversation</app-button>
+      <p>{{ uiCopy().servicesCta.text }}</p>
+      <app-button routerLink="/contact" variant="secondary">{{ uiCopy().servicesCta.label }}</app-button>
     </div>
   </div>
 </section>

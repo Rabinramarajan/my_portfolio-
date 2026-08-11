@@ -67,7 +67,10 @@ export interface CaseStudySection {
 
 export interface PortfolioProject {
   readonly slug: string;
+  /** Displayed card number, e.g. "01". */
+  readonly number?: string;
   readonly title: string;
+  readonly shortTitle?: string;
   readonly tagline: string;
   readonly category: ProjectCategory;
   readonly role: string;
@@ -75,6 +78,13 @@ export interface PortfolioProject {
   readonly client: string;
   readonly summary: string;
   readonly featured: boolean;
+  /** Publishing lifecycle — only `published` projects appear publicly. */
+  readonly status: ContentStatus;
+  /** Sort order — changing it reorders the Work section. */
+  readonly order: number;
+  readonly publishedAt?: string;
+  readonly updatedAt?: string;
+  readonly version?: number;
   readonly problem: string;
   readonly solution: string;
   /** Measurable outcomes. Leave empty rather than inventing numbers. */
@@ -92,38 +102,82 @@ export interface PortfolioProject {
 }
 
 export interface PortfolioService {
+  readonly id: string;
+  /** Displayed row number, e.g. "01". */
   readonly index: string;
+  /** Numeric order used for sorting. */
+  readonly order: number;
   readonly title: string;
+  /** Short line for cards and previews. */
+  readonly shortDescription: string;
   readonly description: string;
   readonly technologies: readonly string[];
   readonly deliverables: readonly string[];
+  readonly icon?: string;
+  readonly image?: PortfolioMedia;
+  readonly featured?: boolean;
+  /** `false` removes the service from the UI without a code change. */
+  readonly active: boolean;
+  readonly updatedAt?: string;
+  readonly version?: number;
 }
 
 export interface PortfolioExperience {
+  readonly id: string;
   readonly company: string;
   readonly role: string;
+  readonly employmentType?: string;
   readonly start: string;
+  /** For the current role keep `end` as `'Present'`; the UI renders it from `current`. */
   readonly end: string | 'Present';
+  readonly current: boolean;
   readonly location: string;
   readonly summary: string;
   readonly achievements: readonly string[];
   readonly technologies: readonly string[];
+  readonly order: number;
+  /** `false` hides the role without a code change. */
+  readonly visible: boolean;
 }
 
 export type SkillGroup =
   'Frontend' | 'Backend' | 'Database' | 'Mobile' | 'Design' | 'Testing' | 'DevOps' | 'Tools';
 
+export interface PortfolioSkill {
+  readonly id: string;
+  readonly name: string;
+  readonly icon?: string;
+  readonly featured?: boolean;
+  readonly order?: number;
+  readonly visible?: boolean;
+}
+
 export interface PortfolioSkillCluster {
   readonly group: SkillGroup;
   readonly blurb: string;
-  readonly items: readonly string[];
+  readonly items: readonly PortfolioSkill[];
 }
 
 export interface PortfolioProcessStep {
+  readonly id: string;
+  /** Displayed row number, e.g. "01". */
   readonly index: string;
+  /** Short stage name, e.g. "Discover". */
+  readonly name: string;
+  /** Full eyebrow, e.g. "01 / DISCOVER". */
+  readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
+  readonly outputsLabel: string;
   readonly outputs: readonly string[];
+  /** Longer supporting copy (optional, not always rendered). */
+  readonly details?: string;
+  readonly technologies?: readonly string[];
+  /** Key that maps to a visual asset (see ProcessVisual). */
+  readonly visual?: string;
+  readonly order: number;
+  /** `false` removes the step without a code change. */
+  readonly active: boolean;
 }
 
 export interface PortfolioTestimonial {
@@ -197,6 +251,8 @@ export interface PortfolioProfile {
   readonly timezone: string;
   readonly email: string;
   readonly phone?: string;
+  /** Displayed coordinates for the decorative engineering readouts. */
+  readonly coordinates?: { readonly lat: string; readonly lon: string; readonly short: string };
   readonly availability: AvailabilityState;
   readonly availabilityNote: string;
   readonly industries: readonly string[];
@@ -206,4 +262,224 @@ export interface PortfolioProfile {
   readonly education: readonly PortfolioEducation[];
   readonly certifications: readonly PortfolioCertification[];
   readonly socials: readonly PortfolioSocial[];
+}
+
+/**
+ * ─────────────────────────────────────────────────────────────────────────────
+ * CONTENT MODULES
+ * ─────────────────────────────────────────────────────────────────────────────
+ * The typed shape of every content module served by the content API and read by
+ * `PortfolioContentService`. The static config (`portfolio.content.ts`) seeds
+ * these; a future CMS/API supplies the same shape at runtime.
+ */
+
+export type ContentStatus = 'draft' | 'published' | 'archived';
+
+/** Machine-readable availability that also drives the public copy. */
+export type AvailabilityLevel = 'AVAILABLE' | 'LIMITED' | 'BUSY' | 'NOT_AVAILABLE';
+
+/** A single CTA link rendered by data-driven sections. */
+export interface ContentCta {
+  readonly label: string;
+  readonly href: string;
+}
+
+export interface HeroContent {
+  readonly eyebrow: string;
+  readonly headline: readonly string[];
+  readonly description: string;
+  readonly primaryCta: ContentCta;
+  readonly secondaryCta: ContentCta;
+  /** Copy per availability state — the label the hero pulse shows. */
+  readonly availabilityLabels: Readonly<Record<AvailabilityState, string>>;
+  readonly availabilityResponse: string;
+  readonly role: string;
+  readonly location: string;
+  readonly focus: string;
+  /** Which rows of `profile.stats` the hero metric strip shows. */
+  readonly metricsLabels: readonly string[];
+  /** Technology ticker under the hero. */
+  readonly technologies: readonly string[];
+  readonly scrollLabel: string;
+  readonly bridge: { readonly index: string; readonly quote: string };
+}
+
+export interface AboutPrinciple {
+  readonly id: string;
+  readonly title: string;
+  readonly statement: string;
+}
+
+export interface CareerMilestone {
+  readonly year: string;
+  readonly role: string;
+  readonly detail: string;
+}
+
+export interface AboutStoryKeyword {
+  readonly id: string;
+  readonly word: string;
+}
+
+export interface AboutStoryParagraph {
+  /**
+   * Plain paragraph text. Keywords appear inline wrapped in `{id}` placeholders
+   * that the component turns into interactive highlighted spans.
+   */
+  readonly text: string;
+  readonly keywords?: readonly AboutStoryKeyword[];
+}
+
+export interface AboutPortraitStamp {
+  readonly name: string;
+  readonly role: string;
+  readonly location: string;
+  readonly status: string;
+}
+
+export interface AboutContent {
+  readonly sectionIndex: string;
+  readonly sectionLabel: string;
+  readonly manifestoHeading: string;
+  readonly storyEyebrow: string;
+  readonly story: readonly AboutStoryParagraph[];
+  readonly portrait: AboutPortraitStamp;
+  readonly principlesEyebrow: string;
+  readonly philosophyStatement: string;
+  readonly principles: readonly AboutPrinciple[];
+  readonly milestonesEyebrow: string;
+  readonly careerMilestones: readonly CareerMilestone[];
+  readonly stackEyebrow: string;
+  readonly engineeringStack: readonly string[];
+  readonly closingStatement: string;
+}
+
+export interface AvailabilityContent {
+  readonly status: AvailabilityLevel;
+  readonly message: string;
+  readonly responseTime: string;
+  readonly updatedAt?: string;
+}
+
+export interface ContactContent {
+  readonly title: string;
+  readonly description: string;
+  /** Short availability blurb in the contact hero status line. */
+  readonly heroNote: string;
+  readonly email: string;
+  readonly availability: string;
+  readonly responseTime: string;
+}
+
+export interface PricingPlan {
+  readonly id: string;
+  readonly name: string;
+  readonly description: string;
+  readonly currency: 'INR';
+  /** Numeric price used for programmatic display. */
+  readonly price: number;
+  /** Pre-formatted INR label exactly as it should read, e.g. "₹35,000+". */
+  readonly priceLabel: string;
+  readonly priceType: 'starting_from' | 'fixed' | 'custom';
+  readonly billingType: 'project' | 'monthly';
+  readonly features: readonly string[];
+  readonly recommended?: boolean;
+  readonly order: number;
+  /** `false` removes the plan without a code change. */
+  readonly active: boolean;
+  readonly updatedAt?: string;
+  readonly version?: number;
+}
+
+export interface SeoContent {
+  readonly siteName: string;
+  readonly defaultTitle: string;
+  readonly defaultDescription: string;
+  readonly ogImage: string;
+  readonly homeTitle: string;
+  readonly homeDescription: string;
+  readonly workTitle: string;
+  readonly workDescription: string;
+  readonly resumeTitle: string;
+  readonly resumeDescription: string;
+  readonly contactTitle: string;
+  readonly contactDescription: string;
+  readonly notFoundTitle: string;
+  readonly notFoundDescription: string;
+}
+
+export interface SiteSettings {
+  readonly siteName: string;
+  readonly ownerName: string;
+  readonly defaultTitle: string;
+  readonly defaultDescription: string;
+  readonly email: string;
+  readonly location: string;
+  readonly timezone: string;
+  readonly defaultOgImage: string;
+  readonly socialLinks: readonly PortfolioSocial[];
+  readonly availability: AvailabilityContent;
+  readonly maintenanceMode: boolean;
+  readonly seo: SeoContent;
+  readonly lastUpdated?: string;
+  readonly version?: number;
+}
+
+/** Copy block for a section header (index + eyebrow + heading + lede). */
+export interface SectionCopy {
+  readonly index?: string;
+  readonly eyebrow: string;
+  readonly heading: string;
+  readonly lede?: string;
+}
+
+/** One source of truth for every section's header copy and CTAs. */
+export interface SectionsContent {
+  readonly about: SectionCopy;
+  readonly services: SectionCopy;
+  readonly work: SectionCopy;
+  readonly workPage: SectionCopy;
+  readonly experience: SectionCopy;
+  readonly skills: SectionCopy;
+  readonly process: SectionCopy;
+  readonly testimonials: SectionCopy;
+  readonly resume: SectionCopy;
+}
+
+/** Small reusable UI copy (empty states, CTAs) kept out of templates. */
+export interface UiCopy {
+  readonly workEmpty: string;
+  readonly workPageEmpty: string;
+  readonly servicesCta: { readonly text: string; readonly label: string };
+  readonly workCta: { readonly label: string };
+  readonly processEnding: { readonly text: string; readonly cta: string };
+  readonly resume: {
+    readonly downloadLabel: string;
+    readonly printLabel: string;
+    readonly updatedLabel: string;
+    readonly profileLabel: string;
+    readonly experienceLabel: string;
+    readonly educationLabel: string;
+    readonly certificationsLabel: string;
+    readonly skillsLabel: string;
+    readonly presentLabel: string;
+  };
+  readonly footer: {
+    readonly ctaHeading: string;
+    readonly ctaLines: readonly string[];
+    readonly ctaLede: string;
+    readonly ctaAction: string;
+    readonly navigateLabel: string;
+    readonly elsewhereLabel: string;
+    readonly availabilityLabel: string;
+    readonly rights: string;
+    readonly builtWith: string;
+  };
+}
+
+/** Standard envelope returned by the content API. */
+export interface ContentEnvelope<T> {
+  readonly success: boolean;
+  readonly data: T;
+  readonly meta?: { readonly timestamp?: string; readonly version?: string };
 }

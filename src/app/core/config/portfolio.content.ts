@@ -19,16 +19,24 @@
  */
 
 import type {
+  AboutContent,
+  AvailabilityContent,
+  ContactContent,
+  HeroContent,
   PortfolioExperience,
   PortfolioMedia,
   PortfolioProcessStep,
   PortfolioProfile,
   PortfolioProject,
   PortfolioService,
+  PortfolioSkill,
   PortfolioSkillCluster,
   PortfolioTestimonial,
   PortfolioVideo,
+  SectionsContent,
   SiteMedia,
+  SiteSettings,
+  UiCopy,
 } from '../models/portfolio.models';
 
 // Generated per deployment so previews are canonical to themselves rather than
@@ -56,6 +64,7 @@ export const PROFILE: PortfolioProfile = {
   timezone: 'Asia/Kolkata',
   email: 'rabinr2607@gmail.com',
   phone: '+91 97893 76992',
+  coordinates: { lat: '13.0827° N', lon: '80.2707° E', short: '13.08°N 80.27°E' },
   availability: 'available',
   availabilityNote: 'Available for new opportunities · replies within 24h',
   industries: [
@@ -214,6 +223,13 @@ export const PROJECTS: readonly PortfolioProject[] = [
     summary:
       'An enterprise platform for immigration officers managing end-to-end immigration operations — assessment, verification, approvals and compliance.',
     featured: true,
+    status: 'published',
+    order: 1,
+    number: '01',
+    shortTitle: 'Fiji Immigration — Internal',
+    publishedAt: '2024-03-01T00:00:00Z',
+    updatedAt: '2026-08-01T00:00:00Z',
+    version: 3,
     problem:
       'Immigration operations span application assessment, document verification, permit approvals, visa processing, citizenship and border control — work that had to move through a single system without officers losing the thread of a case.',
     solution:
@@ -321,6 +337,13 @@ export const PROJECTS: readonly PortfolioProject[] = [
     summary:
       'A secure digital self-service platform where applicants file visa and permit applications, upload documents, pay and track progress.',
     featured: true,
+    status: 'published',
+    order: 2,
+    number: '02',
+    shortTitle: 'Fiji Immigration — Citizen Portal',
+    publishedAt: '2024-06-01T00:00:00Z',
+    updatedAt: '2026-08-01T00:00:00Z',
+    version: 2,
     problem:
       'Applicants needed to submit and follow immigration applications without visiting an office — from a phone, on an unreliable connection, often from another country.',
     solution:
@@ -437,6 +460,13 @@ export const PROJECTS: readonly PortfolioProject[] = [
     summary:
       'A self-service pension portal for account management: contributions, balances, benefit statements, claims and beneficiaries.',
     featured: true,
+    status: 'published',
+    order: 3,
+    number: '03',
+    shortTitle: 'PRIMS Member Portal',
+    publishedAt: '2023-09-01T00:00:00Z',
+    updatedAt: '2026-08-01T00:00:00Z',
+    version: 2,
     problem:
       'Pension information is dense and consequential, and members were dependent on staff to answer questions their own statements should have answered.',
     solution:
@@ -517,6 +547,13 @@ export const PROJECTS: readonly PortfolioProject[] = [
     summary:
       'A cross-platform mobile app for VNPF members: balances, contributions, loans, withdrawals and insurance from one codebase.',
     featured: true,
+    status: 'published',
+    order: 4,
+    number: '04',
+    shortTitle: 'VNPF blo mi',
+    publishedAt: '2023-11-01T00:00:00Z',
+    updatedAt: '2026-08-01T00:00:00Z',
+    version: 2,
     problem:
       'Members needed their fund account on the device they actually own — a phone — with biometric security and usable behaviour when the network drops.',
     solution:
@@ -624,6 +661,13 @@ export const PROJECTS: readonly PortfolioProject[] = [
     summary:
       'An insurance administration platform covering product setup, policies, claims, finance and cashier operations.',
     featured: true,
+    status: 'published',
+    order: 5,
+    number: '05',
+    shortTitle: 'InsureMet',
+    publishedAt: '2025-04-01T00:00:00Z',
+    updatedAt: '2026-08-01T00:00:00Z',
+    version: 1,
     problem:
       'An insurer\u2019s day spans product definition, applications, policy lifecycle, claims and money movement \u2014 usually across as many disconnected systems as there are departments.',
     solution:
@@ -706,6 +750,13 @@ export const PROJECTS: readonly PortfolioProject[] = [
     summary:
       'An AI-powered resume builder that turns guided inputs into tailored, ATS-friendly resumes, with a live preview editor and one-click PDF export.',
     featured: true,
+    status: 'published',
+    order: 6,
+    number: '06',
+    shortTitle: 'Zellavora AI Resume Builder',
+    publishedAt: '2026-01-15T00:00:00Z',
+    updatedAt: '2026-08-01T00:00:00Z',
+    version: 1,
     problem:
       'Resume tools either give you a blank page or a rigid template. Neither helps someone work out what to actually say about their experience.',
     solution:
@@ -849,8 +900,14 @@ export const SITE_MEDIA: SiteMedia = {
 
 export const SERVICES: readonly PortfolioService[] = [
   {
+    id: 'angular-development',
     index: '01',
+    order: 1,
     title: 'Angular Development',
+    shortDescription:
+      'Enterprise-grade Angular applications built with modern signals and standalone architecture.',
+    active: true,
+    updatedAt: '2026-08-01',
     description:
       'Enterprise-grade Angular applications built with modern signals, standalone components and a scalable, maintainable architecture.',
     technologies: ['Angular 17–22', 'Signals', 'Standalone APIs', 'RxJS', 'TypeScript'],
@@ -861,8 +918,14 @@ export const SERVICES: readonly PortfolioService[] = [
     ],
   },
   {
+    id: 'frontend-engineering',
     index: '02',
+    order: 2,
     title: 'Frontend Engineering',
+    shortDescription:
+      'Responsive, accessible, pixel-accurate interfaces from design handoff to production.',
+    active: true,
+    updatedAt: '2026-08-01',
     description:
       'Responsive, accessible and pixel-accurate interfaces from design handoff to production, with clean, testable code.',
     technologies: [
@@ -879,16 +942,26 @@ export const SERVICES: readonly PortfolioService[] = [
     ],
   },
   {
+    id: 'ionic-cross-platform',
     index: '03',
+    order: 3,
     title: 'Ionic & Cross-Platform Apps',
+    shortDescription: 'iOS and Android apps from a single Angular + Ionic codebase.',
+    active: true,
+    updatedAt: '2026-08-01',
     description:
       'Cross-platform mobile apps for iOS and Android from a single Angular + Ionic codebase, shipped to the app stores.',
     technologies: ['Ionic', 'Angular', 'Capacitor', 'Native device APIs'],
     deliverables: ['iOS & Android apps', 'App store builds', 'Release support'],
   },
   {
+    id: 'api-integration',
     index: '04',
+    order: 4,
     title: 'API Integration',
+    shortDescription: 'Reliable REST API integration with typed contracts and clean data flows.',
+    active: true,
+    updatedAt: '2026-08-01',
     description:
       'Reliable integration of REST APIs into the frontend with robust error handling, typed contracts and clean data flows.',
     technologies: [
@@ -901,16 +974,26 @@ export const SERVICES: readonly PortfolioService[] = [
     deliverables: ['Auth flows', 'Error handling', 'Data synchronisation'],
   },
   {
+    id: 'ui-development',
     index: '05',
+    order: 5,
     title: 'UI Development',
+    shortDescription: 'Polished, accessible UIs with micro-interactions and WCAG-compliant markup.',
+    active: true,
+    updatedAt: '2026-08-01',
     description:
       'Polished, accessible user interfaces with attention to detail, micro-interactions and WCAG-compliant markup.',
     technologies: ['SCSS', 'Tailwind CSS', 'WCAG 2.1 AA', 'Motion design'],
     deliverables: ['Accessible interfaces', 'Cross-browser consistency', 'Micro-interactions'],
   },
   {
+    id: 'performance-optimization',
     index: '06',
+    order: 6,
     title: 'Performance Optimization',
+    shortDescription: 'Faster load times and smoother runtime performance through optimisation.',
+    active: true,
+    updatedAt: '2026-08-01',
     description:
       'Faster load times and smoother runtime performance through profiling, lazy loading and bundle optimisation.',
     technologies: ['Core Web Vitals', 'Lighthouse', 'Code splitting', 'Bundle analysis'],
@@ -920,11 +1003,16 @@ export const SERVICES: readonly PortfolioService[] = [
 
 export const EXPERIENCE: readonly PortfolioExperience[] = [
   {
+    id: 'rstack',
     company: 'RSTACK Solutions Private Limited',
     role: 'Frontend Developer Consultant',
+    employmentType: 'Contract',
     start: '2026',
     end: 'Present',
+    current: true,
     location: 'Contract',
+    order: 1,
+    visible: true,
     summary:
       'Designing and developing an interactive front-end interface and experience for a web-based analytics application using modern frontend technologies.',
     achievements: [
@@ -934,11 +1022,16 @@ export const EXPERIENCE: readonly PortfolioExperience[] = [
     technologies: ['Angular', 'TypeScript', 'RxJS', 'REST APIs', 'AI/ML integration'],
   },
   {
+    id: 'zellavora',
     company: 'Zellavora',
     role: 'Frontend Angular Developer — Freelance',
+    employmentType: 'Freelance',
     start: '2026',
     end: 'Present',
+    current: true,
     location: 'Freelance',
+    order: 2,
+    visible: true,
     summary:
       'Ship production-grade SPAs and hybrid mobile apps across multiple client projects using Angular, TypeScript, Ionic and REST APIs.',
     achievements: [
@@ -948,11 +1041,16 @@ export const EXPERIENCE: readonly PortfolioExperience[] = [
     technologies: ['Angular', 'Signals', 'TypeScript', 'Ionic', 'REST APIs'],
   },
   {
+    id: 'itgalax',
     company: 'ITGalax Solutions Pvt Ltd',
     role: 'Frontend Angular Developer',
+    employmentType: 'Full time',
     start: '2022',
     end: '2026',
+    current: false,
     location: 'Full time',
+    order: 3,
+    visible: true,
     summary:
       'Engineered government portals and pension management platforms serving 10,000+ active users across three countries.',
     achievements: [
@@ -972,91 +1070,185 @@ export const EXPERIENCE: readonly PortfolioExperience[] = [
   },
 ];
 
+const skill = (name: string, featured = false): PortfolioSkill => ({
+  id: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+  name,
+  ...(featured ? { featured: true } : {}),
+});
+
 export const SKILLS: readonly PortfolioSkillCluster[] = [
   {
     group: 'Frontend',
     blurb: 'Where the depth is.',
     items: [
-      'Angular',
-      'TypeScript',
-      'JavaScript',
-      'HTML5',
-      'CSS3',
-      'Sass',
-      'Tailwind CSS',
-      'RxJS',
-      'Signals',
+      skill('Angular', true),
+      skill('TypeScript', true),
+      skill('JavaScript'),
+      skill('HTML5'),
+      skill('CSS3'),
+      skill('Sass'),
+      skill('Tailwind CSS', true),
+      skill('RxJS', true),
+      skill('Signals', true),
     ],
   },
   {
     group: 'Mobile',
     blurb: 'One codebase, both stores.',
-    items: ['Ionic', 'Flutter', 'Capacitor', 'Android', 'iOS', 'PWA'],
+    items: [skill('Ionic', true), skill('Flutter'), skill('Capacitor', true), skill('Android'), skill('iOS'), skill('PWA')],
   },
   {
     group: 'Design',
     blurb: 'I work in the design file, not just from it.',
-    items: ['Figma', 'Adobe XD', 'Photoshop', 'Illustrator', 'Canva', 'Sketch'],
+    items: [skill('Figma'), skill('Adobe XD'), skill('Photoshop'), skill('Illustrator'), skill('Canva'), skill('Sketch')],
   },
   {
     group: 'Backend',
     blurb: 'Enough to own an integration end to end.',
-    items: ['Node.js', 'Express.js', 'Python', 'PHP', 'REST API', 'GraphQL'],
+    items: [skill('Node.js', true), skill('Express.js'), skill('Python'), skill('PHP'), skill('REST API'), skill('GraphQL')],
   },
   {
     group: 'Database',
     blurb: 'Data and cloud services.',
-    items: ['Firebase', 'MySQL', 'MongoDB', 'PostgreSQL', 'Supabase', 'AWS'],
+    items: [skill('Firebase'), skill('MySQL'), skill('MongoDB'), skill('PostgreSQL'), skill('Supabase'), skill('AWS')],
   },
   {
     group: 'Tools',
     blurb: 'Daily drivers.',
-    items: ['Git', 'GitHub', 'VS Code', 'Postman', 'ESLint', 'Prettier'],
+    items: [skill('Git'), skill('GitHub'), skill('VS Code'), skill('Postman'), skill('ESLint'), skill('Prettier')],
   },
 ];
 
 export const PROCESS: readonly PortfolioProcessStep[] = [
   {
+    id: 'discover',
     index: '01',
-    title: 'Discover',
-    description: 'Understanding requirements, users, and goals before anything gets designed.',
-    outputs: ['Requirements', 'User goals', 'Success criteria'],
+    name: 'Discover',
+    eyebrow: '01 / DISCOVER',
+    title: 'Understand Before Building',
+    description:
+      'Every strong product starts with understanding. I learn about the business, users, goals, constraints and technical requirements before writing the first line of code.',
+    outputsLabel: 'What I explore',
+    outputs: [
+      'Business goals',
+      'Target users',
+      'Existing product',
+      'Technical constraints',
+      'Project requirements',
+    ],
+    visual: 'discover',
+    order: 1,
+    active: true,
   },
   {
+    id: 'define',
     index: '02',
-    title: 'Plan',
-    description: 'Mapping structure, features, and timeline so we can disagree about it early.',
-    outputs: ['Architecture', 'Feature map', 'Timeline'],
+    name: 'Define',
+    eyebrow: '02 / DEFINE',
+    title: 'Turn Ideas Into a Clear Plan',
+    description:
+      'Once the requirements are clear, I translate them into a practical technical and product plan.',
+    outputsLabel: 'What gets defined',
+    outputs: [
+      'Information architecture',
+      'User flows',
+      'Technical architecture',
+      'Feature priorities',
+      'Development roadmap',
+    ],
+    visual: 'define',
+    order: 2,
+    active: true,
   },
   {
+    id: 'design',
     index: '03',
-    title: 'Design',
-    description: 'Turning the plan into interface decisions — layout, hierarchy, and motion.',
-    outputs: ['UI direction', 'Component design', 'Design review'],
+    name: 'Design',
+    eyebrow: '03 / DESIGN',
+    title: 'Design the Experience',
+    description:
+      'I turn the strategy into a visual experience that is clear, responsive and built around real user needs.',
+    outputsLabel: 'What takes shape',
+    outputs: [
+      'UI direction',
+      'Responsive layouts',
+      'Interaction design',
+      'Design system',
+      'Motion direction',
+    ],
+    visual: 'design',
+    order: 3,
+    active: true,
   },
   {
+    id: 'build',
     index: '04',
-    title: 'Build',
-    description: 'Creating clean, scalable solutions in reviewable increments.',
-    outputs: ['Component library', 'Working increments', 'Code review'],
+    name: 'Build',
+    eyebrow: '04 / BUILD',
+    title: 'Engineer the Product',
+    description:
+      'This is where design becomes a real product — using modern architecture, scalable components and clean engineering practices.',
+    outputsLabel: 'Technology highlights',
+    outputs: ['Angular 22', 'Signals', 'Zoneless', 'TypeScript', 'SSR', 'REST APIs', 'PostgreSQL'],
+    visual: 'build',
+    order: 4,
+    active: true,
   },
   {
+    id: 'test',
     index: '05',
-    title: 'Test',
-    description: 'Verifying behaviour, accessibility, and performance before anything ships.',
-    outputs: ['Test coverage', 'Accessibility check', 'Performance audit'],
+    name: 'Test',
+    eyebrow: '05 / TEST',
+    title: 'Make It Reliable',
+    description:
+      'Before launch, the product is tested across devices, browsers and critical user journeys.',
+    outputsLabel: 'What gets verified',
+    outputs: [
+      'Functional testing',
+      'Responsive testing',
+      'Accessibility',
+      'Performance',
+      'Playwright E2E',
+      'Error handling',
+    ],
+    visual: 'test',
+    order: 5,
+    active: true,
   },
   {
+    id: 'launch',
     index: '06',
-    title: 'Launch',
-    description: 'Shipping to production with monitoring and a clear rollback path.',
-    outputs: ['Production deploy', 'Monitoring', 'Launch checklist'],
+    name: 'Launch',
+    eyebrow: '06 / LAUNCH',
+    title: 'Ship With Confidence',
+    description:
+      'Once everything is ready, I handle the final deployment and production setup.',
+    outputsLabel: 'What ships',
+    outputs: [
+      'Production build',
+      'Environment configuration',
+      'Deployment',
+      'SEO',
+      'Analytics',
+      'Monitoring',
+    ],
+    visual: 'launch',
+    order: 6,
+    active: true,
   },
   {
+    id: 'evolve',
     index: '07',
-    title: 'Support',
-    description: 'The engagement does not end at launch — fixes, tweaks, and guidance after.',
-    outputs: ['Bug fixes', 'Ongoing support', 'Handover docs'],
+    name: 'Evolve',
+    eyebrow: '07 / EVOLVE',
+    title: 'Launch Is Just the Beginning',
+    description:
+      'After launch, the product can continue to improve through performance optimization, maintenance and new features.',
+    outputsLabel: 'What continues',
+    outputs: ['Maintenance', 'Improvements', 'Performance', 'New features', 'Technical support'],
+    visual: 'evolve',
+    order: 7,
+    active: true,
   },
 ];
 
@@ -1065,3 +1257,298 @@ export const PROCESS: readonly PortfolioProcessStep[] = [
  * an absent section reads better than an invented endorsement.
  */
 export const TESTIMONIALS: readonly PortfolioTestimonial[] = [];
+
+/**
+ * ─────────────────────────────────────────────────────────────────────────────
+ * CONTENT MODULES
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Dressed, ready-to-render modules derived from the raw data above. Components
+ * consume these through the store, so an API-backed source can supply the same
+ * shapes later without touching a single template.
+ */
+
+export const HERO: HeroContent = {
+  eyebrow: PROFILE.positioning,
+  headline: PROFILE.headline,
+  description: PROFILE.valueProposition,
+  primaryCta: { label: "Let's Work Together", href: '/contact' },
+  secondaryCta: { label: 'View Selected Work', href: '/work' },
+  availabilityLabels: {
+    available: 'Available for select projects',
+    limited: 'Accepting select projects',
+    booked: 'Currently booked',
+  },
+  availabilityResponse: 'Usually responds within 1 business day',
+  role: PROFILE.consultLabel,
+  location: PROFILE.basedIn,
+  focus: 'Angular · TypeScript · Product Engineering',
+  metricsLabels: ['Years experience', 'Users served', 'UI components built'],
+  technologies: [
+    'Angular',
+    'TypeScript',
+    'Signals',
+    'Zoneless',
+    'SSR',
+    'RxJS',
+    'Tailwind',
+    'Node.js',
+    'PostgreSQL',
+    'Playwright',
+    'Figma',
+    'Ionic',
+    'Capacitor',
+    'REST APIs',
+  ],
+  scrollLabel: 'Scroll to explore',
+  bridge: {
+    index: '01 \u2014 About',
+    quote: 'Engineering is only half the job. The other half is understanding the experience.',
+  },
+};
+
+export const ABOUT: AboutContent = {
+  sectionIndex: '01',
+  sectionLabel: 'ABOUT',
+  manifestoHeading: 'Where thoughtful interfaces meet serious engineering.',
+  storyEyebrow: 'ABOUT THE ENGINEER',
+  story: [
+    {
+      text: "I'm Rabin R, a Senior Frontend Engineer with 4+ years of experience engineering critical web and mobile systems for government and enterprise clients — including immigration platforms for Fiji and pension portals serving thousands of active users.",
+    },
+    {
+      text: "I work at the intersection of interface design and frontend {architecture}. My focus is building digital products that are visually precise, technically sound, and designed for maximum {performance} under real-world conditions.",
+      keywords: [
+        { id: 'architecture', word: 'architecture' },
+        { id: 'performance', word: 'performance' },
+      ],
+    },
+    {
+      text: 'From high-consequence government case management to modern AI-driven analytics dashboards, I care deeply about the details users feel \u2014 speed, clarity, {accessibility}, fluid {interaction}, long-term {scalability}, and pixel {precision}.',
+      keywords: [
+        { id: 'accessibility', word: 'accessibility' },
+        { id: 'interaction', word: 'interaction' },
+        { id: 'scalability', word: 'scalability' },
+        { id: 'precision', word: 'precision' },
+      ],
+    },
+  ],
+  portrait: {
+    name: 'RABIN R',
+    role: 'SENIOR FRONTEND ENGINEER',
+    location: 'CHENNAI / INDIA',
+    status: 'AVAILABLE FOR SELECT PROJECTS',
+  },
+  principlesEyebrow: 'HOW I THINK',
+  philosophyStatement:
+    '"Good frontend engineering is not just about making interfaces work. It\'s about making complexity feel simple."',
+  principles: [
+    {
+      id: '01',
+      title: 'PRECISION',
+      statement:
+        'Every spacing value, interaction pattern, and component hierarchy should have a clear architectural reason.',
+    },
+    {
+      id: '02',
+      title: 'PERFORMANCE',
+      statement:
+        'Beautiful interfaces must feel instant — measured by real-world interaction speed, frame rate, and minimal network overhead.',
+    },
+    {
+      id: '03',
+      title: 'ACCESSIBILITY',
+      statement:
+        'Great digital products are accessible-first, ensuring every user regardless of device or ability experiences effortless usability.',
+    },
+    {
+      id: '04',
+      title: 'SCALABILITY',
+      statement:
+        "Frontend architecture should gracefully support tomorrow's complex requirements without brittle tech debt or refactoring loops.",
+    },
+  ],
+  milestonesEyebrow: 'CAREER MILESTONES',
+  careerMilestones: [
+    {
+      year: '2021',
+      role: 'B.Sc. IT Graduate',
+      detail: 'Core computer science & web technology foundations.',
+    },
+    {
+      year: '2023',
+      role: 'Frontend Developer',
+      detail: 'PRIMS Pension Portal & VNPF Ionic cross-platform mobile apps.',
+    },
+    {
+      year: '2024',
+      role: 'Senior Angular Engineer',
+      detail: 'Fiji Government Immigration Platforms serving 10,000+ users.',
+    },
+    {
+      year: '2026',
+      role: 'AI & Frontend Consultant',
+      detail: 'Applied AI/ML (IIT Patna) & Senior Angular Architecture Consultant.',
+    },
+  ],
+  stackEyebrow: 'MY ENGINEERING STACK',
+  engineeringStack: [
+    'Angular',
+    'TypeScript',
+    'Signals',
+    'Zoneless',
+    'SSR',
+    'RxJS',
+    'Tailwind CSS',
+    'Node.js',
+    'PostgreSQL',
+    'Playwright',
+    'Figma',
+  ],
+  closingStatement:
+    '"I care about the details people notice — and the architecture they never have to."',
+};
+
+export const AVAILABILITY: AvailabilityContent = {
+  status: 'AVAILABLE',
+  message: PROFILE.availabilityNote,
+  responseTime: 'Usually responds within 1 business day',
+  updatedAt: '2026-08-12T00:00:00Z',
+};
+
+export const CONTACT: ContactContent = {
+  title: 'Have a project in mind?',
+  description:
+    "Tell me what you're building, what you need, and where you want to go. I'll review your project and get back to you with the right approach.",
+  heroNote: 'Response within 1 business day',
+  email: PROFILE.email,
+  availability: PROFILE.availabilityNote,
+  responseTime: 'Within 1 business day, always with a real answer.',
+};
+
+export const SITE_SETTINGS: SiteSettings = {
+  siteName: 'Rabin R — Senior Frontend Angular Developer',
+  ownerName: PROFILE.name,
+  defaultTitle: 'Rabin R | Senior Frontend Angular Developer',
+  defaultDescription:
+    'Rabin R is a Senior Angular Developer and Frontend Software Engineer with 4+ years building enterprise-grade web & mobile applications with Angular, TypeScript, RxJS, Ionic, and SSR.',
+  email: PROFILE.email,
+  location: PROFILE.location,
+  timezone: PROFILE.timezone,
+  defaultOgImage: '/media/og/default.png',
+  socialLinks: PROFILE.socials,
+  availability: AVAILABILITY,
+  maintenanceMode: false,
+  seo: {
+    siteName: 'Rabin R — Senior Frontend Angular Developer',
+    defaultTitle: 'Rabin R | Senior Frontend Angular Developer',
+    defaultDescription:
+      'Rabin R is a Senior Angular Developer and Frontend Software Engineer with 4+ years building enterprise-grade web & mobile applications with Angular, TypeScript, RxJS, Ionic, and SSR.',
+    ogImage: '/media/og/default.png',
+    homeTitle: 'Rabin R | Senior Frontend Angular Developer',
+    homeDescription:
+      'Rabin R is a Senior Angular Developer and Frontend Software Engineer with 4+ years building enterprise-grade web & mobile applications with Angular, TypeScript, RxJS, Ionic, and SSR.',
+    workTitle: 'Angular Projects & Case Studies | Rabin R',
+    workDescription:
+      'Explore Angular projects and case studies by Rabin R — enterprise platforms, government portals, and cross-platform mobile apps built with Angular, TypeScript, and RxJS.',
+    resumeTitle: 'Rabin R — Angular Developer Experience & Résumé',
+    resumeDescription:
+      'Experience, skills, and background for Rabin R — Senior Frontend Angular Developer specializing in Angular, TypeScript, RxJS, Ionic, and enterprise web application architecture.',
+    contactTitle: 'Contact Rabin R | Angular Developer & Frontend Consultant',
+    contactDescription:
+      "Tell Rabin R what you're building. Transparent starting prices for Angular development, premium websites, dashboards, SSR and more. Response within one business day.",
+    notFoundTitle: 'Page Not Found — Rabin R',
+    notFoundDescription:
+      'The page you are looking for does not exist. Browse Angular projects, experience, and more from Rabin R.',
+  },
+  lastUpdated: '2026-08-12T00:00:00Z',
+  version: 1,
+};
+
+export const SECTIONS: SectionsContent = {
+  about: {
+    index: '01',
+    eyebrow: 'About',
+    heading: 'Where thoughtful interfaces meet serious engineering.',
+  },
+  services: {
+    index: '02',
+    eyebrow: 'Services',
+    heading: "What I'm usually hired to do.",
+    lede: "Most engagements start with one of these and grow from there. All of them assume I'm working inside your team, not around it.",
+  },
+  work: {
+    index: '03',
+    eyebrow: 'Selected Work',
+    heading: "Projects where the hard part wasn't the pixels.",
+    lede: "A few engagements that show how I think. Each one has a full case study — the problem, the architecture, and what actually changed.",
+  },
+  workPage: {
+    index: '01',
+    eyebrow: 'Selected Work',
+    heading: 'Case studies, not screenshots.',
+    lede: 'Each project below documents the problem, the architecture and what measurably changed.',
+  },
+  experience: {
+    index: '04',
+    eyebrow: 'Experience',
+    heading: "Where I've done this before.",
+  },
+  skills: {
+    index: '05',
+    eyebrow: 'Ecosystem',
+    heading: 'The tools I actually reach for.',
+    lede: 'No percentages, no five-star ratings. Just what I use, grouped by where it sits in the stack.',
+  },
+  process: {
+    index: '06',
+    eyebrow: 'My Process / 07 Steps',
+    heading: 'From Idea to Impact',
+    lede: 'Every project follows a clear path — from understanding the problem to launching a product built to perform.',
+  },
+  testimonials: {
+    index: '07',
+    eyebrow: 'Testimonials',
+    heading: 'In their words.',
+  },
+  resume: {
+    eyebrow: 'Résumé',
+    heading: 'The short version.',
+    lede: 'Everything below is also available as a PDF. The web version is the one I keep current.',
+  },
+};
+
+export const UI_COPY: UiCopy = {
+  workEmpty: 'Case studies are being written up. Ask me about recent work.',
+  workPageEmpty: 'No projects in this category yet.',
+  servicesCta: {
+    text: "Not sure which of these you need? That's usually the first thing we work out together.",
+    label: 'Start a conversation',
+  },
+  workCta: { label: 'View all work' },
+  processEnding: {
+    text: 'Ready to start?',
+    cta: "Let's Build Something",
+  },
+  resume: {
+    downloadLabel: 'Download PDF',
+    printLabel: 'Print this page',
+    updatedLabel: 'Last updated',
+    profileLabel: 'Profile',
+    experienceLabel: 'Experience',
+    educationLabel: 'Education',
+    certificationsLabel: 'Certifications',
+    skillsLabel: 'Skills',
+    presentLabel: 'Present',
+  },
+  footer: {
+    ctaHeading: "Have an idea? Let's build it.",
+    ctaLines: ['Have an idea?', "Let's build it."],
+    ctaLede: "Tell me what you're building and where it's stuck. I reply within 24 hours.",
+    ctaAction: "Let's Work Together",
+    navigateLabel: 'Navigate',
+    elsewhereLabel: 'Elsewhere',
+    availabilityLabel: 'Availability',
+    rights: 'All rights reserved.',
+    builtWith: 'Built with Angular, GSAP and a great deal of restraint.',
+  },
+};

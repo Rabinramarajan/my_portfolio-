@@ -1,8 +1,9 @@
-import {
+﻿import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   afterRenderEffect,
+  computed,
   inject,
   signal,
   viewChild,
@@ -10,111 +11,15 @@ import {
 } from '@angular/core';
 
 import { DeviceCapability } from '../../../../core/services/device-capability';
+import { PortfolioStore } from '../../../../core/services/portfolio-store';
 import { SectionHeader } from '../../../../shared/components/section-header/section-header';
 import { Reveal } from '../../../../shared/directives/reveal';
 import { ProcessVisual } from './process-visual/process-visual';
 
-export interface ProcessStep {
-  readonly eyebrow: string;
-  readonly title: string;
-  readonly description: string;
-  readonly outputsLabel: string;
-  readonly outputs: readonly string[];
-}
-
-const STEPS: readonly ProcessStep[] = [
-  {
-    eyebrow: '01 / DISCOVER',
-    title: 'Understand Before Building',
-    description:
-      'Every strong product starts with understanding. I learn about the business, users, goals, constraints and technical requirements before writing the first line of code.',
-    outputsLabel: 'What I explore',
-    outputs: [
-      'Business goals',
-      'Target users',
-      'Existing product',
-      'Technical constraints',
-      'Project requirements',
-    ],
-  },
-  {
-    eyebrow: '02 / DEFINE',
-    title: 'Turn Ideas Into a Clear Plan',
-    description:
-      'Once the requirements are clear, I translate them into a practical technical and product plan.',
-    outputsLabel: 'What gets defined',
-    outputs: [
-      'Information architecture',
-      'User flows',
-      'Technical architecture',
-      'Feature priorities',
-      'Development roadmap',
-    ],
-  },
-  {
-    eyebrow: '03 / DESIGN',
-    title: 'Design the Experience',
-    description:
-      'I turn the strategy into a visual experience that is clear, responsive and built around real user needs.',
-    outputsLabel: 'What takes shape',
-    outputs: [
-      'UI direction',
-      'Responsive layouts',
-      'Interaction design',
-      'Design system',
-      'Motion direction',
-    ],
-  },
-  {
-    eyebrow: '04 / BUILD',
-    title: 'Engineer the Product',
-    description:
-      'This is where design becomes a real product — using modern architecture, scalable components and clean engineering practices.',
-    outputsLabel: 'Technology highlights',
-    outputs: ['Angular 22', 'Signals', 'Zoneless', 'TypeScript', 'SSR', 'REST APIs', 'PostgreSQL'],
-  },
-  {
-    eyebrow: '05 / TEST',
-    title: 'Make It Reliable',
-    description:
-      'Before launch, the product is tested across devices, browsers and critical user journeys.',
-    outputsLabel: 'What gets verified',
-    outputs: [
-      'Functional testing',
-      'Responsive testing',
-      'Accessibility',
-      'Performance',
-      'Playwright E2E',
-      'Error handling',
-    ],
-  },
-  {
-    eyebrow: '06 / LAUNCH',
-    title: 'Ship With Confidence',
-    description: 'Once everything is ready, I handle the final deployment and production setup.',
-    outputsLabel: 'What ships',
-    outputs: [
-      'Production build',
-      'Environment configuration',
-      'Deployment',
-      'SEO',
-      'Analytics',
-      'Monitoring',
-    ],
-  },
-  {
-    eyebrow: '07 / EVOLVE',
-    title: 'Launch Is Just the Beginning',
-    description:
-      'After launch, the product can continue to improve through performance optimization, maintenance and new features.',
-    outputsLabel: 'What continues',
-    outputs: ['Maintenance', 'Improvements', 'Performance', 'New features', 'Technical support'],
-  },
-];
 
 /**
- * Premium interactive timeline: IDEA → STRATEGY → DESIGN → BUILD → TEST →
- * LAUNCH → GROW. A sticky visual on desktop reacts to whichever step is
+ * Premium interactive timeline: IDEA â†’ STRATEGY â†’ DESIGN â†’ BUILD â†’ TEST â†’
+ * LAUNCH â†’ GROW. A sticky visual on desktop reacts to whichever step is
  * scrolled to center-viewport; a progress line fills alongside it.
  *
  * Deliberately built on a plain passive scroll listener + geometry reads
@@ -133,11 +38,14 @@ const STEPS: readonly ProcessStep[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Process {
+  private readonly store = inject(PortfolioStore);
   private readonly device = inject(DeviceCapability);
 
-  protected readonly steps = STEPS;
+  protected readonly sections = this.store.sections;
+  protected readonly uiCopy = this.store.uiCopy;
+  protected readonly steps = this.store.process;
   protected readonly activeStep = signal(0);
-  protected readonly totalSteps = STEPS.length;
+  protected readonly totalSteps = computed(() => this.steps().length);
 
   private readonly track = viewChild<ElementRef<HTMLElement>>('track');
   private readonly fill = viewChild<ElementRef<HTMLElement>>('fill');

@@ -1,37 +1,40 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, inject } from '@angular/core';
 
-import {
-  EXPERIENCE,
-  PROCESS,
-  PROFILE,
-  PROJECTS,
-  SERVICES,
-  SITE_MEDIA,
-  SKILLS,
-  TESTIMONIALS,
-} from '../config/portfolio.content';
 import type { PortfolioProject } from '../models/portfolio.models';
+import { PortfolioContentService } from './portfolio-content.service';
 
 /**
  * Read model for all portfolio content.
  *
- * Content is currently static, so it is seeded into signals at construction.
- * Swapping to an API means replacing the seed with `resource()` here — every
- * consumer reads signals and needs no change.
+ * Thin facade over `PortfolioContentService` — components depend on the store,
+ * and the store depends on the content source, so swapping the repository (or
+ * moving to an API) never touches a component.
  */
 @Injectable({ providedIn: 'root' })
 export class PortfolioStore {
-  readonly profile = signal(PROFILE);
-  readonly projects = signal(PROJECTS);
-  readonly services = signal(SERVICES);
-  readonly experience = signal(EXPERIENCE);
-  readonly skills = signal(SKILLS);
-  readonly process = signal(PROCESS);
-  readonly testimonials = signal(TESTIMONIALS);
-  /** Section photography and ambient footage. */
-  readonly media = signal(SITE_MEDIA);
+  private readonly content = inject(PortfolioContentService);
 
-  readonly featuredProjects = computed(() => this.projects().filter((p) => p.featured));
+  readonly profile = this.content.profile;
+  readonly projects = this.content.projects;
+  readonly services = this.content.services;
+  readonly experience = this.content.experience;
+  readonly skills = this.content.skills;
+  readonly process = this.content.process;
+  readonly testimonials = this.content.testimonials;
+  /** Section photography and ambient footage. */
+  readonly media = this.content.media;
+
+  readonly hero = this.content.hero;
+  readonly about = this.content.about;
+  readonly availability = this.content.availability;
+  readonly contact = this.content.contact;
+  readonly siteSettings = this.content.siteSettings;
+  readonly sections = this.content.sections;
+  readonly uiCopy = this.content.uiCopy;
+  readonly pricingPlans = this.content.pricingPlans;
+
+  /** Only `featured` projects, in authored order. */
+  readonly featuredProjects = computed(() => this.projects().filter((project) => project.featured));
   readonly hasTestimonials = computed(() => this.testimonials().length > 0);
 
   bySlug(slug: string): PortfolioProject | undefined {
