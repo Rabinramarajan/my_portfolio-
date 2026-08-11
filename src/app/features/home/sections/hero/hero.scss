@@ -34,6 +34,7 @@
   font-size: var(--text-xs);
   letter-spacing: var(--tracking-widest);
   color: var(--color-text);
+  will-change: transform, opacity;
 }
 
 .hero__pulse {
@@ -60,6 +61,7 @@
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   letter-spacing: var(--tracking-wide);
+  will-change: transform, opacity;
 }
 
 /* ---- Headline ------------------------------------------------ */
@@ -96,7 +98,7 @@
 
 .hero__line-inner {
   display: block;
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
 /* ---- Supporting copy + actions ------------------------------ */
@@ -108,6 +110,7 @@
   font-size: var(--text-lg);
   line-height: var(--leading-relaxed);
   text-wrap: pretty;
+  will-change: transform, opacity;
 }
 
 .hero__actions {
@@ -115,6 +118,7 @@
   flex-wrap: wrap;
   gap: var(--space-4);
   margin-block-start: var(--space-7);
+  will-change: transform, opacity;
 
   app-button {
     min-height: 52px;
@@ -133,6 +137,7 @@
   margin-block-start: var(--space-10);
   padding-block-start: var(--space-5);
   border-block-start: 1px solid var(--color-line);
+  will-change: transform, opacity;
 
   @include down(md) {
     grid-template-columns: 1fr;
@@ -196,6 +201,7 @@
   margin-block-start: var(--space-10);
   padding-block: var(--space-6);
   border-block: 1px solid var(--color-line);
+  will-change: transform, opacity;
 }
 
 /* ---- Next-chapter bridge ------------------------------------- */
@@ -203,6 +209,7 @@
 .hero__bridge {
   padding-block-start: var(--space-10);
   padding-block-end: var(--space-8);
+  will-change: transform, opacity;
 }
 
 .hero__bridge-index {
@@ -244,12 +251,14 @@
 .hero__content {
   position: relative;
   z-index: var(--z-raised);
+  will-change: filter, opacity;
 }
 
 .hero__media {
   position: relative;
   z-index: var(--z-raised);
   width: min(100%, 360px);
+  will-change: transform, opacity, filter;
 
   @include up(lg) {
     justify-self: end;
@@ -306,5 +315,22 @@
   .hero__scroll-line::after,
   .hero__scroll-arrow {
     animation: none;
+  }
+
+  // Disable entrance animations for users with reduced-motion preferences
+  .hero__content,
+  .hero__media,
+  .hero__line-inner,
+  .hero__value,
+  .hero__status,
+  .hero__status-note,
+  .hero__actions,
+  .hero__meta,
+  .hero__scroll,
+  .hero__metrics-row,
+  .hero__bridge {
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

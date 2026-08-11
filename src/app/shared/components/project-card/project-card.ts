@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { CursorTarget } from '../../directives/cursor-target';
+import { CursorInteractive } from '../../directives/cursor-interactive';
 import { MediaImage } from '../media-image/media-image';
 import { Reveal } from '../../directives/reveal';
 import type { PortfolioProject } from '../../../core/models/portfolio.models';
@@ -14,7 +15,7 @@ import type { PortfolioProject } from '../../../core/models/portfolio.models';
  */
 @Component({
   selector: 'app-project-card',
-  imports: [RouterLink, MediaImage, Reveal, CursorTarget],
+  imports: [RouterLink, MediaImage, Reveal, CursorTarget, CursorInteractive],
   templateUrl: './project-card.html',
   styleUrl: './project-card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

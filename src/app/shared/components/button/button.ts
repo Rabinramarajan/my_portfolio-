@@ -3,6 +3,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { CursorTarget } from '../../directives/cursor-target';
+import { CursorInteractive } from '../../directives/cursor-interactive';
 import { Magnetic } from '../../directives/magnetic';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
@@ -17,7 +18,7 @@ export type ButtonSize = 'md' | 'lg';
  */
 @Component({
   selector: 'app-button',
-  imports: [NgTemplateOutlet, RouterLink, Magnetic, CursorTarget],
+  imports: [NgTemplateOutlet, RouterLink, Magnetic, CursorTarget, CursorInteractive],
   templateUrl: './button.html',
   styleUrl: './button.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,4 +42,6 @@ export class Button {
   protected readonly classes = computed(
     () => `btn btn--${this.variant()} btn--${this.size()}` + (this.loading() ? ' is-loading' : ''),
   );
+  protected readonly cursorSize = computed(() => (this.size() === 'lg' ? 'lg' : 'md'));
+  protected readonly magneticStrength = computed(() => (this.variant() === 'primary' ? 0.25 : 0));
 }

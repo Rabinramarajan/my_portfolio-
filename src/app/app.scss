@@ -13,3 +13,12 @@ main {
     outline: none;
   }
 }
+
+/* Hide native cursor when custom cursor is enabled */
+html[data-cursor='custom'] {
+  cursor: none;
+}
+
+html[data-cursor='native'] {
+  cursor: auto;
+}

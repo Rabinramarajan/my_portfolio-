@@ -49,9 +49,13 @@ export class DeviceCapability {
     return 'high';
   });
 
-  readonly customCursorEnabled = computed(
-    () => this.animationsEnabled() && this.hasPrecisePointer() && !this.isTouch(),
-  );
+  readonly customCursorEnabled = computed(() => {
+    // Enable custom cursor if animations are enabled and it's not explicitly a touch device
+    // Falls back gracefully: if pointer detection fails but no touch is detected, still enable
+    const isExplicitlyTouch = this.isTouch();
+    const couldHavePrecisePointer = this.hasPrecisePointer() || !isExplicitlyTouch;
+    return this.animationsEnabled() && couldHavePrecisePointer && !isExplicitlyTouch;
+  });
 
   /** Called once from the root component, in the browser only. */
   initialize(): () => void {

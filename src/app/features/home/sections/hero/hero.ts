@@ -108,32 +108,96 @@ export class Hero {
     });
   }
 
-  /** Masked line reveal plus a quiet cascade of the supporting cast. */
+  /** Premium entrance sequence: layered reveals with staggered typography and smooth motion. */
   private setupEntrance(gsap: Gsap): void {
     const root = this.host.nativeElement;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      const tl = gsap.timeline({
+        defaults: { ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+      });
 
+      // Blur-to-sharp entrance for content elements
       tl.fromTo(
-        '.hero__line-inner',
-        { yPercent: 118 },
-        { yPercent: 0, duration: 0.9, stagger: 0.1, ease: 'power4.out' },
-        0.08,
+        '.hero__content',
+        { filter: 'blur(10px)' },
+        { filter: 'blur(0px)', duration: 0.9, ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+        0,
       )
-        .fromTo('.hero__media', { y: 26, autoAlpha: 0.55 }, { y: 0, autoAlpha: 1, duration: 0.9 }, 0.42)
+        // Headline: staggered line reveals with refined easing
+        .fromTo(
+          '.hero__line-inner',
+          { yPercent: 115, autoAlpha: 0 },
+          {
+            yPercent: 0,
+            autoAlpha: 1,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+          },
+          0.12,
+        )
+        // Supporting text: 120ms delay after heading starts
+        .fromTo(
+          '.hero__value',
+          { y: 20, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.7, ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+          0.32,
+        )
+        // Status indicators: early reveal before buttons
         .fromTo(
           '.hero__status, .hero__status-note',
-          { y: 16, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.6 },
-          0.3,
+          { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.65, ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+          0.2,
         )
-        .fromTo('.hero__value', { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.65 }, 0.55)
-        .fromTo('.hero__actions', { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.65 }, 0.62)
-        .fromTo('.hero__meta', { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6 }, 0.82)
-        .fromTo('.hero__scroll', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.7 }, 0.95)
-        .fromTo('.hero__metrics-row', { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7 }, 0.05)
-        .fromTo('.hero__bridge', { y: 22, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7 }, 1.05);
+        // CTA buttons: soft spring-like upward slide
+        .fromTo(
+          '.hero__actions',
+          { y: 24, autoAlpha: 0 },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.85,
+            ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+          },
+          0.42,
+        )
+        // Hero portrait: refined back-to-front layer reveal
+        .fromTo(
+          '.hero__media',
+          { y: 32, autoAlpha: 0.4 },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.9,
+            ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          },
+          0.15,
+        )
+        // Meta information: subtle delayed reveal
+        .fromTo(
+          '.hero__meta',
+          { y: 12, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.65, ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+          0.65,
+        )
+        // Scroll indicator: gentle fade in
+        .fromTo('.hero__scroll', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, 0.8)
+        // Metrics row: layered entrance
+        .fromTo(
+          '.hero__metrics-row',
+          { y: 16, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.7, ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+          0.08,
+        )
+        // Bridge section: final reveal
+        .fromTo(
+          '.hero__bridge',
+          { y: 20, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.75, ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+          0.85,
+        );
     }, root);
 
     this.teardown.register(() => ctx.revert());

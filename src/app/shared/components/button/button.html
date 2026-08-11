@@ -19,6 +19,8 @@
     [attr.aria-label]="ariaLabel()"
     [appMagnetic]="0.28"
     [appCursorTarget]="'link'"
+    [appCursorInteractive]="cursorSize()"
+    [appCursorMagnetic]="magneticStrength()"
   >
     <ng-container *ngTemplateOutlet="content" />
   </a>
@@ -31,6 +33,8 @@
     [attr.aria-label]="ariaLabel()"
     [appMagnetic]="0.28"
     [appCursorTarget]="'link'"
+    [appCursorInteractive]="cursorSize()"
+    [appCursorMagnetic]="magneticStrength()"
     [label]="isExternal() ? 'OPEN' : undefined"
   >
     <ng-container *ngTemplateOutlet="content" />
@@ -44,6 +48,8 @@
     [attr.aria-label]="ariaLabel()"
     [appMagnetic]="0.28"
     [appCursorTarget]="'hover'"
+    [appCursorInteractive]="cursorSize()"
+    [appCursorMagnetic]="magneticStrength()"
   >
     <ng-container *ngTemplateOutlet="content" />
   </button>
