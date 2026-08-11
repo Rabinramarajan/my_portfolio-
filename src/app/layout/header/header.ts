@@ -69,15 +69,80 @@ export class Header {
     });
     this.destroyRef.onDestroy(() => (this.document.body.style.overflow = ''));
 
-    afterNextRender(() => this.watchScroll());
+    afterNextRender(() => {
+      this.watchScroll();
+      this.document.addEventListener('keydown', this.onKeydown);
+    });
+    this.destroyRef.onDestroy(() => this.document.removeEventListener('keydown', this.onKeydown));
   }
 
   protected toggleMenu(): void {
-    this.menuOpen.update((open) => !open);
+    const open = !this.menuOpen();
+    this.menuOpen.set(open);
+    this.focusMenu(open);
   }
 
   protected closeMenu(): void {
     this.menuOpen.set(false);
+    this.focusMenu(false);
+  }
+
+  /**
+   * Keyboard support for the fullscreen menu: Escape closes it, and Tab keeps
+   * focus trapped inside while it is open.
+   */
+  private onKeydown = (event: KeyboardEvent): void => {
+    if (!this.menuOpen()) {
+      return;
+    }
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.menuOpen.set(false);
+      this.focusMenu(false);
+    } else if (event.key === 'Tab') {
+      this.trapFocus(event);
+    }
+  };
+
+  /**
+   * Moves focus to the first menu link when the menu opens (dialog pattern) and
+   * back to the toggle when it closes. Runs after a frame so the is-open class
+   * has flipped the menu from `visibility: hidden`.
+   */
+  private focusMenu(open: boolean): void {
+    requestAnimationFrame(() => {
+      if (open) {
+        this.document.querySelector<HTMLElement>('#mobile-menu a')?.focus();
+      } else {
+        this.document.querySelector<HTMLElement>('.hd__toggle')?.focus();
+      }
+    });
+  }
+
+  /**
+   * Keeps Tab/Shift+Tab cycling within the open menu instead of leaking out.
+   *
+   * The menu intercepts every Tab and moves focus itself, because relying on
+   * the browser's native focus order is not portable — WebKit, for instance,
+   * walks the menu in a different order than the DOM.
+   */
+  private trapFocus(event: KeyboardEvent): void {
+    const menu = this.document.querySelector<HTMLElement>('#mobile-menu');
+    const focusables = [
+      ...(menu?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? []),
+    ];
+    if (focusables.length === 0) {
+      return;
+    }
+    event.preventDefault();
+    const current = focusables.indexOf(this.document.activeElement as HTMLElement);
+    const next =
+      current === -1
+        ? event.shiftKey
+          ? focusables[focusables.length - 1]
+          : focusables[0]
+        : focusables[(current + (event.shiftKey ? -1 : 1) + focusables.length) % focusables.length];
+    next.focus();
   }
 
   /**

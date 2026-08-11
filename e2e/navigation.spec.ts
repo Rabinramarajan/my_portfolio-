@@ -65,4 +65,45 @@ test.describe('mobile navigation', () => {
     // Navigation must close the menu, or the next page is unreachable.
     await expect(page.getByRole('button', { name: /open menu/i })).toBeVisible();
   });
+
+  test('offers a prominent "Let\'s Work Together" call to action', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('button', { name: /open menu/i }).click();
+
+    const cta = page
+      .locator('#mobile-menu .mm__cta')
+      .getByRole('link', { name: /let's work together/i });
+    await expect(cta).toBeVisible();
+    await cta.click();
+    await expect(page).toHaveURL(/\/contact$/);
+  });
+
+  test('closes on Escape and returns focus to the toggle', async ({ page }) => {
+    await page.goto('/');
+    const toggle = page.getByRole('button', { name: /open menu/i });
+    await toggle.click();
+    await expect(page.getByRole('button', { name: /close menu/i })).toBeVisible();
+
+    await page.keyboard.press('Escape');
+    await expect(page.getByRole('button', { name: /open menu/i })).toBeVisible();
+    await expect(toggle).toBeFocused();
+  });
+
+  test('traps Tab focus inside the open menu', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('button', { name: /open menu/i }).click();
+    await expect(page.getByRole('button', { name: /close menu/i })).toBeVisible();
+
+    // Cycling forward several times must never leave the menu.
+    for (let i = 0; i < 10; i++) {
+      await page.keyboard.press('Tab');
+      await expect
+        .poll(() =>
+          page.evaluate(() =>
+            document.querySelector('#mobile-menu')?.contains(document.activeElement),
+          ),
+        )
+        .toBe(true);
+    }
+  });
 });

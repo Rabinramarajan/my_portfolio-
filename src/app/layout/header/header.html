@@ -1,11 +1,11 @@
-<header
-  class="hd"
-  [class.is-scrolled]="scrolled()"
-  [class.is-open]="menuOpen()"
->
+<header class="hd" [class.is-scrolled]="scrolled()" [class.is-open]="menuOpen()">
   <div class="hd__inner">
     <a class="hd__logo" routerLink="/" [appCursorTarget]="'link'" (click)="closeMenu()">
-      <span class="hd__mark" [attr.data-availability]="profile().availability" aria-hidden="true"></span>
+      <span
+        class="hd__mark"
+        [attr.data-availability]="profile().availability"
+        aria-hidden="true"
+      ></span>
       <span class="hd__name">{{ profile().name }}</span>
       <span class="hd__role">{{ profile().consultLabel }}</span>
     </a>
@@ -71,6 +71,14 @@
   </nav>
 
   <div class="mm__foot">
+    <app-button
+      class="mm__cta"
+      href="/contact"
+      size="lg"
+      (click)="navigateFromMenu($event, '/contact')"
+    >
+      Let's Work Together
+    </app-button>
     <a [href]="'mailto:' + profile().email">{{ profile().email }}</a>
     <p>{{ profile().location }}</p>
   </div>

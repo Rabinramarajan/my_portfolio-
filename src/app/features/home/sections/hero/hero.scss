@@ -134,6 +134,11 @@
   padding-block-start: var(--space-5);
   border-block-start: 1px solid var(--color-line);
 
+  @include down(md) {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
   dt {
     @include eyebrow;
 

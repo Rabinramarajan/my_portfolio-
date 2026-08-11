@@ -27,7 +27,7 @@ export class Home {
 
   constructor() {
     this.seo.apply({
-      title: `Rabin R | Angular Developer & Frontend Software Engineer`,
+      title: `Rabin R | Senior Frontend Angular Developer`,
       description:
         'Rabin R is a Senior Angular Developer and Frontend Software Engineer with 4+ years building enterprise-grade web & mobile applications with Angular, TypeScript, RxJS, Ionic, and SSR.',
       path: '/',
