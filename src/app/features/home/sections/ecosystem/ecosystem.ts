@@ -29,7 +29,6 @@ import { EcosystemMobile } from './ecosystem-mobile';
   selector: 'app-ecosystem',
   imports: [
     SectionHeader,
-    Reveal,
     CursorTarget,
     EcosystemCategorySelector,
     EcosystemConnections,
