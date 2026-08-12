@@ -158,6 +158,31 @@ export interface PortfolioSkillCluster {
   readonly items: readonly PortfolioSkill[];
 }
 
+/** Hierarchy tier for visual emphasis in the constellation. */
+export type TechTier = 'primary' | 'secondary' | 'supporting';
+
+/** Category label used by the ecosystem filter — a curated subset of SkillGroup. */
+export type EcosystemCategory = 'Frontend' | 'Mobile' | 'Backend' | 'Data' | 'Design' | 'Tools';
+
+/** A technology node in the engineering constellation. */
+export interface EcosystemNode {
+  readonly id: string;
+  readonly name: string;
+  readonly monogram: string;
+  readonly tier: TechTier;
+  readonly category: EcosystemCategory;
+  /** Angle in degrees from 12-o'clock, clockwise. */
+  readonly angle: number;
+  /** Normalised distance from center (0 = center, 1 = edge). */
+  readonly radius: number;
+  /** IDs of directly connected technologies. */
+  readonly connections: readonly string[];
+  /** Short metadata shown on hover — e.g. "Used in 8+ projects". */
+  readonly meta?: string;
+  /** Sub-features or aspects shown when the node is selected. */
+  readonly features?: readonly string[];
+}
+
 export interface PortfolioProcessStep {
   readonly id: string;
   /** Displayed row number, e.g. "01". */

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, afterNextRender, computed, inject, input, signal } from '@angular/core';
 
 import { CursorTarget } from '../../directives/cursor-target';
 import { Parallax } from '../../directives/parallax';
@@ -20,8 +20,20 @@ import type { PortfolioMedia } from '../../../core/models/portfolio.models';
   host: { '[class.is-loaded]': 'loaded()', '[class.is-failed]': 'failed()' },
 })
 export class MediaImage {
+  private readonly host = inject(ElementRef);
+  private readonly cdr = inject(ChangeDetectorRef);
   readonly media = input.required<PortfolioMedia>();
   readonly priority = input(false);
+
+  constructor() {
+    afterNextRender(() => {
+      const img = this.host.nativeElement.querySelector('img');
+      if (img && img.complete) {
+        this.loaded.set(true);
+        this.cdr.markForCheck();
+      }
+    });
+  }
   readonly rounded = input(true);
   readonly parallax = input(false);
   readonly sizes = input('(max-width: 768px) 100vw, 50vw');
@@ -36,11 +48,13 @@ export class MediaImage {
 
   protected onLoad(): void {
     this.loaded.set(true);
+    this.cdr.markForCheck();
   }
 
   /** A missing asset degrades to a labelled placeholder rather than a broken icon. */
   protected onError(): void {
     this.failed.set(true);
     this.loaded.set(true);
+    this.cdr.markForCheck();
   }
 }

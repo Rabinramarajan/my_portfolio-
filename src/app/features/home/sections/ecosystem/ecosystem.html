@@ -1,0 +1,65 @@
+<section id="skills" class="eco">
+  <div class="eco__inner">
+    <app-section-header
+      [index]="sections().skills.index"
+      [eyebrow]="sections().skills.eyebrow"
+      [heading]="sections().skills.heading"
+      [lede]="sections().skills.lede"
+    />
+
+    <app-ecosystem-category-selector
+      [categories]="categories"
+      [active]="activeCategory()"
+      (categoryChange)="onCategoryChange($event)"
+    />
+
+    <!-- Desktop: constellation canvas -->
+    <div class="eco__canvas eco__desktop-only">
+      <!-- Background grid -->
+      <div class="eco__grid" aria-hidden="true"></div>
+
+      <!-- Connection lines -->
+      <app-ecosystem-connections
+        [nodes]="visibleNodes()"
+        [hoveredId]="hoveredId()"
+        [selectedId]="selectedId()"
+      />
+
+      <!-- Center identity -->
+      <div class="eco__center">
+        <span class="eco__center-name">Rabin R</span>
+        <span class="eco__center-role">Frontend Engineering</span>
+        <span class="eco__center-meta">Angular · TypeScript · Product Engineering</span>
+      </div>
+
+      <!-- Technology nodes -->
+      @for (node of visibleNodes(); track node.id) {
+        <app-ecosystem-node
+          [node]="node"
+          [isActive]="isActive(node.id)"
+          [isRelated]="isRelated(node.id)"
+          [isMuted]="isMuted(node.id)"
+          (hovered)="onNodeHovered($event)"
+          (selected)="onNodeSelected($event)"
+          [appCursorTarget]="'hover'"
+        />
+      }
+
+      <!-- Detail panel -->
+      @if (selectedId(); as selId) {
+        <app-ecosystem-detail
+          [nodes]="allNodes"
+          [selectedId]="selId"
+        />
+      }
+    </div>
+
+    <!-- Mobile: vertical tree -->
+    <div class="eco__mobile-only">
+      <app-ecosystem-mobile
+        [nodes]="allNodes"
+        [activeCategory]="activeCategory()"
+      />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,127 @@
+@use '../../../../../styles/mixins' as *;
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   ECOSYSTEM SECTION — Engineering Constellation
+   ───────────────────────────────────────────────────────────────────────────── */
+
+:host {
+  display: block;
+}
+
+.eco {
+  padding-block: var(--section-y);
+  background: var(--color-bg-elevated);
+  border-block: 1px solid var(--color-line);
+  /* Subtle radial glow behind the constellation */
+  background-image: radial-gradient(
+    ellipse 60% 50% at 50% 45%,
+    color-mix(in srgb, var(--color-accent) 3%, transparent),
+    transparent 70%
+  );
+}
+
+.eco__inner {
+  @include container(var(--container-wide));
+}
+
+.eco__desktop-only {
+  display: block;
+
+  @include down(md) {
+    display: none !important;
+  }
+}
+
+.eco__mobile-only {
+  display: none;
+
+  @include down(md) {
+    display: block !important;
+  }
+}
+
+/* ─── Constellation canvas ─────────────────────────────────────────────────── */
+
+.eco__canvas {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  min-height: 480px;
+  max-height: 680px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+  background: var(--color-bg);
+
+  @include down(lg) {
+    aspect-ratio: 4 / 3;
+    min-height: 400px;
+  }
+}
+
+/* Subtle architectural background grid */
+.eco__grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image:
+    /* Vertical lines */
+    repeating-linear-gradient(
+      90deg,
+      var(--color-text) 0px,
+      var(--color-text) 1px,
+      transparent 1px,
+      transparent 80px
+    ),
+    /* Horizontal lines */
+    repeating-linear-gradient(
+      0deg,
+      var(--color-text) 0px,
+      var(--color-text) 1px,
+      transparent 1px,
+      transparent 80px
+    );
+}
+
+/* ─── Center identity ──────────────────────────────────────────────────────── */
+
+.eco__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: var(--z-raised);
+  pointer-events: none;
+}
+
+.eco__center-name {
+  @include display(var(--text-xl));
+  color: var(--color-text);
+  margin-block-end: var(--space-1);
+}
+
+.eco__center-role {
+  @include eyebrow;
+  color: var(--color-accent);
+  margin-block-end: var(--space-2);
+}
+
+.eco__center-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────────────────── */
+
+@include reduced-motion {
+  .eco__canvas {
+    /* No motion-dependent layout */
+  }
+}

@@ -83,7 +83,8 @@
 
 @include reduced-motion {
   .mi__img {
-    transition-duration: 1ms;
+    opacity: 1 !important;
+    transition: none;
     transform: none;
   }
 }

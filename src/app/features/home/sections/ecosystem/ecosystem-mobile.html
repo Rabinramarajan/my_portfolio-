@@ -1,0 +1,25 @@
+<div class="emob">
+  @for (branch of branches(); track branch.root.id; let b = $index) {
+    <div class="emob__branch" appReveal="rise" [delay]="b * 0.08">
+      <div class="emob__root">
+        <span class="emob__marker" [attr.data-tier]="branch.root.tier">
+          {{ branch.root.monogram }}
+        </span>
+        <span class="emob__name emob__name--root">{{ branch.root.name }}</span>
+        <span class="emob__category">{{ branch.root.category }}</span>
+      </div>
+      @if (branch.children.length) {
+        <ul class="emob__children">
+          @for (child of branch.children; track child.id; let last = $last) {
+            <li class="emob__child" [class.is-last]="last">
+              <span class="emob__connector" aria-hidden="true">
+                @if (last) { └── } @else { ├── }
+              </span>
+              <span class="emob__name">{{ child.name }}</span>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  }
+</div>

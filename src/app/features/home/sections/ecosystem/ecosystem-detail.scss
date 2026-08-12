@@ -1,0 +1,69 @@
+@use '../../../../../styles/mixins' as *;
+
+:host {
+  display: block;
+  position: absolute;
+  bottom: var(--space-6);
+  left: var(--space-6);
+  z-index: var(--z-raised);
+  animation: edetail-in var(--duration-base) var(--ease-out-expo) both;
+}
+
+.edetail {
+  max-width: 280px;
+  padding: var(--space-4) var(--space-5);
+  background: color-mix(in srgb, var(--color-surface-2) 85%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+.edetail__eyebrow {
+  @include eyebrow;
+  margin-block-end: var(--space-1);
+}
+
+.edetail__name {
+  @include display(var(--text-lg));
+  margin-block-end: var(--space-1);
+}
+
+.edetail__meta {
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  margin-block-end: var(--space-3);
+}
+
+.edetail__features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-block-start: var(--space-2);
+  border-block-start: 1px solid var(--color-line);
+}
+
+.edetail__feat {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+}
+
+@keyframes edetail-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@include reduced-motion {
+  :host {
+    animation: none;
+  }
+}

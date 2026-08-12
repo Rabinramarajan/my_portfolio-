@@ -1,0 +1,11 @@
+<span class="enode__marker" aria-hidden="true">
+  @if (node().tier === 'supporting') {
+    <span class="enode__dot"></span>
+  } @else {
+    {{ node().monogram }}
+  }
+</span>
+<span class="enode__label">{{ node().name }}</span>
+@if (isActive() && node().meta) {
+  <span class="enode__meta">{{ node().meta }}</span>
+}

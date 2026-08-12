@@ -1,0 +1,172 @@
+@use '../../../../../styles/mixins' as *;
+
+:host {
+  position: absolute;
+  left: var(--node-x);
+  top: var(--node-y);
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    opacity var(--duration-base) var(--ease-out-expo),
+    filter var(--duration-base) var(--ease-out-expo),
+    transform var(--duration-base) var(--ease-out-expo);
+
+  &.is-muted {
+    opacity: 0.3;
+    filter: blur(1px);
+  }
+
+  &.is-related {
+    opacity: 0.85;
+  }
+
+  &.is-active {
+    opacity: 1;
+
+    .enode__marker {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+      background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+      transform: scale(1.1);
+    }
+
+    .enode__label {
+      color: var(--color-text);
+    }
+  }
+
+  @include hover-capable {
+    &:hover {
+      .enode__marker {
+        transform: scale(1.08);
+      }
+
+      .enode__label {
+        color: var(--color-text);
+      }
+    }
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+/* ---- Marker variants by tier ---- */
+
+.enode__marker {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  transition:
+    transform var(--duration-base) var(--ease-out-expo),
+    border-color var(--duration-base) var(--ease-out-expo),
+    color var(--duration-base) var(--ease-out-expo),
+    background var(--duration-base) var(--ease-out-expo);
+}
+
+/* Primary: strong accent marker */
+:host([data-tier='primary']) .enode__marker {
+  inline-size: 36px;
+  block-size: 36px;
+  border: 1.5px solid var(--color-accent);
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  font-size: var(--text-sm);
+}
+
+/* Secondary: outlined marker */
+:host([data-tier='secondary']) .enode__marker {
+  inline-size: 30px;
+  block-size: 30px;
+  border: 1px solid var(--color-line-strong);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  font-size: var(--text-xs);
+}
+
+/* Supporting: small dot marker */
+:host([data-tier='supporting']) .enode__marker {
+  inline-size: 22px;
+  block-size: 22px;
+  border: 1px solid var(--color-line);
+  background: transparent;
+}
+
+.enode__dot {
+  display: block;
+  inline-size: 5px;
+  block-size: 5px;
+  border-radius: 50%;
+  background: var(--color-text-faint);
+
+  :host(.is-active) & {
+    background: var(--color-accent);
+  }
+}
+
+/* ---- Label ---- */
+
+.enode__label {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color var(--duration-base) var(--ease-out-expo);
+}
+
+:host([data-tier='primary']) .enode__label {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+
+:host([data-tier='secondary']) .enode__label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+:host([data-tier='supporting']) .enode__label {
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+}
+
+/* ---- Hover metadata ---- */
+
+.enode__meta {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  left: 50%;
+  transform: translateX(-50%);
+  @include eyebrow;
+  font-size: 10px;
+  color: var(--color-text-faint);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: enode-meta-in var(--duration-fast) var(--ease-out-expo) both;
+}
+
+@keyframes enode-meta-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@include reduced-motion {
+  :host {
+    transition: none;
+  }
+  .enode__marker {
+    transition: none;
+  }
+}

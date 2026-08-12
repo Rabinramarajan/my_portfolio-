@@ -1,0 +1,16 @@
+@if (detail(); as tech) {
+  <aside class="edetail" role="complementary" [attr.aria-label]="tech.name + ' details'">
+    <p class="edetail__eyebrow">{{ tech.category }}</p>
+    <h4 class="edetail__name">{{ tech.name }}</h4>
+    @if (tech.meta) {
+      <p class="edetail__meta">{{ tech.meta }}</p>
+    }
+    @if (tech.features?.length) {
+      <ul class="edetail__features">
+        @for (feat of tech.features; track feat) {
+          <li class="edetail__feat">{{ feat }}</li>
+        }
+      </ul>
+    }
+  </aside>
+}

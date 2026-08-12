@@ -7,6 +7,8 @@ import {
   inject,
 } from '@angular/core';
 
+import { RouterLink } from '@angular/router';
+
 import { Button } from '../../../../shared/components/button/button';
 import { LoaderService } from '../../../../core/services/loader';
 import { Motion } from '../../../../core/services/motion';
@@ -19,8 +21,10 @@ import { HeroMetrics, type HeroMetric } from './components/hero-metrics';
 import { HeroPortrait } from './components/hero-portrait';
 import { HeroProgress } from './components/hero-progress';
 
-/** Eases pulled from the shared motion tokens so the hero matches every other
- *  reveal on the site instead of hand-tuning its own cubic-beziers. */
+/**
+ * Eases pulled from the shared motion tokens so the hero matches every other
+ * reveal on the site instead of hand-tuning its own cubic-beziers.
+ */
 const EXPO = EASE.expo;
 const SPRING = EASE.spring;
 
@@ -40,7 +44,7 @@ type Gsap = typeof import('gsap').gsap;
  */
 @Component({
   selector: 'app-hero',
-  imports: [Button, WebglField, HeroBackground, HeroMetrics, HeroPortrait, HeroProgress],
+  imports: [Button, RouterLink, WebglField, HeroBackground, HeroMetrics, HeroPortrait, HeroProgress],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
