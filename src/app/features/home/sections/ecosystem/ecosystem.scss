@@ -24,6 +24,48 @@
   @include container(var(--container-wide));
 }
 
+/* ─── Section Header ───────────────────────────────────────────────────────── */
+
+.eco__header {
+  margin-block-end: var(--space-8);
+
+  @include down(md) {
+    margin-block-end: var(--space-6);
+  }
+}
+
+.eco__header-text {
+  max-width: 680px;
+}
+
+.eco__eyebrow {
+  @include eyebrow;
+  color: var(--color-accent);
+  margin-block-end: var(--space-3);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.eco__heading {
+  @include display(var(--text-2xl));
+  color: var(--color-text);
+  margin-block-end: var(--space-3);
+  line-height: 1.3;
+
+  @include down(md) {
+    @include display(var(--text-xl));
+  }
+}
+
+.eco__lede {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  max-width: 620px;
+}
+
+/* ─── Desktop canvas ───────────────────────────────────────────────────────── */
+
 .eco__desktop-only {
   display: block;
 
@@ -120,8 +162,34 @@
 
 /* ─── Reduced motion ───────────────────────────────────────────────────────── */
 
+/* Section entrance animations */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.eco__header {
+  animation: fade-in-up var(--duration-base) var(--ease-out-expo) both;
+}
+
+.eco__canvas {
+  animation: fade-in-up var(--duration-base) var(--ease-out-expo) 100ms both;
+}
+
 @include reduced-motion {
   .eco__canvas {
     /* No motion-dependent layout */
+  }
+
+  .eco__header,
+  .eco__canvas {
+    animation: none;
   }
 }

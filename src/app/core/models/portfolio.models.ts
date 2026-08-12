@@ -162,7 +162,7 @@ export interface PortfolioSkillCluster {
 export type TechTier = 'primary' | 'secondary' | 'supporting';
 
 /** Category label used by the ecosystem filter — a curated subset of SkillGroup. */
-export type EcosystemCategory = 'Frontend' | 'Mobile' | 'Backend' | 'Data' | 'Design' | 'Tools';
+export type EcosystemCategory = 'Frontend' | 'Mobile' | 'Backend' | 'Data' | 'Design' | 'Testing' | 'Tools';
 
 /** A technology node in the engineering constellation. */
 export interface EcosystemNode {

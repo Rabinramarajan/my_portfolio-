@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 
 import { CursorTarget } from '../../../../shared/directives/cursor-target';
-import { Reveal } from '../../../../shared/directives/reveal';
-import { SectionHeader } from '../../../../shared/components/section-header/section-header';
 import { PortfolioStore } from '../../../../core/services/portfolio-store';
 import { DeviceCapability } from '../../../../core/services/device-capability';
 import { ECOSYSTEM_CATEGORIES, ECOSYSTEM_NODES } from '../../../../core/config/portfolio.content';
@@ -28,7 +26,6 @@ import { EcosystemMobile } from './ecosystem-mobile';
 @Component({
   selector: 'app-ecosystem',
   imports: [
-    SectionHeader,
     CursorTarget,
     EcosystemCategorySelector,
     EcosystemConnections,

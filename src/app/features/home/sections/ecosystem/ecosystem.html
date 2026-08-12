@@ -1,11 +1,12 @@
 <section id="skills" class="eco">
   <div class="eco__inner">
-    <app-section-header
-      [index]="sections().skills.index"
-      [eyebrow]="sections().skills.eyebrow"
-      [heading]="sections().skills.heading"
-      [lede]="sections().skills.lede"
-    />
+    <div class="eco__header">
+      <div class="eco__header-text">
+        <p class="eco__eyebrow">{{ sections().skills.eyebrow }}</p>
+        <h2 class="eco__heading">{{ sections().skills.heading }}</h2>
+        <p class="eco__lede">{{ sections().skills.lede }}</p>
+      </div>
+    </div>
 
     <app-ecosystem-category-selector
       [categories]="categories"
