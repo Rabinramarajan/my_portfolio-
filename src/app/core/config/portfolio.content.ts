@@ -1190,6 +1190,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     meta: 'Frontend · Core Foundation',
     features: ['Signals', 'Standalone Components', 'Zoneless', 'SSR', 'Directive composition'],
     projects: ['fiji-immigration-internal', 'fiji-immigration-external', 'prims-member-portal', 'vnpf-blo-mi', 'insuremet', 'zellavora-ai-resume-builder'],
+    experience: '4+',
   },
   {
     id: 'typescript',
@@ -1203,6 +1204,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     meta: 'Frontend · Type Safety',
     features: ['Strict mode', 'Advanced types', 'Generics', 'Utility types'],
     projects: ['fiji-immigration-internal', 'fiji-immigration-external', 'prims-member-portal', 'vnpf-blo-mi', 'insuremet', 'zellavora-ai-resume-builder'],
+    experience: '4+',
   },
   {
     id: 'signals',
@@ -1216,6 +1218,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     meta: 'Frontend · Reactive State',
     features: ['Fine-grained reactivity', 'Effects', 'Computed', 'Signal inputs'],
     projects: ['fiji-immigration-internal', 'prims-member-portal', 'zellavora-ai-resume-builder'],
+    experience: '1+',
   },
   {
     id: 'rxjs',
@@ -1229,6 +1232,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     meta: 'Frontend · Async Orchestration',
     features: ['Observables', 'Operators', 'Subjects', 'Stream composition'],
     projects: ['fiji-immigration-internal', 'fiji-immigration-external', 'prims-member-portal', 'vnpf-blo-mi'],
+    experience: '3+',
   },
 
   // ── SECONDARY: extended stack ────────────────────────────────────────────
@@ -1244,6 +1248,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     meta: 'Frontend · Utility-First Styling',
     features: ['Responsive design', 'Dark mode', 'Custom config', 'JIT compilation'],
     projects: ['fiji-immigration-internal', 'fiji-immigration-external', 'prims-member-portal', 'zellavora-ai-resume-builder'],
+    experience: '3+',
   },
   {
     id: 'ionic',
@@ -1257,6 +1262,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     meta: 'Mobile · Cross-Platform UI',
     features: ['iOS', 'Android', 'Pre-built components', 'Theming'],
     projects: ['insuremet'],
+    experience: '2+',
   },
   {
     id: 'capacitor',
@@ -1270,6 +1276,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     meta: 'Mobile · Native Bridge',
     features: ['Native APIs', 'Plugin system', 'iOS/Android', 'Web compatibility'],
     projects: ['insuremet'],
+    experience: '2+',
   },
   {
     id: 'nodejs',
@@ -1283,6 +1290,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     meta: 'Backend · JavaScript Runtime',
     features: ['Non-blocking I/O', 'Event-driven', 'NPM ecosystem', 'Scalable'],
     projects: ['fiji-immigration-external', 'prims-member-portal', 'zellavora-ai-resume-builder'],
+    experience: '3+',
   },
   {
     id: 'express',
@@ -1296,6 +1304,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     meta: 'Backend · Minimal Web Framework',
     features: ['Routing', 'Middleware', 'RESTful APIs', 'Lightweight'],
     projects: ['fiji-immigration-external', 'prims-member-portal'],
+    experience: '2+',
   },
   {
     id: 'postgresql',
@@ -1309,6 +1318,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     meta: 'Data · Relational Database',
     features: ['ACID transactions', 'JSON support', 'Full-text search', 'Partitioning'],
     projects: ['fiji-immigration-external', 'prims-member-portal'],
+    experience: '2+',
   },
   {
     id: 'supabase',
@@ -1322,6 +1332,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     meta: 'Data · BaaS Platform',
     features: ['PostgreSQL hosted', 'Real-time subscriptions', 'Auth', 'Storage'],
     projects: ['zellavora-ai-resume-builder'],
+    experience: '1+',
   },
 
   // ── TESTING & TOOLING ──────────────────────────────────────────────────
@@ -1337,6 +1348,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     meta: 'Testing · E2E Automation',
     features: ['Multi-browser', 'Assertions', 'Screenshots', 'Video recording'],
     projects: ['fiji-immigration-internal', 'prims-member-portal'],
+    experience: '2+',
   },
   {
     id: 'jest',
@@ -1350,6 +1362,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     meta: 'Testing · Unit & Snapshot Tests',
     features: ['Zero config', 'Snapshots', 'Coverage', 'Mocking'],
     projects: ['fiji-immigration-internal', 'prims-member-portal'],
+    experience: '2+',
   },
 
   // ── DESIGN & TOOLS ────────────────────────────────────────────────────
@@ -1364,6 +1377,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: [],
     meta: 'Design · Collaborative UI Design',
     features: ['Real-time collaboration', 'Components', 'Prototyping', 'Handoff'],
+    experience: '3+',
   },
   {
     id: 'git',
@@ -1376,6 +1390,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['github'],
     meta: 'Tools · Version Control',
     features: ['Branching', 'Merging', 'History', 'Distributed'],
+    experience: '4+',
   },
   {
     id: 'github',
@@ -1388,6 +1403,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['git'],
     meta: 'Tools · Collaboration Platform',
     features: ['Pull requests', 'Issues', 'Actions', 'Pages'],
+    experience: '4+',
   },
   {
     id: 'eslint',
@@ -1400,6 +1416,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['prettier'],
     meta: 'Tools · Code Quality',
     features: ['Linting', 'Custom rules', 'Auto-fix', 'Plugins'],
+    experience: '3+',
   },
   {
     id: 'prettier',
@@ -1412,6 +1429,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['eslint'],
     meta: 'Tools · Code Formatter',
     features: ['Opinionated style', 'Language support', 'Editor integration', 'Consistent format'],
+    experience: '3+',
   },
   {
     id: 'sass',
@@ -1424,6 +1442,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['tailwind'],
     meta: 'Frontend · CSS Preprocessor',
     features: ['Variables', 'Nesting', 'Mixins', 'Functions'],
+    experience: '3+',
   },
   {
     id: 'firebase',
@@ -1436,6 +1455,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['supabase'],
     meta: 'Data · Google Cloud Platform',
     features: ['Real-time DB', 'Authentication', 'Cloud Functions', 'Hosting'],
+    experience: '1+',
   },
 ];
 

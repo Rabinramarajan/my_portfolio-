@@ -189,6 +189,8 @@ export interface EcosystemNode {
   readonly features?: readonly string[];
   /** Project slugs where this technology is used. */
   readonly projects?: readonly string[];
+  /** Years of professional experience with this technology (e.g., "4+", "3-4"). */
+  readonly experience?: string;
 }
 
 export interface PortfolioProcessStep {

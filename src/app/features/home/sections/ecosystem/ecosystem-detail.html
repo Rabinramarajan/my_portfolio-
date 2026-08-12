@@ -1,6 +1,11 @@
 @if (detail(); as tech) {
   <aside class="edetail" role="complementary" [attr.aria-label]="tech.name + ' details'">
-    <p class="edetail__eyebrow">{{ tech.category }}</p>
+    <div class="edetail__header">
+      <p class="edetail__eyebrow">{{ tech.category }}</p>
+      @if (tech.experience) {
+        <span class="edetail__experience">{{ tech.experience }} yrs</span>
+      }
+    </div>
     <h4 class="edetail__name">{{ tech.name }}</h4>
     @if (tech.meta) {
       <p class="edetail__meta">{{ tech.meta }}</p>
