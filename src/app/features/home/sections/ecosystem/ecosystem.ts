@@ -29,6 +29,7 @@ interface CategoryGroup {
   templateUrl: './ecosystem.html',
   styleUrl: './ecosystem.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class Ecosystem {
   private readonly store = inject(PortfolioStore);
