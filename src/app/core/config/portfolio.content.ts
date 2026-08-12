@@ -898,6 +898,12 @@ export const SITE_MEDIA: SiteMedia = {
   ambientStory: clip('about-story', 'Ambient footage of a developer working at night', {
     decorative: true,
   }),
+  ambientDeveloper: clip('professional_developer_sitting', 'Ambient footage of a professional developer at work', {
+    decorative: true,
+  }),
+  processAnimation: clip('Screen_capture_style_animation', 'Animated screen capture visualization of development process', {
+    decorative: true,
+  }),
 };
 
 export const SERVICES: readonly PortfolioService[] = [

@@ -13,6 +13,7 @@
 import { DeviceCapability } from '../../../../core/services/device-capability';
 import { PortfolioStore } from '../../../../core/services/portfolio-store';
 import { SectionHeader } from '../../../../shared/components/section-header/section-header';
+import { VideoShowcase } from '../../../../shared/components/video-showcase/video-showcase';
 import { Reveal } from '../../../../shared/directives/reveal';
 import { Magnetic } from '../../../../shared/directives/magnetic';
 import { ProcessVisual } from './process-visual/process-visual';
@@ -33,7 +34,7 @@ import { ProcessVisual } from './process-visual/process-visual';
  */
 @Component({
   selector: 'app-process',
-  imports: [SectionHeader, ProcessVisual, Reveal, Magnetic],
+  imports: [SectionHeader, ProcessVisual, VideoShowcase, Reveal, Magnetic],
   templateUrl: './process.html',
   styleUrl: './process.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,6 +45,7 @@ export class Process {
 
   protected readonly sections = this.store.sections;
   protected readonly uiCopy = this.store.uiCopy;
+  protected readonly media = this.store.media;
   protected readonly steps = this.store.process;
   protected readonly activeStep = signal(0);
   protected readonly totalSteps = computed(() => this.steps().length);

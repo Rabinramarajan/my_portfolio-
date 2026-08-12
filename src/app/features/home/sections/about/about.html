@@ -17,6 +17,15 @@
       </div>
     </div>
 
+    <!-- Stage 3b: Ambient Developer Video Background -->
+    <div appReveal="rise" [delay]="0.24">
+      <app-video-showcase
+        [video]="media().ambientDeveloper"
+        [controls]="false"
+        [rounded]="true"
+      />
+    </div>
+
     <!-- Stage 4: "HOW I THINK" Interactive Manifesto -->
     <div appReveal="rise">
       <app-engineering-principles />

@@ -242,6 +242,8 @@ export interface SiteMedia {
   readonly ambientLoop: PortfolioVideo;
   readonly ambientOffice: PortfolioVideo;
   readonly ambientStory: PortfolioVideo;
+  readonly ambientDeveloper: PortfolioVideo;
+  readonly processAnimation: PortfolioVideo;
 }
 
 export interface PortfolioEducation {

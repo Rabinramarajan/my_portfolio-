@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { PortfolioStore } from '../../../../core/services/portfolio-store';
 import { Reveal } from '../../../../shared/directives/reveal';
+import { VideoShowcase } from '../../../../shared/components/video-showcase/video-showcase';
 import { AboutManifesto } from './components/about-manifesto';
 import { AboutPortrait } from './components/about-portrait';
 import { AboutSignature } from './components/about-signature';
@@ -15,6 +16,7 @@ import { EngineeringStack } from './components/engineering-stack';
   standalone: true,
   imports: [
     Reveal,
+    VideoShowcase,
     AboutSignature,
     AboutManifesto,
     AboutPortrait,

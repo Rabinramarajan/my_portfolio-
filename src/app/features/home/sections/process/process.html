@@ -68,6 +68,15 @@
       </div>
     </div>
 
+    <!-- Process Animation Video -->
+    <div appReveal="rise">
+      <app-video-showcase
+        [video]="media().processAnimation"
+        [controls]="false"
+        [rounded]="true"
+      />
+    </div>
+
     <div class="pr__ending" appReveal="rise">
       <p class="pr__ending-text">{{ uiCopy().processEnding.text }}</p>
       <a
