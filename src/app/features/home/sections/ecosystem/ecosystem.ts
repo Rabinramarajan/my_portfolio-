@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { PortfolioStore } from '../../../../core/services/portfolio-store';
 import { CATEGORY_DESCRIPTIONS } from '../../../../core/config/portfolio.content';
@@ -30,6 +31,7 @@ interface CategoryGroup {
   styleUrl: './ecosystem.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
+  imports: [CommonModule],
 })
 export class Ecosystem {
   private readonly store = inject(PortfolioStore);
