@@ -21,6 +21,7 @@
 import type {
   AboutContent,
   AvailabilityContent,
+  CategoryDescription,
   ContactContent,
   EcosystemCategory,
   EcosystemNode,
@@ -1127,6 +1128,38 @@ export const SKILLS: readonly PortfolioSkillCluster[] = [
   },
 ];
 
+/** Category descriptions for the ecosystem section. */
+export const CATEGORY_DESCRIPTIONS: readonly CategoryDescription[] = [
+  {
+    category: 'Frontend',
+    description: 'Core browser technologies for building user interfaces and interactive experiences.',
+  },
+  {
+    category: 'Mobile',
+    description: 'Cross-platform native and hybrid technologies for iOS and Android applications.',
+  },
+  {
+    category: 'Backend',
+    description: 'Server-side frameworks and runtime environments for APIs and business logic.',
+  },
+  {
+    category: 'Data',
+    description: 'Databases and data platforms for persistent storage and real-time synchronization.',
+  },
+  {
+    category: 'Design',
+    description: 'Design and prototyping tools for creating high-fidelity user experiences.',
+  },
+  {
+    category: 'Testing',
+    description: 'Testing frameworks and tools for ensuring code quality and reliability.',
+  },
+  {
+    category: 'Tools',
+    description: 'Development utilities for version control, linting, and deployment automation.',
+  },
+];
+
 /** Categories surfaced in the ecosystem constellation filter. */
 export const ECOSYSTEM_CATEGORIES: readonly EcosystemCategory[] = [
   'Frontend',
@@ -1156,6 +1189,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['typescript', 'signals', 'rxjs', 'ionic', 'tailwind', 'playwright', 'jest'],
     meta: 'Frontend · Core Foundation',
     features: ['Signals', 'Standalone Components', 'Zoneless', 'SSR', 'Directive composition'],
+    projects: ['fiji-immigration-internal', 'fiji-immigration-external', 'prims-member-portal', 'vnpf-blo-mi', 'insuremet', 'zellavora-ai-resume-builder'],
   },
   {
     id: 'typescript',
@@ -1168,6 +1202,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['angular', 'signals', 'nodejs'],
     meta: 'Frontend · Type Safety',
     features: ['Strict mode', 'Advanced types', 'Generics', 'Utility types'],
+    projects: ['fiji-immigration-internal', 'fiji-immigration-external', 'prims-member-portal', 'vnpf-blo-mi', 'insuremet', 'zellavora-ai-resume-builder'],
   },
   {
     id: 'signals',
@@ -1180,6 +1215,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['angular', 'typescript', 'rxjs'],
     meta: 'Frontend · Reactive State',
     features: ['Fine-grained reactivity', 'Effects', 'Computed', 'Signal inputs'],
+    projects: ['fiji-immigration-internal', 'prims-member-portal', 'zellavora-ai-resume-builder'],
   },
   {
     id: 'rxjs',
@@ -1192,6 +1228,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['angular', 'signals'],
     meta: 'Frontend · Async Orchestration',
     features: ['Observables', 'Operators', 'Subjects', 'Stream composition'],
+    projects: ['fiji-immigration-internal', 'fiji-immigration-external', 'prims-member-portal', 'vnpf-blo-mi'],
   },
 
   // ── SECONDARY: extended stack ────────────────────────────────────────────
@@ -1206,6 +1243,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['angular', 'sass'],
     meta: 'Frontend · Utility-First Styling',
     features: ['Responsive design', 'Dark mode', 'Custom config', 'JIT compilation'],
+    projects: ['fiji-immigration-internal', 'fiji-immigration-external', 'prims-member-portal', 'zellavora-ai-resume-builder'],
   },
   {
     id: 'ionic',
@@ -1218,6 +1256,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['angular', 'capacitor'],
     meta: 'Mobile · Cross-Platform UI',
     features: ['iOS', 'Android', 'Pre-built components', 'Theming'],
+    projects: ['insuremet'],
   },
   {
     id: 'capacitor',
@@ -1230,6 +1269,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['ionic'],
     meta: 'Mobile · Native Bridge',
     features: ['Native APIs', 'Plugin system', 'iOS/Android', 'Web compatibility'],
+    projects: ['insuremet'],
   },
   {
     id: 'nodejs',
@@ -1242,6 +1282,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['typescript', 'postgresql', 'supabase', 'express'],
     meta: 'Backend · JavaScript Runtime',
     features: ['Non-blocking I/O', 'Event-driven', 'NPM ecosystem', 'Scalable'],
+    projects: ['fiji-immigration-external', 'prims-member-portal', 'zellavora-ai-resume-builder'],
   },
   {
     id: 'express',
@@ -1254,6 +1295,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['nodejs', 'typescript'],
     meta: 'Backend · Minimal Web Framework',
     features: ['Routing', 'Middleware', 'RESTful APIs', 'Lightweight'],
+    projects: ['fiji-immigration-external', 'prims-member-portal'],
   },
   {
     id: 'postgresql',
@@ -1266,6 +1308,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['nodejs', 'supabase'],
     meta: 'Data · Relational Database',
     features: ['ACID transactions', 'JSON support', 'Full-text search', 'Partitioning'],
+    projects: ['fiji-immigration-external', 'prims-member-portal'],
   },
   {
     id: 'supabase',
@@ -1278,6 +1321,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['nodejs', 'postgresql'],
     meta: 'Data · BaaS Platform',
     features: ['PostgreSQL hosted', 'Real-time subscriptions', 'Auth', 'Storage'],
+    projects: ['zellavora-ai-resume-builder'],
   },
 
   // ── TESTING & TOOLING ──────────────────────────────────────────────────
@@ -1292,6 +1336,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['angular'],
     meta: 'Testing · E2E Automation',
     features: ['Multi-browser', 'Assertions', 'Screenshots', 'Video recording'],
+    projects: ['fiji-immigration-internal', 'prims-member-portal'],
   },
   {
     id: 'jest',
@@ -1304,6 +1349,7 @@ export const ECOSYSTEM_NODES: readonly EcosystemNode[] = [
     connections: ['typescript', 'angular'],
     meta: 'Testing · Unit & Snapshot Tests',
     features: ['Zero config', 'Snapshots', 'Coverage', 'Mocking'],
+    projects: ['fiji-immigration-internal', 'prims-member-portal'],
   },
 
   // ── DESIGN & TOOLS ────────────────────────────────────────────────────

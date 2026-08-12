@@ -8,11 +8,21 @@
       </div>
     </div>
 
-    <app-ecosystem-category-selector
-      [categories]="categories"
-      [active]="activeCategory()"
-      (categoryChange)="onCategoryChange($event)"
-    />
+    <div class="eco__controls">
+      <app-ecosystem-category-selector
+        [categories]="categories"
+        [active]="activeCategory()"
+        (categoryChange)="onCategoryChange($event)"
+      />
+      <input
+        type="search"
+        class="eco__search"
+        placeholder="Search technologies..."
+        [value]="searchQuery()"
+        (input)="searchQuery.set($event.target.value)"
+        aria-label="Search technologies by name or feature"
+      />
+    </div>
 
     <!-- Desktop: constellation canvas -->
     <div class="eco__canvas eco__desktop-only">

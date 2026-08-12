@@ -48,13 +48,24 @@ export class Ecosystem {
   protected readonly activeCategory = signal<EcosystemCategory | null>(null);
   protected readonly hoveredId = signal<string | null>(null);
   protected readonly selectedId = signal<string | null>(null);
+  protected readonly searchQuery = signal<string>('');
 
   protected readonly isMobile = this.device.isMobile;
 
-  /** Nodes visible after category filter is applied. */
+  /** Nodes visible after category filter and search query are applied. */
   protected readonly visibleNodes = computed(() => {
     const cat = this.activeCategory();
-    return cat ? this.allNodes.filter((n) => n.category === cat) : this.allNodes;
+    const query = this.searchQuery().toLowerCase();
+    let filtered = cat ? this.allNodes.filter((n) => n.category === cat) : this.allNodes;
+    if (query) {
+      filtered = filtered.filter(
+        (n) =>
+          n.name.toLowerCase().includes(query) ||
+          n.meta?.toLowerCase().includes(query) ||
+          n.features?.some((f) => f.toLowerCase().includes(query)),
+      );
+    }
+    return filtered;
   });
 
   /** Which nodes should glow as "related" to the currently hovered/selected node. */

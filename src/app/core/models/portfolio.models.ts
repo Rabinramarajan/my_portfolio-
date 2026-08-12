@@ -164,6 +164,12 @@ export type TechTier = 'primary' | 'secondary' | 'supporting';
 /** Category label used by the ecosystem filter — a curated subset of SkillGroup. */
 export type EcosystemCategory = 'Frontend' | 'Mobile' | 'Backend' | 'Data' | 'Design' | 'Testing' | 'Tools';
 
+/** Metadata for an ecosystem category. */
+export interface CategoryDescription {
+  readonly category: EcosystemCategory;
+  readonly description: string;
+}
+
 /** A technology node in the engineering constellation. */
 export interface EcosystemNode {
   readonly id: string;
@@ -181,6 +187,8 @@ export interface EcosystemNode {
   readonly meta?: string;
   /** Sub-features or aspects shown when the node is selected. */
   readonly features?: readonly string[];
+  /** Project slugs where this technology is used. */
+  readonly projects?: readonly string[];
 }
 
 export interface PortfolioProcessStep {

@@ -12,5 +12,15 @@
         }
       </ul>
     }
+    @if (projectNames(); as projects) {
+      <div class="edetail__projects">
+        <p class="edetail__projects-label">Used in</p>
+        <ul class="edetail__projects-list">
+          @for (proj of projects; track proj.slug) {
+            <li class="edetail__project">{{ proj.title }}</li>
+          }
+        </ul>
+      </div>
+    }
   </aside>
 }
