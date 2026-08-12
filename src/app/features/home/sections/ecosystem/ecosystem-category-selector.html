@@ -5,6 +5,7 @@
     [class.is-active]="active() === null"
     (click)="select(null)"
     [attr.aria-pressed]="active() === null"
+    title="Show all technologies"
   >
     All
   </button>
@@ -15,6 +16,8 @@
       [class.is-active]="active() === cat"
       (click)="select(cat)"
       [attr.aria-pressed]="active() === cat"
+      [title]="getCategoryDescription(cat)"
+      [attr.aria-describedby]="'cat-tooltip-' + cat"
     >
       {{ cat }}
     </button>
