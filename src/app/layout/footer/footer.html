@@ -8,7 +8,9 @@
         {{ uiCopy().footer.ctaLede }}
       </p>
       <div class="ft__cta-actions" appReveal="rise" [delay]="0.1">
-        <app-button routerLink="/contact" size="lg">{{ uiCopy().footer.ctaAction }}</app-button>
+        <app-button routerLink="/contact" size="lg" [magnetic]="true">{{
+          uiCopy().footer.ctaAction
+        }}</app-button>
         <app-button [href]="'mailto:' + profile().email" variant="ghost">
           {{ profile().email }}
         </app-button>
@@ -34,9 +36,9 @@
 
       <div class="ft__social">
         <h3 class="ft__label">{{ uiCopy().footer.elsewhereLabel }}</h3>
-        <ul>
+        <ul appReveal="stagger">
           @for (social of profile().socials; track social.label) {
-            <li>
+            <li data-reveal-item>
               <a
                 [href]="social.url"
                 [attr.target]="social.url.startsWith('http') ? '_blank' : null"

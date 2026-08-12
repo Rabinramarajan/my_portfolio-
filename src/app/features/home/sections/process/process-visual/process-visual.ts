@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import type { PortfolioMedia } from '../../../../../core/models/portfolio.models';
 
@@ -7,6 +7,11 @@ import type { PortfolioMedia } from '../../../../../core/models/portfolio.models
  * illustration for whichever process step is currently active — one distinct
  * visual per stage, so the panel changes as the visitor scrolls the timeline
  * rather than showing a single reused image.
+ *
+ * All seven illustrations are rendered up front and stacked; the active one is
+ * crossfaded in with a slow scale ("Ken Burns"), so advancing a step never
+ * flashes an instant image swap. The crossfade is compositor-only (opacity +
+ * transform) and the scale is dropped under reduced motion.
  */
 @Component({
   selector: 'app-process-visual',
@@ -19,7 +24,8 @@ export class ProcessVisual {
   /** Zero-based index of the currently active process step (0–6). */
   readonly activeStep = input(0);
 
-  protected readonly media = computed(() => VISUAL_KEYS[this.activeStep()] ?? VISUAL_KEYS[0]);
+  /** All stage illustrations, rendered stacked so the active one can crossfade. */
+  protected readonly visuals = VISUAL_KEYS;
 }
 
 /** The source PNGs in `public/media/process` are all 1672 × 941, shipped with

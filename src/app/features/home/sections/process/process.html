@@ -25,51 +25,70 @@
           <span class="pr__line-fill" #fill></span>
         </span>
 
-        <ol class="pr__track" #track>
-        @for (step of steps(); track step.title; let i = $index) {
-          <li
-            class="pr__step"
-            #stepEl
-            [class.pr__step--active]="activeStep() === i"
-            [class.pr__step--done]="activeStep() > i"
-          >
-            <!-- The accessible name has to start with the visible text ("01"),
-                 or a voice-control user saying "click oh one" hits nothing. -->
-            <button
-              type="button"
-              class="pr__node"
-              [attr.aria-current]="activeStep() === i ? 'step' : null"
-              [attr.aria-label]="
-                (i + 1).toString().padStart(2, '0') + ' — go to step: ' + step.title
-              "
-              (click)="goTo(i)"
+        <ol class="pr__track" #track appReveal="stagger">
+          @for (step of steps(); track step.title; let i = $index) {
+            <li
+              class="pr__step"
+              data-reveal-item
+              #stepEl
+              [class.pr__step--active]="activeStep() === i"
+              [class.pr__step--done]="activeStep() > i"
             >
-              {{ (i + 1).toString().padStart(2, '0') }}
-            </button>
+              <!-- The accessible name has to start with the visible text ("01"),
+                 or a voice-control user saying "click oh one" hits nothing. -->
+              <button
+                type="button"
+                class="pr__node"
+                [attr.aria-current]="activeStep() === i ? 'step' : null"
+                [attr.aria-label]="
+                  (i + 1).toString().padStart(2, '0') + ' — go to step: ' + step.title
+                "
+                (click)="goTo(i)"
+              >
+                {{ (i + 1).toString().padStart(2, '0') }}
+              </button>
 
-            <div class="pr__content">
-              <p class="pr__eyebrow">{{ step.eyebrow }}</p>
-              <h3 class="pr__title">{{ step.title }}</h3>
-              <p class="pr__desc">{{ step.description }}</p>
+              <div class="pr__content">
+                <p class="pr__eyebrow">{{ step.eyebrow }}</p>
+                <h3 class="pr__title">{{ step.title }}</h3>
+                <p class="pr__desc">{{ step.description }}</p>
 
-              <div class="pr__outputs">
-                <span class="pr__outputs-label">{{ step.outputsLabel }}</span>
-                <ul>
-                  @for (output of step.outputs; track output) {
-                    <li>{{ output }}</li>
-                  }
-                </ul>
+                <div class="pr__outputs">
+                  <span class="pr__outputs-label">{{ step.outputsLabel }}</span>
+                  <ul>
+                    @for (output of step.outputs; track output) {
+                      <li>{{ output }}</li>
+                    }
+                  </ul>
+                </div>
               </div>
-            </div>
-          </li>
-        }
+            </li>
+          }
         </ol>
       </div>
     </div>
 
     <div class="pr__ending" appReveal="rise">
       <p class="pr__ending-text">{{ uiCopy().processEnding.text }}</p>
-      <a class="pr__ending-cta" href="#contact">{{ uiCopy().processEnding.cta }}</a>
+      <a
+        class="pr__ending-cta"
+        href="#contact"
+        [appMagnetic]="0.3"
+        [appGlow]="true"
+        [trail]="'[data-magnetic-trail]'"
+        [lead]="'[data-magnetic-lead]'"
+      >
+        <span data-magnetic-trail>{{ uiCopy().processEnding.cta }}</span>
+        <svg
+          data-magnetic-lead
+          viewBox="0 0 16 16"
+          aria-hidden="true"
+          focusable="false"
+          style="width: 16px; height: 16px;"
+        >
+          <path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" />
+        </svg>
+      </a>
     </div>
   </div>
 </section>

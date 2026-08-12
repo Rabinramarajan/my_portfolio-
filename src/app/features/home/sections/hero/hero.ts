@@ -13,10 +13,16 @@ import { Motion } from '../../../../core/services/motion';
 import { PortfolioStore } from '../../../../core/services/portfolio-store';
 import { WebglField } from '../../../../shared/components/webgl-field/webgl-field';
 import { asyncTeardown } from '../../../../shared/utils/async-teardown';
+import { DURATION, EASE } from '../../../../core/services/motion-tokens';
 import { HeroBackground } from './components/hero-background';
 import { HeroMetrics, type HeroMetric } from './components/hero-metrics';
 import { HeroPortrait } from './components/hero-portrait';
 import { HeroProgress } from './components/hero-progress';
+
+/** Eases pulled from the shared motion tokens so the hero matches every other
+ *  reveal on the site instead of hand-tuning its own cubic-beziers. */
+const EXPO = EASE.expo;
+const SPRING = EASE.spring;
 
 type Gsap = typeof import('gsap').gsap;
 
@@ -114,14 +120,14 @@ export class Hero {
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        defaults: { ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+        defaults: { ease: EXPO, duration: DURATION.base },
       });
 
       // Blur-to-sharp entrance for content elements
       tl.fromTo(
         '.hero__content',
         { filter: 'blur(10px)' },
-        { filter: 'blur(0px)', duration: 0.9, ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+        { filter: 'blur(0px)', duration: 0.9, ease: EXPO },
         0,
       )
         // Headline: staggered line reveals with refined easing
@@ -133,7 +139,7 @@ export class Hero {
             autoAlpha: 1,
             duration: 0.8,
             stagger: 0.12,
-            ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+            ease: SPRING,
           },
           0.12,
         )
@@ -141,14 +147,14 @@ export class Hero {
         .fromTo(
           '.hero__value',
           { y: 20, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.7, ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+          { y: 0, autoAlpha: 1, duration: 0.7, ease: EXPO },
           0.32,
         )
         // Status indicators: early reveal before buttons
         .fromTo(
           '.hero__status, .hero__status-note',
           { y: 14, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.65, ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+          { y: 0, autoAlpha: 1, duration: 0.65, ease: EXPO },
           0.2,
         )
         // CTA buttons: soft spring-like upward slide
@@ -159,7 +165,7 @@ export class Hero {
             y: 0,
             autoAlpha: 1,
             duration: 0.85,
-            ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+            ease: SPRING,
           },
           0.42,
         )
@@ -171,7 +177,7 @@ export class Hero {
             y: 0,
             autoAlpha: 1,
             duration: 0.9,
-            ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            ease: EXPO,
           },
           0.15,
         )
@@ -179,7 +185,7 @@ export class Hero {
         .fromTo(
           '.hero__meta',
           { y: 12, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.65, ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+          { y: 0, autoAlpha: 1, duration: 0.65, ease: EXPO },
           0.65,
         )
         // Scroll indicator: gentle fade in
@@ -188,14 +194,14 @@ export class Hero {
         .fromTo(
           '.hero__metrics-row',
           { y: 16, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.7, ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+          { y: 0, autoAlpha: 1, duration: 0.7, ease: EXPO },
           0.08,
         )
         // Bridge section: final reveal
         .fromTo(
           '.hero__bridge',
           { y: 20, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.75, ease: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' },
+          { y: 0, autoAlpha: 1, duration: 0.75, ease: EXPO },
           0.85,
         );
     }, root);

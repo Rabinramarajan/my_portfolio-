@@ -7,17 +7,21 @@
       [lede]="sections().resume.lede"
     />
 
-    <div class="rs__actions no-print">
-      <app-button [href]="profile().resumeUrl" size="lg">{{ uiCopy().resume.downloadLabel }}</app-button>
-      <button type="button" class="rs__print" (click)="print()">{{ uiCopy().resume.printLabel }}</button>
+    <div class="rs__actions no-print" appReveal="rise">
+      <app-button [href]="profile().resumeUrl" size="lg" [magnetic]="true">{{
+        uiCopy().resume.downloadLabel
+      }}</app-button>
+      <button type="button" class="rs__print" (click)="print()">
+        {{ uiCopy().resume.printLabel }}
+      </button>
       <p class="rs__updated">
         {{ uiCopy().resume.updatedLabel }}
         <time [attr.datetime]="profile().resumeUpdated">{{ updated() | date: 'MMMM y' }}</time>
       </p>
     </div>
 
-    <article class="rs__doc">
-      <header class="rs__head">
+    <article class="rs__doc" appReveal="stagger">
+      <header class="rs__head" data-reveal-item>
         <h2 class="rs__name">{{ profile().name }}</h2>
         <p class="rs__role">{{ profile().role }}</p>
         <p class="rs__contact">
@@ -27,12 +31,12 @@
         </p>
       </header>
 
-      <section class="rs__section">
+      <section class="rs__section" data-reveal-item>
         <h3 class="rs__label">{{ uiCopy().resume.profileLabel }}</h3>
         <p class="rs__summary">{{ profile().valueProposition }}</p>
       </section>
 
-      <section class="rs__section">
+      <section class="rs__section" data-reveal-item>
         <h3 class="rs__label">{{ uiCopy().resume.experienceLabel }}</h3>
         @for (role of experience(); track role.company + role.start) {
           <div class="rs__role-block">
@@ -53,7 +57,7 @@
         }
       </section>
 
-      <section class="rs__section">
+      <section class="rs__section" data-reveal-item>
         <h3 class="rs__label">{{ uiCopy().resume.educationLabel }}</h3>
         @for (item of education(); track item.institution) {
           <div class="rs__role-block">
@@ -67,7 +71,7 @@
         }
       </section>
 
-      <section class="rs__section">
+      <section class="rs__section" data-reveal-item>
         <h3 class="rs__label">{{ uiCopy().resume.certificationsLabel }}</h3>
         @for (item of certifications(); track item.name) {
           <div class="rs__role-block">
@@ -79,7 +83,7 @@
         }
       </section>
 
-      <section class="rs__section">
+      <section class="rs__section" data-reveal-item>
         <h3 class="rs__label">{{ uiCopy().resume.skillsLabel }}</h3>
         <dl class="rs__skills">
           @for (cluster of skills(); track cluster.group) {

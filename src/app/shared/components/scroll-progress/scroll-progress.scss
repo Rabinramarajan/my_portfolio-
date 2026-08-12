@@ -1,3 +1,5 @@
+@use '../../../../styles/mixins' as *;
+
 .sp {
   position: fixed;
   inset-block-start: 0;
@@ -10,7 +12,27 @@
 .sp__bar {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, var(--color-accent-dim), var(--color-accent));
+  /* The second layer puts a soft hot edge on the leading tip at every fill
+     level: the element scales as a whole, so the highlight stays glued to
+     the visible right end. */
+  background:
+    radial-gradient(5px 100% at 100% 50%, rgb(255 255 255 / 25%), transparent 75%),
+    linear-gradient(90deg, var(--color-accent-dim), var(--color-accent));
   transform-origin: left;
+  /* The bar is zero-width until JS reports the first scroll position; without
+     this default a full-width accent line would flash at the top before
+     hydration. */
+  transform: scaleX(0);
+  /* Short linear transition turns the per-frame signal updates into smooth
+     tracking without lagging fast scrolls. */
+  transition: transform 80ms linear;
   will-change: transform;
+}
+
+@include reduced-motion {
+  .sp__bar {
+    /* Progress is scroll-driven, not decorative motion, so it still fills —
+       just instantly, with the easing removed. */
+    transition: none;
+  }
 }

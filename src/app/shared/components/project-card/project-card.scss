@@ -9,14 +9,54 @@
 }
 
 .pc__link {
+  position: relative;
+  isolation: isolate;
   display: grid;
   gap: var(--space-5);
+
+  /* The 3D tilt writes inline transforms every frame; this transition keeps the
+     pointer follow-on and the return-to-flat reset weighty rather than jerky. */
+  transition: transform var(--duration-base) var(--ease-out-expo);
+
+  /* Slow ambient wash that breathes on hover — the per-project accent bleeding
+     up through the surface. Compositor-only (opacity + transform). */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(
+      120% 90% at 50% 115%,
+      color-mix(in srgb, var(--card-accent) 12%, transparent),
+      transparent 70%
+    );
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity var(--duration-cinematic) var(--ease-out-expo),
+      transform var(--duration-cinematic) var(--ease-out-expo);
+    pointer-events: none;
+  }
 
   .pc--wide & {
     @include up(lg) {
       grid-template-columns: 1.35fr 1fr;
       gap: var(--space-7);
       align-items: center;
+    }
+  }
+
+  @include hover-capable {
+    will-change: transform;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 40px 80px -40px rgb(0 0 0 / 75%);
+    }
+
+    &:hover::before {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }
@@ -26,6 +66,10 @@
   overflow: hidden;
   border-radius: var(--radius-lg);
   @include fine-border;
+
+  transition:
+    border-color var(--duration-base) var(--ease-out-expo),
+    box-shadow var(--duration-base) var(--ease-out-expo);
 
   app-media-image {
     transition: transform var(--duration-cinematic) var(--ease-out-expo);
@@ -46,8 +90,15 @@
 
   @include hover-capable {
     .pc__link:hover & {
+      border-color: color-mix(in srgb, var(--card-accent) 45%, transparent);
+      box-shadow:
+        0 0 0 1px color-mix(in srgb, var(--card-accent) 30%, transparent),
+        0 24px 48px -24px rgb(0 0 0 / 70%);
+
+      /* The image drifts further than the card itself, which reads as the
+         visual surfacing ahead of the frame — a hint of parallax. */
       app-media-image {
-        transform: scale(1.03);
+        transform: scale(1.05) translateY(-6px);
       }
 
       &::after {
@@ -66,6 +117,38 @@
   letter-spacing: var(--tracking-wide);
   color: var(--color-text-muted);
   mix-blend-mode: difference;
+}
+
+.pc__arrow {
+  position: absolute;
+  inset-block-start: var(--space-4);
+  inset-inline-end: var(--space-4);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  inline-size: 34px;
+  block-size: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--color-line-strong);
+  background: color-mix(in srgb, var(--color-bg) 78%, transparent);
+  color: var(--color-text-muted);
+  transition:
+    transform var(--duration-base) var(--ease-out-expo),
+    color var(--duration-base) var(--ease-out-expo),
+    border-color var(--duration-base) var(--ease-out-expo);
+
+  svg {
+    inline-size: 14px;
+    block-size: 14px;
+  }
+
+  @include hover-capable {
+    .pc__link:hover & {
+      transform: translateX(4px);
+      border-color: var(--card-accent);
+      color: var(--card-accent);
+    }
+  }
 }
 
 .pc__title {
@@ -121,5 +204,65 @@
     font-family: var(--font-mono);
     font-size: var(--text-xs);
     color: var(--color-text-faint);
+  }
+}
+
+/* ---- Desktop hover: metadata reveals progressively ---- */
+
+/* On fine pointers the meta rows and tech chips start receded and step in one
+   after another as the card is hovered. Everything stays fully visible on
+   touch, so the tap-to-open card never hides its own content. */
+@include hover-capable {
+  .pc__meta > div,
+  .pc__tech li {
+    opacity: 0.6;
+    transform: translateY(6px);
+    transition:
+      opacity var(--duration-base) var(--ease-out-expo),
+      transform var(--duration-base) var(--ease-out-expo);
+  }
+
+  .pc__link:hover .pc__meta > div,
+  .pc__link:hover .pc__tech li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .pc__link:hover .pc__meta > div:nth-child(1) {
+    transition-delay: 40ms;
+  }
+
+  .pc__link:hover .pc__meta > div:nth-child(2) {
+    transition-delay: 90ms;
+  }
+
+  .pc__link:hover .pc__meta > div:nth-child(3) {
+    transition-delay: 140ms;
+  }
+
+  .pc__link:hover .pc__tech li:nth-child(1) {
+    transition-delay: 160ms;
+  }
+
+  .pc__link:hover .pc__tech li:nth-child(2) {
+    transition-delay: 200ms;
+  }
+
+  .pc__link:hover .pc__tech li:nth-child(3) {
+    transition-delay: 240ms;
+  }
+
+  .pc__link:hover .pc__tech li:nth-child(4) {
+    transition-delay: 280ms;
+  }
+}
+
+@include reduced-motion {
+  .pc__link,
+  .pc__media,
+  .pc__arrow,
+  .pc__meta > div,
+  .pc__tech li {
+    transition: none;
   }
 }

@@ -14,6 +14,7 @@ import { DeviceCapability } from '../../../../core/services/device-capability';
 import { PortfolioStore } from '../../../../core/services/portfolio-store';
 import { SectionHeader } from '../../../../shared/components/section-header/section-header';
 import { Reveal } from '../../../../shared/directives/reveal';
+import { Magnetic } from '../../../../shared/directives/magnetic';
 import { ProcessVisual } from './process-visual/process-visual';
 
 
@@ -32,7 +33,7 @@ import { ProcessVisual } from './process-visual/process-visual';
  */
 @Component({
   selector: 'app-process',
-  imports: [SectionHeader, ProcessVisual, Reveal],
+  imports: [SectionHeader, ProcessVisual, Reveal, Magnetic],
   templateUrl: './process.html',
   styleUrl: './process.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

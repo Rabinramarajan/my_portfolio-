@@ -1,6 +1,7 @@
 import { Directive, ElementRef, afterNextRender, inject, input } from '@angular/core';
 
-import { Motion } from '../../core/services/motion';
+import { DeviceCapability } from '../../core/services/device-capability';
+import { EASE_CSS } from '../../core/services/motion-tokens';
 import { asyncTeardown } from '../utils/async-teardown';
 
 export type RevealVariant = 'fade' | 'rise' | 'mask' | 'lines' | 'stagger';
@@ -8,10 +9,16 @@ export type RevealVariant = 'fade' | 'rise' | 'mask' | 'lines' | 'stagger';
 /**
  * Scroll-entrance animation.
  *
- * The element is authored in its *final* state in CSS; this directive sets the
- * "from" state only once GSAP has loaded in the browser. That ordering matters:
- * SSR markup and reduced-motion users get fully visible content with no chance
- * of a flash of hidden text, which is the usual failure mode of reveal effects.
+ * The element is authored in its *final* state in CSS; this directive applies
+ * the "from" state only once the browser is running and the element is about
+ * to enter the viewport. That ordering matters: SSR markup and reduced-motion
+ * users get fully visible content with no chance of a flash of hidden text,
+ * which is the usual failure mode of reveal effects.
+ *
+ * The reveal is driven entirely by `IntersectionObserver` — no scroll event
+ * listeners — and plays once through the Web Animations API before handing the
+ * element back to its stylesheet, so it never fights hover states or repeated
+ * scroll passes.
  */
 @Directive({
   selector: '[appReveal]',
@@ -19,7 +26,7 @@ export type RevealVariant = 'fade' | 'rise' | 'mask' | 'lines' | 'stagger';
 })
 export class Reveal {
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly motion = inject(Motion);
+  private readonly device = inject(DeviceCapability);
   private readonly teardown = asyncTeardown();
 
   readonly variant = input<RevealVariant>('rise', { alias: 'appReveal' });
@@ -36,112 +43,110 @@ export class Reveal {
   /** Selector for children animated in sequence (used by `stagger` and `lines`). */
   readonly items = input<string>('[data-reveal-item]');
   /**
-   * Viewport position that triggers the reveal. Deliberately just below the
-   * fold: an element should be finishing its entrance as it arrives, not
-   * starting one once the reader is already looking at empty space.
+   * Viewport position that triggers the reveal, in `top N%` notation. Each
+   * child holds its "from" state while it waits for its turn in a stagger.
    */
   readonly start = input('top 96%');
 
   constructor() {
-    afterNextRender(() => void this.observe());
+    afterNextRender(() => void this.setup());
   }
 
-  private observe(): void {
+  private setup(): void {
+    const element = this.host.nativeElement;
+    if (!this.device.animationsEnabled()) {
+      this.release();
+      return;
+    }
+
+    const rect = element.getBoundingClientRect();
+    const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+
+    // Scroll restoration can land mid-page. Never animate content the visitor
+    // is already reading — show it and move on.
+    if (inViewport && window.scrollY > 40) {
+      this.release();
+      return;
+    }
+
+    // Above the fold on load: play the entrance immediately rather than
+    // waiting for a scroll trigger that will already have passed.
+    if (inViewport) {
+      this.animate();
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
           observer.disconnect();
-          void this.animate();
+          this.animate();
         }
       },
-      { rootMargin: '1200px' }
+      { rootMargin: this.rootMargin() },
     );
-    
-    observer.observe(this.host.nativeElement);
+    observer.observe(element);
     this.teardown.register(() => observer.disconnect());
   }
 
-  private async animate(): Promise<void> {
-    const startMs = performance.now();
-    const gsap = await this.motion.load();
-    if (!gsap || this.teardown.destroyed) return this.release();
-
+  private animate(): void {
     const element = this.host.nativeElement;
-    
-    // If GSAP loaded late (e.g. slow network) and the element is already painted in the viewport,
-    // skip the entrance animation. Otherwise it will flash hidden and ruin LCP.
-    if (performance.now() - startMs > 250) {
-      const rect = element.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        return this.release();
-      }
-    }
-    const targets =
-      this.variant() === 'stagger' || this.variant() === 'lines'
-        ? (Array.from(element.querySelectorAll(this.items())) as HTMLElement[])
-        : [element];
+    const staggered = this.variant() === 'stagger' || this.variant() === 'lines';
+    const targets = staggered
+      ? (Array.from(element.querySelectorAll(this.items())) as HTMLElement[])
+      : [element];
     if (targets.length === 0) return this.release();
 
-    const from = FROM[this.variant()];
-    const tween = gsap.fromTo(targets, from, {
-      // Only the properties this variant actually animates. Setting them all
-      // unconditionally left every revealed element with a `clip-path` of its
-      // own border box, which silently clipped any child designed to overflow —
-      // a badge sitting proud of its card, for instance.
-      ...TO[this.variant()],
-      // Hand the element back to its stylesheet once revealed: no leftover
-      // inline opacity, transform or clip-path to interfere with hover states.
-      clearProps: 'all',
-      duration: 0.55,
-      delay: this.delay(),
-      // `amount` caps the *total* sequence rather than paying `each` per item:
-      // a nine-card grid used to take 0.72s to even start its last card, which
-      // read as a section that simply had not loaded.
-      stagger: targets.length > 1 ? { each: 0.05, amount: 0.18 } : 0,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: element,
-        start: this.start(),
-        once: true,
-        // Snap to the finished state when scrolling faster than ~800px/s: a
-        // reader flicking past should never overtake the animation and meet a
-        // blank section. The default (`true`) only kicks in around 2500px/s.
-        fastScrollEnd: 800,
-      },
-    });
+    const keyframes = KEYFRAMES[this.variant() === 'fade' ? 'fade' : 'premium'];
+    const baseDelay = this.delay() * 1000;
 
-    // `fromTo` renders its "from" state the moment the tween is built, even
-    // with a ScrollTrigger holding playback — so by now the element carries its
-    // own hidden state inline and no longer needs the global pre-hide. Handing
-    // it back here rather than in `onStart` matters for delayed reveals, where
-    // `onStart` does not fire until the delay has elapsed.
+    for (const [index, target] of targets.entries()) {
+      const animation = target.animate(keyframes, {
+        duration: DURATION_MS,
+        // Children enter at 100ms intervals, holding their "from" state while
+        // they wait (the `backwards` fill) instead of flashing visible early.
+        delay: baseDelay + index * STAGGER_MS,
+        easing: EASING,
+        fill: 'backwards',
+      });
+      this.teardown.register(() => animation.cancel());
+    }
+
     this.release();
-
-    this.teardown.register(() => {
-      tween.scrollTrigger?.kill();
-      tween.kill();
-    });
   }
 
-  /** Opts this element out of the `data-motion` pre-hide in `styles.scss`. */
+  /** Reveal trigger line → IntersectionObserver root margin. */
+  private rootMargin(): string {
+    const match = /^top\s+(\d+(?:\.\d+)?)%$/.exec(this.start());
+    if (!match) return '0px 0px 4% 0px';
+    return `0px 0px ${100 - Number(match[1])}% 0px`;
+  }
+
+  /** Hands the element back to its stylesheet once revealed. */
   private release(): void {
     this.host.nativeElement.setAttribute('data-revealed', '');
   }
 }
 
-const FROM: Record<RevealVariant, gsap.TweenVars> = {
-  fade: { opacity: 0 },
-  rise: { opacity: 0, y: 40 },
-  mask: { opacity: 1, clipPath: 'inset(0% 0% 100% 0%)' },
-  lines: { opacity: 0, y: '110%' },
-  stagger: { opacity: 0, y: 28 },
-};
+const DURATION_MS = 700;
+const STAGGER_MS = 100;
+const BLUR_PX = 6;
+const RISE_PX = 30;
+const EASING = EASE_CSS.expo;
 
-/** Resting state per variant — the exact inverse of `FROM`, nothing more. */
-const TO: Record<RevealVariant, gsap.TweenVars> = {
-  fade: { opacity: 1 },
-  rise: { opacity: 1, y: 0 },
-  mask: { opacity: 1, clipPath: 'inset(0% 0% 0% 0%)' },
-  lines: { opacity: 1, y: '0%' },
-  stagger: { opacity: 1, y: 0 },
+/** A soft rise out of a blur — the signature entrance across every section. */
+const PREMIUM: [Keyframe, Keyframe] = [
+  { opacity: 0, transform: `translateY(${RISE_PX}px)`, filter: `blur(${BLUR_PX}px)` },
+  { opacity: 1, transform: 'translateY(0)', filter: 'blur(0px)' },
+];
+
+/** Eyebrows and micro-labels settle in place rather than climbing. */
+const FADE: [Keyframe, Keyframe] = [
+  { opacity: 0, filter: `blur(${BLUR_PX}px)` },
+  { opacity: 1, filter: 'blur(0px)' },
+];
+
+const KEYFRAMES: Record<'fade' | 'premium', [Keyframe, Keyframe]> = {
+  fade: FADE,
+  premium: PREMIUM,
 };

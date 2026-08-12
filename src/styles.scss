@@ -194,6 +194,55 @@ html[data-cursor='custom'] {
 }
 
 /* ------------------------------------------------------------------ *
+ * Route transitions — premium crossfade with a subtle vertical drift
+ * ------------------------------------------------------------------ */
+
+/* `withViewTransitions` (app.config.ts) snapshots the outgoing and incoming
+   pages as `::view-transition-old(root)` / `::view-transition-new(root)`. The
+   browser default is a plain crossfade; this replaces it with an editorial
+   drift — the old page lifts away as the new one rises into place — sharing the
+   site's easing and timing tokens so it reads as the same motion language as
+   the scroll reveals.
+
+   Angular does NOT automatically disable view transitions under
+   `prefers-reduced-motion`, so the guard at the end of this block is required. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--duration-slow);
+  animation-timing-function: var(--ease-out-expo);
+  animation-fill-mode: both;
+}
+
+::view-transition-old(root) {
+  animation-name: vt-out;
+}
+
+::view-transition-new(root) {
+  animation-name: vt-in;
+}
+
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.992);
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.996);
+  }
+}
+
+@include reduced-motion {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ *
  * Print — resume-friendly
  * ------------------------------------------------------------------ */
 
@@ -204,6 +253,7 @@ html[data-cursor='custom'] {
   }
 
   body::after,
+  app-ambient-background,
   app-header,
   app-footer,
   app-cursor,

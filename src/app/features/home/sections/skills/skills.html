@@ -39,15 +39,65 @@
     </div>
 
     <div class="sk__clusters">
-      @for (cluster of visible(); track cluster.group) {
-        <article class="sk__cluster" appReveal="rise">
+      <!-- A faint network drawn behind the chips: connection lines trace in as
+           the section enters, evoking related technologies without clutter. -->
+      <div class="sk__mesh" appReveal="fade" [delay]="0.1" aria-hidden="true">
+        <svg viewBox="0 0 1200 620" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <g class="sk__mesh-lines" fill="none" stroke="currentColor" stroke-width="1">
+            <line x1="110" y1="80" x2="420" y2="55" pathLength="1" />
+            <line x1="420" y1="55" x2="760" y2="105" pathLength="1" />
+            <line x1="760" y1="105" x2="1085" y2="65" pathLength="1" />
+            <line x1="110" y1="80" x2="300" y2="270" pathLength="1" />
+            <line x1="420" y1="55" x2="300" y2="270" pathLength="1" />
+            <line x1="420" y1="55" x2="620" y2="325" pathLength="1" />
+            <line x1="760" y1="105" x2="620" y2="325" pathLength="1" />
+            <line x1="760" y1="105" x2="905" y2="295" pathLength="1" />
+            <line x1="1085" y1="65" x2="905" y2="295" pathLength="1" />
+            <line x1="300" y1="270" x2="190" y2="470" pathLength="1" />
+            <line x1="620" y1="325" x2="555" y2="515" pathLength="1" />
+            <line x1="905" y1="295" x2="825" y2="485" pathLength="1" />
+            <line x1="905" y1="295" x2="1045" y2="540" pathLength="1" />
+            <line x1="190" y1="470" x2="555" y2="515" pathLength="1" />
+            <line x1="555" y1="515" x2="825" y2="485" pathLength="1" />
+          </g>
+          <g class="sk__mesh-dots" fill="currentColor">
+            <circle cx="110" cy="80" r="2" />
+            <circle cx="420" cy="55" r="2" />
+            <circle cx="760" cy="105" r="2" />
+            <circle cx="1085" cy="65" r="2" />
+            <circle cx="300" cy="270" r="2" />
+            <circle cx="620" cy="325" r="2" />
+            <circle cx="905" cy="295" r="2" />
+            <circle cx="1140" cy="235" r="2" />
+            <circle cx="190" cy="470" r="2" />
+            <circle cx="555" cy="515" r="2" />
+            <circle cx="825" cy="485" r="2" />
+            <circle cx="1045" cy="540" r="2" />
+          </g>
+        </svg>
+      </div>
+
+      @for (cluster of visible(); track cluster.group; let c = $index) {
+        <article class="sk__cluster" appReveal="rise" [delay]="c * 0.06">
           <header class="sk__head">
             <h3 class="sk__group">{{ cluster.group }}</h3>
             <p class="sk__blurb">{{ cluster.blurb }}</p>
           </header>
-          <ul class="sk__items">
-            @for (item of cluster.items; track item) {
-              <li [appCursorTarget]="'hover'">{{ itemName(item) }}</li>
+
+          <ul class="sk__cards">
+            @for (item of cluster.items; track item; let i = $index) {
+              <li
+                class="sk__li"
+                [appParallax]="drift(i)"
+                appReveal="fade"
+                [delay]="i * 0.06"
+                [appCursorTarget]="'hover'"
+              >
+                <span class="sk__card" [class.is-featured]="item.featured" [style.--tilt]="tilt(i)">
+                  <span class="sk__tile" aria-hidden="true">{{ monogram(item) }}</span>
+                  <span class="sk__name">{{ itemName(item) }}</span>
+                </span>
+              </li>
             }
           </ul>
         </article>

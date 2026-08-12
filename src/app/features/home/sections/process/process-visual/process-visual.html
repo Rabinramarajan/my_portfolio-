@@ -1,16 +1,17 @@
 <div class="pv__stage" aria-hidden="true">
-  @if (media(); as current) {
-    <picture class="pv__art">
-      @for (source of current.media.sources; track source.type) {
+  @for (visual of visuals; track visual.key; let i = $index) {
+    <picture class="pv__art" [class.is-active]="i === activeStep()" [attr.data-key]="visual.key">
+      @for (source of visual.media.sources; track source.type) {
         <source [type]="source.type" [srcset]="source.srcset" sizes="(max-width: 640px) 90vw, 640px" />
       }
       <img
         class="pv__img"
-        [src]="current.media.src"
+        [src]="visual.media.src"
         alt=""
-        [width]="current.media.width"
-        [height]="current.media.height"
+        [width]="visual.media.width"
+        [height]="visual.media.height"
         decoding="async"
+        loading="lazy"
       />
     </picture>
   }

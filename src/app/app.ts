@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import { AmbientBackground } from './shared/components/ambient-background/ambient-background';
 import { Cursor } from './shared/components/cursor/cursor';
 import { DeviceCapability } from './core/services/device-capability';
 import { Footer } from './layout/footer/footer';
@@ -18,7 +19,7 @@ import { LoaderService } from './core/services/loader';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer, Cursor, ScrollProgress, InitialLoader],
+  imports: [RouterOutlet, Header, Footer, Cursor, ScrollProgress, InitialLoader, AmbientBackground],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

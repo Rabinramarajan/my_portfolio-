@@ -106,4 +106,26 @@ test.describe('mobile navigation', () => {
         .toBe(true);
     }
   });
+
+  test('highlights the page you are on', async ({ page }) => {
+    await page.goto('/work');
+    await page.getByRole('button', { name: /open menu/i }).click();
+
+    const menu = page.locator('#mobile-menu');
+    await expect(menu.getByRole('link', { name: /work$/i })).toHaveClass(/is-active/);
+    await expect(menu.getByRole('link', { name: /résumé$/i })).not.toHaveClass(/is-active/);
+  });
+
+  test('moves the highlight as you navigate', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('button', { name: /open menu/i }).click();
+    const menu = page.locator('#mobile-menu');
+    await expect(menu.getByRole('link', { name: /résumé$/i })).not.toHaveClass(/is-active/);
+
+    await menu.getByRole('link', { name: /résumé$/i }).click();
+    await expect(page).toHaveURL(/\/resume$/);
+
+    await page.getByRole('button', { name: /open menu/i }).click();
+    await expect(menu.getByRole('link', { name: /résumé$/i })).toHaveClass(/is-active/);
+  });
 });

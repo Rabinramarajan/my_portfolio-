@@ -54,6 +54,7 @@
           <a
             [routerLink]="item.path"
             [fragment]="item.fragment"
+            [class.is-active]="activePath() === item.path"
             (click)="navigateFromMenu($event, item.path, item.fragment)"
           >
             <span class="mm__index">{{ '0' + (i + 1) }}</span>
@@ -62,7 +63,11 @@
         </li>
       }
       <li [style.--i]="nav.length">
-        <a routerLink="/contact" (click)="navigateFromMenu($event, '/contact')">
+        <a
+          routerLink="/contact"
+          [class.is-active]="activePath() === '/contact'"
+          (click)="navigateFromMenu($event, '/contact')"
+        >
           <span class="mm__index">0{{ nav.length + 1 }}</span>
           Contact
         </a>

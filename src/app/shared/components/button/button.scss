@@ -20,7 +20,8 @@
   transition:
     color var(--duration-base) var(--ease-out-expo),
     background-color var(--duration-base) var(--ease-out-expo),
-    border-color var(--duration-base) var(--ease-out-expo);
+    border-color var(--duration-base) var(--ease-out-expo),
+    box-shadow var(--duration-base) var(--ease-out-expo);
 
   &--lg {
     padding: 0.85rem 1.5rem;
@@ -87,6 +88,33 @@
   @include hover-capable {
     &:hover {
       color: var(--color-text);
+    }
+  }
+}
+
+/* Magnetic field: while the pointer is near (the `is-magnet` class comes from
+   the appMagnetic directive), the accent glow lifts subtly — a second, tighter
+   halo on top of the resting one. */
+.btn.is-magnet {
+  box-shadow:
+    0 0 60px -10px var(--color-accent-glow),
+    0 0 28px 0 var(--color-accent-glow);
+}
+
+.btn--secondary.is-magnet {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 36px -12px var(--color-accent-glow);
+}
+
+/* Magnetic CTAs hand the arrow's motion to GSAP, so the CSS slide and its
+   transition must stand down — a CSS transition on the same property would
+   fight every frame GSAP writes. */
+:host(.btn-host--magnetic) {
+  .btn__arrow {
+    transition: none;
+
+    .btn:hover & {
+      transform: none;
     }
   }
 }

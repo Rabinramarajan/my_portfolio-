@@ -223,6 +223,7 @@
 }
 
 .mm__nav a {
+  position: relative;
   display: flex;
   align-items: baseline;
   gap: var(--space-4);
@@ -234,12 +235,37 @@
   transform: translateY(24px);
   transition:
     opacity var(--duration-slow) var(--ease-out-expo),
-    transform var(--duration-slow) var(--ease-out-expo);
+    transform var(--duration-slow) var(--ease-out-expo),
+    color var(--duration-base) var(--ease-out-expo);
   transition-delay: calc(var(--i) * 55ms + 180ms);
 
   .mm.is-open & {
     opacity: 1;
     transform: none;
+  }
+
+  /* Short accent bar beneath the label marks the current page; mirrors the
+     desktop underline but reads clearly against the large menu type. */
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block-end: var(--space-3);
+    inset-inline-start: 0;
+    width: var(--space-6);
+    height: 2px;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--duration-base) var(--ease-out-expo);
+  }
+
+  &.is-active {
+    color: var(--color-accent);
+
+    &::after {
+      transform: scaleX(1);
+    }
   }
 }
 
@@ -271,6 +297,7 @@
   .hd,
   .mm,
   .mm__nav a,
+  .mm__nav a::after,
   .hd__mark::after {
     transition-duration: 1ms;
     animation: none;

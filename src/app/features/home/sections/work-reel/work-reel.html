@@ -33,7 +33,9 @@
     </div>
 
     <div class="wr__cta" appReveal="fade">
-      <app-button routerLink="/work" variant="secondary" size="lg">{{ uiCopy().workCta.label }}</app-button>
+      <app-button routerLink="/work" variant="secondary" size="lg" [magnetic]="true">{{
+        uiCopy().workCta.label
+      }}</app-button>
     </div>
   </div>
 </section>

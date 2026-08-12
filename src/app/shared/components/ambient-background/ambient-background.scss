@@ -1,0 +1,255 @@
+@use '../../../../styles/mixins' as *;
+
+/* ------------------------------------------------------------------ *
+ * Ambient background — a fixed, non-interactive backdrop behind every
+ * page. Six cheap planes, composited below all content via a negative
+ * z-index inside the app root's stacking context. Every motion uses
+ * transform/opacity on long durations; the only exception is a pair of
+ * 1.5px data-flow dashes, whose tiny dash-offset repaint is negligible.
+ * ------------------------------------------------------------------ */
+
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  /* One eager composite layer for the whole backdrop; children animate
+     transform/opacity only, so nothing below needs promoting. */
+  transform: translateZ(0);
+}
+
+.ab,
+.ab__grid,
+.ab__glow,
+.ab__shapes,
+.ab__particles {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* ---- Very subtle dark grid, faded toward the edges ---- */
+
+.ab__grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 3.5%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 3.5%) 1px, transparent 1px);
+  background-size: 136px 136px;
+  opacity: 0.85;
+  -webkit-mask-image: radial-gradient(90% 80% at 50% 25%, #000 8%, transparent 78%);
+  mask-image: radial-gradient(90% 80% at 50% 25%, #000 8%, transparent 78%);
+
+  @include down(md) {
+    background-size: 96px 96px;
+  }
+}
+
+/* ---- Soft radial light gradients, drifting slowly ---- */
+
+.ab__glow {
+  border-radius: 50%;
+  will-change: transform, opacity;
+}
+
+.ab__glow--a {
+  inset-inline-start: -18%;
+  inset-block-start: -22%;
+  inline-size: 72vmax;
+  block-size: 72vmax;
+  background: radial-gradient(circle, rgb(201 242 77 / 6.5%), transparent 62%);
+  animation: ab-drift-a 40s var(--ease-in-out-quart) infinite alternate;
+}
+
+.ab__glow--b {
+  inset-inline-end: -22%;
+  inset-block-start: -8%;
+  inline-size: 60vmax;
+  block-size: 60vmax;
+  background: radial-gradient(circle, rgb(127 211 255 / 5.5%), transparent 62%);
+  animation: ab-drift-b 52s var(--ease-in-out-quart) infinite alternate;
+
+  /* One fewer gradient on small screens keeps mobile compositing lean. */
+  @include down(md) {
+    display: none;
+  }
+}
+
+.ab__glow--c {
+  inset-inline-start: 22%;
+  inset-block-end: -30%;
+  inline-size: 64vmax;
+  block-size: 64vmax;
+  background: radial-gradient(circle, rgb(185 166 255 / 5%), transparent 62%);
+  animation: ab-drift-c 46s var(--ease-in-out-quart) infinite alternate;
+}
+
+@keyframes ab-drift-a {
+  from {
+    transform: translate3d(-3%, -2%, 0) scale(1);
+    opacity: 0.65;
+  }
+
+  to {
+    transform: translate3d(5%, 4%, 0) scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes ab-drift-b {
+  from {
+    transform: translate3d(4%, 2%, 0) scale(1.05);
+    opacity: 1;
+  }
+
+  to {
+    transform: translate3d(-5%, -3%, 0) scale(0.95);
+    opacity: 0.6;
+  }
+}
+
+@keyframes ab-drift-c {
+  from {
+    transform: translate3d(3%, 4%, 0) scale(1);
+    opacity: 0.6;
+  }
+
+  to {
+    transform: translate3d(-4%, -6%, 0) scale(1.12);
+    opacity: 1;
+  }
+}
+
+/* ---- Abstract architectural outlines + slow geometric lines ---- */
+
+.ab__shapes {
+  color: rgb(255 255 255 / 8%);
+}
+
+.ab__arch,
+.ab__geo {
+  stroke: currentColor;
+  stroke-width: 1;
+  will-change: transform, opacity;
+}
+
+.ab__arch {
+  animation: ab-arch 46s var(--ease-in-out-quart) infinite alternate;
+}
+
+.ab__arch--right {
+  animation-duration: 54s;
+  animation-delay: -18s;
+}
+
+.ab__geo {
+  animation: ab-geo 64s var(--ease-in-out-quart) infinite alternate;
+}
+
+@keyframes ab-arch {
+  from {
+    transform: translate3d(-12px, 8px, 0);
+    opacity: 0.5;
+  }
+
+  to {
+    transform: translate3d(14px, -10px, 0);
+    opacity: 0.9;
+  }
+}
+
+@keyframes ab-geo {
+  from {
+    transform: translate3d(0, -14px, 0);
+    opacity: 0.35;
+  }
+
+  to {
+    transform: translate3d(-10px, 16px, 0);
+    opacity: 0.75;
+  }
+}
+
+/* ---- Occasional slow data-flow: dashes crawling along a line ---- */
+
+.ab__flow-path {
+  stroke: rgb(201 242 77 / 26%);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 3 26;
+  animation: ab-flow 20s linear infinite;
+}
+
+.ab__flow-path--alt {
+  animation-duration: 28s;
+  animation-delay: -11s;
+  opacity: 0.6;
+}
+
+@keyframes ab-flow {
+  to {
+    stroke-dashoffset: -29;
+  }
+}
+
+/* ---- Tiny floating particles ---- */
+
+.ab__dot {
+  position: absolute;
+  inset-inline-start: var(--ab-x);
+  inset-block-start: var(--ab-y);
+  inline-size: var(--ab-s, 3px);
+  block-size: var(--ab-s, 3px);
+  border-radius: 50%;
+  background: var(--ab-c, rgb(255 255 255 / 85%));
+  opacity: 0;
+  animation: ab-float var(--ab-d, 36s) var(--ease-in-out-quart) var(--ab-delay, 0s) infinite
+    alternate;
+
+  /* Keep only a light field of dots on small screens. */
+  @include down(md) {
+    &:nth-child(n + 8) {
+      display: none;
+    }
+  }
+}
+
+@keyframes ab-float {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+
+  30%,
+  70% {
+    opacity: var(--ab-o, 0.5);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(var(--ab-drift, 14px), -20px, 0);
+  }
+}
+
+/* ---- Reduced motion: freeze into a static wash ---- */
+
+@include reduced-motion {
+  .ab__glow,
+  .ab__arch,
+  .ab__geo,
+  .ab__flow-path,
+  .ab__dot {
+    animation: none;
+  }
+
+  .ab__glow,
+  .ab__arch,
+  .ab__geo {
+    opacity: 0.7;
+  }
+
+  .ab__dot {
+    opacity: 0.3;
+  }
+}

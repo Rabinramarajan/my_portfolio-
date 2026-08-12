@@ -36,12 +36,18 @@ export class Button {
   /** Trailing arrow that slides on hover. */
   readonly arrow = input(true);
   readonly ariaLabel = input<string>();
+  /** Opt-in magnetic drift — reserved for the few primary CTAs. */
+  readonly magnetic = input(false);
 
   protected readonly isExternal = computed(() => this.href()?.startsWith('http') ?? false);
-  protected readonly hostClass = computed(() => `btn-host btn-host--${this.size()}`);
+  protected readonly hostClass = computed(
+    () => `btn-host btn-host--${this.size()}` + (this.magnetic() ? ' btn-host--magnetic' : ''),
+  );
   protected readonly classes = computed(
     () => `btn btn--${this.variant()} btn--${this.size()}` + (this.loading() ? ' is-loading' : ''),
   );
   protected readonly cursorSize = computed(() => (this.size() === 'lg' ? 'lg' : 'md'));
   protected readonly magneticStrength = computed(() => (this.variant() === 'primary' ? 0.25 : 0));
+  /** Button-drift strength handed to the movement directive; 0 leaves it dormant. */
+  protected readonly magnetize = computed(() => (this.magnetic() ? 0.3 : 0));
 }

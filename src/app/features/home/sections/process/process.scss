@@ -157,13 +157,24 @@
 
   @include hover-capable {
     &:hover {
+      transform: scale(1.05);
       border-color: var(--color-accent);
       color: var(--color-text);
+      box-shadow: 0 0 0 8px var(--color-accent-glow);
     }
   }
 
   &:focus-visible {
     @include focus-ring;
+  }
+}
+
+/* Hovering any step nudges its description up a touch and lets the glow
+   breathe. The done/active rules below come later, so a filled node keeps its
+   accent state while still gaining the scale and halo. */
+@include hover-capable {
+  .pr__step:hover .pr__content {
+    transform: translateY(-3px);
   }
 }
 
@@ -284,5 +295,12 @@
 
   &:focus-visible {
     @include focus-ring;
+  }
+
+  /* Magnetic glow lift */
+  &.is-magnet {
+    box-shadow:
+      0 0 60px -10px var(--color-accent-glow),
+      0 0 28px 0 var(--color-accent-glow);
   }
 }

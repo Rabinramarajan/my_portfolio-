@@ -9,8 +9,9 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, map } from 'rxjs';
 
 import { Button } from '../../shared/components/button/button';
 import { CursorTarget } from '../../shared/directives/cursor-target';
@@ -54,6 +55,32 @@ export class Header {
   protected readonly scrolled = signal(false);
   protected readonly menuOpen = signal(false);
   protected readonly menuLabel = computed(() => (this.menuOpen() ? 'Close menu' : 'Open menu'));
+
+  /** The current route as a signal, kept in step with the router. */
+  private readonly currentUrl = toSignal(
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map(() => this.router.url),
+    ),
+    { initialValue: this.router.url },
+  );
+
+  /**
+   * The nav item matching the current route, for the mobile menu. The body is
+   * scroll-locked while the menu is open, so only the route can change — the
+   * menu highlights the page you are on, never a scroll position.
+   */
+  protected readonly activePath = computed(() => {
+    const route = (this.currentUrl() ?? '').split(/[?#]/)[0];
+    if (route === '/') {
+      return null;
+    }
+    return (
+      this.nav.find(
+        (item) => item.path !== '/' && (route === item.path || route.startsWith(`${item.path}/`)),
+      )?.path ?? route
+    );
+  });
 
   constructor() {
     // Any navigation closes the menu — including back/forward, which a click

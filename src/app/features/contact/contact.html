@@ -18,12 +18,12 @@
         {{ contact().description }}
       </p>
 
-      <div class="ct__hero-actions" appReveal="rise" [delay]="0.25">
-        <app-button size="lg" (click)="scrollToForm()">Start a Project</app-button>
-        <app-button variant="secondary" size="lg" (click)="scrollToSection('services')"
-          >View Services</app-button
-        >
-      </div>
+<div class="ct__hero-actions" appReveal="rise" [delay]="0.25">
+          <app-button size="lg" [magnetic]="true" (click)="scrollToForm()">Start a Project</app-button>
+          <app-button variant="secondary" size="lg" (click)="scrollToSection('services')"
+            >View Services</app-button
+          >
+        </div>
     </div>
   </div>
 </section>
@@ -402,7 +402,7 @@
           </div>
 
           <div class="ct__actions">
-            <app-button type="submit" size="lg" [loading]="submitting()" [disabled]="submitting()">
+            <app-button type="submit" size="lg" [magnetic]="true" [loading]="submitting()" [disabled]="submitting()">
               {{ submitting() ? 'Sending…' : 'Submit inquiry' }}
             </app-button>
             <p class="ct__privacy">
@@ -549,9 +549,9 @@
     <p class="ct__final-lede" appReveal="rise">
       Let's turn the idea into a fast, scalable and beautifully engineered digital product.
     </p>
-    <div class="ct__final-actions" appReveal="rise" [delay]="0.15">
-      <app-button size="lg" (click)="scrollToForm()">Start a Conversation</app-button>
-      <app-button routerLink="/work" variant="secondary" size="lg">View Selected Work</app-button>
-    </div>
+<div class="ct__final-actions" appReveal="rise" [delay]="0.15">
+          <app-button size="lg" [magnetic]="true" (click)="scrollToForm()">Start a Conversation</app-button>
+          <app-button routerLink="/work" variant="secondary" size="lg">View Selected Work</app-button>
+        </div>
   </div>
 </section>

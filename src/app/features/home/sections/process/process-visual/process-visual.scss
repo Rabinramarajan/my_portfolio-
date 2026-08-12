@@ -15,48 +15,49 @@
   overflow: hidden;
 }
 
+/* The stage owns the breathing room inside the frame so each stacked artwork
+   sits within the same inset as the single illustration did before. */
 .pv__stage {
-  position: relative;
-  inline-size: 100%;
-  block-size: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-9);
+  position: absolute;
+  inset: var(--space-9);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  isolation: isolate;
 }
 
-/* Each step's illustration fills the panel and fades in when the step becomes
-   active. The stage keeps its padding so the artwork breathes inside the frame. */
+/* All stage illustrations are stacked; only the active one is opaque. Switching
+   steps crossfades the pair and lets the incoming art settle from a slight zoom,
+   a restrained Ken Burns that gives the panel life without distracting. Both
+   properties are compositor-only. */
 .pv__art {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  inline-size: 100%;
-  block-size: 100%;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition:
+    opacity var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-cinematic) var(--ease-out-expo);
+  will-change: opacity, transform;
+  pointer-events: none;
+
+  &.is-active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 1;
+  }
 }
 
 .pv__img {
   inline-size: 100%;
-  block-size: auto;
-  max-block-size: 100%;
+  block-size: 100%;
   object-fit: contain;
-  animation: pv-in var(--duration-cinematic) var(--ease-out-expo) both;
-}
-
-@keyframes pv-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.97);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 @include reduced-motion {
-  .pv__img {
-    animation: none;
+  .pv__art {
+    transform: none;
+    transition: opacity 240ms linear;
   }
 }
