@@ -1,11 +1,18 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 import { Reveal } from '../../../../shared/directives/reveal';
-import type { EcosystemCategory, EcosystemNode } from '../../../../core/models/portfolio.models';
+import { CATEGORY_DESCRIPTIONS } from '../../../../core/config/portfolio.content';
+import type { CategoryDescription, EcosystemCategory, EcosystemNode } from '../../../../core/models/portfolio.models';
 
 interface MobileBranch {
   readonly root: EcosystemNode;
   readonly children: readonly EcosystemNode[];
+}
+
+interface MobileCategory {
+  readonly category: EcosystemCategory;
+  readonly description: string;
+  readonly branches: readonly MobileBranch[];
 }
 
 /**
@@ -26,35 +33,46 @@ export class EcosystemMobile {
   readonly nodes = input.required<readonly EcosystemNode[]>();
   readonly activeCategory = input<EcosystemCategory | null>(null);
 
-  /** Groups nodes into visual branches: primary nodes become roots, others are children. */
-  protected readonly branches = computed<readonly MobileBranch[]>(() => {
+  /** Groups nodes by category with descriptions and visual branches. */
+  protected readonly categories = computed<readonly MobileCategory[]>(() => {
     const all = this.nodes();
-    const cat = this.activeCategory();
-    const filtered = cat ? all.filter((n) => n.category === cat) : all;
+    const filterCat = this.activeCategory();
+    const filtered = filterCat ? all.filter((n) => n.category === filterCat) : all;
 
     // Group by category
-    const categoryMap = new Map<string, EcosystemNode[]>();
+    const categoryMap = new Map<EcosystemCategory, EcosystemNode[]>();
     for (const node of filtered) {
       const list = categoryMap.get(node.category) ?? [];
       list.push(node);
       categoryMap.set(node.category, list);
     }
 
-    const result: MobileBranch[] = [];
-    for (const [, nodes] of categoryMap) {
+    const result: MobileCategory[] = [];
+    for (const category of CATEGORY_DESCRIPTIONS) {
+      const nodes = categoryMap.get(category.category);
+      if (!nodes) continue;
+
       const primary = nodes.filter((n) => n.tier === 'primary');
       const others = nodes.filter((n) => n.tier !== 'primary');
 
+      const branches: MobileBranch[] = [];
       if (primary.length > 0) {
-        // First primary becomes root, rest become children along with secondaries
-        result.push({
+        branches.push({
           root: primary[0],
           children: [...primary.slice(1), ...others],
         });
       } else if (others.length > 0) {
-        result.push({
+        branches.push({
           root: others[0],
           children: others.slice(1),
+        });
+      }
+
+      if (branches.length > 0) {
+        result.push({
+          category: category.category,
+          description: category.description,
+          branches,
         });
       }
     }
