@@ -82,10 +82,10 @@
       <a
         class="pr__ending-cta"
         href="#contact"
-        [appMagnetic]="0.3"
-        [appGlow]="true"
-        [trail]="'[data-magnetic-trail]'"
-        [lead]="'[data-magnetic-lead]'"
+        appMagnetic [strength]="0.3"
+        [glow]="true"
+        trail="[data-magnetic-trail]"
+        lead="[data-magnetic-lead]"
       >
         <span data-magnetic-trail>{{ uiCopy().processEnding.cta }}</span>
         <svg

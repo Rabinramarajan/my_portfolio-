@@ -53,9 +53,9 @@ export const PROFILE: PortfolioProfile = {
   positioning: 'Senior Frontend Angular Developer & Consultant',
   consultLabel: 'Frontend Angular Consultant',
   basedIn: 'Chennai, India',
-  headline: ['I engineer digital products', 'that feel effortless.'],
+  headline: ['I BUILD', 'DIGITAL EXPERIENCES', 'THAT FEEL AS GOOD', 'AS THEY WORK.'],
   valueProposition:
-    'Senior Frontend Angular Consultant with 4+ years of experience building enterprise-grade web and mobile applications with modern Angular architecture.',
+    'Frontend engineer specializing in Angular, scalable design systems, immersive interfaces, and high-performance digital products.',
   bio: [
     "I'm Rabin R, a Senior Frontend Angular Developer with 4+ years of experience engineering critical systems for government and enterprise clients — including immigration portals for Fiji and pension platforms serving thousands of users.",
     'Most of my work lives where the stakes are real: systems people depend on to travel, to claim a pension, to do their job every day. That shapes how I build — type-safe, accessible, tested, and measured.',
@@ -1608,29 +1608,27 @@ export const TESTIMONIALS: readonly PortfolioTestimonial[] = [];
  */
 
 export const HERO: HeroContent = {
-  eyebrow: PROFILE.positioning,
-  headline: PROFILE.headline,
-  description: PROFILE.valueProposition,
-  primaryCta: { label: "Let's Work Together", href: '/contact' },
-  secondaryCta: { label: 'View Selected Work', href: '/work' },
+  eyebrow: 'FRONTEND ENGINEERING',
+  headline: ['I BUILD', 'DIGITAL', 'PRODUCTS.'],
+  description: 'Building scalable interfaces, design systems, and high-performance digital products with Angular and modern web technologies.',
+  primaryCta: { label: "Let's Talk", href: '/contact' },
+  secondaryCta: { label: 'View Work', href: '/work' },
   availabilityLabels: {
-    available: 'Available for select projects',
-    limited: 'Accepting select projects',
-    booked: 'Currently booked',
+    available: 'AVAILABLE',
+    limited: 'LIMITED',
+    booked: 'BOOKED',
   },
-  availabilityResponse: 'Usually responds within 1 business day',
-  role: PROFILE.consultLabel,
-  location: PROFILE.basedIn,
-  focus: 'Angular · TypeScript · Product Engineering',
-  metricsLabels: ['Years experience', 'Users served', 'UI components built'],
+  role: 'FRONTEND ANGULAR CONSULTANT',
+  location: 'CHENNAI / INDIA',
+  focus: 'ANGULAR · TYPESCRIPT · SIGNALS · ZONELESS · DESIGN SYSTEMS',
   technologies: [
     'Angular',
     'TypeScript',
     'Signals',
     'Zoneless',
-    'SSR',
+    'Design Systems',
     'RxJS',
-    'Tailwind',
+    'Tailwind CSS',
     'Node.js',
     'PostgreSQL',
     'Playwright',
@@ -1639,11 +1637,7 @@ export const HERO: HeroContent = {
     'Capacitor',
     'REST APIs',
   ],
-  scrollLabel: 'Scroll to explore',
-  bridge: {
-    index: '01 \u2014 About',
-    quote: 'Engineering is only half the job. The other half is understanding the experience.',
-  },
+  scrollLabel: 'SCROLL',
 };
 
 export const ABOUT: AboutContent = {

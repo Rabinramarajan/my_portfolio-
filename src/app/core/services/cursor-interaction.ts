@@ -29,7 +29,7 @@ export class CursorInteraction {
     this.setState({ scale });
   }
 
-  setAttraction(element: HTMLElement | null, strength: number = 0): void {
+  setAttraction(element: HTMLElement | null, strength = 0): void {
     this.attractionElement = element;
     if (!element) {
       this.setState({ attractionStrength: 0, magnetX: 0, magnetY: 0 });

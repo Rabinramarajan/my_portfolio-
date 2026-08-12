@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { About } from './sections/about/about';
 import { MediaImage } from '../../shared/components/media-image/media-image';
 import { Experience } from './sections/experience/experience';
-import { Hero } from './sections/hero/hero';
+import { HeroSectionComponent } from './sections/hero/hero';
 import { HeroTicker } from './sections/hero/components/hero-ticker';
 import { Process } from './sections/process/process';
 import { PortfolioStore } from '../../core/services/portfolio-store';
@@ -17,7 +17,7 @@ import { homeSchema } from '../../core/services/structured-data';
 
 @Component({
   selector: 'app-home',
-  imports: [Hero, HeroTicker, About, Services, WorkReel, Experience, Ecosystem, MediaImage, Process, Testimonials],
+  imports: [HeroSectionComponent, HeroTicker, About, Services, WorkReel, Experience, Ecosystem, MediaImage, Process, Testimonials],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

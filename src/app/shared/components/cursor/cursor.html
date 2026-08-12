@@ -1,4 +1,16 @@
-<div #container class="cursor" aria-hidden="true">
+<div
+  #container
+  class="cursor"
+  aria-hidden="true"
+  [class.cursor--label]="label() !== undefined"
+  [style.--cursor-scale]="scale()"
+  [style.--cursor-mx]="magnetX()"
+  [style.--cursor-my]="magnetY()"
+>
   <span class="cursor__dot"></span>
-  <span class="cursor__ring"></span>
+  <span class="cursor__ring">
+    @if (label(); as text) {
+      <span class="cursor__label">{{ text }}</span>
+    }
+  </span>
 </div>

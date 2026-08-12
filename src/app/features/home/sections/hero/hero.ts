@@ -9,47 +9,37 @@ import {
 
 import { RouterLink } from '@angular/router';
 
-import { Button } from '../../../../shared/components/button/button';
 import { LoaderService } from '../../../../core/services/loader';
 import { Motion } from '../../../../core/services/motion';
 import { PortfolioStore } from '../../../../core/services/portfolio-store';
-import { WebglField } from '../../../../shared/components/webgl-field/webgl-field';
+import { CursorInteractive } from '../../../../shared/directives/cursor-interactive';
+import { CursorTarget } from '../../../../shared/directives/cursor-target';
+import { Magnetic } from '../../../../shared/directives/magnetic';
 import { asyncTeardown } from '../../../../shared/utils/async-teardown';
 import { DURATION, EASE } from '../../../../core/services/motion-tokens';
-import { HeroBackground } from './components/hero-background';
-import { HeroMetrics, type HeroMetric } from './components/hero-metrics';
-import { HeroPortrait } from './components/hero-portrait';
 import { HeroProgress } from './components/hero-progress';
+import { HeroArchitecture } from './hero-architecture/hero-architecture';
 
-/**
- * Eases pulled from the shared motion tokens so the hero matches every other
- * reveal on the site instead of hand-tuning its own cubic-beziers.
- */
 const EXPO = EASE.expo;
 const SPRING = EASE.spring;
 
 type Gsap = typeof import('gsap').gsap;
 
-/**
- * Hero — the entrance to the portfolio.
- *
- * Not "name, paragraph, two buttons": a staged editorial entry. The heading
- * renders fully on first paint (it is the LCP element and is never gated behind
- * JavaScript); once the initial-loader has handed over, GSAP plays a masked
- * line reveal. A ScrollTrigger scrub carries the section out — type drifting
- * up, grid receding, the exit compressing — as About takes over below.
- *
- * All motion is lazy, browser-only and skippable: `Motion` returns `null` for
- * reduced-motion users and the content is fully visible without GSAP.
- */
 @Component({
-  selector: 'app-hero',
-  imports: [Button, RouterLink, WebglField, HeroBackground, HeroMetrics, HeroPortrait, HeroProgress],
+  selector: 'app-hero-section',
+  imports: [
+    RouterLink,
+    CursorTarget,
+    CursorInteractive,
+    Magnetic,
+    HeroProgress,
+    HeroArchitecture,
+  ],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Hero {
+export class HeroSectionComponent {
   private readonly store = inject(PortfolioStore);
   private readonly loader = inject(LoaderService);
   private readonly motion = inject(Motion);
@@ -57,25 +47,19 @@ export class Hero {
   private readonly teardown = asyncTeardown();
 
   protected readonly profile = this.store.profile;
-  protected readonly media = this.store.media;
   protected readonly hero = this.store.hero;
 
-  /** Only verified numbers ride in the hero row �?" nothing is invented. */
-  protected readonly heroMetrics = computed<readonly HeroMetric[]>(() =>
-    this.profile()
-      .stats.filter((stat) => this.hero().metricsLabels.includes(stat.label))
-      .map((stat) => ({ value: stat.value, suffix: stat.suffix, label: stat.label })),
-  );
+  protected readonly experience = computed(() => {
+    const years = this.profile().stats.find((stat) => stat.label === 'Years experience');
+    return years
+      ? `${years.value}${years.suffix} YEARS ENGINEERING DIGITAL PRODUCTS`
+      : '4+ YEARS ENGINEERING DIGITAL PRODUCTS';
+  });
 
-  protected readonly availabilityLabel = computed(
-    () => this.hero().availabilityLabels[this.profile().availability],
-  );
-
-  protected readonly availabilityResponse = computed(() =>
-    this.profile().availability === 'available'
-      ? this.hero().availabilityResponse
-      : this.profile().availabilityNote,
-  );
+  protected readonly scrollArc = computed(() => {
+    const label = this.hero().scrollLabel;
+    return `${label} · ${label}`;
+  });
 
   constructor() {
     afterNextRender(() => void this.run());
@@ -84,8 +68,6 @@ export class Hero {
   private async run(): Promise<void> {
     const gsap = await this.motion.load();
     if (!gsap || this.teardown.destroyed) return;
-    // Scroll restoration can land mid-page; the entrance must never yank content
-    // the visitor is already reading. Content stays visible — we simply skip.
     if (window.scrollY > 160) return;
 
     this.setupScrub(gsap);
@@ -94,12 +76,6 @@ export class Hero {
     this.setupEntrance(gsap);
   }
 
-  /**
-   * The cinematic initial-loader covers the whole viewport until it wipes away.
-   * Waiting for its completion means the hero reveal is seen instead of played
-   * behind it. Nothing blocks on this: the copy is already painted, so a loader
-   * that never finishes simply means no reveal.
-   */
   private waitForLoader(timeoutMs = 6000): Promise<void> {
     return new Promise((resolve) => {
       const started = performance.now();
@@ -118,131 +94,124 @@ export class Hero {
     });
   }
 
-  /** Premium entrance sequence: layered reveals with staggered typography and smooth motion. */
   private setupEntrance(gsap: Gsap): void {
     const root = this.host.nativeElement;
+    const masked = window.matchMedia('(min-width: 1024px)').matches;
+    const lineFrom = masked ? { yPercent: 110, autoAlpha: 0 } : { y: 28, autoAlpha: 0 };
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        defaults: { ease: EXPO, duration: DURATION.base },
-      });
+      const tl = gsap.timeline({ defaults: { ease: EXPO, duration: DURATION.base } });
 
-      // Blur-to-sharp entrance for content elements
-      tl.fromTo(
-        '.hero__content',
-        { filter: 'blur(10px)' },
-        { filter: 'blur(0px)', duration: 0.9, ease: EXPO },
-        0,
-      )
-        // Headline: staggered line reveals with refined easing
+      tl.fromTo('.hero__bg', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.2 }, 0)
         .fromTo(
-          '.hero__line-inner',
-          { yPercent: 115, autoAlpha: 0 },
-          {
-            yPercent: 0,
-            autoAlpha: 1,
-            duration: 0.8,
-            stagger: 0.12,
-            ease: SPRING,
-          },
-          0.12,
+          '.hero__grid',
+          { autoAlpha: 0, scale: 1.05 },
+          { autoAlpha: 1, scale: 1, duration: 1.4, ease: 'power3.out' },
+          0.1,
         )
-        // Supporting text: 120ms delay after heading starts
         .fromTo(
-          '.hero__value',
-          { y: 20, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.7, ease: EXPO },
-          0.32,
-        )
-        // Status indicators: early reveal before buttons
-        .fromTo(
-          '.hero__status, .hero__status-note',
-          { y: 14, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.65, ease: EXPO },
+          '.hero__glow',
+          { autoAlpha: 0 },
+          { autoAlpha: 1, duration: 1.6, ease: 'power2.out' },
           0.2,
         )
-        // CTA buttons: soft spring-like upward slide
         .fromTo(
-          '.hero__actions',
-          { y: 24, autoAlpha: 0 },
-          {
-            y: 0,
-            autoAlpha: 1,
-            duration: 0.85,
-            ease: SPRING,
-          },
-          0.42,
-        )
-        // Hero portrait: refined back-to-front layer reveal
-        .fromTo(
-          '.hero__media',
-          { y: 32, autoAlpha: 0.4 },
-          {
-            y: 0,
-            autoAlpha: 1,
-            duration: 0.9,
-            ease: EXPO,
-          },
+          '.hero__nav',
+          { y: -20, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.8 },
           0.15,
         )
-        // Meta information: subtle delayed reveal
+        .fromTo(
+          '.hero__eyebrow',
+          { y: 12, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.7 },
+          0.3,
+        )
+        .fromTo(
+          '.hero__line-inner',
+          lineFrom,
+          {
+            y: 0,
+            yPercent: 0,
+            autoAlpha: 1,
+            duration: 0.9,
+            stagger: 0.11,
+            ease: masked ? SPRING : EXPO,
+          },
+          0.45,
+        )
+        .fromTo(
+          '.hero__desc',
+          { y: 20, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.8 },
+          0.7,
+        )
+        .fromTo(
+          '.hero__cta-row',
+          { y: 24, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.85, ease: SPRING },
+          0.85,
+        )
+        .fromTo(
+          '.hero__tech-line',
+          { y: 16, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.75 },
+          1.0,
+        )
+        .fromTo(
+          'app-hero-architecture',
+          { autoAlpha: 0, y: 30 },
+          { autoAlpha: 1, y: 0, duration: 1.3, ease: 'power3.out' },
+          0.6,
+        )
+        .fromTo(
+          '.hero__scroll',
+          { y: 14, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.8 },
+          1.2,
+        )
         .fromTo(
           '.hero__meta',
-          { y: 12, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.65, ease: EXPO },
-          0.65,
-        )
-        // Scroll indicator: gentle fade in
-        .fromTo('.hero__scroll', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, 0.8)
-        // Metrics row: layered entrance
-        .fromTo(
-          '.hero__metrics-row',
-          { y: 16, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.7, ease: EXPO },
-          0.08,
-        )
-        // Bridge section: final reveal
-        .fromTo(
-          '.hero__bridge',
-          { y: 20, autoAlpha: 0 },
-          { y: 0, autoAlpha: 1, duration: 0.75, ease: EXPO },
-          0.85,
+          { y: 10, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.7 },
+          1.3,
         );
     }, root);
 
     this.teardown.register(() => ctx.revert());
   }
 
-  /**
-   * Scroll choreography: as the hero leaves, typography creeps upward, the
-   * portrait drifts, the engineering background recedes and the whole block
-   * compresses gently into the About chapter. Subtle by design — the reader,
-   * not the animation, is the point.
-   */
   private setupScrub(gsap: Gsap): void {
     const root = this.host.nativeElement;
 
     const ctx = gsap.context(() => {
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: root,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: true,
-          invalidateOnRefresh: true,
-        },
-        defaults: { ease: 'none' },
-      })
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: root,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+          defaults: { ease: 'none' },
+        })
         .to('.hero__scroll', { autoAlpha: 0 }, 0)
-        .to('.hero__status, .hero__status-note', { y: -18 }, 0)
-        .to('.hero__value, .hero__actions, .hero__meta', { y: -22 }, 0)
-        .to('.hero__heading', { y: -44 }, 0)
-        .to('.hero__media', { y: -34 }, 0)
-        .to('app-hero-background', { opacity: 0.3 }, 0.06)
-        .to('.hero__metrics-row', { y: -18 }, 0.05)
-        .to('.hero__inner', { yPercent: -4 }, 0.55);
+        .to('.hero__meta', { autoAlpha: 0 }, 0)
+        .to('.hero__eyebrow, .hero__desc, .hero__cta-row, .hero__tech-line', { y: -24 }, 0)
+        .to('.hero__heading', { y: -40 }, 0)
+        .to('.hero__grid', { opacity: 0.15, scale: 1.02 }, 0)
+        .to('.hero__glow', { opacity: 0.5 }, 0.1)
+        .to('app-hero-architecture', { yPercent: -10, opacity: 0.7 }, 0.15);
     }, root);
 
     this.teardown.register(() => ctx.revert());
+  }
+
+  protected scrollToNext(event: Event): void {
+    const about = this.host.nativeElement.ownerDocument.getElementById('about');
+    if (!about) return;
+    event.preventDefault();
+    about.scrollIntoView({ block: 'start' });
   }
 }

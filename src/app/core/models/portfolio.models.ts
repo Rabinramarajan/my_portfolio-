@@ -329,16 +329,12 @@ export interface HeroContent {
   readonly secondaryCta: ContentCta;
   /** Copy per availability state — the label the hero pulse shows. */
   readonly availabilityLabels: Readonly<Record<AvailabilityState, string>>;
-  readonly availabilityResponse: string;
   readonly role: string;
   readonly location: string;
   readonly focus: string;
-  /** Which rows of `profile.stats` the hero metric strip shows. */
-  readonly metricsLabels: readonly string[];
   /** Technology ticker under the hero. */
   readonly technologies: readonly string[];
   readonly scrollLabel: string;
-  readonly bridge: { readonly index: string; readonly quote: string };
 }
 
 export interface AboutPrinciple {

@@ -1,0 +1,99 @@
+<div class="hv" aria-hidden="true">
+  <svg
+    class="hv__graph"
+    viewBox="0 0 1440 900"
+    preserveAspectRatio="xMidYMid slice"
+    fill="none"
+    data-depth="1"
+  >
+    <g class="hv__links">
+      <path d="M982 172 L1158 268 L1048 431 L1236 576" />
+      <path d="M982 172 L902 320 L1002 470" />
+      <path d="M1002 470 L1048 431 L1120 700" />
+      <path d="M1120 700 L960 806" />
+      <path d="M902 320 L1048 431" />
+      <path d="M352 240 L240 356 L432 508" />
+      <path d="M352 240 L432 508" />
+      <path d="M240 356 L902 320" />
+    </g>
+    <g class="hv__nodes">
+      <circle cx="982" cy="172" r="4.5" class="hv__node-accent" />
+      <circle cx="1158" cy="268" r="3" />
+      <rect x="1039" y="422" width="18" height="18" rx="2" />
+      <circle cx="1236" cy="576" r="3.5" class="hv__node-accent" />
+      <circle cx="902" cy="320" r="3" />
+      <circle cx="1002" cy="470" r="2.5" />
+      <circle cx="1120" cy="700" r="3" />
+      <circle cx="960" cy="806" r="2.5" />
+      <rect x="348" y="236" width="8" height="8" class="hv__node-accent" />
+      <circle cx="240" cy="356" r="3" />
+      <circle cx="432" cy="508" r="3" />
+    </g>
+    <g class="hv__tags">
+      <text x="1000" y="150">app-shell</text>
+      <text x="1164" y="292">routes</text>
+      <text x="928" y="314">service</text>
+      <text x="1070" y="440">component</text>
+      <text x="1248" y="600">store</text>
+      <text x="1120" y="724">api</text>
+      <text x="374" y="232">feature</text>
+    </g>
+  </svg>
+
+  <figure class="hv__panel hv__panel--code" data-depth="2">
+    <div class="hv__panel-inner">
+      <figcaption class="hv__bar">
+        <span class="hv__bar-dots"><i></i><i></i><i></i></span>
+        <span class="hv__bar-title">hero.component.ts</span>
+      </figcaption>
+      <pre class="hv__code"><code>export class HeroSectionComponent &#123;
+  readonly lines = signal(&#91;
+    'I build',
+    'digital experiences',
+  &#93;);
+
+  readonly statement = computed(() =>
+    this.lines().join(' '),
+  );
+&#125;</code></pre>
+    </div>
+  </figure>
+
+  <figure class="hv__panel hv__panel--tree" data-depth="2">
+    <div class="hv__panel-inner">
+      <figcaption class="hv__bar">
+        <span class="hv__bar-title">modules</span>
+      </figcaption>
+      <pre class="hv__code hv__code--tree"><code>app
+├─ home
+│  ├─ hero-section
+│  ├─ about
+│  └─ services
+├─ work
+└─ contact</code></pre>
+    </div>
+  </figure>
+
+  <figure class="hv__panel hv__panel--spec" data-depth="3">
+    <div class="hv__panel-inner">
+      <figcaption class="hv__bar">
+        <span class="hv__bar-title">system.md</span>
+      </figcaption>
+      <pre class="hv__code hv__code--spec"><code>angular  ·  signals
+zoneless ·  ssr
+systems  ·  a11y</code></pre>
+    </div>
+  </figure>
+
+  <span class="hv__data hv__data--tl" data-depth="3">13.08°N · 80.27°E</span>
+  <span class="hv__data hv__data--br" data-depth="3">Angular · Signals · Zoneless</span>
+  <span class="hv__cross hv__cross--a" data-depth="2"></span>
+  <span class="hv__cross hv__cross--b" data-depth="2"></span>
+
+  <svg class="hv__orbit hv__orbit--a" data-depth="3" viewBox="0 0 200 200" preserveAspectRatio="none">
+    <circle cx="100" cy="100" r="88" fill="none" stroke="var(--color-line-strong)" stroke-width="0.5" stroke-dasharray="4 8" />
+  </svg>
+  <svg class="hv__orbit hv__orbit--b" data-depth="2" viewBox="0 0 300 300" preserveAspectRatio="none">
+    <circle cx="150" cy="150" r="130" fill="none" stroke="var(--color-line-strong)" stroke-width="0.5" stroke-dasharray="4 8" />
+  </svg>
+</div>

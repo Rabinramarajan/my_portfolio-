@@ -1,0 +1,73 @@
+<div class="arch" aria-hidden="true" [class.arch--loaded]="isLoaded()" appCursorTarget="explore" appCursorInteractive>
+
+  <svg class="arch__grid" viewBox="0 0 100 100" preserveAspectRatio="none" data-depth="1">
+    <defs>
+      <pattern id="arch-grid-pattern" width="10" height="10" patternUnits="userSpaceOnUse">
+        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="var(--color-line)" stroke-width="0.3" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#arch-grid-pattern)" />
+  </svg>
+
+  <svg class="arch__connections" viewBox="0 0 100 100" preserveAspectRatio="none" data-depth="2">
+    @for (conn of connections(); track conn.x1 + ',' + conn.y1 + ',' + conn.x2 + ',' + conn.y2) {
+      <path
+        class="arch__connection"
+        [attr.d]="'M' + conn.x1 + ',' + conn.y1 + ' C' +
+          (conn.x1 + (conn.x2 - conn.x1) * 0.5) + ',' + conn.y1 + ' ' +
+          (conn.x1 + (conn.x2 - conn.x1) * 0.5) + ',' + conn.y2 + ' ' +
+          conn.x2 + ',' + conn.y2"
+        fill="none"
+        stroke="var(--color-line-strong)"
+        stroke-width="0.4"
+        stroke-linecap="round"
+        stroke-dasharray="2 4"
+      />
+    }
+  </svg>
+
+  @for (node of nodes(); track node.id) {
+    <div
+      class="arch-node-wrapper"
+      [class]="getNodeClass(node.type)"
+      [style.--x]="node.x + '%'"
+      [style.--y]="node.y + '%'"
+      data-depth="3"
+    >
+      <div class="arch-node">
+        <span class="arch-node__core" [class.arch-node__core--pulse]="node.type === 'signal'"></span>
+        <span class="arch-node__ring"></span>
+        <span class="arch-node__label">{{ node.label }}</span>
+      </div>
+    </div>
+  }
+
+  <div class="arch__panel arch__panel--signature" data-depth="2">
+    <div class="arch__panel-inner">
+      <div class="arch__panel-header">
+        <span class="arch__panel-title">RABIN.R</span>
+        <span class="arch__panel-divider"></span>
+      </div>
+      <p class="arch__panel-role">FRONTEND ENGINEER</p>
+      <ul class="arch__panel-stack">
+        <li>ANGULAR</li>
+        <li>TYPESCRIPT</li>
+        <li>SYSTEMS</li>
+        <li>MOTION</li>
+      </ul>
+      <div class="arch__panel-status">
+        <span class="arch__panel-status-label">STATUS</span>
+        <span class="arch__panel-status-value arch__panel-status-value--active">AVAILABLE</span>
+      </div>
+      <p class="arch__panel-location">CHENNAI / INDIA</p>
+    </div>
+  </div>
+
+  <div class="arch__metadata" data-depth="1">
+    <span class="arch__meta-item">01 / 07</span>
+    <span class="arch__meta-item">DIGITAL PRODUCT ENGINEERING</span>
+    <span class="arch__meta-item">CHENNAI / INDIA</span>
+    <span class="arch__meta-item">2026</span>
+  </div>
+
+</div>

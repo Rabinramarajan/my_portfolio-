@@ -1,41 +1,96 @@
+@use '../../../../styles/_mixins' as *;
+
+/* Renders nothing unless the device capability has declared a custom cursor
+   (fine pointer + animations enabled). Touch and reduced-motion visitors keep
+   the native pointer. */
+:host {
+  display: none;
+}
+
+:host(.cursor--enabled) {
+  display: block;
+}
+
 .cursor {
   --cursor-x: 0px;
   --cursor-y: 0px;
+  --cursor-scale: 1;
+  --cursor-mx: 0px;
+  --cursor-my: 0px;
 }
 
-.cursor__dot {
-  position: fixed;
-  top: var(--cursor-y);
-  left: var(--cursor-x);
-  width: 6px;
-  height: 6px;
-  margin-top: -3px;
-  margin-left: -3px;
-  background: var(--color-accent);
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(206, 255, 0, 0.8);
-  pointer-events: none;
-  z-index: 10000;
-  opacity: 1;
-  display: block;
-  will-change: auto;
-}
-
+.cursor__dot,
 .cursor__ring {
   position: fixed;
-  top: var(--cursor-y);
-  left: var(--cursor-x);
-  width: 38px;
-  height: 38px;
-  margin-top: -19px;
-  margin-left: -19px;
-  border: 2px solid var(--color-accent);
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(206, 255, 0, 0.5);
+  top: 0;
+  left: 0;
   pointer-events: none;
-  z-index: 9999;
-  opacity: 0.8;
-  display: block;
-  background: transparent;
-  will-change: auto;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+/* The dot tracks the pointer directly — instant and precise. */
+.cursor__dot {
+  width: 5px;
+  height: 5px;
+  background: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent-glow);
+  transform: translate3d(var(--cursor-x), var(--cursor-y), 0) translate(-50%, -50%);
+  transition: opacity var(--duration-base) var(--ease-out-expo);
+  z-index: calc(var(--z-cursor) + 1);
+}
+
+/* The ring trails a beat behind, leans toward magnetic targets and expands
+   over interactive elements — subtle by design. */
+.cursor__ring {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--color-accent);
+  opacity: 0.5;
+  transform:
+    translate3d(var(--cursor-x), var(--cursor-y), 0)
+    translate(-50%, -50%)
+    translate(var(--cursor-mx), var(--cursor-my))
+    scale(var(--cursor-scale));
+  transition: transform 0.4s var(--ease-out-expo), opacity var(--duration-base) var(--ease-out-expo), border-color var(--duration-base) var(--ease-out-expo);
+  z-index: var(--z-cursor);
+}
+
+/* Contextual label: the ring becomes a quiet chip under labeled targets. */
+.cursor__label {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+  color: var(--color-bg);
+  background: var(--color-accent);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-pill);
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-out-expo);
+}
+
+.cursor--label {
+  .cursor__dot {
+    opacity: 0;
+  }
+
+  .cursor__ring {
+    border-color: transparent;
+    background: transparent;
+  }
+
+  .cursor__label {
+    opacity: 1;
+  }
+}
+
+@include reduced-motion {
+  .cursor__ring {
+    transition: none;
+  }
 }

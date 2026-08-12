@@ -19,10 +19,10 @@ export class CursorInteractive {
   private readonly cursor = inject(CursorInteraction);
   private readonly device = inject(DeviceCapability);
 
-  /** Expand ring size: 'sm' (18px), 'md' (28px), 'lg' (38px) */
-  readonly size = input<'sm' | 'md' | 'lg'>('md', { alias: 'appCursorInteractive' });
+  /** Expand ring size: 'sm' (1.2x), 'md' (1.5x), 'lg' (1.8x) */
+  readonly size = input<'sm' | 'md' | 'lg'>('md');
   /** Enable magnetic attraction: 0–1 strength */
-  readonly magnetic = input(0, { alias: 'appCursorMagnetic' });
+  readonly magnetic = input(0);
 
   constructor() {
     afterNextRender(() => {

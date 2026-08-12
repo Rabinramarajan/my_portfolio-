@@ -12,7 +12,7 @@
         <span>{{ media().alt }}</span>
       </div>
     } @else {
-      <picture class="mi__frame" [appCursorTarget]="'image'" [label]="cursorLabel() ?? 'EXPLORE'">
+      <picture class="mi__frame" appCursorTarget="image" [label]="cursorLabel() ?? 'EXPLORE'">
         @for (source of media().sources; track source.type) {
           <source [type]="source.type" [srcset]="source.srcset" [sizes]="sizes()" />
         }

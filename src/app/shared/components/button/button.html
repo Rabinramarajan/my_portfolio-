@@ -23,11 +23,10 @@
     [routerLink]="link"
     [class]="classes()"
     [attr.aria-label]="ariaLabel()"
-    [appMagnetic]="magnetize()"
-    [appGlow]="magnetic()"
-    [appCursorTarget]="'link'"
-    [appCursorInteractive]="cursorSize()"
-    [appCursorMagnetic]="magneticStrength()"
+    appMagnetic [strength]="magnetize()"
+    [glow]="magnetic()"
+    appCursorTarget="link"
+    appCursorInteractive [size]="cursorSize()"
   >
     <ng-container *ngTemplateOutlet="content" />
   </a>
@@ -38,11 +37,10 @@
     [attr.target]="isExternal() ? '_blank' : null"
     [attr.rel]="isExternal() ? 'noopener noreferrer' : null"
     [attr.aria-label]="ariaLabel()"
-    [appMagnetic]="magnetize()"
-    [appGlow]="magnetic()"
-    [appCursorTarget]="'link'"
-    [appCursorInteractive]="cursorSize()"
-    [appCursorMagnetic]="magneticStrength()"
+    appMagnetic [strength]="magnetize()"
+    [glow]="magnetic()"
+    appCursorTarget="link"
+    appCursorInteractive [size]="cursorSize()"
     [label]="isExternal() ? 'OPEN' : undefined"
   >
     <ng-container *ngTemplateOutlet="content" />
@@ -54,11 +52,10 @@
     [disabled]="disabled() || loading()"
     [attr.aria-busy]="loading()"
     [attr.aria-label]="ariaLabel()"
-    [appMagnetic]="magnetize()"
-    [appGlow]="magnetic()"
-    [appCursorTarget]="'hover'"
-    [appCursorInteractive]="cursorSize()"
-    [appCursorMagnetic]="magneticStrength()"
+    appMagnetic [strength]="magnetize()"
+    [glow]="magnetic()"
+    appCursorTarget="hover"
+    appCursorInteractive [size]="cursorSize()"
   >
     <ng-container *ngTemplateOutlet="content" />
   </button>

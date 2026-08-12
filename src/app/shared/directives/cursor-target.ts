@@ -15,7 +15,7 @@ import { CursorState, type CursorMode } from '../../core/services/cursor-state';
 export class CursorTarget {
   private readonly cursor = inject(CursorState);
 
-  readonly mode = input<CursorMode>('hover', { alias: 'appCursorTarget' });
+  readonly mode = input<CursorMode>('link', { alias: 'appCursorTarget' });
   readonly label = input<string>();
 
   protected enter(): void {

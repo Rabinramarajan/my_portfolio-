@@ -22,7 +22,7 @@ export class Magnetic {
   private readonly teardown = asyncTeardown();
 
   /** 0–1. How eagerly the element follows the pointer across its own bounds. */
-  readonly strength = input(0.35, { alias: 'appMagnetic' });
+  readonly strength = input(0.35);
   /** Hard ceiling on the drift in px, so wide buttons cannot leap. */
   readonly maxPx = input(8);
   /** Inner label that trails the container for depth. */
@@ -30,7 +30,7 @@ export class Magnetic {
   /** Inner icon that leads the label, following the pointer faster. */
   readonly lead = input<string>('[data-magnetic-lead]');
   /** Adds `.is-magnet` while the pointer is near, so CSS can lift the glow. */
-  readonly glow = input(false, { alias: 'appGlow' });
+  readonly glow = input(false);
 
   constructor() {
     afterNextRender(() => void this.attach());
