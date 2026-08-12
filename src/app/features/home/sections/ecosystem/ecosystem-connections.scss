@@ -16,20 +16,28 @@
   stroke: rgb(255 255 255 / 7%);
   stroke-width: 0.15;
   stroke-dasharray: 1;
-  stroke-dashoffset: 0;
-  animation: econn-draw 1.6s var(--ease-out-expo) 0.4s forwards;
+  stroke-dashoffset: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: econn-draw 1.2s var(--ease-out-expo) 0.3s forwards;
   transition:
     stroke var(--duration-base) var(--ease-out-expo),
-    stroke-opacity var(--duration-base) var(--ease-out-expo);
+    stroke-opacity var(--duration-base) var(--ease-out-expo),
+    stroke-width var(--duration-base) var(--ease-out-expo);
+  filter: drop-shadow(0 0 0 rgba(132, 250, 176, 0));
 
   &.is-active {
     stroke: var(--color-accent);
-    stroke-opacity: 0.45;
-    stroke-width: 0.2;
+    stroke-opacity: 1;
+    stroke-width: 0.25;
+    filter: drop-shadow(0 0 2px color-mix(in srgb, var(--color-accent) 40%, transparent));
   }
 }
 
 @keyframes econn-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
   to {
     stroke-dashoffset: 0;
   }

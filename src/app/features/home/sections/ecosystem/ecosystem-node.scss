@@ -31,18 +31,21 @@
       border-color: var(--color-accent);
       color: var(--color-accent);
       background: color-mix(in srgb, var(--color-accent) 12%, transparent);
-      transform: scale(1.1);
+      transform: scale(1.15);
+      box-shadow: 0 0 8px color-mix(in srgb, var(--color-accent) 20%, transparent);
     }
 
     .enode__label {
       color: var(--color-text);
+      font-weight: 600;
     }
   }
 
   @include hover-capable {
-    &:hover {
+    &:hover:not(.is-active) {
       .enode__marker {
-        transform: scale(1.08);
+        transform: scale(1.12);
+        box-shadow: 0 0 4px color-mix(in srgb, var(--color-accent) 10%, transparent);
       }
 
       .enode__label {
