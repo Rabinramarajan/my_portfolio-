@@ -228,11 +228,11 @@
 }
 
 .eco__header {
-  animation: fade-in-up var(--duration-base) var(--ease-out-expo) both;
+  animation: fade-in-up var(--duration-base) var(--ease-out-expo) 0ms forwards;
 }
 
 .eco__canvas {
-  animation: fade-in-up var(--duration-base) var(--ease-out-expo) 100ms both;
+  animation: fade-in-up var(--duration-base) var(--ease-out-expo) 100ms forwards;
 }
 
 @include reduced-motion {
