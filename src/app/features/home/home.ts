@@ -17,7 +17,7 @@ import { homeSchema } from '../../core/services/structured-data';
 
 @Component({
   selector: 'app-home',
-  imports: [Hero, HeroTicker, About, Services, WorkReel, Experience, Ecosystem, Process, Testimonials, MediaImage],
+  imports: [Hero, HeroTicker, About, Services, WorkReel, Experience, Ecosystem, MediaImage, Process, Testimonials],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

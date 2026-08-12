@@ -1,76 +1,136 @@
-<section id="skills" class="eco">
-  <div class="eco__inner">
-    <div class="eco__header">
-      <div class="eco__header-text">
-        <p class="eco__eyebrow">{{ sections().skills.eyebrow }}</p>
-        <h2 class="eco__heading">{{ sections().skills.heading }}</h2>
-        <p class="eco__lede">{{ sections().skills.lede }}</p>
+<section id="skills" class="skills">
+  <div class="skills__inner">
+    <!-- Section Introduction -->
+    <header class="skills__header">
+      <p class="skills__eyebrow">{{ sections().skills.eyebrow }}</p>
+      <h2 class="skills__heading">{{ sections().skills.heading }}</h2>
+      <p class="skills__lede">{{ sections().skills.lede }}</p>
+    </header>
+
+    <!-- Core Stack -->
+    <div class="skills__core">
+      <div class="skills__core-label">Core Stack</div>
+      <div class="skills__core-primary">
+        <h3 class="skills__core-name">Angular</h3>
+        <p class="skills__core-version">Angular 22</p>
+        <ul class="skills__core-features">
+          <li>Standalone</li>
+          <li>Signals</li>
+          <li>Zoneless</li>
+          <li>SSR</li>
+        </ul>
+      </div>
+      <div class="skills__core-support">
+        <div class="skills__core-tech">
+          <span class="skills__tech-name">TypeScript</span>
+          <span class="skills__tech-experience">4+ yrs</span>
+        </div>
+        <div class="skills__core-tech">
+          <span class="skills__tech-name">Signals</span>
+          <span class="skills__tech-experience">1+ yrs</span>
+        </div>
+        <div class="skills__core-tech">
+          <span class="skills__tech-name">RxJS</span>
+          <span class="skills__tech-experience">3+ yrs</span>
+        </div>
       </div>
     </div>
 
-    <div class="eco__controls">
-      <app-ecosystem-category-selector
-        [categories]="categories"
-        [active]="activeCategory()"
-        (categoryChange)="onCategoryChange($event)"
-      />
-      <input
-        type="search"
-        class="eco__search"
-        placeholder="Search technologies..."
-        [value]="searchQuery()"
-        (input)="searchQuery.set($event.target.value)"
-        aria-label="Search technologies by name or feature"
-      />
-    </div>
-
-    <!-- Desktop: constellation canvas -->
-    <div class="eco__canvas eco__desktop-only">
-      <!-- Background grid -->
-      <div class="eco__grid" aria-hidden="true"></div>
-
-      <!-- Connection lines -->
-      <app-ecosystem-connections
-        [nodes]="visibleNodes()"
-        [hoveredId]="hoveredId()"
-        [selectedId]="selectedId()"
-      />
-
-      <!-- Center identity -->
-      <div class="eco__center">
-        <span class="eco__center-name">Rabin R</span>
-        <span class="eco__center-role">Frontend Engineering</span>
-        <span class="eco__center-meta">Angular · TypeScript · Product Engineering</span>
-      </div>
-
-      <!-- Technology nodes -->
-      @for (node of visibleNodes(); track node.id) {
-        <app-ecosystem-node
-          [node]="node"
-          [isActive]="isActive(node.id)"
-          [isRelated]="isRelated(node.id)"
-          [isMuted]="isMuted(node.id)"
-          (hovered)="onNodeHovered($event)"
-          (selected)="onNodeSelected($event)"
-          [appCursorTarget]="'hover'"
-        />
+    <!-- Category Filter -->
+    <nav class="skills__filter" role="group" aria-label="Filter by category">
+      <button
+        type="button"
+        class="skills__filter-btn"
+        [class.is-active]="activeCategory() === null"
+        (click)="onCategorySelect(null)"
+      >
+        All
+      </button>
+      @for (cat of CATEGORIES; track cat) {
+        <button
+          type="button"
+          class="skills__filter-btn"
+          [class.is-active]="activeCategory() === cat"
+          (click)="onCategorySelect(cat)"
+        >
+          {{ cat }}
+        </button>
       }
+    </nav>
 
-      <!-- Detail panel -->
-      @if (selectedId(); as selId) {
-        <app-ecosystem-detail
-          [nodes]="allNodes"
-          [selectedId]="selId"
-        />
+    <!-- Skills Architecture -->
+    <div class="skills__categories">
+      @for (cat of categorizedSkills(); track cat.category; let idx = $index) {
+        <div class="skills__category" [attr.data-category]="cat.category">
+          <div class="skills__category-header">
+            <span class="skills__category-number">{{ padZero(idx + 1) }}</span>
+            <h3 class="skills__category-name">{{ cat.category }}</h3>
+          </div>
+          <p class="skills__category-description">{{ getCategoryDescription(cat.category) }}</p>
+
+          <ul class="skills__tech-list">
+            @for (tech of cat.skills; track tech.id) {
+              <li class="skills__tech-item" [attr.data-tier]="tech.primary ? 'primary' : 'secondary'">
+                <button
+                  class="skills__tech-btn"
+                  (click)="onTechSelect(tech)"
+                  [attr.aria-label]="tech.name + ' - ' + tech.category"
+                >
+                  <span class="skills__tech-name">{{ tech.name }}</span>
+                  @if (tech.experience) {
+                    <span class="skills__tech-meta">{{ tech.experience }}</span>
+                  }
+                </button>
+              </li>
+            }
+          </ul>
+
+          @if (idx < categorizedSkills().length - 1) {
+            <div class="skills__divider" aria-hidden="true"></div>
+          }
+        </div>
       }
     </div>
 
-    <!-- Mobile: vertical tree -->
-    <div class="eco__mobile-only">
-      <app-ecosystem-mobile
-        [nodes]="allNodes"
-        [activeCategory]="activeCategory()"
-      />
-    </div>
+    <!-- Technology Detail Panel -->
+    @if (selectedTech(); as tech) {
+      <aside class="skills__detail" role="complementary" [attr.aria-label]="tech.name + ' details'">
+        <button
+          type="button"
+          class="skills__detail-close"
+          (click)="onTechSelect(null)"
+          aria-label="Close details"
+        >
+          ×
+        </button>
+        <div class="skills__detail-header">
+          <p class="skills__detail-category">{{ tech.category }}</p>
+          @if (tech.experience) {
+            <span class="skills__detail-experience">{{ tech.experience }} yrs</span>
+          }
+        </div>
+        <h4 class="skills__detail-name">{{ tech.name }}</h4>
+        @if (tech.description) {
+          <p class="skills__detail-description">{{ tech.description }}</p>
+        }
+        @if (tech.features?.length) {
+          <ul class="skills__detail-features">
+            @for (feature of tech.features; track feature) {
+              <li>{{ feature }}</li>
+            }
+          </ul>
+        }
+        @if (tech.relatedProjects?.length) {
+          <div class="skills__detail-projects">
+            <p class="skills__detail-projects-label">Used in</p>
+            <ul>
+              @for (proj of getProjectsBySkill(tech.id); track proj.slug) {
+                <li>{{ proj.title }}</li>
+              }
+            </ul>
+          </div>
+        }
+      </aside>
+    }
   </div>
 </section>
