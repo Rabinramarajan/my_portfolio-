@@ -1,0 +1,275 @@
+@use '../../../../../../styles/_mixins' as *;
+
+:host {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.dc {
+  position: absolute;
+  inset: 0;
+  /* The stage tilts in 3D under the pointer; this is the camera. */
+  perspective: 1200px;
+}
+
+.dc__stage {
+  position: absolute;
+  right: 2%;
+  top: 50%;
+  translate: 0 -50%;
+  width: min(44vh, 520px);
+  aspect-ratio: 1;
+  pointer-events: auto;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+.dc__scene {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- frame ─────────────────────────────────────────────────────────── */
+
+.dc__frame-rect {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-opacity: 0.08;
+  stroke-width: 0.8;
+}
+
+.dc__frame-tick {
+  stroke: var(--color-text);
+  stroke-opacity: 0.13;
+  stroke-width: 0.8;
+}
+
+.dc__coord {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  fill: var(--color-text);
+  fill-opacity: 0.16;
+}
+
+/* ---- links ─────────────────────────────────────────────────────────── */
+
+.dc__link {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-opacity: 0.07;
+  stroke-width: 0.8;
+}
+
+.dc__link--trail {
+  stroke: var(--color-accent);
+  stroke-opacity: 0.28;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-dasharray: 3 44;
+  animation: dc-trail 7s linear infinite;
+}
+
+@keyframes dc-trail {
+  to {
+    stroke-dashoffset: -47;
+  }
+}
+
+/* ---- micro interface fragments ─────────────────────────────────────── */
+
+.dc__chip-box {
+  fill: rgb(7 9 11 / 55%);
+  stroke: var(--color-text);
+  stroke-opacity: 0.12;
+  stroke-width: 0.8;
+}
+
+.dc__chip-bar {
+  fill: rgb(244 244 241 / 7%);
+}
+
+.dc__chip-line {
+  stroke: var(--color-text);
+  stroke-opacity: 0.14;
+  stroke-width: 0.8;
+}
+
+.dc__chip-dot {
+  fill: var(--color-text);
+  fill-opacity: 0.5;
+}
+
+.dc__chip-dot--accent {
+  fill: var(--color-accent);
+  fill-opacity: 0.75;
+}
+
+.dc__chip-block {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-opacity: 0.18;
+  stroke-width: 0.7;
+}
+
+.dc__chip-thumb {
+  fill: var(--color-accent);
+  fill-opacity: 0.65;
+}
+
+/* ---- data points ───────────────────────────────────────────────────── */
+
+.dc__point {
+  fill: var(--color-text);
+  fill-opacity: 0.55;
+  animation: dc-point 5.2s ease-in-out infinite;
+}
+
+@keyframes dc-point {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ---- nodes ─────────────────────────────────────────────────────────── */
+
+.dc__node-dot {
+  fill: var(--color-text);
+  fill-opacity: 0.75;
+}
+
+.dc__node-halo {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-opacity: 0.16;
+  stroke-width: 0.7;
+}
+
+.dc__node--component .dc__node-dot {
+  fill: var(--color-accent);
+  fill-opacity: 0.85;
+  r: 2.4;
+}
+
+.dc__node--system .dc__node-dot {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-opacity: 0.7;
+  stroke-width: 0.8;
+}
+
+.dc__node--api .dc__node-dot {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-opacity: 0.6;
+  stroke-width: 0.8;
+}
+
+.dc__node--signal .dc__node-halo {
+  stroke: var(--color-accent);
+  stroke-opacity: 0.35;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dc-pulse 3.4s var(--ease-out-expo) infinite;
+}
+
+@keyframes dc-pulse {
+  0%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* ---- labels — meant to be discovered, not noticed ──────────────────── */
+
+.dc__label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: var(--color-text);
+  fill-opacity: 0.35;
+}
+
+/* ---- central core ──────────────────────────────────────────────────── */
+
+.dc__core-halo {
+  fill: url(#dc-core-glow);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dc-core 3.4s var(--ease-in-out-quart) infinite;
+}
+
+.dc__core-halo--ring {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-opacity: 0.25;
+  stroke-width: 0.8;
+}
+
+.dc__core-dot {
+  fill: var(--color-accent);
+  filter: drop-shadow(0 0 6px rgb(103 232 249 / 0.5));
+}
+
+@keyframes dc-core {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.14);
+  }
+}
+
+/* ---- mobile: the core recedes behind the typography, labels dropped ── */
+
+@include down(md) {
+  .dc__stage {
+    right: -12%;
+    top: auto;
+    bottom: 8%;
+    translate: 0 0;
+    width: min(70vw, 340px);
+    opacity: 0.55;
+  }
+
+  .dc__label,
+  .dc__coord,
+  .dc__chip-box,
+  .dc__chip-bar,
+  .dc__chip-line,
+  .dc__chip-dot,
+  .dc__chip-block,
+  .dc__chip-thumb {
+    display: none;
+  }
+}
+
+@include reduced-motion {
+  .dc__link--trail,
+  .dc__point,
+  .dc__node--signal .dc__node-halo,
+  .dc__core-halo {
+    animation: none !important;
+  }
+}

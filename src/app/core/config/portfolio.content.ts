@@ -198,6 +198,7 @@ const photo = (
 /** Motion piece with a poster frame extracted from the video itself. */
 const clip = (name: string, alt: string, extra: Partial<PortfolioVideo> = {}): PortfolioVideo => ({
   mp4: `/media/videos/${name}.mp4`,
+  webm: `/media/videos/${name}.webm`,
   poster: `/media/posters/${name}.jpg`,
   alt,
   width: 1280,
@@ -1608,11 +1609,11 @@ export const TESTIMONIALS: readonly PortfolioTestimonial[] = [];
  */
 
 export const HERO: HeroContent = {
-  eyebrow: 'FRONTEND ENGINEERING',
+  eyebrow: 'DIGITAL PRODUCT ENGINEERING',
   headline: ['I BUILD', 'DIGITAL', 'PRODUCTS.'],
-  description: 'Building scalable interfaces, design systems, and high-performance digital products with Angular and modern web technologies.',
-  primaryCta: { label: "Let's Talk", href: '/contact' },
-  secondaryCta: { label: 'View Work', href: '/work' },
+  description: 'Building scalable interfaces, design systems, and high-performance digital products.',
+  primaryCta: { label: 'View Selected Work', href: '/work' },
+  secondaryCta: { label: "Let's Talk", href: '/contact' },
   availabilityLabels: {
     available: 'AVAILABLE',
     limited: 'LIMITED',
@@ -1620,7 +1621,7 @@ export const HERO: HeroContent = {
   },
   role: 'FRONTEND ANGULAR CONSULTANT',
   location: 'CHENNAI / INDIA',
-  focus: 'ANGULAR · TYPESCRIPT · SIGNALS · ZONELESS · DESIGN SYSTEMS',
+  focus: 'ANGULAR · TYPESCRIPT · SIGNALS · ZONELESS',
   technologies: [
     'Angular',
     'TypeScript',

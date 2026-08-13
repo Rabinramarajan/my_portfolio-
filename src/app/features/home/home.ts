@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { About } from './sections/about/about';
-import { MediaImage } from '../../shared/components/media-image/media-image';
 import { Experience } from './sections/experience/experience';
 import { HeroSectionComponent } from './sections/hero/hero';
 import { HeroTicker } from './sections/hero/components/hero-ticker';
@@ -17,7 +16,7 @@ import { homeSchema } from '../../core/services/structured-data';
 
 @Component({
   selector: 'app-home',
-  imports: [HeroSectionComponent, HeroTicker, About, Services, WorkReel, Experience, Ecosystem, MediaImage, Process, Testimonials],
+  imports: [HeroSectionComponent, HeroTicker, About, Services, WorkReel, Experience, Ecosystem, Process, Testimonials],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

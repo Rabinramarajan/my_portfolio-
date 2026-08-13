@@ -1,9 +1,5 @@
-import {
-  AngularNodeAppEngine,
-  createNodeRequestHandler,
-  isMainModule,
-  writeResponseToNodeResponse,
-} from '@angular/ssr/node';
+import { AngularNodeAppEngine, createNodeRequestHandler, isMainModule, writeResponseToNodeResponse } from '@angular/ssr/node';
+import compression from 'compression';
 import express from 'express';
 import { join } from 'node:path';
 
@@ -11,6 +7,11 @@ const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
+
+// Brotli/gzip for HTML, JS and CSS. Vercel's CDN already does this for the
+// static build; this covers the self-hosted `serve:ssr` path, where the Express
+// server is the origin. Binary media is already compressed and is skipped.
+app.use(compression());
 
 /**
  * Example Express Rest API endpoints can be defined here.

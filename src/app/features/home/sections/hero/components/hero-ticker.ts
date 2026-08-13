@@ -3,7 +3,7 @@
 import { PortfolioStore } from '../../../../../core/services/portfolio-store';
 
 /**
- * Technology ticker under the hero ï¿½?" the "animated skill language" of the
+ * Technology ticker under the hero — the "animated skill language" of the
  * page. Purely CSS: two bands translate via compositor-only `translate3d`
  * keyframes in opposite directions, pause on hover, and stop outright for
  * reduced motion. No per-frame JavaScript, no signal writes.
@@ -16,20 +16,20 @@ import { PortfolioStore } from '../../../../../core/services/portfolio-store';
       <div class="hero-ticker__row hero-ticker__row--a">
         <div class="hero-ticker__band">
           @for (item of items(); track item) {
-            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">âœ¦</span></span>
+            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">✦</span></span>
           }
           @for (item of items(); track item) {
-            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">âœ¦</span></span>
+            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">✦</span></span>
           }
         </div>
       </div>
       <div class="hero-ticker__row hero-ticker__row--b">
         <div class="hero-ticker__band">
           @for (item of items(); track item) {
-            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">âœ¦</span></span>
+            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">✦</span></span>
           }
           @for (item of items(); track item) {
-            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">âœ¦</span></span>
+            <span class="hero-ticker__item">{{ item }}<span class="hero-ticker__sep">✦</span></span>
           }
         </div>
       </div>

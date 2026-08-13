@@ -5,26 +5,29 @@
 
 :root {
   /* ---- Color: base ---- */
-  --color-bg: #08090b;
-  --color-bg-elevated: #0d0e10;
-  --color-surface: #131317;
-  --color-surface-2: #1a1c20;
+  --color-bg: #07090b;
+  --color-bg-elevated: #0c0e11;
+  --color-surface: #121419;
+  --color-surface-2: #181b20;
   --color-line: rgb(255 255 255 / 6%);
   --color-line-strong: rgb(255 255 255 / 12%);
 
   /* ---- Color: text ---- */
-  --color-text: #f5f5f3;
-  --color-text-muted: #85878c;
-  --color-text-faint: #5a5c61;
+  --color-text: #f4f4f1;
+  --color-text-muted: #85888d;
+  --color-text-faint: #5a5d62;
 
-  /* ---- Color: accent (dual: cyan + blue, restrained) ---- */
-  --color-accent: #6ee7ff;
-  --color-accent-dim: #4db8cc;
-  --color-accent-contrast: #08090b;
-  --color-accent-glow: rgb(110 231 255 / 12%);
-  --color-accent-2: #7c7cff;
-  --color-accent-2-dim: #5a5acc;
-  --color-accent-2-glow: rgb(124 124 255 / 10%);
+  /* ---- Color: accent (dual: cyan + violet, restrained) ---- */
+  --color-accent: #67e8f9;
+  --color-accent-dim: #4cb8c9;
+  --color-accent-contrast: #07090b;
+  --color-accent-glow: rgb(103 232 249 / 12%);
+  --color-accent-2: #7c83ff;
+  --color-accent-2-dim: #5b62d8;
+  --color-accent-2-glow: rgb(124 131 255 / 10%);
+
+  /* ---- Color: hero grid ---- */
+  --color-grid: #15191d;
 
   /* ---- Color: semantic ---- */
   --color-success: #6ee7a8;
